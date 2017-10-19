@@ -1,0 +1,502 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.sinog2c.dao.api.flow.FlowBaseArchivesMapper" >
+  <resultMap id="BaseResultMap" type="com.sinog2c.model.flow.FlowBaseArchives" >
+    <result column="PERSONID" property="personid" jdbcType="VARCHAR" />
+    <result column="PERSONNAME" property="personname" jdbcType="VARCHAR" />
+    <result column="ARCHIVEID" property="archiveid" jdbcType="VARCHAR" />
+    <result column="DOCYEAR" property="docyear" jdbcType="DECIMAL" />
+    <result column="NAME" property="name" jdbcType="VARCHAR" />
+    <result column="DOCID" property="docid" jdbcType="VARCHAR" />
+    <result column="TYPE" property="type" jdbcType="DECIMAL" />
+    <result column="RANK" property="rank" jdbcType="DECIMAL" />
+    <result column="ISATTACHED" property="isattached" jdbcType="DECIMAL" />
+    <result column="RETENTION" property="retention" jdbcType="DECIMAL" />
+    <result column="CLASSIFICATION" property="classification" jdbcType="VARCHAR" />
+    <result column="DEPARTID" property="departid" jdbcType="VARCHAR" />
+    <result column="REMARK" property="remark" jdbcType="VARCHAR" />
+    <result column="OPID" property="opid" jdbcType="VARCHAR" />
+    <result column="OPTIME" property="optime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <insert id="insert" parameterType="com.sinog2c.model.flow.FlowBaseArchives" >
+    insert into TBFLOW_BASE_ARCHIVES (PERSONID, PERSONNAME, ARCHIVEID, 
+      DOCYEAR, NAME, DOCID, 
+      TYPE, RANK, ISATTACHED, 
+      RETENTION, CLASSIFICATION,DEPARTID,
+      REMARK,OPID, OPTIME)
+    values (#{personid,jdbcType=VARCHAR}, #{personname,jdbcType=VARCHAR}, #{archiveid,jdbcType=DECIMAL}, 
+      #{docyear,jdbcType=DECIMAL}, #{name,jdbcType=VARCHAR}, #{docid,jdbcType=VARCHAR}, 
+      #{type,jdbcType=DECIMAL}, #{rank,jdbcType=DECIMAL}, #{isattached,jdbcType=DECIMAL}, 
+      #{retention,jdbcType=DECIMAL}, #{classification,jdbcType=DECIMAL}, #{departid,jdbcType=VARCHAR}, 
+      #{remark,jdbcType=VARCHAR}, #{opid,jdbcType=VARCHAR}, #{optime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.sinog2c.model.flow.FlowBaseArchives" >
+    insert into TBFLOW_BASE_ARCHIVES
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="personid != null" >
+        PERSONID,
+      </if>
+      <if test="personname != null" >
+        PERSONNAME,
+      </if>
+      <if test="archiveid != null" >
+        ARCHIVEID,
+      </if>
+      <if test="docyear != null" >
+        DOCYEAR,
+      </if>
+      <if test="name != null" >
+        NAME,
+      </if>
+      <if test="docid != null" >
+        DOCID,
+      </if>
+      <if test="type != null" >
+        TYPE,
+      </if>
+      <if test="rank != null" >
+        RANK,
+      </if>
+      <if test="isattached != null" >
+        ISATTACHED,
+      </if>
+      <if test="retention != null" >
+        RETENTION,
+      </if>
+      <if test="classification != null" >
+        CLASSIFICATION,
+      </if>
+      <if test="remark != null" >
+        REMARK,
+      </if>
+      <if test="opid != null" >
+        OPID,
+      </if>
+      <if test="optime != null" >
+        OPTIME,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="personid != null" >
+        #{personid,jdbcType=VARCHAR},
+      </if>
+      <if test="personname != null" >
+        #{personname,jdbcType=VARCHAR},
+      </if>
+      <if test="archiveid != null" >
+        #{archiveid,jdbcType=DECIMAL},
+      </if>
+      <if test="docyear != null" >
+        #{docyear,jdbcType=DECIMAL},
+      </if>
+      <if test="name != null" >
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="docid != null" >
+        #{docid,jdbcType=VARCHAR},
+      </if>
+      <if test="type != null" >
+        #{type,jdbcType=DECIMAL},
+      </if>
+      <if test="rank != null" >
+        #{rank,jdbcType=DECIMAL},
+      </if>
+      <if test="isattached != null" >
+        #{isattached,jdbcType=DECIMAL},
+      </if>
+      <if test="retention != null" >
+        #{retention,jdbcType=DECIMAL},
+      </if>
+      <if test="classification != null" >
+        #{classification,jdbcType=DECIMAL},
+      </if>
+      <if test="remark != null" >
+        #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="opid != null" >
+        #{opid,jdbcType=VARCHAR},
+      </if>
+      <if test="optime != null" >
+        #{optime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <delete id="deleteById" parameterType="String" >
+  	delete from tbflow_base_archives  where archiveid = #{archiveid}
+  </delete>
+  
+  <delete id="deleteFlowById" parameterType="String" >
+  	delete from TBFLOW where FLOWID in (select FLOWID from TBFLOW_ARCHIVES where archiveid = #{archiveid})
+  </delete>
+ 
+  <delete id="deleteFlowBaseById" parameterType="String" >
+  	delete from tbflow_base where flowdraftid  in (select flowdraftid from TBFLOW where FLOWID in (select FLOWID from TBFLOW_ARCHIVES where archiveid = #{archiveid}))
+  </delete>
+  
+  <!-- 查询表中记录总数 -->
+  <select id="selectById" parameterType="Map" resultType="int">  
+		select count(*) from  tbflow_base_archives  where archiveid = #{archiveid} 
+  </select>
+  <!-- 查询表中记录总数 -->
+  <select id="countAllByCondition" parameterType="Map" resultType="int">  
+		select count(*) from  tbflow_base_archives  where  isattached='1'  and archiveid not in 
+		(select archiveid from tbflow_archives_view where applyid=#{applyid})
+		<if test="key!=null and key!=''">  
+	        and (name like concat(concat('%', #{key}), '%')
+	        	or personid like concat(concat('%', #{key}), '%')
+	        	or personname like concat(concat('%', #{key}), '%'))
+	    </if>
+	    <if test="orgid!=null and orgid!=''">
+			and PERSONID in (select crimid from TBPRISONER_BASE_CRIME where orgid1 in (select  dorgid from TBFLOW_ORG_ORG where orgid = #{orgid}))
+	    </if>
+  </select>
+  <!-- 查询表中的所有流程信息 -->
+  <select id="selectAllByCondition" parameterType="Map" resultType="com.sinog2c.model.flow.FlowBaseArchives">
+	select * from
+    ( 
+	    select a.*, rownum rn from
+	    (
+		    select * from  tbflow_base_archives  where  isattached='1' and archiveid not in 
+		    (
+		    	select archiveid from tbflow_archives_view where applyid=#{applyid}
+		    )
+		    <if test="key!=null and key!=''">  
+		        and (name like concat(concat('%', #{key}), '%')
+		        	or personid like concat(concat('%', #{key}), '%')
+		        	or personname like concat(concat('%', #{key}), '%'))
+		    </if>
+		    <if test="orgid!=null and orgid!=''">
+				and PERSONID in (select crimid from TBPRISONER_BASE_CRIME where orgid1 in (select  dorgid from TBFLOW_ORG_ORG where orgid = #{orgid}))
+		    </if>
+		    <if test="sortField!=null and sortField!=''" > 
+		     	order by ${sortField}  ${sortOrder}
+		    </if>
+	  	) a 
+	    <if test="end!=null and end!=''">
+	   		where rownum &lt;= #{end}
+	   	</if> 
+    )
+   	<if test="start!=null and start!=''">
+   		where  rn &gt;= #{start}
+   	</if>
+  </select>
+  <!--查询电子档案信息记录总数-->
+  <select id="countAll" parameterType="Map" resultType="int">
+    select count (*) from tbflow_base_archives tba,
+			(select * from TBFLOW_ARCHIVESCODE where departid=#{provinceid}) ta
+		    where 1=1 and tba.docid=ta.codeid
+	       <if test="personid!=null and personid!=''">  
+	        and tba.personid = #{personid}
+	       </if>
+	       <!-- 此处书写有问题(之前sql语句无法查询出数据) 备注：mushuhong -->
+	       <if test="archclass!=null and archclass!=''">  
+	       <!-- 
+	        and (
+	        		docid in (select codeid from TBFLOW_ARCHIVESCODE t connect by prior  t.codeid = t.pcodeid start with t.pcodeid =#{archclass}) 
+	        	) -->
+        	and (
+        		tba.docid in (select codeid from TBFLOW_ARCHIVESCODE t START WITH t.codeid = #{archclass} CONNECT BY  t.pcodeid =PRIOR t.codeid) 
+        	) 
+	       </if>
+	     <if test="key!=null and key!=''">  
+	        and 
+	        (
+	        	tba.name like concat(concat('%', #{key}), '%')
+	        )
+	     </if>
+  </select>
+  <!--查询电子档案信息记录总数-->
+  <select id="countAllForSD" parameterType="Map" resultType="int">
+	select count(*)
+						FROM tbflow_base_archives tba,TBFLOW_ARCHIVES t,UV_FLOW uf,
+						(select * from TBFLOW_ARCHIVESCODE where departid=#{provinceid}) ta
+					    where 
+					    ( 
+					    1=1
+					    )
+					     AND TBA.ARCHIVEID = T.ARCHIVEID(+)
+		                 AND T.FLOWID = UF.FLOWID(+)
+		                 AND UF.STATE = '1'
+				       	and tba.docid=ta.codeid
+    	<if test="personid!=null and personid!=''">  
+	        and personid = #{personid}
+	    </if>
+	    <if test="condition!=null and condition!=''">  
+	       	and (
+	       		docid in (select codeid from TBFLOW_ARCHIVESCODE t where 1=1 and t.codeid in (${condition}) and pcodeid not in ('0','-1')) 
+	       	) 
+       </if>
+    	<if test="key!=null and key!=''">  
+	         and 
+	        (
+	        	name like concat(concat('%', #{key}), '%')
+	        )
+	    </if>
+  </select>
+  <select id="countAllShengju" parameterType="Map" resultType="int">
+	select count (*) c from tbflow_base_archives
+    where 
+    ( 
+    1=1
+    )	
+    	<if test="departid!=null and departid!=''">  
+	        and departid in ( 
+                select a.orgid from tbsys_orginfo a 
+                start with a.orgid =#{departid,jdbcType=VARCHAR}
+                connect by prior a.orgid= a.porgid )
+	    </if>
+    	<if test="personid!=null and personid!=''">  
+	        and personid = #{personid}
+	    </if>
+	    <if test="archclass!=null and archclass!=''">  
+	        and (
+	        		docid = #{archclass}
+	        		or
+	        		classification = #{archclass}
+	        	)
+	    </if>
+    	<if test="key!=null and key!=''">  
+	         and 
+	        (
+	        	name like concat(concat('%', #{key}), '%')
+	        )
+	    </if>
+  </select>
+  <!-- 查询电子档案信息  -->
+  <select id="selectAllByPage" parameterType="Map" resultType="com.sinog2c.model.flow.FlowBaseArchives">
+	select * from
+    ( 
+	    select a.*, rownum rn from
+	    (
+	        select * from (
+						select tba.*,ta.sn 
+						from tbflow_base_archives tba,
+						(select * from TBFLOW_ARCHIVESCODE where departid=#{provinceid}) ta
+					    where 1=1 and tba.docid=ta.codeid
+				       <if test="personid!=null and personid!=''">  
+				        and tba.personid = #{personid}
+				       </if>
+				       <!-- 此处书写有问题(之前sql语句无法查询出数据) 备注：mushuhong -->
+				       <if test="archclass!=null and archclass!=''">  
+				       <!-- 
+				        and (
+				        		docid in (select codeid from TBFLOW_ARCHIVESCODE t connect by prior  t.codeid = t.pcodeid start with t.pcodeid =#{archclass}) 
+				        	) -->
+			        	and (
+			        		tba.docid in (select codeid from TBFLOW_ARCHIVESCODE t START WITH t.codeid = #{archclass} CONNECT BY  t.pcodeid =PRIOR t.codeid) 
+			        	) 
+				       </if>
+				     <if test="key!=null and key!=''">  
+				        and 
+				        (
+				        	tba.name like concat(concat('%', #{key}), '%')
+				        )
+				     </if>
+				     order by tba.personid, ta.sn, tba.name
+	        
+	        )
+	     <if test="sortField!=null and sortField!=''" > 
+	     	order by ${sortField}  ${sortOrder}
+	     </if>   
+	  	) a 
+	    <if test="end!=null and end!=''">
+	   		where rownum &lt;= #{end}
+	   	</if> 
+    )
+   	<if test="start!=null and start!=''">
+   		where  rn &gt;= #{start}
+   	</if>
+	
+  </select>
+  
+  <!-- 查询电子档案信息 (山东) -->
+  <select id="selectAllByPageForSD" parameterType="Map" resultType="com.sinog2c.model.flow.FlowBaseArchives">
+	select * from
+    ( 
+	    select a.*, rownum rn from
+	    (
+	        select * from (
+						select tba.*,ta.sn 
+						FROM tbflow_base_archives tba,TBFLOW_ARCHIVES t,UV_FLOW uf,
+						(select * from TBFLOW_ARCHIVESCODE where departid=#{provinceid}) ta
+					    where 
+					    ( 
+					    1=1
+					    )
+					     AND TBA.ARCHIVEID = T.ARCHIVEID(+)
+		                 AND T.FLOWID = UF.FLOWID(+)
+		                 AND UF.STATE = '1'
+				       	and tba.docid=ta.codeid
+				       <if test="personid!=null and personid!=''">  
+				        and tba.personid = #{personid}
+				       </if>
+				       <if test="condition!=null and condition!=''">  
+			        	and (
+			        		tba.docid in (select codeid from TBFLOW_ARCHIVESCODE t where 1=1 and t.codeid in (${condition}) and pcodeid not in ('0','-1')) 
+			        	) 
+				       </if>
+				     <if test="key!=null and key!=''">  
+				        and 
+				        (
+				        	tba.name like concat(concat('%', #{key}), '%')
+				        )
+				     </if>
+				     order by tba.personid, ta.sn, tba.name
+	        
+	        )
+	     <if test="sortField!=null and sortField!=''" > 
+	     	order by ${sortField}  ${sortOrder}
+	     </if>   
+	  	) a 
+	    <if test="end!=null and end!=''">
+	   		where rownum &lt;= #{end}
+	   	</if> 
+    )
+   	<if test="start!=null and start!=''">
+   		where  rn &gt;= #{start}
+   	</if>
+	
+  </select>
+  <select id="selectAllByPageShengju" parameterType="Map" resultType="com.sinog2c.model.flow.FlowBaseArchives">
+	select * from
+    ( 
+	    select a.*, rownum rn from
+	    (
+			select * from tbflow_base_archives
+		    where 
+		    ( 
+		    1=1
+		    ) 
+		   <if test="departid!=null and departid!=''">  
+	        and departid in ( 
+                select a.orgid from tbsys_orginfo a 
+                start with a.orgid =#{departid,jdbcType=VARCHAR}
+                connect by prior a.orgid= a.porgid )
+	       </if>
+	       <if test="personid!=null and personid!=''">  
+	        and personid = #{personid}
+	       </if>
+	       <!-- 此处书写有问题(之前sql语句无法查询出数据) 备注：mushuhong -->
+	       <if test="archclass!=null and archclass!=''">  
+	        	and (
+	        		docid in (select codeid from TBFLOW_ARCHIVESCODE t START WITH t.codeid = #{archclass} CONNECT BY  t.pcodeid =PRIOR t.codeid) 
+	        	) 
+	       </if>
+	     <if test="key!=null and key!=''">  
+	        and 
+	        (
+	        	name like concat(concat('%', #{key}), '%')
+	        )
+	     </if>
+	     <if test="sortField!=null and sortField!=''" > 
+	     	order by ${sortField}  ${sortOrder}
+	     </if>   
+	  	) a 
+	    <if test="end!=null and end!=''">
+	   		where rownum &lt;= #{end}
+	   	</if> 
+    )
+   	<if test="start!=null and start!=''">
+   		where  rn &gt;= #{start}
+   	</if>
+	
+  </select>
+  
+  <insert id="insertCaseInfo" parameterType="Map" >
+    insert into TBFLOW_BASE_ARCHIVES
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="personid != null" >
+        PERSONID,
+      </if>
+      <if test="personname != null" >
+        PERSONNAME,
+      </if>
+      <if test="archiveid != null" >
+        ARCHIVEID,
+      </if>
+      <if test="docyear != null" >
+        DOCYEAR,
+      </if>
+      <if test="name != null" >
+        NAME,
+      </if>
+      <if test="docid != null" >
+        DOCID,
+      </if>
+      <if test="type != null" >
+        TYPE,
+      </if>
+      <if test="rank != null" >
+        RANK,
+      </if>
+      <if test="isattached != null" >
+        ISATTACHED,
+      </if>
+      <if test="retention != null" >
+        RETENTION,
+      </if>
+      <if test="classification != null" >
+        CLASSIFICATION,
+      </if>
+      <if test="remark != null" >
+        REMARK,
+      </if>
+      <if test="opid != null" >
+        OPID,
+      </if>
+      <if test="optime != null" >
+        OPTIME,
+      </if>
+      <if test="departid != null" >
+        DEPARTID,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="personid != null" >
+        #{personid,jdbcType=VARCHAR},
+      </if>
+      <if test="personname != null" >
+        #{personname,jdbcType=VARCHAR},
+      </if>
+      <if test="archiveid != null" >
+        #{archiveid,jdbcType=DECIMAL},
+      </if>
+      <if test="docyear != null" >
+        #{docyear,jdbcType=DECIMAL},
+      </if>
+      <if test="name != null" >
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="docid != null" >
+        #{docid,jdbcType=VARCHAR},
+      </if>
+      <if test="type != null" >
+        #{type,jdbcType=DECIMAL},
+      </if>
+      <if test="rank != null" >
+        #{rank,jdbcType=DECIMAL},
+      </if>
+      <if test="isattached != null" >
+        #{isattached,jdbcType=DECIMAL},
+      </if>
+      <if test="retention != null" >
+        #{retention,jdbcType=DECIMAL},
+      </if>
+      <if test="classification != null" >
+        #{classification,jdbcType=DECIMAL},
+      </if>
+      <if test="remark != null" >
+        #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="opid != null" >
+        #{opid,jdbcType=VARCHAR},
+      </if>
+      <if test="optime != null" >
+        #{optime,jdbcType=TIMESTAMP},
+      </if>
+       <if test="departid != null" >
+         #{departid,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+</mapper>

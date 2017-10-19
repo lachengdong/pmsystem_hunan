@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.sinog2c.dao.api.assessAndPunish.TbyzRewardsMapper" >
+  <resultMap id="BaseResultMap" type="com.sinog2c.model.assessAndPunish.TbyzRewards" >
+    <result column="CRIMID" property="crimid" jdbcType="VARCHAR" />
+    <result column="CBRQ" property="cbrq" jdbcType="DATE" />
+    <result column="PZRQ" property="pzrq" jdbcType="DATE" />
+    <result column="JLLB" property="jllb" jdbcType="VARCHAR" />
+    <result column="JLYY" property="jlyy" jdbcType="VARCHAR" />
+    <result column="YYJX" property="yyjx" jdbcType="CHAR" />
+    <result column="BZ" property="bz" jdbcType="VARCHAR" />
+    <result column="GYDW" property="gydw" jdbcType="CHAR" />
+    <result column="GYMX" property="gymx" jdbcType="CHAR" />
+    <result column="OPID" property="opid" jdbcType="VARCHAR" />
+    <result column="OPTIME" property="optime" jdbcType="DATE" />
+  </resultMap>
+  <insert id="insert" parameterType="com.sinog2c.model.assessAndPunish.TbyzRewards" >
+    insert into TBYZ_REWARDS (CRIMID, CBRQ, PZRQ, 
+      JLLB, JLYY, YYJX, BZ, 
+      GYDW, GYMX, OPID, OPTIME
+      )
+    values (#{crimid,jdbcType=VARCHAR}, #{cbrq,jdbcType=DATE}, #{pzrq,jdbcType=DATE}, 
+      #{jllb,jdbcType=VARCHAR}, #{jlyy,jdbcType=VARCHAR}, #{yyjx,jdbcType=CHAR}, #{bz,jdbcType=VARCHAR}, 
+      #{gydw,jdbcType=CHAR}, #{gymx,jdbcType=CHAR}, #{opid,jdbcType=VARCHAR}, #{optime,jdbcType=DATE}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.sinog2c.model.assessAndPunish.TbyzRewards" >
+    insert into TBYZ_REWARDS
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="crimid != null" >
+        CRIMID,
+      </if>
+      <if test="cbrq != null" >
+        CBRQ,
+      </if>
+      <if test="pzrq != null" >
+        PZRQ,
+      </if>
+      <if test="jllb != null" >
+        JLLB,
+      </if>
+      <if test="jlyy != null" >
+        JLYY,
+      </if>
+      <if test="yyjx != null" >
+        YYJX,
+      </if>
+      <if test="bz != null" >
+        BZ,
+      </if>
+      <if test="gydw != null" >
+        GYDW,
+      </if>
+      <if test="gymx != null" >
+        GYMX,
+      </if>
+      <if test="opid != null" >
+        OPID,
+      </if>
+      <if test="optime != null" >
+        OPTIME,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="crimid != null" >
+        #{crimid,jdbcType=VARCHAR},
+      </if>
+      <if test="cbrq != null" >
+        #{cbrq,jdbcType=DATE},
+      </if>
+      <if test="pzrq != null" >
+        #{pzrq,jdbcType=DATE},
+      </if>
+      <if test="jllb != null" >
+        #{jllb,jdbcType=VARCHAR},
+      </if>
+      <if test="jlyy != null" >
+        #{jlyy,jdbcType=VARCHAR},
+      </if>
+      <if test="yyjx != null" >
+        #{yyjx,jdbcType=CHAR},
+      </if>
+      <if test="bz != null" >
+        #{bz,jdbcType=VARCHAR},
+      </if>
+      <if test="gydw != null" >
+        #{gydw,jdbcType=CHAR},
+      </if>
+      <if test="gymx != null" >
+        #{gymx,jdbcType=CHAR},
+      </if>
+      <if test="opid != null" >
+        #{opid,jdbcType=VARCHAR},
+      </if>
+      <if test="optime != null" >
+        #{optime,jdbcType=DATE},
+      </if>
+    </trim>
+  </insert>
+  
+  <select id="getPunishInfoCountOfCrim" resultType="int">
+  		select count(*) from  TBYZ_REWARDS  where CRIMID =#{crimid}
+  </select>
+  
+  <select id="getPunishInfoOfCrim" parameterType="Object" resultType="java.util.HashMap">
+  	select * from
+    ( 
+	    select a.*, rownum rn from
+			    (
+				    select t.*
+					  from TBYZ_REWARDS t
+					 where 1 = 1 and t.CRIMID =#{crimid}
+		 	<trim prefix="" suffix="" suffixOverrides=",">
+				<if test="sortField!=null and sortField!=''"> order by ${sortField} ${sortOrder}</if>
+			</trim>
+	  	) a 
+	    <if test="end!=null and end!=''">
+	   		where rownum &lt;= #{end}
+	   	</if> 
+    )
+   	<if test="start!=null and start!=''">
+   		where  rn &gt;= #{start}
+   	</if>
+  </select>
+  
+  
+</mapper>

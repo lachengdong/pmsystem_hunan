@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>  
+<!DOCTYPE generatorConfiguration  
+  PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN"  
+  "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd">  
+<generatorConfiguration>  
+<!-- 说明: 本文件需要 ANSI编码,不能使用 UTF-8,所以 MyEclipse 并不能读取,请使用编辑工具进行编辑  -->
+	<!-- 数据库驱动-->
+    <classPathEntry  location="ojdbc14.jar"/>  
+    <context id="OracleTables_test"  targetRuntime="MyBatis3">  
+        <commentGenerator>  
+            <property name="suppressDate" value="true"/>  
+            <!-- 是否去除自动生成的注释 true：是 ： false:否 -->  
+            <property name="suppressAllComments" value="true"/>  
+        </commentGenerator>  
+        <!--数据库链接URL，用户名、密码 -->
+        <jdbcConnection driverClass="oracle.jdbc.driver.OracleDriver" connectionURL="jdbc:oracle:thin:@localhost:1521:orcl" userId="gdpmsys" password="gdpmsys"> 
+        </jdbcConnection>  
+        <javaTypeResolver>  
+            <property name="forceBigDecimals" value="false"/>  
+        </javaTypeResolver>  
+        <!-- 生成模型(Java Model)的包名和位置; 建议总的包为 com.sinog2c.model.xxx -->  
+        <javaModelGenerator targetPackage="com.sinog2c.model.yzgl" targetProject="../../../src">  
+            <property name="enableSubPackages" value="true"/>  
+            <property name="trimStrings" value="true"/>  
+        </javaModelGenerator>  
+        <!-- 生成映射(XML实现)文件的包名和位置; 注意多次生成后文件内会有重复,请自己解决 -->
+		<!-- 建议总的包为 com.sinog2c.dao.oracle.xxx, 其他类型数据库类似 -->  
+        <sqlMapGenerator targetPackage="com.sinog2c.dao.oracle.yzgl" targetProject="../../../config">  
+            <property name="enableSubPackages" value="true"/>  
+        </sqlMapGenerator>  
+        <!-- 生成DAO(Java接口文件)的包名和位置; 建议总的包为 com.sinog2c.dao.api.assessAndPunish -->  
+        <javaClientGenerator type="XMLMAPPER" targetPackage="com.sinog2c.dao.api.yzgl" targetProject="../../../src">  
+            <property name="enableSubPackages" value="true"/>  
+        </javaClientGenerator>  
+        <!-- 要生成的表 tableName是数据库中的表名或视图名 domainObjectName是实体类名 -->  
+		<!-- 这里可以有多个表, context也可以有多个,id唯一即可,比如要生成在多个子包下, -->
+		<!-- enable *** ByExample 如果设为true,则会生成一个类似的 Example对象,以及Mapper中的示例XML -->
+        <table tableName="TBYZ_DUTY_DIARY" domainObjectName="TbyzDutyDiary" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false"></table>
+    </context>
+</generatorConfiguration>  

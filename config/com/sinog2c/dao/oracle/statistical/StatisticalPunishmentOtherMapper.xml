@@ -1,0 +1,674 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.sinog2c.dao.api.statistical.StatisticalPunishmentOtherMapper" >
+  <resultMap id="BaseResultMap" type="com.sinog2c.model.statistical.StatisticalPunishmentOther" >
+    <id column="DEPARTID" property="departid" jdbcType="VARCHAR" />
+    <id column="YEARTYPE" property="yeartype" jdbcType="VARCHAR" />
+    <result column="DEPTNAME" property="deptname" jdbcType="VARCHAR" />
+    <result column="SHENSUHJ" property="shensuhj" jdbcType="DECIMAL" />
+    <result column="SSJYTQCL" property="ssjytqcl" jdbcType="DECIMAL" />
+    <result column="SSJYTQHF" property="ssjytqhf" jdbcType="DECIMAL" />
+    <result column="SSZFTQCL" property="sszftqcl" jdbcType="DECIMAL" />
+    <result column="SSZFTQHF" property="sszftqhf" jdbcType="DECIMAL" />
+    <result column="KGJJHJ" property="kgjjhj" jdbcType="DECIMAL" />
+    <result column="KGJYZXCL" property="kgjyzxcl" jdbcType="DECIMAL" />
+    <result column="KGBSJCL" property="kgbsjcl" jdbcType="DECIMAL" />
+    <result column="KGZGAJCYCL" property="kgzgajcycl" jdbcType="DECIMAL" />
+    <result column="JCJYHJ" property="jcjyhj" jdbcType="DECIMAL" />
+    <result column="JCJYJJZ" property="jcjyjjz" jdbcType="DECIMAL" />
+    <result column="JZWFHJ" property="jzwfhj" jdbcType="DECIMAL" />
+    <result column="JZWFJJZ" property="jzwfjjz" jdbcType="DECIMAL" />
+    <result column="WFWJHJ" property="wfwjhj" jdbcType="DECIMAL" />
+    <result column="WFWJXSCF" property="wfwjxscf" jdbcType="DECIMAL" />
+    <result column="WFWJDZJCF" property="wfwjdzjcf" jdbcType="DECIMAL" />
+    <result column="WFWJXSCFREMARK" property="wfwjxscfremark" jdbcType="VARCHAR" />
+    <result column="QMYFHJ" property="qmyfhj" jdbcType="DECIMAL" />
+    <result column="SHXJF" property="shxjf" jdbcType="DECIMAL" />
+    <result column="SHXZJXF" property="shxzjxf" jdbcType="DECIMAL" />
+    <result column="WQTXF" property="wqtxf" jdbcType="DECIMAL" />
+    <result column="XQTXF" property="xqtxf" jdbcType="DECIMAL" />
+    <result column="LBCF" property="lbcf" jdbcType="DECIMAL" />
+    <result column="YXCYSF" property="yxcysf" jdbcType="DECIMAL" />
+    <result column="SHENHEREN" property="shenheren" jdbcType="VARCHAR" />
+    <result column="TONGJIREN" property="tongjiren" jdbcType="VARCHAR" />
+    <result column="PHONE" property="phone" jdbcType="VARCHAR" />
+    <result column="OPTIME" property="optime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <delete id="deleteByPrimaryKey" parameterType="com.sinog2c.model.statistical.StatisticalPunishmentOther" >
+    delete from STATISTICAL_PUNISHMENT_OTHER
+    where DEPARTID = #{departid,jdbcType=VARCHAR}
+      and YEARTYPE = #{yeartype,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.sinog2c.model.statistical.StatisticalPunishmentOther" >
+    insert into STATISTICAL_PUNISHMENT_OTHER (DEPARTID, YEARTYPE, DEPTNAME, 
+      SHENSUHJ, SSJYTQCL, SSJYTQHF, 
+      SSZFTQCL, SSZFTQHF, KGJJHJ, 
+      KGJYZXCL, KGBSJCL, KGZGAJCYCL, 
+      JCJYHJ, JCJYJJZ, JZWFHJ, 
+      JZWFJJZ, WFWJHJ, WFWJXSCF, 
+      WFWJDZJCF, WFWJXSCFREMARK, QMYFHJ, 
+      SHXJF, SHXZJXF, WQTXF, 
+      XQTXF, LBCF, YXCYSF, 
+      SHENHEREN, TONGJIREN, PHONE, 
+      OPTIME)
+    values (#{departid,jdbcType=VARCHAR}, #{yeartype,jdbcType=VARCHAR}, #{deptname,jdbcType=VARCHAR}, 
+      #{shensuhj,jdbcType=DECIMAL}, #{ssjytqcl,jdbcType=DECIMAL}, #{ssjytqhf,jdbcType=DECIMAL}, 
+      #{sszftqcl,jdbcType=DECIMAL}, #{sszftqhf,jdbcType=DECIMAL}, #{kgjjhj,jdbcType=DECIMAL}, 
+      #{kgjyzxcl,jdbcType=DECIMAL}, #{kgbsjcl,jdbcType=DECIMAL}, #{kgzgajcycl,jdbcType=DECIMAL}, 
+      #{jcjyhj,jdbcType=DECIMAL}, #{jcjyjjz,jdbcType=DECIMAL}, #{jzwfhj,jdbcType=DECIMAL}, 
+      #{jzwfjjz,jdbcType=DECIMAL}, #{wfwjhj,jdbcType=DECIMAL}, #{wfwjxscf,jdbcType=DECIMAL}, 
+      #{wfwjdzjcf,jdbcType=DECIMAL}, #{wfwjxscfremark,jdbcType=VARCHAR}, #{qmyfhj,jdbcType=DECIMAL}, 
+      #{shxjf,jdbcType=DECIMAL}, #{shxzjxf,jdbcType=DECIMAL}, #{wqtxf,jdbcType=DECIMAL}, 
+      #{xqtxf,jdbcType=DECIMAL}, #{lbcf,jdbcType=DECIMAL}, #{yxcysf,jdbcType=DECIMAL}, 
+      #{shenheren,jdbcType=VARCHAR}, #{tongjiren,jdbcType=VARCHAR}, #{phone,jdbcType=VARCHAR}, 
+      #{optime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.sinog2c.model.statistical.StatisticalPunishmentOther" >
+    insert into STATISTICAL_PUNISHMENT_OTHER
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="departid != null" >
+        DEPARTID,
+      </if>
+      <if test="yeartype != null" >
+        YEARTYPE,
+      </if>
+      <if test="deptname != null" >
+        DEPTNAME,
+      </if>
+      <if test="shensuhj != null" >
+        SHENSUHJ,
+      </if>
+      <if test="ssjytqcl != null" >
+        SSJYTQCL,
+      </if>
+      <if test="ssjytqhf != null" >
+        SSJYTQHF,
+      </if>
+      <if test="sszftqcl != null" >
+        SSZFTQCL,
+      </if>
+      <if test="sszftqhf != null" >
+        SSZFTQHF,
+      </if>
+      <if test="kgjjhj != null" >
+        KGJJHJ,
+      </if>
+      <if test="kgjyzxcl != null" >
+        KGJYZXCL,
+      </if>
+      <if test="kgbsjcl != null" >
+        KGBSJCL,
+      </if>
+      <if test="kgzgajcycl != null" >
+        KGZGAJCYCL,
+      </if>
+      <if test="jcjyhj != null" >
+        JCJYHJ,
+      </if>
+      <if test="jcjyjjz != null" >
+        JCJYJJZ,
+      </if>
+      <if test="jzwfhj != null" >
+        JZWFHJ,
+      </if>
+      <if test="jzwfjjz != null" >
+        JZWFJJZ,
+      </if>
+      <if test="wfwjhj != null" >
+        WFWJHJ,
+      </if>
+      <if test="wfwjxscf != null" >
+        WFWJXSCF,
+      </if>
+      <if test="wfwjdzjcf != null" >
+        WFWJDZJCF,
+      </if>
+      <if test="wfwjxscfremark != null" >
+        WFWJXSCFREMARK,
+      </if>
+      <if test="qmyfhj != null" >
+        QMYFHJ,
+      </if>
+      <if test="shxjf != null" >
+        SHXJF,
+      </if>
+      <if test="shxzjxf != null" >
+        SHXZJXF,
+      </if>
+      <if test="wqtxf != null" >
+        WQTXF,
+      </if>
+      <if test="xqtxf != null" >
+        XQTXF,
+      </if>
+      <if test="lbcf != null" >
+        LBCF,
+      </if>
+      <if test="yxcysf != null" >
+        YXCYSF,
+      </if>
+      <if test="shenheren != null" >
+        SHENHEREN,
+      </if>
+      <if test="tongjiren != null" >
+        TONGJIREN,
+      </if>
+      <if test="phone != null" >
+        PHONE,
+      </if>
+      <if test="optime != null" >
+        OPTIME,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="departid != null" >
+        #{departid,jdbcType=VARCHAR},
+      </if>
+      <if test="yeartype != null" >
+        #{yeartype,jdbcType=VARCHAR},
+      </if>
+      <if test="deptname != null" >
+        #{deptname,jdbcType=VARCHAR},
+      </if>
+      <if test="shensuhj != null" >
+        #{shensuhj,jdbcType=DECIMAL},
+      </if>
+      <if test="ssjytqcl != null" >
+        #{ssjytqcl,jdbcType=DECIMAL},
+      </if>
+      <if test="ssjytqhf != null" >
+        #{ssjytqhf,jdbcType=DECIMAL},
+      </if>
+      <if test="sszftqcl != null" >
+        #{sszftqcl,jdbcType=DECIMAL},
+      </if>
+      <if test="sszftqhf != null" >
+        #{sszftqhf,jdbcType=DECIMAL},
+      </if>
+      <if test="kgjjhj != null" >
+        #{kgjjhj,jdbcType=DECIMAL},
+      </if>
+      <if test="kgjyzxcl != null" >
+        #{kgjyzxcl,jdbcType=DECIMAL},
+      </if>
+      <if test="kgbsjcl != null" >
+        #{kgbsjcl,jdbcType=DECIMAL},
+      </if>
+      <if test="kgzgajcycl != null" >
+        #{kgzgajcycl,jdbcType=DECIMAL},
+      </if>
+      <if test="jcjyhj != null" >
+        #{jcjyhj,jdbcType=DECIMAL},
+      </if>
+      <if test="jcjyjjz != null" >
+        #{jcjyjjz,jdbcType=DECIMAL},
+      </if>
+      <if test="jzwfhj != null" >
+        #{jzwfhj,jdbcType=DECIMAL},
+      </if>
+      <if test="jzwfjjz != null" >
+        #{jzwfjjz,jdbcType=DECIMAL},
+      </if>
+      <if test="wfwjhj != null" >
+        #{wfwjhj,jdbcType=DECIMAL},
+      </if>
+      <if test="wfwjxscf != null" >
+        #{wfwjxscf,jdbcType=DECIMAL},
+      </if>
+      <if test="wfwjdzjcf != null" >
+        #{wfwjdzjcf,jdbcType=DECIMAL},
+      </if>
+      <if test="wfwjxscfremark != null" >
+        #{wfwjxscfremark,jdbcType=VARCHAR},
+      </if>
+      <if test="qmyfhj != null" >
+        #{qmyfhj,jdbcType=DECIMAL},
+      </if>
+      <if test="shxjf != null" >
+        #{shxjf,jdbcType=DECIMAL},
+      </if>
+      <if test="shxzjxf != null" >
+        #{shxzjxf,jdbcType=DECIMAL},
+      </if>
+      <if test="wqtxf != null" >
+        #{wqtxf,jdbcType=DECIMAL},
+      </if>
+      <if test="xqtxf != null" >
+        #{xqtxf,jdbcType=DECIMAL},
+      </if>
+      <if test="lbcf != null" >
+        #{lbcf,jdbcType=DECIMAL},
+      </if>
+      <if test="yxcysf != null" >
+        #{yxcysf,jdbcType=DECIMAL},
+      </if>
+      <if test="shenheren != null" >
+        #{shenheren,jdbcType=VARCHAR},
+      </if>
+      <if test="tongjiren != null" >
+        #{tongjiren,jdbcType=VARCHAR},
+      </if>
+      <if test="phone != null" >
+        #{phone,jdbcType=VARCHAR},
+      </if>
+      <if test="optime != null" >
+        #{optime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <insert id="insertByMap" parameterType="Map" >
+    insert into STATISTICAL_PUNISHMENT_OTHER
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="departid != null" >
+        DEPARTID,
+      </if>
+      <if test="yeartype != null" >
+        YEARTYPE,
+      </if>
+      <if test="deptname != null" >
+        DEPTNAME,
+      </if>
+      <if test="shensuhj != null" >
+        SHENSUHJ,
+      </if>
+      <if test="ssjytqcl != null" >
+        SSJYTQCL,
+      </if>
+      <if test="ssjytqhf != null" >
+        SSJYTQHF,
+      </if>
+      <if test="sszftqcl != null" >
+        SSZFTQCL,
+      </if>
+      <if test="sszftqhf != null" >
+        SSZFTQHF,
+      </if>
+      <if test="kgjjhj != null" >
+        KGJJHJ,
+      </if>
+      <if test="kgjyzxcl != null" >
+        KGJYZXCL,
+      </if>
+      <if test="kgbsjcl != null" >
+        KGBSJCL,
+      </if>
+      <if test="kgzgajcycl != null" >
+        KGZGAJCYCL,
+      </if>
+      <if test="jcjyhj != null" >
+        JCJYHJ,
+      </if>
+      <if test="jcjyjjz != null" >
+        JCJYJJZ,
+      </if>
+      <if test="jzwfhj != null" >
+        JZWFHJ,
+      </if>
+      <if test="jzwfjjz != null" >
+        JZWFJJZ,
+      </if>
+      <if test="wfwjhj != null" >
+        WFWJHJ,
+      </if>
+      <if test="wfwjxscf != null" >
+        WFWJXSCF,
+      </if>
+      <if test="wfwjdzjcf != null" >
+        WFWJDZJCF,
+      </if>
+      <if test="wfwjxscfremark != null" >
+        WFWJXSCFREMARK,
+      </if>
+      <if test="qmyfhj != null" >
+        QMYFHJ,
+      </if>
+      <if test="shxjf != null" >
+        SHXJF,
+      </if>
+      <if test="shxzjxf != null" >
+        SHXZJXF,
+      </if>
+      <if test="wqtxf != null" >
+        WQTXF,
+      </if>
+      <if test="xqtxf != null" >
+        XQTXF,
+      </if>
+      <if test="lbcf != null" >
+        LBCF,
+      </if>
+      <if test="yxcysf != null" >
+        YXCYSF,
+      </if>
+      <if test="shenheren != null" >
+        SHENHEREN,
+      </if>
+      <if test="tongjiren != null" >
+        TONGJIREN,
+      </if>
+      <if test="phone != null" >
+        PHONE,
+      </if>
+      <if test="optime != null" >
+        OPTIME,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="departid != null" >
+        #{departid,jdbcType=VARCHAR},
+      </if>
+      <if test="yeartype != null" >
+        #{yeartype,jdbcType=VARCHAR},
+      </if>
+      <if test="deptname != null" >
+        #{deptname,jdbcType=VARCHAR},
+      </if>
+      <if test="shensuhj != null" >
+        #{shensuhj,jdbcType=DECIMAL},
+      </if>
+      <if test="ssjytqcl != null" >
+        #{ssjytqcl,jdbcType=DECIMAL},
+      </if>
+      <if test="ssjytqhf != null" >
+        #{ssjytqhf,jdbcType=DECIMAL},
+      </if>
+      <if test="sszftqcl != null" >
+        #{sszftqcl,jdbcType=DECIMAL},
+      </if>
+      <if test="sszftqhf != null" >
+        #{sszftqhf,jdbcType=DECIMAL},
+      </if>
+      <if test="kgjjhj != null" >
+        #{kgjjhj,jdbcType=DECIMAL},
+      </if>
+      <if test="kgjyzxcl != null" >
+        #{kgjyzxcl,jdbcType=DECIMAL},
+      </if>
+      <if test="kgbsjcl != null" >
+        #{kgbsjcl,jdbcType=DECIMAL},
+      </if>
+      <if test="kgzgajcycl != null" >
+        #{kgzgajcycl,jdbcType=DECIMAL},
+      </if>
+      <if test="jcjyhj != null" >
+        #{jcjyhj,jdbcType=DECIMAL},
+      </if>
+      <if test="jcjyjjz != null" >
+        #{jcjyjjz,jdbcType=DECIMAL},
+      </if>
+      <if test="jzwfhj != null" >
+        #{jzwfhj,jdbcType=DECIMAL},
+      </if>
+      <if test="jzwfjjz != null" >
+        #{jzwfjjz,jdbcType=DECIMAL},
+      </if>
+      <if test="wfwjhj != null" >
+        #{wfwjhj,jdbcType=DECIMAL},
+      </if>
+      <if test="wfwjxscf != null" >
+        #{wfwjxscf,jdbcType=DECIMAL},
+      </if>
+      <if test="wfwjdzjcf != null" >
+        #{wfwjdzjcf,jdbcType=DECIMAL},
+      </if>
+      <if test="wfwjxscfremark != null" >
+        #{wfwjxscfremark,jdbcType=VARCHAR},
+      </if>
+      <if test="qmyfhj != null" >
+        #{qmyfhj,jdbcType=DECIMAL},
+      </if>
+      <if test="shxjf != null" >
+        #{shxjf,jdbcType=DECIMAL},
+      </if>
+      <if test="shxzjxf != null" >
+        #{shxzjxf,jdbcType=DECIMAL},
+      </if>
+      <if test="wqtxf != null" >
+        #{wqtxf,jdbcType=DECIMAL},
+      </if>
+      <if test="xqtxf != null" >
+        #{xqtxf,jdbcType=DECIMAL},
+      </if>
+      <if test="lbcf != null" >
+        #{lbcf,jdbcType=DECIMAL},
+      </if>
+      <if test="yxcysf != null" >
+        #{yxcysf,jdbcType=DECIMAL},
+      </if>
+      <if test="shenheren != null" >
+        #{shenheren,jdbcType=VARCHAR},
+      </if>
+      <if test="tongjiren != null" >
+        #{tongjiren,jdbcType=VARCHAR},
+      </if>
+      <if test="phone != null" >
+        #{phone,jdbcType=VARCHAR},
+      </if>
+      <if test="optime != null" >
+        #{optime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.sinog2c.model.statistical.StatisticalPunishmentOther" >
+    update STATISTICAL_PUNISHMENT_OTHER
+    <set >
+      <if test="deptname != null" >
+        DEPTNAME = #{deptname,jdbcType=VARCHAR},
+      </if>
+      <if test="shensuhj != null" >
+        SHENSUHJ = #{shensuhj,jdbcType=DECIMAL},
+      </if>
+      <if test="ssjytqcl != null" >
+        SSJYTQCL = #{ssjytqcl,jdbcType=DECIMAL},
+      </if>
+      <if test="ssjytqhf != null" >
+        SSJYTQHF = #{ssjytqhf,jdbcType=DECIMAL},
+      </if>
+      <if test="sszftqcl != null" >
+        SSZFTQCL = #{sszftqcl,jdbcType=DECIMAL},
+      </if>
+      <if test="sszftqhf != null" >
+        SSZFTQHF = #{sszftqhf,jdbcType=DECIMAL},
+      </if>
+      <if test="kgjjhj != null" >
+        KGJJHJ = #{kgjjhj,jdbcType=DECIMAL},
+      </if>
+      <if test="kgjyzxcl != null" >
+        KGJYZXCL = #{kgjyzxcl,jdbcType=DECIMAL},
+      </if>
+      <if test="kgbsjcl != null" >
+        KGBSJCL = #{kgbsjcl,jdbcType=DECIMAL},
+      </if>
+      <if test="kgzgajcycl != null" >
+        KGZGAJCYCL = #{kgzgajcycl,jdbcType=DECIMAL},
+      </if>
+      <if test="jcjyhj != null" >
+        JCJYHJ = #{jcjyhj,jdbcType=DECIMAL},
+      </if>
+      <if test="jcjyjjz != null" >
+        JCJYJJZ = #{jcjyjjz,jdbcType=DECIMAL},
+      </if>
+      <if test="jzwfhj != null" >
+        JZWFHJ = #{jzwfhj,jdbcType=DECIMAL},
+      </if>
+      <if test="jzwfjjz != null" >
+        JZWFJJZ = #{jzwfjjz,jdbcType=DECIMAL},
+      </if>
+      <if test="wfwjhj != null" >
+        WFWJHJ = #{wfwjhj,jdbcType=DECIMAL},
+      </if>
+      <if test="wfwjxscf != null" >
+        WFWJXSCF = #{wfwjxscf,jdbcType=DECIMAL},
+      </if>
+      <if test="wfwjdzjcf != null" >
+        WFWJDZJCF = #{wfwjdzjcf,jdbcType=DECIMAL},
+      </if>
+      <if test="wfwjxscfremark != null" >
+        WFWJXSCFREMARK = #{wfwjxscfremark,jdbcType=VARCHAR},
+      </if>
+      <if test="qmyfhj != null" >
+        QMYFHJ = #{qmyfhj,jdbcType=DECIMAL},
+      </if>
+      <if test="shxjf != null" >
+        SHXJF = #{shxjf,jdbcType=DECIMAL},
+      </if>
+      <if test="shxzjxf != null" >
+        SHXZJXF = #{shxzjxf,jdbcType=DECIMAL},
+      </if>
+      <if test="wqtxf != null" >
+        WQTXF = #{wqtxf,jdbcType=DECIMAL},
+      </if>
+      <if test="xqtxf != null" >
+        XQTXF = #{xqtxf,jdbcType=DECIMAL},
+      </if>
+      <if test="lbcf != null" >
+        LBCF = #{lbcf,jdbcType=DECIMAL},
+      </if>
+      <if test="yxcysf != null" >
+        YXCYSF = #{yxcysf,jdbcType=DECIMAL},
+      </if>
+      <if test="shenheren != null" >
+        SHENHEREN = #{shenheren,jdbcType=VARCHAR},
+      </if>
+      <if test="tongjiren != null" >
+        TONGJIREN = #{tongjiren,jdbcType=VARCHAR},
+      </if>
+      <if test="phone != null" >
+        PHONE = #{phone,jdbcType=VARCHAR},
+      </if>
+      <if test="optime != null" >
+        OPTIME = #{optime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where DEPARTID = #{departid,jdbcType=VARCHAR}
+      and YEARTYPE = #{yeartype,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByMap" parameterType="Map" >
+    update STATISTICAL_PUNISHMENT_OTHER
+    <set >
+      <if test="deptname != null" >
+        DEPTNAME = #{deptname,jdbcType=VARCHAR},
+      </if>
+      <if test="shensuhj != null" >
+        SHENSUHJ = #{shensuhj,jdbcType=DECIMAL},
+      </if>
+      <if test="ssjytqcl != null" >
+        SSJYTQCL = #{ssjytqcl,jdbcType=DECIMAL},
+      </if>
+      <if test="ssjytqhf != null" >
+        SSJYTQHF = #{ssjytqhf,jdbcType=DECIMAL},
+      </if>
+      <if test="sszftqcl != null" >
+        SSZFTQCL = #{sszftqcl,jdbcType=DECIMAL},
+      </if>
+      <if test="sszftqhf != null" >
+        SSZFTQHF = #{sszftqhf,jdbcType=DECIMAL},
+      </if>
+      <if test="kgjjhj != null" >
+        KGJJHJ = #{kgjjhj,jdbcType=DECIMAL},
+      </if>
+      <if test="kgjyzxcl != null" >
+        KGJYZXCL = #{kgjyzxcl,jdbcType=DECIMAL},
+      </if>
+      <if test="kgbsjcl != null" >
+        KGBSJCL = #{kgbsjcl,jdbcType=DECIMAL},
+      </if>
+      <if test="kgzgajcycl != null" >
+        KGZGAJCYCL = #{kgzgajcycl,jdbcType=DECIMAL},
+      </if>
+      <if test="jcjyhj != null" >
+        JCJYHJ = #{jcjyhj,jdbcType=DECIMAL},
+      </if>
+      <if test="jcjyjjz != null" >
+        JCJYJJZ = #{jcjyjjz,jdbcType=DECIMAL},
+      </if>
+      <if test="jzwfhj != null" >
+        JZWFHJ = #{jzwfhj,jdbcType=DECIMAL},
+      </if>
+      <if test="jzwfjjz != null" >
+        JZWFJJZ = #{jzwfjjz,jdbcType=DECIMAL},
+      </if>
+      <if test="wfwjhj != null" >
+        WFWJHJ = #{wfwjhj,jdbcType=DECIMAL},
+      </if>
+      <if test="wfwjxscf != null" >
+        WFWJXSCF = #{wfwjxscf,jdbcType=DECIMAL},
+      </if>
+      <if test="wfwjdzjcf != null" >
+        WFWJDZJCF = #{wfwjdzjcf,jdbcType=DECIMAL},
+      </if>
+      <if test="wfwjxscfremark != null" >
+        WFWJXSCFREMARK = #{wfwjxscfremark,jdbcType=VARCHAR},
+      </if>
+      <if test="qmyfhj != null" >
+        QMYFHJ = #{qmyfhj,jdbcType=DECIMAL},
+      </if>
+      <if test="shxjf != null" >
+        SHXJF = #{shxjf,jdbcType=DECIMAL},
+      </if>
+      <if test="shxzjxf != null" >
+        SHXZJXF = #{shxzjxf,jdbcType=DECIMAL},
+      </if>
+      <if test="wqtxf != null" >
+        WQTXF = #{wqtxf,jdbcType=DECIMAL},
+      </if>
+      <if test="xqtxf != null" >
+        XQTXF = #{xqtxf,jdbcType=DECIMAL},
+      </if>
+      <if test="lbcf != null" >
+        LBCF = #{lbcf,jdbcType=DECIMAL},
+      </if>
+      <if test="yxcysf != null" >
+        YXCYSF = #{yxcysf,jdbcType=DECIMAL},
+      </if>
+      <if test="shenheren != null" >
+        SHENHEREN = #{shenheren,jdbcType=VARCHAR},
+      </if>
+      <if test="tongjiren != null" >
+        TONGJIREN = #{tongjiren,jdbcType=VARCHAR},
+      </if>
+      <if test="phone != null" >
+        PHONE = #{phone,jdbcType=VARCHAR},
+      </if>
+      <if test="optime != null" >
+        OPTIME = #{optime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where DEPARTID = #{departid,jdbcType=VARCHAR}
+      and YEARTYPE = #{yeartype,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.sinog2c.model.statistical.StatisticalPunishmentOther" >
+    update STATISTICAL_PUNISHMENT_OTHER
+    set DEPTNAME = #{deptname,jdbcType=VARCHAR},
+      SHENSUHJ = #{shensuhj,jdbcType=DECIMAL},
+      SSJYTQCL = #{ssjytqcl,jdbcType=DECIMAL},
+      SSJYTQHF = #{ssjytqhf,jdbcType=DECIMAL},
+      SSZFTQCL = #{sszftqcl,jdbcType=DECIMAL},
+      SSZFTQHF = #{sszftqhf,jdbcType=DECIMAL},
+      KGJJHJ = #{kgjjhj,jdbcType=DECIMAL},
+      KGJYZXCL = #{kgjyzxcl,jdbcType=DECIMAL},
+      KGBSJCL = #{kgbsjcl,jdbcType=DECIMAL},
+      KGZGAJCYCL = #{kgzgajcycl,jdbcType=DECIMAL},
+      JCJYHJ = #{jcjyhj,jdbcType=DECIMAL},
+      JCJYJJZ = #{jcjyjjz,jdbcType=DECIMAL},
+      JZWFHJ = #{jzwfhj,jdbcType=DECIMAL},
+      JZWFJJZ = #{jzwfjjz,jdbcType=DECIMAL},
+      WFWJHJ = #{wfwjhj,jdbcType=DECIMAL},
+      WFWJXSCF = #{wfwjxscf,jdbcType=DECIMAL},
+      WFWJDZJCF = #{wfwjdzjcf,jdbcType=DECIMAL},
+      WFWJXSCFREMARK = #{wfwjxscfremark,jdbcType=VARCHAR},
+      QMYFHJ = #{qmyfhj,jdbcType=DECIMAL},
+      SHXJF = #{shxjf,jdbcType=DECIMAL},
+      SHXZJXF = #{shxzjxf,jdbcType=DECIMAL},
+      WQTXF = #{wqtxf,jdbcType=DECIMAL},
+      XQTXF = #{xqtxf,jdbcType=DECIMAL},
+      LBCF = #{lbcf,jdbcType=DECIMAL},
+      YXCYSF = #{yxcysf,jdbcType=DECIMAL},
+      SHENHEREN = #{shenheren,jdbcType=VARCHAR},
+      TONGJIREN = #{tongjiren,jdbcType=VARCHAR},
+      PHONE = #{phone,jdbcType=VARCHAR},
+      OPTIME = #{optime,jdbcType=TIMESTAMP}
+    where DEPARTID = #{departid,jdbcType=VARCHAR}
+      and YEARTYPE = #{yeartype,jdbcType=VARCHAR}
+  </update>
+</mapper>

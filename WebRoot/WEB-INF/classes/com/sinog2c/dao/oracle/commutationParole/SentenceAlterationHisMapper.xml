@@ -1,0 +1,781 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.sinog2c.dao.api.commutationParole.SentenceAlterationHisMapper" >
+  <resultMap id="BaseResultMap" type="com.sinog2c.model.commutationParole.SentenceAlterationHis" >
+    <result column="JAILID" property="jailid" jdbcType="VARCHAR" />
+    <result column="JAILNAME" property="jailname" jdbcType="VARCHAR" />
+    <result column="AREANAME" property="areaname" jdbcType="VARCHAR" />
+    <result column="AREAID" property="areaid" jdbcType="VARCHAR" />
+    <result column="BRANCHAREANAME" property="branchareaname" jdbcType="VARCHAR" />
+    <result column="CASENO" property="caseno" jdbcType="DECIMAL" />
+    <result column="CRIMID" property="crimid" jdbcType="VARCHAR" />
+    <result column="NAME" property="name" jdbcType="VARCHAR" />
+    <result column="GENDER" property="gender" jdbcType="VARCHAR" />
+    <result column="BRITHDAY" property="brithday" jdbcType="DATE" />
+    <result column="TYPEID" property="typeid" jdbcType="DECIMAL" />
+    <result column="ISMINOR" property="isminor" jdbcType="DECIMAL" />
+    <result column="ISOLD" property="isold" jdbcType="DECIMAL" />
+    <result column="ISILL" property="isill" jdbcType="DECIMAL" />
+    <result column="ISDISABILITY" property="isdisability" jdbcType="DECIMAL" />
+    <result column="CHANGETYPE" property="changetype" jdbcType="VARCHAR" />
+    <result column="COURTNAME" property="courtname" jdbcType="VARCHAR" />
+    <result column="COURTTITLE" property="courttitle" jdbcType="VARCHAR" />
+    <result column="COURTYEAR" property="courtyear" jdbcType="DECIMAL" />
+    <result column="COURTSHORT" property="courtshort" jdbcType="VARCHAR" />
+    <result column="COURTSN" property="courtsn" jdbcType="DECIMAL" />
+    <result column="COURTSANCTION" property="courtsanction" jdbcType="DATE" />
+    <result column="COURTCHANGEYEAR" property="courtchangeyear" jdbcType="VARCHAR" />
+    <result column="COURTCHANGEMONTH" property="courtchangemonth" jdbcType="VARCHAR" />
+    <result column="COURTCHANGEDAY" property="courtchangeday" jdbcType="VARCHAR" />
+    <result column="COURTCHANGEFROM" property="courtchangefrom" jdbcType="DATE" />
+    <result column="COURTCHANGETO" property="courtchangeto" jdbcType="DATE" />
+    <result column="CRIMCLASS" property="crimclass" jdbcType="VARCHAR" />
+    <result column="ISDEPORTATION" property="isdeportation" jdbcType="DECIMAL" />
+    <result column="PUNISHMENTYEAR" property="punishmentyear" jdbcType="VARCHAR" />
+    <result column="PUNISHMENTMONTH" property="punishmentmonth" jdbcType="VARCHAR" />
+    <result column="PUNISHMENTDAY" property="punishmentday" jdbcType="VARCHAR" />
+    <result column="ISLIMIT" property="islimit" jdbcType="DECIMAL" />
+    <result column="ISPAROLE" property="isparole" jdbcType="DECIMAL" />
+    <result column="STAYEXECUTION" property="stayexecution" jdbcType="DATE" />
+    <result column="NOPERIOD" property="noperiod" jdbcType="DATE" />
+    <result column="EXNOPERIOD" property="exnoperiod" jdbcType="VARCHAR" />
+    <result column="SENTENCESTART" property="sentencestart" jdbcType="DATE" />
+    <result column="DELIVERY" property="delivery" jdbcType="DATE" />
+    <result column="NOWPUNISHMENTYEAR" property="nowpunishmentyear" jdbcType="VARCHAR" />
+    <result column="NOWPUNISHMENTMONTH" property="nowpunishmentmonth" jdbcType="VARCHAR" />
+    <result column="NOWPUNISHMENTDAY" property="nowpunishmentday" jdbcType="VARCHAR" />
+    <result column="INPERSION" property="inpersion" jdbcType="DATE" />
+    <result column="FRISTSUBMIT" property="fristsubmit" jdbcType="DATE" />
+    <result column="COMMUTATIONDATE" property="commutationdate" jdbcType="DATE" />
+    <result column="PREDATE" property="predate" jdbcType="DATE" />
+    <result column="THISDATE" property="thisdate" jdbcType="DATE" />
+    <result column="INTERVALYEAR" property="intervalyear" jdbcType="VARCHAR" />
+    <result column="INTERVALMONTH" property="intervalmonth" jdbcType="VARCHAR" />
+    <result column="INTERVALDAY" property="intervalday" jdbcType="VARCHAR" />
+    <result column="FINE" property="fine" jdbcType="DECIMAL" />
+    <result column="THISFINE" property="thisfine" jdbcType="DECIMAL" />
+    <result column="SUMFINE" property="sumfine" jdbcType="DECIMAL" />
+    <result column="RECOVERED" property="recovered" jdbcType="DECIMAL" />
+    <result column="SUMRECOVERED" property="sumrecovered" jdbcType="DECIMAL" />
+    <result column="THISRECOVERED" property="thisrecovered" jdbcType="DECIMAL" />
+    <result column="EXPROPRIATION" property="expropriation" jdbcType="DECIMAL" />
+    <result column="SUMEXPROPRIATION" property="sumexpropriation" jdbcType="DECIMAL" />
+    <result column="THISEXPROPRIATION" property="thisexpropriation" jdbcType="DECIMAL" />
+    <result column="EXPROPRIATIONINFO" property="expropriationinfo" jdbcType="VARCHAR" />
+    <result column="CIVILJUDGMENT" property="civiljudgment" jdbcType="VARCHAR" />
+    <result column="CIVIL" property="civil" jdbcType="DECIMAL" />
+    <result column="SUMCIVIL" property="sumcivil" jdbcType="DECIMAL" />
+    <result column="THISCIVIL" property="thiscivil" jdbcType="DECIMAL" />
+    <result column="INCOME" property="income" jdbcType="DECIMAL" />
+    <result column="PAY" property="pay" jdbcType="DECIMAL" />
+    <result column="OVERPLUS" property="overplus" jdbcType="DECIMAL" />
+    <result column="REWARDSTART" property="rewardstart" jdbcType="DATE" />
+    <result column="REWARDEND" property="rewardend" jdbcType="DATE" />
+    <result column="JAILREPORT" property="jailreport" jdbcType="DATE" />
+    <result column="EXECDATE" property="execdate" jdbcType="DATE" />
+    <result column="JAILINFO" property="jailinfo" jdbcType="VARCHAR" />
+    <result column="ADMINISTRATION" property="administration" jdbcType="VARCHAR" />
+    <result column="PROSECUTOR" property="prosecutor" jdbcType="VARCHAR" />
+    <result column="REWARDINFO" property="rewardinfo" jdbcType="VARCHAR" />
+    <result column="PUNISHINFO" property="punishinfo" jdbcType="VARCHAR" />
+    <result column="SENTENCECHAGEINFO" property="sentencechageinfo" jdbcType="VARCHAR" />
+    <result column="CRIMETIME" property="crimetime" jdbcType="DATE" />
+    <result column="DETAINDATE" property="detaindate" jdbcType="DATE" />
+    <result column="ORIGINALYEAR" property="originalyear" jdbcType="VARCHAR" />
+    <result column="ORIGINALMONTH" property="originalmonth" jdbcType="VARCHAR" />
+    <result column="ORIGINALDAY" property="originalday" jdbcType="VARCHAR" />
+    <result column="BATCHID" property="batchid" jdbcType="DECIMAL" />
+    <result column="STATUS" property="status" jdbcType="DECIMAL" />
+    <result column="ISFILTER" property="isfilter" jdbcType="DECIMAL" />
+    <result column="REMARK" property="remark" jdbcType="VARCHAR" />
+    <result column="OPID" property="opid" jdbcType="VARCHAR" />
+    <result column="OPTIME" property="optime" jdbcType="DATE" />
+  </resultMap>
+  <insert id="insert" parameterType="com.sinog2c.model.commutationParole.SentenceAlterationHis" >
+    insert into TBXF_SENTENCEALTERATION_HIS (JAILID, JAILNAME, AREANAME, 
+      AREAID, BRANCHAREANAME, CASENO, 
+      CRIMID, NAME, GENDER, 
+      BRITHDAY, TYPEID, ISMINOR, 
+      ISOLD, ISILL, ISDISABILITY, 
+      CHANGETYPE, COURTNAME, COURTTITLE, 
+      COURTYEAR, COURTSHORT, COURTSN, 
+      COURTSANCTION, COURTCHANGEYEAR, COURTCHANGEMONTH, 
+      COURTCHANGEDAY, COURTCHANGEFROM, COURTCHANGETO, 
+      CRIMCLASS, ISDEPORTATION, PUNISHMENTYEAR, 
+      PUNISHMENTMONTH, PUNISHMENTDAY, ISLIMIT, 
+      ISPAROLE, STAYEXECUTION, NOPERIOD, 
+      EXNOPERIOD, SENTENCESTART, DELIVERY, 
+      NOWPUNISHMENTYEAR, NOWPUNISHMENTMONTH, 
+      NOWPUNISHMENTDAY, INPERSION, FRISTSUBMIT, 
+      COMMUTATIONDATE, PREDATE, THISDATE, 
+      INTERVALYEAR, INTERVALMONTH, INTERVALDAY, 
+      FINE, THISFINE, SUMFINE, 
+      RECOVERED, SUMRECOVERED, THISRECOVERED, 
+      EXPROPRIATION, SUMEXPROPRIATION, THISEXPROPRIATION, 
+      EXPROPRIATIONINFO, CIVILJUDGMENT, CIVIL, 
+      SUMCIVIL, THISCIVIL, INCOME, 
+      PAY, OVERPLUS, REWARDSTART, 
+      REWARDEND, JAILREPORT, EXECDATE, 
+      JAILINFO, ADMINISTRATION, PROSECUTOR, 
+      REWARDINFO, PUNISHINFO, SENTENCECHAGEINFO, 
+      CRIMETIME, DETAINDATE, ORIGINALYEAR, 
+      ORIGINALMONTH, ORIGINALDAY, BATCHID, 
+      STATUS, ISFILTER, REMARK, 
+      OPID, OPTIME)
+    values (#{jailid,jdbcType=VARCHAR}, #{jailname,jdbcType=VARCHAR}, #{areaname,jdbcType=VARCHAR}, 
+      #{areaid,jdbcType=VARCHAR}, #{branchareaname,jdbcType=VARCHAR}, #{caseno,jdbcType=DECIMAL}, 
+      #{crimid,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR}, #{gender,jdbcType=VARCHAR}, 
+      #{brithday,jdbcType=DATE}, #{typeid,jdbcType=DECIMAL}, #{isminor,jdbcType=DECIMAL}, 
+      #{isold,jdbcType=DECIMAL}, #{isill,jdbcType=DECIMAL}, #{isdisability,jdbcType=DECIMAL}, 
+      #{changetype,jdbcType=VARCHAR}, #{courtname,jdbcType=VARCHAR}, #{courttitle,jdbcType=VARCHAR}, 
+      #{courtyear,jdbcType=DECIMAL}, #{courtshort,jdbcType=VARCHAR}, #{courtsn,jdbcType=DECIMAL}, 
+      #{courtsanction,jdbcType=DATE}, #{courtchangeyear,jdbcType=VARCHAR}, #{courtchangemonth,jdbcType=VARCHAR}, 
+      #{courtchangeday,jdbcType=VARCHAR}, #{courtchangefrom,jdbcType=DATE}, #{courtchangeto,jdbcType=DATE}, 
+      #{crimclass,jdbcType=VARCHAR}, #{isdeportation,jdbcType=DECIMAL}, #{punishmentyear,jdbcType=VARCHAR}, 
+      #{punishmentmonth,jdbcType=VARCHAR}, #{punishmentday,jdbcType=VARCHAR}, #{islimit,jdbcType=DECIMAL}, 
+      #{isparole,jdbcType=DECIMAL}, #{stayexecution,jdbcType=DATE}, #{noperiod,jdbcType=DATE}, 
+      #{exnoperiod,jdbcType=VARCHAR}, #{sentencestart,jdbcType=DATE}, #{delivery,jdbcType=DATE}, 
+      #{nowpunishmentyear,jdbcType=VARCHAR}, #{nowpunishmentmonth,jdbcType=VARCHAR}, 
+      #{nowpunishmentday,jdbcType=VARCHAR}, #{inpersion,jdbcType=DATE}, #{fristsubmit,jdbcType=DATE}, 
+      #{commutationdate,jdbcType=DATE}, #{predate,jdbcType=DATE}, #{thisdate,jdbcType=DATE}, 
+      #{intervalyear,jdbcType=VARCHAR}, #{intervalmonth,jdbcType=VARCHAR}, #{intervalday,jdbcType=VARCHAR}, 
+      #{fine,jdbcType=DECIMAL}, #{thisfine,jdbcType=DECIMAL}, #{sumfine,jdbcType=DECIMAL}, 
+      #{recovered,jdbcType=DECIMAL}, #{sumrecovered,jdbcType=DECIMAL}, #{thisrecovered,jdbcType=DECIMAL}, 
+      #{expropriation,jdbcType=DECIMAL}, #{sumexpropriation,jdbcType=DECIMAL}, #{thisexpropriation,jdbcType=DECIMAL}, 
+      #{expropriationinfo,jdbcType=VARCHAR}, #{civiljudgment,jdbcType=VARCHAR}, #{civil,jdbcType=DECIMAL}, 
+      #{sumcivil,jdbcType=DECIMAL}, #{thiscivil,jdbcType=DECIMAL}, #{income,jdbcType=DECIMAL}, 
+      #{pay,jdbcType=DECIMAL}, #{overplus,jdbcType=DECIMAL}, #{rewardstart,jdbcType=DATE}, 
+      #{rewardend,jdbcType=DATE}, #{jailreport,jdbcType=DATE}, #{execdate,jdbcType=DATE}, 
+      #{jailinfo,jdbcType=VARCHAR}, #{administration,jdbcType=VARCHAR}, #{prosecutor,jdbcType=VARCHAR}, 
+      #{rewardinfo,jdbcType=VARCHAR}, #{punishinfo,jdbcType=VARCHAR}, #{sentencechageinfo,jdbcType=VARCHAR}, 
+      #{crimetime,jdbcType=DATE}, #{detaindate,jdbcType=DATE}, #{originalyear,jdbcType=VARCHAR}, 
+      #{originalmonth,jdbcType=VARCHAR}, #{originalday,jdbcType=VARCHAR}, #{batchid,jdbcType=DECIMAL}, 
+      #{status,jdbcType=DECIMAL}, #{isfilter,jdbcType=DECIMAL}, #{remark,jdbcType=VARCHAR}, 
+      #{opid,jdbcType=VARCHAR}, #{optime,jdbcType=DATE})
+  </insert>
+  <insert id="insertSelective" parameterType="com.sinog2c.model.commutationParole.SentenceAlterationHis" >
+    insert into TBXF_SENTENCEALTERATION_HIS
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="jailid != null" >
+        JAILID,
+      </if>
+      <if test="jailname != null" >
+        JAILNAME,
+      </if>
+      <if test="areaname != null" >
+        AREANAME,
+      </if>
+      <if test="areaid != null" >
+        AREAID,
+      </if>
+      <if test="branchareaname != null" >
+        BRANCHAREANAME,
+      </if>
+      <if test="caseno != null" >
+        CASENO,
+      </if>
+      <if test="crimid != null" >
+        CRIMID,
+      </if>
+      <if test="name != null" >
+        NAME,
+      </if>
+      <if test="gender != null" >
+        GENDER,
+      </if>
+      <if test="brithday != null" >
+        BRITHDAY,
+      </if>
+      <if test="typeid != null" >
+        TYPEID,
+      </if>
+      <if test="isminor != null" >
+        ISMINOR,
+      </if>
+      <if test="isold != null" >
+        ISOLD,
+      </if>
+      <if test="isill != null" >
+        ISILL,
+      </if>
+      <if test="isdisability != null" >
+        ISDISABILITY,
+      </if>
+      <if test="changetype != null" >
+        CHANGETYPE,
+      </if>
+      <if test="courtname != null" >
+        COURTNAME,
+      </if>
+      <if test="courttitle != null" >
+        COURTTITLE,
+      </if>
+      <if test="courtyear != null" >
+        COURTYEAR,
+      </if>
+      <if test="courtshort != null" >
+        COURTSHORT,
+      </if>
+      <if test="courtsn != null" >
+        COURTSN,
+      </if>
+      <if test="courtsanction != null" >
+        COURTSANCTION,
+      </if>
+      <if test="courtchangeyear != null" >
+        COURTCHANGEYEAR,
+      </if>
+      <if test="courtchangemonth != null" >
+        COURTCHANGEMONTH,
+      </if>
+      <if test="courtchangeday != null" >
+        COURTCHANGEDAY,
+      </if>
+      <if test="courtchangefrom != null" >
+        COURTCHANGEFROM,
+      </if>
+      <if test="courtchangeto != null" >
+        COURTCHANGETO,
+      </if>
+      <if test="crimclass != null" >
+        CRIMCLASS,
+      </if>
+      <if test="isdeportation != null" >
+        ISDEPORTATION,
+      </if>
+      <if test="punishmentyear != null" >
+        PUNISHMENTYEAR,
+      </if>
+      <if test="punishmentmonth != null" >
+        PUNISHMENTMONTH,
+      </if>
+      <if test="punishmentday != null" >
+        PUNISHMENTDAY,
+      </if>
+      <if test="islimit != null" >
+        ISLIMIT,
+      </if>
+      <if test="isparole != null" >
+        ISPAROLE,
+      </if>
+      <if test="stayexecution != null" >
+        STAYEXECUTION,
+      </if>
+      <if test="noperiod != null" >
+        NOPERIOD,
+      </if>
+      <if test="exnoperiod != null" >
+        EXNOPERIOD,
+      </if>
+      <if test="sentencestart != null" >
+        SENTENCESTART,
+      </if>
+      <if test="delivery != null" >
+        DELIVERY,
+      </if>
+      <if test="nowpunishmentyear != null" >
+        NOWPUNISHMENTYEAR,
+      </if>
+      <if test="nowpunishmentmonth != null" >
+        NOWPUNISHMENTMONTH,
+      </if>
+      <if test="nowpunishmentday != null" >
+        NOWPUNISHMENTDAY,
+      </if>
+      <if test="inpersion != null" >
+        INPERSION,
+      </if>
+      <if test="fristsubmit != null" >
+        FRISTSUBMIT,
+      </if>
+      <if test="commutationdate != null" >
+        COMMUTATIONDATE,
+      </if>
+      <if test="predate != null" >
+        PREDATE,
+      </if>
+      <if test="thisdate != null" >
+        THISDATE,
+      </if>
+      <if test="intervalyear != null" >
+        INTERVALYEAR,
+      </if>
+      <if test="intervalmonth != null" >
+        INTERVALMONTH,
+      </if>
+      <if test="intervalday != null" >
+        INTERVALDAY,
+      </if>
+      <if test="fine != null" >
+        FINE,
+      </if>
+      <if test="thisfine != null" >
+        THISFINE,
+      </if>
+      <if test="sumfine != null" >
+        SUMFINE,
+      </if>
+      <if test="recovered != null" >
+        RECOVERED,
+      </if>
+      <if test="sumrecovered != null" >
+        SUMRECOVERED,
+      </if>
+      <if test="thisrecovered != null" >
+        THISRECOVERED,
+      </if>
+      <if test="expropriation != null" >
+        EXPROPRIATION,
+      </if>
+      <if test="sumexpropriation != null" >
+        SUMEXPROPRIATION,
+      </if>
+      <if test="thisexpropriation != null" >
+        THISEXPROPRIATION,
+      </if>
+      <if test="expropriationinfo != null" >
+        EXPROPRIATIONINFO,
+      </if>
+      <if test="civiljudgment != null" >
+        CIVILJUDGMENT,
+      </if>
+      <if test="civil != null" >
+        CIVIL,
+      </if>
+      <if test="sumcivil != null" >
+        SUMCIVIL,
+      </if>
+      <if test="thiscivil != null" >
+        THISCIVIL,
+      </if>
+      <if test="income != null" >
+        INCOME,
+      </if>
+      <if test="pay != null" >
+        PAY,
+      </if>
+      <if test="overplus != null" >
+        OVERPLUS,
+      </if>
+      <if test="rewardstart != null" >
+        REWARDSTART,
+      </if>
+      <if test="rewardend != null" >
+        REWARDEND,
+      </if>
+      <if test="jailreport != null" >
+        JAILREPORT,
+      </if>
+      <if test="execdate != null" >
+        EXECDATE,
+      </if>
+      <if test="jailinfo != null" >
+        JAILINFO,
+      </if>
+      <if test="administration != null" >
+        ADMINISTRATION,
+      </if>
+      <if test="prosecutor != null" >
+        PROSECUTOR,
+      </if>
+      <if test="rewardinfo != null" >
+        REWARDINFO,
+      </if>
+      <if test="punishinfo != null" >
+        PUNISHINFO,
+      </if>
+      <if test="sentencechageinfo != null" >
+        SENTENCECHAGEINFO,
+      </if>
+      <if test="crimetime != null" >
+        CRIMETIME,
+      </if>
+      <if test="detaindate != null" >
+        DETAINDATE,
+      </if>
+      <if test="originalyear != null" >
+        ORIGINALYEAR,
+      </if>
+      <if test="originalmonth != null" >
+        ORIGINALMONTH,
+      </if>
+      <if test="originalday != null" >
+        ORIGINALDAY,
+      </if>
+      <if test="batchid != null" >
+        BATCHID,
+      </if>
+      <if test="status != null" >
+        STATUS,
+      </if>
+      <if test="isfilter != null" >
+        ISFILTER,
+      </if>
+      <if test="remark != null" >
+        REMARK,
+      </if>
+      <if test="opid != null" >
+        OPID,
+      </if>
+      <if test="optime != null" >
+        OPTIME,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="jailid != null" >
+        #{jailid,jdbcType=VARCHAR},
+      </if>
+      <if test="jailname != null" >
+        #{jailname,jdbcType=VARCHAR},
+      </if>
+      <if test="areaname != null" >
+        #{areaname,jdbcType=VARCHAR},
+      </if>
+      <if test="areaid != null" >
+        #{areaid,jdbcType=VARCHAR},
+      </if>
+      <if test="branchareaname != null" >
+        #{branchareaname,jdbcType=VARCHAR},
+      </if>
+      <if test="caseno != null" >
+        #{caseno,jdbcType=DECIMAL},
+      </if>
+      <if test="crimid != null" >
+        #{crimid,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null" >
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="gender != null" >
+        #{gender,jdbcType=VARCHAR},
+      </if>
+      <if test="brithday != null" >
+        #{brithday,jdbcType=DATE},
+      </if>
+      <if test="typeid != null" >
+        #{typeid,jdbcType=DECIMAL},
+      </if>
+      <if test="isminor != null" >
+        #{isminor,jdbcType=DECIMAL},
+      </if>
+      <if test="isold != null" >
+        #{isold,jdbcType=DECIMAL},
+      </if>
+      <if test="isill != null" >
+        #{isill,jdbcType=DECIMAL},
+      </if>
+      <if test="isdisability != null" >
+        #{isdisability,jdbcType=DECIMAL},
+      </if>
+      <if test="changetype != null" >
+        #{changetype,jdbcType=VARCHAR},
+      </if>
+      <if test="courtname != null" >
+        #{courtname,jdbcType=VARCHAR},
+      </if>
+      <if test="courttitle != null" >
+        #{courttitle,jdbcType=VARCHAR},
+      </if>
+      <if test="courtyear != null" >
+        #{courtyear,jdbcType=DECIMAL},
+      </if>
+      <if test="courtshort != null" >
+        #{courtshort,jdbcType=VARCHAR},
+      </if>
+      <if test="courtsn != null" >
+        #{courtsn,jdbcType=DECIMAL},
+      </if>
+      <if test="courtsanction != null" >
+        #{courtsanction,jdbcType=DATE},
+      </if>
+      <if test="courtchangeyear != null" >
+        #{courtchangeyear,jdbcType=VARCHAR},
+      </if>
+      <if test="courtchangemonth != null" >
+        #{courtchangemonth,jdbcType=VARCHAR},
+      </if>
+      <if test="courtchangeday != null" >
+        #{courtchangeday,jdbcType=VARCHAR},
+      </if>
+      <if test="courtchangefrom != null" >
+        #{courtchangefrom,jdbcType=DATE},
+      </if>
+      <if test="courtchangeto != null" >
+        #{courtchangeto,jdbcType=DATE},
+      </if>
+      <if test="crimclass != null" >
+        #{crimclass,jdbcType=VARCHAR},
+      </if>
+      <if test="isdeportation != null" >
+        #{isdeportation,jdbcType=DECIMAL},
+      </if>
+      <if test="punishmentyear != null" >
+        #{punishmentyear,jdbcType=VARCHAR},
+      </if>
+      <if test="punishmentmonth != null" >
+        #{punishmentmonth,jdbcType=VARCHAR},
+      </if>
+      <if test="punishmentday != null" >
+        #{punishmentday,jdbcType=VARCHAR},
+      </if>
+      <if test="islimit != null" >
+        #{islimit,jdbcType=DECIMAL},
+      </if>
+      <if test="isparole != null" >
+        #{isparole,jdbcType=DECIMAL},
+      </if>
+      <if test="stayexecution != null" >
+        #{stayexecution,jdbcType=DATE},
+      </if>
+      <if test="noperiod != null" >
+        #{noperiod,jdbcType=DATE},
+      </if>
+      <if test="exnoperiod != null" >
+        #{exnoperiod,jdbcType=VARCHAR},
+      </if>
+      <if test="sentencestart != null" >
+        #{sentencestart,jdbcType=DATE},
+      </if>
+      <if test="delivery != null" >
+        #{delivery,jdbcType=DATE},
+      </if>
+      <if test="nowpunishmentyear != null" >
+        #{nowpunishmentyear,jdbcType=VARCHAR},
+      </if>
+      <if test="nowpunishmentmonth != null" >
+        #{nowpunishmentmonth,jdbcType=VARCHAR},
+      </if>
+      <if test="nowpunishmentday != null" >
+        #{nowpunishmentday,jdbcType=VARCHAR},
+      </if>
+      <if test="inpersion != null" >
+        #{inpersion,jdbcType=DATE},
+      </if>
+      <if test="fristsubmit != null" >
+        #{fristsubmit,jdbcType=DATE},
+      </if>
+      <if test="commutationdate != null" >
+        #{commutationdate,jdbcType=DATE},
+      </if>
+      <if test="predate != null" >
+        #{predate,jdbcType=DATE},
+      </if>
+      <if test="thisdate != null" >
+        #{thisdate,jdbcType=DATE},
+      </if>
+      <if test="intervalyear != null" >
+        #{intervalyear,jdbcType=VARCHAR},
+      </if>
+      <if test="intervalmonth != null" >
+        #{intervalmonth,jdbcType=VARCHAR},
+      </if>
+      <if test="intervalday != null" >
+        #{intervalday,jdbcType=VARCHAR},
+      </if>
+      <if test="fine != null" >
+        #{fine,jdbcType=DECIMAL},
+      </if>
+      <if test="thisfine != null" >
+        #{thisfine,jdbcType=DECIMAL},
+      </if>
+      <if test="sumfine != null" >
+        #{sumfine,jdbcType=DECIMAL},
+      </if>
+      <if test="recovered != null" >
+        #{recovered,jdbcType=DECIMAL},
+      </if>
+      <if test="sumrecovered != null" >
+        #{sumrecovered,jdbcType=DECIMAL},
+      </if>
+      <if test="thisrecovered != null" >
+        #{thisrecovered,jdbcType=DECIMAL},
+      </if>
+      <if test="expropriation != null" >
+        #{expropriation,jdbcType=DECIMAL},
+      </if>
+      <if test="sumexpropriation != null" >
+        #{sumexpropriation,jdbcType=DECIMAL},
+      </if>
+      <if test="thisexpropriation != null" >
+        #{thisexpropriation,jdbcType=DECIMAL},
+      </if>
+      <if test="expropriationinfo != null" >
+        #{expropriationinfo,jdbcType=VARCHAR},
+      </if>
+      <if test="civiljudgment != null" >
+        #{civiljudgment,jdbcType=VARCHAR},
+      </if>
+      <if test="civil != null" >
+        #{civil,jdbcType=DECIMAL},
+      </if>
+      <if test="sumcivil != null" >
+        #{sumcivil,jdbcType=DECIMAL},
+      </if>
+      <if test="thiscivil != null" >
+        #{thiscivil,jdbcType=DECIMAL},
+      </if>
+      <if test="income != null" >
+        #{income,jdbcType=DECIMAL},
+      </if>
+      <if test="pay != null" >
+        #{pay,jdbcType=DECIMAL},
+      </if>
+      <if test="overplus != null" >
+        #{overplus,jdbcType=DECIMAL},
+      </if>
+      <if test="rewardstart != null" >
+        #{rewardstart,jdbcType=DATE},
+      </if>
+      <if test="rewardend != null" >
+        #{rewardend,jdbcType=DATE},
+      </if>
+      <if test="jailreport != null" >
+        #{jailreport,jdbcType=DATE},
+      </if>
+      <if test="execdate != null" >
+        #{execdate,jdbcType=DATE},
+      </if>
+      <if test="jailinfo != null" >
+        #{jailinfo,jdbcType=VARCHAR},
+      </if>
+      <if test="administration != null" >
+        #{administration,jdbcType=VARCHAR},
+      </if>
+      <if test="prosecutor != null" >
+        #{prosecutor,jdbcType=VARCHAR},
+      </if>
+      <if test="rewardinfo != null" >
+        #{rewardinfo,jdbcType=VARCHAR},
+      </if>
+      <if test="punishinfo != null" >
+        #{punishinfo,jdbcType=VARCHAR},
+      </if>
+      <if test="sentencechageinfo != null" >
+        #{sentencechageinfo,jdbcType=VARCHAR},
+      </if>
+      <if test="crimetime != null" >
+        #{crimetime,jdbcType=DATE},
+      </if>
+      <if test="detaindate != null" >
+        #{detaindate,jdbcType=DATE},
+      </if>
+      <if test="originalyear != null" >
+        #{originalyear,jdbcType=VARCHAR},
+      </if>
+      <if test="originalmonth != null" >
+        #{originalmonth,jdbcType=VARCHAR},
+      </if>
+      <if test="originalday != null" >
+        #{originalday,jdbcType=VARCHAR},
+      </if>
+      <if test="batchid != null" >
+        #{batchid,jdbcType=DECIMAL},
+      </if>
+      <if test="status != null" >
+        #{status,jdbcType=DECIMAL},
+      </if>
+      <if test="isfilter != null" >
+        #{isfilter,jdbcType=DECIMAL},
+      </if>
+      <if test="remark != null" >
+        #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="opid != null" >
+        #{opid,jdbcType=VARCHAR},
+      </if>
+      <if test="optime != null" >
+        #{optime,jdbcType=DATE},
+      </if>
+    </trim>
+  </insert>
+  
+  <select id="countSentenceChangesOfCrimid" resultType="int">
+  		select count(*) from TBDATA_SENTCHAGE t where 1=1 and t.crimid = #{crimid,jdbcType=VARCHAR}
+  </select>
+  
+  <select id="getSentenceChangesOfCrimid" parameterType="Object" resultType="java.util.HashMap">
+  	select * from
+    ( select a.*, rownum rn from
+	    	(SELECT    '('||courtyear||')'||courtshort||courtsn||'号' AS caseno,
+                case 
+                when CATEGORY = '1'
+         			then REPLACE(G_SENCHANGE_AMPLITUDE_BIGNUM(COURTCHANGE), '减为', '')
+                when  CATEGORY='7' and LENGTH (COURTCHANGE) = 6 and SUBSTR(COURTCHANGE, 1, 2) > 5
+                                then '减为'|| G_SENCHANGE_AMPLITUDE_BIGNUM (COURTCHANGE)
+                                else  G_SENCHANGE_AMPLITUDE_BIGNUM(COURTCHANGE)
+                    end  AS biandongfudu,
+               REPLACE( G_SENCHANGE_AMPLITUDE_BIGNUM(SENTENCE),'减为','') AS bianhouxingqi,
+               REPLACE(F_LOSEPOWER_SD (LOSEPOWER),'剥夺政治权利','') as boquan,
+                F_TRY_FORMATDATE(COURTSANCTION) as date1,
+            	  tsh.courtname||tsh.courttitle as pancaifayuan,
+                 case when length(tsh.courtchange) = 4 then F_FORMATYMD((tsh.courtchange),0,0)
+                         else
+                        F_FORMATYMD(TO_NUMBER(substr(tsh.courtchange,0,2)),TO_NUMBER(substr(tsh.courtchange,3,2)),TO_NUMBER(substr(tsh.courtchange,5,2)),0)
+                        end  as commuterange1,
+            	tsh.*
+       		FROM TBDATA_SENTCHAGE tsh
+		    where  tsh.crimid = #{crimid,jdbcType=VARCHAR}
+		 	<trim prefix="" suffix="" suffixOverrides=",">
+				<if test="sortField!=null and sortField!=''"> order by ${sortField} ${sortOrder}</if>
+			</trim>
+	  	) a 
+	    <if test="end!=null and end!=''">
+	   		where rownum &lt;= #{end}
+	   	</if>
+    )
+   	<if test="start!=null and start!=''">
+   		where  rn &gt;= #{start}
+   	</if>
+  </select>
+  
+  <select id="getSingleSentenceChangeOfCrim" parameterType="Map" resultType="Map">
+  		select crimid,name,to_char(rewardstart,'yyyyMMdd') as rewardstart,
+  				to_char(rewardend,'yyyyMMdd') as rewardend, 
+  				to_char(courtchangeto,'yyyyMMdd') as courtchangeto,
+  				 to_char(courtchangefrom,'yyyyMMdd') as courtchangefrom, changetype, 
+  				 to_char(execdate,'yyyyMMdd') as execdate, 
+  				 to_char(courtsanction,'yyyyMMdd') as courtsanction,
+  				 courtsn,courtshort,courtyear,courtname,
+  				 (case when courtchangeyear='9995' then '减为无期'
+  				 	else (
+  				 		(case when courtchangeyear is not null then courtchangeyear||'年' else '' end)||
+  				 		(case when courtchangemonth is not null then courtchangemonth||'月' else '' end)||
+  				 		(case when courtchangeday is not null then courtchangeday||'天' else '' end)
+  				 	)
+  				 	end
+  				 ) as courtchangeyear,
+  				 
+  				 (case when punishmentyear='9995' then '无期徒刑'
+  				 	else (
+  				 		(case when punishmentyear is not null then punishmentyear||'年' else '' end)||
+  				 		(case when punishmentmonth is not null then punishmentmonth||'月' else '' end)||
+  				 		(case when punishmentday is not null then punishmentday||'天' else '' end)
+  				 	)
+  				 	end
+  				 ) as punishmentyear
+  				 
+  		 from TBXF_SENTENCEALTERATION_HIS t 
+  		 where  t.crimid = #{crimid,jdbcType=VARCHAR} and to_char(t.courtsanction,'yyyy-MM-dd') =#{courtsanction,jdbcType=VARCHAR} 
+  </select>
+  
+  
+  <select id="countJiFenBuLuOfCrimid" resultType="int">
+  		select count(*)
+  		from ZHUNAN_RCKH
+  		where pr_id1 = #{crimid,jdbcType=VARCHAR}
+  </select>
+  
+  <select id="getJiFenBuLuOfCrimid" parameterType="Object" resultType="Map">
+	  	select id,
+	  		   awps_abstract,
+	  		   awps_score,
+	  		   TO_CHAR(awps_date,'yyyy-MM-dd') as awps_date,
+	  		   entry_name,
+	  		   TO_CHAR(entry_date,'yyyy-MM-dd') as entry_date
+	  	from ZHUNAN_RCKH 
+	  	where pr_id1 = #{crimid,jdbcType=VARCHAR}
+	    order by awps_date desc
+  </select>
+  
+  
+</mapper>

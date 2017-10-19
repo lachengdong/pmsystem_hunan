@@ -1,0 +1,172 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.sinog2c.dao.api.prisoner.ZpublicDaMtxxMapper">
+  <resultMap id="BaseResultMap" type="com.sinog2c.model.prisoner.ZpublicDaMtxx">
+    <id column="BH" jdbcType="VARCHAR" property="bh" />
+    <id column="ID" jdbcType="VARCHAR" property="id" />
+    <result column="MTBM" jdbcType="VARCHAR" property="mtbm" />
+    <result column="MTLB" jdbcType="VARCHAR" property="mtlb" />
+    <result column="LRSJ" jdbcType="VARCHAR" property="lrsj" />
+    <result column="SDID" jdbcType="VARCHAR" property="sdid" />
+    <result column="YHBH" jdbcType="VARCHAR" property="yhbh" />
+  </resultMap>
+  <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="com.sinog2c.model.prisoner.ZpublicDaMtxx">
+    <result column="NR" jdbcType="CLOB" property="nr" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    BH, ID, MTBM, MTLB, LRSJ, SDID, YHBH
+  </sql>
+  <sql id="Blob_Column_List">
+    NR
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="Map" resultMap="ResultMapWithBLOBs">
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    ,rownum from ZPUBLIC_DA_MTXX
+    where BH = #{bh,jdbcType=VARCHAR}
+      and MTBM = #{mtbm,jdbcType=VARCHAR}
+      and MTLB = #{mtlb,jdbcType=VARCHAR}
+      and rownum = 1
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="com.sinog2c.model.prisoner.ZpublicDaMtxxKey">
+    delete from ZPUBLIC_DA_MTXX
+    where BH = #{bh,jdbcType=VARCHAR}
+      and ID = #{id,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.sinog2c.model.prisoner.ZpublicDaMtxx">
+    insert into ZPUBLIC_DA_MTXX (BH, ID, MTBM, 
+      MTLB, LRSJ, SDID, YHBH, 
+      ISDONE, DONEDATE, NR)
+    values (#{bh,jdbcType=VARCHAR}, #{id,jdbcType=VARCHAR}, #{mtbm,jdbcType=VARCHAR}, 
+      #{mtlb,jdbcType=VARCHAR}, #{lrsj,jdbcType=VARCHAR}, #{sdid,jdbcType=VARCHAR}, #{yhbh,jdbcType=VARCHAR}, 
+      #{isdone,jdbcType=DECIMAL}, #{donedate,jdbcType=DATE}, #{nr,jdbcType=CLOB})
+  </insert>
+  <insert id="insertSelective" parameterType="com.sinog2c.model.prisoner.ZpublicDaMtxx">
+    insert into ZPUBLIC_DA_MTXX
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="bh != null">
+        BH,
+      </if>
+      <if test="id != null">
+        ID,
+      </if>
+      <if test="mtbm != null">
+        MTBM,
+      </if>
+      <if test="mtlb != null">
+        MTLB,
+      </if>
+      <if test="lrsj != null">
+        LRSJ,
+      </if>
+      <if test="sdid != null">
+        SDID,
+      </if>
+      <if test="yhbh != null">
+        YHBH,
+      </if>
+      <if test="isdone != null">
+        ISDONE,
+      </if>
+      <if test="donedate != null">
+        DONEDATE,
+      </if>
+      <if test="nr != null">
+        NR,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="bh != null">
+        #{bh,jdbcType=VARCHAR},
+      </if>
+      <if test="id != null">
+        #{id,jdbcType=VARCHAR},
+      </if>
+      <if test="mtbm != null">
+        #{mtbm,jdbcType=VARCHAR},
+      </if>
+      <if test="mtlb != null">
+        #{mtlb,jdbcType=VARCHAR},
+      </if>
+      <if test="lrsj != null">
+        #{lrsj,jdbcType=VARCHAR},
+      </if>
+      <if test="sdid != null">
+        #{sdid,jdbcType=VARCHAR},
+      </if>
+      <if test="yhbh != null">
+        #{yhbh,jdbcType=VARCHAR},
+      </if>
+      <if test="isdone != null">
+        #{isdone,jdbcType=DECIMAL},
+      </if>
+      <if test="donedate != null">
+        #{donedate,jdbcType=DATE},
+      </if>
+      <if test="nr != null">
+        #{nr,jdbcType=CLOB},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.sinog2c.model.prisoner.ZpublicDaMtxx">
+    update ZPUBLIC_DA_MTXX
+    <set>
+      <if test="mtbm != null">
+        MTBM = #{mtbm,jdbcType=VARCHAR},
+      </if>
+      <if test="mtlb != null">
+        MTLB = #{mtlb,jdbcType=VARCHAR},
+      </if>
+      <if test="lrsj != null">
+        LRSJ = #{lrsj,jdbcType=VARCHAR},
+      </if>
+      <if test="sdid != null">
+        SDID = #{sdid,jdbcType=VARCHAR},
+      </if>
+      <if test="yhbh != null">
+        YHBH = #{yhbh,jdbcType=VARCHAR},
+      </if>
+      <if test="isdone != null">
+        ISDONE = #{isdone,jdbcType=DECIMAL},
+      </if>
+      <if test="donedate != null">
+        DONEDATE = #{donedate,jdbcType=DATE},
+      </if>
+      <if test="nr != null">
+        NR = #{nr,jdbcType=CLOB},
+      </if>
+    </set>
+    where BH = #{bh,jdbcType=VARCHAR}
+      and ID = #{id,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.sinog2c.model.prisoner.ZpublicDaMtxx">
+    update ZPUBLIC_DA_MTXX
+    set MTBM = #{mtbm,jdbcType=VARCHAR},
+      MTLB = #{mtlb,jdbcType=VARCHAR},
+      LRSJ = #{lrsj,jdbcType=VARCHAR},
+      SDID = #{sdid,jdbcType=VARCHAR},
+      YHBH = #{yhbh,jdbcType=VARCHAR},
+      ISDONE = #{isdone,jdbcType=DECIMAL},
+      DONEDATE = #{donedate,jdbcType=DATE},
+      NR = #{nr,jdbcType=CLOB}
+    where BH = #{bh,jdbcType=VARCHAR}
+      and ID = #{id,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.sinog2c.model.prisoner.ZpublicDaMtxx">
+    update ZPUBLIC_DA_MTXX
+    set MTBM = #{mtbm,jdbcType=VARCHAR},
+      MTLB = #{mtlb,jdbcType=VARCHAR},
+      LRSJ = #{lrsj,jdbcType=VARCHAR},
+      SDID = #{sdid,jdbcType=VARCHAR},
+      YHBH = #{yhbh,jdbcType=VARCHAR},
+      ISDONE = #{isdone,jdbcType=DECIMAL},
+      DONEDATE = #{donedate,jdbcType=DATE}
+    where BH = #{bh,jdbcType=VARCHAR}
+      and ID = #{id,jdbcType=VARCHAR}
+  </update>
+  <select id="gettNextID" resultType="int">
+  	select to_number(max(to_number(ID))+1) as nextID from ZPUBLIC_DA_MTXX
+  </select>  
+</mapper>

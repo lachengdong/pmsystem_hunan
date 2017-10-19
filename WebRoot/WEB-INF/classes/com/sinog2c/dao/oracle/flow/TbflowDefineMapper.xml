@@ -1,0 +1,258 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.sinog2c.dao.api.flow.TbflowDefineMapper">
+	<resultMap id="BaseResultMap" type="com.sinog2c.model.flow.TbflowDefine">
+		<id column="FLOWDEFID" jdbcType="VARCHAR" property="flowdefid" />
+		<result column="TYPE" jdbcType="DECIMAL" property="type" />
+		<result column="TEMPID" jdbcType="VARCHAR" property="tempid" />
+		<result column="OPTIME" jdbcType="DATE" property="optime" />
+		<result column="OPID" jdbcType="VARCHAR" property="opid" />
+		<result column="DEPARTID" jdbcType="VARCHAR" property="departid" />
+		<result column="REMARK" jdbcType="VARCHAR" property="remark" />
+		<result column="TEXT1" jdbcType="VARCHAR" property="text1" />
+		<result column="TEXT2" jdbcType="VARCHAR" property="text2" />
+		<result column="TEXT3" jdbcType="VARCHAR" property="text3" />
+	</resultMap>
+	<resultMap extends="BaseResultMap" id="ResultMapWithBLOBs"
+		type="com.sinog2c.model.flow.TbflowDefineWithBLOBs">
+		<result column="NODEDATA" jdbcType="CLOB" property="nodedata" />
+		<result column="LINEDATA" jdbcType="CLOB" property="linedata" />
+	</resultMap>
+	<sql id="Base_Column_List">
+		FLOWDEFID, TYPE, TEMPID, OPTIME, OPID, DEPARTID, REMARK,
+		TEXT1, TEXT2, TEXT3
+	</sql>
+	<sql id="Blob_Column_List">
+		NODEDATA, LINEDATA
+	</sql>
+	<select id="selectByPrimaryKey" parameterType="java.lang.String"
+		resultMap="ResultMapWithBLOBs">
+		select
+		<include refid="Base_Column_List" />
+		,
+		<include refid="Blob_Column_List" />
+		from TBFLOW_DEFINE
+		where FLOWDEFID = #{flowdefid,jdbcType=VARCHAR}
+	</select>
+	<delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+		delete from
+		TBFLOW_DEFINE
+		where FLOWDEFID = #{flowdefid,jdbcType=VARCHAR}
+	</delete>
+	<insert id="insert" parameterType="com.sinog2c.model.flow.TbflowDefineWithBLOBs">
+		insert into TBFLOW_DEFINE
+		(FLOWDEFID, TYPE, TEMPID,
+		OPTIME, OPID, DEPARTID,
+		REMARK, TEXT1, TEXT2,
+		TEXT3, NODEDATA, LINEDATA
+		)
+		values (#{flowdefid,jdbcType=VARCHAR},
+		#{type,jdbcType=DECIMAL},
+		#{tempid,jdbcType=VARCHAR},
+		#{optime,jdbcType=DATE}, #{opid,jdbcType=VARCHAR},
+		#{departid,jdbcType=VARCHAR},
+		#{remark,jdbcType=VARCHAR},
+		#{text1,jdbcType=VARCHAR},
+		#{text2,jdbcType=VARCHAR},
+		#{text3,jdbcType=VARCHAR}, #{nodedata,jdbcType=CLOB},
+		#{linedata,jdbcType=CLOB}
+		)
+	</insert>
+	<insert id="insertSelective" parameterType="com.sinog2c.model.flow.TbflowDefineWithBLOBs">
+		insert into TBFLOW_DEFINE
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="flowdefid != null">
+				FLOWDEFID,
+			</if>
+			<if test="type != null">
+				TYPE,
+			</if>
+			<if test="tempid != null">
+				TEMPID,
+			</if>
+			<if test="optime != null">
+				OPTIME,
+			</if>
+			<if test="opid != null">
+				OPID,
+			</if>
+			<if test="departid != null">
+				DEPARTID,
+			</if>
+			<if test="remark != null">
+				REMARK,
+			</if>
+			<if test="text1 != null">
+				TEXT1,
+			</if>
+			<if test="text2 != null">
+				TEXT2,
+			</if>
+			<if test="text3 != null">
+				TEXT3,
+			</if>
+			<if test="nodedata != null">
+				NODEDATA,
+			</if>
+			<if test="linedata != null">
+				LINEDATA,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="flowdefid != null">
+				#{flowdefid,jdbcType=VARCHAR},
+			</if>
+			<if test="type != null">
+				#{type,jdbcType=DECIMAL},
+			</if>
+			<if test="tempid != null">
+				#{tempid,jdbcType=VARCHAR},
+			</if>
+			<if test="optime != null">
+				#{optime,jdbcType=DATE},
+			</if>
+			<if test="opid != null">
+				#{opid,jdbcType=VARCHAR},
+			</if>
+			<if test="departid != null">
+				#{departid,jdbcType=VARCHAR},
+			</if>
+			<if test="remark != null">
+				#{remark,jdbcType=VARCHAR},
+			</if>
+			<if test="text1 != null">
+				#{text1,jdbcType=VARCHAR},
+			</if>
+			<if test="text2 != null">
+				#{text2,jdbcType=VARCHAR},
+			</if>
+			<if test="text3 != null">
+				#{text3,jdbcType=VARCHAR},
+			</if>
+			<if test="nodedata != null">
+				#{nodedata,jdbcType=CLOB},
+			</if>
+			<if test="linedata != null">
+				#{linedata,jdbcType=CLOB},
+			</if>
+		</trim>
+	</insert>
+	<update id="updateByPrimaryKeySelective" parameterType="com.sinog2c.model.flow.TbflowDefineWithBLOBs">
+		update TBFLOW_DEFINE
+		<set>
+			<if test="type != null">
+				TYPE = #{type,jdbcType=DECIMAL},
+			</if>
+			<if test="tempid != null">
+				TEMPID = #{tempid,jdbcType=VARCHAR},
+			</if>
+			<if test="optime != null">
+				OPTIME = #{optime,jdbcType=DATE},
+			</if>
+			<if test="opid != null">
+				OPID = #{opid,jdbcType=VARCHAR},
+			</if>
+			<if test="departid != null">
+				DEPARTID = #{departid,jdbcType=VARCHAR},
+			</if>
+			<if test="remark != null">
+				REMARK = #{remark,jdbcType=VARCHAR},
+			</if>
+			<if test="text1 != null">
+				TEXT1 = #{text1,jdbcType=VARCHAR},
+			</if>
+			<if test="text2 != null">
+				TEXT2 = #{text2,jdbcType=VARCHAR},
+			</if>
+			<if test="text3 != null">
+				TEXT3 = #{text3,jdbcType=VARCHAR},
+			</if>
+			<if test="nodedata != null">
+				NODEDATA = #{nodedata,jdbcType=CLOB},
+			</if>
+			<if test="linedata != null">
+				LINEDATA = #{linedata,jdbcType=CLOB},
+			</if>
+		</set>
+		where FLOWDEFID = #{flowdefid,jdbcType=VARCHAR}
+	</update>
+	<update id="updateByPrimaryKeyWithBLOBs" parameterType="com.sinog2c.model.flow.TbflowDefineWithBLOBs">
+		update
+		TBFLOW_DEFINE
+		set TYPE = #{type,jdbcType=DECIMAL},
+		TEMPID =
+		#{tempid,jdbcType=VARCHAR},
+		OPTIME = #{optime,jdbcType=DATE},
+		OPID =
+		#{opid,jdbcType=VARCHAR},
+		DEPARTID = #{departid,jdbcType=VARCHAR},
+		REMARK = #{remark,jdbcType=VARCHAR},
+		TEXT1 = #{text1,jdbcType=VARCHAR},
+		TEXT2 = #{text2,jdbcType=VARCHAR},
+		TEXT3 = #{text3,jdbcType=VARCHAR},
+		NODEDATA = #{nodedata,jdbcType=CLOB},
+		LINEDATA =
+		#{linedata,jdbcType=CLOB}
+		where FLOWDEFID =
+		#{flowdefid,jdbcType=VARCHAR}
+	</update>
+	<update id="updateByPrimaryKey" parameterType="com.sinog2c.model.flow.TbflowDefine">
+		update
+		TBFLOW_DEFINE
+		set TYPE = #{type,jdbcType=DECIMAL},
+		TEMPID =
+		#{tempid,jdbcType=VARCHAR},
+		OPTIME = #{optime,jdbcType=DATE},
+		OPID =
+		#{opid,jdbcType=VARCHAR},
+		DEPARTID = #{departid,jdbcType=VARCHAR},
+		REMARK = #{remark,jdbcType=VARCHAR},
+		TEXT1 = #{text1,jdbcType=VARCHAR},
+		TEXT2 = #{text2,jdbcType=VARCHAR},
+		TEXT3 = #{text3,jdbcType=VARCHAR}
+		where FLOWDEFID = #{flowdefid,jdbcType=VARCHAR}
+	</update>
+
+	<select id="getNextId" resultType="int">  <!-- 获取下一个ID -->
+		select SEQ_FLOW_DELIVERID.NEXTVAL from dual
+	</select>
+
+	<select id="findFlowByDepartid" resultType="com.sinog2c.model.flow.TbflowDefine">
+		select *
+		from (
+		select rownum rn ,t.*
+		from ( select
+		distinct(t.flowdefid),t.remark,t.OPTIME
+		from tbflow_define t
+		where
+		t.departid=#{departid}
+		<if test="key!=null and key!=''">
+			and (t.flowdefid=#{key} or t.remark like '%'||#{key}||'%')
+		</if>
+		<if test="sortField!=null and sortField !=''">
+			order by ${sortField} ${sortOrder}
+		</if>
+
+		)t where rownum&lt;=${end}) a where a.rn&gt;=${start}
+	</select>
+	<select id="getFlowCountBydepid" resultType="int">
+		select count(*) from (select rownum rn ,t.* from (select
+		distinct(t.flowdefid),t.remark from tbflow_define t where
+		t.departid=#{departid}
+		<if test="key!=null and key!=''">
+			and (t.flowdefid=#{key} or t.remark like '%'||#{key}||'%')
+		</if>
+		)t)
+	</select>
+	
+	<select id="findFlowByTypeandDept" resultType="com.sinog2c.model.flow.TbflowDefine">
+		select
+		<include refid="Base_Column_List" />
+		from tbflow_define
+		where TYPE=#{type} 
+		<if test="key!=null and key!=''">
+			and (flowdefid=#{key} or remark like '%'||#{key}||'%')
+		</if>
+	</select>
+	
+</mapper>

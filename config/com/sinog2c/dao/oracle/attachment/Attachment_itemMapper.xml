@@ -1,0 +1,298 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.sinog2c.dao.api.attachment.Attachment_itemMapper">
+	<resultMap id="BaseResultMap" type="com.sinog2c.model.attachment.Attachment_item">
+		<id column="ID" property="id" jdbcType="DECIMAL" />
+		<result column="ATTACHMENT_ID" property="attachmentId"
+			jdbcType="DECIMAL" />
+		<result column="FILE_ID" property="fileId" jdbcType="VARCHAR" />
+		<result column="FILE_NAME" property="fileName" jdbcType="VARCHAR" />
+		<result column="FILE_SIZE" property="fileSize" jdbcType="DECIMAL" />
+		<result column="FILE_EXT_NAME" property="fileExtName" jdbcType="VARCHAR" />
+		<result column="FILE_CONTENTYPE" property="fileContentype"
+			jdbcType="VARCHAR" />
+		<result column="FILE_HASH" property="fileHash" jdbcType="VARCHAR" />
+		<result column="CREATE_USER" property="createUser" jdbcType="VARCHAR" />
+		<result column="DELETE_FLAG" property="deleteFlag" jdbcType="DECIMAL" />
+		<result column="REFERENCE_COUNT" property="referenceCount"
+			jdbcType="DECIMAL" />
+		<result column="CREATE_TIME" property="createTime" jdbcType="TIMESTAMP" />
+		<result column="UPDATE_TIME" property="updateTime" jdbcType="TIMESTAMP" />
+	</resultMap>
+	<resultMap extends="BaseResultMap" id="ResultMapWithPath"
+		type="com.sinog2c.model.attachment.Attachment_item2">
+		<result column="MODULE" property="module" jdbcType="VARCHAR" />
+		<result column="PATH" property="path" jdbcType="VARCHAR" />
+		<result column="MODEL" property="model" jdbcType="VARCHAR" />
+		<result column="ATTRIBUTE" property="attribute" jdbcType="VARCHAR" />
+		<result column="PK" property="pk" jdbcType="DECIMAL" />
+	</resultMap>
+
+	<sql id="Base_Column_List">
+		ID, ATTACHMENT_ID, FILE_ID, FILE_NAME, FILE_SIZE,
+		FILE_EXT_NAME,
+		FILE_CONTENTYPE,
+		FILE_HASH, CREATE_USER, DELETE_FLAG,
+		REFERENCE_COUNT, CREATE_TIME, UPDATE_TIME
+	</sql>
+	<select id="selectByPrimaryKey" resultMap="BaseResultMap"
+		parameterType="java.lang.Long">
+		select
+		<include refid="Base_Column_List" />
+		from OA_ATTACHMENT_ITEM
+		where ID = #{id,jdbcType=DECIMAL}
+	</select>
+	<delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+		delete from
+		OA_ATTACHMENT_ITEM
+		where ID = #{id,jdbcType=DECIMAL}
+	</delete>
+	<insert id="insert" parameterType="com.sinog2c.model.attachment.Attachment_item">
+		insert into OA_ATTACHMENT_ITEM
+		(ID, ATTACHMENT_ID, FILE_ID,
+		FILE_NAME, FILE_SIZE, FILE_EXT_NAME,
+		FILE_CONTENTYPE, FILE_HASH, CREATE_USER,
+		DELETE_FLAG, REFERENCE_COUNT,
+		CREATE_TIME,
+		UPDATE_TIME)
+		values (#{id,jdbcType=DECIMAL},
+		#{attachmentId,jdbcType=DECIMAL},
+		#{fileId,jdbcType=VARCHAR},
+		#{fileName,jdbcType=VARCHAR}, #{fileSize,jdbcType=DECIMAL},
+		#{fileExtName,jdbcType=VARCHAR},
+		#{fileContentype,jdbcType=VARCHAR},
+		#{fileHash,jdbcType=VARCHAR},
+		#{createUser,jdbcType=VARCHAR},
+		#{deleteFlag,jdbcType=DECIMAL}, #{referenceCount,jdbcType=DECIMAL},
+		#{createTime,jdbcType=TIMESTAMP},
+		#{updateTime,jdbcType=TIMESTAMP})
+	</insert>
+	<insert id="insertSelective" parameterType="com.sinog2c.model.attachment.Attachment_item">
+		insert into OA_ATTACHMENT_ITEM
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				ID,
+			</if>
+			<if test="attachmentId != null">
+				ATTACHMENT_ID,
+			</if>
+			<if test="fileId != null">
+				FILE_ID,
+			</if>
+			<if test="fileName != null">
+				FILE_NAME,
+			</if>
+			<if test="fileSize != null">
+				FILE_SIZE,
+			</if>
+			<if test="fileExtName != null">
+				FILE_EXT_NAME,
+			</if>
+			<if test="fileContentype != null">
+				FILE_CONTENTYPE,
+			</if>
+			<if test="fileHash != null">
+				FILE_HASH,
+			</if>
+			<if test="createUser != null">
+				CREATE_USER,
+			</if>
+			<if test="deleteFlag != null">
+				DELETE_FLAG,
+			</if>
+			<if test="referenceCount != null">
+				REFERENCE_COUNT,
+			</if>
+			<if test="createTime != null">
+				CREATE_TIME,
+			</if>
+			<if test="updateTime != null">
+				UPDATE_TIME,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				#{id,jdbcType=DECIMAL},
+			</if>
+			<if test="attachmentId != null">
+				#{attachmentId,jdbcType=DECIMAL},
+			</if>
+			<if test="fileId != null">
+				#{fileId,jdbcType=VARCHAR},
+			</if>
+			<if test="fileName != null">
+				#{fileName,jdbcType=VARCHAR},
+			</if>
+			<if test="fileSize != null">
+				#{fileSize,jdbcType=DECIMAL},
+			</if>
+			<if test="fileExtName != null">
+				#{fileExtName,jdbcType=VARCHAR},
+			</if>
+			<if test="fileContentype != null">
+				#{fileContentype,jdbcType=VARCHAR},
+			</if>
+			<if test="fileHash != null">
+				#{fileHash,jdbcType=VARCHAR},
+			</if>
+			<if test="createUser != null">
+				#{createUser,jdbcType=VARCHAR},
+			</if>
+			<if test="deleteFlag != null">
+				#{deleteFlag,jdbcType=DECIMAL},
+			</if>
+			<if test="referenceCount != null">
+				#{referenceCount,jdbcType=DECIMAL},
+			</if>
+			<if test="createTime != null">
+				#{createTime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="updateTime != null">
+				#{updateTime,jdbcType=TIMESTAMP},
+			</if>
+		</trim>
+	</insert>
+	<update id="updateByPrimaryKeySelective" parameterType="com.sinog2c.model.attachment.Attachment_item">
+		update OA_ATTACHMENT_ITEM
+		<set>
+			<if test="attachmentId != null">
+				ATTACHMENT_ID = #{attachmentId,jdbcType=DECIMAL},
+			</if>
+			<if test="fileId != null">
+				FILE_ID = #{fileId,jdbcType=VARCHAR},
+			</if>
+			<if test="fileName != null">
+				FILE_NAME = #{fileName,jdbcType=VARCHAR},
+			</if>
+			<if test="fileSize != null">
+				FILE_SIZE = #{fileSize,jdbcType=DECIMAL},
+			</if>
+			<if test="fileExtName != null">
+				FILE_EXT_NAME = #{fileExtName,jdbcType=VARCHAR},
+			</if>
+			<if test="fileContentype != null">
+				FILE_CONTENTYPE = #{fileContentype,jdbcType=VARCHAR},
+			</if>
+			<if test="fileHash != null">
+				FILE_HASH = #{fileHash,jdbcType=VARCHAR},
+			</if>
+			<if test="createUser != null">
+				CREATE_USER = #{createUser,jdbcType=VARCHAR},
+			</if>
+			<if test="deleteFlag != null">
+				DELETE_FLAG = #{deleteFlag,jdbcType=DECIMAL},
+			</if>
+			<if test="referenceCount != null">
+				REFERENCE_COUNT = #{referenceCount,jdbcType=DECIMAL},
+			</if>
+			<if test="createTime != null">
+				CREATE_TIME = #{createTime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="updateTime != null">
+				UPDATE_TIME = #{updateTime,jdbcType=TIMESTAMP},
+			</if>
+		</set>
+		where ID = #{id,jdbcType=DECIMAL}
+	</update>
+	<update id="updateByPrimaryKey" parameterType="com.sinog2c.model.attachment.Attachment_item">
+		update
+		OA_ATTACHMENT_ITEM
+		set ATTACHMENT_ID =
+		#{attachmentId,jdbcType=DECIMAL},
+		FILE_ID = #{fileId,jdbcType=VARCHAR},
+		FILE_NAME = #{fileName,jdbcType=VARCHAR},
+		FILE_SIZE =
+		#{fileSize,jdbcType=DECIMAL},
+		FILE_EXT_NAME =
+		#{fileExtName,jdbcType=VARCHAR},
+		FILE_CONTENTYPE =
+		#{fileContentype,jdbcType=VARCHAR},
+		FILE_HASH =
+		#{fileHash,jdbcType=VARCHAR},
+		CREATE_USER =
+		#{createUser,jdbcType=VARCHAR},
+		DELETE_FLAG =
+		#{deleteFlag,jdbcType=DECIMAL},
+		REFERENCE_COUNT =
+		#{referenceCount,jdbcType=DECIMAL},
+		CREATE_TIME =
+		#{createTime,jdbcType=TIMESTAMP},
+		UPDATE_TIME = #{updateTime,jdbcType=TIMESTAMP}
+		where ID = #{id,jdbcType=DECIMAL}
+	</update>
+
+	<select id="getattachmentlistBymodel" resultMap="ResultMapWithPath">
+		Select
+		oa_attachment_item.*, t.module,t.path,t.model,t.pk,t.attribute
+		from
+		oa_attachment_item join(
+		Select
+		oa_attachment.id
+		attachment_id1,oa_attachment.module,oa_attachment.path,oa_attachment.model,oa_attachment.pk,oa_attachment.attribute
+		from oa_attachment where oa_attachment.pk=#{id} and
+		oa_attachment.model=#{model}) t on
+		oa_attachment_item.attachment_id=t.attachment_id1
+	</select>
+
+	<select id="getattachmentbypkandfilename" resultMap="BaseResultMap">
+		Select
+		oa_attachment_item.*
+		from
+		oa_attachment_item join(
+		Select
+		oa_attachment.id
+		attachment_id1,oa_attachment.module,oa_attachment.path,oa_attachment.model,oa_attachment.pk,oa_attachment.attribute
+		from oa_attachment where oa_attachment.pk=#{id} and
+		oa_attachment.model=#{model}) t on
+		oa_attachment_item.attachment_id=t.attachment_id1 and
+		FILE_NAME =
+		#{fileName,jdbcType=VARCHAR}
+	</select>
+
+	<select id="getBymodelwithpagination" resultMap="ResultMapWithPath">
+		select * from (select
+		rownum rn ,t1.*
+		from (
+		Select
+		oa_attachment_item.*,
+		t.module,t.path,t.model,t.pk,t.attribute
+		from
+		oa_attachment_item join(
+		Select
+		oa_attachment.id
+		attachment_id1,oa_attachment.module,oa_attachment.path,oa_attachment.model,oa_attachment.pk,oa_attachment.attribute
+		from oa_attachment where oa_attachment.pk=#{id} and
+		oa_attachment.model=#{model}) t on
+		oa_attachment_item.attachment_id=t.attachment_id1
+		where 1=1
+		<if test="fileName != null and fileName !=''">		
+			And FILE_NAME like '%'||#{fileName,jdbcType=VARCHAR}||'%'
+		</if>		
+		<if test="sortField!=null and sortField !=''">
+			order by ${sortField} ${sortOrder}
+		</if>
+		)t1 where rownum&lt;=#{end,jdbcType=DECIMAL}) a where
+		a.rn&gt;=#{start,jdbcType=DECIMAL}
+	</select>
+
+	<select id="getcountofattachment" resultType="int">
+		select count(*) from
+		oa_attachment_item join(
+		Select
+		oa_attachment.id attachment_id1
+		from oa_attachment where oa_attachment.pk=#{id} and
+		oa_attachment.model=#{model}) t on
+		oa_attachment_item.attachment_id=t.attachment_id1
+		where 1=1
+		<if test="fileName != null and fileName !=''">		
+			And FILE_NAME like '%'||#{fileName,jdbcType=VARCHAR}||'%'
+		</if>		
+	</select>	
+	
+	<delete id="deletefromAttachmentitemByAttachid" parameterType="java.lang.Long">
+		delete from
+		OA_ATTACHMENT_ITEM
+		where ATTACHMENT_ID = #{attachmentId,jdbcType=DECIMAL}
+	</delete>
+
+</mapper>

@@ -1,0 +1,721 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.sinog2c.dao.api.flow.FlowDeliverMapper">
+  <resultMap id="BaseResultMap" type="com.sinog2c.model.flow.FlowDeliver">
+    <result column="FLOWDEFID" jdbcType="VARCHAR" property="flowdefid" />
+    <result column="RESID" jdbcType="VARCHAR" property="resid" />
+    <result column="SNODEID" jdbcType="VARCHAR" property="snodeid" />
+    <result column="DNODEID" jdbcType="VARCHAR" property="dnodeid" />
+    <result column="EXPLAIN" jdbcType="VARCHAR" property="explain" />
+    <result column="STATE" jdbcType="DECIMAL" property="state" />
+    <result column="TEXT1" jdbcType="VARCHAR" property="text1" />
+    <result column="TEXT2" jdbcType="VARCHAR" property="text2" />
+    <result column="TEXT3" jdbcType="VARCHAR" property="text3" />
+    <result column="INT1" jdbcType="DECIMAL" property="int1" />
+    <result column="DEPARTID" jdbcType="VARCHAR" property="DEPARTID" />
+    <result column="REMARK" jdbcType="VARCHAR" property="remark" />
+    <result column="OPTIME" jdbcType="TIMESTAMP" property="optime" />
+    <result column="OPID" jdbcType="VARCHAR" property="opid" />
+    
+    <result column="INT2" jdbcType="DECIMAL" property="int2" />
+    <result column="INT3" jdbcType="DECIMAL" property="int3" />
+    <result column="INT4" jdbcType="DECIMAL" property="int4" />
+    <result column="TEXT4" jdbcType="VARCHAR" property="text4" />
+    <result column="TEXT5" jdbcType="VARCHAR" property="text5" />
+    <result column="TEXT6" jdbcType="VARCHAR" property="text6" />
+    <result column="TEXT7" jdbcType="VARCHAR" property="text7" />
+    <result column="TEXT8" jdbcType="VARCHAR" property="text8" />
+    <result column="TEXT9" jdbcType="VARCHAR" property="text9" />
+    <result column="TEXT10" jdbcType="VARCHAR" property="text10" />
+    <result column="STRATEGY" jdbcType="VARCHAR" property="strategy" />
+    <result column="ASSIGNEER" jdbcType="VARCHAR" property="assigneer" />
+    
+    <result column="FILTERORG" jdbcType="VARCHAR" property="filterorg" />
+    <result column="BRANCHTYPE" jdbcType="VARCHAR" property="branchtype" />
+    <result column="BRANCHVALUE" jdbcType="VARCHAR" property="branchvalue" />
+    <result column="SOLUTIONID" jdbcType="VARCHAR" property="solutionid" />
+    
+  </resultMap>
+  
+   <sql id="Base_Column_List">
+    FLOWDEFID,RESID,SNODEID,DNODEID,EXPLAIN,STATE,TEXT1,TEXT2,TEXT3,INT1,DEPARTID,REMARK,OPTIME,OPID,
+    INT2,INT3,INT4,TEXT4,TEXT5,TEXT6,TEXT7,TEXT8,TEXT9,TEXT10,STRATEGY,ASSIGNEER,FILTERORG,BRANCHTYPE,
+    BRANCHVALUE,SOLUTIONID
+  </sql>
+  
+  <insert id="insert" parameterType="com.sinog2c.model.flow.FlowDeliver">
+    insert into TBFLOW_DELIVER (FLOWDEFID, RESID, SNODEID, 
+      DNODEID, EXPLAIN, STATE, 
+      TEXT1, TEXT2, TEXT3, INT1,
+      REMARK, OPTIME, OPID,DEPARTID,
+      INT2,INT3,INT4,TEXT4,TEXT5,TEXT6,
+      TEXT7,TEXT8,TEXT9,TEXT10,STRATEGY,ASSIGNEER,
+      FILTERORG,BRANCHTYPE,BRANCHVALUE,SOLUTIONID
+      )
+    values (#{flowdefid,jdbcType=VARCHAR}, #{resid,jdbcType=VARCHAR}, #{snodeid,jdbcType=VARCHAR}, 
+      #{dnodeid,jdbcType=VARCHAR}, #{explain,jdbcType=VARCHAR}, #{state,jdbcType=DECIMAL}, 
+      #{text1,jdbcType=VARCHAR}, #{text2,jdbcType=VARCHAR}, #{text3,jdbcType=VARCHAR},#{int1,jdbcType=DECIMAL},
+      #{remark,jdbcType=VARCHAR}, #{optime,jdbcType=TIMESTAMP}, #{opid,jdbcType=VARCHAR},#{departid,jdbcType=VARCHAR},
+      #{int2,jdbcType=DECIMAL},#{int3,jdbcType=DECIMAL},#{int4,jdbcType=DECIMAL},
+      #{text4,jdbcType=VARCHAR},#{text5,jdbcType=VARCHAR},#{text6,jdbcType=VARCHAR},#{text7,jdbcType=VARCHAR},
+      #{text8,jdbcType=VARCHAR},#{text9,jdbcType=VARCHAR},#{text10,jdbcType=VARCHAR},
+      #{strategy,jdbcType=VARCHAR},#{assigneer,jdbcType=VARCHAR}, 
+      #{filterorg,jdbcType=VARCHAR},#{branchtype,jdbcType=VARCHAR},
+      #{branchvalue,jdbcType=VARCHAR},#{solutionid,jdbcType=VARCHAR}
+      )
+  </insert>
+  
+  	<select id="countAll" resultType="int">  <!-- 查询表中记录总数 -->
+		select count(*) c from TBFLOW_DELIVER
+	</select>
+
+	<select id="selectAll" resultType="com.sinog2c.model.flow.FlowDeliver">    <!-- 查询表中的所有流程信息 -->
+		select * from TBFLOW_DELIVER order by optime asc
+	</select>
+	<!-- 根据资源ID查询数据  -->
+	<select id="findByCondition"  parameterType="String" resultType="com.sinog2c.model.flow.FlowDeliver">
+		select * from TBFLOW_DELIVER where  resid= #{resid} and departid = #{departid}
+	</select>
+	<!-- 根据参数Map集合查询数据  -->
+	<select id="findByParamMap"  parameterType="Map" resultType="com.sinog2c.model.flow.FlowDeliver">
+		select * from TBFLOW_DELIVER where 1=1
+		<if test="resid!=null and resid!=''">
+			and resid= #{resid}
+		</if>
+		<if test="departid!=null and departid!=''">
+			and departid = #{departid}
+		</if>
+		<if test="flowdefid!=null and flowdefid!=''">
+			and flowdefid = #{flowdefid}
+		</if>
+		<if test="snodeid!=null and snodeid!=''">
+			and snodeid = #{snodeid}
+		</if>
+		<if test="state!=null and state!=''">
+			and state = #{state}
+		</if>
+		<if test="instate!=null and instate!=''">
+			and state in (0,1)
+		</if>
+		and rownum=1
+	</select>
+	<!-- 根据条件查询数据  -->
+	<select id="findByParam"  resultType="com.sinog2c.model.flow.FlowDeliver">
+		 select * from TBFLOW_DELIVER where 1=1
+		 <if test="departid!=null and departid!=''">
+		 	and departid = #{departid}
+		 </if>
+		 <if test="flowdefid!=null and flowdefid!=''">
+		 	and flowdefid= #{flowdefid}
+		 </if>
+	</select>
+	<!-- 根据部门ID查询数据  -->
+	<select id="findByDepartid"  parameterType="String" resultType="com.sinog2c.model.flow.FlowDeliver">
+		select * from TBFLOW_DELIVER where departid = #{departid}
+	</select>
+	<!-- 根据流程id(不唯一)查询信息 -->
+	<select id="selectTree"  parameterType="Object" resultType="java.util.HashMap">
+		select  * from tbflow_deliver where snodeid=#{ snodeid } 
+		
+	</select>
+	<select id="findByflowdefid" resultType="com.sinog2c.model.flow.FlowDeliver">
+		select * from tbflow_deliver f where f.flowdefid=#{id} 
+		<if test="departid!=null and departid!=''" > 
+			and departid = #{departid}
+		</if>
+		<if test="snodeid!=null and snodeid!=''" > 
+			and snodeid = #{snodeid}
+		</if>
+		<if test="tempstate!=null and tempstate!=''" > 
+			and state in(${tempstate})
+		</if>
+		<if test="text3!=null and text3!=''">
+			and text3 is not null
+		</if>
+		<if test="sortField!=null and sortField!=''" > 
+     		 order by ${sortField}  ${sortOrder}
+    	</if>
+	</select>
+	
+	<select id="getCaseProcess" parameterType="java.util.HashMap" resultType="java.util.HashMap">
+		select snodeid as id, text3 as text from TBFLOW_DELIVER 
+		where flowdefid=#{flowdefid} 
+		and departid=#{departid} 
+		and (state=0 or state=1)
+     	order by snodeid asc
+	</select>
+	
+	<select id="findSnodeidByDnodeid"  resultType="String">
+		select snodeid from tbflow_deliver f 
+		where f.flowdefid=#{id} 
+		and state in (0,1)
+		<if test="departid!=null and departid!=''" > 
+			and departid = #{departid}
+		</if>
+		<if test="snodeid!=null and snodeid!=''" > 
+			and dnodeid = #{snodeid}
+		</if>
+	</select>
+	<select id="findFlowByDepartid" resultType="com.sinog2c.model.flow.FlowDeliver">
+		select * from (select rownum rn ,t.* from (select 
+		distinct(t.flowdefid),t.remark from tbflow_deliver t where t.departid=#{departid} 
+		<if test="sortField!=null and sortField !=''">
+			order by ${sortField} ${sortOrder}
+		</if>
+		<if test="key!=null and key!=''">
+			and (t.flowdefid=#{key} or t.remark like '%'||#{key}||'%')
+		</if>
+		)t where rownum&lt;=${end}) a where a.rn&gt;=${start}
+	</select>
+	<select id="flowManageServicenum" resultType="int">
+		select count(*) from (select rownum rn ,t.* from (select 
+		distinct(t.flowdefid),t.remark from tbflow_deliver t where t.departid=#{departid} 
+		<if test="key!=null and key!=''">
+			and (t.flowdefid=#{key} or t.remark like '%'||#{key}||'%')
+		</if>)t)
+	</select>
+	<select id="findDepartidCount" resultType="int">
+		select count(*)　from tbflow_deliver t where t.departid=#{fromid}
+	</select>
+	<insert id="beginCopy1" parameterType="Object" >
+		insert into tbflow_deliver (flowdefid,resid, snodeid,dnodeid,explain, state,text1,
+		text2,text3, departid, remark, optime,opid)  select t.flowdefid,t.resid,t.snodeid,
+		 t.dnodeid,t.explain,t.state,t.text1,t.text2,t.text3, replace(t.departid, '${fromid}', '${toid}') as departid,
+		 t.remark,t.optime,t.opid from tbflow_deliver t where t.departid = #{fromid} 
+	</insert>
+	<insert id="beginCopy2" parameterType="map"  >
+			${sql}
+	</insert>
+	<select id="getFlowconfByDepartid" resultType="int">
+		select count(*) from TBSYS_FLOWCONF where departid=#{departid}
+	</select>
+	<select id="getFlowById" resultType="com.sinog2c.model.flow.FlowDeliver">
+		select * from 
+		(
+			select rownum rs,a.* from (
+				select rownum,t.* from tbflow_deliver t
+		 		where t.flowdefid=#{flowid} and t.departid=#{departid} 
+					order by t.snodeid,t.dnodeid
+			)a 
+			where 1=1
+			<if test="end !=null and end !=''">
+					and rownum&lt;=${end}
+				</if>
+		)aa 
+		where 1=1
+		<if test="start!=null and start!=''">
+			and aa.rs&gt;=${start}
+		</if>
+	</select>
+	<select id="getFlowByIdCount" resultType="int">
+		select count(*) from tbflow_deliver t where t.flowdefid=#{flowid} and t.departid=#{departid}
+	</select>
+	
+	<update id="updateFlowInfo" parameterType="Map">
+		update tbflow_deliver set
+		        <if test="remark!=null and remark!=''" >
+				   remark=#{remark},
+				</if>
+				<if test="flowdefid!=null and flowdefid!=''" >
+				   flowdefid=#{flowdefid},
+				</if>
+				<if test="state!=null and state!=''" >
+				   state=#{state},
+				</if>
+				<if test="explain!=null and explain!=''" >
+				   explain=#{explain},
+				</if>
+				<if test="resid!=null and resid!=''" >
+				   resid=#{resid},
+				</if>
+				<if test="snodeid!=null and snodeid!=''" >
+				   snodeid=#{snodeid},
+				</if>
+				<if test="dnodeid!=null and dnodeid!=''" >
+				   dnodeid=#{dnodeid},
+				</if>
+				<if test="text1!=null and text1!=''" >
+				   text1=#{text1},
+				</if>
+				<if test="text2!=null and text2!=''" >
+				   text2=#{text2},
+				</if>
+				<if test="text3!=null and text3!=''" >
+				   text3=#{text3},
+				</if>
+				<if test="opid!=null and opid!=''" >
+				   opid=#{opid},
+				</if>
+				<if test="departid!=null and departid!=''" >
+				   departid=#{departid}
+				</if>
+			where flowdefid=#{flowid} and departid=#{userdepartid} and resid=#{resid}
+	</update>
+	<select id="createSequences">
+		<![CDATA[   
+		   {call P_CREATEFLOWID(12)}   
+		]]>
+	</select>
+	
+	<select id="removeFlow" parameterType="Map">
+		delete from tbflow_deliver t where t.departid=#{departid} and resid=#{resid} and flowdefid=#{flowid}
+	</select>
+	
+	<insert id="createOrgOrg" parameterType="Map">
+		insert into TBFLOW_ORG_ORG 
+		<trim prefix="("  suffix=")" suffixOverrides=",">
+			<if test="orgid!=null and orgid!=''">
+				orgid,
+			</if>
+			<if test="dorgid!=null and dorgid!=''">
+				dorgid,
+			</if>
+			<if test="remark!=null and remark!=''">
+				remark,
+			</if>
+			<if test="opid!=null and opid!=''">
+				opid,
+			</if>
+			<if test="optime!=null and optime!=''">
+				optime,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="orgid!=null and orgid!=''">
+				#{orgid},
+			</if>
+			<if test="dorgid!=null and dorgid!=''">
+				#{dorgid},
+			</if>
+			<if test="remark!=null and remark!=''">
+				#{remark},
+			</if>
+			<if test="opid!=null and opid!=''">
+				#{opid},
+			</if>
+			<if test="optime!=null and optime!=''">
+				#{optime},
+			</if>
+		</trim>
+	</insert>
+	
+	<delete id="delteOrgByid" parameterType="java.lang.String">
+		delete from TBFLOW_ORG_ORG t where t.orgid=#{fromid}
+	</delete>
+	<select id="getOrgInfo" parameterType="java.lang.String" resultType="Map">
+		select * from (select rownum rs, a.* from (select rownum, t.* from tbflow_org_org t 
+		where substr(t.orgid,0,4)=#{departid}
+		<if test="key!=null and key!=''">
+			and orgid=#{key}
+		</if>
+		 and  rownum &lt;= ${end}) a) aa where aa.rs &gt;=${start}
+	</select>
+	<select id="getOrgInfoCount" parameterType="java.lang.String" resultType="int">
+		select count(1) from (select * from TBFLOW_ORG_ORG t where substr(t.orgid,0,4) =#{departid}
+		<if test="key!=null and key!=''">
+			and orgid=#{key}
+		</if>
+		)
+	</select>
+	
+	<delete id="removeOrgOrg" parameterType="Map">
+		delete from tbflow_org_org  t where t.orgid=#{orgid} and t.dorgid=#{dorgid}
+	</delete>
+	<select id="getXingwenData" parameterType="Map" resultType="Map">
+		 select *
+  from (select aa.*, rownum rs
+          from (select rownum,t.subclass,
+                       t.classification,
+                       t.text1,
+                       t.text2,
+                       t.text3,
+                       a.name,
+                       t.porgid,
+                       decode(t.status, 0, '刑期', 1, '无刑期', 2, '其他') as status
+                  from TBDATA_EXCHANGEWRITING t,tbsys_orginfo a
+               where t.porgid=a.orgid  
+          <if test="key!=null and key!=''">
+          	and (a.name like '%'||#{key}||'%' or t.porgid=#{key})
+          </if>
+         and rownum &lt;= ${end})aa
+          )
+ where rs &gt;= ${start}
+	</select>
+	<select id="getXingwenCount" parameterType="Map" resultType="int">
+		select count(1) from (select rownum,t.subclass,
+                       t.classification,
+                       t.text1,
+                       t.text2,
+                       t.text3,
+                       a.name,
+                       decode(t.status, 0, '刑期', 1, '无刑期', 2, '其他') as status
+                  from TBDATA_EXCHANGEWRITING t,tbsys_orginfo a
+               where t.porgid=a.orgid 
+               <if test="key!=null and key!=''">
+               	and (a.name like '%'||#{key}||'%' or t.porgid=#{key})
+               </if>)
+	</select>
+	<select id="getXingWenDepart" resultType="Map">
+		 select t.orgid, t.name
+                  from tbsys_orginfo t
+                 where t.orgid in
+                       (select distinct (a.porgid)
+                          from TBDATA_EXCHANGEWRITING a)
+	</select>
+	<select id="selectXingWenCount" parameterType="Map" resultType="int">
+		select count(1) from TBDATA_EXCHANGEWRITING t where t.porgid=#{porgid}
+	</select>
+	<delete id="deleXingWen" parameterType="Map">
+		delete from TBDATA_EXCHANGEWRITING t where t.porgid=#{porgid}
+	</delete>
+	<select id="CopyXingWen" parameterType="Map">
+		${sql}
+	</select>
+	<!-- 根据部门查询流程定义 -->
+	<select id="getFlowDeliverTreeByDepartid"  parameterType="Object" resultType="java.util.HashMap">
+		select  distinct flowdefid as tempid,REMARK as tempname from tbflow_deliver where DEPARTID=#{ DEPARTID } 
+	</select>
+	<select id="getFyJinCheng" parameterType="Map" resultType="java.util.HashMap">
+		select  codeid,name from tbsys_code  where codetype ='GK053' 
+		<if test="sql!=null and sql!=''">
+			and (${sql})
+		</if>
+	</select>
+	<select id="setValue" parameterType="String" resultType="com.sinog2c.model.flow.FlowDeliver">
+		select t.remark,t.int1,f.flowshort explain from TBFLOW_DELIVER t,TBSYS_FLOWCONF f where 1=1 
+		and t.flowdefid=#{flowdefid,jdbcType=VARCHAR} and rownum=1 and t.flowdefid=f.flowdefid 
+	</select>
+	
+	<select id="findCountFlowid" parameterType="Map" resultType="int">
+		select count(1) from tbsys_flowconf t where t.departid=#{departid} and t.flowdefid=#{flowdefid}
+	</select>
+	<select  id="addFlowToFlowconf" parameterType="Map" >
+		insert into tbsys_flowconf(flowdefid,departid,flowshort,iscreate) values(#{flowdefid},#{departid},#{flowshort},#{iscreate})
+	</select>
+	
+	<select id="returnUserResourceByCondition" parameterType="Map" resultType="String">
+		select F_getUSERFlow(#{userid},#{departid},#{flowdefid}) as connsql  from  dual
+	</select>
+	<select id="getDeliverCount" parameterType="Map" resultType="int">
+		select count(1) from tbflow_deliver t where t.resid=#{resid} and t.flowdefid=#{flowdefid} and t.departid=#{departid}
+	</select>
+	<select id="findByConditionFlowdef"  parameterType="String" resultType="com.sinog2c.model.flow.FlowDeliver">
+		select * from TBFLOW_DELIVER where  resid= #{resid} and departid = #{departid} and flowdefid =#{flowdefid} 
+	</select>
+	<select id="getFlowdefListForYwgkByDepartid"  parameterType="String" resultType="Map">
+		select  distinct flowdefid ,REMARK as flowdefname from tbflow_deliver where DEPARTID=#{ DEPARTID } 
+	</select>
+	
+	<!-- start add by blue_lv 2015-07-14 -->
+	<insert id="insertSelective" parameterType="com.sinog2c.model.flow.FlowDeliver">
+		insert into TBFLOW_DELIVER
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="flowdefid != null">
+				FLOWDEFID,
+			</if>
+			<if test="snodeid != null">
+				SNODEID,
+			</if>
+			<if test="dnodeid != null">
+				DNODEID,
+			</if>
+			<if test="resid != null">
+				RESID,
+			</if>
+			<if test="explain != null">
+				EXPLAIN,
+			</if>
+			<if test="state != null">
+				STATE,
+			</if>
+			<if test="text1 != null">
+				TEXT1,
+			</if>
+			<if test="text2 != null">
+				TEXT2,
+			</if>
+			<if test="text3 != null">
+				TEXT3,
+			</if>
+			<if test="departid != null">
+				DEPARTID,
+			</if>
+			<if test="remark != null">
+				REMARK,
+			</if>
+			<if test="optime != null">
+				OPTIME,
+			</if>
+			<if test="opid != null">
+				OPID,
+			</if>
+			<if test="int1 != null">
+				INT1,
+			</if>
+			
+			<if test="int2 != null">
+				INT2,
+			</if>
+			<if test="int3 != null">
+				INT3,
+			</if>
+			<if test="int4 != null">
+				INT4,
+			</if>
+			
+			<if test="text4 != null">
+				TEXT4,
+			</if>
+			<if test="text5 != null">
+				TEXT5,
+			</if>
+			<if test="text6 != null">
+				TEXT6,
+			</if>
+			<if test="text7 != null">
+				TEXT7,
+			</if>
+			<if test="text8 != null">
+				TEXT8,
+			</if>
+			<if test="text9 != null">
+				TEXT9,
+			</if>
+			<if test="text10 != null">
+				TEXT10,
+			</if>
+			
+			<if test="assigneer != null">
+				ASSIGNEER,
+			</if>
+			<if test="strategy != null">
+				STRATEGY,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="flowdefid != null">
+				#{flowdefid,jdbcType=VARCHAR},
+			</if>
+			<if test="snodeid != null">
+				#{snodeid,jdbcType=VARCHAR},
+			</if>
+			<if test="dnodeid != null">
+				#{dnodeid,jdbcType=VARCHAR},
+			</if>
+			<if test="resid != null">
+				#{resid,jdbcType=VARCHAR},
+			</if>
+			<if test="explain != null">
+				#{explain,jdbcType=VARCHAR},
+			</if>
+			<if test="state != null">
+				#{state,jdbcType=DECIMAL},
+			</if>
+			<if test="text1 != null">
+				#{text1,jdbcType=VARCHAR},
+			</if>
+			<if test="text2 != null">
+				#{text2,jdbcType=VARCHAR},
+			</if>
+			<if test="text3 != null">
+				#{text3,jdbcType=VARCHAR},
+			</if>
+			<if test="departid != null">
+				#{departid,jdbcType=VARCHAR},
+			</if>
+			<if test="remark != null">
+				#{remark,jdbcType=VARCHAR},
+			</if>
+			<if test="optime != null">
+				#{optime,jdbcType=DATE},
+			</if>
+			<if test="opid != null">
+				#{opid,jdbcType=VARCHAR},
+			</if>
+			<if test="int1 != null">
+				#{int1,jdbcType=DECIMAL},
+			</if>
+			
+			<if test="int2 != null">
+				#{int2,jdbcType=DECIMAL},
+			</if>
+			<if test="int3 != null">
+				#{int3,jdbcType=DECIMAL},
+			</if>
+			<if test="int4 != null">
+				#{int4,jdbcType=DECIMAL},
+			</if>
+			
+			<if test="text4 != null">
+				#{text4,jdbcType=VARCHAR},
+			</if>
+			<if test="text5 != null">
+				#{text5,jdbcType=VARCHAR},
+			</if>
+			<if test="text6 != null">
+				#{text6,jdbcType=VARCHAR},
+			</if>
+			<if test="text7 != null">
+				#{text7,jdbcType=VARCHAR},
+			</if>
+			<if test="text8 != null">
+				#{text8,jdbcType=VARCHAR},
+			</if>
+			<if test="text9 != null">
+				#{text9,jdbcType=VARCHAR},
+			</if>
+			<if test="text10 != null">
+				#{text10,jdbcType=VARCHAR},
+			</if>
+			
+			<if test="assigneer != null">
+				#{assigneer,jdbcType=VARCHAR},
+			</if>
+			<if test="strategy != null">
+				#{strategy,jdbcType=VARCHAR},
+			</if>
+		</trim>
+	</insert>
+	<update id="updateByPrimaryKeySelective" parameterType="com.sinog2c.model.flow.FlowDeliver">
+		update TBFLOW_DELIVER
+		<set>
+			<if test="resid != null">
+				RESID = #{resid,jdbcType=VARCHAR},
+			</if>
+			<if test="explain != null">
+				EXPLAIN = #{explain,jdbcType=VARCHAR},
+			</if>
+			<if test="state != null">
+				STATE = #{state,jdbcType=DECIMAL},
+			</if>
+			<if test="text1 != null">
+				TEXT1 = #{text1,jdbcType=VARCHAR},
+			</if>
+			<if test="text2 != null">
+				TEXT2 = #{text2,jdbcType=VARCHAR},
+			</if>
+			<if test="text3 != null">
+				TEXT3 = #{text3,jdbcType=VARCHAR},
+			</if>
+			<if test="departid != null">
+				DEPARTID = #{departid,jdbcType=VARCHAR},
+			</if>
+			<if test="remark != null">
+				REMARK = #{remark,jdbcType=VARCHAR},
+			</if>
+			<if test="optime != null">
+				OPTIME = #{optime,jdbcType=DATE},
+			</if>
+			<if test="opid != null">
+				OPID = #{opid,jdbcType=VARCHAR},
+			</if>
+			<if test="int1 != null">
+				INT1 = #{int1,jdbcType=DECIMAL},
+			</if>
+			
+			<if test="int2 != null">
+				INT2 = #{int2,jdbcType=DECIMAL},
+			</if>
+			<if test="int3 != null">
+				INT3 = #{int3,jdbcType=DECIMAL},
+			</if>
+			<if test="int4 != null">
+				INT4 = #{int4,jdbcType=DECIMAL},
+			</if>
+			
+			<if test="text4 != null">
+				TEXT4 = #{text4,jdbcType=VARCHAR},
+			</if>
+			<if test="text5 != null">
+				TEXT5 = #{text5,jdbcType=VARCHAR},
+			</if>
+			<if test="text6 != null">
+				TEXT6 = #{text6,jdbcType=VARCHAR},
+			</if>
+			<if test="text7 != null">
+				TEXT7 = #{text7,jdbcType=VARCHAR},
+			</if>
+			<if test="text8 != null">
+				TEXT8 = #{text8,jdbcType=VARCHAR},
+			</if>
+			<if test="text9 != null">
+				TEXT9 = #{text9,jdbcType=VARCHAR},
+			</if>
+			<if test="text10 != null">
+				TEXT10 = #{text10,jdbcType=VARCHAR},
+			</if>
+			
+			
+			<if test="assigneer != null">
+				ASSIGNEER = #{assigneer,jdbcType=VARCHAR},
+			</if>
+			<if test="strategy != null">
+				STRATEGY = #{strategy,jdbcType=VARCHAR},
+			</if>
+		</set>
+		where FLOWDEFID = #{flowdefid,jdbcType=VARCHAR}
+		and SNODEID =#{snodeid,jdbcType=VARCHAR}
+		and DNODEID = #{dnodeid,jdbcType=VARCHAR}
+	</update>
+	
+	
+	<delete id="deleteByflowdefid" parameterType="java.lang.String">
+		delete from
+		TBFLOW_DELIVER
+		where FLOWDEFID = #{flowdefid,jdbcType=VARCHAR}
+	</delete>
+
+	<select id="getchildNodebyDeliverExplain" resultType="com.sinog2c.model.flow.FlowDeliver">
+		select
+		<include refid="Base_Column_List" />
+		from TBFLOW_DELIVER
+		where FLOWDEFID = #{flowdefid}
+		and SNODEID =
+		#{snodeid}
+		<if test="explain != null and explain!=''">
+			and EXPLAIN = #{explain}
+		</if>
+	</select>
+
+	<select id="getflowGrandNodebyidexplain" resultType="com.sinog2c.model.flow.FlowDeliver">
+		select
+		t1.* from(
+		select * from tbflow_deliver
+		where flowdefid=#{flowdefid} ) t
+		join tbflow_deliver t1 on
+		t.dnodeid=t1.snodeid and t.flowdefid=t1.flowdefid
+		where
+		t.snodeid=#{snodeid} and t1.explain=#{explain}
+	</select>
+
+	<select id="getflowNodelistbyflowdefineid" resultType="com.sinog2c.model.flow.FlowDeliver">
+		select
+		<include refid="Base_Column_List" />
+		from TBFLOW_DELIVER
+		where FLOWDEFID = #{flowdefid}
+	</select>
+	
+	<select id="getflowDNodeinfobyTaskId" resultType="com.sinog2c.model.flow.FlowDeliver" parameterType="java.lang.String">
+		select top 1
+		<include refid="Base_Column_List" />
+		from TBFLOW_DELIVER
+		where DNODEID=(select CNODE from TBFLOW_TASK where TASKID = #{taskid,jdbcType=VARCHAR} )
+	</select>	
+	<!-- end add by blue_lv 2015-07-14 -->
+	
+	<!-- 查询当前用户、某列表页上的流程对应的节点 -->
+	<select id="getFlowCurrnodeidOfDataGrid"  parameterType="Map"  resultType="String">
+		 select distinct td.snodeid as currnodeid 
+	     from (select * from TBFLOW_DELIVER
+	              where flowdefid=#{flowdefid}
+	                 and departid=#{departid}
+	             ) td,
+	         	TBSYS_ROLE_RES rr,
+	         	TBSYS_USERS_ROLES ur,
+	         	( select resid from TBSYS_RESOURCES where presid=#{presid} ) res  
+	    where td.resid=rr.resid
+	       and rr.roleid=ur.roleid
+	       and ur.userid=#{userid}
+	       and td.resid in res.resid
+	</select>
+</mapper>

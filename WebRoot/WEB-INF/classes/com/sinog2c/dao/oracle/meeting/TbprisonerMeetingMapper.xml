@@ -1,0 +1,519 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.sinog2c.dao.api.meeting.TbprisonerMeetingMapper">
+	<resultMap id="BaseResultMap" type="com.sinog2c.model.meeting.TbprisonerMeeting">
+		<result column="SDID" jdbcType="VARCHAR" property="sdid" />
+		<result column="MKEY" jdbcType="VARCHAR" property="mkey" />
+		<result column="MTYPE" jdbcType="DECIMAL" property="mtype" />
+		<result column="MNAME" jdbcType="VARCHAR" property="mname" />
+		<result column="MPLACE" jdbcType="VARCHAR" property="mplace" />
+		<result column="MPEOPLE" jdbcType="VARCHAR" property="mpeople" />
+		<result column="MCOMPERE" jdbcType="VARCHAR" property="mcompere" />
+		<result column="MRECORDER" jdbcType="VARCHAR" property="mrecorder" />
+		<result column="MSHOULDCOUNT" jdbcType="DECIMAL" property="mshouldcount" />
+		<result column="MATTENDCOUNT" jdbcType="DECIMAL" property="mattendcount" />
+		<result column="MLIEXI" jdbcType="VARCHAR" property="mliexi" />
+		<result column="LISTYEAR" jdbcType="VARCHAR" property="listyear" />
+		<result column="OPTIME" jdbcType="TIMESTAMP" property="optime" />
+		<result column="OPID" jdbcType="VARCHAR" property="opid" />
+		<result column="TEMPID" jdbcType="VARCHAR" property="tempid" />
+	</resultMap>
+	<sql id="Update_By_Example_Where_Clause">
+		<where>
+			<foreach collection="example.oredCriteria" item="criteria"
+				separator="or">
+				<if test="criteria.valid">
+					<trim prefix="(" prefixOverrides="and" suffix=")">
+						<foreach collection="criteria.criteria" item="criterion">
+							<choose>
+								<when test="criterion.noValue">
+									and ${criterion.condition}
+                </when>
+								<when test="criterion.singleValue">
+									and ${criterion.condition} #{criterion.value}
+								</when>
+								<when test="criterion.betweenValue">
+									and ${criterion.condition} #{criterion.value}
+									and
+									#{criterion.secondValue}
+                </when>
+								<when test="criterion.listValue">
+									and ${criterion.condition}
+									<foreach close=")" collection="criterion.value" item="listItem"
+										open="(" separator=",">
+										#{listItem}
+                  </foreach>
+								</when>
+							</choose>
+						</foreach>
+					</trim>
+				</if>
+			</foreach>
+		</where>
+	</sql>
+	<insert id="insert" parameterType="com.sinog2c.model.meeting.TbprisonerMeeting">
+	<selectKey keyProperty="mkey" resultType="int" order="BEFORE">
+			select
+			SEQ_MEETING_ID.nextval as mkey from dual
+  	</selectKey>
+		insert into TBPRISONER_MEETING
+		(SDID, MKEY, MTYPE,
+		MNAME, MPLACE, MPEOPLE,
+		MCOMPERE, MRECORDER,
+		MSHOULDCOUNT,
+		MATTENDCOUNT, MLIEXI, LISTYEAR,OPTIME,OPID,TEMPID)
+		values (#{sdid,jdbcType=VARCHAR}, #{mkey,jdbcType=VARCHAR},
+		#{mtype,jdbcType=DECIMAL},
+		#{mname,jdbcType=VARCHAR},
+		#{mplace,jdbcType=VARCHAR}, #{mpeople,jdbcType=VARCHAR},
+		#{mcompere,jdbcType=VARCHAR}, #{mrecorder,jdbcType=VARCHAR},
+		#{mshouldcount,jdbcType=DECIMAL},
+		#{mattendcount,jdbcType=DECIMAL},
+		#{mliexi,jdbcType=VARCHAR}, #{listyear,jdbcType=VARCHAR},
+		#{OPID,jdbcType=VARCHAR}, #{OPTIME,jdbcType=TIMESTAMP}),#{TEMPID,jdbcType=VARCHAR}
+  </insert>
+	<insert id="insertSelective" parameterType="com.sinog2c.model.meeting.TbprisonerMeeting">
+		<selectKey keyProperty="mkey" resultType="int" order="BEFORE">
+			select
+			SEQ_MEETING_ID.nextval as mkey from dual
+  	</selectKey>
+		insert into TBPRISONER_MEETING
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="sdid != null">
+				SDID,
+      </if>
+			<if test="mkey != null">
+				MKEY,
+      </if>
+			<if test="mtype != null">
+				MTYPE,
+      </if>
+			<if test="mname != null">
+				MNAME,
+      </if>
+			<if test="mplace != null">
+				MPLACE,
+      </if>
+			<if test="mpeople != null">
+				MPEOPLE,
+      </if>
+			<if test="mcompere != null">
+				MCOMPERE,
+      </if>
+			<if test="mrecorder != null">
+				MRECORDER,
+      </if>
+			<if test="mshouldcount != null">
+				MSHOULDCOUNT,
+      </if>
+			<if test="mattendcount != null">
+				MATTENDCOUNT,
+      </if>
+			<if test="mliexi != null">
+				MLIEXI,
+      </if>
+			<if test="listyear != null">
+				LISTYEAR,
+      </if>
+			<if test="tempid != null">
+				tempid,
+      </if>
+			<if test="opid != null">
+				OPID,
+      </if>
+			<if test="optime != null">
+				OPTIME,
+      </if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="sdid != null">
+				#{sdid,jdbcType=VARCHAR},
+      </if>
+			<if test="mkey != null">
+				#{mkey,jdbcType=VARCHAR},
+      </if>
+			<if test="mtype != null">
+				#{mtype,jdbcType=DECIMAL},
+      </if>
+			<if test="mname != null">
+				#{mname,jdbcType=VARCHAR},
+      </if>
+			<if test="mplace != null">
+				#{mplace,jdbcType=VARCHAR},
+      </if>
+			<if test="mpeople != null">
+				#{mpeople,jdbcType=VARCHAR},
+      </if>
+			<if test="mcompere != null">
+				#{mcompere,jdbcType=VARCHAR},
+      </if>
+			<if test="mrecorder != null">
+				#{mrecorder,jdbcType=VARCHAR},
+      </if>
+			<if test="mshouldcount != null">
+				#{mshouldcount,jdbcType=DECIMAL},
+      </if>
+			<if test="mattendcount != null">
+				#{mattendcount,jdbcType=DECIMAL},
+      </if>
+			<if test="mliexi != null">
+				#{mliexi,jdbcType=VARCHAR},
+      </if>
+			<if test="listyear != null">
+				#{listyear,jdbcType=VARCHAR},
+      </if>
+	  <if test="tempid != null">
+				#{tempid,jdbcType=VARCHAR},
+      </if>
+	  <if test="opid != null">
+				#{opid,jdbcType=VARCHAR},
+      </if>
+			<if test="optime != null">
+				#{optime,jdbcType=TIMESTAMP},
+      </if>
+		</trim>
+	</insert>
+	<insert id="insertByMap" parameterType="Map">
+	<selectKey keyProperty="mkey" resultType="int" order="BEFORE">
+			select SEQ_MEETING_ID.nextval as mkey from dual
+  	</selectKey>
+		insert into TBPRISONER_MEETING
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="sdid != null">
+				SDID,
+      </if>
+			<if test="mkey != null">
+				MKEY,
+      </if>
+			<if test="mtype != null">
+				MTYPE,
+      </if>
+			<if test="mname != null">
+				MNAME,
+      </if>
+			<if test="mplace != null">
+				MPLACE,
+      </if>
+			<if test="mpeople != null">
+				MPEOPLE,
+      </if>
+			<if test="mcompere != null">
+				MCOMPERE,
+      </if>
+			<if test="mrecorder != null">
+				MRECORDER,
+      </if>
+			<if test="mshouldcount != null">
+				MSHOULDCOUNT,
+      </if>
+			<if test="mattendcount != null">
+				MATTENDCOUNT,
+      </if>
+			<if test="mliexi != null">
+				MLIEXI,
+      </if>
+			<if test="listyear != null">
+				LISTYEAR,
+      </if>
+      <if test="tempid != null">
+				TEMPID,
+      </if>
+	  <if test="opid != null">
+				OPID,
+      </if>
+     <if test="optime != null">
+				OPTIME,
+      </if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="sdid != null">
+				#{sdid,jdbcType=VARCHAR},
+      </if>
+			<if test="mkey != null">
+				#{mkey,jdbcType=VARCHAR},
+      </if>
+			<if test="mtype != null">
+				#{mtype,jdbcType=DECIMAL},
+      </if>
+			<if test="mname != null">
+				#{mname,jdbcType=VARCHAR},
+      </if>
+			<if test="mplace != null">
+				#{mplace,jdbcType=VARCHAR},
+      </if>
+			<if test="mpeople != null">
+				#{mpeople,jdbcType=VARCHAR},
+      </if>
+			<if test="mcompere != null">
+				#{mcompere,jdbcType=VARCHAR},
+      </if>
+			<if test="mrecorder != null">
+				#{mrecorder,jdbcType=VARCHAR},
+      </if>
+			<if test="mshouldcount != null">
+				#{mshouldcount,jdbcType=DECIMAL},
+      </if>
+			<if test="mattendcount != null">
+				#{mattendcount,jdbcType=DECIMAL},
+      </if>
+			<if test="mliexi != null">
+				#{mliexi,jdbcType=VARCHAR},
+      </if>
+			<if test="listyear != null">
+				#{listyear,jdbcType=VARCHAR},
+      </if>
+		
+	  <if test="tempid != null">
+				#{tempid,jdbcType=VARCHAR},
+      </if>
+      <if test="opid != null">
+				#{opid,jdbcType=VARCHAR},
+      </if>
+      <if test="optime != null">
+				#{optime,jdbcType=TIMESTAMP},
+      </if>
+		</trim>
+	</insert>
+	<update id="updateByExampleSelective" parameterType="map">
+		update TBPRISONER_MEETING
+		<set>
+			<if test="record.sdid != null">
+				SDID = #{record.sdid,jdbcType=VARCHAR},
+      </if>
+			<if test="record.mkey != null">
+				MKEY = #{record.mkey,jdbcType=VARCHAR},
+      </if>
+			<if test="record.mtype != null">
+				MTYPE = #{record.mtype,jdbcType=DECIMAL},
+      </if>
+			<if test="record.mname != null">
+				MNAME = #{record.mname,jdbcType=VARCHAR},
+      </if>
+			<if test="record.mplace != null">
+				MPLACE = #{record.mplace,jdbcType=VARCHAR},
+      </if>
+			<if test="record.mpeople != null">
+				MPEOPLE = #{record.mpeople,jdbcType=VARCHAR},
+      </if>
+			<if test="record.mcompere != null">
+				MCOMPERE = #{record.mcompere,jdbcType=VARCHAR},
+      </if>
+			<if test="record.mrecorder != null">
+				MRECORDER = #{record.mrecorder,jdbcType=VARCHAR},
+      </if>
+			<if test="record.mshouldcount != null">
+				MSHOULDCOUNT = #{record.mshouldcount,jdbcType=DECIMAL},
+			</if>
+			<if test="record.mattendcount != null">
+				MATTENDCOUNT = #{record.mattendcount,jdbcType=DECIMAL},
+			</if>
+			<if test="record.mliexi != null">
+				MLIEXI = #{record.mliexi,jdbcType=VARCHAR},
+      </if>
+			<if test="record.listyear != null">
+				LISTYEAR = #{record.listyear,jdbcType=VARCHAR},
+      </if>
+	  <if test="record.tempid != null">
+				CREATETIME = #{record.tempid,jdbcType=VARCHAR},
+      </if>
+	  <if test="record.opid != null">
+				CREATETIME = #{record.opid,jdbcType=VARCHAR},
+      </if>
+			<if test="record.optime != null">
+				UPDATETIME = #{record.optime,jdbcType=TIMESTAMP},
+      </if>
+		</set>
+		<if test="_parameter != null">
+			<include refid="Update_By_Example_Where_Clause" />
+		</if>
+	</update>
+	<update id="updateByMap" parameterType="map">
+		update TBPRISONER_MEETING
+		<set>
+			<if test="record.sdid != null">
+				SDID = #{record.sdid,jdbcType=VARCHAR},
+      </if>
+			<if test="record.mkey != null">
+				MKEY = #{record.mkey,jdbcType=VARCHAR},
+      </if>
+			<if test="record.mtype != null">
+				MTYPE = #{record.mtype,jdbcType=DECIMAL},
+      </if>
+			<if test="record.mname != null">
+				MNAME = #{record.mname,jdbcType=VARCHAR},
+      </if>
+			<if test="record.mplace != null">
+				MPLACE = #{record.mplace,jdbcType=VARCHAR},
+      </if>
+			<if test="record.mpeople != null">
+				MPEOPLE = #{record.mpeople,jdbcType=VARCHAR},
+      </if>
+			<if test="record.mcompere != null">
+				MCOMPERE = #{record.mcompere,jdbcType=VARCHAR},
+      </if>
+			<if test="record.mrecorder != null">
+				MRECORDER = #{record.mrecorder,jdbcType=VARCHAR},
+      </if>
+			<if test="record.mshouldcount != null">
+				MSHOULDCOUNT = #{record.mshouldcount,jdbcType=DECIMAL},
+			</if>
+			<if test="record.mattendcount != null">
+				MATTENDCOUNT = #{record.mattendcount,jdbcType=DECIMAL},
+			</if>
+			<if test="record.mliexi != null">
+				MLIEXI = #{record.mliexi,jdbcType=VARCHAR},
+      </if>
+			<if test="record.listyear != null">
+				LISTYEAR = #{record.listyear,jdbcType=VARCHAR},
+      </if>
+		
+	  <if test="record.tempid != null">
+				TEMPID = #{record.tempid,jdbcType=VARCHAR},
+      </if><if test="record.opid != null">
+				OPID = #{record.opid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.optime != null">
+				optime = #{record.optime,jdbcType=TIMESTAMP},
+      </if>
+		</set>
+		<if test="_parameter != null">
+			<include refid="Update_By_Example_Where_Clause" />
+		</if>
+	</update>
+	<select id="getCount" resultType="int">
+		select count(*) from TBSYS_DOCUMENT t where 1=1 and t.docid=#{docid}
+		<trim prefix="" suffix="" suffixOverrides=",">
+			<if test="key!=null and key!=''"> and t.mname like '%'||#{key}||'%' </if>
+		</trim>
+	</select>
+	<select id="getMeetingList" resultType="com.sinog2c.model.meeting.TbprisonerMeeting">
+		SELECT * FROM 
+		(
+			SELECT A.*, ROWNUM RN FROM 
+			(
+				SELECT * FROM TBPRISONER_MEETING tr
+				WHERE 1=1 
+				and tr.sdid=#{sdid}
+				<if test=" key != null and key != '' ">
+					and tr.MNAME like '%'||#{key}||'%' 
+		        </if>
+				order by tr.sdid asc
+			) A
+			WHERE ROWNUM &lt;= #{end,jdbcType=DECIMAL}
+		)
+		WHERE RN &gt;= #{start,jdbcType=DECIMAL}
+	</select>
+	<select id="getOneMeet" resultType="com.sinog2c.model.meeting.TbprisonerMeeting">
+	select * from TBPRISONER_MEETING where sdid=#{sdid} and mkey=#{mkey} 
+	</select>
+	
+	<select id="getMeetTreeList" parameterType="Map" resultType="Map">
+		select 
+			tof.flowdraftid,tof.tempid,tm.grade as id,
+			(
+				case when tm.grade=1 then '分监区会议记录'
+					   when tm.grade=2 then '监区会议记录'
+					   when tm.grade=3 then '刑罚科会议记录'
+					   when tm.grade=4 then '评审会会议记录'
+					   when tm.grade=5 then '监狱长办公会会议记录'
+				end
+			) as text
+		from TBFLOW_OTHER_FLOW tof,
+			 tbflow_base_other tbo,
+			 TBSYS_MEETINGRECORDFLOW tm,
+			 (
+			 	select batchid,curyear,batch from ( 
+				      select batchid,curyear,batch from TBXF_COMMUTEPAROLE_BATCH 
+				      where departid=#{departid} order by curyear desc,batch desc
+				) where rownum=1
+			 ) batch
+		where tm.crimid=#{applyid} and tm.text1=batch.batchid
+		  and tm.flowdraftid=tof.flowdraftid
+		  and tof.tempid='meetContentreport'
+		  and tof.otherid=tbo.otherid
+		order by tm.grade desc 
+	</select>
+	
+	<select id="getBWMeetTreeList" parameterType="Map" resultType="Map">
+		select 
+			tof.flowdraftid,tof.tempid,tm.grade as id,
+			(
+				case when tm.grade=1 then '分监区会议记录'
+					   when tm.grade=2 then '监区会议记录'
+					   when tm.grade=3 then '刑罚科会议记录'
+					   when tm.grade=4 then '评审会会议记录'
+					   when tm.grade=5 then '监狱长办工会会议记录'
+					   when tm.grade=7 then '省局处合议会议记录'
+					   when tm.grade=8 then '省局评审会会议记录'
+					   when tm.grade=9 then '生活卫生科会议记录'
+				end
+			) as text
+		from TBFLOW_OTHER_FLOW tof,
+			 tbflow_base_other tbo,
+			 TBSYS_MEETINGRECORDFLOW tm
+		where tm.crimid=#{applyid}
+		  and tm.flowdraftid=tof.flowdraftid
+		  and tof.tempid=#{tempid}
+		  and tof.otherid=tbo.otherid
+		  and tm.optime >= sysdate-100
+		order by tm.grade desc 
+	</select>
+	
+	<select id="selectMeetingDetail" parameterType="Map" resultType="Map">
+		  SELECT DISTINCT a.flowdraftid,
+		                  a.grade,
+		                  tbo.text5 as name,
+		                  a.text1,
+		                  a.text2,
+		                  a.text3,
+		                  a.departid,
+		                  c.applyid,
+		                  d.name as createmender,
+		                  F_FORMATDATE(c.APPLYDATETIME) as createtime, 
+		                  c.opid,
+		                  c.opname,
+		                  f.name orgname,
+		                  F_FORMATDATE(c.optime) as updatetime
+		    FROM TBSYS_MEETINGRECORDFLOW a,
+		    		 (select * from TBSYS_CODE where CODETYPE = 'GKHYLX') b,
+		    		 TBFLOW_BASE c,
+		    		 TBSYS_USERINFO d,
+		    		 TBFLOW_OTHER_FLOW tof,
+		    		 TBFLOW_BASE_OTHER tbo,
+		    		 TBSYS_ORGINFO f
+		   WHERE a.departid=#{departid}
+		         and  a.text1 =#{batchid} 
+		         and a.grade = b.codeid(+) 
+		         and a.flowdraftid=c.flowdraftid(+)
+		         and c.applyid=d.userid(+)
+		         and a.flowdraftid = tof.flowdraftid
+		         and tof.tempid = 'meetContentreport'
+		         and tof.otherid = tbo.otherid
+		         and f.orgid = tbo.text6
+		         and exists (select 'x' from tbflow_org_org org where org.orgid = #{orgid} and org.dorgid=tbo.text6)
+		    ORDER BY grade ASC
+	</select>
+	
+	<select id="selectPublicityDetail" parameterType="Map" resultType="Map">
+		  select tf.flowdraftid,
+		       t.text5 as name, 
+		       tb.optime,
+		       tb.departid,
+		       tf.tempid,
+		       t.int1,
+		       F_FORMATDATE_SD(tb.optime) as updatetime,
+		       tb.opid,
+		       tb.opname as createmender,
+		       F_FORMATDATE_SD(tb.APPLYDATETIME) as createtime
+		  from TBFLOW_OTHER_FLOW tf, 
+		       TBFLOW_BASE_OTHER t, 
+		       TBFLOW_BASE tb
+		 where tf.otherid = t.otherid
+		   and tf.flowdraftid = tb.flowdraftid
+		   and tf.tempid like '%'||#{tempid}||'%'
+		   and t.int2 = #{batchid} 
+		   and tb.departid = #{departid}
+		   and exists (select 'x' from tbflow_org_org org where org.orgid = #{orgid} and org.dorgid=t.text6) 
+		 order by t.text6
+	</select>
+</mapper>

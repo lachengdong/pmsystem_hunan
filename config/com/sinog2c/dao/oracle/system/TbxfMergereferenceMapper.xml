@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.sinog2c.dao.api.system.TbxfMergereferenceMapper" >
+  <resultMap id="BaseResultMap" type="com.sinog2c.model.system.TbxfMergereference" >
+    <id column="MERGEID" property="mergeid" jdbcType="DECIMAL" />
+    <result column="REFID" property="refid" jdbcType="DECIMAL" />
+    <result column="REWARDID" property="rewardid" jdbcType="DECIMAL" />
+    <result column="SNO" property="sno" jdbcType="DECIMAL" />
+    <result column="ENO" property="eno" jdbcType="DECIMAL" />
+    <result column="OPID" property="opid" jdbcType="VARCHAR" />
+    <result column="OPTIME" property="optime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    MERGEID, REFID, REWARDID, SNO, ENO, OPID, OPTIME
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from TBXF_MERGEREFERENCE
+    where MERGEID = #{mergeid,jdbcType=DECIMAL}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from TBXF_MERGEREFERENCE
+    where MERGEID = #{mergeid,jdbcType=DECIMAL}
+  </delete>
+  <insert id="insert" parameterType="com.sinog2c.model.system.TbxfMergereference" >
+    insert into TBXF_MERGEREFERENCE (MERGEID, REFID, REWARDID, 
+      SNO, ENO, OPID, OPTIME
+      )
+    values (#{mergeid,jdbcType=DECIMAL}, #{refid,jdbcType=DECIMAL}, #{rewardid,jdbcType=DECIMAL}, 
+      #{sno,jdbcType=DECIMAL}, #{eno,jdbcType=DECIMAL}, #{opid,jdbcType=VARCHAR}, #{optime,jdbcType=TIMESTAMP}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.sinog2c.model.system.TbxfMergereference" >
+    insert into TBXF_MERGEREFERENCE
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="mergeid != null" >
+        MERGEID,
+      </if>
+      <if test="refid != null" >
+        REFID,
+      </if>
+      <if test="rewardid != null" >
+        REWARDID,
+      </if>
+      <if test="sno != null" >
+        SNO,
+      </if>
+      <if test="eno != null" >
+        ENO,
+      </if>
+      <if test="opid != null" >
+        OPID,
+      </if>
+      <if test="optime != null" >
+        OPTIME,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="mergeid != null" >
+        #{mergeid,jdbcType=DECIMAL},
+      </if>
+      <if test="refid != null" >
+        #{refid,jdbcType=DECIMAL},
+      </if>
+      <if test="rewardid != null" >
+        #{rewardid,jdbcType=DECIMAL},
+      </if>
+      <if test="sno != null" >
+        #{sno,jdbcType=DECIMAL},
+      </if>
+      <if test="eno != null" >
+        #{eno,jdbcType=DECIMAL},
+      </if>
+      <if test="opid != null" >
+        #{opid,jdbcType=VARCHAR},
+      </if>
+      <if test="optime != null" >
+        #{optime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.sinog2c.model.system.TbxfMergereference" >
+    update TBXF_MERGEREFERENCE
+    <set >
+      <if test="refid != null" >
+        REFID = #{refid,jdbcType=DECIMAL},
+      </if>
+      <if test="rewardid != null" >
+        REWARDID = #{rewardid,jdbcType=DECIMAL},
+      </if>
+      <if test="sno != null" >
+        SNO = #{sno,jdbcType=DECIMAL},
+      </if>
+      <if test="eno != null" >
+        ENO = #{eno,jdbcType=DECIMAL},
+      </if>
+      <if test="opid != null" >
+        OPID = #{opid,jdbcType=VARCHAR},
+      </if>
+      <if test="optime != null" >
+        OPTIME = #{optime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where MERGEID = #{mergeid,jdbcType=DECIMAL}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.sinog2c.model.system.TbxfMergereference" >
+    update TBXF_MERGEREFERENCE
+    set REFID = #{refid,jdbcType=DECIMAL},
+      REWARDID = #{rewardid,jdbcType=DECIMAL},
+      SNO = #{sno,jdbcType=DECIMAL},
+      ENO = #{eno,jdbcType=DECIMAL},
+      OPID = #{opid,jdbcType=VARCHAR},
+      OPTIME = #{optime,jdbcType=TIMESTAMP}
+    where MERGEID = #{mergeid,jdbcType=DECIMAL}
+  </update>
+</mapper>

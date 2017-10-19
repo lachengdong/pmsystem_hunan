@@ -1,0 +1,91 @@
+@charset "utf-8";
+/* CSS Document */
+
+body{color:#333333;} 
+.shadetabs{
+
+	height:52px;
+	line-height:52px;
+	margin-left: 0;
+	margin-bottom: 0;
+	list-style-type: none;
+	overflow: hidden;
+    width: 1140px;
+	/*set to left, center, or right to align the menu as desired*/
+}
+
+.shadetabs li{
+	display: block;
+	float:left;
+	margin: 0;
+	height: 52px;
+	line-height: 52px;
+	margin-right:2px;
+}
+
+.shadetabs li a{
+	text-decoration: none;
+	width:150px;
+	text-align:center;
+	display:block;
+	float:left;
+	color: #0136aa;
+	background:url(../../../images/ywgk/images/dhcdz.jpg) top left repeat-x;
+	height:52px;
+	line-height:52px;
+	font-family:"微软雅黑";
+	font-size:18px;
+	overflow: hidden;
+}
+
+.shadetabs li a:visited{
+	color: #065a88;
+	height:52px;
+}
+
+.shadetabs li a:hover{
+	color: #065a88;
+	height:52px;
+	text-decoration:none;
+}
+
+.shadetabs li.selected{
+	position: relative;
+	top: 2px;
+}
+
+.shadetabs li.selected a{ /*selected main tab style */
+	background-image:url(../../../images/ywgk/images/dhcddj.jpg) ;
+	height:52px;
+	line-height:52px;
+	width:150px;
+	text-decoration:none;
+	color:#0567a4;
+	overflow:hidden;
+}
+
+.shadetabs li.selected a:hover{ /*selected main tab style */
+	text-decoration:none;
+	height:52px;
+}
+
+.tabcontentstyle{ /*style of tab content oontainer*/
+	border: 1px solid gray;
+	height:445px;
+	width: 800px;
+	margin-bottom: 1em;
+	padding: 10px;
+	clear:both;
+}
+
+.tabcontent{
+	display:none;
+	background: #fff;
+    height: 835px;
+}
+
+@media print {
+.tabcontent {
+display:block!important;
+}
+}

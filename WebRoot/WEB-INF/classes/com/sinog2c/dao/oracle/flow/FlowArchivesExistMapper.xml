@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.sinog2c.dao.api.flow.FlowArchivesExistMapper" >
+  <resultMap id="BaseResultMap" type="com.sinog2c.model.flow.FlowArchivesExist" >
+    <result column="FLOWDRAFTID" property="flowdraftid" jdbcType="VARCHAR" />
+    <result column="STATE" property="state" jdbcType="DECIMAL" />
+    <result column="STARTTIME" property="starttime" jdbcType="DATE" />
+    <result column="ENDTIME" property="endtime" jdbcType="DATE" />
+  </resultMap>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <insert id="insertSelective" parameterType="com.sinog2c.model.flow.FlowArchivesExist" >
+    insert into TBFLOW_ARCHIVES_EXIST
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="flowdraftid != null" >
+        FLOWDRAFTID,
+      </if>
+      <if test="state != null" >
+        STATE,
+      </if>
+      <if test="starttime != null" >
+        STARTTIME,
+      </if>
+      <if test="endtime != null" >
+        ENDTIME,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="flowdraftid != null" >
+        #{flowdraftid,jdbcType=VARCHAR},
+      </if>
+      <if test="state != null" >
+        #{state,jdbcType=DECIMAL},
+      </if>
+      <if test="starttime != null" >
+        #{starttime,jdbcType=DATE},
+      </if>
+      <if test="endtime != null" >
+        #{endtime,jdbcType=DATE},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update TBFLOW_ARCHIVES_EXIST
+    <set >
+      <if test="record.flowdraftid != null" >
+        FLOWDRAFTID = #{record.flowdraftid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.state != null" >
+        STATE = #{record.state,jdbcType=DECIMAL},
+      </if>
+      <if test="record.starttime != null" >
+        STARTTIME = #{record.starttime,jdbcType=DATE},
+      </if>
+      <if test="record.endtime != null" >
+        ENDTIME = #{record.endtime,jdbcType=DATE},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="com.sinog2c.model.flow.FlowArchivesExist" >
+    update TBFLOW_ARCHIVES_EXIST
+    <set>
+    	<if test="state != null" >
+    		state = #{state,jdbcType=DECIMAL},
+    	</if>
+    	<if test="endtime != null" >
+    		endtime = #{endtime,jdbcType=TIMESTAMP},
+    	</if>
+    </set> 
+    where 1=1
+    <if test="flowdraftid != null" >
+    	and flowdraftid = #{flowdraftid}
+    </if>
+  </update>
+  <delete id="removeByArchid" parameterType="String">
+	delete from TBFLOW_ARCHIVES_EXIST where state = 1 and FLOWDRAFTID 
+	in (select  text1 as FLOWDRAFTID   from  TBFLOW_ARCHIVES where  archiveid = #{archiveid})
+  </delete>
+</mapper>

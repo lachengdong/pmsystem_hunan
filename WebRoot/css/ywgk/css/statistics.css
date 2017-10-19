@@ -1,0 +1,149 @@
+html,body,table,tr,div{
+	margin:0;
+	padding:0;
+}
+html,body{
+	width:100%;
+	height:100%;
+	font-family:Arial, Helvetica, sans-serif;
+	font-size:12px;		
+}
+input {
+outline:none;
+}
+.Contrast{
+	background:url(images/tabbg.gif) repeat-x;
+    background-repeat: repeat-x;
+    height: 24px;
+    line-height: 24px;
+    padding: 3px 0;
+    width: 100%;
+}
+.date-select-bar{
+	height: 22px;
+    line-height: 22px;
+    padding: 1px 0 1px 20px;
+	float:left;	
+}
+.date-select-bar a{
+	color: #0965b8;
+    display: inline-block;
+    height: 18px;
+    line-height: 18px;
+    padding: 2px 7px 2px 6px;	
+	text-decoration:none;
+}
+.date-select-bar a:hover{
+	background-color: #73b1e0;
+    color: #fff;
+	display: inline-block;
+    padding: 2px 7px 2px 6px;		
+}
+.date-select-bar .selected{
+	background-color: #73b1e0;
+    color: #fff;
+}
+.date-select-bar input{
+	vertical-align: middle;
+}
+.date-select-bar .trackable{
+	background-color: transparent;
+    border: 0 none;
+    color: #0965b8;
+    cursor: pointer;
+    font-family: Arial;
+    font-size: 12px;
+    height: 18px;
+    line-height: 18px;
+    padding: 2px 0 2px 4px;
+    width: 155px;	
+}
+.patterning{
+	float:right;
+	margin-right:20px;	
+}
+.patterning label{
+	padding-right:20px;	
+	color: #0965b8;
+}
+.patterning input{
+	vertical-align: middle;
+	height:22px;
+	line-height:22px;	
+}
+*{margin:0;padding:0;list-style-type:none;}
+/* tabbox */
+.tabbox{width:100%;margin:20px auto;position:relative;height:100%px;overflow:hidden;}
+.tabbox .tabbtn{height:30px;background:url(images/tabbg.gif) repeat-x;border-left:solid 1px #ddd;border-right:solid 1px #ddd;}
+.tabbox .tabbtn li{float:left;position:relative;margin:0 0 0 -1px;}
+.tabbox .tabbtn li a,.tabbox .tabbtn li span{display:block;float:left;height:30px;line-height:30px;overflow:hidden;width:108px;text-align:center;font-size:12px;cursor:pointer;}
+.tabbox .tabbtn li.current{border-left:solid 1px #d5d5d5;border-right:solid 1px #d5d5d5;border-top:solid 1px #c5c5c5;}
+.tabbox .tabbtn li.current a,.tabbox .tabbtn li.current span{border-top:solid 2px #E2EDFB;height:27px;line-height:27px;background:#fff;color:#3366cc;font-weight:800;}
+.tabbox .loading{height:40px;width:432px;text-align:center;position:absolute;left:0;top:120px;}
+.tabbox .tabcon{padding:10px;border-width:0 1px 1px 1px;border-color:#ddd;border-style:solid;}
+.tabbox .tabcon li{height:24px;line-height:24px;overflow:hidden;}
+.tabbox .tabcon li span{margin:0 10px 0 0;font-family:"宋体";font-size:12px;font-weight:400;color:#ddd;}
+.section{
+	margin-top: 10px;
+}
+.summary{
+	background-color: #fdf2ef;
+    border-bottom: 1px solid #f1f1f1;
+    border-collapse: separate;
+    border-top: 1px solid #f1f1f1;
+    width: 100%;
+}
+.summary tr td{
+	border-bottom: 1px solid white;
+    border-right: 1px solid #e4e4e4;
+    border-top: 1px solid white;
+    line-height: 1.2;
+    padding: 8px 30px;
+    text-align: left;
+}
+.summary tr td .text{
+	color: #999;
+    line-height: 24px;	
+}
+.summary tr td .help{
+		
+}
+.summary tr td .value{
+	color: #333;
+    font-size: 20px;	
+}
+.margint{
+	margin-top:20px;	
+}
+.flash-indicator-wrapper {
+    background-repeat: repeat;
+    border: 1px solid #dadada;
+    cursor: pointer;
+    display: inline-block;
+    padding: 3px 5px 3px 10px;
+}
+.flash-indicator-wrapper a{
+	color: #6191d4;
+    text-indent: 6px;	
+}
+.to-toggle{
+	width:100%;
+	height:240px;	
+	text-align: center;
+}
+.fold{
+	border-top: 2px solid #e5e5e5;
+    margin-top: 2px;
+    text-align: center;	
+}
+.table-filter{
+	width:100%;
+    margin-top: 10px;
+    padding-bottom: 1px;
+    padding-left: 10px;	
+}
+.table-filter .tr1{
+	background-color: #ebebeb;	
+	height: 25px;
+    line-height: 25px;
+}

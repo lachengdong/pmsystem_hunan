@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.sinog2c.dao.api.commutationParole.UvFlowDocMapper" >
+  <resultMap id="BaseResultMap" type="com.sinog2c.model.commutationParole.UvFlowDoc" >
+    <result column="APPLYID" property="applyid" jdbcType="VARCHAR" />
+    <result column="APPLYNAME" property="applyname" jdbcType="VARCHAR" />
+    <result column="DEPARTID" property="departid" jdbcType="VARCHAR" />
+    <result column="FLOWDEFID" property="flowdefid" jdbcType="VARCHAR" />
+    <result column="YEARCASENUMBER" property="yearcasenumber" jdbcType="VARCHAR" />
+    <result column="TEMPLETNAME" property="templetname" jdbcType="VARCHAR" />
+    <result column="ANJIANLEIXING" property="anjianleixing" jdbcType="VARCHAR" />
+  </resultMap>
+  <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs"
+		type="com.sinog2c.model.commutationParole.UvFlowDoc">
+		<result column="DOCCONENT" jdbcType="CLOB" property="docconent" />
+	</resultMap>
+	<sql id="Blob_Column_List">
+		DOCCONENT
+  </sql>
+   <select id="selectFlowDocByKeys" resultMap="BaseResultMap">
+	    select uf.* from UV_XFZX_FLOWDOC uf ,(SELECT *
+             FROM TBDATA_SENTCHAGE A
+            WHERE A.CATEGORY != '1'
+                  AND A.COURTSANCTION = (SELECT MAX (COURTSANCTION)
+                                           FROM TBDATA_SENTCHAGE B
+                                          WHERE B.CRIMID = A.CRIMID))  sen
+	    where  1=1 and uf.applyid=sen.crimid(+)
+	    	and uf.templetname in ( select c.confid from TBXF_PRINTSCHEME_CONFIG c where c.psid=#{psid,jdbcType=DECIMAL} )
+	    	and uf.applyid in(select t.crimid from TBPRISONER_BASE_CRIME t where t.orgid1 in (select a.dorgid from TBFLOW_ORG_ORG a where a.orgid=#{departid,jdbcType=VARCHAR}))
+	    	and ${yearCaseNumberSql}
+	    	<if test="anjianleixing != null and anjianleixing=='刑执字'" >
+		        and (uf.anjianleixing='减刑' or uf.anjianleixing='假释')
+		    </if>
+		    <if test="anjianleixing != null and anjianleixing!='刑执字'" >
+		        and uf.anjianleixing=#{anjianleixing,jdbcType=VARCHAR}
+		    </if>
+		    <if test="xingqileixing != null and xingqileixing != '' and xingqileixing != 0 ">
+				and F_getSentenceType(sen.SENTENCE) = #{xingqileixing}
+			</if>
+	    	and uf.docconent is not null
+	    	order by yearcasenumber
+  </select> 
+</mapper>

@@ -1,0 +1,315 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.sinog2c.dao.api.courtjoint.TbxfRulingMapper" >
+  <resultMap id="BaseResultMap" type="com.sinog2c.model.courtjoint.TbxfRuling" >
+    <result column="CRIMID" property="crimid" jdbcType="VARCHAR" />
+    <result column="CASENUM" property="casenum" jdbcType="VARCHAR" />
+    <result column="COURTYEAR" property="courtyear" jdbcType="VARCHAR" />
+    <result column="COURTSHORT" property="courtshort" jdbcType="VARCHAR" />
+    <result column="MANAGECOURT" property="managecourt" jdbcType="VARCHAR" />
+    <result column="BATCHID" property="batchid" jdbcType="VARCHAR" />
+    <result column="SETTLEDATE" property="settledate" jdbcType="DATE" />
+    <result column="SETTLETYPE" property="settletype" jdbcType="VARCHAR" />
+    <result column="SETTLERESON" property="settlereson" jdbcType="VARCHAR" />
+    <result column="NOSETTLEWRITRESON" property="nosettlewritreson" jdbcType="VARCHAR" />
+    <result column="MAINCASE" property="maincase" jdbcType="VARCHAR" />
+    <result column="ISEDUCEPENALTY" property="iseducepenalty" jdbcType="VARCHAR" />
+    <result column="THISCHANGEYEAR" property="thischangeyear" jdbcType="VARCHAR" />
+    <result column="THISCHANGEMONTH" property="thischangemonth" jdbcType="VARCHAR" />
+    <result column="THISCHANGEDAY" property="thischangeday" jdbcType="VARCHAR" />
+    <result column="COURTCHANGYEAR" property="courtchangyear" jdbcType="VARCHAR" />
+    <result column="COURTCHANGMONTH" property="courtchangmonth" jdbcType="VARCHAR" />
+    <result column="COURTCHANGDAY" property="courtchangday" jdbcType="VARCHAR" />
+    <result column="ANNULFAJIN" property="annulfajin" jdbcType="VARCHAR" />
+    <result column="NOTINCLUDEYEAR" property="notincludeyear" jdbcType="VARCHAR" />
+    <result column="NOTINCLUDEMONTH" property="notincludemonth" jdbcType="VARCHAR" />
+    <result column="NOTINCLUDEDAY" property="notincludeday" jdbcType="VARCHAR" />
+    <result column="REDUCERESON" property="reducereson" jdbcType="VARCHAR" />
+    <result column="RULINGDATE" property="rulingdate" jdbcType="VARCHAR" />
+    <result column="PRISONSTARTTIME" property="prisonstarttime" jdbcType="VARCHAR" />
+    <result column="PRISONENDTIME" property="prisonendtime" jdbcType="VARCHAR" />
+    <result column="LOSEPOWER" property="losepower" jdbcType="VARCHAR" />
+    <result column="CUSTODYRESON" property="custodyreson" jdbcType="VARCHAR" />
+  </resultMap>
+  <insert id="insert" parameterType="com.sinog2c.model.courtjoint.TbxfRuling" >
+    insert into TBXF_RULING (CRIMID, CASENUM, COURTYEAR, 
+      COURTSHORT, MANAGECOURT, BATCHID, 
+      SETTLEDATE, SETTLETYPE, SETTLERESON, 
+      NOSETTLEWRITRESON, MAINCASE, ISEDUCEPENALTY, 
+      THISCHANGEYEAR, THISCHANGEMONTH, THISCHANGEDAY, 
+      COURTCHANGYEAR, COURTCHANGMONTH, COURTCHANGDAY, 
+      ANNULFAJIN, NOTINCLUDEYEAR, NOTINCLUDEMONTH, 
+      NOTINCLUDEDAY, REDUCERESON, RULINGDATE, 
+      PRISONSTARTTIME, PRISONENDTIME, LOSEPOWER,CUSTODYRESON
+      )
+    values (#{crimid,jdbcType=VARCHAR}, #{casenum,jdbcType=VARCHAR}, #{courtyear,jdbcType=VARCHAR}, 
+      #{courtshort,jdbcType=VARCHAR}, #{managecourt,jdbcType=VARCHAR}, #{batchid,jdbcType=VARCHAR}, 
+      #{settledate,jdbcType=DATE}, #{settletype,jdbcType=VARCHAR}, #{settlereson,jdbcType=VARCHAR}, 
+      #{nosettlewritreson,jdbcType=VARCHAR}, #{maincase,jdbcType=VARCHAR}, #{iseducepenalty,jdbcType=VARCHAR}, 
+      #{thischangeyear,jdbcType=VARCHAR}, #{thischangemonth,jdbcType=VARCHAR}, #{thischangeday,jdbcType=VARCHAR}, 
+      #{courtchangyear,jdbcType=VARCHAR}, #{courtchangmonth,jdbcType=VARCHAR}, #{courtchangday,jdbcType=VARCHAR}, 
+      #{annulfajin,jdbcType=VARCHAR}, #{notincludeyear,jdbcType=VARCHAR}, #{notincludemonth,jdbcType=VARCHAR}, 
+      #{notincludeday,jdbcType=VARCHAR}, #{reducereson,jdbcType=VARCHAR}, #{rulingdate,jdbcType=VARCHAR}, 
+      #{prisonstarttime,jdbcType=VARCHAR}, #{prisonendtime,jdbcType=VARCHAR}, #{losepower,jdbcType=VARCHAR}
+      #{custodyreson,jdbcType=VARCHAR},)
+  </insert>
+  <insert id="insertSelective" parameterType="com.sinog2c.model.courtjoint.TbxfRuling" >
+    insert into TBXF_RULING
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="crimid != null" >
+        CRIMID,
+      </if>
+      <if test="casenum != null" >
+        CASENUM,
+      </if>
+      <if test="courtyear != null" >
+        COURTYEAR,
+      </if>
+      <if test="courtshort != null" >
+        COURTSHORT,
+      </if>
+      <if test="managecourt != null" >
+        MANAGECOURT,
+      </if>
+      <if test="batchid != null" >
+        BATCHID,
+      </if>
+      <if test="settledate != null" >
+        SETTLEDATE,
+      </if>
+      <if test="settletype != null" >
+        SETTLETYPE,
+      </if>
+      <if test="settlereson != null" >
+        SETTLERESON,
+      </if>
+      <if test="nosettlewritreson != null" >
+        NOSETTLEWRITRESON,
+      </if>
+      <if test="maincase != null" >
+        MAINCASE,
+      </if>
+      <if test="iseducepenalty != null" >
+        ISEDUCEPENALTY,
+      </if>
+      <if test="thischangeyear != null" >
+        THISCHANGEYEAR,
+      </if>
+      <if test="thischangemonth != null" >
+        THISCHANGEMONTH,
+      </if>
+      <if test="thischangeday != null" >
+        THISCHANGEDAY,
+      </if>
+      <if test="courtchangyear != null" >
+        COURTCHANGYEAR,
+      </if>
+      <if test="courtchangmonth != null" >
+        COURTCHANGMONTH,
+      </if>
+      <if test="courtchangday != null" >
+        COURTCHANGDAY,
+      </if>
+      <if test="annulfajin != null" >
+        ANNULFAJIN,
+      </if>
+      <if test="notincludeyear != null" >
+        NOTINCLUDEYEAR,
+      </if>
+      <if test="notincludemonth != null" >
+        NOTINCLUDEMONTH,
+      </if>
+      <if test="notincludeday != null" >
+        NOTINCLUDEDAY,
+      </if>
+      <if test="reducereson != null" >
+        REDUCERESON,
+      </if>
+      <if test="rulingdate != null" >
+        RULINGDATE,
+      </if>
+      <if test="prisonstarttime != null" >
+        PRISONSTARTTIME,
+      </if>
+      <if test="prisonendtime != null" >
+        PRISONENDTIME,
+      </if>
+      <if test="losepower != null" >
+        LOSEPOWER,
+      </if>
+      <if test="custodyreson != null" >
+        CUSTODYRESON,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="crimid != null" >
+        #{crimid,jdbcType=VARCHAR},
+      </if>
+      <if test="casenum != null" >
+        #{casenum,jdbcType=VARCHAR},
+      </if>
+      <if test="courtyear != null" >
+        #{courtyear,jdbcType=VARCHAR},
+      </if>
+      <if test="courtshort != null" >
+        #{courtshort,jdbcType=VARCHAR},
+      </if>
+      <if test="managecourt != null" >
+        #{managecourt,jdbcType=VARCHAR},
+      </if>
+      <if test="batchid != null" >
+        #{batchid,jdbcType=VARCHAR},
+      </if>
+      <if test="settledate != null" >
+        #{settledate,jdbcType=DATE},
+      </if>
+      <if test="settletype != null" >
+        #{settletype,jdbcType=VARCHAR},
+      </if>
+      <if test="settlereson != null" >
+        #{settlereson,jdbcType=VARCHAR},
+      </if>
+      <if test="nosettlewritreson != null" >
+        #{nosettlewritreson,jdbcType=VARCHAR},
+      </if>
+      <if test="maincase != null" >
+        #{maincase,jdbcType=VARCHAR},
+      </if>
+      <if test="iseducepenalty != null" >
+        #{iseducepenalty,jdbcType=VARCHAR},
+      </if>
+      <if test="thischangeyear != null" >
+        #{thischangeyear,jdbcType=VARCHAR},
+      </if>
+      <if test="thischangemonth != null" >
+        #{thischangemonth,jdbcType=VARCHAR},
+      </if>
+      <if test="thischangeday != null" >
+        #{thischangeday,jdbcType=VARCHAR},
+      </if>
+      <if test="courtchangyear != null" >
+        #{courtchangyear,jdbcType=VARCHAR},
+      </if>
+      <if test="courtchangmonth != null" >
+        #{courtchangmonth,jdbcType=VARCHAR},
+      </if>
+      <if test="courtchangday != null" >
+        #{courtchangday,jdbcType=VARCHAR},
+      </if>
+      <if test="annulfajin != null" >
+        #{annulfajin,jdbcType=VARCHAR},
+      </if>
+      <if test="notincludeyear != null" >
+        #{notincludeyear,jdbcType=VARCHAR},
+      </if>
+      <if test="notincludemonth != null" >
+        #{notincludemonth,jdbcType=VARCHAR},
+      </if>
+      <if test="notincludeday != null" >
+        #{notincludeday,jdbcType=VARCHAR},
+      </if>
+      <if test="reducereson != null" >
+        #{reducereson,jdbcType=VARCHAR},
+      </if>
+      <if test="rulingdate != null" >
+        #{rulingdate,jdbcType=VARCHAR},
+      </if>
+      <if test="prisonstarttime != null" >
+        #{prisonstarttime,jdbcType=VARCHAR},
+      </if>
+      <if test="prisonendtime != null" >
+        #{prisonendtime,jdbcType=VARCHAR},
+      </if>
+      <if test="losepower != null" >
+        #{losepower,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  
+  <insert id="insertMap" parameterType="Map" >
+	insert into TBXF_RULING (CRIMID, CASENUM, COURTYEAR,
+	COURTSHORT, MANAGECOURT, BATCHID,
+	SETTLEDATE, SETTLETYPE, SETTLERESON,
+	NOSETTLEWRITRESON, MAINCASE, ISEDUCEPENALTY,
+	THISCHANGEYEAR, THISCHANGEMONTH, THISCHANGEDAY,
+	COURTCHANGYEAR, COURTCHANGMONTH, COURTCHANGDAY,CUSTODYRESON,
+	ANNULFAJIN, NOTINCLUDEYEAR, NOTINCLUDEMONTH,
+	NOTINCLUDEDAY, REDUCERESON, RULINGDATE,
+	PRISONSTARTTIME, PRISONENDTIME, LOSEPOWER
+	)
+	values (
+	#{ZFBH,jdbcType=VARCHAR},#{AJBH,jdbcType=VARCHAR},#{COURTYEAR,jdbcType=VARCHAR},#{COURTSHORT,jdbcType=VARCHAR},#{JBFY,jdbcType=VARCHAR},#{PC,jdbcType=VARCHAR},
+	to_date(#{JARQ,jdbcType=DATE},'yyyy/MM/dd'),#{JAFS,jdbcType=VARCHAR},#{JAAY,jdbcType=VARCHAR},#{WJAWSLY,jdbcType=VARCHAR},
+	#{BGHZXXZ,jdbcType=VARCHAR},#{SFJYX,jdbcType=VARCHAR},#{BCJXN,jdbcType=VARCHAR},#{BCJXY,jdbcType=VARCHAR},#{BCJXR,jdbcType=VARCHAR},#{BGHSYZYXQN,jdbcType=VARCHAR},
+	#{BGHSYZYXQY,jdbcType=VARCHAR},#{BGHSYZYXQR,jdbcType=VARCHAR},#{SJZXSY,jdbcType=VARCHAR},#{JMFJSE,jdbcType=VARCHAR},
+	#{BJRXQQJN,jdbcType=VARCHAR},#{BJRXQQJY,jdbcType=VARCHAR},#{BJRXQQJR,jdbcType=VARCHAR},#{JXSY,jdbcType=VARCHAR},#{CDRQ,jdbcType=VARCHAR},#{XQQR,jdbcType=VARCHAR},#{XQZR,jdbcType=VARCHAR},#{LOSEPOWER,jdbcType=VARCHAR})
+  </insert>
+  
+      <select id="countByCrimidAndBatchid" parameterType="Map" resultType="int">
+  	select count(1) from TBXF_RULING where  batchid = #{batchid,jdbcType=VARCHAR}
+  </select>
+  
+  <select id="findByCrimidAndBatchid" parameterType="Map" resultType="Map">
+  select * from
+		(
+			select a.*, rownum rn from
+		(
+  			select tb.CRIMID,
+       '(' || tb.courtyear || ')' || tb.courtshort as CASENUMBER,
+       (select name from tbsys_orginfo t where t.orgid= ('c'||tb.MANAGECOURT) and rownum =1) as MANAGECOURT,
+       to_char(tb.SETTLEDATE, 'yyyy-MM-dd') as SETTLEDATE,
+       CASE tb.SETTLETYPE
+         when '1' then
+          '判决'
+         when '2' then
+          '不予受理'
+         when '3' then
+          '驳回自诉'
+         when '4' then
+          '撤诉'
+         when '5' then
+          '按撤诉处理'
+         when '6' then
+          '终止'
+         when '7' then
+          '调解'
+         when '8' then
+          '移送'
+         when '255' then
+          '其他'
+       end as SETTLETYPE,
+       tb.SETTLERESON,
+       tb.NOSETTLEWRITRESON,
+       (select tc.name from tbsys_code tc where tc.codetype ='GB0075' and tc.codeid = tb.MAINCASE) as MAINCASE,
+       case tb.ISEDUCEPENALTY when '0' then '是' when '1' then '否' end as ISEDUCEPENALTY,
+       tb.THISCHANGEYEAR || '年' || tb.THISCHANGEMONTH||'月' || tb.THISCHANGEDAY || '日' AS THISCHANGEYEAR,
+       tb.COURTCHANGYEAR || '年' || tb.COURTCHANGMONTH || '月' ||
+       tb.COURTCHANGDAY || '日' AS COURTCHANGYEAR,
+       tb.ANNULFAJIN,
+       tb.NOTINCLUDEYEAR|| '年' ||tb.NOTINCLUDEMONTH||'月' ||tb.NOTINCLUDEDAY|| '日' as NOTINCLUDEYEAR,
+       tb.REDUCERESON,
+       tb.RULINGDATE,
+       tb.PRISONSTARTTIME,
+       tb.PRISONENDTIME,
+       tb.LOSEPOWER||'年' as LOSEPOWER,
+       tb.CUSTODYRESON,
+       tba.name AS CRIMNAME
+	 from TBXF_RULING tb ,tbprisoner_baseinfo tba
+		 where tba.crimid = tb.crimid and  tb.batchid = #{batchid,jdbcType=VARCHAR}
+	 	<if test="crimid!=null and crimid!=''">
+			and tb.crimid = #{crimid,jdbcType=VARCHAR}
+		</if>
+		<if test="crimname!=null and crimname!=''">
+			and tba.name like '%'||#{crimname,jdbcType=VARCHAR}||'%'
+		</if>
+	) a
+		<if test="end!=null and end!=''">
+			where rownum &lt;= #{end}
+		</if>
+		)
+		<if test="start!=null and start!=''">
+			where rn &gt;= #{start}
+		</if>
+		
+  </select>
+</mapper>

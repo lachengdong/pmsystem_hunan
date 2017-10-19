@@ -1,0 +1,146 @@
+@charset "utf-8";
+/* CSS Document */
+body,div,table,tr,ul,li,h4,p{
+	margin:0;
+	padding:0;	
+}
+img{ 
+	border:0 none; 
+} 
+*:link, *:visited{
+	 text-decoration:none;
+} 
+a{
+	blr:expression(this.onFocus=this.blur());
+}
+a{
+	outline: none;
+} 
+ul li{
+	list-style:none;	
+}
+input{
+	border:none;	
+}
+.clear{
+	clear:both;	
+}
+body{
+	width:1280px;
+	margin:0 auto;
+}
+#tops{
+	width:100%;
+	height:80px;
+	background:#1d74a0;	
+	padding:30px 0;	
+}
+.top_logs{
+	width:389px;
+	float:left;
+	margin-left: 30px;
+	background:url(../../../images/ywgk/images/top_logs.png) no-repeat;	
+	height:75px;
+	
+}
+.tops_nav{
+	float:left;
+	margin-left:20px;
+	width:825px;
+	overflow-x: auto;
+	scrollbar-face-color: #1D74A0;
+	scrollbar-arrow-color: #1D74A0;
+	scrollbar-3dlight-color: #1D74A0;
+	scrollbar-highlight-color: #1D74A0;
+	scrollbar-shadow-color: #1D74A0;
+	scrollbar-darkshadow-color: #1D74A0;
+	scrollbar-track-color: #1D74A0;
+	scrollbar-base-color:#1D74A0;
+}
+.tops_nav li{
+	margin-right:7px;
+	text-align:center;
+	float:left;	
+}
+.tops_nav li a{
+	display:block;
+	width:129px;
+	height:35px;
+	color:#fff;	
+	padding-top:47px;
+	font-family:"微软雅黑";	
+	font-size:20px;
+}
+.tops_nav li .tops_JianYuJianJie:link,.tops_nav li .tops_JianYuJianJie:visited{
+	background:url(../../../images/ywgk/images/tops_jyjjz.png) no-repeat;
+}
+.tops_nav li .tops_JianYuJianJie:hover{
+	background:url(../../../images/ywgk/images/tops_jyjjzh.png) no-repeat;
+	font-weight:bold;	
+}
+.tops_JianYuJianJie_click{
+	background:url(../../../images/ywgk/images/tops_jyjjzh.png) no-repeat;
+	font-weight:bold;
+}	
+.tops_nav li .tops_FaLvFaGui:link,.tops_nav li .tops_FaLvFaGui:visited{
+	background:url(../../../images/ywgk/images/tops_flfgz.png) no-repeat;
+}	
+.tops_nav li .tops_FaLvFaGui:hover{
+	background:url(../../../images/ywgk/images/tops_flfgzh.png) no-repeat;
+	font-weight:bold;	
+}	
+.tops_FaLvFaGui_click{
+	background:url(../../../images/ywgk/images/tops_flfgzh.png) no-repeat;
+	font-weight:bold;	
+}	
+.tops_nav li .tops_gkxx:link,.tops_nav li .tops_gkxx:visited{
+	background:url(../../../images/ywgk/images/tops_gkxxz.png) no-repeat;
+}	
+.tops_nav li .tops_gkxx:hover{
+	background:url(../../../images/ywgk/images/tops_gkxxzh.png) no-repeat;
+	font-weight:bold;
+}	
+.tops_gkxx_click{
+	background:url(../../../images/ywgk/images/tops_gkxxzh.png) no-repeat;
+	font-weight:bold;
+}	
+.tops_nav li .tops_GeRenXinXi:link,.tops_nav li .tops_GeRenXinXi:visited{
+	background:url(../../../images/ywgk/images/tops_grxxz.png) no-repeat;
+}	
+.tops_nav li .tops_GeRenXinXi:hover{
+	background:url(../../../images/ywgk/images/tops_grxxzh.png) no-repeat;
+	font-weight:bold;
+}
+.tops_GeRenXinXi_click{
+	background:url(../../../images/ywgk/images/tops_grxxzh.png) no-repeat;
+	font-weight:bold;
+}			
+.tops_nav li .tops_ZhiNenHuDong:link,.tops_nav li .tops_ZhiNenHuDong:visited{
+	background:url(../../../images/ywgk/images/tops_znhdz.png) no-repeat;
+}	
+.tops_nav li .tops_ZhiNenHuDong:hover{
+	background:url(../../../images/ywgk/images/tops_znhdzh.png) no-repeat;
+	font-weight:bold;
+}
+.tops_ZhiNenHuDong_click{
+	background:url(../../../images/ywgk/images/tops_znhdzh.png) no-repeat;
+	font-weight:bold;
+}
+.tops_nav li .tops_WoYaoGouWu:link,.tops_nav li .tops_WoYaoGouWu:visited{
+	background:url(../../../images/ywgk/images/tops_wygwz.png) no-repeat;
+}	
+.tops_nav li .tops_WoYaoGouWu:hover{
+	background:url(../../../images/ywgk/images/tops_wygwzh.png) no-repeat;
+	font-weight:bold;
+}
+.tops_WoYaoGouWu_click{
+	background:url(../../../images/ywgk/images/tops_wygwzh.png) no-repeat;
+	font-weight:bold;
+}
+/*弹出窗口全局样式*/
+.mask_content{display:none;width:600px;height:100px;position:absolute;top:60%;z-index:3;margin-left:40%;}
+.mask_content2{display:none;width:600px;height:100px;position:absolute;top:25%;z-index:3;left:50%;font-style:normal;}
+.popWarp{background:#111;-moz-opacity: 0.5;opacity:0.5;filter: alpha(opacity=50);position:absolute;z-index:1200;margin-top: -161px;margin-left: -214px;}
+.popWin{display:none; width:535px;padding:5px; position:absolute; z-index:1280;margin-left: -200px;margin-top: -200px;}
+.popWin .popbox{ background:#fff; border:#C4C4C4 1px solid; padding:0 4px 13px 4px;}
+.popWarp_message1{width:535px; height:463px;background:url(../../../images/ywgk/images/ts_k.png) no-repeat;}

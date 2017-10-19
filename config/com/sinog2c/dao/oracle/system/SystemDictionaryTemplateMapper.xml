@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.sinog2c.dao.api.system.SystemDictionaryTemplateMapper" >
+  <resultMap id="BaseResultMap" type="com.sinog2c.model.system.SystemDictionaryTemplate" >
+    <id column="TEMPID" property="tempid" jdbcType="VARCHAR" />
+    <id column="ENAME" property="ename" jdbcType="VARCHAR" />
+    <id column="ECOLNAME" property="ecolname" jdbcType="VARCHAR" />
+    <result column="OPTIME" property="optime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    TEMPID, ENAME, ECOLNAME, OPTIME
+  </sql>
+  <delete id="deleteByEcolname" parameterType="String" >
+    delete from TBSYS_DICTIONARYTEMPLATE
+    where TEMPID = #{tempid,jdbcType=VARCHAR}
+      and ENAME = #{ename,jdbcType=VARCHAR}
+      and ECOLNAME = #{ecolname,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByTempid" parameterType="String" >
+    delete from TBSYS_DICTIONARYTEMPLATE
+    where TEMPID = #{tempid,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.sinog2c.model.system.SystemDictionaryTemplate" >
+    insert into TBSYS_DICTIONARYTEMPLATE (TEMPID, ENAME, ECOLNAME, 
+      OPTIME)
+    values (#{tempid,jdbcType=VARCHAR}, #{ename,jdbcType=VARCHAR}, #{ecolname,jdbcType=VARCHAR}, 
+      #{optime,jdbcType=TIMESTAMP})
+  </insert>
+  <!-- 根据模板ID查询表中记录 -->
+  <select id="selectAllByTempid" parameterType="String" resultType="com.sinog2c.model.system.SystemDictionaryTemplate">
+    select * from TBSYS_DICTIONARYTEMPLATE where tempid = #{tempid}
+  </select>
+  
+  <select id="getSystemDictionaryTemplate" parameterType="String" resultType="Map">
+	    select td.ename as pid,
+	    		 td.ecolname as id,
+	    		 td.ccolname as text
+		from TBSYS_DICTIONARYTEMPLATE tt,
+		     TBSYS_DICTIONARY td
+		where tt.tempid = #{tempid}
+		  and tt.ename=td.ename 
+		  and tt.ecolname = td.ecolname
+		union
+		select distinct '-1' as pid,
+				 td.ename as id,
+				 td.cname as text
+		from TBSYS_DICTIONARYTEMPLATE tt,
+		     TBSYS_DICTIONARY td
+		where tt.tempid = #{tempid}
+		  and tt.ename=td.ename 
+		  and tt.ecolname = td.ecolname
+  </select>
+  
+  <!-- 根据条件查询表中记录 -->
+  <select id="selectAllByCondition" parameterType="Map" resultType="com.sinog2c.model.system.SystemDictionaryTemplate">
+	select * from
+    ( select a.*, rownum rn
+    from
+    (
+    select * from TBSYS_DICTIONARYTEMPLATE where 1=1 
+     <if test="tempid!=null and tempid!=''">  
+        and tempid = #{tempid}
+    </if>
+    <if test="key!=null and key!=''">  
+        and (
+	        ecolname like concat(concat('%', #{key}), '%') 
+	        or
+	        ename like concat(concat('%', #{key}), '%')
+        )
+    </if>
+    <if test="sortField!=null and sortField!=''" > 
+     	order by ${sortField}  ${sortOrder}
+    </if>
+    ) a 
+    <if test="start!=null and start!=''">
+   		where rownum &lt;= #{end}
+   	</if> 
+    )
+   	<if test="start!=null and start!=''">
+   		where  rn &gt;= #{start}
+   	</if>
+  </select>
+  <!-- 根据条件查询表中记录总数 -->
+  <select id="countAllByCondition" parameterType="Map" resultType="int">
+	select count(*) c from TBSYS_DICTIONARYTEMPLATE where 1=1 
+	 <if test="tempid!=null and tempid!=''">  
+        and tempid = #{tempid}
+    </if>
+    <if test="key!=null and key!=''">  
+        and (
+	        ecolname like concat(concat('%', #{key}), '%') 
+	        or
+	        ename like concat(concat('%', #{key}), '%')
+        )
+    </if>
+  </select>
+</mapper>

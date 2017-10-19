@@ -1,0 +1,33 @@
+[
+	{id: "congkuan", text: "从宽情节"},
+	
+	{id: "isminor", text: "未成年犯", pid: "congkuan"},
+	{id: "oldprisoner", text: "老犯", pid: "congkuan"},
+	{id: "illprisoner", text: "病犯", pid: "congkuan"},
+	{id: "deformityprisoner", text: "残犯", pid: "congkuan"},
+	{id: "wideplots", text: "其他", pid: "congkuan"},
+	
+
+	{id: "congyan", text: "从严情节"},
+	
+	{id: "limitedremission", text: "限制减刑", pid: "congyan"},
+	{id: "isrecidivism", text: "累犯", pid: "congyan"},
+	{id: "redrugs", text: "毒品再犯", pid: "congyan"},
+	{id: "crimes", text: "多次犯罪", pid: "congyan"},
+	{id: "overfourcrimes", text: "犯四罪以上", pid: "congyan"},
+	{id: "seriousviolations", text: "严重违纪", pid: "congyan"},
+	{id: "combinedpunishment", text: "数罪并罚有两罪在五年以上", pid: "congyan"},
+	{id: "majorcriminal", text: "重大刑事犯罪罪犯", pid: "congyan"},
+	{id: "strictlyplot", text: "其他", pid: "congyan"},
+	
+	
+	{id: "sanleifan", text: "三类罪犯"},
+	
+	{id: "postcrime", text: "职务犯罪", pid: "sanleifan"},
+	{id: "xianchuji", text: "县处级及以上", pid: "postcrime"},
+	{id: "tingjuji", text: "厅局级及以上", pid: "postcrime"},
+	{id: "undermine", text: "破坏金融管理秩序和金融诈骗罪", pid: "sanleifan"},
+	{id: "underworld", text: "涉黑犯罪", pid: "sanleifan"}
+
+	
+]

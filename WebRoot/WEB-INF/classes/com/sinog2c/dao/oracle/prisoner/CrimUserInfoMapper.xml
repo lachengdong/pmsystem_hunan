@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.sinog2c.dao.api.prisoner.CrimUserInfoMapper">
+	<resultMap id="BaseResultMap" type="com.sinog2c.model.prisoner.CrimUserInfo">
+		<id column="ID" property="id" jdbcType="VARCHAR" />
+		<result column="CRIMID" property="crimid" jdbcType="VARCHAR" />
+		<result column="CRIMPASSWORD" property="crimpassword" jdbcType="VARCHAR" />
+		<result column="BIRTHDAY" property="birthday" jdbcType="VARCHAR" />
+		<result column="CRIMUSERNAME" property="CrimUserName"
+			jdbcType="VARCHAR" />
+	</resultMap>
+
+	<select id="selectByPrimaryKey" resultMap="BaseResultMap"
+		parameterType="java.lang.String">
+		select
+	      *
+		from CRIM_USERINFO
+		where CRIMID = #{crimid,jdbcType=VARCHAR}
+	</select>
+	
+	<insert id="saveCrimUserInfo" parameterType="com.sinog2c.model.prisoner.CrimUserInfo">
+		insert into   CRIM_USERINFO(ID,CRIMID,CRIMPASSWORD,BIRTHDAY,CRIMUSERNAME)
+		values (#{id,jdbcType=VARCHAR},
+		#{crimid,jdbcType=VARCHAR}, 
+		#{crimpassword,jdbcType=VARCHAR},
+		 #{birthday,jdbcType=DATE},
+		#{CrimUserName,jdbcType=VARCHAR} )
+  </insert>
+	
+</mapper>

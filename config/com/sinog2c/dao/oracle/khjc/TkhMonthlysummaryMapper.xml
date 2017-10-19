@@ -1,0 +1,392 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.sinog2c.dao.api.khjc.TkhMonthlysummaryMapper" >
+  <resultMap id="BaseResultMap" type="com.sinog2c.model.khjc.TkhMonthlysummary" >
+    <id column="MONTHID" property="monthid" jdbcType="DECIMAL" />
+    <result column="CRIMID" property="crimid" jdbcType="VARCHAR" />
+    <result column="ORGPID" property="orgpid" jdbcType="VARCHAR" />
+    <result column="ORGID" property="orgid" jdbcType="VARCHAR" />
+    <result column="ORGSID" property="orgsid" jdbcType="VARCHAR" />
+    <result column="CYEAR" property="cyear" jdbcType="VARCHAR" />
+    <result column="CMONTH" property="cmonth" jdbcType="VARCHAR" />
+    <result column="STOTAL" property="stotal" jdbcType="DECIMAL" />
+    <result column="DTOTAL" property="dtotal" jdbcType="DECIMAL" />
+    <result column="ATOTAL" property="atotal" jdbcType="DECIMAL" />
+    <result column="MTOTAL" property="mtotal" jdbcType="DECIMAL" />
+    <result column="ISSTANDARD" property="isstandard" jdbcType="DECIMAL" />
+    <result column="FINALTOTAL" property="finaltotal" jdbcType="DECIMAL" />
+    <result column="TOTAL" property="total" jdbcType="DECIMAL" />
+    <result column="TOTALSORT" property="totalsort" jdbcType="DECIMAL" />
+    <result column="CSEASON" property="cseason" jdbcType="DECIMAL" />
+    <result column="SEASONSORT" property="seasonsort" jdbcType="DECIMAL" />
+    <result column="PASTSEASON" property="pastseason" jdbcType="DECIMAL" />
+    <result column="PASTSEASONSORT" property="pastseasonsort" jdbcType="DECIMAL" />
+    <result column="INT1" property="int1" jdbcType="DECIMAL" />
+    <result column="INT2" property="int2" jdbcType="DECIMAL" />
+    <result column="INT3" property="int3" jdbcType="DECIMAL" />
+    <result column="TEXT1" property="text1" jdbcType="VARCHAR" />
+    <result column="TEXT2" property="text2" jdbcType="VARCHAR" />
+    <result column="REMARK" property="remark" jdbcType="VARCHAR" />
+    <result column="OPID" property="opid" jdbcType="VARCHAR" />
+    <result column="OPTIME" property="optime" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    MONTHID, CRIMID, ORGPID, ORGID, ORGSID, CYEAR, CMONTH, STOTAL, DTOTAL, ATOTAL, MTOTAL, 
+    ISSTANDARD, FINALTOTAL, TOTAL, TOTALSORT, CSEASON, SEASONSORT, PASTSEASON, PASTSEASONSORT, 
+    INT1, INT2, INT3, TEXT1, TEXT2, REMARK, OPID, OPTIME
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from TKH_MONTHLYSUMMARY
+    where MONTHID = #{monthid,jdbcType=DECIMAL}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from TKH_MONTHLYSUMMARY
+    where MONTHID = #{monthid,jdbcType=DECIMAL}
+  </delete>
+  <insert id="insert" parameterType="com.sinog2c.model.khjc.TkhMonthlysummary" >
+    insert into TKH_MONTHLYSUMMARY (MONTHID, CRIMID, ORGPID, 
+      ORGID, ORGSID, CYEAR, 
+      CMONTH, STOTAL, DTOTAL, 
+      ATOTAL, MTOTAL, ISSTANDARD, 
+      FINALTOTAL, TOTAL, TOTALSORT, 
+      CSEASON, SEASONSORT, PASTSEASON, 
+      PASTSEASONSORT, INT1, INT2, 
+      INT3, TEXT1, TEXT2, 
+      REMARK, OPID, OPTIME
+      )
+    values (#{monthid,jdbcType=DECIMAL}, #{crimid,jdbcType=VARCHAR}, #{orgpid,jdbcType=VARCHAR}, 
+      #{orgid,jdbcType=VARCHAR}, #{orgsid,jdbcType=VARCHAR}, #{cyear,jdbcType=VARCHAR}, 
+      #{cmonth,jdbcType=VARCHAR}, #{stotal,jdbcType=DECIMAL}, #{dtotal,jdbcType=DECIMAL}, 
+      #{atotal,jdbcType=DECIMAL}, #{mtotal,jdbcType=DECIMAL}, #{isstandard,jdbcType=DECIMAL}, 
+      #{finaltotal,jdbcType=DECIMAL}, #{total,jdbcType=DECIMAL}, #{totalsort,jdbcType=DECIMAL}, 
+      #{cseason,jdbcType=DECIMAL}, #{seasonsort,jdbcType=DECIMAL}, #{pastseason,jdbcType=DECIMAL}, 
+      #{pastseasonsort,jdbcType=DECIMAL}, #{int1,jdbcType=DECIMAL}, #{int2,jdbcType=DECIMAL}, 
+      #{int3,jdbcType=DECIMAL}, #{text1,jdbcType=VARCHAR}, #{text2,jdbcType=VARCHAR}, 
+      #{remark,jdbcType=VARCHAR}, #{opid,jdbcType=VARCHAR}, #{optime,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.sinog2c.model.khjc.TkhMonthlysummary" >
+    insert into TKH_MONTHLYSUMMARY
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="monthid != null" >
+        MONTHID,
+      </if>
+      <if test="crimid != null" >
+        CRIMID,
+      </if>
+      <if test="orgpid != null" >
+        ORGPID,
+      </if>
+      <if test="orgid != null" >
+        ORGID,
+      </if>
+      <if test="orgsid != null" >
+        ORGSID,
+      </if>
+      <if test="cyear != null" >
+        CYEAR,
+      </if>
+      <if test="cmonth != null" >
+        CMONTH,
+      </if>
+      <if test="stotal != null" >
+        STOTAL,
+      </if>
+      <if test="dtotal != null" >
+        DTOTAL,
+      </if>
+      <if test="atotal != null" >
+        ATOTAL,
+      </if>
+      <if test="mtotal != null" >
+        MTOTAL,
+      </if>
+      <if test="isstandard != null" >
+        ISSTANDARD,
+      </if>
+      <if test="finaltotal != null" >
+        FINALTOTAL,
+      </if>
+      <if test="total != null" >
+        TOTAL,
+      </if>
+      <if test="totalsort != null" >
+        TOTALSORT,
+      </if>
+      <if test="cseason != null" >
+        CSEASON,
+      </if>
+      <if test="seasonsort != null" >
+        SEASONSORT,
+      </if>
+      <if test="pastseason != null" >
+        PASTSEASON,
+      </if>
+      <if test="pastseasonsort != null" >
+        PASTSEASONSORT,
+      </if>
+      <if test="int1 != null" >
+        INT1,
+      </if>
+      <if test="int2 != null" >
+        INT2,
+      </if>
+      <if test="int3 != null" >
+        INT3,
+      </if>
+      <if test="text1 != null" >
+        TEXT1,
+      </if>
+      <if test="text2 != null" >
+        TEXT2,
+      </if>
+      <if test="remark != null" >
+        REMARK,
+      </if>
+      <if test="opid != null" >
+        OPID,
+      </if>
+      <if test="optime != null" >
+        OPTIME,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="monthid != null" >
+        #{monthid,jdbcType=DECIMAL},
+      </if>
+      <if test="crimid != null" >
+        #{crimid,jdbcType=VARCHAR},
+      </if>
+      <if test="orgpid != null" >
+        #{orgpid,jdbcType=VARCHAR},
+      </if>
+      <if test="orgid != null" >
+        #{orgid,jdbcType=VARCHAR},
+      </if>
+      <if test="orgsid != null" >
+        #{orgsid,jdbcType=VARCHAR},
+      </if>
+      <if test="cyear != null" >
+        #{cyear,jdbcType=VARCHAR},
+      </if>
+      <if test="cmonth != null" >
+        #{cmonth,jdbcType=VARCHAR},
+      </if>
+      <if test="stotal != null" >
+        #{stotal,jdbcType=DECIMAL},
+      </if>
+      <if test="dtotal != null" >
+        #{dtotal,jdbcType=DECIMAL},
+      </if>
+      <if test="atotal != null" >
+        #{atotal,jdbcType=DECIMAL},
+      </if>
+      <if test="mtotal != null" >
+        #{mtotal,jdbcType=DECIMAL},
+      </if>
+      <if test="isstandard != null" >
+        #{isstandard,jdbcType=DECIMAL},
+      </if>
+      <if test="finaltotal != null" >
+        #{finaltotal,jdbcType=DECIMAL},
+      </if>
+      <if test="total != null" >
+        #{total,jdbcType=DECIMAL},
+      </if>
+      <if test="totalsort != null" >
+        #{totalsort,jdbcType=DECIMAL},
+      </if>
+      <if test="cseason != null" >
+        #{cseason,jdbcType=DECIMAL},
+      </if>
+      <if test="seasonsort != null" >
+        #{seasonsort,jdbcType=DECIMAL},
+      </if>
+      <if test="pastseason != null" >
+        #{pastseason,jdbcType=DECIMAL},
+      </if>
+      <if test="pastseasonsort != null" >
+        #{pastseasonsort,jdbcType=DECIMAL},
+      </if>
+      <if test="int1 != null" >
+        #{int1,jdbcType=DECIMAL},
+      </if>
+      <if test="int2 != null" >
+        #{int2,jdbcType=DECIMAL},
+      </if>
+      <if test="int3 != null" >
+        #{int3,jdbcType=DECIMAL},
+      </if>
+      <if test="text1 != null" >
+        #{text1,jdbcType=VARCHAR},
+      </if>
+      <if test="text2 != null" >
+        #{text2,jdbcType=VARCHAR},
+      </if>
+      <if test="remark != null" >
+        #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="opid != null" >
+        #{opid,jdbcType=VARCHAR},
+      </if>
+      <if test="optime != null" >
+        #{optime,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.sinog2c.model.khjc.TkhMonthlysummary" >
+    update TKH_MONTHLYSUMMARY
+    <set >
+      <if test="crimid != null" >
+        CRIMID = #{crimid,jdbcType=VARCHAR},
+      </if>
+      <if test="orgpid != null" >
+        ORGPID = #{orgpid,jdbcType=VARCHAR},
+      </if>
+      <if test="orgid != null" >
+        ORGID = #{orgid,jdbcType=VARCHAR},
+      </if>
+      <if test="orgsid != null" >
+        ORGSID = #{orgsid,jdbcType=VARCHAR},
+      </if>
+      <if test="cyear != null" >
+        CYEAR = #{cyear,jdbcType=VARCHAR},
+      </if>
+      <if test="cmonth != null" >
+        CMONTH = #{cmonth,jdbcType=VARCHAR},
+      </if>
+      <if test="stotal != null" >
+        STOTAL = #{stotal,jdbcType=DECIMAL},
+      </if>
+      <if test="dtotal != null" >
+        DTOTAL = #{dtotal,jdbcType=DECIMAL},
+      </if>
+      <if test="atotal != null" >
+        ATOTAL = #{atotal,jdbcType=DECIMAL},
+      </if>
+      <if test="mtotal != null" >
+        MTOTAL = #{mtotal,jdbcType=DECIMAL},
+      </if>
+      <if test="isstandard != null" >
+        ISSTANDARD = #{isstandard,jdbcType=DECIMAL},
+      </if>
+      <if test="finaltotal != null" >
+        FINALTOTAL = #{finaltotal,jdbcType=DECIMAL},
+      </if>
+      <if test="total != null" >
+        TOTAL = #{total,jdbcType=DECIMAL},
+      </if>
+      <if test="totalsort != null" >
+        TOTALSORT = #{totalsort,jdbcType=DECIMAL},
+      </if>
+      <if test="cseason != null" >
+        CSEASON = #{cseason,jdbcType=DECIMAL},
+      </if>
+      <if test="seasonsort != null" >
+        SEASONSORT = #{seasonsort,jdbcType=DECIMAL},
+      </if>
+      <if test="pastseason != null" >
+        PASTSEASON = #{pastseason,jdbcType=DECIMAL},
+      </if>
+      <if test="pastseasonsort != null" >
+        PASTSEASONSORT = #{pastseasonsort,jdbcType=DECIMAL},
+      </if>
+      <if test="int1 != null" >
+        INT1 = #{int1,jdbcType=DECIMAL},
+      </if>
+      <if test="int2 != null" >
+        INT2 = #{int2,jdbcType=DECIMAL},
+      </if>
+      <if test="int3 != null" >
+        INT3 = #{int3,jdbcType=DECIMAL},
+      </if>
+      <if test="text1 != null" >
+        TEXT1 = #{text1,jdbcType=VARCHAR},
+      </if>
+      <if test="text2 != null" >
+        TEXT2 = #{text2,jdbcType=VARCHAR},
+      </if>
+      <if test="remark != null" >
+        REMARK = #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="opid != null" >
+        OPID = #{opid,jdbcType=VARCHAR},
+      </if>
+      <if test="optime != null" >
+        OPTIME = #{optime,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where MONTHID = #{monthid,jdbcType=DECIMAL}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.sinog2c.model.khjc.TkhMonthlysummary" >
+    update TKH_MONTHLYSUMMARY
+    set CRIMID = #{crimid,jdbcType=VARCHAR},
+      ORGPID = #{orgpid,jdbcType=VARCHAR},
+      ORGID = #{orgid,jdbcType=VARCHAR},
+      ORGSID = #{orgsid,jdbcType=VARCHAR},
+      CYEAR = #{cyear,jdbcType=VARCHAR},
+      CMONTH = #{cmonth,jdbcType=VARCHAR},
+      STOTAL = #{stotal,jdbcType=DECIMAL},
+      DTOTAL = #{dtotal,jdbcType=DECIMAL},
+      ATOTAL = #{atotal,jdbcType=DECIMAL},
+      MTOTAL = #{mtotal,jdbcType=DECIMAL},
+      ISSTANDARD = #{isstandard,jdbcType=DECIMAL},
+      FINALTOTAL = #{finaltotal,jdbcType=DECIMAL},
+      TOTAL = #{total,jdbcType=DECIMAL},
+      TOTALSORT = #{totalsort,jdbcType=DECIMAL},
+      CSEASON = #{cseason,jdbcType=DECIMAL},
+      SEASONSORT = #{seasonsort,jdbcType=DECIMAL},
+      PASTSEASON = #{pastseason,jdbcType=DECIMAL},
+      PASTSEASONSORT = #{pastseasonsort,jdbcType=DECIMAL},
+      INT1 = #{int1,jdbcType=DECIMAL},
+      INT2 = #{int2,jdbcType=DECIMAL},
+      INT3 = #{int3,jdbcType=DECIMAL},
+      TEXT1 = #{text1,jdbcType=VARCHAR},
+      TEXT2 = #{text2,jdbcType=VARCHAR},
+      REMARK = #{remark,jdbcType=VARCHAR},
+      OPID = #{opid,jdbcType=VARCHAR},
+      OPTIME = #{optime,jdbcType=VARCHAR}
+    where MONTHID = #{monthid,jdbcType=DECIMAL}
+  </update>
+  
+  <select id="getRewardMonthlySummaryList" parameterType="Map" resultType="java.util.HashMap">
+	select * from (
+      select x.*, rownum rn from (
+		select t.crimid,a.name,b.orgname2,t.total,t.cseason,t.pastseason,t.seasonsort,t.pastseasonsort
+			from TKH_MONTHLYSUMMARY t,TBPRISONER_BASEINFO a,TBPRISONER_BASE_CRIME b 
+			where t.crimid=a.crimid and t.crimid=b.crimid and t.cyear=#{cyear} and t.cmonth=#{cmonth}
+			      and b.orgid2 in (select e.dorgid from tbflow_org_org e where e.orgid=#{orgid})
+		<if test="selected!=null and selected!=''">
+			and t.crimid not in(${selected})
+		</if>
+	    <trim prefix="" suffix="" suffixOverrides=",">
+	        <if test="key!=null and key!=''"> and (a.crimid like '%'||#{key}||'%' or a.name like '%'||#{key}||'%')</if>
+	    </trim>
+	    <trim prefix="" suffix="" suffixOverrides=",">
+	       <if test="sortField!=null and sortField!=''"> order by ${sortField} ${sortOrder}</if>
+	    </trim>
+	   ) x
+	<if test="end!=null and end!=''">
+	   	where rownum &lt;= #{end}
+	</if>
+	 )
+   	<if test="start!=null and start!=''">
+   		where  rn &gt;= #{start}
+   	</if>
+  </select>
+  
+  <select id="getRewardMonthlySummaryCount" parameterType="java.util.HashMap" resultType="int">
+	select count(t.crimid)
+		from TKH_MONTHLYSUMMARY t,TBPRISONER_BASEINFO a,TBPRISONER_BASE_CRIME b 
+		where t.crimid=a.crimid and t.crimid=b.crimid and t.cyear=#{cyear} and t.cmonth=#{cmonth}
+		      and b.orgid2 in (select e.dorgid from tbflow_org_org e where e.orgid=#{orgid})
+	<if test="selected!=null and selected!=''">
+		and t.crimid not in(${selected})
+	</if>	      
+    <trim prefix="" suffix="" suffixOverrides=",">
+        <if test="key!=null and key!=''"> and (a.crimid like '%'||#{key}||'%' or a.name like '%'||#{key}||'%')</if>
+    </trim>
+  </select>
+</mapper>

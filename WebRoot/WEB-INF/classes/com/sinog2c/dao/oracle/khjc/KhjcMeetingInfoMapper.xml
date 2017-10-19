@@ -1,0 +1,265 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.sinog2c.dao.api.khjc.KhjcMeetingInfoMapper" >
+  <resultMap id="BaseResultMap" type="com.sinog2c.model.khjc.KhjcMeetingInfo" >
+    <id column="DOCID" property="docid" jdbcType="VARCHAR" />
+    <result column="MEETINGDEPNAME" property="meetingdepname" jdbcType="VARCHAR" />
+    <result column="MEETINGTIME" property="meetingtime" jdbcType="VARCHAR" />
+    <result column="MEETINGPLACE" property="meetingplace" jdbcType="VARCHAR" />
+    <result column="MEETINGTYPE" property="meetingtype" jdbcType="VARCHAR" />
+    <result column="MEETINGCONTENT" property="meetingcontent" jdbcType="VARCHAR" />
+    <result column="ZHUCHIREN" property="zhuchiren" jdbcType="VARCHAR" />
+    <result column="JILUREN" property="jiluren" jdbcType="VARCHAR" />
+    <result column="UPDATETIME" property="updatetime" jdbcType="VARCHAR" />
+    <result column="UPDATEMENDER" property="updatemender" jdbcType="VARCHAR" />
+    <result column="CREATETIME" property="createtime" jdbcType="VARCHAR" />
+    <result column="CREATEMENDER" property="createmender" jdbcType="VARCHAR" />
+    <result column="DELFLAG" property="delflag" jdbcType="VARCHAR" />
+    <result column="DOCDEPARTID" property="docdepartid" jdbcType="VARCHAR" />
+    <result column="DEPARTID" property="departid" jdbcType="VARCHAR" />
+  </resultMap>
+  <resultMap id="ResultMapWithBLOBs" type="com.sinog2c.model.khjc.KhjcMeetingInfo" extends="BaseResultMap" >
+    <result column="DOCCONENT" property="docconent" jdbcType="CLOB" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    DOCID, MEETINGDEPNAME, MEETINGTIME, MEETINGPLACE, MEETINGTYPE, MEETINGCONTENT, ZHUCHIREN, 
+    JILUREN, UPDATETIME, UPDATEMENDER, CREATETIME, CREATEMENDER, DELFLAG, DOCDEPARTID, 
+    DEPARTID
+  </sql>
+  <sql id="Blob_Column_List" >
+    DOCCONENT
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from KHJC_MEETING_INFO
+    where DOCID = #{docid,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from KHJC_MEETING_INFO
+    where DOCID = #{docid,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.sinog2c.model.khjc.KhjcMeetingInfo" >
+    insert into KHJC_MEETING_INFO (DOCID, MEETINGDEPNAME, MEETINGTIME, 
+      MEETINGPLACE, MEETINGTYPE, MEETINGCONTENT, 
+      ZHUCHIREN, JILUREN, UPDATETIME, 
+      UPDATEMENDER, CREATETIME, CREATEMENDER, 
+      DELFLAG, DOCDEPARTID, DEPARTID, 
+      DOCCONENT)
+    values (#{docid,jdbcType=VARCHAR}, #{meetingdepname,jdbcType=VARCHAR}, #{meetingtime,jdbcType=VARCHAR}, 
+      #{meetingplace,jdbcType=VARCHAR}, #{meetingtype,jdbcType=VARCHAR}, #{meetingcontent,jdbcType=VARCHAR}, 
+      #{zhuchiren,jdbcType=VARCHAR}, #{jiluren,jdbcType=VARCHAR}, #{updatetime,jdbcType=VARCHAR}, 
+      #{updatemender,jdbcType=VARCHAR}, #{createtime,jdbcType=VARCHAR}, #{createmender,jdbcType=VARCHAR}, 
+      #{delflag,jdbcType=VARCHAR}, #{docdepartid,jdbcType=VARCHAR}, #{departid,jdbcType=VARCHAR}, 
+      #{docconent,jdbcType=CLOB})
+  </insert>
+  <insert id="insertSelective" parameterType="com.sinog2c.model.khjc.KhjcMeetingInfo" >
+    insert into KHJC_MEETING_INFO
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="docid != null" >
+        DOCID,
+      </if>
+      <if test="meetingdepname != null" >
+        MEETINGDEPNAME,
+      </if>
+      <if test="meetingtime != null" >
+        MEETINGTIME,
+      </if>
+      <if test="meetingplace != null" >
+        MEETINGPLACE,
+      </if>
+      <if test="meetingtype != null" >
+        MEETINGTYPE,
+      </if>
+      <if test="meetingcontent != null" >
+        MEETINGCONTENT,
+      </if>
+      <if test="zhuchiren != null" >
+        ZHUCHIREN,
+      </if>
+      <if test="jiluren != null" >
+        JILUREN,
+      </if>
+      <if test="updatetime != null" >
+        UPDATETIME,
+      </if>
+      <if test="updatemender != null" >
+        UPDATEMENDER,
+      </if>
+      <if test="createtime != null" >
+        CREATETIME,
+      </if>
+      <if test="createmender != null" >
+        CREATEMENDER,
+      </if>
+      <if test="delflag != null" >
+        DELFLAG,
+      </if>
+      <if test="docdepartid != null" >
+        DOCDEPARTID,
+      </if>
+      <if test="departid != null" >
+        DEPARTID,
+      </if>
+      <if test="docconent != null" >
+        DOCCONENT,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="docid != null" >
+        #{docid,jdbcType=VARCHAR},
+      </if>
+      <if test="meetingdepname != null" >
+        #{meetingdepname,jdbcType=VARCHAR},
+      </if>
+      <if test="meetingtime != null" >
+        #{meetingtime,jdbcType=VARCHAR},
+      </if>
+      <if test="meetingplace != null" >
+        #{meetingplace,jdbcType=VARCHAR},
+      </if>
+      <if test="meetingtype != null" >
+        #{meetingtype,jdbcType=VARCHAR},
+      </if>
+      <if test="meetingcontent != null" >
+        #{meetingcontent,jdbcType=VARCHAR},
+      </if>
+      <if test="zhuchiren != null" >
+        #{zhuchiren,jdbcType=VARCHAR},
+      </if>
+      <if test="jiluren != null" >
+        #{jiluren,jdbcType=VARCHAR},
+      </if>
+      <if test="updatetime != null" >
+        #{updatetime,jdbcType=VARCHAR},
+      </if>
+      <if test="updatemender != null" >
+        #{updatemender,jdbcType=VARCHAR},
+      </if>
+      <if test="createtime != null" >
+        #{createtime,jdbcType=VARCHAR},
+      </if>
+      <if test="createmender != null" >
+        #{createmender,jdbcType=VARCHAR},
+      </if>
+      <if test="delflag != null" >
+        #{delflag,jdbcType=VARCHAR},
+      </if>
+      <if test="docdepartid != null" >
+        #{docdepartid,jdbcType=VARCHAR},
+      </if>
+      <if test="departid != null" >
+        #{departid,jdbcType=VARCHAR},
+      </if>
+      <if test="docconent != null" >
+        #{docconent,jdbcType=CLOB},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.sinog2c.model.khjc.KhjcMeetingInfo" >
+    update KHJC_MEETING_INFO
+    <set >
+      <if test="meetingdepname != null" >
+        MEETINGDEPNAME = #{meetingdepname,jdbcType=VARCHAR},
+      </if>
+      <if test="meetingtime != null" >
+        MEETINGTIME = #{meetingtime,jdbcType=VARCHAR},
+      </if>
+      <if test="meetingplace != null" >
+        MEETINGPLACE = #{meetingplace,jdbcType=VARCHAR},
+      </if>
+      <if test="meetingtype != null" >
+        MEETINGTYPE = #{meetingtype,jdbcType=VARCHAR},
+      </if>
+      <if test="meetingcontent != null" >
+        MEETINGCONTENT = #{meetingcontent,jdbcType=VARCHAR},
+      </if>
+      <if test="zhuchiren != null" >
+        ZHUCHIREN = #{zhuchiren,jdbcType=VARCHAR},
+      </if>
+      <if test="jiluren != null" >
+        JILUREN = #{jiluren,jdbcType=VARCHAR},
+      </if>
+      <if test="updatetime != null" >
+        UPDATETIME = #{updatetime,jdbcType=VARCHAR},
+      </if>
+      <if test="updatemender != null" >
+        UPDATEMENDER = #{updatemender,jdbcType=VARCHAR},
+      </if>
+      <if test="createtime != null" >
+        CREATETIME = #{createtime,jdbcType=VARCHAR},
+      </if>
+      <if test="createmender != null" >
+        CREATEMENDER = #{createmender,jdbcType=VARCHAR},
+      </if>
+      <if test="delflag != null" >
+        DELFLAG = #{delflag,jdbcType=VARCHAR},
+      </if>
+      <if test="docdepartid != null" >
+        DOCDEPARTID = #{docdepartid,jdbcType=VARCHAR},
+      </if>
+      <if test="departid != null" >
+        DEPARTID = #{departid,jdbcType=VARCHAR},
+      </if>
+      <if test="docconent != null" >
+        DOCCONENT = #{docconent,jdbcType=CLOB},
+      </if>
+    </set>
+    where DOCID = #{docid,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.sinog2c.model.khjc.KhjcMeetingInfo" >
+    update KHJC_MEETING_INFO
+    set MEETINGDEPNAME = #{meetingdepname,jdbcType=VARCHAR},
+      MEETINGTIME = #{meetingtime,jdbcType=VARCHAR},
+      MEETINGPLACE = #{meetingplace,jdbcType=VARCHAR},
+      MEETINGTYPE = #{meetingtype,jdbcType=VARCHAR},
+      MEETINGCONTENT = #{meetingcontent,jdbcType=VARCHAR},
+      ZHUCHIREN = #{zhuchiren,jdbcType=VARCHAR},
+      JILUREN = #{jiluren,jdbcType=VARCHAR},
+      UPDATETIME = #{updatetime,jdbcType=VARCHAR},
+      UPDATEMENDER = #{updatemender,jdbcType=VARCHAR},
+      CREATETIME = #{createtime,jdbcType=VARCHAR},
+      CREATEMENDER = #{createmender,jdbcType=VARCHAR},
+      DELFLAG = #{delflag,jdbcType=VARCHAR},
+      DOCDEPARTID = #{docdepartid,jdbcType=VARCHAR},
+      DEPARTID = #{departid,jdbcType=VARCHAR},
+      DOCCONENT = #{docconent,jdbcType=CLOB}
+    where DOCID = #{docid,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.sinog2c.model.khjc.KhjcMeetingInfo" >
+    update KHJC_MEETING_INFO
+    set MEETINGDEPNAME = #{meetingdepname,jdbcType=VARCHAR},
+      MEETINGTIME = #{meetingtime,jdbcType=VARCHAR},
+      MEETINGPLACE = #{meetingplace,jdbcType=VARCHAR},
+      MEETINGTYPE = #{meetingtype,jdbcType=VARCHAR},
+      MEETINGCONTENT = #{meetingcontent,jdbcType=VARCHAR},
+      ZHUCHIREN = #{zhuchiren,jdbcType=VARCHAR},
+      JILUREN = #{jiluren,jdbcType=VARCHAR},
+      UPDATETIME = #{updatetime,jdbcType=VARCHAR},
+      UPDATEMENDER = #{updatemender,jdbcType=VARCHAR},
+      CREATETIME = #{createtime,jdbcType=VARCHAR},
+      CREATEMENDER = #{createmender,jdbcType=VARCHAR},
+      DELFLAG = #{delflag,jdbcType=VARCHAR},
+      DOCDEPARTID = #{docdepartid,jdbcType=VARCHAR},
+      DEPARTID = #{departid,jdbcType=VARCHAR}
+    where DOCID = #{docid,jdbcType=VARCHAR}
+  </update>
+  <!-- 获取当前页面数据（分页） -->
+   <select id="getKhjcMeetingByType" resultType="com.sinog2c.model.khjc.KhjcMeetingInfo">
+		SELECT * FROM 
+	 	(SELECT A.*, ROWNUM RN FROM 
+		 	(select * from ( select * from KHJC_MEETING_INFO a where a.delflag = '0' ) b where 1=1 
+		 		<if test="tempid!=null and tempid!=''">  
+		        	and b.meetingtype = #{tempid}
+		   		</if>
+		 		<if test="sortField!=null and sortField!=''"> 
+     				order by b.${sortField} ${sortOrder}
+    			</if>
+		 	 ) A 
+		 	WHERE ROWNUM &lt;= #{end,jdbcType=DECIMAL}
+	 	) 
+	 	WHERE RN &gt;= #{start,jdbcType=DECIMAL}
+  </select>
+</mapper>

@@ -1,0 +1,313 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.sinog2c.dao.api.prisoner.TbPrisonerCaiChanXingMapper">
+  <resultMap id="BaseResultMap" type="com.sinog2c.model.prisoner.TbPrisonerCaiChanXing">
+    <id column="ID" jdbcType="VARCHAR" property="id" />
+    <result column="CRIMID" jdbcType="VARCHAR" property="crimid" />
+    <result column="ZHIXINGDATE" jdbcType="DATE" property="zhixingdate" />
+    <result column="ZHIXINGJINE" jdbcType="VARCHAR" property="zhixingjine" />
+    <result column="ZHIXINGJIGUAN" jdbcType="VARCHAR" property="zhixingjiguan" />
+    <result column="DANJUHAO" jdbcType="VARCHAR" property="danjuhao" />
+    <result column="WEIZHIXING" jdbcType="VARCHAR" property="weizhixing" />
+    <result column="OPTIME" jdbcType="DATE" property="optime" />
+    <result column="OPID" jdbcType="VARCHAR" property="opid" />
+    <result column="CAICHANTYPE" jdbcType="VARCHAR" property="caichantype" />
+    <result column="STATUS" jdbcType="VARCHAR" property="status" />
+    
+  </resultMap>
+  <sql id="Base_Column_List">
+    ID, CRIMID, ZHIXINGDATE, ZHIXINGJINE, ZHIXINGJIGUAN, DANJUHAO, WEIZHIXING, OPTIME, 
+    OPID, CAICHANTYPE,STATUS
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from TBPRISONER_CAICHANXING
+    where ID = #{id,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from TBPRISONER_CAICHANXING
+    where ID = #{id,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.sinog2c.model.prisoner.TbPrisonerCaiChanXing">
+    insert into TBPRISONER_CAICHANXING (ID, CRIMID, ZHIXINGDATE, 
+      ZHIXINGJINE, ZHIXINGJIGUAN, DANJUHAO, 
+      WEIZHIXING, OPTIME, OPID, 
+      CAICHANTYPE,STATUS)
+    values (#{id,jdbcType=VARCHAR}, #{crimid,jdbcType=VARCHAR}, #{zhixingdate,jdbcType=DATE}, 
+      #{zhixingjine,jdbcType=VARCHAR}, #{zhixingjiguan,jdbcType=VARCHAR}, #{danjuhao,jdbcType=VARCHAR}, 
+      #{weizhixing,jdbcType=VARCHAR}, #{optime,jdbcType=DATE}, #{opid,jdbcType=VARCHAR}, 
+      #{caichantype,jdbcType=VARCHAR},#{status,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.sinog2c.model.prisoner.TbPrisonerCaiChanXing">
+    insert into TBPRISONER_CAICHANXING
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        ID,
+      </if>
+      <if test="crimid != null">
+        CRIMID,
+      </if>
+      <if test="zhixingdate != null">
+        ZHIXINGDATE,
+      </if>
+      <if test="zhixingjine != null">
+        ZHIXINGJINE,
+      </if>
+      <if test="zhixingjiguan != null">
+        ZHIXINGJIGUAN,
+      </if>
+      <if test="danjuhao != null">
+        DANJUHAO,
+      </if>
+      <if test="weizhixing != null">
+        WEIZHIXING,
+      </if>
+      <if test="optime != null">
+        OPTIME,
+      </if>
+      <if test="opid != null">
+        OPID,
+      </if>
+      <if test="caichantype != null">
+        CAICHANTYPE,
+      </if>
+      <if test="status != null">
+        STATUS,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=VARCHAR},
+      </if>
+      <if test="crimid != null">
+        #{crimid,jdbcType=VARCHAR},
+      </if>
+      <if test="zhixingdate != null">
+        #{zhixingdate,jdbcType=DATE},
+      </if>
+      <if test="zhixingjine != null">
+        #{zhixingjine,jdbcType=VARCHAR},
+      </if>
+      <if test="zhixingjiguan != null">
+        #{zhixingjiguan,jdbcType=VARCHAR},
+      </if>
+      <if test="danjuhao != null">
+        #{danjuhao,jdbcType=VARCHAR},
+      </if>
+      <if test="weizhixing != null">
+        #{weizhixing,jdbcType=VARCHAR},
+      </if>
+      <if test="optime != null">
+        #{optime,jdbcType=DATE},
+      </if>
+      <if test="opid != null">
+        #{opid,jdbcType=VARCHAR},
+      </if>
+      <if test="caichantype != null">
+        #{caichantype,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null">
+        #{status,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <insert id="insertSelective1" parameterType="Map">
+    insert into TBPRISONER_CAICHANXING
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        ID,
+      </if>
+      <if test="crimid != null">
+        CRIMID,
+      </if>
+      <if test="zhixingdate != null">
+        ZHIXINGDATE,
+      </if>
+      <if test="zhixingjine != null">
+        ZHIXINGJINE,
+      </if>
+      <if test="zhixingjiguan != null">
+        ZHIXINGJIGUAN,
+      </if>
+      <if test="danjuhao != null">
+        DANJUHAO,
+      </if>
+      <if test="weizhixing != null">
+        WEIZHIXING,
+      </if>
+      <if test="optime != null">
+        OPTIME,
+      </if>
+      <if test="opid != null">
+        OPID,
+      </if>
+      <if test="caichantype != null">
+        CAICHANTYPE,
+      </if>
+      <if test="status != null">
+        STATUS,
+      </if>
+      <if test="kaipiaodate != null">
+        KAIPIAODATE,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id},
+      </if>
+      <if test="crimid != null">
+        #{crimid},
+      </if>
+      <if test="zhixingdate != null">
+        to_date('${zhixingdate}','yyyy-MM-dd HH24:mi:ss'),
+      </if>
+      <if test="zhixingjine != null">
+        #{zhixingjine},
+      </if>
+      <if test="zhixingjiguan != null">
+        #{zhixingjiguan},
+      </if>
+      <if test="danjuhao != null">
+        #{danjuhao},
+      </if>
+      <if test="weizhixing != null">
+        #{weizhixing},
+      </if>
+      <if test="optime != null">
+        to_date('${optime}','yyyy.MM.dd'),
+      </if>
+      <if test="opid != null">
+       #{opid},
+      </if>
+      <if test="caichantype != null">
+       #{caichantype},
+      </if>
+      <if test="status != null">
+       #{status},
+      </if>
+      <if test="kaipiaodate != null">
+       to_date('${kaipiaodate}','yyyy-MM-dd'),
+      </if>
+    </trim>
+  </insert>
+  <select id="callCaichanxingProcedure" parameterType="Map">
+   
+    <![CDATA[   
+		   {call P_CAICHANXING(${crimid},'${caichantype}','${danjuhao}','${zhixingdate}')}   
+		]]> 
+  </select>
+  <update id="updateByPrimaryKeySelective" parameterType="com.sinog2c.model.prisoner.TbPrisonerCaiChanXing">
+    update TBPRISONER_CAICHANXING
+    <set>
+      <if test="zhixingjine != null">
+        ZHIXINGJINE = #{zhixingjine,jdbcType=VARCHAR},
+      </if>
+      <if test="zhixingjiguan != null">
+        ZHIXINGJIGUAN = #{zhixingjiguan,jdbcType=VARCHAR},
+      </if>
+      <if test="danjuhao != null">
+        DANJUHAO = #{danjuhao,jdbcType=VARCHAR},
+      </if>
+      <if test="weizhixing != null">
+        WEIZHIXING = #{weizhixing,jdbcType=VARCHAR},
+      </if>
+      <if test="optime != null">
+        OPTIME = #{optime,jdbcType=DATE},
+      </if>
+      <if test="opid != null">
+        OPID = #{opid,jdbcType=VARCHAR},
+      </if>
+      <if test="caichantype != null">
+        CAICHANTYPE = #{caichantype,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null">
+        STATUS = #{status},
+      </if>
+      <if test="kaipiaodate != null">
+        KAIPIAODATE = to_date('${kaipiaodate}','yyyy-MM-dd'),
+      </if>
+    </set>
+    where crimid = #{crimid,jdbcType=VARCHAR}
+        and danjuhao = #{danjuhao}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.sinog2c.model.prisoner.TbPrisonerCaiChanXing">
+    update TBPRISONER_CAICHANXING
+    set CRIMID = #{crimid,jdbcType=VARCHAR},
+      ZHIXINGDATE = #{zhixingdate,jdbcType=DATE},
+      ZHIXINGJINE = #{zhixingjine,jdbcType=VARCHAR},
+      ZHIXINGJIGUAN = #{zhixingjiguan,jdbcType=VARCHAR},
+      DANJUHAO = #{danjuhao,jdbcType=VARCHAR},
+      WEIZHIXING = #{weizhixing,jdbcType=VARCHAR},
+      OPTIME = #{optime,jdbcType=DATE},
+      OPID = #{opid,jdbcType=VARCHAR},
+      CAICHANTYPE = #{caichantype,jdbcType=VARCHAR}
+      STATUS = #{status,jdbcType=VARCHAR}
+    where ID = #{id,jdbcType=VARCHAR}
+  </update>
+    
+  <select id="getCaiChanByCrimid" parameterType="Object" resultType="java.util.HashMap">
+  	select * from
+    ( 
+	    select a.*, rownum rn from
+	    (
+	    	SELECT  case when tc.CAICHANTYPE='fajin' then
+	    				'罚金'
+	    		     when tc.CAICHANTYPE='moshou' then
+	    		         '没收财产'
+	    		      when tc.CAICHANTYPE='minpei' then
+	    		         '民事赔偿'
+	    		     when tc.CAICHANTYPE='zangkuan' then
+	    		         '追缴赃款'
+	    		     when tc.CAICHANTYPE='tuipei' then
+	    		         '责令退赔'
+	    		     end  caichantype,
+	    			tc.ZHIXINGDATE zhixingdate,
+	    			tc.ZHIXINGJINE,
+	    			tc.ZHIXINGJIGUAN,
+	    			tc.DANJUHAO,
+	    			tc.WEIZHIXING,
+	    			tc.kaipiaodate,
+	    			tc.status
+       		FROM TBPRISONER_CAICHANXING tc
+		    where 1=1 and tc.crimid = #{crimid,jdbcType=VARCHAR}
+		 	<trim prefix="" suffix="" suffixOverrides=",">
+				<if test="sortField!=null and sortField!=''"> order by ${sortField} ${sortOrder}</if>
+			</trim>
+	  	) a 
+	    <if test="end!=null and end!=''">
+	   		where rownum &lt;= #{end}
+	   	</if>
+    )
+   	<if test="start!=null and start!=''">
+   		where  rn &gt;= #{start}
+   	</if>
+  </select>
+  
+  <select id="countCaiChanByCrimid" resultType="int">
+  		select count(*) from TBPRISONER_CAICHANXING t where 1=1 and t.crimid = #{crimid,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByCrimidAndZhiDate" parameterType="HashMap">
+  	delete from TBPRISONER_CAICHANXING 
+  	where crimid = ${crimid}
+  	and DANJUHAO=#{danjuhao}
+  </delete>
+  
+  <select id="getByCrimidAndDate" parameterType="HashMap" resultType="com.sinog2c.model.prisoner.TbPrisonerCaiChanXing">
+  		select *
+  		 from TBPRISONER_CAICHANXING t
+  		where t.crimid=#{crimid,jdbcType=VARCHAR}
+  		and t.DANJUHAO=#{danjuhao}
+  </select>
+ <select id="callCaichanDeleteProcedure" parameterType="Map">
+   
+    <![CDATA[   
+		   {call p_caichandelete('${crimid}','${zhixingdate}','${caichantype}','${danjuhao}')}   
+		]]> 
+  </select>
+   <select id="isByPrimaryKeySelective" resultType="int">
+  		select count(*) from TBPRISONER_CAICHANXING t 
+  		where 1=1 and t.crimid = #{crimid,jdbcType=VARCHAR}
+  		and t.DANJUHAO=#{danjuhao}
+  </select>
+</mapper>

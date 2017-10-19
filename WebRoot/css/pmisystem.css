@@ -1,0 +1,65 @@
+body {
+	margin: 0;
+	padding: 0;
+	border: 0;
+	width: 100%;
+	height: 100%;
+	overflow: hidden;
+	font-size: 12px;
+	BACKGROUND-COLOR: transparent;
+	SCROLLBAR-FACE-COLOR: #D9E7F8;
+	SCROLLBAR-HIGHLIGHT-COLOR: #EAECEC;
+	SCROLLBAR-SHADOW-COLOR: #99BCE8;
+	SCROLLBAR-3DLIGHT-COLOR: #EAECEC;
+	SCROLLBAR-ARROW-COLOR: #EAECEC;
+	SCROLLBAR-TRACK-COLOR: #F4F7F9;
+	SCROLLBAR-DARKSHADOW-COLOR: #FFFFFF;
+}
+
+.hide {
+	display: none;
+}
+
+#ui-upload-holder {
+	margin-top: 20px;
+	margin-left: 20px;
+	position: relative;
+	width: 50px;
+	height: 22px;
+	overflow: hidden;
+	BORDER-LEFT: #d4e2c4 1px solid;
+	BORDER-TOP: #50A05B 1px solid;
+	BORDER-RIGHT: #50A05B 1px solid;
+	BORDER-BOTTOM: #d4e2c4 1px solid;
+	float: left;
+}
+
+#ui-upload-input {
+	position: absolute;
+	top: 0px;
+	right: 0px;
+	height: 100%;
+	cursor: pointer;
+	opacity: 0;
+	filter: alpha(opacity : 0);
+	z-index: 999;
+}
+
+#ui-upload-txt {
+	position: absolute;
+	top: 0px;
+	left: 0px;
+	width: 200px;
+	height: 100%;
+	line-height: 35px;
+	text-align: center;
+}
+
+.td-nav-title {
+	color: #333333;
+	font-size: 14px;
+}
+
+span.required {
+	color: red;
+}

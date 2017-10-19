@@ -1,0 +1,175 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.sinog2c.dao.api.system.SystemLogMapper" >
+  <resultMap id="BaseResultMap" type="com.sinog2c.model.system.SystemLog" >
+    <result column="LOGID" property="logid" jdbcType="DECIMAL" />
+    <result column="LOGTYPE" property="logtype" jdbcType="VARCHAR" />
+    <result column="OPCONTENT" property="opcontent" jdbcType="VARCHAR" />
+    <result column="OPACTION" property="opaction" jdbcType="VARCHAR" />
+    <result column="LOGINMAC" property="loginmac" jdbcType="VARCHAR" />
+    <result column="LOGINIP" property="loginip" jdbcType="VARCHAR" />
+    <result column="STATUS" property="status" jdbcType="DECIMAL" />
+    <result column="REMARK" property="remark" jdbcType="VARCHAR" />
+    <result column="ORGID" property="orgid" jdbcType="VARCHAR" />
+    <result column="OPTIME" property="optime" jdbcType="TIMESTAMP" />
+    <result column="OPID" property="opid" jdbcType="VARCHAR" />
+    <result column="OPNAME" property="opname" jdbcType="VARCHAR" />
+  </resultMap>
+  <insert id="insert_no_use" parameterType="com.sinog2c.model.system.SystemLog" >
+    insert into TBSYS_LOG (LOGID, LOGTYPE, OPCONTENT, 
+      OPACTION, LOGINMAC, LOGINIP, 
+      STATUS, REMARK, ORGID, 
+      OPTIME, OPID, OPNAME)
+    values (#{logid,jdbcType=DECIMAL}, #{logtype,jdbcType=VARCHAR}, #{opcontent,jdbcType=VARCHAR}, 
+      #{opaction,jdbcType=VARCHAR}, #{loginmac,jdbcType=VARCHAR}, #{loginip,jdbcType=VARCHAR}, 
+      #{status,jdbcType=DECIMAL}, #{remark,jdbcType=VARCHAR}, #{orgid,jdbcType=VARCHAR}, 
+      #{optime,jdbcType=TIMESTAMP}, #{opid,jdbcType=VARCHAR}, #{opname,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.sinog2c.model.system.SystemLog" >
+  	<!-- 先查询出主键,再执行插入 -->
+    <selectKey resultType="int" keyProperty="logid" order="BEFORE">
+   		select SEQ_LOG_ID.NEXTVAL  from dual
+    </selectKey>
+    insert into TBSYS_LOG
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="logid != null" >
+        LOGID,
+      </if>
+      <if test="logtype != null" >
+        LOGTYPE,
+      </if>
+      <if test="opcontent != null" >
+        OPCONTENT,
+      </if>
+      <if test="opaction != null" >
+        OPACTION,
+      </if>
+      <if test="loginmac != null" >
+        LOGINMAC,
+      </if>
+      <if test="loginip != null" >
+        LOGINIP,
+      </if>
+      <if test="status != null" >
+        STATUS,
+      </if>
+      <if test="remark != null" >
+        REMARK,
+      </if>
+      <if test="orgid != null" >
+        ORGID,
+      </if>
+      <if test="optime != null" >
+        OPTIME,
+      </if>
+      <if test="opid != null" >
+        OPID,
+      </if>
+      <if test="opname != null" >
+        OPNAME,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="logid != null" >
+        #{logid,jdbcType=DECIMAL},
+      </if>
+      <if test="logtype != null" >
+        #{logtype,jdbcType=VARCHAR},
+      </if>
+      <if test="opcontent != null" >
+        #{opcontent,jdbcType=VARCHAR},
+      </if>
+      <if test="opaction != null" >
+        #{opaction,jdbcType=VARCHAR},
+      </if>
+      <if test="loginmac != null" >
+        #{loginmac,jdbcType=VARCHAR},
+      </if>
+      <if test="loginip != null" >
+        #{loginip,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null" >
+        #{status,jdbcType=DECIMAL},
+      </if>
+      <if test="remark != null" >
+        #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="orgid != null" >
+        #{orgid,jdbcType=VARCHAR},
+      </if>
+      <if test="optime != null" >
+        #{optime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="opid != null" >
+        #{opid,jdbcType=VARCHAR},
+      </if>
+      <if test="opname != null" >
+        #{opname,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+
+
+  <select id="countBySearch" resultType="int">  <!-- 查询搜索记录总数 -->
+	 	select count(*) c from TBSYS_LOG
+	 	where 1=1 
+		 <if test="logtype!=null and logtype!=''">  
+	        and LOGTYPE like CONCAT(CONCAT('%', #{logtype}), '%')
+	     </if>
+	     <if test="starttime!=null and starttime!=''">  
+	        and optime &gt;= to_date(#{starttime},'yyyy-MM-dd')
+	     </if>
+	     <if test="endtime!=null and endtime!=''">  
+	        and optime &lt;= to_date(#{endtime},'yyyy-MM-dd')
+	     </if>
+		 <if test="key!=null and key!=''">  
+	        and (OPCONTENT like CONCAT(CONCAT('%', #{key}), '%') or 
+	        	OPNAME like CONCAT(CONCAT('%', #{key}), '%') or
+	        	OPID like CONCAT(CONCAT('%', #{key}), '%') or
+	        	LOGINMAC like CONCAT(CONCAT('%', #{key}), '%') )
+	     </if>
+  </select>
+  <select id="search" resultMap="BaseResultMap">    <!-- 分页查询表中的所有信息 -->
+	 SELECT * FROM 
+	 	( SELECT A.*, ROWNUM RN 
+		 	FROM 
+		 	(
+		 		SELECT * FROM TBSYS_LOG
+		 		  where 1=1 
+				 <if test="logtype!=null and logtype!=''">  
+			        and LOGTYPE like CONCAT(CONCAT('%', #{logtype}), '%')
+			     </if>
+				 <if test="key!=null and key!=''">  
+			        and (OPCONTENT like CONCAT(CONCAT('%', #{key}), '%') or 
+			        	OPNAME like CONCAT(CONCAT('%', #{key}), '%') or
+			        	OPID like CONCAT(CONCAT('%', #{key}), '%') or
+			        	LOGINMAC like CONCAT(CONCAT('%', #{key}), '%'))
+			     </if>
+			     <if test="starttime!=null and starttime!=''">  
+			        and optime &gt;= to_date(#{starttime},'yyyy-MM-dd')
+			     </if>
+			     <if test="endtime!=null and endtime!=''">  
+			        and optime &lt;= to_date(#{endtime},'yyyy-MM-dd')
+			     </if>
+				 <if test="sortField!=null and sortField!='' and sortOrder!=null and sortOrder!=''"> 
+		 		  order by  ${sortField} ${sortOrder}
+			     </if>
+		 	) A 
+		 	WHERE ROWNUM &lt;= #{end,jdbcType=DECIMAL}
+	 	) 
+	 	WHERE RN &gt;= #{start,jdbcType=DECIMAL}
+  </select>
+    
+  <select id="getByLogId" resultMap="BaseResultMap">    <!-- 根据ID获取 -->
+	 select * from TBSYS_LOG where LOGID=#{logid} order by LOGID desc
+  </select>
+  <delete id="removelog" parameterType="java.lang.Long"> <!-- 删除审计日志 -->
+	 	delete from TBSYS_LOG where 1=1 
+	     <if test="starttime!=null and starttime!=''">  
+	        and optime &gt;= to_date(#{starttime},'yyyy-MM-dd')
+	     </if>
+	     <if test="endtime!=null and endtime!=''">  
+	        and optime &lt;= to_date(#{endtime},'yyyy-MM-dd')
+	     </if>
+  </delete>
+</mapper>

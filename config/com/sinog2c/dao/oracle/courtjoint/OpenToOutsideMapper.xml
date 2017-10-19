@@ -1,0 +1,875 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.sinog2c.dao.api.courtjoint.OpenToOutsideMapper">
+
+	<select id="getPiciInfo" parameterType="Map" resultType="Map">
+		select batchid as picibianhao,batch as pici from
+		tbxf_commuteparole_batch
+		<if test="curyear!=null and curyear!=''">
+			where curyear =#{curyear}
+		</if>
+		<if test="orgid!=null and orgid!=''">
+			and departid =#{orgid}
+		</if>
+		order by batch
+	</select>
+		
+	<select id="getPrisonInfo" parameterType="Map" resultType="Map">
+			select orgid as orgid, t.name as orgname from
+    		tbsys_orginfo  t
+		<if test="departid!=null and departid!=''">
+			    where t.porgid =#{departid}
+		</if>
+	</select>
+	
+	<select id="getCourt" parameterType="Map" resultType="Map">
+		with highcourt as (select t.highcourt from tbsys_orginfo t where t.orgid =#{departid})
+		select distinct (orgid) as courtid, name as courtname
+		  from tbsys_orginfo t
+		 where t.porgid = (select * from highcourt)
+		    or t.orgid = (select * from highcourt)
+	</select>
+	
+	<select id="getCourtP" parameterType="Map" resultType="Map">
+		with court as (select t.highcourt,t.intermediatecourt from tbsys_orginfo t where t.orgid =#{departid})
+    select distinct (t.orgid) as courtid, name as courtname
+      from tbsys_orginfo t
+     where t.orgid = (select highcourt from court)
+        or t.orgid = (select intermediatecourt from court)
+	</select>
+
+	<select id="countCourtCaseHandleList" parameterType="Map"
+		resultType="int">
+		select count(1)
+		from tbflow_base tb, TBSYS_ORGINFO tr
+		,TBPRISONER_BASE_CRIME tbc
+		where 1 = 1
+		and tb.departid =tr.orgid and
+		tbc.crimid = tb.applyid and tb.int1 in
+		(0,1,4)
+		<if test="departid!=null and departid!=''">
+			and tr.orgid =  #{departid} 
+		</if>
+		<if test="flowdefid!=null and flowdefid!=''">
+			and flowdefid = #{flowdefid}
+		</if>
+		<if test="crimname!=null and crimname!=''">
+			and tb.applyname like '%'||#{crimname}||'%'
+		</if>
+		<if test="curyear!=null and curyear!=''">
+			and tb.text6 like concat(#{curyear},'%')
+		</if>
+		<if test="picibianhao!=null and picibianhao!=''">
+			and int6 =(select t.batch from tbxf_commuteparole_batch t where t.batchid = #{picibianhao})
+		</if>
+		and tbc.crimid not in (select tp.crimid from TBDATA_PRISONER tp where tp.batchid = #{picibianhao})
+		and tb.currnodeid = '1'
+	</select>
+
+	<select id="getCourtCaseHandleList" resultType="Map"
+		parameterType="Map">
+		select * from
+		(
+		select a.*, rownum rn from
+		( select
+		'(' ||
+		substr(tb.text6,1,4) || ')' || tr.shortname ||tb.text7||'第'
+		||substr(tb.text6,5) || '号' as CASENUMBER
+		,tb.applyname as XINGMING ,
+		tbc.causeaction as ZUIMING,
+		<!-- tb.commenttext , -->
+		tbc.CRIMID as CRIMID,
+		tb.int1 as COMMUTETYPE,
+		tbc.ORGNAME1 as ORGNAME
+		from tbflow_base tb,
+		TBSYS_ORGINFO tr ,TBPRISONER_BASE_CRIME tbc
+		where 1 = 1
+		and tb.departid
+		=tr.orgid and tbc.crimid = tb.applyid and tb.int1 in
+		(0,1,4)
+		<if test="departid!=null and departid!=''">
+			and tr.orgid =  #{departid} 
+		</if>
+		<if test="flowdefid!=null and flowdefid!=''">
+			and flowdefid = #{flowdefid}
+		</if>
+		<if test="curyear!=null and curyear!=''">
+			and tb.text6 like concat(#{curyear},'%')
+		</if>
+		<if test="crimname!=null and crimname!=''">
+			and tb.applyname like '%'||#{crimname}||'%'
+		</if>
+		<if test="picibianhao!=null and picibianhao!=''">
+			and int6 =(select t.batch from tbxf_commuteparole_batch t where t.batchid = #{picibianhao})
+		</if>
+			and tbc.crimid not in (select tp.crimid from TBDATA_PRISONER tp where tp.batchid = #{picibianhao})
+			and tb.currnodeid = '1'
+		) a
+		<if test="end!=null and end!=''">
+			where rownum &lt;= #{end} 
+		</if>
+		)
+		<if test="start!=null and start!=''">
+			where rn &gt;= #{start}
+		</if>
+	</select>
+
+	<select id="getAJXXCaseDateInfo" parameterType="Map" resultType="Map">
+		select case
+         when t.int1 = 0 or t.int1 = 4 then
+          0
+         else
+          1
+       end as COMMUTETYPE,
+		<!-- selectzuiming(#{crimid}) -->
+		selectzuiming1(#{crimid}) as CHARGE,
+		<!-- selectzuiming(#{crimid}) -->
+		tbc.causeaction as CHARGEREMARKE,
+		tbc.crimid as CRIMID,
+		SUBSTR(t.text6, 5) as CASENUM,
+		case 
+		when t.int1 = 0 or t.int1 = 4 then
+		case
+		ts.NOWPUNISHMENTYEAR
+		when '9996' then
+		'0'
+		when '9995' then
+		'1'
+		else
+		'2'
+		end
+		else '3' end as JXJSTYPE,
+		tcb.batchid as picibianhao
+		,'null' as emptydata
+		from tbflow_base t, TBPRISONER_BASE_CRIME tbc, tbxf_sentencealteration ts,TBXF_COMMUTEPAROLE_BATCH tcb
+		where t.applyid = #{crimid}
+		and t.text6 like concat(#{curyear}, '%')
+		and tcb.batchid = #{picibianhao}
+		and tbc.crimid = t.applyid
+		and ts.crimid = t.applyid
+	</select>
+
+
+	<select id="getBQXXCaseDateInfo" resultType="Map">
+		select 
+			(select tor.orgid from tbsys_orginfo tor where tor.orgid = ts.jailid) as THISSHORTNAME,
+		    substr(
+		    	(case when  ts.NOWPUNISHMENTYEAR ='9996' or ts.NOWPUNISHMENTYEAR ='9995' or tbc.sanclassstatus is NOT NULL or tbc.importantcriminal is NOT NULL 
+		    		     then
+				    		(select t.highcourt from tbsys_orginfo t where orgid =tb.departid)
+				      else
+				    	 (select t.intermediatecourt from tbsys_orginfo t where orgid =tb.departid)
+				 end
+		    	) ,2
+		    ) as TIQINGFAYUANID,
+		    
+		    selectcode(tb.text18, 'GK054') as SBRESON,
+		    
+		    ts.areaname as DETAINPRISON,
+		    tcb.batch as BATCH,
+		    ts.jailreport as JAILREPORT,
+		    ts.areaname as AREANAME,
+		    
+		    (case ts.NOWPUNISHMENTYEAR
+			    when '9996' then '3'
+			    when '9995' then '2'
+			    else '1'
+		    end) as NOWSENTENCETYPE,
+		    
+		    (case ts.losepoweryear
+		    	when '97' then '0'
+		    else '1'
+		    end) as LOSEPOWERYEA,
+		    
+		    ts.LOSEPOWERYEAR as LOSEPOWERYEAR,
+		    ts.losepowermonth as LOSEPOWERMONTH,
+		    ts.LOSEPOWEReDAY as LOSEPOWERDAY,
+		
+		    ts.COURTCHANGEYEAR as COURTCHANGEYEAR,
+		    ts.COURTCHANGEMONTH as COURTCHANGEMONTH,
+		    ts.COURTCHANGEDAY as COURTCHANGEDAY,
+		
+		    (case tbc.PUNISHMENTTYPE
+		    	when '9995' then '2'
+		    	when '9996' then '3'
+		    	when '9997' then '死刑'
+		     else '1'
+		    end) as PUNISHMENTMAIN,
+		    
+		    tbc.STRICTLYPLOT as LENIENT_RANGE,
+		    
+		    (case
+			    when tbc.OLDPRISONER = '1' then '3'
+			    when tbc.ILLPRISONER = '1' then '4'
+			    when DEFORMITYPRISONER = '1' then '5'
+			    when tbc.ISMINOR = '1' then '2'
+			    else ''
+		    end) as STRICT_RANGE,
+		    
+		    ts.COURTCHANGETO,
+		    ts.COURTCHANGEYEAR as YETREDUCEYEAR,
+		    ts.COURTCHANGEMONTH as YETREDUCEMONTH,
+		    ts.COURTCHANGEDAY as YETREDUCEDAY,
+		
+		    ts.COURTCHANGEYEAR as COMMUTEYEAR,
+		    ts.COURTCHANGEMONTH as COMMUTEMONTH,
+		    ts.COURTCHANGEDAY as COMMUTEDAY，
+		    ts.NOWPUNISHMENTYEAR as NOWPUNISHMENTYEAR,
+		    ts.NOWPUNISHMENTMONTH as NOWPUNISHMENTMONTH,
+		    ts.NOWPUNISHMENTDAY as NOWPUNISHMENTDAY,
+		    'null' as emptydata
+
+    from
+	    TBXF_SENTENCEALTERATION ts,
+	    tbxf_commuteparole_batch tcb,
+	    TBPRISONER_BASE_CRIME tbc,
+	    tbflow_base tb
+
+    where ts.crimid = #{crimid}
+      and tb.text6 like concat(#{curyear},'%')
+      and ts.batchid = tcb.batchid
+      and ts.crimid = tbc.crimid
+      and tb.applyid = tbc.crimid
+
+	</select>
+
+	<select id="getJYYJCaseDateInfo" resultType="Map">
+
+	</select>
+
+	<select id="getJYJYJCaseDateInfo" resultType="Map">
+	</select>
+
+	<select id="getFZSSCaseDateInfo" resultType="Map">
+		select
+		tbc.COMMUTATION as COMMUTATION,
+		case tbc.JOINTCRIMES
+		when 1 then
+		'1'
+		else
+		'0'
+		end as ISJOINTCRIME,
+		to_char(tbc.CRIMEFACE) as CRIMEFACE,
+		case
+		tbc.fleetype_code
+		when '省内流窜' then
+		'1'
+		when '跨省流窜' then
+		'2'
+		when '跨国流窜'
+		then
+		'3'
+		end as FLEETYPE_CODE,
+		case
+		when tbc.DRUGS = '1' then
+		'1'
+		when
+		tbc.GUN = '1' then
+		'2'
+		when tbc.UNDERWORLD = '1' then
+		'3'
+		when
+		tbc.WICKEDNESS = '1' THEN
+		'4'
+		end as CASEINVOLVE,
+		case
+		when tbc.TAKEDRUGS
+		= '1' then
+		'0'
+		when tbc.ESCAPES = '1' then
+		'1'
+		when tbc.SUICIDE = '1' then
+		'2'
+		when tbc.ASSAULTEPOLICE = '1' THEN
+		'3'
+		end AS SISHI
+		,'null' as
+		emptydata
+
+		from TBPRISONER_BASE_CRIME tbc
+
+		where tbc.crimid = #{crimid}
+	</select>
+
+	<select id="getZFJBXXCaseDateInfo" resultType="Map">
+		select tbc.CRIMID
+		as CRIMINAID,
+		tb.name as NAME,
+		tb.IDNUMBER as CREDENTIALSNUM,
+		selectcode(tb.nation,'GB006') as nation,
+		case tb.gender
+		when '男' then
+		'1'
+		when '女' then
+		'2'
+		end as gender,
+		tb.birthday as BIRTHDAY,
+		tbc.CRIMEDATE as CRIMEDATE,
+		EXTRACT(year FROM tbc.crimeDATE) - EXTRACT(year FROM tb.birthday) as
+		ARRESTDATE,
+		case tbc.ISMINOR
+		when '是' then
+		'0'
+		when '否' then
+		'1'
+		else
+		tbc.ISMINOR
+		end as ISMINOR,
+		case tbc.MARRIAGE
+		when '未婚' then
+		'1'
+		when '已婚'
+		then
+		'2'
+		when '丧偶' then
+		'3'
+		when '离婚' then
+		'4'
+		when '再婚' then
+		'5'
+		when '同居'
+		then
+		'6'
+		end as MARRIAGE,
+		selectcode(tb.VOCATION,'GK041') as VOCATION,
+		selectcode(tb.POLITICALSTATUS,'GB008') as POLITICAL,
+		selectcode(tb.EDUCATION,'GK007') as CATION,
+		selectcode(tb.Countryarea_Code,'GB002') as COUNTRYAREA_CODE,
+		tb.ORIGINPLACEAREA as DOMICILE,
+		tb.FAMILYADDRESS as HOMEADDRESS,
+		tb.ORIGIN as ORIGIN,
+		case tbc.Isrecidivism
+		when '0' then
+		'1'
+		when '1' then
+		'0'
+		end as ISRECIDIVISM,
+		ts.REMUNERATION,
+		case tbc.COMBINEDPUNISHMENT
+		when '1' then '0' else '1' end as
+		COMBINEDPUNISHMENT,
+		case
+		tbc.LIMITEDREMISSION when '1' then '0' else '1' end as
+		LIMITEDREMISSION,
+		case tbc.POSTCRIME when '1' then '0' else '1' end as
+		POSTCRIME,
+		case tbc.UNDERMINE when '1' then '0' else '1' end as
+		UNDERMINE,
+		case tbc.UNDERWORLD when '1' then '0' else '1' end as
+		UNDERWORLD,
+		case
+		when tbc.ISMINOR='0' then
+		'1'
+		when tbc.OLDPRISONER='0'
+		then
+		'1'
+		when tbc.ILLPRISONER='0' then
+		'1'
+		when tbc.DEFORMITYPRISONER='0'
+		then
+		'1'
+		else
+		'1'
+		end as SPECIALPLOT,
+		tbc.InprisonDATE as INPRISONDATE,
+		tbc.ExecutionDATE as
+		EXECUTIONDATE,
+		selectcode(tb.grade,'GB018') as
+		XLEVEL,
+		tbc.CUSTODYTYPE
+		as CUSTODYTYPE_CODE,
+		tbc.CHARGECLASS as
+		CHARGECLASS_CODE,
+		tb.PPROVINCE
+		as PPROVINCE,
+		selectcode(tb.IDENTITY,'GB017') as IDENTITY,
+		tbc.Recidivist as
+		RECIDIVIST
+		,'null' as emptydata
+		from
+		TBPRISONER_BASE_CRIME tbc,
+		TBPRISONER_BASEINFO tb,
+		TBXF_SENTENCEALTERATION ts
+		where tbc.crimid =
+		#{crimid}
+		and tbc.crimid = tb.crimid
+		and
+		ts.crimid = tbc.crimid
+	</select>
+
+	<select id="getXFBGCaseDateInfo" resultType="Map">
+		select (select tor.orgid from tbsys_orginfo tor where tor.orgid =
+		ts.areaid)
+		as APPLYOFFICE,
+		ts.areaname as
+		Jailname,
+		f_amendcourt(concat(ts.courtname, ts.courttitle)) as COURTTITLE,
+		ts.CASENO as COMMUTATIONCASENUM,
+		ts.COURTSANCTION as COMMUTATIONDATE,
+		ts.COURTCHANGEYEAR as COMMUTATIONYEAR,
+		ts.COURTCHANGEMONTH,
+		ts.COURTCHANGEDAY,
+		(to_char(sysDATE, 'yyyy') -
+		to_char(tbc.sentencestime, 'yyyy')) as EXECUTEDYEAR,
+		case
+		when
+		to_char(sysDATE, 'yyyy') - to_char(tbc.sentencestime, 'yyyy') > 1
+		then
+		(to_char(sysDATE, 'mm') - to_char(tbc.sentencestime, 'mm'))
+		else
+		0
+		end as
+		EXECUTEDYEAR,
+		case
+		when (to_char(sysDATE, 'mm') -
+		to_char(tbc.sentencestime, 'mm')) > 1 then
+		(to_char(sysDATE, 'dd') -
+		to_char(tbc.sentencestime, 'dd'))
+		else
+		0
+		end as EXECUTEDYEAR,
+		case
+		tse.Sentence when '9995' then '2' when '9996' then '3' when '9997'
+		then '死刑' else '1' end as NOWPUNISHMENTMAIN,
+		substr(tse.Sentence,0,2)
+		as NOWPUNISHMENTYEAR,substr(tse.Sentence,3,2) as
+		NOWPUNISHMENTMONTH,substr(tse.Sentence,5,2) as NOWPUNISHMENTDAY,
+		case
+		tse.LOSEPOWER when '97' then '0' else '1' end as
+		LOSEPOWERLIFE,substr(tse.LOSEPOWER,0,2) as LOSEPOWERYEAR,
+		substr(tse.LOSEPOWER,3,2) as LOSEPOWERYEAR,
+		substr(tse.LOSEPOWER,5,2)
+		as
+		LOSEPOWERYEAR,tse.LOSEPOWER,ts.PUNISHMENTYEAR,ts.PUNISHMENTMONTH,ts.PUNISHMENTDAY,ts.COURTCHANGEYEAR
+		as COURTCHANGEYEAR,
+		ts.Courtchangemonth as
+		COURTCHANGEMONTH,ts.Courtchangeday,case ts.LOSEPOWERYEAR when '97'
+		then '0' else '1' end as NOWLOSEPOWERLIFE,
+		ts.LOSEPOWERYEAR AS
+		NOWLOSEPOWERYEAR,ts.LOSEPOWERMONTH AS
+		NOWLOSEPOWERMONTH,ts.LOSEPOWEREDAY AS NOWLOSEPOWERDAY
+		,ts.COURTCHANGEFROM,ts.COURTCHANGETO,tcb.examineend AS ORDEALENDDATE
+		,'null' as emptydata
+
+		from TBXF_SENTENCEALTERATION ts,
+		tbdata_sentchage
+		tse,
+		TBPRISONER_BASE_CRIME tbc,
+		TBXF_COMMUTEPAROLE_BATCH tcb
+
+		where
+		ts.crimid
+		= #{crimid}
+		<!-- and tse.courtyear like concat(#{curyear},'%') -->
+		and ts.crimid = tse.crimid
+		and tbc.crimid = ts.crimid
+		and
+		tcb.batchid=ts.batchid
+
+	</select>
+
+	<select id="getZFXFQKCaseDateInfo" resultType="Map">
+		select
+		ts.REMUNERATION,ts.WITHCASH,ts.SHOPPING,ts.OVERPLUS
+		,'null' as
+		emptydata
+		from
+		tbxf_sentencealteration ts where
+		ts.crimid= #{crimid}
+		and
+		ts.batchid=#{picibianhao}
+	</select>
+
+	<select id="getLRBCCaseDateInfo" resultType="Map">
+		select too.oidtype,
+		too.CONFIRMTIME
+		,'null' as emptydata
+		from TBXF_OLDILLDISABILITY too
+		where too.crimid = #{crimid}
+	</select>
+
+	<select id="getQKXXCaseDateInfo" resultType="Map">
+		select F_formatymd_ws(tp.STARTTIME) as SENTENCE,
+		F_formatymd_ws(tp.endtime) as STARTTIME,
+		SELECTCODE(tp.type,'GB060') as
+		TYPE,
+		<!-- selectzuiming(#{crimid}) -->
+		selectzuiming1(#{crimid}) as CRIMENAME,
+		substr(SENTENCE, 0, 2) as
+		RAWYEAR,
+		substr(SENTENCE, 3, 2) as RAWMONTH,
+		substr(SENTENCE, 5, 2) as
+		RAWDAY,
+		tp.EXECUTINGORGAN
+		,'null' as emptydata
+		from tbprisoner_precrime
+		tp,TBPRISONER_BASE_CRIME tbc
+
+		where tp.crimid = #{crimid} and
+		tbc.crimid=tp.crimid
+	</select>
+
+	<select id="getSHGXCaseDateInfo" resultType="Map">
+		select tsr.NAME,
+		tsr.GENDER,
+		tsr.RELATIONSHIP,
+		F_formatymd_ws(tsr.BIRTHDAY) as BIRTHDAY,
+		tsr.POLITICAL as POLITICAL_CODE,
+		tsr.HOMEADDRESS,
+		tsr.VOCATION,
+		tsr.RDUTY,
+		tsr.ORGNAME,
+		tsr.ISPRIMARYCONTACT,
+		tsr.PHONE
+		,'null' as emptydata
+
+		from
+		tbprisoner_social_relation tsr
+		where tsr.crimid = #{crimid}
+	</select>
+
+	<select id="getJLXXCaseDateInfo" resultType="Map">
+		select
+		tr.BEGINDATE,
+		tr.ENDDATE,
+		tr.ORGNAME,
+		tr.VOCATION,
+		tr.DUTY
+		,'null' as emptydata
+
+		from
+		tbprisoner_resume tr
+		where tr.crimid = #{crimid}
+	</select>
+
+	<select id="getFXBXCaseDateInfo" resultType="Map">
+		select
+		kk.SUMFEN,ts.REWARDINFO,ts.PUNISHINFO
+		,'null' as emptydata
+		from
+		TBXF_SENTENCEALTERATION ts,KHJC_KAOHEFEN kk where
+		ts.crimid = #{crimid}
+		and ts.batchid = #{picibianhao} and ts.crimid =
+		kk.crimid
+	</select>
+
+	<select id="getCCQKCaseDateInfo" resultType="Map">
+		select ts.fine,
+		ts.sumfine,
+		ts.thisfine,
+		ts.Civil,
+		ts.sumcivil,
+		ts.thiscivil,
+		ts.EXPROPRIATION,
+		ts.THISEXPROPRIATION,
+		ts.SUMEXPROPRIATION,
+		ts.CIVIL as
+		QUANTUM,
+		ts.CIVIL - ts.SUMCIVIL as UNDONEQUANTUM,
+		ts.RECOVERED as
+		RECOVEREDAMOUNT,
+		ts.SUMRECOVERED as DONERECOVEREDAMOUNT,
+		ts.RECOVERED -
+		ts.SUMRECOVERED as UNDONERECOVEREDAMOUNT,
+		ts.FINE - ts.SUMFINE as
+		NONEXECUTIONAMOUNT,
+		ts.EXPROPRIATION as CONFISCATEAMOUNT,
+		ts.SUMEXPROPRIATION as DONECONFISCATEAMOUNT,
+		ts.EXPROPRIATION -
+		ts.SUMEXPROPRIATION as UNDONECONFISCATEAMOUNT
+		,'null' as emptydata
+		from
+		TBXF_SENTENCEALTERATION ts
+		where ts.crimid = #{crimid}
+		and ts.batchid =
+		#{picibianhao}
+	</select>
+
+	<select id="getQLQKCaseDateInfo" resultType="Map">
+	</select>
+
+	<select id="getCFQKCaseDateInfo" resultType="Map">
+	</select>
+
+	<select id="getYPXXCaseDateInfo" resultType="Map">
+		 select f_amendcourt(tbc.JUDGMENTSHORT) as HANDLECOURT,
+         selectzuiming1(#{crimid}) as MAINCHARGE,
+         tbc.causeaction as MAINCHARGEREMARKE,
+         tbc.JUDGEDATE,
+         '(' || substr(tb.text6, 1, 4) || ')' || tr.shortname || tb.text7 || '第' ||
+         substr(tb.text6, 5) || '号' as CASENUM,
+         case TBC.PUNISHMENTTYPE
+           when '有期徒刑' then
+            '1'
+           when '无期徒刑' then
+            '2'
+           when '死刑，缓期二年执行' then
+            '3'
+           when '死刑' then
+            '4'
+         end AS MAINTORTURE,
+         CASE TBC.PUNISHMENTYEAR
+           WHEN 9995 THEN
+            '2'
+           WHEN 9996 THEN
+            '3'
+           WHEN 9997 THEN
+            '4'
+           else
+            '1'
+         end as MAINTORTURE,
+         TBC.PUNISHMENTYEAR as ORIGINALY,
+         TBC.PUNISHMENTMONTH as ORIGINALM,
+         TBC.PUNISHMENTDAY as ORIGINALD,
+         case TBC.LOSEPOWERYEAR
+           when 97 then
+            '0'
+           else
+            '1'
+         end as LOSEPOWERLIFE,
+         TBC.LOSEPOWERYEAR,
+         TBC.LOSEPOWERMONTH,
+         TBC.LOSEPOWEREDAY,
+         case ts.EXPROPRIATIONINFO
+           when '1' then
+            '0'
+           else
+            '1'
+         end as CONFISCATEALLAMOUNT,
+         ts.THISEXPROPRIATION,
+         ts.THISRECOVERED as THISCIVIL,
+         tbc.JUDGEDATE as DECLARDATE,
+         ts.DETAINDATE as INPERSION,
+         tbc.TAKEEFFECTDATE as EFFECTDATE,
+         tbc.SENTENCESTIME as PRISONSTARTTIME,
+         tbc.SENTENCEETIME as PRISONENDTIME,
+         tbc.EXECUTIONDATE as EXECUTETIME,
+         'null' as emptydata
+    from TBPRISONER_BASE_CRIME   tbc,
+         tbxf_sentencealteration ts,
+         tbflow_base             tb,
+         tbsys_orginfo           tr
+   where ts.crimid = #{crimid}
+     and tr.orgid = (select tp.departid
+                       from tbprisoner_baseinfo tp
+                      where crimid = #{crimid})
+     and tb.text6 like concat(#{curyear}, '%')
+     and int6 = (select t.batch
+                   from tbxf_commuteparole_batch t
+                  where t.batchid = #{picibianhao})
+     and tbc.crimid = ts.crimid
+	</select>
+
+	<select id="getyjDataInfo" resultType="Map">
+		select
+		ts.JAILINFO,ts.ADMINISTRATION,ts.PROSECUTOR
+		,'null' as emptydata
+		from
+		tbxf_sentencealteration ts
+		where ts.crimid = #{crimid} and ts.batchid =
+		#{picibianhao}
+	</select>
+
+	<select id="getWritDataInfo" resultType="Map">
+		select ta.archiveid,
+		       tba.name,
+		       case
+		         when to_char(ta.int1) = '1' then
+		          dbms_lob.substr(ta.docconent)
+		       end as docconent,
+		       to_char(ta.int1) as INT1,
+		       tacode.name as TYPENAME,
+		       tba.docid as CODEID
+		  from tbflow_archives      ta,
+		       tbflow_base_archives tba,
+		       tbflow_archivescode  tacode
+		 where ta.personid = #{crimid}
+		   and ta.archiveid = tba.archiveid
+		   and tacode.codeid = tba.classification
+		   and int1 = '1'
+		 union 
+     select ta.archiveid,
+           tba.name,
+           case
+             when to_char(ta.int1) = '1' then
+              dbms_lob.substr(ta.docconent)
+           end as docconent,
+           to_char(ta.int1) as INT1,
+           tacode.name as TYPENAME,
+           tba.docid as CODEID
+      from tbflow_archives      ta,
+           tbflow_base_archives tba,
+           tbflow_archivescode  tacode
+     where 
+        ta.flowid in (select t.flowid
+                      from TBFLOW_BASE t
+                     where t.applyid = #{crimid}
+                       and flowdefid = 'arch_zfdajdsp')
+   and ta.archiveid = tba.archiveid
+   and tacode.codeid = tba.classification
+	</select>
+	
+	<select id="getOtherWritDataInfo" resultType="Map">
+		select tb.otherid as archiveid,
+               case tf.tempid
+                 when 'jailcommutereport' then
+                  '减刑假释建议书'
+                 when 'JXJS_JXPYS' then
+                  '减刑假释评议书'
+                 when 'JXJS_JXJSSHB_LOCAL' then
+                  '审核表'
+                  when 'BJSHZFRDSPB' then
+                  '重要罪犯、三类犯审批表'
+               end as name,
+               tb.docconent as docconent1,
+               '0' as INT1,
+               case tf.tempid
+                 when 'jailcommutereport' then
+                  '减刑假释建议书'
+                 when 'JXJS_JXPYS' then
+                  '减刑假释评议书'
+                 when 'JXJS_JXJSSHB_LOCAL' then
+                  '审核表'
+                  when 'BJSHZFRDSPB' then
+                  '重要罪犯、三类犯审批表'
+               end as  typename,
+               case tf.tempid
+                 when 'jailcommutereport' then
+                  '002001'
+                 when 'JXJS_JXPYS' then
+                  '009001'
+                 when 'JXJS_JXJSSHB_LOCAL' then
+                  '003001'
+                  when 'BJSHZFRDSPB' then
+                  '010001'
+               end as CODEID
+          from TBFLOW_OTHER_FLOW tf, TBFLOW_BASE_OTHER tb
+         where tf.otherid = tb.otherid
+           and tf.flowdraftid =
+               (select t.flowdraftid
+                  from tbflow_base t
+                 where t.flowdefid = 'other_zfjyjxjssp'
+                   and t.applyid = #{crimid}
+                   and t.text6 like concat(#{curyear}, '%')
+                   and int6 = (select t.batch
+                                 from tbxf_commuteparole_batch t
+                                where t.batchid = #{picibianhao}) and t.currnodeid ='1' and rownum=1)
+           and tf.tempid in
+               ('jailcommutereport', 'JXJS_JXPYS', 'JXJS_JXJSSHB_LOCAL','BJSHZFRDSPB')
+         order by tb.otherid desc
+	</select>
+	
+	<select id="getReceiptData" resultType="Map">
+		 
+   <!--  select
+    tba.personid,SUBSTR(t.text6, 3) as CASENUM,tba.optime,(select name from tbsys_userinfo  where userid = tba.opid) as name
+    from 
+    tbflow_base_archives tba,tbflow_base t,TBPRISONER_BASE_CRIME tbc,tbflow_archivescode
+    tacode
+    where ta.personid =
+		#{crimid} and tacode.name like '%送达%' and tacode.codeid=tba.classification
+		and t.flowdefid='other_zfjyjxjssp' and t.applyid = tba.personid and t.applyid = tbc.crimid -->
+select 
+    ta.crimid,SUBSTR(t.text6, 3) as CASENUM,ta.optime,(select name from tbsys_userinfo  where userid = ta.opid) as name
+    from 
+    TBDATA_ARCHIVES ta,tbflow_base t,TBPRISONER_BASE_CRIME tbc
+    where ta.crimid =
+    #{crimid} and ta.archivesname like '%送达%' 
+    and t.flowdefid='other_zfjyjxjssp' and t.applyid = ta.crimid and t.applyid = tbc.crimid 
+	</select>
+	
+		<select id="getReceiptDatatest" resultType="Map">
+		select t.crimid,
+	       t.batchid,
+	       t.CASENUM,
+	       (select name from tbprisoner_baseinfo where crimid = t.crimid) as NAME,
+	       t.optime
+		  from tbdata_archives t
+		 where t.crimid = #{crimid}
+		 and t.batchid = #{picibianhao}
+		 and rownum ='1'
+
+	</select>
+
+	<insert id="insertCaseData" parameterType="Map">
+		insert into TBDATA_SENTCHAGE
+		(CRIMID,CASENUM,COURTYEAR,COURTSHORT,BATCHID<!--,LIANEXAMINEPERSON ,LIANEXAMINEDATE,LIANEXAMINEOPINION,LIANEXAMINEREMARK, -->
+		,LIANEXAMINEPERSON,LIANEXAMINEDATE,LIANEXAMINEOPINION,LIANEXAMINEREMARK,LIANAPPROVALPERSON,LIANAPPROVALDATE,LIANAPPROVALOPINION,LIANAPPROVALREMARK,LIANDATE,
+		HANDLECOURT,OPENCOURTTIME,OPENCOURTEND,OPENCOURTSITE,OPENCOURTDATE,
+		RULINGDATE,SETTLEDATE,SETTLETYPE,SETTLERESON,NOSETTLEWRITRESON,
+		COURTCHANGEFROM,COURTCHANGETO,MAINCASE,ISEDUCEPENALTY,THISCHANGEYEAR,THISCHANGEMONTH,THISCHANGEDAY,COURTCHANGYEAR,COURTCHANGMONTH,COURTCHANGDAY,LOSEPOWER,ANNULFAJIN,NOTINCLUDEYEAR,NOTINCLUDEMONTH,NOTINCLUDEDAY,REDUCERESON
+		,COURTSANCTION,DATATYPE
+		)
+
+		values(#{ZFBH,jdbcType=VARCHAR},#{AJBH,jdbcType=VARCHAR},#{COURTYEAR,jdbcType=VARCHAR},#{COURTSHORT,jdbcType=VARCHAR},#{PC,jdbcType=VARCHAR},<!-- 
+			#{LASCR,jdbcType=VARCHAR},#{LASCRQ,jdbcType=VARCHAR},#{LASCYJ,jdbcType=VARCHAR},#{LASCBZ,jdbcType=VARCHAR}, -->
+
+		#{LASCR,jdbcType=VARCHAR},to_date(#{LASCRQ,jdbcType=DATE},'yyyy/MM/dd'),#{LASCYJ,jdbcType=VARCHAR},#{LASCBZ,jdbcType=VARCHAR},#{LASPR,jdbcType=VARCHAR},#{LASPRQ,jdbcType=VARCHAR},#{LASPYJ,jdbcType=VARCHAR},#{LASPBZ,jdbcType=VARCHAR},#{LARQ,jdbcType=VARCHAR},
+		#{JBFY,jdbcType=VARCHAR},to_date(#{KTSJ,jdbcType=TIMESTAMP},'yyyy/MM/dd
+		HH24:mi:ss'),to_date(#{JSSJ,jdbcType=TIMESTAMP},'yyyy/MM/dd
+		HH24:mi:ss'),#{KTDD,jdbcType=VARCHAR},to_date(#{KTRQ,jdbcType=DATE},'yyyy/MM/dd'),
+		to_date(#{CDRQ,jdbcType=DATE},'yyyy/MM/dd'),to_date(#{JARQ,jdbcType=DATE},'yyyy/MM/dd'),#{JAFS,jdbcType=VARCHAR},#{JAAY,jdbcType=VARCHAR},#{WJAWSLY,jdbcType=VARCHAR},
+		#{XQQR,jdbcType=VARCHAR},#{XQZR,jdbcType=VARCHAR},#{BGHZXXZ,jdbcType=VARCHAR},#{SFJYX,jdbcType=VARCHAR},#{BCJXN,jdbcType=VARCHAR},#{BCJXR,jdbcType=VARCHAR},#{BGHSYZYXQN,jdbcType=VARCHAR},#{BGHSYZYXQY,jdbcType=VARCHAR},#{BGHSYZYXQR,jdbcType=VARCHAR},#{XQJZRQ,jdbcType=VARCHAR},#{JMFJSE,jdbcType=VARCHAR},#{SJZXSY,jdbcType=VARCHAR},#{JXSY,jdbcType=VARCHAR},#{BJRXQQJN,jdbcType=VARCHAR},#{BJRXQQJY,jdbcType=VARCHAR},#{BJRXQQJR,jdbcType=VARCHAR}
+		,'00000000','1'
+		)
+
+	</insert>
+
+	<insert id="insertWritData" parameterType="Map">
+		insert into TBDATA_ARCHIVES
+		(ARCHIVESID,ARCHIVESNAME,ARCHIVESTYPE,ARCHIVESPATH,ARCHIVESSN,ARCHIVESCREATETIME,ARCHIVESSENDTIME,ARCHIVESTYPENAME,ARCHIVESSIZE,ARCHIVESREMARKE,BATCHID,CASENUM,CRIMID)
+		values
+		(#{WSBH,jdbcType=VARCHAR},#{WSMC,jdbcType=VARCHAR},#{WSLX,jdbcType=VARCHAR},#{CFLJ,jdbcType=VARCHAR},#{XSSX,jdbcType=VARCHAR},#{CJSJ,jdbcType=VARCHAR},#{FSSJ,jdbcType=VARCHAR},#{WSFLMC,jdbcType=VARCHAR},#{WJDX,jdbcType=VARCHAR},#{BZ,jdbcType=VARCHAR},#{PC,jdbcType=VARCHAR},#{AJBH,jdbcType=VARCHAR},#{ZFBH,jdbcType=VARCHAR})
+
+	</insert>
+
+	<insert id="getCaseDataB" parameterType="Map">
+		insert into
+		TBDATA_SENTCHAGE
+		(CRIMID,CASENUM,COURTYEAR,COURTSHORT,BATCHID,LIANEXAMINEPERSON,LIANEXAMINEDATE,LIANEXAMINEOPINION,LIANEXAMINEREMARK,
+		COURTSANCTION,DATATYPE)
+		values(CONCAT(#{ZFBH,jdbcType=VARCHAR},'TH'),#{AJBH,jdbcType=VARCHAR},#{COURTYEAR,jdbcType=VARCHAR},#{COURTSHORT,jdbcType=VARCHAR},#{PC,jdbcType=VARCHAR},#{LASCR,jdbcType=VARCHAR},to_date(#{LASCRQ,jdbcType=VARCHAR},'yyyy/MM/dd'),#{LASCYJ,jdbcType=VARCHAR},#{LASCBZ,jdbcType=VARCHAR},
+		'00000000','1')
+
+	</insert>
+
+	<insert id="getCaseDataC" parameterType="Map">
+
+	</insert>
+
+	<insert id="getCaseDataD" parameterType="Map">
+		insert into TBDATA_SENTCHAGE(CRIMID,CASENUM,COURTYEAR,COURTSHORT,BATCHID,
+		LIANEXAMINEPERSON,LIANEXAMINEDATE,LIANEXAMINEOPINION,LIANEXAMINEREMARK,LIANAPPROVALPERSON,LIANAPPROVALDATE,LIANAPPROVALOPINION,LIANAPPROVALREMARK,LIANDATE
+		,COURTSANCTION,DATATYPE)
+		values(#{ZFBH,jdbcType=VARCHAR},#{AJBH,jdbcType=VARCHAR},#{COURTYEAR,jdbcType=VARCHAR},#{COURTSHORT,jdbcType=VARCHAR},#{PC,jdbcType=VARCHAR},
+		#{LASCR,jdbcType=VARCHAR},#{LASCRQ,jdbcType=DATE},#{LASCYJ,jdbcType=VARCHAR},#{LASCBZ,jdbcType=VARCHAR},#{LASPR,jdbcType=VARCHAR},#{LASPRQ,jdbcType=VARCHAR},#{LASPYJ,jdbcType=VARCHAR},#{LASPBZ,jdbcType=VARCHAR},#{LARQ,jdbcType=VARCHAR}
+		,"00000000","3")
+	</insert>
+
+	<insert id="getCaseDataE" parameterType="Map">
+		insert into TBDATA_SENTCHAGE(CRIMID,CASENUM,COURTYEAR,COURTSHORT,BATCHID,
+		HANDLECOURT,OPENCOURTTIME,OPENCOURTEND,OPENCOURTSITE,OPENCOURTDATE
+		,COURTSANCTION,DATATYPE)
+		values(#{ZFBH,jdbcType=VARCHAR},#{AJBH,jdbcType=VARCHAR},#{COURTYEAR,jdbcType=VARCHAR},#{COURTSHORT,jdbcType=VARCHAR},#{PC,jdbcType=VARCHAR},
+		#{JBFY,jdbcType=VARCHAR},#{KTSJ,jdbcType=TIMESTAMP},#{JSSJ,jdbcType=TIMESTAMP},#{KTDD,jdbcType=VARCHAR},#{KTRQ,jdbcType=DATE}
+		,"00000000","4")
+	</insert>
+
+	<insert id="getCaseDataF" parameterType="Map">
+		insert into TBDATA_SENTCHAGE(CRIMID,CASENUM,COURTYEAR,COURTSHORT,BATCHID,
+		COURTCHANGEFROM,COURTCHANGETO,MAINCASE,ISEDUCEPENALTY,THISCHANGEYEAR,THISCHANGEMONTH,THISCHANGEDAY,COURTCHANGYEAR,COURTCHANGMONTH,COURTCHANGDAY,LOSEPOWER,ANNULFAJIN,NOTINCLUDEYEAR,NOTINCLUDEMONTH,NOTINCLUDEDAY,REDUCERESON
+		,COURTSANCTION,DATATYPE)
+		values(
+		#{ZFBH,jdbcType=VARCHAR},#{AJBH,jdbcType=VARCHAR},#{COURTYEAR,jdbcType=VARCHAR},#{COURTSHORT,jdbcType=VARCHAR},#{PC,jdbcType=VARCHAR},
+		#{XQQR,jdbcType=VARCHAR},#{XQZR,jdbcType=VARCHAR},#{BGHZXXZ,jdbcType=VARCHAR},#{SFJYX,jdbcType=VARCHAR},#{BCJXN,jdbcType=VARCHAR},#{BCJXR,jdbcType=VARCHAR},#{BGHSYZYXQN,jdbcType=VARCHAR},#{BGHSYZYXQY,jdbcType=VARCHAR},#{BGHSYZYXQR,jdbcType=VARCHAR},#{LOSEPOWER,jdbcType=VARCHAR},#{JMFJSE,jdbcType=VARCHAR},#{SJZXSY,jdbcType=VARCHAR},#{JXSY,jdbcType=VARCHAR},#{BJRXQQJN,jdbcType=VARCHAR},#{BJRXQQJY,jdbcType=VARCHAR},#{BJRXQQJR,jdbcType=VARCHAR}
+		,"00000000","5"
+		)
+	</insert>
+
+	<select id="findsome" resultType="Map">
+		<!-- select t.content as docconent from tbsys_document t where t.docid 
+			= '2' -->
+		select t.docconent as docconent from tbflow_base_other_temp t where
+		otherid='2192214866913599396111'
+	</select>
+</mapper>

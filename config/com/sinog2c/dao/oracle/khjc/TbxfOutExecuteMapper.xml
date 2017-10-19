@@ -1,0 +1,574 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.sinog2c.dao.api.khjc.TbxfOutExecuteMapper" >
+  <resultMap id="BaseResultMap" type="com.sinog2c.model.khjc.TbxfOutExecute" >
+    <id column="DOCID" property="docid" jdbcType="VARCHAR" />
+    <result column="FLOWDEFID" property="flowdefid" jdbcType="VARCHAR" />
+    <result column="CRIMID" property="crimid" jdbcType="VARCHAR" />
+    <result column="CASEYEAR" property="caseyear" jdbcType="VARCHAR" />
+    <result column="CASENO" property="caseno" jdbcType="VARCHAR" />
+    <result column="SHORTNAME" property="shortname" jdbcType="VARCHAR" />
+    <result column="CASETYPE" property="casetype" jdbcType="VARCHAR" />
+    <result column="OUTEXECUTETYPE" property="outexecutetype" jdbcType="VARCHAR" />
+    <result column="STARTDATE" property="startdate" jdbcType="VARCHAR" />
+    <result column="ENDDATE" property="enddate" jdbcType="VARCHAR" />
+    <result column="APPROVEDATE" property="approvedate" jdbcType="VARCHAR" />
+    <result column="ADVICE" property="advice" jdbcType="VARCHAR" />
+    <result column="OUTEXECUTEMONTHS" property="outexecutemonths" jdbcType="DECIMAL" />
+    <result column="DEPARTID" property="departid" jdbcType="VARCHAR" />
+    <result column="DELFLAG" property="delflag" jdbcType="VARCHAR" />
+    <result column="CREATETIME" property="createtime" jdbcType="DATE" />
+    <result column="CREATEMENDER" property="createmender" jdbcType="VARCHAR" />
+    <result column="UPDATETIME" property="updatetime" jdbcType="DATE" />
+    <result column="UPDATEMENDER" property="updatemender" jdbcType="VARCHAR" />
+    <result column="TEXT1" property="text1" jdbcType="VARCHAR" />
+    <result column="TEXT2" property="text2" jdbcType="VARCHAR" />
+    <result column="TEXT3" property="text3" jdbcType="VARCHAR" />
+    <result column="TEXT4" property="text4" jdbcType="VARCHAR" />
+    <result column="TEXT5" property="text5" jdbcType="VARCHAR" />
+    <result column="INT1" property="int1" jdbcType="DECIMAL" />
+    <result column="INT2" property="int2" jdbcType="DECIMAL" />
+    <result column="INT3" property="int3" jdbcType="DECIMAL" />
+    <result column="INT4" property="int4" jdbcType="DECIMAL" />
+    <result column="INT5" property="int5" jdbcType="DECIMAL" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    DOCID, FLOWDEFID, CRIMID, CASEYEAR, CASENO, SHORTNAME, CASETYPE, OUTEXECUTETYPE, 
+    STARTDATE, ENDDATE, APPROVEDATE, ADVICE, OUTEXECUTEMONTHS, DEPARTID, DELFLAG, CREATETIME, 
+    CREATEMENDER, UPDATETIME, UPDATEMENDER, TEXT1, TEXT2, TEXT3, TEXT4, TEXT5, INT1, 
+    INT2, INT3, INT4, INT5
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from TBXF_OUTEXECUTE
+    where DOCID = #{docid,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from TBXF_OUTEXECUTE
+    where DOCID = #{docid,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.sinog2c.model.khjc.TbxfOutExecute" >
+    insert into TBXF_OUTEXECUTE (DOCID, FLOWDEFID, CRIMID, 
+      CASEYEAR, CASENO, SHORTNAME, 
+      CASETYPE, OUTEXECUTETYPE, STARTDATE, 
+      ENDDATE, APPROVEDATE, ADVICE, 
+      OUTEXECUTEMONTHS, DEPARTID, DELFLAG, 
+      CREATETIME, CREATEMENDER, UPDATETIME, 
+      UPDATEMENDER, TEXT1, TEXT2, 
+      TEXT3, TEXT4, TEXT5, 
+      INT1, INT2, INT3, INT4, 
+      INT5)
+    values (#{docid,jdbcType=VARCHAR}, #{flowdefid,jdbcType=VARCHAR}, #{crimid,jdbcType=VARCHAR}, 
+      #{caseyear,jdbcType=VARCHAR}, #{caseno,jdbcType=VARCHAR}, #{shortname,jdbcType=VARCHAR}, 
+      #{casetype,jdbcType=VARCHAR}, #{outexecutetype,jdbcType=VARCHAR}, #{startdate,jdbcType=VARCHAR}, 
+      #{enddate,jdbcType=VARCHAR}, #{approvedate,jdbcType=VARCHAR}, #{advice,jdbcType=VARCHAR}, 
+      #{outexecutemonths,jdbcType=DECIMAL}, #{departid,jdbcType=VARCHAR}, #{delflag,jdbcType=VARCHAR}, 
+      #{createtime,jdbcType=DATE}, #{createmender,jdbcType=VARCHAR}, #{updatetime,jdbcType=DATE}, 
+      #{updatemender,jdbcType=VARCHAR}, #{text1,jdbcType=VARCHAR}, #{text2,jdbcType=VARCHAR}, 
+      #{text3,jdbcType=VARCHAR}, #{text4,jdbcType=VARCHAR}, #{text5,jdbcType=VARCHAR}, 
+      #{int1,jdbcType=DECIMAL}, #{int2,jdbcType=DECIMAL}, #{int3,jdbcType=DECIMAL}, #{int4,jdbcType=DECIMAL}, 
+      #{int5,jdbcType=DECIMAL})
+  </insert>
+  <insert id="insertSelective" parameterType="com.sinog2c.model.khjc.TbxfOutExecute" >
+    insert into TBXF_OUTEXECUTE
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="docid != null" >
+        DOCID,
+      </if>
+      <if test="flowdefid != null" >
+        FLOWDEFID,
+      </if>
+      <if test="crimid != null" >
+        CRIMID,
+      </if>
+      <if test="caseyear != null" >
+        CASEYEAR,
+      </if>
+      <if test="caseno != null" >
+        CASENO,
+      </if>
+      <if test="shortname != null" >
+        SHORTNAME,
+      </if>
+      <if test="casetype != null" >
+        CASETYPE,
+      </if>
+      <if test="outexecutetype != null" >
+        OUTEXECUTETYPE,
+      </if>
+      <if test="startdate != null" >
+        STARTDATE,
+      </if>
+      <if test="enddate != null" >
+        ENDDATE,
+      </if>
+      <if test="approvedate != null" >
+        APPROVEDATE,
+      </if>
+      <if test="advice != null" >
+        ADVICE,
+      </if>
+      <if test="outexecutemonths != null" >
+        OUTEXECUTEMONTHS,
+      </if>
+      <if test="departid != null" >
+        DEPARTID,
+      </if>
+      <if test="delflag != null" >
+        DELFLAG,
+      </if>
+      <if test="createtime != null" >
+        CREATETIME,
+      </if>
+      <if test="createmender != null" >
+        CREATEMENDER,
+      </if>
+      <if test="updatetime != null" >
+        UPDATETIME,
+      </if>
+      <if test="updatemender != null" >
+        UPDATEMENDER,
+      </if>
+      <if test="text1 != null" >
+        TEXT1,
+      </if>
+      <if test="text2 != null" >
+        TEXT2,
+      </if>
+      <if test="text3 != null" >
+        TEXT3,
+      </if>
+      <if test="text4 != null" >
+        TEXT4,
+      </if>
+      <if test="text5 != null" >
+        TEXT5,
+      </if>
+      <if test="int1 != null" >
+        INT1,
+      </if>
+      <if test="int2 != null" >
+        INT2,
+      </if>
+      <if test="int3 != null" >
+        INT3,
+      </if>
+      <if test="int4 != null" >
+        INT4,
+      </if>
+      <if test="int5 != null" >
+        INT5,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="docid != null" >
+        #{docid,jdbcType=VARCHAR},
+      </if>
+      <if test="flowdefid != null" >
+        #{flowdefid,jdbcType=VARCHAR},
+      </if>
+      <if test="crimid != null" >
+        #{crimid,jdbcType=VARCHAR},
+      </if>
+      <if test="caseyear != null" >
+        #{caseyear,jdbcType=VARCHAR},
+      </if>
+      <if test="caseno != null" >
+        #{caseno,jdbcType=VARCHAR},
+      </if>
+      <if test="shortname != null" >
+        #{shortname,jdbcType=VARCHAR},
+      </if>
+      <if test="casetype != null" >
+        #{casetype,jdbcType=VARCHAR},
+      </if>
+      <if test="outexecutetype != null" >
+        #{outexecutetype,jdbcType=VARCHAR},
+      </if>
+      <if test="startdate != null" >
+        #{startdate,jdbcType=VARCHAR},
+      </if>
+      <if test="enddate != null" >
+        #{enddate,jdbcType=VARCHAR},
+      </if>
+      <if test="approvedate != null" >
+        #{approvedate,jdbcType=VARCHAR},
+      </if>
+      <if test="advice != null" >
+        #{advice,jdbcType=VARCHAR},
+      </if>
+      <if test="outexecutemonths != null" >
+        #{outexecutemonths,jdbcType=DECIMAL},
+      </if>
+      <if test="departid != null" >
+        #{departid,jdbcType=VARCHAR},
+      </if>
+      <if test="delflag != null" >
+        #{delflag,jdbcType=VARCHAR},
+      </if>
+      <if test="createtime != null" >
+        #{createtime,jdbcType=DATE},
+      </if>
+      <if test="createmender != null" >
+        #{createmender,jdbcType=VARCHAR},
+      </if>
+      <if test="updatetime != null" >
+        #{updatetime,jdbcType=DATE},
+      </if>
+      <if test="updatemender != null" >
+        #{updatemender,jdbcType=VARCHAR},
+      </if>
+      <if test="text1 != null" >
+        #{text1,jdbcType=VARCHAR},
+      </if>
+      <if test="text2 != null" >
+        #{text2,jdbcType=VARCHAR},
+      </if>
+      <if test="text3 != null" >
+        #{text3,jdbcType=VARCHAR},
+      </if>
+      <if test="text4 != null" >
+        #{text4,jdbcType=VARCHAR},
+      </if>
+      <if test="text5 != null" >
+        #{text5,jdbcType=VARCHAR},
+      </if>
+      <if test="int1 != null" >
+        #{int1,jdbcType=DECIMAL},
+      </if>
+      <if test="int2 != null" >
+        #{int2,jdbcType=DECIMAL},
+      </if>
+      <if test="int3 != null" >
+        #{int3,jdbcType=DECIMAL},
+      </if>
+      <if test="int4 != null" >
+        #{int4,jdbcType=DECIMAL},
+      </if>
+      <if test="int5 != null" >
+        #{int5,jdbcType=DECIMAL},
+      </if>
+    </trim>
+  </insert>
+  
+  <insert id="insertSelectiveByMap" parameterType="Map" >
+    insert into TBXF_OUTEXECUTE
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="docid != null" >
+        DOCID,
+      </if>
+      <if test="flowdefid != null" >
+        FLOWDEFID,
+      </if>
+      <if test="crimid != null" >
+        CRIMID,
+      </if>
+      <if test="caseyear != null" >
+        CASEYEAR,
+      </if>
+      <if test="caseno != null" >
+        CASENO,
+      </if>
+      <if test="shortname != null" >
+        SHORTNAME,
+      </if>
+      <if test="casetype != null" >
+        CASETYPE,
+      </if>
+      <if test="outexecutetype != null" >
+        OUTEXECUTETYPE,
+      </if>
+      <if test="startdate != null" >
+        STARTDATE,
+      </if>
+      <if test="enddate != null" >
+        ENDDATE,
+      </if>
+      <if test="approvedate != null" >
+        APPROVEDATE,
+      </if>
+      <if test="advice != null" >
+        ADVICE,
+      </if>
+      <if test="outexecutemonths != null" >
+        OUTEXECUTEMONTHS,
+      </if>
+      <if test="departid != null" >
+        DEPARTID,
+      </if>
+      <if test="delflag != null" >
+        DELFLAG,
+      </if>
+      <if test="createtime != null" >
+        CREATETIME,
+      </if>
+      <if test="createmender != null" >
+        CREATEMENDER,
+      </if>
+      <if test="updatetime != null" >
+        UPDATETIME,
+      </if>
+      <if test="updatemender != null" >
+        UPDATEMENDER,
+      </if>
+      <if test="text1 != null" >
+        TEXT1,
+      </if>
+      <if test="text2 != null" >
+        TEXT2,
+      </if>
+      <if test="text3 != null" >
+        TEXT3,
+      </if>
+      <if test="text4 != null" >
+        TEXT4,
+      </if>
+      <if test="text5 != null" >
+        TEXT5,
+      </if>
+      <if test="int1 != null" >
+        INT1,
+      </if>
+      <if test="int2 != null" >
+        INT2,
+      </if>
+      <if test="int3 != null" >
+        INT3,
+      </if>
+      <if test="int4 != null" >
+        INT4,
+      </if>
+      <if test="int5 != null" >
+        INT5,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="docid != null" >
+        #{docid,jdbcType=VARCHAR},
+      </if>
+      <if test="flowdefid != null" >
+        #{flowdefid,jdbcType=VARCHAR},
+      </if>
+      <if test="crimid != null" >
+        #{crimid,jdbcType=VARCHAR},
+      </if>
+      <if test="caseyear != null" >
+        #{caseyear,jdbcType=VARCHAR},
+      </if>
+      <if test="caseno != null" >
+        #{caseno,jdbcType=VARCHAR},
+      </if>
+      <if test="shortname != null" >
+        #{shortname,jdbcType=VARCHAR},
+      </if>
+      <if test="casetype != null" >
+        #{casetype,jdbcType=VARCHAR},
+      </if>
+      <if test="outexecutetype != null" >
+        #{outexecutetype,jdbcType=VARCHAR},
+      </if>
+      <if test="startdate != null" >
+        #{startdate,jdbcType=VARCHAR},
+      </if>
+      <if test="enddate != null" >
+        #{enddate,jdbcType=VARCHAR},
+      </if>
+      <if test="approvedate != null" >
+        #{approvedate,jdbcType=VARCHAR},
+      </if>
+      <if test="advice != null" >
+        #{advice,jdbcType=VARCHAR},
+      </if>
+      <if test="outexecutemonths != null" >
+        #{outexecutemonths,jdbcType=DECIMAL},
+      </if>
+      <if test="departid != null" >
+        #{departid,jdbcType=VARCHAR},
+      </if>
+      <if test="delflag != null" >
+        #{delflag,jdbcType=VARCHAR},
+      </if>
+      <if test="createtime != null" >
+        #{createtime,jdbcType=DATE},
+      </if>
+      <if test="createmender != null" >
+        #{createmender,jdbcType=VARCHAR},
+      </if>
+      <if test="updatetime != null" >
+        #{updatetime,jdbcType=DATE},
+      </if>
+      <if test="updatemender != null" >
+        #{updatemender,jdbcType=VARCHAR},
+      </if>
+      <if test="text1 != null" >
+        #{text1,jdbcType=VARCHAR},
+      </if>
+      <if test="text2 != null" >
+        #{text2,jdbcType=VARCHAR},
+      </if>
+      <if test="text3 != null" >
+        #{text3,jdbcType=VARCHAR},
+      </if>
+      <if test="text4 != null" >
+        #{text4,jdbcType=VARCHAR},
+      </if>
+      <if test="text5 != null" >
+        #{text5,jdbcType=VARCHAR},
+      </if>
+      <if test="int1 != null" >
+        #{int1,jdbcType=DECIMAL},
+      </if>
+      <if test="int2 != null" >
+        #{int2,jdbcType=DECIMAL},
+      </if>
+      <if test="int3 != null" >
+        #{int3,jdbcType=DECIMAL},
+      </if>
+      <if test="int4 != null" >
+        #{int4,jdbcType=DECIMAL},
+      </if>
+      <if test="int5 != null" >
+        #{int5,jdbcType=DECIMAL},
+      </if>
+    </trim>
+  </insert>
+  
+  <update id="updateByPrimaryKeySelective" parameterType="com.sinog2c.model.khjc.TbxfOutExecute" >
+    update TBXF_OUTEXECUTE
+    <set >
+      <if test="flowdefid != null" >
+        FLOWDEFID = #{flowdefid,jdbcType=VARCHAR},
+      </if>
+      <if test="crimid != null" >
+        CRIMID = #{crimid,jdbcType=VARCHAR},
+      </if>
+      <if test="caseyear != null" >
+        CASEYEAR = #{caseyear,jdbcType=VARCHAR},
+      </if>
+      <if test="caseno != null" >
+        CASENO = #{caseno,jdbcType=VARCHAR},
+      </if>
+      <if test="shortname != null" >
+        SHORTNAME = #{shortname,jdbcType=VARCHAR},
+      </if>
+      <if test="casetype != null" >
+        CASETYPE = #{casetype,jdbcType=VARCHAR},
+      </if>
+      <if test="outexecutetype != null" >
+        OUTEXECUTETYPE = #{outexecutetype,jdbcType=VARCHAR},
+      </if>
+      <if test="startdate != null" >
+        STARTDATE = #{startdate,jdbcType=VARCHAR},
+      </if>
+      <if test="enddate != null" >
+        ENDDATE = #{enddate,jdbcType=VARCHAR},
+      </if>
+      <if test="approvedate != null" >
+        APPROVEDATE = #{approvedate,jdbcType=VARCHAR},
+      </if>
+      <if test="advice != null" >
+        ADVICE = #{advice,jdbcType=VARCHAR},
+      </if>
+      <if test="outexecutemonths != null" >
+        OUTEXECUTEMONTHS = #{outexecutemonths,jdbcType=DECIMAL},
+      </if>
+      <if test="departid != null" >
+        DEPARTID = #{departid,jdbcType=VARCHAR},
+      </if>
+      <if test="delflag != null" >
+        DELFLAG = #{delflag,jdbcType=VARCHAR},
+      </if>
+      <if test="createtime != null" >
+        CREATETIME = #{createtime,jdbcType=DATE},
+      </if>
+      <if test="createmender != null" >
+        CREATEMENDER = #{createmender,jdbcType=VARCHAR},
+      </if>
+      <if test="updatetime != null" >
+        UPDATETIME = #{updatetime,jdbcType=DATE},
+      </if>
+      <if test="updatemender != null" >
+        UPDATEMENDER = #{updatemender,jdbcType=VARCHAR},
+      </if>
+      <if test="text1 != null" >
+        TEXT1 = #{text1,jdbcType=VARCHAR},
+      </if>
+      <if test="text2 != null" >
+        TEXT2 = #{text2,jdbcType=VARCHAR},
+      </if>
+      <if test="text3 != null" >
+        TEXT3 = #{text3,jdbcType=VARCHAR},
+      </if>
+      <if test="text4 != null" >
+        TEXT4 = #{text4,jdbcType=VARCHAR},
+      </if>
+      <if test="text5 != null" >
+        TEXT5 = #{text5,jdbcType=VARCHAR},
+      </if>
+      <if test="int1 != null" >
+        INT1 = #{int1,jdbcType=DECIMAL},
+      </if>
+      <if test="int2 != null" >
+        INT2 = #{int2,jdbcType=DECIMAL},
+      </if>
+      <if test="int3 != null" >
+        INT3 = #{int3,jdbcType=DECIMAL},
+      </if>
+      <if test="int4 != null" >
+        INT4 = #{int4,jdbcType=DECIMAL},
+      </if>
+      <if test="int5 != null" >
+        INT5 = #{int5,jdbcType=DECIMAL},
+      </if>
+    </set>
+    where DOCID = #{docid,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.sinog2c.model.khjc.TbxfOutExecute" >
+    update TBXF_OUTEXECUTE
+    set FLOWDEFID = #{flowdefid,jdbcType=VARCHAR},
+      CRIMID = #{crimid,jdbcType=VARCHAR},
+      CASEYEAR = #{caseyear,jdbcType=VARCHAR},
+      CASENO = #{caseno,jdbcType=VARCHAR},
+      SHORTNAME = #{shortname,jdbcType=VARCHAR},
+      CASETYPE = #{casetype,jdbcType=VARCHAR},
+      OUTEXECUTETYPE = #{outexecutetype,jdbcType=VARCHAR},
+      STARTDATE = #{startdate,jdbcType=VARCHAR},
+      ENDDATE = #{enddate,jdbcType=VARCHAR},
+      APPROVEDATE = #{approvedate,jdbcType=VARCHAR},
+      ADVICE = #{advice,jdbcType=VARCHAR},
+      OUTEXECUTEMONTHS = #{outexecutemonths,jdbcType=DECIMAL},
+      DEPARTID = #{departid,jdbcType=VARCHAR},
+      DELFLAG = #{delflag,jdbcType=VARCHAR},
+      CREATETIME = #{createtime,jdbcType=DATE},
+      CREATEMENDER = #{createmender,jdbcType=VARCHAR},
+      UPDATETIME = #{updatetime,jdbcType=DATE},
+      UPDATEMENDER = #{updatemender,jdbcType=VARCHAR},
+      TEXT1 = #{text1,jdbcType=VARCHAR},
+      TEXT2 = #{text2,jdbcType=VARCHAR},
+      TEXT3 = #{text3,jdbcType=VARCHAR},
+      TEXT4 = #{text4,jdbcType=VARCHAR},
+      TEXT5 = #{text5,jdbcType=VARCHAR},
+      INT1 = #{int1,jdbcType=DECIMAL},
+      INT2 = #{int2,jdbcType=DECIMAL},
+      INT3 = #{int3,jdbcType=DECIMAL},
+      INT4 = #{int4,jdbcType=DECIMAL},
+      INT5 = #{int5,jdbcType=DECIMAL}
+    where DOCID = #{docid,jdbcType=VARCHAR}
+  </update>
+  
+  <select id="getMaxOutExecuteCaseNo" resultType="String" parameterType="Map" >
+    	select max(to_number(nvl(caseno,'0'))) from TBXF_OUTEXECUTE t 
+    	where t.departid = #{departid,jdbcType=VARCHAR}
+    	<if test="caseyear!=null and caseyear!=''">
+			and t.CASEYEAR = #{caseyear,jdbcType=VARCHAR}
+		</if>
+		<if test="outexecutetype!=null and outexecutetype!=''">
+			and t.OUTEXECUTETYPE = #{outexecutetype,jdbcType=DECIMAL}
+		</if>
+    	<if test="flowdefid!=null and flowdefid!=''">
+			and t.FLOWDEFID = #{flowdefid,jdbcType=VARCHAR}
+		</if>
+  </select>
+  
+</mapper>

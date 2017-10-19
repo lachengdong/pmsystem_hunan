@@ -1,0 +1,412 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.sinog2c.dao.api.system.SystemRoleMapper" >
+  <resultMap id="BaseResultMap" type="com.sinog2c.model.system.SystemRole" >
+    <result column="ROLEID" property="roleid" jdbcType="DECIMAL" />
+    <result column="DEPARTID" property="departid" jdbcType="VARCHAR" />
+    <result column="NAME" property="name" jdbcType="VARCHAR" />
+    <result column="SN" property="sn" jdbcType="DECIMAL" />
+    <result column="TEXT1" property="text1" jdbcType="VARCHAR" />
+    <result column="TEXT2" property="text2" jdbcType="VARCHAR" />
+    <result column="TEXT3" property="text3" jdbcType="VARCHAR" />
+    <result column="TEXT4" property="text4" jdbcType="VARCHAR" />
+    <result column="INT1" property="int1" jdbcType="DECIMAL" />
+    <result column="INT2" property="int2" jdbcType="DECIMAL" />
+    <result column="REMARK" property="remark" jdbcType="VARCHAR" />
+    <result column="OPTIME" property="optime" jdbcType="TIMESTAMP" />
+    <result column="OPID" property="opid" jdbcType="VARCHAR" />
+  </resultMap>
+  <insert id="insert" parameterType="com.sinog2c.model.system.SystemRole" >
+    insert into TBSYS_ROLEINFO (ROLEID, DEPARTID, NAME, 
+      SN, TEXT1, TEXT2, TEXT3, 
+      TEXT4, INT1, INT2, 
+      REMARK, OPTIME, OPID)
+    values (#{roleid,jdbcType=DECIMAL}, #{departid,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR}, 
+      #{sn,jdbcType=DECIMAL}, #{text1,jdbcType=VARCHAR}, #{text2,jdbcType=VARCHAR}, #{text3,jdbcType=VARCHAR}, 
+      #{text4,jdbcType=VARCHAR}, #{int1,jdbcType=DECIMAL}, #{int2,jdbcType=DECIMAL}, 
+      #{remark,jdbcType=VARCHAR}, #{optime,jdbcType=TIMESTAMP}, #{opid,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.sinog2c.model.system.SystemRole" >
+    insert into TBSYS_ROLEINFO
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="roleid != null" >
+        ROLEID,
+      </if>
+      <if test="departid != null" >
+        DEPARTID,
+      </if>
+      <if test="name != null" >
+        NAME,
+      </if>
+      <if test="sn != null" >
+        SN,
+      </if>
+      <if test="text1 != null" >
+        TEXT1,
+      </if>
+      <if test="text2 != null" >
+        TEXT2,
+      </if>
+      <if test="text3 != null" >
+        TEXT3,
+      </if>
+      <if test="text4 != null" >
+        TEXT4,
+      </if>
+      <if test="int1 != null" >
+        INT1,
+      </if>
+      <if test="int2 != null" >
+        INT2,
+      </if>
+      <if test="remark != null" >
+        REMARK,
+      </if>
+      <if test="opid != null" >
+        OPID,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="roleid != null" >
+        #{roleid,jdbcType=DECIMAL},
+      </if>
+      <if test="departid != null" >
+        #{departid,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null" >
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="sn != null" >
+        #{sn,jdbcType=DECIMAL},
+      </if>
+      <if test="text1 != null" >
+        #{text1,jdbcType=VARCHAR},
+      </if>
+      <if test="text2 != null" >
+        #{text2,jdbcType=VARCHAR},
+      </if>
+      <if test="text3 != null" >
+        #{text3,jdbcType=VARCHAR},
+      </if>
+      <if test="text4 != null" >
+        #{text4,jdbcType=VARCHAR},
+      </if>
+      <if test="int1 != null" >
+        #{int1,jdbcType=DECIMAL},
+      </if>
+      <if test="int2 != null" >
+        #{int2,jdbcType=DECIMAL},
+      </if>
+      <if test="remark != null" >
+        #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="opid != null" >
+        #{opid,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <insert id="insertByMap" parameterType="Map" >
+    insert into TBSYS_ROLEINFO
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="roleid != null" >
+        ROLEID,
+      </if>
+      <if test="departid != null" >
+        DEPARTID,
+      </if>
+      <if test="name != null" >
+        NAME,
+      </if>
+      <if test="sn != null" >
+        SN,
+      </if>
+      <if test="text1 != null" >
+        TEXT1,
+      </if>
+      <if test="text2 != null" >
+        TEXT2,
+      </if>
+      <if test="text3 != null" >
+        TEXT3,
+      </if>
+      <if test="text4 != null" >
+        TEXT4,
+      </if>
+      <if test="int1 != null" >
+        INT1,
+      </if>
+      <if test="int2 != null" >
+        INT2,
+      </if>
+      <if test="remark != null" >
+        REMARK,
+      </if>
+      <if test="opid != null" >
+        OPID,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="roleid != null" >
+        #{roleid,jdbcType=DECIMAL},
+      </if>
+      <if test="departid != null" >
+        #{departid,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null" >
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="sn != null" >
+        #{sn,jdbcType=DECIMAL},
+      </if>
+      <if test="text1 != null" >
+        #{text1,jdbcType=VARCHAR},
+      </if>
+      <if test="text2 != null" >
+        #{text2,jdbcType=VARCHAR},
+      </if>
+      <if test="text3 != null" >
+        #{text3,jdbcType=VARCHAR},
+      </if>
+      <if test="text4 != null" >
+        #{text4,jdbcType=VARCHAR},
+      </if>
+      <if test="int1 != null" >
+        #{int1,jdbcType=DECIMAL},
+      </if>
+      <if test="int2 != null" >
+        #{int2,jdbcType=DECIMAL},
+      </if>
+      <if test="remark != null" >
+        #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="opid != null" >
+        #{opid,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <insert id="insertToHistory" parameterType="com.sinog2c.model.system.SystemRole" >
+    insert into TBSYS_ROLEINFO_HIS
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="roleid != null" >
+        ROLEID,
+      </if>
+      <if test="departid != null" >
+        orgid,
+      </if>
+      <if test="name != null" >
+        NAME,
+      </if>
+      <if test="sn != null" >
+        SN,
+      </if>
+      <if test="text1 != null" >
+        TEXT1,
+      </if>
+      <if test="text2 != null" >
+        TEXT2,
+      </if>
+      <if test="text3 != null" >
+        TEXT3,
+      </if>
+      <if test="text4 != null" >
+        TEXT4,
+      </if>
+      <if test="int1 != null" >
+        INT1,
+      </if>
+      <if test="int2 != null" >
+        INT2,
+      </if>
+      <if test="remark != null" >
+        REMARK,
+      </if>
+      <if test="optime != null" >
+        OPTIME,
+      </if>
+      <if test="opid != null" >
+        OPID,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="roleid != null" >
+        #{roleid,jdbcType=DECIMAL},
+      </if>
+      <if test="departid != null" >
+        #{departid,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null" >
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="sn != null" >
+        #{sn,jdbcType=DECIMAL},
+      </if>
+      <if test="text1 != null" >
+        #{text1,jdbcType=VARCHAR},
+      </if>
+      <if test="text2 != null" >
+        #{text2,jdbcType=VARCHAR},
+      </if>
+      <if test="text3 != null" >
+        #{text3,jdbcType=VARCHAR},
+      </if>
+      <if test="text4 != null" >
+        #{text4,jdbcType=VARCHAR},
+      </if>
+      <if test="int1 != null" >
+        #{int1,jdbcType=DECIMAL},
+      </if>
+      <if test="int2 != null" >
+        #{int2,jdbcType=DECIMAL},
+      </if>
+      <if test="remark != null" >
+        #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="optime != null" >
+        #{optime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="opid != null" >
+        #{opid,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <delete id="delete" parameterType="com.sinog2c.model.system.SystemRole">
+  	delete from TBSYS_ROLEINFO where ROLEID=#{roleid}
+  </delete>
+  <delete id="delres" parameterType="com.sinog2c.model.system.SystemRole">
+  	delete from tbsys_role_res where roleid=#{roleid}
+  </delete>
+  <update id="update" parameterType="com.sinog2c.model.system.SystemRole">
+  	update TBSYS_ROLEINFO
+	<set>
+      <if test="name != null" >
+        NAME=#{name},
+      </if>
+      <if test="departid != null" >
+        DEPARTID=#{departid},
+      </if>
+      <if test="sn != null" >
+        SN=#{sn},
+      </if>
+      <if test="remark != null" >
+        REMARK=#{remark},
+      </if>
+      <if test="text1 != null" >
+        TEXT1=#{text1},
+      </if>
+      <if test="text2 != null" >
+        TEXT2=#{text2},
+      </if>
+      <if test="text3 != null" >
+        TEXT3=#{text3},
+      </if>
+      <if test="text4 != null" >
+        TEXT4=#{text4},
+      </if>
+      <if test="int1 != null" >
+        INT1=#{int1},
+      </if>
+      <if test="int2 != null" >
+        INT2=#{int2},
+      </if>
+	</set>
+	where ROLEID=#{roleid}
+  </update>
+
+  <update id="updateByMap" parameterType="Map">
+  	update TBSYS_ROLEINFO
+	<set>
+      <if test="name != null" >
+        NAME=#{name},
+      </if>
+      <if test="departid != null" >
+        DEPARTID=#{departid},
+      </if>
+      <if test="sn != null" >
+        SN=#{sn},
+      </if>
+      <if test="remark != null" >
+        REMARK=#{remark},
+      </if>
+      <if test="text1 != null" >
+        TEXT1=#{text1},
+      </if>
+      <if test="text2 != null" >
+        TEXT2=#{text2},
+      </if>
+      <if test="text3 != null" >
+        TEXT3=#{text3},
+      </if>
+      <if test="text4 != null" >
+        TEXT4=#{text4},
+      </if>
+      <if test="int1 != null" >
+        INT1=#{int1},
+      </if>
+      <if test="int2 != null" >
+        INT2=#{int2},
+      </if>
+	</set>
+	where ROLEID=#{roleid}
+  </update>
+
+  <select id="getByRoleId" resultMap="BaseResultMap">    <!-- 根据ID获取 -->
+	 select * from TBSYS_ROLEINFO where ROLEID=#{roleid} order by ROLEID asc
+  </select>
+  <select id="selectAll" resultMap="BaseResultMap">    <!-- 查询表中的所有信息 -->
+	 select * from TBSYS_ROLEINFO order by SN asc, ROLEID asc
+  </select>
+  <select id="selectAllByDepartid" resultMap="BaseResultMap" parameterType="Map"> 
+select a.*
+  from TBSYS_ROLEINFO a
+ where 1=1
+        <choose>
+	        <when test="unitlevel != null and unitlevel = 3" >
+	           and (a.DEPARTID = '0' or a.DEPARTID = #{departid} or
+	               (a.DEPARTID in
+	               (select porgid from TBSYS_ORGINFO where orgid = #{departid}) and a.text1 in ('2','3')))
+			</when>
+	        <when test="unitlevel != null and unitlevel = 2" >
+	           and (a.DEPARTID = '0' or a.DEPARTID = #{departid})
+			</when>	
+		</choose>	
+	order by a.sn asc		 
+  </select>
+  <select id="getAllByPage" resultMap="BaseResultMap" parameterType="Map">    <!-- 分页查询表中的所有信息 -->
+	 SELECT * FROM 
+	 	( SELECT aa.*, ROWNUM RN 
+		 	FROM 
+		 	(
+			  SELECT a.*
+			          FROM TBSYS_ROLEINFO a
+			         where 1 = 1
+			        <choose>
+				        <when test="unitlevel != null and unitlevel = 3" >
+				           and (a.DEPARTID = '0' or a.DEPARTID = #{departid} or
+				               (a.DEPARTID in
+				               (select porgid from TBSYS_ORGINFO where orgid = #{departid}) and a.text1 in ('2','3')))
+						</when>
+				        <when test="unitlevel != null and unitlevel = 2" >
+				           and (a.DEPARTID = '0' or a.DEPARTID = #{departid})
+						</when>	
+					</choose>
+					 ORDER BY a.sn ASC,a.NAME
+		 	) aa 
+		 	WHERE ROWNUM &lt;= #{end}
+	 	) 
+	 	WHERE RN &gt;= #{start}
+  </select>
+  <select id="countAll" resultType="int" parameterType="Map">  <!-- 查询表中记录总数 -->
+		select count(1) c from TBSYS_ROLEINFO a
+        where 1 = 1
+        <choose>
+	        <when test="unitlevel != null and unitlevel = 3" >
+	           and (a.DEPARTID = '0' or a.DEPARTID = #{departid} or
+	               (a.DEPARTID in
+	               (select porgid from TBSYS_ORGINFO where orgid = #{departid}) and a.text1 in ('2','3')))
+			</when>
+	        <when test="unitlevel != null and unitlevel = 2" >
+	           and (a.DEPARTID = '0' or a.DEPARTID = #{departid})
+			</when>	
+		</choose>	
+  </select>
+</mapper>

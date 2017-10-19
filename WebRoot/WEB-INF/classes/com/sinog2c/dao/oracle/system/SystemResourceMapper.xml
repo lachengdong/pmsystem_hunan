@@ -1,0 +1,1120 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.sinog2c.dao.api.system.SystemResourceMapper" >
+  <resultMap id="BaseResultMap" type="com.sinog2c.model.system.SystemResource" >
+    <result column="RESID" property="resid" jdbcType="VARCHAR" />
+    <result column="PRESID" property="presid" jdbcType="VARCHAR" />
+    <result column="NAME" property="name" jdbcType="VARCHAR" />
+    <result column="ISMENU" property="ismenu" jdbcType="DECIMAL" />
+    <result column="SRURL" property="srurl" jdbcType="VARCHAR" />
+    <result column="SHOWSITE" property="showsite" jdbcType="VARCHAR" />
+    <result column="OPENICO" property="openico" jdbcType="VARCHAR" />
+    <result column="CLOSEICO" property="closeico" jdbcType="VARCHAR" />
+    <result column="SHOWICO" property="showico" jdbcType="VARCHAR" />
+    <result column="TITLE" property="title" jdbcType="VARCHAR" />
+    <result column="SN" property="sn" jdbcType="DECIMAL" />
+    <result column="PROMPT" property="prompt" jdbcType="VARCHAR" />
+    <result column="LINKTABLENAME" property="linktablename" jdbcType="VARCHAR" />
+    <result column="LINKCOLUMNS" property="linkcolumns" jdbcType="VARCHAR" />
+    <result column="WINDOWWIDTH" property="windowwidth" jdbcType="DECIMAL" />
+    <result column="WINDOWHIGHT" property="windowhight" jdbcType="DECIMAL" />
+    <result column="ORDERBYCON" property="orderbycon" jdbcType="VARCHAR" />
+    <result column="RCT" property="rct" jdbcType="DECIMAL" />
+    <result column="DELFLAG" property="delflag" jdbcType="VARCHAR" />
+    <result column="INSERTSQL" property="insertsql" jdbcType="VARCHAR" />
+    <result column="UPDATESQL" property="updatesql" jdbcType="VARCHAR" />
+    <result column="QUERYSQL" property="querysql" jdbcType="VARCHAR" />
+    <result column="ISMENULEAF" property="ismenuleaf" jdbcType="DECIMAL" />
+    <result column="ISRESOURCESLEAF" property="isresourcesleaf" jdbcType="DECIMAL" />
+    <result column="TEXT1" property="text1" jdbcType="VARCHAR" />
+    <result column="TEXT2" property="text2" jdbcType="VARCHAR" />
+    <result column="TEXT3" property="text3" jdbcType="VARCHAR" />
+    <result column="TEXT4" property="text4" jdbcType="VARCHAR" />
+    <result column="TEXT5" property="text5" jdbcType="VARCHAR" />
+    <result column="TEXT6" property="text6" jdbcType="VARCHAR" />
+    <result column="TEXT7" property="text7" jdbcType="VARCHAR" />
+    <result column="TEXT8" property="text8" jdbcType="VARCHAR" />
+    <result column="X1" property="x1" jdbcType="DECIMAL" />
+    <result column="X2" property="x2" jdbcType="DECIMAL" />
+    <result column="Y1" property="y1" jdbcType="DECIMAL" />
+    <result column="Y2" property="y2" jdbcType="DECIMAL" />
+    <result column="ISVISIBLE" property="isvisible" jdbcType="DECIMAL" />
+    <result column="FORMID" property="formid" jdbcType="VARCHAR" />
+    <result column="RESTYPEID" property="restypeid" jdbcType="DECIMAL" />
+    <result column="REMARK" property="remark" jdbcType="VARCHAR" />
+    <result column="OPID" property="opid" jdbcType="VARCHAR" />
+    <result column="OPTIME" property="optime" jdbcType="TIMESTAMP" />
+  </resultMap>
+
+  <insert id="insertSelective" parameterType="com.sinog2c.model.system.SystemResource" >
+    insert into TBSYS_RESOURCES
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="resid != null" >
+        RESID,
+      </if>
+      <if test="presid != null" >
+        PRESID,
+      </if>
+      <if test="name != null" >
+        NAME,
+      </if>
+      <if test="ismenu != null" >
+        ISMENU,
+      </if>
+      <if test="srurl != null" >
+        SRURL,
+      </if>
+      <if test="showsite != null" >
+        SHOWSITE,
+      </if>
+      <if test="openico != null" >
+        OPENICO,
+      </if>
+      <if test="closeico != null" >
+        CLOSEICO,
+      </if>
+      <if test="showico != null" >
+        SHOWICO,
+      </if>
+      <if test="title != null" >
+        TITLE,
+      </if>
+      <if test="sn != null" >
+        SN,
+      </if>
+      <if test="prompt != null" >
+        PROMPT,
+      </if>
+      <if test="linktablename != null" >
+        LINKTABLENAME,
+      </if>
+      <if test="linkcolumns != null" >
+        LINKCOLUMNS,
+      </if>
+      <if test="windowwidth != null" >
+        WINDOWWIDTH,
+      </if>
+      <if test="windowhight != null" >
+        WINDOWHIGHT,
+      </if>
+      <if test="orderbycon != null" >
+        ORDERBYCON,
+      </if>
+      <if test="rct != null" >
+        RCT,
+      </if>
+      <if test="delflag != null" >
+        DELFLAG,
+      </if>
+      <if test="insertsql != null" >
+        INSERTSQL,
+      </if>
+      <if test="updatesql != null" >
+        UPDATESQL,
+      </if>
+      <if test="querysql != null" >
+        QUERYSQL,
+      </if>
+      <if test="ismenuleaf != null" >
+        ISMENULEAF,
+      </if>
+      <if test="isresourcesleaf != null" >
+        ISRESOURCESLEAF,
+      </if>
+      <if test="text1 != null" >
+        TEXT1,
+      </if>
+      <if test="text2 != null" >
+        TEXT2,
+      </if>
+      <if test="text3 != null" >
+        TEXT3,
+      </if>
+      <if test="text4 != null" >
+        TEXT4,
+      </if>
+      <if test="text5 != null" >
+        TEXT5,
+      </if>
+      <if test="text6 != null" >
+        TEXT6,
+      </if>
+      <if test="text7 != null" >
+        TEXT7,
+      </if>
+      <if test="text8 != null" >
+        TEXT8,
+      </if>
+
+      <if test="x2 != null" >
+        X2,
+      </if>
+      <if test="y1 != null" >
+        Y1,
+      </if>
+      <if test="y2 != null" >
+        Y2,
+      </if>
+      <if test="isvisible != null" >
+        ISVISIBLE,
+      </if>
+      <if test="formid != null" >
+        FORMID,
+      </if>
+      <if test="restypeid != null" >
+        RESTYPEID,
+      </if>
+      <if test="remark != null" >
+        REMARK,
+      </if>
+      <if test="opid != null" >
+        OPID,
+      </if>
+      <if test="optime != null" >
+        OPTIME,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="resid != null" >
+        #{resid,jdbcType=VARCHAR},
+      </if>
+      <if test="presid != null" >
+        #{presid,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null" >
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="ismenu != null" >
+        #{ismenu,jdbcType=DECIMAL},
+      </if>
+      <if test="srurl != null" >
+        #{srurl,jdbcType=VARCHAR},
+      </if>
+      <if test="showsite != null" >
+        #{showsite,jdbcType=VARCHAR},
+      </if>
+      <if test="openico != null" >
+        #{openico,jdbcType=VARCHAR},
+      </if>
+      <if test="closeico != null" >
+        #{closeico,jdbcType=VARCHAR},
+      </if>
+      <if test="showico != null" >
+        #{showico,jdbcType=VARCHAR},
+      </if>
+      <if test="title != null" >
+        #{title,jdbcType=VARCHAR},
+      </if>
+      <if test="sn != null" >
+        #{sn,jdbcType=DECIMAL},
+      </if>
+      <if test="prompt != null" >
+        #{prompt,jdbcType=VARCHAR},
+      </if>
+      <if test="linktablename != null" >
+        #{linktablename,jdbcType=VARCHAR},
+      </if>
+      <if test="linkcolumns != null" >
+        #{linkcolumns,jdbcType=VARCHAR},
+      </if>
+      <if test="windowwidth != null" >
+        #{windowwidth,jdbcType=DECIMAL},
+      </if>
+      <if test="windowhight != null" >
+        #{windowhight,jdbcType=DECIMAL},
+      </if>
+      <if test="orderbycon != null" >
+        #{orderbycon,jdbcType=VARCHAR},
+      </if>
+      <if test="rct != null" >
+        #{rct,jdbcType=DECIMAL},
+      </if>
+      <if test="delflag != null" >
+        #{delflag,jdbcType=VARCHAR},
+      </if>
+      <if test="insertsql != null" >
+        #{insertsql,jdbcType=VARCHAR},
+      </if>
+      <if test="updatesql != null" >
+        #{updatesql,jdbcType=VARCHAR},
+      </if>
+      <if test="querysql != null" >
+        #{querysql,jdbcType=VARCHAR},
+      </if>
+      <if test="ismenuleaf != null" >
+        #{ismenuleaf,jdbcType=DECIMAL},
+      </if>
+      <if test="isresourcesleaf != null" >
+        #{isresourcesleaf,jdbcType=DECIMAL},
+      </if>
+      <if test="text1 != null" >
+        #{text1,jdbcType=VARCHAR},
+      </if>
+      <if test="text2 != null" >
+        #{text2,jdbcType=VARCHAR},
+      </if>
+      <if test="text3 != null" >
+        #{text3,jdbcType=VARCHAR},
+      </if>
+      <if test="text4 != null" >
+        #{text4,jdbcType=VARCHAR},
+      </if>
+      <if test="text5 != null" >
+        #{text5,jdbcType=VARCHAR},
+      </if>
+      <if test="text6 != null" >
+        #{text6,jdbcType=VARCHAR},
+      </if>
+      <if test="text7 != null" >
+        #{text7,jdbcType=VARCHAR},
+      </if>
+      <if test="text8 != null" >
+        #{text8,jdbcType=VARCHAR},
+      </if>
+
+      <if test="x2 != null" >
+        #{x2,jdbcType=DECIMAL},
+      </if>
+      <if test="y1 != null" >
+        #{y1,jdbcType=DECIMAL},
+      </if>
+      <if test="y2 != null" >
+        #{y2,jdbcType=DECIMAL},
+      </if>
+      <if test="isvisible != null" >
+        #{isvisible,jdbcType=DECIMAL},
+      </if>
+      <if test="formid != null" >
+        #{formid,jdbcType=VARCHAR},
+      </if>
+      <if test="restypeid != null" >
+        #{restypeid,jdbcType=DECIMAL},
+      </if>
+      <if test="remark != null" >
+        #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="opid != null" >
+        #{opid,jdbcType=VARCHAR},
+      </if>
+      <if test="optime != null" >
+        #{optime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+ <select id="selectMenubyrestypeid" resultMap="BaseResultMap">    <!-- 根据 pid取得直接子元素资源列表 -->
+		SELECT distinct resid,
+		presid,decode(remark,null,name,name||'('||remark||')')
+		as
+		resname,name,ismenu, srurl, showsite, openico, closeico, showico,
+		title, sn, prompt, linktablename, linkcolumns, windowwidth,
+		windowhight, orderbycon, rct, delflag, insertsql, updatesql, querysql,
+		ismenuleaf, isresourcesleaf, text1, text2, text3, text4, text5, text6,
+		text7, text8, x1, x2, y1, y2, isvisible, formid, restypeid, remark,
+		opid, optime
+		FROM TBSYS_RESOURCES t
+		start with t.restypeid=#{restypeid} connect by prior t.presid =t.resid
+		order by SN asc, RESID asc
+	</select>
+  <insert id="insertByMap" parameterType="Map" >
+    insert into TBSYS_RESOURCES
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="resid != null" >
+        RESID,
+      </if>
+      <if test="presid != null" >
+        PRESID,
+      </if>
+      <if test="name != null" >
+        NAME,
+      </if>
+      <if test="ismenu != null" >
+        ISMENU,
+      </if>
+      <if test="srurl != null" >
+        SRURL,
+      </if>
+      <if test="showsite != null" >
+        SHOWSITE,
+      </if>
+      <if test="openico != null" >
+        OPENICO,
+      </if>
+      <if test="closeico != null" >
+        CLOSEICO,
+      </if>
+      <if test="showico != null" >
+        SHOWICO,
+      </if>
+      <if test="title != null" >
+        TITLE,
+      </if>
+      <if test="sn != null" >
+        SN,
+      </if>
+      <if test="prompt != null" >
+        PROMPT,
+      </if>
+      <if test="linktablename != null" >
+        LINKTABLENAME,
+      </if>
+      <if test="linkcolumns != null" >
+        LINKCOLUMNS,
+      </if>
+      <if test="windowwidth != null" >
+        WINDOWWIDTH,
+      </if>
+      <if test="windowhight != null" >
+        WINDOWHIGHT,
+      </if>
+      <if test="orderbycon != null" >
+        ORDERBYCON,
+      </if>
+      <if test="rct != null" >
+        RCT,
+      </if>
+      <if test="delflag != null" >
+        DELFLAG,
+      </if>
+      <if test="insertsql != null" >
+        INSERTSQL,
+      </if>
+      <if test="updatesql != null" >
+        UPDATESQL,
+      </if>
+      <if test="querysql != null" >
+        QUERYSQL,
+      </if>
+      <if test="ismenuleaf != null" >
+        ISMENULEAF,
+      </if>
+      <if test="isresourcesleaf != null" >
+        ISRESOURCESLEAF,
+      </if>
+      <if test="text1 != null" >
+        TEXT1,
+      </if>
+      <if test="text2 != null" >
+        TEXT2,
+      </if>
+      <if test="text3 != null" >
+        TEXT3,
+      </if>
+      <if test="text4 != null" >
+        TEXT4,
+      </if>
+      <if test="text5 != null" >
+        TEXT5,
+      </if>
+      <if test="text6 != null" >
+        TEXT6,
+      </if>
+      <if test="text7 != null" >
+        TEXT7,
+      </if>
+      <if test="text8 != null" >
+        TEXT8,
+      </if>
+      <if test="x1 != null" >
+        X1,
+      </if>
+      <if test="x2 != null" >
+        X2,
+      </if>
+      <if test="y1 != null" >
+        Y1,
+      </if>
+      <if test="y2 != null" >
+        Y2,
+      </if>
+      <if test="isvisible != null" >
+        ISVISIBLE,
+      </if>
+      <if test="formid != null" >
+        FORMID,
+      </if>
+      <if test="restypeid != null" >
+        RESTYPEID,
+      </if>
+      <if test="remark != null" >
+        REMARK,
+      </if>
+      <if test="opid != null" >
+        OPID,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="resid != null" >
+        #{resid,jdbcType=VARCHAR},
+      </if>
+      <if test="presid != null" >
+        #{presid,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null" >
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="ismenu != null" >
+        #{ismenu,jdbcType=DECIMAL},
+      </if>
+      <if test="srurl != null" >
+        #{srurl,jdbcType=VARCHAR},
+      </if>
+      <if test="showsite != null" >
+        #{showsite,jdbcType=VARCHAR},
+      </if>
+      <if test="openico != null" >
+        #{openico,jdbcType=VARCHAR},
+      </if>
+      <if test="closeico != null" >
+        #{closeico,jdbcType=VARCHAR},
+      </if>
+      <if test="showico != null" >
+        #{showico,jdbcType=VARCHAR},
+      </if>
+      <if test="title != null" >
+        #{title,jdbcType=VARCHAR},
+      </if>
+      <if test="sn != null" >
+        #{sn,jdbcType=DECIMAL},
+      </if>
+      <if test="prompt != null" >
+        #{prompt,jdbcType=VARCHAR},
+      </if>
+      <if test="linktablename != null" >
+        #{linktablename,jdbcType=VARCHAR},
+      </if>
+      <if test="linkcolumns != null" >
+        #{linkcolumns,jdbcType=VARCHAR},
+      </if>
+      <if test="windowwidth != null" >
+        #{windowwidth,jdbcType=DECIMAL},
+      </if>
+      <if test="windowhight != null" >
+        #{windowhight,jdbcType=DECIMAL},
+      </if>
+      <if test="orderbycon != null" >
+        #{orderbycon,jdbcType=VARCHAR},
+      </if>
+      <if test="rct != null" >
+        #{rct,jdbcType=DECIMAL},
+      </if>
+      <if test="delflag != null" >
+        #{delflag,jdbcType=VARCHAR},
+      </if>
+      <if test="insertsql != null" >
+        #{insertsql,jdbcType=VARCHAR},
+      </if>
+      <if test="updatesql != null" >
+        #{updatesql,jdbcType=VARCHAR},
+      </if>
+      <if test="querysql != null" >
+        #{querysql,jdbcType=VARCHAR},
+      </if>
+      <if test="ismenuleaf != null" >
+        #{ismenuleaf,jdbcType=DECIMAL},
+      </if>
+      <if test="isresourcesleaf != null" >
+        #{isresourcesleaf,jdbcType=DECIMAL},
+      </if>
+      <if test="text1 != null" >
+        #{text1,jdbcType=VARCHAR},
+      </if>
+      <if test="text2 != null" >
+        #{text2,jdbcType=VARCHAR},
+      </if>
+      <if test="text3 != null" >
+        #{text3,jdbcType=VARCHAR},
+      </if>
+      <if test="text4 != null" >
+        #{text4,jdbcType=VARCHAR},
+      </if>
+      <if test="text5 != null" >
+        #{text5,jdbcType=VARCHAR},
+      </if>
+      <if test="text6 != null" >
+        #{text6,jdbcType=VARCHAR},
+      </if>
+      <if test="text7 != null" >
+        #{text7,jdbcType=VARCHAR},
+      </if>
+      <if test="text8 != null" >
+        #{text8,jdbcType=VARCHAR},
+      </if>
+      <if test="x1 != null" >
+        #{x1,jdbcType=DECIMAL},
+      </if>
+      <if test="x2 != null" >
+        #{x2,jdbcType=DECIMAL},
+      </if>
+      <if test="y1 != null" >
+        #{y1,jdbcType=DECIMAL},
+      </if>
+      <if test="y2 != null" >
+        #{y2,jdbcType=DECIMAL},
+      </if>
+      <if test="isvisible != null" >
+        #{isvisible,jdbcType=DECIMAL},
+      </if>
+      <if test="formid != null" >
+        #{formid,jdbcType=VARCHAR},
+      </if>
+      <if test="restypeid != null" >
+        #{restypeid,jdbcType=DECIMAL},
+      </if>
+      <if test="remark != null" >
+        #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="opid != null" >
+        #{opid,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+
+  <insert id="insertToHistory" parameterType="com.sinog2c.model.system.SystemResource" >
+    insert into TBSYS_RESOURCES_HIS
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="resid != null" >
+        RESID,
+      </if>
+      <if test="presid != null" >
+        PRESID,
+      </if>
+      <if test="name != null" >
+        NAME,
+      </if>
+      <if test="ismenu != null" >
+        ISMENU,
+      </if>
+      <if test="srurl != null" >
+        SRURL,
+      </if>
+      <if test="showsite != null" >
+        SHOWSITE,
+      </if>
+      <if test="openico != null" >
+        OPENICO,
+      </if>
+      <if test="closeico != null" >
+        CLOSEICO,
+      </if>
+      <if test="showico != null" >
+        SHOWICO,
+      </if>
+      <if test="title != null" >
+        TITLE,
+      </if>
+      <if test="sn != null" >
+        SN,
+      </if>
+      <if test="prompt != null" >
+        PROMPT,
+      </if>
+      <if test="linktablename != null" >
+        LINKTABLENAME,
+      </if>
+      <if test="linkcolumns != null" >
+        LINKCOLUMNS,
+      </if>
+      <if test="windowwidth != null" >
+        WINDOWWIDTH,
+      </if>
+      <if test="windowhight != null" >
+        WINDOWHIGHT,
+      </if>
+      <if test="orderbycon != null" >
+        ORDERBYCON,
+      </if>
+      <if test="rct != null" >
+        RCT,
+      </if>
+      <if test="delflag != null" >
+        DELFLAG,
+      </if>
+      <if test="insertsql != null" >
+        INSERTSQL,
+      </if>
+      <if test="updatesql != null" >
+        UPDATESQL,
+      </if>
+      <if test="querysql != null" >
+        QUERYSQL,
+      </if>
+      <if test="ismenuleaf != null" >
+        ISMENULEAF,
+      </if>
+      <if test="isresourcesleaf != null" >
+        ISRESOURCESLEAF,
+      </if>
+      <if test="text1 != null" >
+        TEXT1,
+      </if>
+      <if test="text2 != null" >
+        TEXT2,
+      </if>
+      <if test="text3 != null" >
+        TEXT3,
+      </if>
+      <if test="text4 != null" >
+        TEXT4,
+      </if>
+      <if test="text5 != null" >
+        TEXT5,
+      </if>
+      <if test="text6 != null" >
+        TEXT6,
+      </if>
+      <if test="text7 != null" >
+        TEXT7,
+      </if>
+      <if test="text8 != null" >
+        TEXT8,
+      </if>
+      <if test="x1 != null" >
+        X1,
+      </if>
+      <if test="x2 != null" >
+        X2,
+      </if>
+      <if test="y1 != null" >
+        Y1,
+      </if>
+      <if test="y2 != null" >
+        Y2,
+      </if>
+      <if test="isvisible != null" >
+        ISVISIBLE,
+      </if>
+      <if test="formid != null" >
+        FORMID,
+      </if>
+      <if test="restypeid != null" >
+        RESTYPEID,
+      </if>
+      <if test="remark != null" >
+        REMARK,
+      </if>
+      <if test="opid != null" >
+        OPID,
+      </if>
+      <if test="optime != null" >
+        OPTIME,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="resid != null" >
+        #{resid,jdbcType=VARCHAR},
+      </if>
+      <if test="presid != null" >
+        #{presid,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null" >
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="ismenu != null" >
+        #{ismenu,jdbcType=DECIMAL},
+      </if>
+      <if test="srurl != null" >
+        #{srurl,jdbcType=VARCHAR},
+      </if>
+      <if test="showsite != null" >
+        #{showsite,jdbcType=VARCHAR},
+      </if>
+      <if test="openico != null" >
+        #{openico,jdbcType=VARCHAR},
+      </if>
+      <if test="closeico != null" >
+        #{closeico,jdbcType=VARCHAR},
+      </if>
+      <if test="showico != null" >
+        #{showico,jdbcType=VARCHAR},
+      </if>
+      <if test="title != null" >
+        #{title,jdbcType=VARCHAR},
+      </if>
+      <if test="sn != null" >
+        #{sn,jdbcType=DECIMAL},
+      </if>
+      <if test="prompt != null" >
+        #{prompt,jdbcType=VARCHAR},
+      </if>
+      <if test="linktablename != null" >
+        #{linktablename,jdbcType=VARCHAR},
+      </if>
+      <if test="linkcolumns != null" >
+        #{linkcolumns,jdbcType=VARCHAR},
+      </if>
+      <if test="windowwidth != null" >
+        #{windowwidth,jdbcType=DECIMAL},
+      </if>
+      <if test="windowhight != null" >
+        #{windowhight,jdbcType=DECIMAL},
+      </if>
+      <if test="orderbycon != null" >
+        #{orderbycon,jdbcType=VARCHAR},
+      </if>
+      <if test="rct != null" >
+        #{rct,jdbcType=DECIMAL},
+      </if>
+      <if test="delflag != null" >
+        #{delflag,jdbcType=VARCHAR},
+      </if>
+      <if test="insertsql != null" >
+        #{insertsql,jdbcType=VARCHAR},
+      </if>
+      <if test="updatesql != null" >
+        #{updatesql,jdbcType=VARCHAR},
+      </if>
+      <if test="querysql != null" >
+        #{querysql,jdbcType=VARCHAR},
+      </if>
+      <if test="ismenuleaf != null" >
+        #{ismenuleaf,jdbcType=DECIMAL},
+      </if>
+      <if test="isresourcesleaf != null" >
+        #{isresourcesleaf,jdbcType=DECIMAL},
+      </if>
+      <if test="text1 != null" >
+        #{text1,jdbcType=VARCHAR},
+      </if>
+      <if test="text2 != null" >
+        #{text2,jdbcType=VARCHAR},
+      </if>
+      <if test="text3 != null" >
+        #{text3,jdbcType=VARCHAR},
+      </if>
+      <if test="text4 != null" >
+        #{text4,jdbcType=VARCHAR},
+      </if>
+      <if test="text5 != null" >
+        #{text5,jdbcType=VARCHAR},
+      </if>
+      <if test="text6 != null" >
+        #{text6,jdbcType=VARCHAR},
+      </if>
+      <if test="text7 != null" >
+        #{text7,jdbcType=VARCHAR},
+      </if>
+      <if test="text8 != null" >
+        #{text8,jdbcType=VARCHAR},
+      </if>
+      <if test="x1 != null" >
+        #{x1,jdbcType=DECIMAL},
+      </if>
+      <if test="x2 != null" >
+        #{x2,jdbcType=DECIMAL},
+      </if>
+      <if test="y1 != null" >
+        #{y1,jdbcType=DECIMAL},
+      </if>
+      <if test="y2 != null" >
+        #{y2,jdbcType=DECIMAL},
+      </if>
+      <if test="isvisible != null" >
+        #{isvisible,jdbcType=DECIMAL},
+      </if>
+      <if test="formid != null" >
+        #{formid,jdbcType=VARCHAR},
+      </if>
+      <if test="restypeid != null" >
+        #{restypeid,jdbcType=DECIMAL},
+      </if>
+      <if test="remark != null" >
+        #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="opid != null" >
+        #{opid,jdbcType=VARCHAR},
+      </if>
+      <if test="optime != null" >
+        #{optime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  
+  <delete id="delete" parameterType="com.sinog2c.model.system.SystemResource">
+  	delete from TBSYS_RESOURCES where DELFLAG=0 and RESID=#{resid}
+  </delete>
+  
+  <update id="update" parameterType="com.sinog2c.model.system.SystemResource">
+  	update TBSYS_RESOURCES
+	<set>
+		<if test="presid != null">PRESID=#{presid},</if>
+		<if test="name != null">NAME=#{name},</if>
+		<if test="srurl != null">SRURL=#{srurl},</if>
+		<if test="remark != null">REMARK=#{remark},</if>
+		<if test="restypeid != null">RESTYPEID=#{restypeid},</if>
+		
+		<if test="sn != -1">SN=#{sn},</if>
+		<if test="ismenu != -1">ISMENU=#{ismenu},</if>
+		<if test="ismenuleaf != -1">ISMENULEAF=#{ismenuleaf},</if>
+		<if test="isresourcesleaf != -1">ISRESOURCESLEAF=#{isresourcesleaf},</if>
+		<if test="isvisible != -1">ISVISIBLE=#{isvisible},</if>
+		
+		
+		<if test="showsite != null">SHOWSITE=#{showsite},</if>
+		<if test="openico != null">OPENICO=#{openico},</if>
+		<if test="closeico != null">CLOSEICO=#{closeico},</if>
+		<if test="showico != null">SHOWICO=#{showico},</if>
+		<if test="title != null">TITLE=#{title},</if>
+		<if test="prompt != null">PROMPT=#{prompt},</if>
+		<if test="linktablename != null">LINKTABLENAME=#{linktablename},</if>
+		<if test="linkcolumns != null">LINKCOLUMNS=#{linkcolumns},</if>
+		<if test="windowwidth != null">WINDOWWIDTH=#{windowwidth},</if>
+		<if test="windowhight != null">WINDOWHIGHT=#{windowhight},</if>
+		<if test="orderbycon != null">ORDERBYCON=#{orderbycon},</if>
+		<if test="rct != -1">RCT=#{rct},</if>
+		<if test="delflag != null">DELFLAG=#{delflag},</if>
+		<if test="formid != null">FORMID=#{formid},</if>
+		<if test="text1 != null">TEXT1=#{text1},</if>
+	</set>
+	where RESID=#{resid}
+  </update>
+
+  <update id="updateByMap" parameterType="Map">
+  	update TBSYS_RESOURCES
+	<set>
+		<if test="presid != null">PRESID=#{presid,jdbcType=VARCHAR},</if>
+		<if test="name != null">NAME=#{name,jdbcType=VARCHAR},</if>
+		<if test="srurl != null">SRURL=#{srurl,jdbcType=VARCHAR},</if>
+		<if test="remark != 'xxx'">REMARK=#{remark,jdbcType=VARCHAR},</if>
+		<if test="restypeid != null">RESTYPEID=#{restypeid,jdbcType=NUMERIC},</if>
+		
+		<if test="sn != null">SN=#{sn,jdbcType=NUMERIC},</if>
+		<if test="ismenu != null">ISMENU=#{ismenu,jdbcType=NUMERIC},</if>
+		<if test="ismenuleaf != null">ISMENULEAF=#{ismenuleaf,jdbcType=NUMERIC},</if>
+		<if test="isresourcesleaf != null">ISRESOURCESLEAF=#{isresourcesleaf,jdbcType=NUMERIC},</if>
+		<if test="isvisible != null">ISVISIBLE=#{isvisible,jdbcType=NUMERIC},</if>
+		
+		
+		<if test="showsite != null">SHOWSITE=#{showsite,jdbcType=VARCHAR},</if>
+		<if test="openico != null">OPENICO=#{openico,jdbcType=VARCHAR},</if>
+		<if test="closeico != null">CLOSEICO=#{closeico,jdbcType=VARCHAR},</if>
+		<if test="showico != null">SHOWICO=#{showico,jdbcType=VARCHAR},</if>
+		<if test="title != null">TITLE=#{title,jdbcType=VARCHAR},</if>
+		<if test="prompt != null">PROMPT=#{prompt,jdbcType=VARCHAR},</if>
+		
+		<if test="linktablename != null">LINKTABLENAME=#{linktablename,jdbcType=VARCHAR},</if>
+		<if test="linkcolumns != null">LINKCOLUMNS=#{linkcolumns,jdbcType=VARCHAR},</if>
+		<if test="windowwidth != -1 and windowwidth != null">WINDOWWIDTH=#{windowwidth,jdbcType=NUMERIC},</if>
+		<if test="windowhight != -1 and windowhight != null">WINDOWHIGHT=#{windowhight,jdbcType=NUMERIC},</if>
+		<if test="orderbycon != null">ORDERBYCON=#{orderbycon,jdbcType=VARCHAR},</if>
+		
+		<if test="rct != null">RCT=#{rct,jdbcType=NUMERIC},</if>
+		<if test="delflag != null">DELFLAG=#{delflag,jdbcType=VARCHAR},</if>
+		<if test="formid != null">FORMID=#{formid,jdbcType=VARCHAR},</if>
+		<if test="text1 != null">TEXT1=#{text1,jdbcType=VARCHAR},</if>
+		<if test="querysql != null">QUERYSQL=#{querysql,jdbcType=VARCHAR},</if>
+		TEXT8=#{text8,jdbcType=VARCHAR}
+	</set>
+	where RESID=#{resid,jdbcType=VARCHAR}
+  </update>
+
+  
+  <select id="getByResourceId" resultMap="BaseResultMap">    <!-- 根据ID获取 -->
+	 select * from TBSYS_RESOURCES where RESID=#{resid}
+  </select>
+  <select id="listByResourcePid" resultMap="BaseResultMap">    <!-- 根据 pid取得直接子元素资源列表-->
+	 SELECT * FROM TBSYS_RESOURCES where presid=#{presid} order by SN asc, RESID asc
+  </select>
+  <select id="getAllMenu" resultMap="BaseResultMap">    <!-- 查询表中的所有菜单 -->
+	 select * from TBSYS_RESOURCES where DELFLAG=0 and ISMENU=1 order by SN asc, RESID asc
+  </select>
+  <select id="selectAll" resultMap="BaseResultMap">    <!-- 查询表中的所有信息 -->
+	select  resid, presid,decode(remark,null,name,name||'('||remark||')') as resname,name,ismenu, srurl, showsite, openico, closeico, showico, title, sn, prompt, linktablename, linkcolumns, windowwidth, windowhight, orderbycon, rct, delflag, insertsql, updatesql, querysql, ismenuleaf, isresourcesleaf, text1, text2, text3, text4, text5, text6, text7, text8, x1, x2, y1, y2, isvisible, formid, restypeid, remark, opid, optime
+ 	from TBSYS_RESOURCES a where a.DELFLAG=0 order by SN asc, RESID asc
+  </select>
+  <select id="getAllByPage" resultMap="BaseResultMap">    <!-- 分页查询表中的所有信息 -->
+	 SELECT * FROM 
+	 	( SELECT A.*, ROWNUM RN 
+		 	FROM 
+		 	(
+		 		SELECT * FROM TBSYS_RESOURCES
+		 		  where DELFLAG=0
+		 		  order by SN asc, RESID asc
+		 	) A 
+		 	WHERE ROWNUM &lt;= #{end,jdbcType=DECIMAL}
+	 	) 
+	 	WHERE RN &gt;= #{start,jdbcType=DECIMAL}
+  </select>
+  <select id="countAll" resultType="int">  <!-- 查询表中记录总数 -->
+		select count(*) c from TBSYS_RESOURCES
+  </select>
+  <select id="getNextId" resultType="int">  <!-- 获取下一个ID -->
+		select SEQ_RES_ID.NEXTVAL  from dual
+  </select>
+
+  <select id="getNextIdNoCache" resultType="int">  <!-- 获取下一个ID,无缓存 -->
+		select SEQ_RES_ID.NEXTVAL  from dual where 1=1 or 2=#{random}
+  </select>
+  
+  <!-- Oracle 11g中, in, exists 都会使用半连接优化, 应用层可以不考虑 -->
+  <!--  不使用OR,优化查询时间 -->
+  <select id="getResourcesByUserid" resultMap="BaseResultMap">    <!-- 根据用户ID查询资源, 有授权,或创建者 -->
+SELECT *
+  FROM TBSYS_RESOURCES r
+ WHERE DELFLAG = 0
+   AND EXISTS (select resid
+          from (SELECT rr.resid
+                  FROM TBSYS_ROLE_RES rr
+                 WHERE rr.roleid IN
+                       (SELECT ur.roleid
+                          FROM TBSYS_USERS_ROLES ur
+                         WHERE ur.userid = #{userid,jdbcType=VARCHAR})
+                UNION
+                SELECT uur.resid
+                  FROM TBUSER_USERRES uur
+                 WHERE uur.userid = #{userid,jdbcType=VARCHAR}
+                   AND uur.distime > SYSDATE
+                
+                ) UN
+         where r.resid = UN.resid)
+		  
+	  <if test="restypeid != null and restypeid > 0" >
+	   and r.RESTYPEID = #{restypeid,jdbcType=DECIMAL}
+      </if>
+	   order by SN asc, RESID asc
+  </select>
+  
+  <!-- Oracle 11g中, in, exists 都会使用半连接优化, 应用层可以不考虑 -->
+  <!--  不使用OR,优化查询时间 -->
+  <select id="getResourcesByConditions" resultMap="BaseResultMap">    <!-- 根据用户ID查询资源, 有授权,或创建者 -->
+SELECT *
+  FROM TBSYS_RESOURCES r
+ WHERE DELFLAG = 0
+   AND EXISTS (select resid
+          from (SELECT rr.resid
+                  FROM TBSYS_ROLE_RES rr
+                 WHERE rr.roleid IN
+                       (SELECT ur.roleid
+                          FROM TBSYS_USERS_ROLES ur
+                         WHERE ur.userid = #{userid,jdbcType=VARCHAR})
+                UNION
+                SELECT uur.resid
+                  FROM TBUSER_USERRES uur
+                 WHERE uur.userid = #{userid,jdbcType=VARCHAR}
+                   AND uur.distime > SYSDATE
+                ) UN
+         where r.resid = UN.resid)
+		  
+	  <if test="restypeid != null and restypeid > 0" >
+	   and r.RESTYPEID = #{restypeid,jdbcType=DECIMAL}
+      </if>
+	  <if test="presid != null and presid !=''" >
+	   and r.presid = #{presid,jdbcType=VARCHAR}
+      </if>
+	   order by SN asc, RESID asc
+  </select>
+  
+  
+  <select id="getResourcesByUserid_SLOW" resultMap="BaseResultMap">    <!-- 根据用户ID查询资源, 有授权,或创建者 -->
+	select *
+	 from TBSYS_RESOURCES r
+	 where DELFLAG = 0
+	   and (
+	   	r.resid in
+	       (select rr.resid
+	          from TBSYS_ROLE_RES rr
+	         where rr.roleid in 
+	         (
+	         	select ur.roleid
+	         	from TBSYS_USERS_ROLES ur
+	            where ur.userid = #{userid,jdbcType=VARCHAR}
+	         )
+	       )
+	    )
+	  or (
+	  	r.resid in
+	       (select uur.resid
+	          from TBUSER_USERRES uur
+	         where uur.userid = #{userid,jdbcType=VARCHAR}
+	         	and uur.distime > SYSDATE
+	       )
+	  )
+	  <if test="restypeid != null and restypeid > 0" >
+	   and r.RESTYPEID = #{restypeid,jdbcType=DECIMAL}
+      </if>
+	   order by SN asc, RESID asc
+  </select>
+  
+  <!-- 通过相关条件查询某用户所具有的某个流程定议的相关节点  userid  flowdefid  departid -->
+  <select id="getResourcesByMap"  parameterType="Map" resultType="Map">
+	select aa1.resid,aa2.dnodeid from 
+		(select distinct(tr.resid) resid from TBSYS_RESOURCES tr,TBSYS_ROLE_RES trr,
+			TBSYS_USERS_ROLES tur
+			where tr.resid=trr.resid and trr.roleid=tur.roleid
+			and tur.userid=#{userid}
+			
+			union 
+			
+			select distinct(tr.resid) resid from TBSYS_RESOURCES tr,TBUSER_USERRES tu
+			where tr.resid=tu.resid
+			and tu.userid=#{userid}
+			and tu.distime > SYSDATE
+		) aa1,
+		(select * from TBFLOW_DELIVER td where td.flowdefid=#{flowdefid} and td.departid=#{departid} and state=0) aa2
+	where aa1.resid = aa2.resid
+  </select>
+  
+   <!-- 通过相关条件查询某节点的有哪些用户有此权限   flowdefid  departid nodeids-->
+  <select id="getUserInfoByMap"  parameterType="Map" resultType="Map"> 
+	select distinct(td.userid) as userid, td.name from 
+		(select t.* from TBSYS_USERINFO t where t.departid=#{departid}) td,
+		TBSYS_USERS_ROLES tur,TBSYS_ROLE_RES trr,
+		(
+			select resid from TBFLOW_DELIVER  tdr
+		        	where tdr.flowdefid=#{flowdefid} and tdr.departid=#{departid} and tdr.snodeid in(${nodeids})
+		) tr
+	where td.userid=tur.userid
+		and tur.roleid=trr.roleid
+		and trr.resid=tr.resid
+		
+	union
+	
+	select distinct(td.userid) as userid, td.name from 
+		(select t.* from TBSYS_USERINFO t where t.departid=#{departid}) td,
+		TBUSER_USERRES tu,
+		(
+			select resid from TBFLOW_DELIVER  tdr
+		        	where tdr.flowdefid=#{flowdefid} and tdr.departid=#{departid} and tdr.snodeid in(${nodeids})
+		) tr
+	where td.userid=tu.userid
+		and tu.resid=tr.resid
+  </select>
+  
+  
+   <select id="selectResourcesByType" resultMap="BaseResultMap">    <!-- 查询表中的所有信息 -->
+	 select * from TBSYS_RESOURCES where DELFLAG=0 and RESTYPEID = #{restypeid,jdbcType=DECIMAL} order by SN asc, RESID asc
+  </select>
+  <!-- 根据资源Id获取罪犯处理页面的查询条件 -->
+  <select id="getTheQueryCondition" parameterType="Object" resultType="java.lang.String">
+  		select t.TEXT1 from TBSYS_RESOURCES t where t.RESID = #{resid} 
+  </select>
+  
+  <select id="listAllByPid" resultMap="BaseResultMap">    <!-- 根据 pid取得直接子元素资源列表-->
+	 SELECT * FROM TBSYS_RESOURCES t
+	 start with t.presid= #{presid} connect by prior t.resid =t.presid
+	 order by SN asc, RESID asc
+  </select>
+  <select id="getResourcesByFlowdefid"  resultType="Map">    <!-- 根据流程ID,和用户id获取 -->
+	SELECT *
+  FROM TBSYS_RESOURCES WHERE 1=1
+ AND  RESID IN (SELECT resid
+                   FROM TBSYS_ROLE_RES
+                  WHERE roleid IN (SELECT ROLEID
+                                     FROM TBSYS_USERS_ROLES
+                                    WHERE USERID = #{userid}))
+       AND RESID = (select presid from TBSYS_RESOURCES where resid= #{resid})
+       AND SRURL LIKE '%flowdefid='||#{flowdefid}||'%'
+       AND TEXT1='daibanshenpi'
+  </select>
+  <!-- 根据当前登录用户获取需要锁定的节点 -->
+  <select id="lockSignNode" resultType="map">
+      SELECT td.text1||','||td.text2 as protectnode
+			  FROM tbflow_deliver td,
+			       (SELECT tr.*
+			          FROM TBSYS_ROLE_RES tr, TBSYS_USERS_ROLES tu
+			         WHERE tu.userid = #{userid} AND tr.roleid = tu.roleid) td1
+			 WHERE     td.flowdefid = #{flowdefid}
+			       AND td.departid = #{departid}
+			       AND td.resid = td1.resid
+			       AND td.state = 0
+  </select>
+</mapper>

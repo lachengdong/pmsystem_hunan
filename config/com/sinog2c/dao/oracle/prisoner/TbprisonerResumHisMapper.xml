@@ -1,0 +1,156 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.sinog2c.dao.api.prisoner.TbprisonerResumHisMapper" >
+  <resultMap id="BaseResultMap" type="com.sinog2c.model.prisoner.TbprisonerResumHis" >
+    <result column="RESUMEID" property="resumeid" jdbcType="DECIMAL" />
+    <result column="CRIMID" property="crimid" jdbcType="VARCHAR" />
+    <result column="BEGINDATE" property="begindate" jdbcType="VARCHAR" />
+    <result column="ENDDATE" property="enddate" jdbcType="VARCHAR" />
+    <result column="ORGADDRESS" property="orgaddress" jdbcType="VARCHAR" />
+    <result column="ORGNAME" property="orgname" jdbcType="VARCHAR" />
+    <result column="POSTALCODE" property="postalcode" jdbcType="VARCHAR" />
+    <result column="VOCATION" property="vocation" jdbcType="VARCHAR" />
+    <result column="RETERENCE" property="reterence" jdbcType="VARCHAR" />
+    <result column="RETERENCELINK" property="reterencelink" jdbcType="VARCHAR" />
+    <result column="IDENTITY" property="identity" jdbcType="VARCHAR" />
+    <result column="CLEVEL" property="clevel" jdbcType="VARCHAR" />
+    <result column="DUTY" property="duty" jdbcType="VARCHAR" />
+    <result column="ORGMARK" property="orgmark" jdbcType="DECIMAL" />
+    <result column="REMARK" property="remark" jdbcType="VARCHAR" />
+    <result column="DELFLAG" property="delflag" jdbcType="VARCHAR" />
+    <result column="OPID" property="opid" jdbcType="VARCHAR" />
+    <result column="OPTIME" property="optime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <insert id="insert" parameterType="com.sinog2c.model.prisoner.TbprisonerResumHis" >
+    insert into TBPRISONER_RESUME_HIS (RESUMEID, CRIMID, BEGINDATE, 
+      ENDDATE, ORGADDRESS, ORGNAME, 
+      POSTALCODE, VOCATION, RETERENCE, 
+      RETERENCELINK, IDENTITY, CLEVEL, 
+      DUTY, ORGMARK, REMARK, 
+      DELFLAG, OPID, OPTIME)
+    values (#{resumeid,jdbcType=DECIMAL}, #{crimid,jdbcType=VARCHAR}, #{begindate,jdbcType=VARCHAR}, 
+      #{enddate,jdbcType=VARCHAR}, #{orgaddress,jdbcType=VARCHAR}, #{orgname,jdbcType=VARCHAR}, 
+      #{postalcode,jdbcType=VARCHAR}, #{vocation,jdbcType=VARCHAR}, #{reterence,jdbcType=VARCHAR}, 
+      #{reterencelink,jdbcType=VARCHAR}, #{identity,jdbcType=VARCHAR}, #{clevel,jdbcType=VARCHAR}, 
+      #{duty,jdbcType=VARCHAR}, #{orgmark,jdbcType=DECIMAL}, #{remark,jdbcType=VARCHAR}, 
+      #{delflag,jdbcType=VARCHAR}, #{opid,jdbcType=VARCHAR}, #{optime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.sinog2c.model.prisoner.TbprisonerResumHis" >
+    insert into TBPRISONER_RESUME_HIS
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="resumeid != null" >
+        RESUMEID,
+      </if>
+      <if test="crimid != null" >
+        CRIMID,
+      </if>
+      <if test="begindate != null" >
+        BEGINDATE,
+      </if>
+      <if test="enddate != null" >
+        ENDDATE,
+      </if>
+      <if test="orgaddress != null" >
+        ORGADDRESS,
+      </if>
+      <if test="orgname != null" >
+        ORGNAME,
+      </if>
+      <if test="postalcode != null" >
+        POSTALCODE,
+      </if>
+      <if test="vocation != null" >
+        VOCATION,
+      </if>
+      <if test="reterence != null" >
+        RETERENCE,
+      </if>
+      <if test="reterencelink != null" >
+        RETERENCELINK,
+      </if>
+      <if test="identity != null" >
+        IDENTITY,
+      </if>
+      <if test="clevel != null" >
+        CLEVEL,
+      </if>
+      <if test="duty != null" >
+        DUTY,
+      </if>
+      <if test="orgmark != null" >
+        ORGMARK,
+      </if>
+      <if test="remark != null" >
+        REMARK,
+      </if>
+      <if test="delflag != null" >
+        DELFLAG,
+      </if>
+      <if test="opid != null" >
+        OPID,
+      </if>
+      <if test="optime != null" >
+        OPTIME,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="resumeid != null" >
+        #{resumeid,jdbcType=DECIMAL},
+      </if>
+      <if test="crimid != null" >
+        #{crimid,jdbcType=VARCHAR},
+      </if>
+      <if test="begindate != null" >
+        #{begindate,jdbcType=VARCHAR},
+      </if>
+      <if test="enddate != null" >
+        #{enddate,jdbcType=VARCHAR},
+      </if>
+      <if test="orgaddress != null" >
+        #{orgaddress,jdbcType=VARCHAR},
+      </if>
+      <if test="orgname != null" >
+        #{orgname,jdbcType=VARCHAR},
+      </if>
+      <if test="postalcode != null" >
+        #{postalcode,jdbcType=VARCHAR},
+      </if>
+      <if test="vocation != null" >
+        #{vocation,jdbcType=VARCHAR},
+      </if>
+      <if test="reterence != null" >
+        #{reterence,jdbcType=VARCHAR},
+      </if>
+      <if test="reterencelink != null" >
+        #{reterencelink,jdbcType=VARCHAR},
+      </if>
+      <if test="identity != null" >
+        #{identity,jdbcType=VARCHAR},
+      </if>
+      <if test="clevel != null" >
+        #{clevel,jdbcType=VARCHAR},
+      </if>
+      <if test="duty != null" >
+        #{duty,jdbcType=VARCHAR},
+      </if>
+      <if test="orgmark != null" >
+        #{orgmark,jdbcType=DECIMAL},
+      </if>
+      <if test="remark != null" >
+        #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="delflag != null" >
+        #{delflag,jdbcType=VARCHAR},
+      </if>
+      <if test="opid != null" >
+        #{opid,jdbcType=VARCHAR},
+      </if>
+      <if test="optime != null" >
+        #{optime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <select id="findBycrimid" resultType="com.sinog2c.model.prisoner.TbprisonerResumHis">
+  	select * from TBPRISONER_RESUME_HIS  where crimid=${crimid}
+  </select>
+</mapper>

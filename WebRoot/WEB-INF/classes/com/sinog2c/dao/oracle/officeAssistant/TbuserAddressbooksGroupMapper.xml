@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.sinog2c.dao.api.officeAssistant.TbuserAddressbooksGroupMapper" >
+  <resultMap id="BaseResultMap" type="com.sinog2c.model.officeAssistant.TbuserAddressbooksGroup" >
+    <result column="USERID" property="userid" jdbcType="VARCHAR" />
+    <result column="GROUPID" property="groupid" jdbcType="DECIMAL" />
+    <result column="PGROUPID" property="pgroupid" jdbcType="DECIMAL" />
+    <result column="NAME" property="name" jdbcType="VARCHAR" />
+    <result column="SN" property="sn" jdbcType="DECIMAL" />
+    <result column="REMARK" property="remark" jdbcType="VARCHAR" />
+    <result column="OPTIME" property="optime" jdbcType="TIMESTAMP" />
+    <result column="OPID" property="opid" jdbcType="VARCHAR" />
+    <result column="ISPUBLIC" property="ispublic" jdbcType="VARCHAR"/>
+    
+  </resultMap>
+  <insert id="insertSelective" parameterType="com.sinog2c.model.officeAssistant.TbuserAddressbooksGroup">
+    insert into TBUSER_ADDRESSBOOK_GROUP
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="userid != null">
+        USERID,
+      </if>
+      <if test="groupid != null">
+        GROUPID,
+      </if>
+      <if test="pgroupid != null">
+        PGROUPID,
+      </if>
+      <if test="name != null">
+        NAME,
+      </if>
+      <if test="sn != null">
+        SN,
+      </if>
+      <if test="remark != null">
+        REMARK,
+      </if>
+      <if test="optime != null">
+        OPTIME,
+      </if>
+      <if test="opid != null">
+        OPID,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="userid != null">
+        #{userid,jdbcType=VARCHAR},
+      </if>
+      <if test="groupid != null">
+        #{groupid,jdbcType=DECIMAL},
+      </if>
+      <if test="pgroupid != null">
+        #{pgroupid,jdbcType=DECIMAL},
+      </if>
+      <if test="name != null">
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="sn != null">
+        #{sn,jdbcType=DECIMAL},
+      </if>
+      <if test="remark != null">
+        #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="optime != null">
+        #{optime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="opid != null">
+        #{opid,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <!-- 新增分组 -->
+  <insert id="addGroup" parameterType="com.sinog2c.model.officeAssistant.TbuserAddressbooksGroup" >
+		<selectKey resultType="int" order="BEFORE" keyProperty="groupid">
+			select SEQ_GROUP_ID.nextval as groupid from dual
+		</selectKey>
+		insert into TBUSER_ADDRESSBOOK_GROUP(userid,ispublic,groupid,name,remark,opid) values(#{userid},#{ispublic},#{groupid},#{name},#{remark},#{opid})
+ </insert>
+  <!-- 根据groupid删除组 -->
+  <delete id="deleteGroup" parameterType="Object">
+		delete from TBUSER_ADDRESSBOOK_GROUP where groupid=#{groupid}
+  </delete>
+  <!-- 修改分组 -->
+  <update id="updateGroup" parameterType="Object">
+	update TBUSER_ADDRESSBOOK_GROUP set
+		<trim  suffixOverrides=",">
+	       userid=#{userid},
+	       ispublic=#{ispublic},
+	       name=#{name},
+	       remark=#{remark}
+    	</trim> 
+    where groupid=#{groupid}
+  </update>
+  <!-- 根据gorupid查询联系人 -->
+  <select id="selectAll" parameterType="String" resultType="java.util.HashMap">
+  	select * from TBUSER_ADDRESSBOOK_GROUP where userid=#{userid} or ispublic='1'
+  </select>
+  <!-- 根据gorupid查询分组 -->
+  <select id="selectByGroupid" parameterType="String" resultType="java.util.HashMap" >
+  	select * from TBUSER_ADDRESSBOOK_GROUP where groupid=#{groupid}
+  </select>
+  <!-- 根据userid查询下拉列表的分组显示 -->
+  <select id="selectByUserid" parameterType="String" resultType="java.util.HashMap">
+  	select name  from TBUSER_ADDRESSBOOK_GROUP where userid=#{userid}
+  </select>
+ 
+</mapper>

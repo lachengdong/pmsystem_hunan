@@ -1,0 +1,323 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.sinog2c.dao.api.khjc.TkhRewardpunishruleMapper" >
+  <resultMap id="BaseResultMap" type="com.sinog2c.model.khjc.TkhRewardpunishrule" >
+    <id column="RULEID" property="ruleid" jdbcType="VARCHAR" />
+    <result column="RULEPID" property="rulepid" jdbcType="VARCHAR" />
+    <result column="ORGID" property="orgid" jdbcType="VARCHAR" />
+    <result column="PORGID" property="porgid" jdbcType="VARCHAR" />
+    <result column="PPORGID" property="pporgid" jdbcType="VARCHAR" />
+    <result column="INTRODUCTION" property="introduction" jdbcType="VARCHAR" />
+    <result column="CONTENT" property="content" jdbcType="VARCHAR" />
+    <result column="OINTRODUCTION" property="ointroduction" jdbcType="VARCHAR" />
+    <result column="OCONTENT" property="ocontent" jdbcType="VARCHAR" />
+    <result column="SEARCHCODE" property="searchcode" jdbcType="VARCHAR" />
+    <result column="ISLEAF" property="isleaf" jdbcType="DECIMAL" />
+    <result column="ISPROVISIONS" property="isprovisions" jdbcType="DECIMAL" />
+    <result column="ISDEL" property="isdel" jdbcType="DECIMAL" />
+    <result column="TEXT1" property="text1" jdbcType="VARCHAR" />
+    <result column="TEXT2" property="text2" jdbcType="VARCHAR" />
+    <result column="TEXT3" property="text3" jdbcType="VARCHAR" />
+    <result column="INT1" property="int1" jdbcType="DECIMAL" />
+    <result column="INT2" property="int2" jdbcType="DECIMAL" />
+    <result column="OPID" property="opid" jdbcType="VARCHAR" />
+    <result column="OPTIME" property="optime" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    RULEID, RULEPID, ORGID, PORGID, PPORGID, INTRODUCTION, CONTENT, OINTRODUCTION, OCONTENT, 
+    SEARCHCODE, ISLEAF, ISPROVISIONS, ISDEL, TEXT1, TEXT2, TEXT3, INT1, INT2, OPID, OPTIME
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from TKH_REWARDPUNISHRULE
+    where RULEID = #{ruleid,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from TKH_REWARDPUNISHRULE
+    where RULEID = #{ruleid,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.sinog2c.model.khjc.TkhRewardpunishrule" >
+    insert into TKH_REWARDPUNISHRULE (RULEID, RULEPID, ORGID, 
+      PORGID, PPORGID, INTRODUCTION, 
+      CONTENT, OINTRODUCTION, OCONTENT, 
+      SEARCHCODE, ISLEAF, ISPROVISIONS, 
+      ISDEL, TEXT1, TEXT2, 
+      TEXT3, INT1, INT2, 
+      OPID, OPTIME)
+    values (#{ruleid,jdbcType=VARCHAR}, #{rulepid,jdbcType=VARCHAR}, #{orgid,jdbcType=VARCHAR}, 
+      #{porgid,jdbcType=VARCHAR}, #{pporgid,jdbcType=VARCHAR}, #{introduction,jdbcType=VARCHAR}, 
+      #{content,jdbcType=VARCHAR}, #{ointroduction,jdbcType=VARCHAR}, #{ocontent,jdbcType=VARCHAR}, 
+      #{searchcode,jdbcType=VARCHAR}, #{isleaf,jdbcType=DECIMAL}, #{isprovisions,jdbcType=DECIMAL}, 
+      #{isdel,jdbcType=DECIMAL}, #{text1,jdbcType=VARCHAR}, #{text2,jdbcType=VARCHAR}, 
+      #{text3,jdbcType=VARCHAR}, #{int1,jdbcType=DECIMAL}, #{int2,jdbcType=DECIMAL}, 
+      #{opid,jdbcType=VARCHAR}, #{optime,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.sinog2c.model.khjc.TkhRewardpunishrule" >
+    insert into TKH_REWARDPUNISHRULE
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="ruleid != null" >
+        RULEID,
+      </if>
+      <if test="rulepid != null" >
+        RULEPID,
+      </if>
+      <if test="orgid != null" >
+        ORGID,
+      </if>
+      <if test="porgid != null" >
+        PORGID,
+      </if>
+      <if test="pporgid != null" >
+        PPORGID,
+      </if>
+      <if test="introduction != null" >
+        INTRODUCTION,
+      </if>
+      <if test="content != null" >
+        CONTENT,
+      </if>
+      <if test="ointroduction != null" >
+        OINTRODUCTION,
+      </if>
+      <if test="ocontent != null" >
+        OCONTENT,
+      </if>
+      <if test="searchcode != null" >
+        SEARCHCODE,
+      </if>
+      <if test="isleaf != null" >
+        ISLEAF,
+      </if>
+      <if test="isprovisions != null" >
+        ISPROVISIONS,
+      </if>
+      <if test="isdel != null" >
+        ISDEL,
+      </if>
+      <if test="text1 != null" >
+        TEXT1,
+      </if>
+      <if test="text2 != null" >
+        TEXT2,
+      </if>
+      <if test="text3 != null" >
+        TEXT3,
+      </if>
+      <if test="int1 != null" >
+        INT1,
+      </if>
+      <if test="int2 != null" >
+        INT2,
+      </if>
+      <if test="opid != null" >
+        OPID,
+      </if>
+      <if test="optime != null" >
+        OPTIME,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="ruleid != null" >
+        #{ruleid,jdbcType=VARCHAR},
+      </if>
+      <if test="rulepid != null" >
+        #{rulepid,jdbcType=VARCHAR},
+      </if>
+      <if test="orgid != null" >
+        #{orgid,jdbcType=VARCHAR},
+      </if>
+      <if test="porgid != null" >
+        #{porgid,jdbcType=VARCHAR},
+      </if>
+      <if test="pporgid != null" >
+        #{pporgid,jdbcType=VARCHAR},
+      </if>
+      <if test="introduction != null" >
+        #{introduction,jdbcType=VARCHAR},
+      </if>
+      <if test="content != null" >
+        #{content,jdbcType=VARCHAR},
+      </if>
+      <if test="ointroduction != null" >
+        #{ointroduction,jdbcType=VARCHAR},
+      </if>
+      <if test="ocontent != null" >
+        #{ocontent,jdbcType=VARCHAR},
+      </if>
+      <if test="searchcode != null" >
+        #{searchcode,jdbcType=VARCHAR},
+      </if>
+      <if test="isleaf != null" >
+        #{isleaf,jdbcType=DECIMAL},
+      </if>
+      <if test="isprovisions != null" >
+        #{isprovisions,jdbcType=DECIMAL},
+      </if>
+      <if test="isdel != null" >
+        #{isdel,jdbcType=DECIMAL},
+      </if>
+      <if test="text1 != null" >
+        #{text1,jdbcType=VARCHAR},
+      </if>
+      <if test="text2 != null" >
+        #{text2,jdbcType=VARCHAR},
+      </if>
+      <if test="text3 != null" >
+        #{text3,jdbcType=VARCHAR},
+      </if>
+      <if test="int1 != null" >
+        #{int1,jdbcType=DECIMAL},
+      </if>
+      <if test="int2 != null" >
+        #{int2,jdbcType=DECIMAL},
+      </if>
+      <if test="opid != null" >
+        #{opid,jdbcType=VARCHAR},
+      </if>
+      <if test="optime != null" >
+        #{optime,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.sinog2c.model.khjc.TkhRewardpunishrule" >
+    update TKH_REWARDPUNISHRULE
+    <set >
+      <if test="rulepid != null" >
+        RULEPID = #{rulepid,jdbcType=VARCHAR},
+      </if>
+      <if test="orgid != null" >
+        ORGID = #{orgid,jdbcType=VARCHAR},
+      </if>
+      <if test="porgid != null" >
+        PORGID = #{porgid,jdbcType=VARCHAR},
+      </if>
+      <if test="pporgid != null" >
+        PPORGID = #{pporgid,jdbcType=VARCHAR},
+      </if>
+      <if test="introduction != null" >
+        INTRODUCTION = #{introduction,jdbcType=VARCHAR},
+      </if>
+      <if test="content != null" >
+        CONTENT = #{content,jdbcType=VARCHAR},
+      </if>
+      <if test="ointroduction != null" >
+        OINTRODUCTION = #{ointroduction,jdbcType=VARCHAR},
+      </if>
+      <if test="ocontent != null" >
+        OCONTENT = #{ocontent,jdbcType=VARCHAR},
+      </if>
+      <if test="searchcode != null" >
+        SEARCHCODE = #{searchcode,jdbcType=VARCHAR},
+      </if>
+      <if test="isleaf != null" >
+        ISLEAF = #{isleaf,jdbcType=DECIMAL},
+      </if>
+      <if test="isprovisions != null" >
+        ISPROVISIONS = #{isprovisions,jdbcType=DECIMAL},
+      </if>
+      <if test="isdel != null" >
+        ISDEL = #{isdel,jdbcType=DECIMAL},
+      </if>
+      <if test="text1 != null" >
+        TEXT1 = #{text1,jdbcType=VARCHAR},
+      </if>
+      <if test="text2 != null" >
+        TEXT2 = #{text2,jdbcType=VARCHAR},
+      </if>
+      <if test="text3 != null" >
+        TEXT3 = #{text3,jdbcType=VARCHAR},
+      </if>
+      <if test="int1 != null" >
+        INT1 = #{int1,jdbcType=DECIMAL},
+      </if>
+      <if test="int2 != null" >
+        INT2 = #{int2,jdbcType=DECIMAL},
+      </if>
+      <if test="opid != null" >
+        OPID = #{opid,jdbcType=VARCHAR},
+      </if>
+      <if test="optime != null" >
+        OPTIME = #{optime,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where RULEID = #{ruleid,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.sinog2c.model.khjc.TkhRewardpunishrule" >
+    update TKH_REWARDPUNISHRULE
+    set RULEPID = #{rulepid,jdbcType=VARCHAR},
+      ORGID = #{orgid,jdbcType=VARCHAR},
+      PORGID = #{porgid,jdbcType=VARCHAR},
+      PPORGID = #{pporgid,jdbcType=VARCHAR},
+      INTRODUCTION = #{introduction,jdbcType=VARCHAR},
+      CONTENT = #{content,jdbcType=VARCHAR},
+      OINTRODUCTION = #{ointroduction,jdbcType=VARCHAR},
+      OCONTENT = #{ocontent,jdbcType=VARCHAR},
+      SEARCHCODE = #{searchcode,jdbcType=VARCHAR},
+      ISLEAF = #{isleaf,jdbcType=DECIMAL},
+      ISPROVISIONS = #{isprovisions,jdbcType=DECIMAL},
+      ISDEL = #{isdel,jdbcType=DECIMAL},
+      TEXT1 = #{text1,jdbcType=VARCHAR},
+      TEXT2 = #{text2,jdbcType=VARCHAR},
+      TEXT3 = #{text3,jdbcType=VARCHAR},
+      INT1 = #{int1,jdbcType=DECIMAL},
+      INT2 = #{int2,jdbcType=DECIMAL},
+      OPID = #{opid,jdbcType=VARCHAR},
+      OPTIME = #{optime,jdbcType=VARCHAR}
+    where RULEID = #{ruleid,jdbcType=VARCHAR}
+  </update>
+  <select id="ajaxRewardPunishRules"  resultType="java.util.HashMap" parameterType="Map">
+  	select * from TKH_REWARDPUNISHRULE t where 1=1 and t.isdel=0 
+      <if test="porgid != null" >
+        and t.porgid = #{porgid,jdbcType=VARCHAR} 
+      </if> 	
+      <if test="orgid != null" >
+        and t.orgid = #{orgid,jdbcType=VARCHAR} 
+      </if>
+      <if test="key != null" >
+        and (t.introduction like '%'||#{key}||'%' or t.searchcode like '%'||#{key}||'%')
+      </if>
+      order by t.ruleid
+  </select>
+  <select id="ajaxRewardPunishRulesDetail"  resultType="java.util.HashMap" parameterType="Map">
+  	select t.ruleid,t.isleaf,t.isprovisions,t.introduction,t.content,t.searchcode,a.recommendvalue,a.isaward
+  		,a.uplimit,a.downlimit from TKH_REWARDPUNISHRULE t,TKH_REWARDPUNISHRULEDETAIL a 
+  	where t.isdel=0 and t.ruleid=a.ruleid(+)
+      <if test="porgid != null" >
+        and t.porgid = #{porgid,jdbcType=VARCHAR} 
+      </if> 	
+      <if test="orgid != null" >
+        and t.orgid = #{orgid,jdbcType=VARCHAR} 
+      </if>
+      <if test="ruleid != null" >
+        and t.ruleid = #{ruleid,jdbcType=VARCHAR} 
+      </if>
+  </select>
+  
+  <select id="getRewardPunishRuleCount" parameterType="Object" resultType="int">
+  	select count(t.ruleid) from TKH_REWARDPUNISHRULE t where 1=1
+  	  <if test="porgid != null">
+        and t.porgid = #{porgid}
+      </if>
+      <if test="key != null" >
+        and (t.introduction like '%'||#{key}||'%' or t.searchcode like '%'||#{key}||'%')
+      </if>
+  </select>
+  <select id="getRewardPunishRuleList" parameterType="Map" resultType="java.util.HashMap">
+	select * from ( 
+	  select a.*, rownum rn from (
+	    select t.ruleid,t.introduction,t.searchcode,t.isprovisions,t.text1,t.text2 from TKH_REWARDPUNISHRULE t where 1=1
+		  <if test="porgid != null">
+	        and t.porgid = #{porgid}
+	      </if>
+	      <if test="key != null" >
+	        and (t.introduction like '%'||#{key}||'%' or t.searchcode like '%'||#{key}||'%')
+	      </if>
+		  <if test="sortField!=null and sortField!='' and sortOrder!=null and sortOrder!=''">  
+ 		    order by  ${sortField} ${sortOrder}
+	      </if> ) A 
+		WHERE ROWNUM &lt;= #{end,jdbcType=DECIMAL}
+	   ) 
+	WHERE RN &gt;= #{start,jdbcType=DECIMAL}
+  </select>
+</mapper>

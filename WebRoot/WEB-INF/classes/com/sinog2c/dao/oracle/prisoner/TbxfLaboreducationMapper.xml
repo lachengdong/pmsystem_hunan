@@ -1,0 +1,195 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.sinog2c.dao.api.prisoner.TbxfLaboreducationMapper" >
+  <resultMap id="BaseResultMap" type="com.sinog2c.model.prisoner.TbxfLaboreducation" >
+    <id column="LABORID" property="laborid" jdbcType="VARCHAR" />
+    <result column="CRIMID" property="crimid" jdbcType="VARCHAR" />
+    <result column="YEAR" property="year" jdbcType="VARCHAR" />
+    <result column="PROJECT" property="project" jdbcType="VARCHAR" />
+    <result column="TEMPID" property="tempid" jdbcType="VARCHAR" />
+    <result column="INT1" property="int1" jdbcType="DECIMAL" />
+    <result column="TEXT1" property="text1" jdbcType="VARCHAR" />
+    <result column="OPTIME" property="optime" jdbcType="DATE" />
+    <result column="OPTID" property="optid" jdbcType="VARCHAR" />
+    <result column="FRACTION1" property="fraction1" jdbcType="VARCHAR" />
+    <result column="FRACTION2" property="fraction2" jdbcType="VARCHAR" />
+    <result column="FRACTION3" property="fraction3" jdbcType="VARCHAR" />
+    <result column="REMARK" property="remark" jdbcType="VARCHAR" />
+  </resultMap>
+  <resultMap id="ResultMapWithBLOBs" type="com.sinog2c.model.prisoner.TbxfLaboreducation" extends="BaseResultMap" >
+    <result column="OTHERWISE" property="otherwise" jdbcType="CLOB" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    LABORID, CRIMID, YEAR, PROJECT, TEMPID, INT1, TEXT1, OPTIME, OPTID, FRACTION1, FRACTION2, 
+    FRACTION3, REMARK
+  </sql>
+  <sql id="Blob_Column_List" >
+    OTHERWISE
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from TBXF_LABOREDUCATION
+    where LABORID = #{laborid,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from TBXF_LABOREDUCATION
+    where LABORID = #{laborid,jdbcType=VARCHAR}
+  </delete>
+    <!-- 劳动教育信息表保存之前获取简历ID -->
+  <select id="getLaborid" parameterType="String" resultType="String">
+      	select nvl(max(laborid),0)+1 as laborid from TBXF_LABOREDUCATION
+  </select>
+  <select id="findLaboreducationBycrimid" parameterType="String" resultType="com.sinog2c.model.prisoner.TbxfLaboreducation">
+      	select * from TBXF_LABOREDUCATION where 1=1
+      	<if test="crimid != null" >
+        	and CRIMID = #{crimid}
+      	</if>
+      	<if test="year != null" >
+        	and YEAR = #{year}
+      	</if>
+      	<if test="tempid != null" >
+        	and TEMPID = #{tempid}
+      	</if>
+  </select>
+  <insert id="insertSelective" parameterType="com.sinog2c.model.prisoner.TbxfLaboreducation" >
+    insert into TBXF_LABOREDUCATION
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="laborid != null" >
+        LABORID,
+      </if>
+      <if test="crimid != null" >
+        CRIMID,
+      </if>
+      <if test="year != null" >
+        YEAR,
+      </if>
+      <if test="project != null" >
+        PROJECT,
+      </if>
+      <if test="tempid != null" >
+        TEMPID,
+      </if>
+      <if test="int1 != null" >
+        INT1,
+      </if>
+      <if test="text1 != null" >
+        TEXT1,
+      </if>
+      <if test="optime != null" >
+        OPTIME,
+      </if>
+      <if test="optid != null" >
+        OPTID,
+      </if>
+      <if test="fraction1 != null" >
+        FRACTION1,
+      </if>
+      <if test="fraction2 != null" >
+        FRACTION2,
+      </if>
+      <if test="fraction3 != null" >
+        FRACTION3,
+      </if>
+      <if test="remark != null" >
+        REMARK,
+      </if>
+      <if test="otherwise != null" >
+        OTHERWISE,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="laborid != null" >
+        #{laborid,jdbcType=VARCHAR},
+      </if>
+      <if test="crimid != null" >
+        #{crimid,jdbcType=VARCHAR},
+      </if>
+      <if test="year != null" >
+        #{year,jdbcType=VARCHAR},
+      </if>
+      <if test="project != null" >
+        #{project,jdbcType=VARCHAR},
+      </if>
+      <if test="tempid != null" >
+        #{tempid,jdbcType=VARCHAR},
+      </if>
+      <if test="int1 != null" >
+        #{int1,jdbcType=DECIMAL},
+      </if>
+      <if test="text1 != null" >
+        #{text1,jdbcType=VARCHAR},
+      </if>
+      <if test="optime != null" >
+        #{optime,jdbcType=DATE},
+      </if>
+      <if test="optid != null" >
+        #{optid,jdbcType=VARCHAR},
+      </if>
+      <if test="fraction1 != null" >
+        #{fraction1,jdbcType=VARCHAR},
+      </if>
+      <if test="fraction2 != null" >
+        #{fraction2,jdbcType=VARCHAR},
+      </if>
+      <if test="fraction3 != null" >
+        #{fraction3,jdbcType=VARCHAR},
+      </if>
+      <if test="remark != null" >
+        #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="otherwise != null" >
+        #{otherwise,jdbcType=CLOB},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.sinog2c.model.prisoner.TbxfLaboreducation" >
+    update TBXF_LABOREDUCATION
+    <set >
+      <if test="crimid != null" >
+        CRIMID = #{crimid,jdbcType=VARCHAR},
+      </if>
+      <if test="year != null" >
+        YEAR = #{year,jdbcType=VARCHAR},
+      </if>
+      <if test="project != null" >
+        PROJECT = #{project,jdbcType=VARCHAR},
+      </if>
+      <if test="tempid != null" >
+        TEMPID = #{tempid,jdbcType=VARCHAR},
+      </if>
+      <if test="int1 != null" >
+        INT1 = #{int1,jdbcType=DECIMAL},
+      </if>
+      <if test="text1 != null" >
+        TEXT1 = #{text1,jdbcType=VARCHAR},
+      </if>
+      <if test="optime != null" >
+        OPTIME = #{optime,jdbcType=DATE},
+      </if>
+      <if test="optid != null" >
+        OPTID = #{optid,jdbcType=VARCHAR},
+      </if>
+      <if test="fraction1 != null" >
+        FRACTION1 = #{fraction1,jdbcType=VARCHAR},
+      </if>
+      <if test="fraction2 != null" >
+        FRACTION2 = #{fraction2,jdbcType=VARCHAR},
+      </if>
+      <if test="fraction3 != null" >
+        FRACTION3 = #{fraction3,jdbcType=VARCHAR},
+      </if>
+      <if test="remark != null" >
+        REMARK = #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="otherwise != null" >
+        OTHERWISE = #{otherwise,jdbcType=CLOB},
+      </if>
+    </set>
+    where LABORID = #{laborid,jdbcType=VARCHAR}
+  </update>
+
+
+</mapper>

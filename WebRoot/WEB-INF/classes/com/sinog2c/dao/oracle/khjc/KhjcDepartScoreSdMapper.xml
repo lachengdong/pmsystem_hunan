@@ -1,0 +1,164 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.sinog2c.dao.api.khjc.KhjcDepartScoreSdMapper" >
+  <resultMap id="BaseResultMap" type="com.sinog2c.model.khjc.KhjcDepartScoreSd" >
+    <id column="ID" property="id" jdbcType="VARCHAR" />
+    <result column="DEPID" property="depid" jdbcType="VARCHAR" />
+    <result column="SCORE" property="score" jdbcType="VARCHAR" />
+    <result column="CREATETIME" property="createtime" jdbcType="DATE" />
+    <result column="CASHTIME" property="cashtime" jdbcType="DATE" />
+    <result column="CREATEMENDER" property="createmender" jdbcType="VARCHAR" />
+    <result column="JIANYU" property="jianyu" jdbcType="VARCHAR" />
+    <result column="DELFLAG" property="delflag" jdbcType="VARCHAR" />
+    <result column="APPROVEID" property="approveid" jdbcType="VARCHAR" />
+    <result column="UPDATETIME" property="updatetime" jdbcType="DATE" />
+    <result column="UPDATEMENDER" property="updatemender" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    ID, DEPID, SCORE, CREATETIME, CASHTIME, CREATEMENDER, JIANYU, DELFLAG, APPROVEID, 
+    UPDATETIME, UPDATEMENDER
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from KHJC_DEPART_SCORE_SD
+    where ID = #{id,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from KHJC_DEPART_SCORE_SD
+    where ID = #{id,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.sinog2c.model.khjc.KhjcDepartScoreSd" >
+    insert into KHJC_DEPART_SCORE_SD (ID, DEPID, SCORE, 
+      CREATETIME, CASHTIME, CREATEMENDER, 
+      JIANYU, DELFLAG, APPROVEID, 
+      UPDATETIME, UPDATEMENDER)
+    values (#{id,jdbcType=VARCHAR}, #{depid,jdbcType=VARCHAR}, #{score,jdbcType=VARCHAR}, 
+      #{createtime,jdbcType=DATE}, #{cashtime,jdbcType=DATE}, #{createmender,jdbcType=VARCHAR}, 
+      #{jianyu,jdbcType=VARCHAR}, #{delflag,jdbcType=VARCHAR}, #{approveid,jdbcType=VARCHAR}, 
+      #{updatetime,jdbcType=DATE}, #{updatemender,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.sinog2c.model.khjc.KhjcDepartScoreSd" >
+    insert into KHJC_DEPART_SCORE_SD
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        ID,
+      </if>
+      <if test="depid != null" >
+        DEPID,
+      </if>
+      <if test="score != null" >
+        SCORE,
+      </if>
+      <if test="createtime != null" >
+        CREATETIME,
+      </if>
+      <if test="cashtime != null" >
+        CASHTIME,
+      </if>
+      <if test="createmender != null" >
+        CREATEMENDER,
+      </if>
+      <if test="jianyu != null" >
+        JIANYU,
+      </if>
+      <if test="delflag != null" >
+        DELFLAG,
+      </if>
+      <if test="approveid != null" >
+        APPROVEID,
+      </if>
+      <if test="updatetime != null" >
+        UPDATETIME,
+      </if>
+      <if test="updatemender != null" >
+        UPDATEMENDER,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=VARCHAR},
+      </if>
+      <if test="depid != null" >
+        #{depid,jdbcType=VARCHAR},
+      </if>
+      <if test="score != null" >
+        #{score,jdbcType=VARCHAR},
+      </if>
+      <if test="createtime != null" >
+        #{createtime,jdbcType=DATE},
+      </if>
+      <if test="cashtime != null" >
+        #{cashtime,jdbcType=DATE},
+      </if>
+      <if test="createmender != null" >
+        #{createmender,jdbcType=VARCHAR},
+      </if>
+      <if test="jianyu != null" >
+        #{jianyu,jdbcType=VARCHAR},
+      </if>
+      <if test="delflag != null" >
+        #{delflag,jdbcType=VARCHAR},
+      </if>
+      <if test="approveid != null" >
+        #{approveid,jdbcType=VARCHAR},
+      </if>
+      <if test="updatetime != null" >
+        #{updatetime,jdbcType=DATE},
+      </if>
+      <if test="updatemender != null" >
+        #{updatemender,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.sinog2c.model.khjc.KhjcDepartScoreSd" >
+    update KHJC_DEPART_SCORE_SD
+    <set >
+      <if test="depid != null" >
+        DEPID = #{depid,jdbcType=VARCHAR},
+      </if>
+      <if test="score != null" >
+        SCORE = #{score,jdbcType=VARCHAR},
+      </if>
+      <if test="createtime != null" >
+        CREATETIME = #{createtime,jdbcType=DATE},
+      </if>
+      <if test="cashtime != null" >
+        CASHTIME = #{cashtime,jdbcType=DATE},
+      </if>
+      <if test="createmender != null" >
+        CREATEMENDER = #{createmender,jdbcType=VARCHAR},
+      </if>
+      <if test="jianyu != null" >
+        JIANYU = #{jianyu,jdbcType=VARCHAR},
+      </if>
+      <if test="delflag != null" >
+        DELFLAG = #{delflag,jdbcType=VARCHAR},
+      </if>
+      <if test="approveid != null" >
+        APPROVEID = #{approveid,jdbcType=VARCHAR},
+      </if>
+      <if test="updatetime != null" >
+        UPDATETIME = #{updatetime,jdbcType=DATE},
+      </if>
+      <if test="updatemender != null" >
+        UPDATEMENDER = #{updatemender,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where ID = #{id,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.sinog2c.model.khjc.KhjcDepartScoreSd" >
+    update KHJC_DEPART_SCORE_SD
+    set DEPID = #{depid,jdbcType=VARCHAR},
+      SCORE = #{score,jdbcType=VARCHAR},
+      CREATETIME = #{createtime,jdbcType=DATE},
+      CASHTIME = #{cashtime,jdbcType=DATE},
+      CREATEMENDER = #{createmender,jdbcType=VARCHAR},
+      JIANYU = #{jianyu,jdbcType=VARCHAR},
+      DELFLAG = #{delflag,jdbcType=VARCHAR},
+      APPROVEID = #{approveid,jdbcType=VARCHAR},
+      UPDATETIME = #{updatetime,jdbcType=DATE},
+      UPDATEMENDER = #{updatemender,jdbcType=VARCHAR}
+    where ID = #{id,jdbcType=VARCHAR}
+  </update>
+</mapper>

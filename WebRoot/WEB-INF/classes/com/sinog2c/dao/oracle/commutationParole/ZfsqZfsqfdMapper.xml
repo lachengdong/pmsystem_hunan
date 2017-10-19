@@ -1,0 +1,269 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.sinog2c.dao.api.commutationParole.ZfsqZfsqfdMapper">
+  <resultMap id="BaseResultMap" type="com.sinog2c.model.commutationParole.ZfsqZfsqfd">
+    <id column="ID" jdbcType="VARCHAR" property="id" />
+    <result column="CRIMID" jdbcType="VARCHAR" property="crimid" />
+    <result column="NAME" jdbcType="VARCHAR" property="name" />
+    <result column="FUDU" jdbcType="VARCHAR" property="fudu" />
+    <result column="BATCHID" jdbcType="VARCHAR" property="batchid" />
+    <result column="FILENO" jdbcType="VARCHAR" property="fileno" />
+    <result column="OPTIME" jdbcType="DATE" property="optime" />
+    <result column="OPID" jdbcType="VARCHAR" property="opid" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    ID, CRIMID, NAME, FUDU, BATCHID, FILENO, OPTIME, OPID
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from ZFSQ_ZFSQFD
+    where ID = #{id,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from ZFSQ_ZFSQFD
+    where ID = #{id,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.sinog2c.model.commutationParole.ZfsqZfsqfd">
+  	<selectKey keyProperty="id" resultType="String" order="BEFORE">
+		select SEQ_BASE_DOC_ID.nextval as id from dual
+  	</selectKey>
+    insert into ZFSQ_ZFSQFD (ID, CRIMID, NAME, 
+      FUDU, BATCHID, FILENO, 
+      OPTIME, OPID)
+    values (#{id,jdbcType=VARCHAR}, #{crimid,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR}, 
+      #{fudu,jdbcType=VARCHAR}, #{batchid,jdbcType=VARCHAR}, #{fileno,jdbcType=VARCHAR}, 
+      #{optime,jdbcType=DATE}, #{opid,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.sinog2c.model.commutationParole.ZfsqZfsqfd">
+  	<selectKey keyProperty="id" resultType="String" order="BEFORE">
+		select SEQ_BASE_DOC_ID.nextval as id from dual
+  	</selectKey>
+    insert into ZFSQ_ZFSQFD
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        ID,
+      </if>
+      <if test="crimid != null">
+        CRIMID,
+      </if>
+      <if test="name != null">
+        NAME,
+      </if>
+      <if test="fudu != null">
+        FUDU,
+      </if>
+      <if test="batchid != null">
+        BATCHID,
+      </if>
+      <if test="fileno != null">
+        FILENO,
+      </if>
+      <if test="optime != null">
+        OPTIME,
+      </if>
+      <if test="opid != null">
+        OPID,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=VARCHAR},
+      </if>
+      <if test="crimid != null">
+        #{crimid,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null">
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="fudu != null">
+        #{fudu,jdbcType=VARCHAR},
+      </if>
+      <if test="batchid != null">
+        #{batchid,jdbcType=VARCHAR},
+      </if>
+      <if test="fileno != null">
+        #{fileno,jdbcType=VARCHAR},
+      </if>
+      <if test="optime != null">
+        #{optime,jdbcType=DATE},
+      </if>
+      <if test="opid != null">
+        #{opid,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.sinog2c.model.commutationParole.ZfsqZfsqfd">
+    update ZFSQ_ZFSQFD
+    <set>
+      <if test="crimid != null">
+        CRIMID = #{crimid,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null">
+        NAME = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="fudu != null">
+        FUDU = #{fudu,jdbcType=VARCHAR},
+      </if>
+      <if test="batchid != null">
+        BATCHID = #{batchid,jdbcType=VARCHAR},
+      </if>
+      <if test="fileno != null">
+        FILENO = #{fileno,jdbcType=VARCHAR},
+      </if>
+      <if test="optime != null">
+        OPTIME = #{optime,jdbcType=DATE},
+      </if>
+      <if test="opid != null">
+        OPID = #{opid,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where ID = #{id,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.sinog2c.model.commutationParole.ZfsqZfsqfd">
+    update ZFSQ_ZFSQFD
+    set CRIMID = #{crimid,jdbcType=VARCHAR},
+      NAME = #{name,jdbcType=VARCHAR},
+      FUDU = #{fudu,jdbcType=VARCHAR},
+      BATCHID = #{batchid,jdbcType=VARCHAR},
+      FILENO = #{fileno,jdbcType=VARCHAR},
+      OPTIME = #{optime,jdbcType=DATE},
+      OPID = #{opid,jdbcType=VARCHAR}
+    where ID = #{id,jdbcType=VARCHAR}
+  </update>
+  <select id="getCount" parameterType="Map" resultType="int">
+      	select 	count(*) c
+              	from tbprisoner_base_crime b,
+              	tbprisoner_baseinfo t,
+              	TBXF_SCREENING S 
+              	LEFT JOIN   zfsq_zfsqfd z ON S.BATCHID=Z.BATCHID 
+              	AND S.CRIMID=Z.CRIMID
+              	where b.crimid=t.crimid and s.crimid=b.crimid 
+				<trim prefix="" suffix="" suffixOverrides=",">
+					<if test="crimids!=null and crimids!=''">
+	              		and s.crimid in (${crimids})
+	               </if>
+	           </trim>
+                                     
+	          <trim prefix="" suffix="" suffixOverrides=",">
+	              <if test="key!=null and key!=''"> and (b.crimid like '%'||#{key}||'%' or t.name like '%'||#{key}||'%' or t.NAMEPINYINSHORT like '%'||#{key}||'%')</if>
+	          </trim>
+  </select>
+  
+  <select id="getSentenceAlterationList" parameterType="java.util.HashMap" resultType="java.util.HashMap">
+  		select * from
+        ( 
+          select a.*, rownum rn from
+          (
+              select z.id,b.crimid,t.name,b.fileno,b.orgname2 jianqu,z.fudu,s.batchid
+              from tbprisoner_base_crime b,
+              tbprisoner_baseinfo t,
+              TBXF_SCREENING S 
+              LEFT JOIN zfsq_zfsqfd z ON S.BATCHID=Z.BATCHID 
+              AND S.CRIMID=Z.CRIMID
+              where b.crimid=t.crimid and s.crimid=b.crimid 
+              <trim prefix="" suffix="" suffixOverrides=",">
+	              <if test="crimids!=null and crimids!=''">
+					and s.crimid in (${crimids})
+	               </if>
+          	  </trim>
+                                     
+	          <trim prefix="" suffix="" suffixOverrides=",">
+	              <if test="key!=null and key!=''"> and (b.crimid like '%'||#{key}||'%' or b.fileno like '%'||#{key}||'%' or t.name like '%'||#{key}||'%' or t.NAMEPINYINSHORT like '%'||#{key}||'%')</if>
+	          </trim>
+          ) a 
+          <if test="end!=null and end!=''">
+             where rownum &lt;= #{end}
+          </if>
+          <trim prefix="" suffix="" suffixOverrides=",">
+             <if test="sortField!=null and sortField!=''"> order by ${sortField} ${sortOrder}</if>
+          </trim>
+          )
+          <if test="start!=null and start!=''">
+           where  rn &gt;= #{start}
+         </if>
+  </select>
+  <select id="selectMaxId" resultType="String">
+  		select max(id+1) from ZFSQ_ZFSQFD
+  </select>
+  <select id="selectByCrimidAndBatchId" parameterType="java.util.HashMap" resultMap="BaseResultMap">
+  		select 
+			<include refid="Base_Column_List" />
+    	from ZFSQ_ZFSQFD t
+    	where t.crimid=#{crimid}
+    		and t.batchid=#{batchid}
+  </select>
+  <insert id="insertByMap" parameterType="Map">
+  	<selectKey keyProperty="id" resultType="int" order="BEFORE">
+		select SEQ_BASE_DOC_ID.nextval as id from dual
+  	</selectKey>
+    insert into ZFSQ_ZFSQFD
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        ID,
+      </if>
+      <if test="batchid != null">
+        batchid,
+      </if>
+      <if test="crimid != null">
+        CRIMID,
+      </if>
+      <if test="fileno != null">
+        FILENO,
+      </if>
+      <if test="name != null">
+        NAME,
+      </if>
+      <if test="fudu != null">
+        FUDU,
+      </if>
+      <if test="opid != null">
+        OPID,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=VARCHAR},
+      </if>
+      <if test="batchid != null">
+        #{batchid,jdbcType=VARCHAR},
+      </if>
+      <if test="crimid != null">
+        #{crimid,jdbcType=VARCHAR},
+      </if>
+      <if test="fileno != null">
+        #{fileno,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null">
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="fudu != null">
+        #{fudu,jdbcType=VARCHAR},
+      </if>
+      <if test="opid != null">
+        #{opid,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByMap" parameterType="Map">
+    update ZFSQ_ZFSQFD
+    <set>
+      <if test="crimid != null">
+        crimid = #{crimid,jdbcType=VARCHAR},
+      </if>
+      <if test="fileno != null">
+        FILENO = #{fileno,jdbcType=VARCHAR},
+      </if>
+      <if test="batchid != null">
+        batchid = #{batchid,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null">
+        NAME = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="fudu != null">
+        FUDU = #{fudu,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+</mapper>

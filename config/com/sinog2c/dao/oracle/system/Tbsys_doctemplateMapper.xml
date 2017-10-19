@@ -1,0 +1,286 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.sinog2c.dao.api.flow.Tbsys_doctemplateMapper">
+	<resultMap id="BaseResultMap" type="com.sinog2c.model.system.Tbsys_doctemplate">
+		<id column="DOCTEMPID" jdbcType="VARCHAR" property="doctempid" />
+		<result column="MODULENAME" jdbcType="VARCHAR" property="modulename" />
+		<result column="TEMPNAME" jdbcType="VARCHAR" property="tempname" />
+		<result column="FILETYPE" jdbcType="VARCHAR" property="filetype" />
+		<result column="THUMFILETYPE" jdbcType="VARCHAR" property="thumfiletype" />
+		<result column="TYPE" jdbcType="CHAR" property="type" />
+		<result column="REMARK" jdbcType="VARCHAR" property="remark" />
+		<result column="DEPARTID" jdbcType="VARCHAR" property="departid" />
+		<result column="OPTIME" jdbcType="DATE" property="optime" />
+		<result column="OPID" jdbcType="VARCHAR" property="opid" />
+	</resultMap>
+	<resultMap extends="BaseResultMap" id="ResultMapWithBLOBs"
+		type="com.sinog2c.model.system.Tbsys_doctemplateWithBLOBs">
+		<result column="CONTENT" jdbcType="BLOB" property="content" />
+		<result column="THUMBNAIL" jdbcType="BLOB" property="thumbnail" />
+		<result column="CONTENT2" jdbcType="CLOB" property="content2" />
+		<result column="THUMBNAIL2" jdbcType="CLOB" property="thumbnail2" />
+	</resultMap>
+	<sql id="Base_Column_List">
+		DOCTEMPID, MODULENAME, TEMPNAME, FILETYPE, THUMFILETYPE,
+		TYPE, REMARK, DEPARTID,
+		OPTIME, OPID
+	</sql>
+	<sql id="Blob_Column_List">
+		CONTENT, THUMBNAIL, CONTENT2, THUMBNAIL2
+	</sql>
+	<select id="selectByPrimaryKey" parameterType="java.lang.String"
+		resultMap="ResultMapWithBLOBs">
+		select
+		<include refid="Base_Column_List" />
+		,
+		<include refid="Blob_Column_List" />
+		from TBSYS_DOCTEMPLATE
+		where DOCTEMPID = #{doctempid,jdbcType=VARCHAR}
+	</select>
+	<delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+		delete from
+		TBSYS_DOCTEMPLATE
+		where DOCTEMPID = #{doctempid,jdbcType=VARCHAR}
+	</delete>
+	<insert id="insert" parameterType="com.sinog2c.model.system.Tbsys_doctemplateWithBLOBs">
+		insert into TBSYS_DOCTEMPLATE
+		(DOCTEMPID, MODULENAME, TEMPNAME,
+		FILETYPE, THUMFILETYPE, TYPE,
+		REMARK,
+		DEPARTID, OPTIME,
+		OPID, CONTENT, THUMBNAIL,
+		CONTENT2, THUMBNAIL2)
+		values
+		(#{doctempid,jdbcType=VARCHAR}, #{modulename,jdbcType=VARCHAR},
+		#{tempname,jdbcType=VARCHAR},
+		#{filetype,jdbcType=VARCHAR},
+		#{thumfiletype,jdbcType=VARCHAR}, #{type,jdbcType=CHAR},
+		#{remark,jdbcType=VARCHAR}, #{departid,jdbcType=VARCHAR},
+		#{optime,jdbcType=DATE},
+		#{opid,jdbcType=VARCHAR},
+		#{content,jdbcType=BLOB}, #{thumbnail,jdbcType=BLOB},
+		#{content2,jdbcType=CLOB}, #{thumbnail2,jdbcType=CLOB})
+	</insert>
+	<insert id="insertSelective" parameterType="com.sinog2c.model.system.Tbsys_doctemplateWithBLOBs">
+		insert into TBSYS_DOCTEMPLATE
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="doctempid != null">
+				DOCTEMPID,
+			</if>
+			<if test="modulename != null">
+				MODULENAME,
+			</if>
+			<if test="tempname != null">
+				TEMPNAME,
+			</if>
+			<if test="filetype != null">
+				FILETYPE,
+			</if>
+			<if test="thumfiletype != null">
+				THUMFILETYPE,
+			</if>
+			<if test="type != null">
+				TYPE,
+			</if>
+			<if test="remark != null">
+				REMARK,
+			</if>
+			<if test="departid != null">
+				DEPARTID,
+			</if>
+			<if test="optime != null">
+				OPTIME,
+			</if>
+			<if test="opid != null">
+				OPID,
+			</if>
+			<if test="content != null">
+				CONTENT,
+			</if>
+			<if test="thumbnail != null">
+				THUMBNAIL,
+			</if>
+			<if test="content2 != null">
+				CONTENT2,
+			</if>
+			<if test="thumbnail2 != null">
+				THUMBNAIL2,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="doctempid != null">
+				#{doctempid,jdbcType=VARCHAR},
+			</if>
+			<if test="modulename != null">
+				#{modulename,jdbcType=VARCHAR},
+			</if>
+			<if test="tempname != null">
+				#{tempname,jdbcType=VARCHAR},
+			</if>
+			<if test="filetype != null">
+				#{filetype,jdbcType=VARCHAR},
+			</if>
+			<if test="thumfiletype != null">
+				#{thumfiletype,jdbcType=VARCHAR},
+			</if>
+			<if test="type != null">
+				#{type,jdbcType=CHAR},
+			</if>
+			<if test="remark != null">
+				#{remark,jdbcType=VARCHAR},
+			</if>
+			<if test="departid != null">
+				#{departid,jdbcType=VARCHAR},
+			</if>
+			<if test="optime != null">
+				#{optime,jdbcType=DATE},
+			</if>
+			<if test="opid != null">
+				#{opid,jdbcType=VARCHAR},
+			</if>
+			<if test="content != null">
+				#{content,jdbcType=BLOB},
+			</if>
+			<if test="thumbnail != null">
+				#{thumbnail,jdbcType=BLOB},
+			</if>
+			<if test="content2 != null">
+				#{content2,jdbcType=CLOB},
+			</if>
+			<if test="thumbnail2 != null">
+				#{thumbnail2,jdbcType=CLOB},
+			</if>
+		</trim>
+	</insert>
+	<update id="updateByPrimaryKeySelective" parameterType="com.sinog2c.model.system.Tbsys_doctemplateWithBLOBs">
+		update TBSYS_DOCTEMPLATE
+		<set>
+			<if test="modulename != null">
+				MODULENAME = #{modulename,jdbcType=VARCHAR},
+			</if>
+			<if test="tempname != null">
+				TEMPNAME = #{tempname,jdbcType=VARCHAR},
+			</if>
+			<if test="filetype != null">
+				FILETYPE = #{filetype,jdbcType=VARCHAR},
+			</if>
+			<if test="thumfiletype != null">
+				THUMFILETYPE = #{thumfiletype,jdbcType=VARCHAR},
+			</if>
+			<if test="type != null">
+				TYPE = #{type,jdbcType=CHAR},
+			</if>
+			<if test="remark != null">
+				REMARK = #{remark,jdbcType=VARCHAR},
+			</if>
+			<if test="departid != null">
+				DEPARTID = #{departid,jdbcType=VARCHAR},
+			</if>
+			<if test="optime != null">
+				OPTIME = #{optime,jdbcType=DATE},
+			</if>
+			<if test="opid != null">
+				OPID = #{opid,jdbcType=VARCHAR},
+			</if>
+			<if test="content != null">
+				CONTENT = #{content,jdbcType=BLOB},
+			</if>
+			<if test="thumbnail != null">
+				THUMBNAIL = #{thumbnail,jdbcType=BLOB},
+			</if>
+			<if test="content2 != null">
+				CONTENT2 = #{content2,jdbcType=CLOB},
+			</if>
+			<if test="thumbnail2 != null">
+				THUMBNAIL2 = #{thumbnail2,jdbcType=CLOB},
+			</if>
+		</set>
+		where DOCTEMPID = #{doctempid,jdbcType=VARCHAR}
+	</update>
+	<update id="updateByPrimaryKeyWithBLOBs" parameterType="com.sinog2c.model.system.Tbsys_doctemplateWithBLOBs">
+		update
+		TBSYS_DOCTEMPLATE
+		set MODULENAME = #{modulename,jdbcType=VARCHAR},
+		TEMPNAME = #{tempname,jdbcType=VARCHAR},
+		FILETYPE =
+		#{filetype,jdbcType=VARCHAR},
+		THUMFILETYPE =
+		#{thumfiletype,jdbcType=VARCHAR},
+		TYPE = #{type,jdbcType=CHAR},
+		REMARK =
+		#{remark,jdbcType=VARCHAR},
+		DEPARTID = #{departid,jdbcType=VARCHAR},
+		OPTIME = #{optime,jdbcType=DATE},
+		OPID = #{opid,jdbcType=VARCHAR},
+		CONTENT = #{content,jdbcType=BLOB},
+		THUMBNAIL =
+		#{thumbnail,jdbcType=BLOB},
+		CONTENT2 = #{content2,jdbcType=CLOB},
+		THUMBNAIL2 = #{thumbnail2,jdbcType=CLOB}
+		where DOCTEMPID =
+		#{doctempid,jdbcType=VARCHAR}
+	</update>
+	<update id="updateByPrimaryKey" parameterType="com.sinog2c.model.system.Tbsys_doctemplate">
+		update
+		TBSYS_DOCTEMPLATE
+		set MODULENAME = #{modulename,jdbcType=VARCHAR},
+		TEMPNAME = #{tempname,jdbcType=VARCHAR},
+		FILETYPE =
+		#{filetype,jdbcType=VARCHAR},
+		THUMFILETYPE =
+		#{thumfiletype,jdbcType=VARCHAR},
+		TYPE = #{type,jdbcType=CHAR},
+		REMARK =
+		#{remark,jdbcType=VARCHAR},
+		DEPARTID = #{departid,jdbcType=VARCHAR},
+		OPTIME = #{optime,jdbcType=DATE},
+		OPID = #{opid,jdbcType=VARCHAR}
+		where
+		DOCTEMPID = #{doctempid,jdbcType=VARCHAR}
+	</update>
+	<select id="getDocTemplateBydept" resultType="com.sinog2c.model.system.Tbsys_doctemplate">
+		select *
+		from (
+		select rownum rn ,t.*
+		from ( select DOCTEMPID,
+		MODULENAME, TEMPNAME, FILETYPE, TYPE, REMARK, DEPARTID, OPTIME, OPID
+		from TBSYS_DOCTEMPLATE
+		where DEPARTID=#{departid}
+		<if test="key!=null and key!=''">
+			and (TEMPNAME like '%'||#{key}||'%' or REMARK like
+			'%'||#{key}||'%')
+		</if>
+		<if test="sortField!=null and sortField !=''">
+			order by ${sortField} ${sortOrder}
+		</if>
+
+		)t where rownum&lt;=${end}) a where a.rn&gt;=${start}
+	</select>
+	<select id="getTemplateCountBydept" resultType="int">
+		select count(*) from TBSYS_DOCTEMPLATE
+		where DEPARTID=#{departid}
+		<if test="key!=null and key!=''">
+			and (TEMPNAME like '%'||#{key}||'%' or REMARK like
+			'%'||#{key}||'%')
+		</if>
+	</select>
+
+	<select id="getDocTemplateBydeptAndmodule" resultType="com.sinog2c.model.system.Tbsys_doctemplateWithBLOBs">
+		select
+		<include refid="Base_Column_List" />
+		,
+		<include refid="Blob_Column_List" />
+		from TBSYS_DOCTEMPLATE
+		where DEPARTID=#{departid} and
+		MODULENAME=#{module}
+	</select>
+	
+	<select id="getDocTemplateBydeptAndmodule2" resultType="com.sinog2c.model.system.Tbsys_doctemplate">
+		select
+		<include refid="Base_Column_List" />		
+		from TBSYS_DOCTEMPLATE
+		where DEPARTID=#{departid} and
+		MODULENAME=#{module}
+	</select>
+	
+</mapper>

@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.sinog2c.dao.api.dbmsnew.DbmsFileCopyMapper" >
+  <resultMap id="BaseResultMap" type="com.sinog2c.model.dbmsnew.DbmsFileCopy" >
+    <id column="SDID" property="sdid" jdbcType="VARCHAR" />
+    <result column="JGXTADDRESS" property="jgxtaddress" jdbcType="VARCHAR" />
+    <result column="LOCALADDRESS" property="localaddress" jdbcType="VARCHAR" />
+    <result column="CREATETIME" property="createtime" jdbcType="TIMESTAMP" />
+    <result column="UPDATEMENDER" property="updatemender" jdbcType="VARCHAR" />
+    <result column="UPDATETIME" property="updatetime" jdbcType="TIMESTAMP" />
+    <result column="CREATEMENDER" property="createmender" jdbcType="VARCHAR" />
+    <result column="REMARK" property="remark" jdbcType="VARCHAR" />
+    <result column="DELFLG" property="delflg" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    SDID, JGXTADDRESS, LOCALADDRESS, CREATETIME, UPDATEMENDER, UPDATETIME, CREATEMENDER, 
+    REMARK, DELFLG
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from DBMS_FILE_COPY
+    where SDID = #{sdid,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from DBMS_FILE_COPY
+    where SDID = #{sdid,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.sinog2c.model.dbmsnew.DbmsFileCopy" >
+    insert into DBMS_FILE_COPY (SDID, JGXTADDRESS, LOCALADDRESS, 
+      CREATETIME, UPDATEMENDER, UPDATETIME, 
+      CREATEMENDER, REMARK, DELFLG
+      )
+    values (#{sdid,jdbcType=VARCHAR}, #{jgxtaddress,jdbcType=VARCHAR}, #{localaddress,jdbcType=VARCHAR}, 
+      #{createtime,jdbcType=TIMESTAMP}, #{updatemender,jdbcType=VARCHAR}, #{updatetime,jdbcType=TIMESTAMP}, 
+      #{createmender,jdbcType=VARCHAR}, #{remark,jdbcType=VARCHAR}, #{delflg,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.sinog2c.model.dbmsnew.DbmsFileCopy" >
+    insert into DBMS_FILE_COPY
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="sdid != null" >
+        SDID,
+      </if>
+      <if test="jgxtaddress != null" >
+        JGXTADDRESS,
+      </if>
+      <if test="localaddress != null" >
+        LOCALADDRESS,
+      </if>
+      <if test="createtime != null" >
+        CREATETIME,
+      </if>
+      <if test="updatemender != null" >
+        UPDATEMENDER,
+      </if>
+      <if test="updatetime != null" >
+        UPDATETIME,
+      </if>
+      <if test="createmender != null" >
+        CREATEMENDER,
+      </if>
+      <if test="remark != null" >
+        REMARK,
+      </if>
+      <if test="delflg != null" >
+        DELFLG,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="sdid != null" >
+        #{sdid,jdbcType=VARCHAR},
+      </if>
+      <if test="jgxtaddress != null" >
+        #{jgxtaddress,jdbcType=VARCHAR},
+      </if>
+      <if test="localaddress != null" >
+        #{localaddress,jdbcType=VARCHAR},
+      </if>
+      <if test="createtime != null" >
+        #{createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updatemender != null" >
+        #{updatemender,jdbcType=VARCHAR},
+      </if>
+      <if test="updatetime != null" >
+        #{updatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createmender != null" >
+        #{createmender,jdbcType=VARCHAR},
+      </if>
+      <if test="remark != null" >
+        #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="delflg != null" >
+        #{delflg,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.sinog2c.model.dbmsnew.DbmsFileCopy" >
+    update DBMS_FILE_COPY
+    <set >
+      <if test="jgxtaddress != null" >
+        JGXTADDRESS = #{jgxtaddress,jdbcType=VARCHAR},
+      </if>
+      <if test="localaddress != null" >
+        LOCALADDRESS = #{localaddress,jdbcType=VARCHAR},
+      </if>
+      <if test="createtime != null" >
+        CREATETIME = #{createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updatemender != null" >
+        UPDATEMENDER = #{updatemender,jdbcType=VARCHAR},
+      </if>
+      <if test="updatetime != null" >
+        UPDATETIME = #{updatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createmender != null" >
+        CREATEMENDER = #{createmender,jdbcType=VARCHAR},
+      </if>
+      <if test="remark != null" >
+        REMARK = #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="delflg != null" >
+        DELFLG = #{delflg,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where SDID = #{sdid,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.sinog2c.model.dbmsnew.DbmsFileCopy" >
+    update DBMS_FILE_COPY
+    set JGXTADDRESS = #{jgxtaddress,jdbcType=VARCHAR},
+      LOCALADDRESS = #{localaddress,jdbcType=VARCHAR},
+      CREATETIME = #{createtime,jdbcType=TIMESTAMP},
+      UPDATEMENDER = #{updatemender,jdbcType=VARCHAR},
+      UPDATETIME = #{updatetime,jdbcType=TIMESTAMP},
+      CREATEMENDER = #{createmender,jdbcType=VARCHAR},
+      REMARK = #{remark,jdbcType=VARCHAR},
+      DELFLG = #{delflg,jdbcType=VARCHAR}
+    where SDID = #{sdid,jdbcType=VARCHAR}
+  </update>
+</mapper>

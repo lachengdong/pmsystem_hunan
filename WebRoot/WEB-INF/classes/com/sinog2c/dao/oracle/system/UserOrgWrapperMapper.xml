@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.sinog2c.dao.api.system.UserOrgWrapperMapper" >
+  <resultMap id="BaseResultMap" type="com.sinog2c.model.system.UserOrgWrapper" >
+    <result column="USERID" property="userid" jdbcType="VARCHAR" />
+    <result column="ORGID" property="orgid" jdbcType="VARCHAR" />
+    <result column="OPTIME" property="optime" jdbcType="TIMESTAMP" />
+    <result column="OPID" property="opid" jdbcType="VARCHAR" />
+  </resultMap>
+  <insert id="insert" parameterType="com.sinog2c.model.system.UserOrgWrapper" >
+    insert into TBSYS_USER_ORG (USERID, ORGID, OPTIME, 
+      OPID)
+    values (#{userid,jdbcType=VARCHAR}, #{orgid,jdbcType=VARCHAR}, #{optime,jdbcType=TIMESTAMP}, 
+      #{opid,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.sinog2c.model.system.UserOrgWrapper" >
+    insert into TBSYS_USER_ORG
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="userid != null" >
+        USERID,
+      </if>
+      <if test="orgid != null" >
+        ORGID,
+      </if>
+      <if test="optime != null" >
+        OPTIME,
+      </if>
+      <if test="opid != null" >
+        OPID,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="userid != null" >
+        #{userid,jdbcType=VARCHAR},
+      </if>
+      <if test="orgid != null" >
+        #{orgid,jdbcType=VARCHAR},
+      </if>
+      <if test="optime != null" >
+        #{optime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="opid != null" >
+        #{opid,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  
+  <!-- 考虑以后采用标志位 -->
+  <delete id="delete" parameterType="com.sinog2c.model.system.UserOrgWrapper" >
+    delete from TBSYS_USER_ORG
+    where USERID=#{userid,jdbcType=VARCHAR}
+    <!-- 
+    and ORGID=#{orgid,jdbcType=VARCHAR}
+     -->
+  </delete>
+  <delete id="deleterole" parameterType="com.sinog2c.model.system.UserOrgWrapper">
+  	delete from tbsys_users_roles where userid=#{userid}
+  </delete>
+  
+  <select id="getAllByUserid" resultMap="BaseResultMap">    <!-- 条件查询表中的所有信息 -->
+	 SELECT * FROM TBSYS_USER_ORG
+	 	where USERID=#{userid,jdbcType=VARCHAR}
+	 	order by ORGID asc, USERID asc
+  </select>
+  
+  <select id="getAllByOrgid" resultMap="BaseResultMap">    <!-- 条件查询表中的所有信息 -->
+	 SELECT * FROM TBSYS_USER_ORG
+	 	where ORGID=#{orgid,jdbcType=VARCHAR}
+	 	order by ORGID asc, USERID asc
+  </select>
+  
+  <select id="getIdsByDepartid" resultMap="BaseResultMap">
+  	select * from TBSYS_USERINFO where departid=#{departid}
+  </select>
+  
+  <select id="getAllByOrgids" resultMap="BaseResultMap">    <!-- 条件查询表中的所有信息 -->
+	 SELECT * FROM TBSYS_USER_ORG
+	 	where ORGID in ( ${orgids} )
+	 	order by ORGID asc, USERID asc
+  </select>
+  
+  <select id="getAll" resultMap="BaseResultMap">    <!-- 条件查询表中的所有信息 -->
+	 SELECT * FROM TBSYS_USER_ORG
+	 	where 1=1
+	 	order by ORGID asc, USERID asc
+  </select>
+
+  <select id="getAllByPage" resultMap="BaseResultMap">    <!-- 分页查询表中的所有信息 -->
+	 SELECT * FROM 
+	 	( SELECT A.*, ROWNUM RN 
+		 	FROM 
+		 	(
+		 		SELECT * FROM TBSYS_USER_ORG
+		 		  order by ORGID asc, USERID asc
+		 	) A 
+		 	WHERE ROWNUM &lt;= #{end,jdbcType=DECIMAL}
+	 	) 
+	 	WHERE RN &gt;= #{start,jdbcType=DECIMAL}
+  </select>
+  
+  <select id="countAll" resultType="int">  <!-- 查询表中记录总数 -->
+		select count(*) c from TBSYS_USER_ORG
+  </select>
+  <!-- 根据角色表 remark字段判断是否给属于本角色的用户发送通知 -->
+  <select id="getUserByMap" parameterType="Map" resultType="Map">
+		select a.userid from tbsys_users_roles a where a.roleid in (select t.roleid
+               from tbsys_roleinfo t  where t.remark = #{servicesinfo})
+  </select>
+</mapper>

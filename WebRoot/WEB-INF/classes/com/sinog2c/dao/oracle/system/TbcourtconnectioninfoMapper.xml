@@ -1,0 +1,212 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.sinog2c.dao.api.system.TbcourtconnectioninfoMapper" >
+  <resultMap id="BaseResultMap" type="com.sinog2c.model.system.Tbcourtconnectioninfo" >
+    <id column="CID" property="cid" jdbcType="DECIMAL" />
+    <result column="CORGID" property="corgid" jdbcType="VARCHAR" />
+    <result column="TORGID" property="torgid" jdbcType="VARCHAR" />
+    <result column="CNAME" property="cname" jdbcType="VARCHAR" />
+    <result column="CIP" property="cip" jdbcType="VARCHAR" />
+    <result column="CPORT" property="cport" jdbcType="VARCHAR" />
+    <result column="CUSERNAME" property="cusername" jdbcType="VARCHAR" />
+    <result column="CPASSWORD" property="cpassword" jdbcType="VARCHAR" />
+    <result column="OPID" property="opid" jdbcType="VARCHAR" />
+    <result column="OPTIME" property="optime" jdbcType="DATE" />
+    <result column="REMARK" property="remark" jdbcType="VARCHAR" />
+    <result column="DELFLG" property="delflg" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    CID, CORGID, TORGID, CNAME, CIP, CPORT, CUSERNAME, CPASSWORD, OPID, OPTIME, REMARK, 
+    DELFLG
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select i.*, o.name as orgname
+    from TBCOURT_CONNECTION_INFO i,TBSYS_ORGINFO o
+    where CID = #{cid,jdbcType=DECIMAL} and i.torgid=o.orgid(+)
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from TBCOURT_CONNECTION_INFO
+    where CID = #{cid,jdbcType=DECIMAL}
+  </delete>
+  <insert id="insert" parameterType="com.sinog2c.model.system.Tbcourtconnectioninfo" >
+    insert into TBCOURT_CONNECTION_INFO (CID, CORGID, TORGID, 
+      CNAME, CIP, CPORT, 
+      CUSERNAME, CPASSWORD, OPID, 
+      OPTIME, REMARK, DELFLG
+      )
+    values (#{cid,jdbcType=DECIMAL}, #{corgid,jdbcType=VARCHAR}, #{torgid,jdbcType=VARCHAR}, 
+      #{cname,jdbcType=VARCHAR}, #{cip,jdbcType=VARCHAR}, #{cport,jdbcType=VARCHAR}, 
+      #{cusername,jdbcType=VARCHAR}, #{cpassword,jdbcType=VARCHAR}, #{opid,jdbcType=VARCHAR}, 
+      #{optime,jdbcType=DATE}, #{remark,jdbcType=VARCHAR}, #{delflg,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.sinog2c.model.system.Tbcourtconnectioninfo" >
+    insert into TBCOURT_CONNECTION_INFO
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+        CID,
+      <if test="corgid != null" >
+        CORGID,
+      </if>
+      <if test="torgid != null" >
+        TORGID,
+      </if>
+      <if test="cname != null" >
+        CNAME,
+      </if>
+      <if test="cip != null" >
+        CIP,
+      </if>
+      <if test="cport != null" >
+        CPORT,
+      </if>
+      <if test="cusername != null" >
+        CUSERNAME,
+      </if>
+      <if test="cpassword != null" >
+        CPASSWORD,
+      </if>
+      <if test="opid != null" >
+        OPID,
+      </if>
+      <if test="optime != null" >
+        OPTIME,
+      </if>
+      <if test="remark != null" >
+        REMARK,
+      </if>
+      <if test="delflg != null" >
+        DELFLG,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+       SEQ_VIDEOSESSION_ID.NEXTVAL,
+      <if test="corgid != null" >
+        #{corgid,jdbcType=VARCHAR},
+      </if>
+      <if test="torgid != null" >
+        #{torgid,jdbcType=VARCHAR},
+      </if>
+      <if test="cname != null" >
+        #{cname,jdbcType=VARCHAR},
+      </if>
+      <if test="cip != null" >
+        #{cip,jdbcType=VARCHAR},
+      </if>
+      <if test="cport != null" >
+        #{cport,jdbcType=VARCHAR},
+      </if>
+      <if test="cusername != null" >
+        #{cusername,jdbcType=VARCHAR},
+      </if>
+      <if test="cpassword != null" >
+        #{cpassword,jdbcType=VARCHAR},
+      </if>
+      <if test="opid != null" >
+        #{opid,jdbcType=VARCHAR},
+      </if>
+      <if test="optime != null" >
+        #{optime,jdbcType=DATE},
+      </if>
+      <if test="remark != null" >
+        #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="delflg != null" >
+        #{delflg,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.sinog2c.model.system.Tbcourtconnectioninfo" >
+    update TBCOURT_CONNECTION_INFO
+    <set >
+      <if test="corgid != null" >
+        CORGID = #{corgid,jdbcType=VARCHAR},
+      </if>
+      <if test="torgid != null" >
+        TORGID = #{torgid,jdbcType=VARCHAR},
+      </if>
+      <if test="cname != null" >
+        CNAME = #{cname,jdbcType=VARCHAR},
+      </if>
+      <if test="cip != null" >
+        CIP = #{cip,jdbcType=VARCHAR},
+      </if>
+      <if test="cport != null" >
+        CPORT = #{cport,jdbcType=VARCHAR},
+      </if>
+      <if test="cusername != null" >
+        CUSERNAME = #{cusername,jdbcType=VARCHAR},
+      </if>
+      <if test="cpassword != null" >
+        CPASSWORD = #{cpassword,jdbcType=VARCHAR},
+      </if>
+      <if test="opid != null" >
+        OPID = #{opid,jdbcType=VARCHAR},
+      </if>
+      <if test="optime != null" >
+        OPTIME = #{optime,jdbcType=DATE},
+      </if>
+      <if test="remark != null" >
+        REMARK = #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="delflg != null" >
+        DELFLG = #{delflg,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where CID = #{cid,jdbcType=DECIMAL}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.sinog2c.model.system.Tbcourtconnectioninfo" >
+    update TBCOURT_CONNECTION_INFO
+    set CORGID = #{corgid,jdbcType=VARCHAR},
+      TORGID = #{torgid,jdbcType=VARCHAR},
+      CNAME = #{cname,jdbcType=VARCHAR},
+      CIP = #{cip,jdbcType=VARCHAR},
+      CPORT = #{cport,jdbcType=VARCHAR},
+      CUSERNAME = #{cusername,jdbcType=VARCHAR},
+      CPASSWORD = #{cpassword,jdbcType=VARCHAR},
+      OPID = #{opid,jdbcType=VARCHAR},
+      OPTIME = #{optime,jdbcType=DATE},
+      REMARK = #{remark,jdbcType=VARCHAR},
+      DELFLG = #{delflg,jdbcType=VARCHAR}
+    where CID = #{cid,jdbcType=DECIMAL}
+  </update>
+  <select id="getVideoSessionListCount" resultType="int">
+ 	 	select count(1) from TBCOURT_CONNECTION_INFO where corgid=#{orgid}
+  </select>
+   <select id="getVideoSessionList" resultType="java.util.Map">    
+	 SELECT * FROM 
+	 	( SELECT A.*, ROWNUM RN 
+		 	FROM 
+		 	(
+		 		select c.*,o.name as torgidstr from TBCOURT_CONNECTION_INFO c,TBSYS_ORGINFO o where c.corgid=#{orgid} and c.torgid=o.orgid 
+		 	) A 
+		 	WHERE ROWNUM &lt;= #{end,jdbcType=DECIMAL}
+		 	<if test="sortField != null and sortField != '' and sortOrder != null and sortOrder !=''" >
+		 	 order by a.${sortField} ${sortOrder} 
+		 	</if>
+	 	) 
+	 	WHERE RN &gt;= #{start,jdbcType=DECIMAL} 
+  </select> 
+  <select id="getVideoSessionDepartmentsCount" resultType="int">
+	select count(1) from TBSYS_ORGINFO where (intermediatecourt=#{orgid} or highcourt=#{orgid})
+  </select>
+     <select id="getVideoSessionDepartments" resultType="java.util.Map">    
+	 SELECT * FROM 
+	 	( SELECT A.*, ROWNUM RN 
+		 	FROM 
+		 	(
+		 		select orgid,name from TBSYS_ORGINFO where (intermediatecourt=#{orgid} or highcourt=#{orgid}) 
+		 	) A 
+		 	WHERE ROWNUM &lt;= #{end,jdbcType=DECIMAL}
+		 	<if test="key != null and key != ''" >
+		 	 and name like '%'||#{key}||'%'
+		 	</if>
+		 	<if test="sortField != null and sortField != '' and sortOrder != null and sortOrder !=''" >
+		 	 order by ${sortField} ${sortOrder} 
+		 	</if>
+	 	) 
+	 	WHERE RN &gt;= #{start,jdbcType=DECIMAL} 
+  </select> 
+  <select id="getVideoPlayDepartments" resultType="java.util.Map">    
+	 select c.*,o.name as tname from TBCOURT_CONNECTION_INFO c,TBSYS_ORGINFO o where c.torgid=o.orgid and c.corgid=#{orgid} order by TORGID
+  </select> 
+</mapper>

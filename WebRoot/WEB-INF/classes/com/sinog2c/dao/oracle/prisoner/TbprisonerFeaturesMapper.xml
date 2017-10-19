@@ -1,0 +1,157 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.sinog2c.dao.api.prisoner.TbprisonerFeaturesMapper">
+  <resultMap id="BaseResultMap" type="com.sinog2c.model.prisoner.TbprisonerFeatures">
+    <id column="CRIMID" jdbcType="VARCHAR" property="crimid" />
+    <result column="HEIGHT" jdbcType="DECIMAL" property="height" />
+    <result column="SHAPE" jdbcType="VARCHAR" property="shape" />
+    <result column="WEIGHT" jdbcType="DECIMAL" property="weight" />
+    <result column="FACE" jdbcType="VARCHAR" property="face" />
+    <result column="BLOODTYPE" jdbcType="VARCHAR" property="bloodtype" />
+    <result column="FOOTLENGTH" jdbcType="DECIMAL" property="footlength" />
+    <result column="DIALECT" jdbcType="VARCHAR" property="dialect" />
+    <result column="SKIN" jdbcType="VARCHAR" property="skin" />
+    <result column="FEATURE" jdbcType="VARCHAR" property="feature" />
+    <result column="REMARK" jdbcType="VARCHAR" property="remark" />
+    <result column="OPID" jdbcType="VARCHAR" property="opid" />
+    <result column="OPTIME" jdbcType="DATE" property="optime" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    CRIMID, HEIGHT, SHAPE, WEIGHT, FACE, BLOODTYPE, FOOTLENGTH, DIALECT, SKIN, FEATURE,
+    REMARK, OPID, OPTIME
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from TBPRISONER_FEATURES
+    where CRIMID = #{crimid,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from TBPRISONER_FEATURES
+    where CRIMID = #{crimid,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insertSelective" parameterType="com.sinog2c.model.prisoner.TbprisonerFeatures">
+    insert into TBPRISONER_FEATURES
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="crimid != null">
+        CRIMID,
+      </if>
+      <if test="height != null">
+        HEIGHT,
+      </if>
+      <if test="shape != null">
+        SHAPE,
+      </if>
+      <if test="weight != null">
+        WEIGHT,
+      </if>
+      <if test="face != null">
+        FACE,
+      </if>
+      <if test="bloodtype != null">
+        BLOODTYPE,
+      </if>
+      <if test="footlength != null">
+        FOOTLENGTH,
+      </if>
+      <if test="dialect != null">
+        DIALECT,
+      </if>
+      <if test="skin != null">
+        SKIN,
+      </if>
+      <if test="feature != null">
+        FEATURE,
+      </if>
+      <if test="remark != null">
+        REMARK,
+      </if>
+      <if test="opid != null">
+        OPID,
+      </if>
+      <if test="optime != null">
+        OPTIME,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="crimid != null">
+        #{crimid,jdbcType=VARCHAR},
+      </if>
+      <if test="height != null">
+        #{height,jdbcType=DECIMAL},
+      </if>
+      <if test="shape != null">
+        #{shape,jdbcType=VARCHAR},
+      </if>
+      <if test="weight != null">
+        #{weight,jdbcType=DECIMAL},
+      </if>
+      <if test="face != null">
+        #{face,jdbcType=VARCHAR},
+      </if>
+      <if test="bloodtype != null">
+        #{bloodtype,jdbcType=VARCHAR},
+      </if>
+      <if test="footlength != null">
+        #{footlength,jdbcType=DECIMAL},
+      </if>
+      <if test="dialect != null">
+        #{dialect,jdbcType=VARCHAR},
+      </if>
+      <if test="skin != null">
+        #{skin,jdbcType=VARCHAR},
+      </if>
+      <if test="remark != null">
+        #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="opid != null">
+        #{opid,jdbcType=VARCHAR},
+      </if>
+      <if test="optime != null">
+        #{optime,jdbcType=DATE},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.sinog2c.model.prisoner.TbprisonerFeatures">
+    update TBPRISONER_FEATURES
+    <set>
+      <if test="height != null">
+        HEIGHT = #{height,jdbcType=DECIMAL},
+      </if>
+      <if test="shape != null">
+        SHAPE = #{shape,jdbcType=VARCHAR},
+      </if>
+      <if test="weight != null">
+        WEIGHT = #{weight,jdbcType=DECIMAL},
+      </if>
+      <if test="face != null">
+        FACE = #{face,jdbcType=VARCHAR},
+      </if>
+      <if test="bloodtype != null">
+        BLOODTYPE = #{bloodtype,jdbcType=VARCHAR},
+      </if>
+      <if test="footlength != null">
+        FOOTLENGTH = #{footlength,jdbcType=DECIMAL},
+      </if>
+      <if test="dialect != null">
+        DIALECT = #{dialect,jdbcType=VARCHAR},
+      </if>
+      <if test="skin != null">
+        SKIN = #{skin,jdbcType=VARCHAR},
+      </if>
+      <if test="feature != null">
+        FEATURE = #{feature,jdbcType=VARCHAR},
+      </if>
+      <if test="remark != null">
+        REMARK = #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="opid != null">
+        OPID = #{opid,jdbcType=VARCHAR},
+      </if>
+      <if test="optime != null">
+        OPTIME = #{optime,jdbcType=DATE},
+      </if>
+    </set>
+    where CRIMID = #{crimid,jdbcType=VARCHAR}
+  </update>
+</mapper>

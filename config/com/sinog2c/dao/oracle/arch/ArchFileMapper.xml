@@ -1,0 +1,386 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.sinog2c.dao.api.arch.ArchFileMapper">
+	<resultMap id="BaseResultMap" type="com.sinog2c.model.arch.ArchFile">
+		<id column="ID" property="id" jdbcType="DECIMAL" />
+		<result column="DOC_GUID" property="docGuid" jdbcType="VARCHAR" />
+		<result column="UNIT_CODE" property="unitCode" jdbcType="VARCHAR" />
+		<result column="FONDS_NO" property="fondsNo" jdbcType="VARCHAR" />
+		<result column="YEAR" property="year" jdbcType="VARCHAR" />
+		<result column="SAVE_DATE" property="saveDate" jdbcType="VARCHAR" />
+		<result column="ORG_NO" property="orgNo" jdbcType="VARCHAR" />
+		<result column="BOX_ID" property="boxId" jdbcType="DECIMAL" />
+		<result column="FILE_NO" property="fileNo" jdbcType="DECIMAL" />
+		<result column="ARCHIVE_NO" property="archiveNo" jdbcType="VARCHAR" />
+		<result column="FILE_NAME" property="fileName" jdbcType="VARCHAR" />
+		<result column="SEND_UNIT" property="sendUnit" jdbcType="VARCHAR" />
+		<result column="FILE_CODE" property="fileCode" jdbcType="VARCHAR" />
+		<result column="CARRIER_NO" property="carrierNo" jdbcType="VARCHAR" />
+		<result column="DATE1" property="date1" jdbcType="TIMESTAMP" />
+		<result column="CARRIER_TYPE" property="carrierType" jdbcType="VARCHAR" />
+		<result column="TYPE" property="type" jdbcType="VARCHAR" />
+		<result column="SECRET" property="secret" jdbcType="VARCHAR" />
+		<result column="URGENCY" property="urgency" jdbcType="VARCHAR" />
+		<result column="REMARK" property="remark" jdbcType="VARCHAR" />
+		<result column="USER_ID" property="userId" jdbcType="VARCHAR" />
+		<result column="IS_ARCH" property="isArch" jdbcType="DECIMAL" />
+		<result column="IS_DEL" property="isDel" jdbcType="DECIMAL" />
+		<result column="DOC_FLOWID" property="docFlowid" jdbcType="VARCHAR" />
+		<result column="orgName" property="orgName" jdbcType="VARCHAR" />
+	</resultMap>
+	<sql id="Base_Column_List">
+		ID, DOC_GUID, UNIT_CODE, FONDS_NO, YEAR, SAVE_DATE, ORG_NO, BOX_ID,
+		FILE_NO, ARCHIVE_NO,
+		FILE_NAME, SEND_UNIT, FILE_CODE, CARRIER_NO, DATE1, CARRIER_TYPE, TYPE, SECRET,
+		URGENCY,
+		REMARK, USER_ID, IS_ARCH, IS_DEL, DOC_FLOWID
+	</sql>
+	<select id="selectByPrimaryKey" resultMap="BaseResultMap"
+		parameterType="java.lang.Long">
+		select
+		<include refid="Base_Column_List" />
+		from ARCHIVE
+		where ID = #{id,jdbcType=DECIMAL}
+	</select>
+	<delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+		delete from ARCHIVE
+		where ID = #{id,jdbcType=DECIMAL}
+	</delete>
+	<insert id="insert" parameterType="com.sinog2c.model.arch.ArchFile">
+		insert into ARCHIVE (ID, DOC_GUID, UNIT_CODE,
+		FONDS_NO, YEAR, SAVE_DATE,
+		ORG_NO, BOX_ID, FILE_NO,
+		ARCHIVE_NO, FILE_NAME, SEND_UNIT,
+		FILE_CODE, CARRIER_NO, DATE1,
+		CARRIER_TYPE, TYPE, SECRET,
+		URGENCY, REMARK, USER_ID,
+		IS_ARCH, IS_DEL, DOC_FLOWID
+		)
+		values (#{id,jdbcType=DECIMAL}, #{docGuid,jdbcType=VARCHAR},
+		#{unitCode,jdbcType=VARCHAR},
+		#{fondsNo,jdbcType=VARCHAR}, #{year,jdbcType=VARCHAR}, #{saveDate,jdbcType=VARCHAR},
+		#{orgNo,jdbcType=VARCHAR}, #{boxId,jdbcType=DECIMAL},
+		#{fileNo,jdbcType=DECIMAL},
+		#{archiveNo,jdbcType=VARCHAR}, #{fileName,jdbcType=VARCHAR}, #{sendUnit,jdbcType=VARCHAR},
+		#{fileCode,jdbcType=VARCHAR}, #{carrierNo,jdbcType=VARCHAR},
+		#{date1,jdbcType=TIMESTAMP},
+		#{carrierType,jdbcType=VARCHAR}, #{type,jdbcType=VARCHAR}, #{secret,jdbcType=VARCHAR},
+		#{urgency,jdbcType=VARCHAR}, #{remark,jdbcType=VARCHAR},
+		#{userId,jdbcType=VARCHAR},
+		#{isArch,jdbcType=DECIMAL}, #{isDel,jdbcType=DECIMAL}, #{docFlowid,jdbcType=VARCHAR}
+		)
+	</insert>
+	<insert id="insertSelective" parameterType="com.sinog2c.model.arch.ArchFile">
+		insert into ARCHIVE
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				ID,
+			</if>
+			<if test="docGuid != null">
+				DOC_GUID,
+			</if>
+			<if test="unitCode != null">
+				UNIT_CODE,
+			</if>
+			<if test="fondsNo != null">
+				FONDS_NO,
+			</if>
+			<if test="year != null">
+				YEAR,
+			</if>
+			<if test="saveDate != null">
+				SAVE_DATE,
+			</if>
+			<if test="orgNo != null">
+				ORG_NO,
+			</if>
+			<if test="boxId != null">
+				BOX_ID,
+			</if>
+			<if test="fileNo != null">
+				FILE_NO,
+			</if>
+			<if test="archiveNo != null">
+				ARCHIVE_NO,
+			</if>
+			<if test="fileName != null">
+				FILE_NAME,
+			</if>
+			<if test="sendUnit != null">
+				SEND_UNIT,
+			</if>
+			<if test="fileCode != null">
+				FILE_CODE,
+			</if>
+			<if test="carrierNo != null and carrierNo!=''">
+				CARRIER_NO,
+			</if>
+			<if test="date1 != null">
+				DATE1,
+			</if>
+			<if test="carrierType != null">
+				CARRIER_TYPE,
+			</if>
+			<if test="type != null">
+				TYPE,
+			</if>
+			<if test="secret != null">
+				SECRET,
+			</if>
+			<if test="urgency != null">
+				URGENCY,
+			</if>
+			<if test="remark != null">
+				REMARK,
+			</if>
+			<if test="userId != null">
+				USER_ID,
+			</if>
+			<if test="isArch != null">
+				IS_ARCH,
+			</if>
+			<if test="isDel != null">
+				IS_DEL,
+			</if>
+			<if test="docFlowid != null">
+				DOC_FLOWID,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				#{id,jdbcType=DECIMAL},
+			</if>
+			<if test="docGuid != null">
+				#{docGuid,jdbcType=VARCHAR},
+			</if>
+			<if test="unitCode != null">
+				#{unitCode,jdbcType=VARCHAR},
+			</if>
+			<if test="fondsNo != null">
+				#{fondsNo,jdbcType=VARCHAR},
+			</if>
+			<if test="year != null">
+				#{year,jdbcType=VARCHAR},
+			</if>
+			<if test="saveDate != null">
+				#{saveDate,jdbcType=VARCHAR},
+			</if>
+			<if test="orgNo != null">
+				#{orgNo,jdbcType=VARCHAR},
+			</if>
+			<if test="boxId != null">
+				#{boxId,jdbcType=DECIMAL},
+			</if>
+			<if test="fileNo != null">
+				#{fileNo,jdbcType=DECIMAL},
+			</if>
+			<if test="archiveNo != null">
+				#{archiveNo,jdbcType=VARCHAR},
+			</if>
+			<if test="fileName != null">
+				#{fileName,jdbcType=VARCHAR},
+			</if>
+			<if test="sendUnit != null">
+				#{sendUnit,jdbcType=VARCHAR},
+			</if>
+			<if test="fileCode != null">
+				#{fileCode,jdbcType=VARCHAR},
+			</if>
+			<if test="carrierNo != null and carrierNo!=''">
+				#{carrierNo,jdbcType=VARCHAR},
+			</if>
+			<if test="date1 != null">
+				#{date1,jdbcType=TIMESTAMP},
+			</if>
+			<if test="carrierType != null">
+				#{carrierType,jdbcType=VARCHAR},
+			</if>
+			<if test="type != null">
+				#{type,jdbcType=VARCHAR},
+			</if>
+			<if test="secret != null">
+				#{secret,jdbcType=VARCHAR},
+			</if>
+			<if test="urgency != null">
+				#{urgency,jdbcType=VARCHAR},
+			</if>
+			<if test="remark != null">
+				#{remark,jdbcType=VARCHAR},
+			</if>
+			<if test="userId != null">
+				#{userId,jdbcType=VARCHAR},
+			</if>
+			<if test="isArch != null">
+				#{isArch,jdbcType=DECIMAL},
+			</if>
+			<if test="isDel != null">
+				#{isDel,jdbcType=DECIMAL},
+			</if>
+			<if test="docFlowid != null">
+				#{docFlowid,jdbcType=VARCHAR},
+			</if>
+		</trim>
+	</insert>
+	<update id="updateByPrimaryKeySelective" parameterType="com.sinog2c.model.arch.ArchFile">
+		update ARCHIVE
+		<set>
+			<if test="docGuid != null">
+				DOC_GUID = #{docGuid,jdbcType=VARCHAR},
+			</if>
+			<if test="unitCode != null">
+				UNIT_CODE = #{unitCode,jdbcType=VARCHAR},
+			</if>
+			<if test="fondsNo != null">
+				FONDS_NO = #{fondsNo,jdbcType=VARCHAR},
+			</if>
+			<if test="year != null">
+				YEAR = #{year,jdbcType=VARCHAR},
+			</if>
+			<if test="saveDate != null">
+				SAVE_DATE = #{saveDate,jdbcType=VARCHAR},
+			</if>
+			<if test="orgNo != null">
+				ORG_NO = #{orgNo,jdbcType=VARCHAR},
+			</if>
+			<if test="boxId != null">
+				BOX_ID = #{boxId,jdbcType=DECIMAL},
+			</if>
+			<if test="fileNo != null">
+				FILE_NO = #{fileNo,jdbcType=DECIMAL},
+			</if>
+			<if test="archiveNo != null">
+				ARCHIVE_NO = #{archiveNo,jdbcType=VARCHAR},
+			</if>
+			<if test="fileName != null">
+				FILE_NAME = #{fileName,jdbcType=VARCHAR},
+			</if>
+			<if test="sendUnit != null">
+				SEND_UNIT = #{sendUnit,jdbcType=VARCHAR},
+			</if>
+			<if test="fileCode != null">
+				FILE_CODE = #{fileCode,jdbcType=VARCHAR},
+			</if>
+			<if test="carrierNo != null">
+				CARRIER_NO = #{carrierNo,jdbcType=VARCHAR},
+			</if>
+			<if test="date1 != null">
+				DATE1 = #{date1,jdbcType=TIMESTAMP},
+			</if>
+			<if test="carrierType != null">
+				CARRIER_TYPE = #{carrierType,jdbcType=VARCHAR},
+			</if>
+			<if test="type != null">
+				TYPE = #{type,jdbcType=VARCHAR},
+			</if>
+			<if test="secret != null">
+				SECRET = #{secret,jdbcType=VARCHAR},
+			</if>
+			<if test="urgency != null">
+				URGENCY = #{urgency,jdbcType=VARCHAR},
+			</if>
+			<if test="remark != null">
+				REMARK = #{remark,jdbcType=VARCHAR},
+			</if>
+			<if test="userId != null">
+				USER_ID = #{userId,jdbcType=VARCHAR},
+			</if>
+			<if test="isArch != null">
+				IS_ARCH = #{isArch,jdbcType=DECIMAL},
+			</if>
+			<if test="isDel != null">
+				IS_DEL = #{isDel,jdbcType=DECIMAL},
+			</if>
+			<if test="docFlowid != null">
+				DOC_FLOWID = #{docFlowid,jdbcType=VARCHAR},
+			</if>
+		</set>
+		where ID = #{id,jdbcType=DECIMAL}
+	</update>
+	<update id="updateByPrimaryKey" parameterType="com.sinog2c.model.arch.ArchFile">
+		update ARCHIVE
+		set DOC_GUID = #{docGuid,jdbcType=VARCHAR},
+		UNIT_CODE = #{unitCode,jdbcType=VARCHAR},
+		FONDS_NO = #{fondsNo,jdbcType=VARCHAR},
+		YEAR = #{year,jdbcType=VARCHAR},
+		SAVE_DATE = #{saveDate,jdbcType=VARCHAR},
+		ORG_NO = #{orgNo,jdbcType=VARCHAR},
+		BOX_ID = #{boxId,jdbcType=DECIMAL},
+		FILE_NO = #{fileNo,jdbcType=DECIMAL},
+		ARCHIVE_NO = #{archiveNo,jdbcType=VARCHAR},
+		FILE_NAME = #{fileName,jdbcType=VARCHAR},
+		SEND_UNIT = #{sendUnit,jdbcType=VARCHAR},
+		FILE_CODE = #{fileCode,jdbcType=VARCHAR},
+		CARRIER_NO = #{carrierNo,jdbcType=VARCHAR},
+		DATE1 = #{date1,jdbcType=TIMESTAMP},
+		CARRIER_TYPE = #{carrierType,jdbcType=VARCHAR},
+		TYPE = #{type,jdbcType=VARCHAR},
+		SECRET = #{secret,jdbcType=VARCHAR},
+		URGENCY = #{urgency,jdbcType=VARCHAR},
+		REMARK = #{remark,jdbcType=VARCHAR},
+		USER_ID = #{userId,jdbcType=VARCHAR},
+		IS_ARCH = #{isArch,jdbcType=DECIMAL},
+		IS_DEL = #{isDel,jdbcType=DECIMAL},
+		DOC_FLOWID = #{docFlowid,jdbcType=VARCHAR}
+		where ID = #{id,jdbcType=DECIMAL}
+	</update>
+
+	<update id="updatearchfilebox" parameterType="java.lang.Long">
+		update ARCHIVE
+		set BOX_ID = 0
+		where BOX_ID = #{boxId,jdbcType=DECIMAL}
+	</update>
+	
+	<update id="setArchflag" parameterType="java.lang.Long">
+		update ARCHIVE
+		set IS_ARCH =1
+		where BOX_ID = #{boxId,jdbcType=DECIMAL}
+	</update>
+
+	<select id="getarchfilebycondition" resultMap="BaseResultMap">
+		select F_getOrgName(ORG_NO) as orgName,a.* from (
+		select
+		rownum rn ,t.*
+		from ( select *
+		from ARCHIVE
+		where
+		IS_DEL=0
+		<if test="fileName != null and fileName!=''">
+			And (FILE_NAME like '%'||#{fileName}||'%' or FILE_CODE
+			like '%'||#{fileName}||'%')
+		</if>
+		<if test="boxId != null and boxId!=0">
+			And BOX_ID = #{boxId,jdbcType=DECIMAL}
+		</if>
+		<if test="sortField!=null and sortField !=''">
+			order by ${sortField} ${sortOrder}
+		</if>
+		)t where rownum&lt;=#{end,jdbcType=DECIMAL}) a
+		where
+		a.rn&gt;=#{start,jdbcType=DECIMAL}
+	</select>
+
+	<select id="getcountofarchfilebycondition" resultType="int">
+		select count(*) from ARCHIVE
+		where IS_DEL=0
+		<if test="fileName != null and fileName!=''">
+			And (FILE_NAME like '%'||#{fileName}||'%' or FILE_CODE
+			like '%'||#{fileName}||'%')
+		</if>
+		<if test="boxId != null and boxId!=0">
+			And BOX_ID = #{boxId,jdbcType=DECIMAL}
+		</if>
+	</select>
+	
+	<select id="getNextId" resultType="java.lang.Long">  <!-- 获取下一个ID -->
+		SELECT archive_id_seq.NEXTVAL FROM DUAL
+	</select>
+	
+	<select id="getArchFileByid" resultMap="BaseResultMap"
+		parameterType="java.lang.Long">
+		select F_getOrgName(ORG_NO) as orgName,
+		<include refid="Base_Column_List" />
+		from ARCHIVE
+		where ID = #{id,jdbcType=DECIMAL}
+	</select>
+
+</mapper>

@@ -1,0 +1,431 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.sinog2c.dao.api.khjc.TkhRoutineexaminationMapper" >
+  <resultMap id="BaseResultMap" type="com.sinog2c.model.khjc.TkhRoutineexamination" >
+    <id column="ROUTINEID" property="routineid" jdbcType="DECIMAL" />
+    <result column="CRIMID" property="crimid" jdbcType="VARCHAR" />
+    <result column="FLOWID" property="flowid" jdbcType="VARCHAR" />
+    <result column="ORGPID" property="orgpid" jdbcType="VARCHAR" />
+    <result column="ORGID" property="orgid" jdbcType="VARCHAR" />
+    <result column="ORGSID" property="orgsid" jdbcType="VARCHAR" />
+    <result column="RULEID" property="ruleid" jdbcType="VARCHAR" />
+    <result column="SEARCHCODE" property="searchcode" jdbcType="VARCHAR" />
+    <result column="SCORE" property="score" jdbcType="DECIMAL" />
+    <result column="TYPEID" property="typeid" jdbcType="VARCHAR" />
+    <result column="APPLYTIME" property="applytime" jdbcType="VARCHAR" />
+    <result column="APPROVALCOMMENT" property="approvalcomment" jdbcType="VARCHAR" />
+    <result column="ISCANCEL" property="iscancel" jdbcType="DECIMAL" />
+    <result column="CANCELREASON" property="cancelreason" jdbcType="VARCHAR" />
+    <result column="CANCETIME" property="cancetime" jdbcType="VARCHAR" />
+    <result column="CANCEID" property="canceid" jdbcType="VARCHAR" />
+    <result column="TEXT1" property="text1" jdbcType="VARCHAR" />
+    <result column="TEXT2" property="text2" jdbcType="VARCHAR" />
+    <result column="TEXT3" property="text3" jdbcType="VARCHAR" />
+    <result column="TEXT4" property="text4" jdbcType="VARCHAR" />
+    <result column="TEXT5" property="text5" jdbcType="VARCHAR" />
+    <result column="TEXT6" property="text6" jdbcType="VARCHAR" />
+    <result column="TEXT7" property="text7" jdbcType="VARCHAR" />
+    <result column="TEXT8" property="text8" jdbcType="VARCHAR" />
+    <result column="INT1" property="int1" jdbcType="DECIMAL" />
+    <result column="OPID" property="opid" jdbcType="VARCHAR" />
+    <result column="OPTIME" property="optime" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    ROUTINEID, CRIMID, FLOWID, ORGPID, ORGID, ORGSID, RULEID, SEARCHCODE, SCORE, TYPEID, 
+    APPLYTIME, APPROVALCOMMENT, ISCANCEL, CANCELREASON, CANCETIME, CANCEID, TEXT1, TEXT2, 
+    TEXT3, TEXT4, TEXT5, TEXT6, TEXT7, TEXT8, INT1, OPID, OPTIME
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from TKH_ROUTINEEXAMINATION
+    where ROUTINEID = #{routineid,jdbcType=DECIMAL}
+  </select>
+  
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from TKH_ROUTINEEXAMINATION
+    where ROUTINEID = #{routineid,jdbcType=DECIMAL}
+  </delete>
+  <insert id="insert" parameterType="com.sinog2c.model.khjc.TkhRoutineexamination" >
+    insert into TKH_ROUTINEEXAMINATION (ROUTINEID, CRIMID, FLOWID, 
+      ORGPID, ORGID, ORGSID, 
+      RULEID, SEARCHCODE, SCORE, 
+      TYPEID, APPLYTIME, APPROVALCOMMENT, 
+      ISCANCEL, CANCELREASON, CANCETIME, 
+      CANCEID, TEXT1, TEXT2, 
+      TEXT3, TEXT4, TEXT5, 
+      TEXT6, TEXT7, TEXT8, 
+      INT1, OPID, OPTIME)
+    values (#{routineid,jdbcType=DECIMAL}, #{crimid,jdbcType=VARCHAR}, #{flowid,jdbcType=VARCHAR}, 
+      #{orgpid,jdbcType=VARCHAR}, #{orgid,jdbcType=VARCHAR}, #{orgsid,jdbcType=VARCHAR}, 
+      #{ruleid,jdbcType=VARCHAR}, #{searchcode,jdbcType=VARCHAR}, #{score,jdbcType=DECIMAL}, 
+      #{typeid,jdbcType=VARCHAR}, #{applytime,jdbcType=VARCHAR}, #{approvalcomment,jdbcType=VARCHAR}, 
+      #{iscancel,jdbcType=DECIMAL}, #{cancelreason,jdbcType=VARCHAR}, #{cancetime,jdbcType=VARCHAR}, 
+      #{canceid,jdbcType=VARCHAR}, #{text1,jdbcType=VARCHAR}, #{text2,jdbcType=VARCHAR}, 
+      #{text3,jdbcType=VARCHAR}, #{text4,jdbcType=VARCHAR}, #{text5,jdbcType=VARCHAR}, 
+      #{text6,jdbcType=VARCHAR}, #{text7,jdbcType=VARCHAR}, #{text8,jdbcType=VARCHAR}, 
+      #{int1,jdbcType=DECIMAL}, #{opid,jdbcType=VARCHAR}, #{optime,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.sinog2c.model.khjc.TkhRoutineexamination" >
+    insert into TKH_ROUTINEEXAMINATION
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="routineid != null" >
+        ROUTINEID,
+      </if>
+      <if test="crimid != null" >
+        CRIMID,
+      </if>
+      <if test="flowid != null" >
+        FLOWID,
+      </if>
+      <if test="orgpid != null" >
+        ORGPID,
+      </if>
+      <if test="orgid != null" >
+        ORGID,
+      </if>
+      <if test="orgsid != null" >
+        ORGSID,
+      </if>
+      <if test="ruleid != null" >
+        RULEID,
+      </if>
+      <if test="searchcode != null" >
+        SEARCHCODE,
+      </if>
+      <if test="score != null" >
+        SCORE,
+      </if>
+      <if test="typeid != null" >
+        TYPEID,
+      </if>
+      <if test="applytime != null" >
+        APPLYTIME,
+      </if>
+      <if test="approvalcomment != null" >
+        APPROVALCOMMENT,
+      </if>
+      <if test="iscancel != null" >
+        ISCANCEL,
+      </if>
+      <if test="cancelreason != null" >
+        CANCELREASON,
+      </if>
+      <if test="cancetime != null" >
+        CANCETIME,
+      </if>
+      <if test="canceid != null" >
+        CANCEID,
+      </if>
+      <if test="text1 != null" >
+        TEXT1,
+      </if>
+      <if test="text2 != null" >
+        TEXT2,
+      </if>
+      <if test="text3 != null" >
+        TEXT3,
+      </if>
+      <if test="text4 != null" >
+        TEXT4,
+      </if>
+      <if test="text5 != null" >
+        TEXT5,
+      </if>
+      <if test="text6 != null" >
+        TEXT6,
+      </if>
+      <if test="text7 != null" >
+        TEXT7,
+      </if>
+      <if test="text8 != null" >
+        TEXT8,
+      </if>
+      <if test="int1 != null" >
+        INT1,
+      </if>
+      <if test="opid != null" >
+        OPID,
+      </if>
+      <if test="optime != null" >
+        OPTIME,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="routineid != null" >
+        #{routineid,jdbcType=DECIMAL},
+      </if>
+      <if test="crimid != null" >
+        #{crimid,jdbcType=VARCHAR},
+      </if>
+      <if test="flowid != null" >
+        #{flowid,jdbcType=VARCHAR},
+      </if>
+      <if test="orgpid != null" >
+        #{orgpid,jdbcType=VARCHAR},
+      </if>
+      <if test="orgid != null" >
+        #{orgid,jdbcType=VARCHAR},
+      </if>
+      <if test="orgsid != null" >
+        #{orgsid,jdbcType=VARCHAR},
+      </if>
+      <if test="ruleid != null" >
+        #{ruleid,jdbcType=VARCHAR},
+      </if>
+      <if test="searchcode != null" >
+        #{searchcode,jdbcType=VARCHAR},
+      </if>
+      <if test="score != null" >
+        #{score,jdbcType=DECIMAL},
+      </if>
+      <if test="typeid != null" >
+        #{typeid,jdbcType=VARCHAR},
+      </if>
+      <if test="applytime != null" >
+        #{applytime,jdbcType=VARCHAR},
+      </if>
+      <if test="approvalcomment != null" >
+        #{approvalcomment,jdbcType=VARCHAR},
+      </if>
+      <if test="iscancel != null" >
+        #{iscancel,jdbcType=DECIMAL},
+      </if>
+      <if test="cancelreason != null" >
+        #{cancelreason,jdbcType=VARCHAR},
+      </if>
+      <if test="cancetime != null" >
+        #{cancetime,jdbcType=VARCHAR},
+      </if>
+      <if test="canceid != null" >
+        #{canceid,jdbcType=VARCHAR},
+      </if>
+      <if test="text1 != null" >
+        #{text1,jdbcType=VARCHAR},
+      </if>
+      <if test="text2 != null" >
+        #{text2,jdbcType=VARCHAR},
+      </if>
+      <if test="text3 != null" >
+        #{text3,jdbcType=VARCHAR},
+      </if>
+      <if test="text4 != null" >
+        #{text4,jdbcType=VARCHAR},
+      </if>
+      <if test="text5 != null" >
+        #{text5,jdbcType=VARCHAR},
+      </if>
+      <if test="text6 != null" >
+        #{text6,jdbcType=VARCHAR},
+      </if>
+      <if test="text7 != null" >
+        #{text7,jdbcType=VARCHAR},
+      </if>
+      <if test="text8 != null" >
+        #{text8,jdbcType=VARCHAR},
+      </if>
+      <if test="int1 != null" >
+        #{int1,jdbcType=DECIMAL},
+      </if>
+      <if test="opid != null" >
+        #{opid,jdbcType=VARCHAR},
+      </if>
+      <if test="optime != null" >
+        #{optime,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.sinog2c.model.khjc.TkhRoutineexamination" >
+    update TKH_ROUTINEEXAMINATION
+    <set >
+      <if test="crimid != null" >
+        CRIMID = #{crimid,jdbcType=VARCHAR},
+      </if>
+      <if test="flowid != null" >
+        FLOWID = #{flowid,jdbcType=VARCHAR},
+      </if>
+      <if test="orgpid != null" >
+        ORGPID = #{orgpid,jdbcType=VARCHAR},
+      </if>
+      <if test="orgid != null" >
+        ORGID = #{orgid,jdbcType=VARCHAR},
+      </if>
+      <if test="orgsid != null" >
+        ORGSID = #{orgsid,jdbcType=VARCHAR},
+      </if>
+      <if test="ruleid != null" >
+        RULEID = #{ruleid,jdbcType=VARCHAR},
+      </if>
+      <if test="searchcode != null" >
+        SEARCHCODE = #{searchcode,jdbcType=VARCHAR},
+      </if>
+      <if test="score != null" >
+        SCORE = #{score,jdbcType=DECIMAL},
+      </if>
+      <if test="typeid != null" >
+        TYPEID = #{typeid,jdbcType=VARCHAR},
+      </if>
+      <if test="applytime != null" >
+        APPLYTIME = #{applytime,jdbcType=VARCHAR},
+      </if>
+      <if test="approvalcomment != null" >
+        APPROVALCOMMENT = #{approvalcomment,jdbcType=VARCHAR},
+      </if>
+      <if test="iscancel != null" >
+        ISCANCEL = #{iscancel,jdbcType=DECIMAL},
+      </if>
+      <if test="cancelreason != null" >
+        CANCELREASON = #{cancelreason,jdbcType=VARCHAR},
+      </if>
+      <if test="cancetime != null" >
+        CANCETIME = #{cancetime,jdbcType=VARCHAR},
+      </if>
+      <if test="canceid != null" >
+        CANCEID = #{canceid,jdbcType=VARCHAR},
+      </if>
+      <if test="text1 != null" >
+        TEXT1 = #{text1,jdbcType=VARCHAR},
+      </if>
+      <if test="text2 != null" >
+        TEXT2 = #{text2,jdbcType=VARCHAR},
+      </if>
+      <if test="text3 != null" >
+        TEXT3 = #{text3,jdbcType=VARCHAR},
+      </if>
+      <if test="text4 != null" >
+        TEXT4 = #{text4,jdbcType=VARCHAR},
+      </if>
+      <if test="text5 != null" >
+        TEXT5 = #{text5,jdbcType=VARCHAR},
+      </if>
+      <if test="text6 != null" >
+        TEXT6 = #{text6,jdbcType=VARCHAR},
+      </if>
+      <if test="text7 != null" >
+        TEXT7 = #{text7,jdbcType=VARCHAR},
+      </if>
+      <if test="text8 != null" >
+        TEXT8 = #{text8,jdbcType=VARCHAR},
+      </if>
+      <if test="int1 != null" >
+        INT1 = #{int1,jdbcType=DECIMAL},
+      </if>
+      <if test="opid != null" >
+        OPID = #{opid,jdbcType=VARCHAR},
+      </if>
+      <if test="optime != null" >
+        OPTIME = #{optime,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where ROUTINEID = #{routineid,jdbcType=DECIMAL}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.sinog2c.model.khjc.TkhRoutineexamination" >
+    update TKH_ROUTINEEXAMINATION
+    set CRIMID = #{crimid,jdbcType=VARCHAR},
+      FLOWID = #{flowid,jdbcType=VARCHAR},
+      ORGPID = #{orgpid,jdbcType=VARCHAR},
+      ORGID = #{orgid,jdbcType=VARCHAR},
+      ORGSID = #{orgsid,jdbcType=VARCHAR},
+      RULEID = #{ruleid,jdbcType=VARCHAR},
+      SEARCHCODE = #{searchcode,jdbcType=VARCHAR},
+      SCORE = #{score,jdbcType=DECIMAL},
+      TYPEID = #{typeid,jdbcType=VARCHAR},
+      APPLYTIME = #{applytime,jdbcType=VARCHAR},
+      APPROVALCOMMENT = #{approvalcomment,jdbcType=VARCHAR},
+      ISCANCEL = #{iscancel,jdbcType=DECIMAL},
+      CANCELREASON = #{cancelreason,jdbcType=VARCHAR},
+      CANCETIME = #{cancetime,jdbcType=VARCHAR},
+      CANCEID = #{canceid,jdbcType=VARCHAR},
+      TEXT1 = #{text1,jdbcType=VARCHAR},
+      TEXT2 = #{text2,jdbcType=VARCHAR},
+      TEXT3 = #{text3,jdbcType=VARCHAR},
+      TEXT4 = #{text4,jdbcType=VARCHAR},
+      TEXT5 = #{text5,jdbcType=VARCHAR},
+      TEXT6 = #{text6,jdbcType=VARCHAR},
+      TEXT7 = #{text7,jdbcType=VARCHAR},
+      TEXT8 = #{text8,jdbcType=VARCHAR},
+      INT1 = #{int1,jdbcType=DECIMAL},
+      OPID = #{opid,jdbcType=VARCHAR},
+      OPTIME = #{optime,jdbcType=VARCHAR}
+    where ROUTINEID = #{routineid,jdbcType=DECIMAL}
+  </update>
+  
+  <update id="getCancelReason" parameterType="Object">
+  		update tkh_routineexamination
+    		set CANCELREASON = #{cancelreason,jdbcType=VARCHAR},
+    		ISCANCEL = #{iscancel,jdbcType=DECIMAL},
+    		CANCETIME = #{cancetime,jdbcType=VARCHAR},
+    		CANCEID = #{canceid,jdbcType=VARCHAR}
+   	 where CRIMID = #{crimid,jdbcType=DECIMAL}
+  </update>
+  
+  <select id="getCancelReasonView" parameterType="Map" resultType="String">
+  		select tkh.cancelreason from tkh_routineexamination tkh where crimid=#{crimid}
+  </select>
+  
+  <select id="countCondition" parameterType="Object" resultType="int">
+        select count(tkh.crimid) from tkh_routineexamination tkh where crimid=#{crimid}
+  </select>
+  
+  <select id="getInfoList" parameterType="Object" resultType="Map">
+	select * from (
+		select x.*, rownum rn from (
+			select tkh.typeid,tkh.score,tkh.iscancel,
+				to_char(to_date(tkh.applytime,'yyyy-MM-dd HH24:mi:ss'),'yyyy-MM-dd') as applytime,
+				tkh.approvalcomment 
+				from tkh_routineexamination tkh where crimid=#{crimid}
+				<if test="key!=null and key!=''"> 
+  					and (a.crimid like '%'||#{key}||'%' or a.name like '%'||#{key}||'%')
+  				</if>
+         			) x
+				<if test="end!=null and end!=''">
+	   				where rownum &lt;= #{end}
+				</if>
+				 	)
+   				<if test="start!=null and start!=''">
+   					where  rn &gt;= #{start}
+   				</if>
+      		 	<if test="sortField!=null and sortField!=''"> 
+       				order by ${sortField} ${sortOrder}
+       			</if>
+  </select>
+  
+  <select id="countAllByCondition" parameterType="Object" resultType="int">
+  		select count(tb.crimid)
+  			from tbprisoner_baseinfo tb, tbprisoner_base_crime tbp
+ 				where tb.crimid = tbp.crimid and tb.crimid in(select distinct(crimid)
+ 					from tkh_routineexamination tkh)
+ 					<if test="orgid!=null and orgid!=''">
+						and (tbp.orgid1 in(select a.dorgid from TBFLOW_ORG_ORG a where a.orgid
+						=#{orgid}) or tbp.orgid2 in(select a.dorgid from TBFLOW_ORG_ORG a where a.orgid
+						=#{orgid}))
+	    	   		</if>
+  </select>
+  
+  <select id="getBasicInfoList" parameterType="Object" resultType="Map">
+   select * from (
+      select x.*, rownum rn from (
+          select tb.crimid,tb.name,tb.gender,f_formatdate(tb.birthday) as birthday,tb.nation,tb.familyaddress,tbp.orgname1
+          		from tbprisoner_baseinfo tb, tbprisoner_base_crime tbp where tb.crimid = tbp.crimid 
+          				and tb.crimid in (select distinct(crimid) from tkh_routineexamination tkh)
+        		<if test="orgid!=null and orgid!=''">
+					and (tbp.orgid1 in(select a.dorgid from TBFLOW_ORG_ORG a where a.orgid
+					=#{orgid}) or tbp.orgid2 in(select a.dorgid from TBFLOW_ORG_ORG a where a.orgid
+					=#{orgid}))
+	    		</if>
+  				<if test="key!=null and key!=''"> 
+  					and (a.crimid like '%'||#{key}||'%' or a.name like '%'||#{key}||'%' or a.namepinyinshort like '%'||#{key}||'%')
+  				</if>
+         			) x
+				<if test="end!=null and end!=''">
+	   				where rownum &lt;= #{end}
+				</if>
+				 	)
+   				<if test="start!=null and start!=''">
+   					where  rn &gt;= #{start}
+   				</if>
+      		 	<if test="sortField!=null and sortField!=''"> 
+       				order by ${sortField} ${sortOrder}
+       			</if>
+  </select>
+</mapper>

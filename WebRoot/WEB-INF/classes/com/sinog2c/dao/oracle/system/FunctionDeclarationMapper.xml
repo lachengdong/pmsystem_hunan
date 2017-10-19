@@ -1,0 +1,277 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.sinog2c.dao.api.system.FunctionDeclarationMapper" >
+  <resultMap id="BaseResultMap" type="com.sinog2c.model.system.FunctionDeclaration" >
+    <id column="MENUID" property="menuid" jdbcType="VARCHAR" />
+    <result column="TITLE" property="title" jdbcType="VARCHAR" />
+    <result column="SN" property="sn" jdbcType="DECIMAL" />
+    <result column="REMARK" property="remark" jdbcType="VARCHAR" />
+    <result column="OPID" property="opid" jdbcType="VARCHAR" />
+    <result column="OPTIME" property="optime" jdbcType="DATE" />
+  </resultMap>
+  <resultMap id="ResultMapWithBLOBs" type="com.sinog2c.model.system.FunctionDeclaration" extends="BaseResultMap" >
+    <result column="CONTENT" property="content" jdbcType="CLOB" />
+  </resultMap>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    MENUID, TITLE, SN, REMARK, OPID, OPTIME
+  </sql>
+  <sql id="Blob_Column_List" >
+    CONTENT
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from TBSYS_FUNCTION_DECLARATION
+    where MENUID = #{menuid,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from TBSYS_FUNCTION_DECLARATION
+    where MENUID = #{menuid,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.sinog2c.model.system.FunctionDeclaration" >
+    insert into TBSYS_FUNCTION_DECLARATION (MENUID, TITLE, SN, 
+      REMARK, OPID, OPTIME, 
+      CONTENT)
+    values (#{menuid,jdbcType=VARCHAR}, #{title,jdbcType=VARCHAR}, #{sn,jdbcType=DECIMAL}, 
+      #{remark,jdbcType=VARCHAR}, #{opid,jdbcType=VARCHAR}, #{optime,jdbcType=DATE}, 
+      #{content,jdbcType=CLOB})
+  </insert>
+  <insert id="insertSelective" parameterType="com.sinog2c.model.system.FunctionDeclaration" >
+    insert into TBSYS_FUNCTION_DECLARATION
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="menuid != null" >
+        MENUID,
+      </if>
+      <if test="title != null" >
+        TITLE,
+      </if>
+      <if test="sn != null" >
+        SN,
+      </if>
+      <if test="remark != null" >
+        REMARK,
+      </if>
+      <if test="opid != null" >
+        OPID,
+      </if>
+      <if test="optime != null" >
+        OPTIME,
+      </if>
+      <if test="content != null" >
+        CONTENT,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="menuid != null" >
+        #{menuid,jdbcType=VARCHAR},
+      </if>
+      <if test="title != null" >
+        #{title,jdbcType=VARCHAR},
+      </if>
+      <if test="sn != null" >
+        #{sn,jdbcType=DECIMAL},
+      </if>
+      <if test="remark != null" >
+        #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="opid != null" >
+        #{opid,jdbcType=VARCHAR},
+      </if>
+      <if test="optime != null" >
+        #{optime,jdbcType=DATE},
+      </if>
+      <if test="content != null" >
+        #{content,jdbcType=CLOB},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update TBSYS_FUNCTION_DECLARATION
+    <set >
+      <if test="record.menuid != null" >
+        MENUID = #{record.menuid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.title != null" >
+        TITLE = #{record.title,jdbcType=VARCHAR},
+      </if>
+      <if test="record.sn != null" >
+        SN = #{record.sn,jdbcType=DECIMAL},
+      </if>
+      <if test="record.remark != null" >
+        REMARK = #{record.remark,jdbcType=VARCHAR},
+      </if>
+      <if test="record.opid != null" >
+        OPID = #{record.opid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.optime != null" >
+        OPTIME = #{record.optime,jdbcType=DATE},
+      </if>
+      <if test="record.content != null" >
+        CONTENT = #{record.content,jdbcType=CLOB},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExampleWithBLOBs" parameterType="map" >
+    update TBSYS_FUNCTION_DECLARATION
+    set MENUID = #{record.menuid,jdbcType=VARCHAR},
+      TITLE = #{record.title,jdbcType=VARCHAR},
+      SN = #{record.sn,jdbcType=DECIMAL},
+      REMARK = #{record.remark,jdbcType=VARCHAR},
+      OPID = #{record.opid,jdbcType=VARCHAR},
+      OPTIME = #{record.optime,jdbcType=DATE},
+      CONTENT = #{record.content,jdbcType=CLOB}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update TBSYS_FUNCTION_DECLARATION
+    set MENUID = #{record.menuid,jdbcType=VARCHAR},
+      TITLE = #{record.title,jdbcType=VARCHAR},
+      SN = #{record.sn,jdbcType=DECIMAL},
+      REMARK = #{record.remark,jdbcType=VARCHAR},
+      OPID = #{record.opid,jdbcType=VARCHAR},
+      OPTIME = #{record.optime,jdbcType=DATE}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.sinog2c.model.system.FunctionDeclaration" >
+    update TBSYS_FUNCTION_DECLARATION
+    <set >
+      <if test="title != null" >
+        TITLE = #{title,jdbcType=VARCHAR},
+      </if>
+      <if test="sn != null" >
+        SN = #{sn,jdbcType=DECIMAL},
+      </if>
+      <if test="remark != null" >
+        REMARK = #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="opid != null" >
+        OPID = #{opid,jdbcType=VARCHAR},
+      </if>
+      <if test="optime != null" >
+        OPTIME = #{optime,jdbcType=DATE},
+      </if>
+      <if test="content != null" >
+        CONTENT = #{content,jdbcType=CLOB},
+      </if>
+    </set>
+    where MENUID = #{menuid,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.sinog2c.model.system.FunctionDeclaration" >
+    update TBSYS_FUNCTION_DECLARATION
+    set TITLE = #{title,jdbcType=VARCHAR},
+      SN = #{sn,jdbcType=DECIMAL},
+      REMARK = #{remark,jdbcType=VARCHAR},
+      OPID = #{opid,jdbcType=VARCHAR},
+      OPTIME = #{optime,jdbcType=DATE},
+      CONTENT = #{content,jdbcType=CLOB}
+    where MENUID = #{menuid,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.sinog2c.model.system.FunctionDeclaration" >
+    update TBSYS_FUNCTION_DECLARATION
+    set TITLE = #{title,jdbcType=VARCHAR},
+      SN = #{sn,jdbcType=DECIMAL},
+      REMARK = #{remark,jdbcType=VARCHAR},
+      OPID = #{opid,jdbcType=VARCHAR},
+      OPTIME = #{optime,jdbcType=DATE}
+    where MENUID = #{menuid,jdbcType=VARCHAR}
+  </update>
+  
+  <select id="getById" resultType="int">
+   	select count(*) as s from tbsys_function_declaration t where t.menuid=#{menuid}
+  </select>
+  
+  <delete id="removeDocument" parameterType="java.lang.String">
+  	delete from tbsys_function_declaration t where t.menuid=#{resid}
+  </delete>
+  <select id="findByMenuid" resultType="int">
+  	select count(*) from tbsys_function_declaration t where t.menuid=#{resid}
+  </select>
+  <select id="getFunctionContent" resultType="java.lang.String">
+  	select content from tbsys_function_declaration where menuid=#{menuid}
+  </select>
+  <select id="getFunction" resultType="int">
+  	select count(*) from TBSYS_FUNCTION_DECLARATION where menuid=#{menuid}
+  </select>
+  
+  <!-- Excel用 -->
+  <select id="getExcelDetailByID" parameterType="map" resultType="Map">
+    select * from UPLOAD_EXCEL_DETAIL_INFO where id=#{id} order by xuhao
+  </select>
+  
+  <select id="getExcelSettingByID" parameterType="map" resultType="Map">
+    select * from UPLOAD_EXCEL_SETTING_INFO where id=#{id}
+  </select>
+  
+   <select id="getExcelTypeByDepartid"  resultType="map">
+  	select id,remark from UPLOAD_EXCEL_SETTING_INFO where departid=#{departid} order by id asc
+  </select>
+  
+  <select id="getCodeIdByCodeType"  resultType="map">
+  	select * from TBSYS_CODE where CODETYPE = #{codetype} and name=#{value}
+  </select>
+  
+   <insert id="insertTableByCondition" parameterType="Map" >
+	INSERT INTO ${tablename} (${columnlist})
+   	SELECT ${selectlist} FROM DUAL
+  </insert>
+   <update id="updateTableByCondition" parameterType="Map" >
+	update ${tablename} set ${updatelist} 
+   	where 1=1 ${keylist}
+  </update>
+  <select id="getExcelAllCode" resultType="map">
+       SELECT *
+			  FROM TBSYS_CODE
+			 WHERE codetype IN (  SELECT code
+			                        FROM UPLOAD_EXCEL_DETAIL_INFO
+			                       WHERE id = #{id} AND code IS NOT NULL
+			                    GROUP BY code)
+			      and codetype != codeid
+  </select>
+  <!-- 获取所有的重复columnname -->
+  <select id="getAllRepeatColumn" resultType="map">
+       select tocolumnname,count(*) as counts from upload_excel_detail_info group by tocolumnname
+  </select>
+  <select id="callSql">
+	  <![CDATA[   
+	     ${callsql}   
+	  ]]>
+  </select>
+</mapper>

@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.sinog2c.dao.api.system.TbxfRewardtypesMapper" >
+  <resultMap id="BaseResultMap" type="com.sinog2c.model.system.TbxfRewardtypes" >
+    <id column="REWARDID" property="rewardid" jdbcType="DECIMAL" />
+    <result column="DEPARTID" property="departid" jdbcType="VARCHAR" />
+    <result column="NAME" property="name" jdbcType="VARCHAR" />
+    <result column="STIME" property="stime" jdbcType="TIMESTAMP" />
+    <result column="ETIME" property="etime" jdbcType="TIMESTAMP" />
+    <result column="ISDEL" property="isdel" jdbcType="DECIMAL" />
+    <result column="REMARK" property="remark" jdbcType="VARCHAR" />
+    <result column="OPID" property="opid" jdbcType="VARCHAR" />
+    <result column="OPTIME" property="optime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    REWARDID, DEPARTID, NAME, STIME, ETIME, ISDEL, REMARK, OPID, OPTIME
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.math.BigDecimal" >
+    select 
+    <include refid="Base_Column_List" />
+    from TBXF_REWARDTYPES
+    where REWARDID = #{rewardid,jdbcType=DECIMAL}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.math.BigDecimal" >
+    delete from TBXF_REWARDTYPES
+    where REWARDID = #{rewardid,jdbcType=DECIMAL}
+  </delete>
+  <insert id="insert" parameterType="com.sinog2c.model.system.TbxfRewardtypes" >
+    insert into TBXF_REWARDTYPES (REWARDID, DEPARTID, NAME, 
+      STIME, ETIME, ISDEL, REMARK, 
+      OPID, OPTIME)
+    values (#{rewardid,jdbcType=DECIMAL}, #{departid,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR}, 
+      #{stime,jdbcType=DATE}, #{etime,jdbcType=DATE}, #{isdel,jdbcType=DECIMAL}, #{remark,jdbcType=VARCHAR}, 
+      #{opid,jdbcType=VARCHAR}, #{optime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.sinog2c.model.system.TbxfRewardtypes" >
+    insert into TBXF_REWARDTYPES
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="rewardid != null" >
+        REWARDID,
+      </if>
+      <if test="departid != null" >
+        DEPARTID,
+      </if>
+      <if test="name != null" >
+        NAME,
+      </if>
+      <if test="stime != null" >
+        STIME,
+      </if>
+      <if test="etime != null" >
+        ETIME,
+      </if>
+      <if test="isdel != null" >
+        ISDEL,
+      </if>
+      <if test="remark != null" >
+        REMARK,
+      </if>
+      <if test="opid != null" >
+        OPID,
+      </if>
+      <if test="optime != null" >
+        OPTIME,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="rewardid != null" >
+        #{rewardid,jdbcType=DECIMAL},
+      </if>
+      <if test="departid != null" >
+        #{departid,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null" >
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="stime != null" >
+        #{stime,jdbcType=DATE},
+      </if>
+      <if test="etime != null" >
+        #{etime,jdbcType=DATE},
+      </if>
+      <if test="isdel != null" >
+        #{isdel,jdbcType=DECIMAL},
+      </if>
+      <if test="remark != null" >
+        #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="opid != null" >
+        #{opid,jdbcType=VARCHAR},
+      </if>
+      <if test="optime != null" >
+        #{optime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.sinog2c.model.system.TbxfRewardtypes" >
+    update TBXF_REWARDTYPES
+    <set >
+      <if test="departid != null" >
+        DEPARTID = #{departid,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null" >
+        NAME = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="stime != null" >
+        STIME = #{stime,jdbcType=DATE},
+      </if>
+      <if test="etime != null" >
+        ETIME = #{etime,jdbcType=DATE},
+      </if>
+      <if test="isdel != null" >
+        ISDEL = #{isdel,jdbcType=DECIMAL},
+      </if>
+      <if test="remark != null" >
+        REMARK = #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="opid != null" >
+        OPID = #{opid,jdbcType=VARCHAR},
+      </if>
+      <if test="optime != null" >
+        OPTIME = #{optime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where REWARDID = #{rewardid,jdbcType=DECIMAL}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.sinog2c.model.system.TbxfRewardtypes" >
+    update TBXF_REWARDTYPES
+    set DEPARTID = #{departid,jdbcType=VARCHAR},
+      NAME = #{name,jdbcType=VARCHAR},
+      STIME = #{stime,jdbcType=DATE},
+      ETIME = #{etime,jdbcType=DATE},
+      ISDEL = #{isdel,jdbcType=DECIMAL},
+      REMARK = #{remark,jdbcType=VARCHAR},
+      OPID = #{opid,jdbcType=VARCHAR},
+      OPTIME = #{optime,jdbcType=TIMESTAMP}
+    where REWARDID = #{rewardid,jdbcType=DECIMAL}
+  </update>
+</mapper>

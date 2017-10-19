@@ -1,0 +1,1122 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.sinog2c.dao.api.system.SystemOrganizationMapper" >
+  <resultMap id="BaseResultMap" type="com.sinog2c.model.system.SystemOrganization" >
+    <result column="ORGID" property="orgid" jdbcType="VARCHAR" />
+    <result column="PORGID" property="porgid" jdbcType="VARCHAR" />
+    <result column="BELONGORGID" property="belongorgid" jdbcType="VARCHAR" />
+    <result column="NAME" property="name" jdbcType="VARCHAR" />
+    <result column="SHORTNAME" property="shortname" jdbcType="VARCHAR" />
+    <result column="FULLNAME" property="fullname" jdbcType="VARCHAR" />
+    <result column="SN" property="sn" jdbcType="DECIMAL" />
+    <result column="EXTTEL" property="exttel" jdbcType="VARCHAR" />
+    <result column="FAX" property="fax" jdbcType="VARCHAR" />
+    <result column="EXTCONTACTS" property="extcontacts" jdbcType="VARCHAR" />
+    <result column="CITY" property="city" jdbcType="VARCHAR" />
+    <result column="ADDRESS" property="address" jdbcType="VARCHAR" />
+    <result column="POSTCODE" property="postcode" jdbcType="VARCHAR" />
+    <result column="EMAIL" property="email" jdbcType="VARCHAR" />
+    <result column="DESCRIPTION" property="description" jdbcType="VARCHAR" />
+    <result column="BUSLINE" property="busline" jdbcType="VARCHAR" />
+    <result column="DUTYEXPLAIN" property="dutyexplain" jdbcType="VARCHAR" />
+    <result column="BENEFIT" property="benefit" jdbcType="VARCHAR" />
+    <result column="UNITLEVEL" property="unitlevel" jdbcType="VARCHAR" />
+    <result column="INTERMEDIATECOURT" property="intermediatecourt" jdbcType="VARCHAR" />
+    <result column="HIGHCOURT" property="highcourt" jdbcType="VARCHAR" />
+    <result column="PROCURATORATE" property="procuratorate" jdbcType="VARCHAR" />
+    <result column="PRISONTYPE" property="prisontype" jdbcType="VARCHAR" />
+    <result column="PRISONAREALEVEL" property="prisonarealevel" jdbcType="VARCHAR" />
+    <result column="CRIMINALCODERULES" property="criminalcoderules" jdbcType="VARCHAR" />
+    <result column="DELFLAG" property="delflag" jdbcType="VARCHAR" />
+    <result column="OPFLAG" property="opflag" jdbcType="DECIMAL" />
+    <result column="REMARK" property="remark" jdbcType="VARCHAR" />
+    <result column="TEXT1" property="text1" jdbcType="VARCHAR" />
+    <result column="TEXT2" property="text2" jdbcType="VARCHAR" />
+    <result column="TEXT3" property="text3" jdbcType="VARCHAR" />
+    <result column="TEXT4" property="text4" jdbcType="VARCHAR" />
+    <result column="INT1" property="int1" jdbcType="DECIMAL" />
+    <result column="INT2" property="int2" jdbcType="DECIMAL" />
+    <result column="OPTIME" property="optime" jdbcType="TIMESTAMP" />
+    <result column="OPID" property="opid" jdbcType="VARCHAR" />
+  </resultMap>
+  <insert id="insert" parameterType="com.sinog2c.model.system.SystemOrganization" >
+    insert into TBSYS_ORGINFO (ORGID, PORGID, BELONGORGID, 
+      NAME, SHORTNAME, FULLNAME, 
+      SN, EXTTEL, FAX, EXTCONTACTS, 
+      CITY, ADDRESS, POSTCODE, 
+      EMAIL, DESCRIPTION, BUSLINE, 
+      DUTYEXPLAIN, BENEFIT, UNITLEVEL, 
+      INTERMEDIATECOURT, HIGHCOURT, PROCURATORATE, 
+      PRISONTYPE, PRISONAREALEVEL, CRIMINALCODERULES, 
+      DELFLAG, OPFLAG, REMARK, 
+      TEXT1, TEXT2, TEXT3, 
+      TEXT4, INT1, INT2, 
+      OPTIME, OPID)
+    values (#{orgid,jdbcType=VARCHAR}, #{porgid,jdbcType=VARCHAR}, #{belongorgid,jdbcType=VARCHAR}, 
+      #{name,jdbcType=VARCHAR}, #{shortname,jdbcType=VARCHAR}, #{fullname,jdbcType=VARCHAR}, 
+      #{sn,jdbcType=DECIMAL}, #{exttel,jdbcType=VARCHAR}, #{fax,jdbcType=VARCHAR}, #{extcontacts,jdbcType=VARCHAR}, 
+      #{city,jdbcType=VARCHAR}, #{address,jdbcType=VARCHAR}, #{postcode,jdbcType=VARCHAR}, 
+      #{email,jdbcType=VARCHAR}, #{description,jdbcType=VARCHAR}, #{busline,jdbcType=VARCHAR}, 
+      #{dutyexplain,jdbcType=VARCHAR}, #{benefit,jdbcType=VARCHAR}, #{unitlevel,jdbcType=VARCHAR}, 
+      #{intermediatecourt,jdbcType=VARCHAR}, #{highcourt,jdbcType=VARCHAR}, #{procuratorate,jdbcType=VARCHAR}, 
+      #{prisontype,jdbcType=VARCHAR}, #{prisonarealevel,jdbcType=VARCHAR}, #{criminalcoderules,jdbcType=VARCHAR}, 
+      #{delflag,jdbcType=VARCHAR}, #{opflag,jdbcType=DECIMAL}, #{remark,jdbcType=VARCHAR}, 
+      #{text1,jdbcType=VARCHAR}, #{text2,jdbcType=VARCHAR}, #{text3,jdbcType=VARCHAR}, 
+      #{text4,jdbcType=VARCHAR}, #{int1,jdbcType=DECIMAL}, #{int2,jdbcType=DECIMAL}, 
+      #{optime,jdbcType=TIMESTAMP}, #{opid,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.sinog2c.model.system.SystemOrganization" >
+    insert into TBSYS_ORGINFO
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="orgid != null" >
+        ORGID,
+      </if>
+      <if test="porgid != null" >
+        PORGID,
+      </if>
+      <if test="belongorgid != null" >
+        BELONGORGID,
+      </if>
+      <if test="name != null" >
+        NAME,
+      </if>
+      <if test="shortname != null" >
+        SHORTNAME,
+      </if>
+      <if test="fullname != null" >
+        FULLNAME,
+      </if>
+      <if test="sn != null" >
+        SN,
+      </if>
+      <if test="exttel != null" >
+        EXTTEL,
+      </if>
+      <if test="fax != null" >
+        FAX,
+      </if>
+      <if test="extcontacts != null" >
+        EXTCONTACTS,
+      </if>
+      <if test="city != null" >
+        CITY,
+      </if>
+      <if test="address != null" >
+        ADDRESS,
+      </if>
+      <if test="postcode != null" >
+        POSTCODE,
+      </if>
+      <if test="email != null" >
+        EMAIL,
+      </if>
+      <if test="description != null" >
+        DESCRIPTION,
+      </if>
+      <if test="busline != null" >
+        BUSLINE,
+      </if>
+      <if test="dutyexplain != null" >
+        DUTYEXPLAIN,
+      </if>
+      <if test="benefit != null" >
+        BENEFIT,
+      </if>
+      <if test="unitlevel != null" >
+        UNITLEVEL,
+      </if>
+      <if test="intermediatecourt != null" >
+        INTERMEDIATECOURT,
+      </if>
+      <if test="highcourt != null" >
+        HIGHCOURT,
+      </if>
+      <if test="procuratorate != null" >
+        PROCURATORATE,
+      </if>
+      <if test="prisontype != null" >
+        PRISONTYPE,
+      </if>
+      <if test="prisonarealevel != null" >
+        PRISONAREALEVEL,
+      </if>
+      <if test="criminalcoderules != null" >
+        CRIMINALCODERULES,
+      </if>
+      <if test="delflag != null" >
+        DELFLAG,
+      </if>
+      <if test="opflag != null" >
+        OPFLAG,
+      </if>
+      <if test="remark != null" >
+        REMARK,
+      </if>
+      <if test="text1 != null" >
+        TEXT1,
+      </if>
+      <if test="text2 != null" >
+        TEXT2,
+      </if>
+      <if test="text3 != null" >
+        TEXT3,
+      </if>
+      <if test="text4 != null" >
+        TEXT4,
+      </if>
+      <if test="int1 != null" >
+        INT1,
+      </if>
+      <if test="int2 != null" >
+        INT2,
+      </if>
+      <if test="opid != null" >
+        OPID,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="orgid != null" >
+        #{orgid,jdbcType=VARCHAR},
+      </if>
+      <if test="porgid != null" >
+        #{porgid,jdbcType=VARCHAR},
+      </if>
+      <if test="belongorgid != null" >
+        #{belongorgid,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null" >
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="shortname != null" >
+        #{shortname,jdbcType=VARCHAR},
+      </if>
+      <if test="fullname != null" >
+        #{fullname,jdbcType=VARCHAR},
+      </if>
+      <if test="sn != null" >
+        #{sn,jdbcType=DECIMAL},
+      </if>
+      <if test="exttel != null" >
+        #{exttel,jdbcType=VARCHAR},
+      </if>
+      <if test="fax != null" >
+        #{fax,jdbcType=VARCHAR},
+      </if>
+      <if test="extcontacts != null" >
+        #{extcontacts,jdbcType=VARCHAR},
+      </if>
+      <if test="city != null" >
+        #{city,jdbcType=VARCHAR},
+      </if>
+      <if test="address != null" >
+        #{address,jdbcType=VARCHAR},
+      </if>
+      <if test="postcode != null" >
+        #{postcode,jdbcType=VARCHAR},
+      </if>
+      <if test="email != null" >
+        #{email,jdbcType=VARCHAR},
+      </if>
+      <if test="description != null" >
+        #{description,jdbcType=VARCHAR},
+      </if>
+      <if test="busline != null" >
+        #{busline,jdbcType=VARCHAR},
+      </if>
+      <if test="dutyexplain != null" >
+        #{dutyexplain,jdbcType=VARCHAR},
+      </if>
+      <if test="benefit != null" >
+        #{benefit,jdbcType=VARCHAR},
+      </if>
+      <if test="unitlevel != null" >
+        #{unitlevel,jdbcType=VARCHAR},
+      </if>
+      <if test="intermediatecourt != null" >
+        #{intermediatecourt,jdbcType=VARCHAR},
+      </if>
+      <if test="highcourt != null" >
+        #{highcourt,jdbcType=VARCHAR},
+      </if>
+      <if test="procuratorate != null" >
+        #{procuratorate,jdbcType=VARCHAR},
+      </if>
+      <if test="prisontype != null" >
+        #{prisontype,jdbcType=VARCHAR},
+      </if>
+      <if test="prisonarealevel != null" >
+        #{prisonarealevel,jdbcType=VARCHAR},
+      </if>
+      <if test="criminalcoderules != null" >
+        #{criminalcoderules,jdbcType=VARCHAR},
+      </if>
+      <if test="delflag != null" >
+        #{delflag,jdbcType=VARCHAR},
+      </if>
+      <if test="opflag != null" >
+        #{opflag,jdbcType=DECIMAL},
+      </if>
+      <if test="remark != null" >
+        #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="text1 != null" >
+        #{text1,jdbcType=VARCHAR},
+      </if>
+      <if test="text2 != null" >
+        #{text2,jdbcType=VARCHAR},
+      </if>
+      <if test="text3 != null" >
+        #{text3,jdbcType=VARCHAR},
+      </if>
+      <if test="text4 != null" >
+        #{text4,jdbcType=VARCHAR},
+      </if>
+      <if test="int1 != null" >
+        #{int1,jdbcType=DECIMAL},
+      </if>
+      <if test="int2 != null" >
+        #{int2,jdbcType=DECIMAL},
+      </if>
+      <if test="opid != null" >
+        #{opid,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <insert id="insertByMap" parameterType="Map" >
+    insert into TBSYS_ORGINFO
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="orgid != null" >
+        ORGID,
+      </if>
+      <if test="porgid != null" >
+        PORGID,
+      </if>
+      <if test="belongorgid != null" >
+        BELONGORGID,
+      </if>
+      <if test="name != null" >
+        NAME,
+      </if>
+      <if test="shortname != null" >
+        SHORTNAME,
+      </if>
+      <if test="fullname != null" >
+        FULLNAME,
+      </if>
+      <if test="sn != null" >
+        SN,
+      </if>
+      <if test="exttel != null" >
+        EXTTEL,
+      </if>
+      <if test="fax != null" >
+        FAX,
+      </if>
+      <if test="extcontacts != null" >
+        EXTCONTACTS,
+      </if>
+      <if test="city != null" >
+        CITY,
+      </if>
+      <if test="address != null" >
+        ADDRESS,
+      </if>
+      <if test="postcode != null" >
+        POSTCODE,
+      </if>
+      <if test="email != null" >
+        EMAIL,
+      </if>
+      <if test="description != null" >
+        DESCRIPTION,
+      </if>
+      <if test="busline != null" >
+        BUSLINE,
+      </if>
+      <if test="dutyexplain != null" >
+        DUTYEXPLAIN,
+      </if>
+      <if test="benefit != null" >
+        BENEFIT,
+      </if>
+      <if test="unitlevel != null" >
+        UNITLEVEL,
+      </if>
+      <if test="intermediatecourt != null" >
+        INTERMEDIATECOURT,
+      </if>
+      <if test="highcourt != null" >
+        HIGHCOURT,
+      </if>
+      <if test="procuratorate != null" >
+        PROCURATORATE,
+      </if>
+      <if test="prisontype != null" >
+        PRISONTYPE,
+      </if>
+      <if test="prisonarealevel != null" >
+        PRISONAREALEVEL,
+      </if>
+      <if test="criminalcoderules != null" >
+        CRIMINALCODERULES,
+      </if>
+      <if test="delflag != null" >
+        DELFLAG,
+      </if>
+      <if test="opflag != null" >
+        OPFLAG,
+      </if>
+      <if test="remark != null" >
+        REMARK,
+      </if>
+      <if test="text1 != null" >
+        TEXT1,
+      </if>
+      <if test="text2 != null" >
+        TEXT2,
+      </if>
+      <if test="text3 != null" >
+        TEXT3,
+      </if>
+      <if test="text4 != null" >
+        TEXT4,
+      </if>
+      <if test="int1 != null" >
+        INT1,
+      </if>
+      <if test="int2 != null" >
+        INT2,
+      </if>
+      <if test="opid != null" >
+        OPID,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="orgid != null" >
+        #{orgid,jdbcType=VARCHAR},
+      </if>
+      <if test="porgid != null" >
+        #{porgid,jdbcType=VARCHAR},
+      </if>
+      <if test="belongorgid != null" >
+        #{belongorgid,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null" >
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="shortname != null" >
+        #{shortname,jdbcType=VARCHAR},
+      </if>
+      <if test="fullname != null" >
+        #{fullname,jdbcType=VARCHAR},
+      </if>
+      <if test="sn != null" >
+        #{sn,jdbcType=DECIMAL},
+      </if>
+      <if test="exttel != null" >
+        #{exttel,jdbcType=VARCHAR},
+      </if>
+      <if test="fax != null" >
+        #{fax,jdbcType=VARCHAR},
+      </if>
+      <if test="extcontacts != null" >
+        #{extcontacts,jdbcType=VARCHAR},
+      </if>
+      <if test="city != null" >
+        #{city,jdbcType=VARCHAR},
+      </if>
+      <if test="address != null" >
+        #{address,jdbcType=VARCHAR},
+      </if>
+      <if test="postcode != null" >
+        #{postcode,jdbcType=VARCHAR},
+      </if>
+      <if test="email != null" >
+        #{email,jdbcType=VARCHAR},
+      </if>
+      <if test="description != null" >
+        #{description,jdbcType=VARCHAR},
+      </if>
+      <if test="busline != null" >
+        #{busline,jdbcType=VARCHAR},
+      </if>
+      <if test="dutyexplain != null" >
+        #{dutyexplain,jdbcType=VARCHAR},
+      </if>
+      <if test="benefit != null" >
+        #{benefit,jdbcType=VARCHAR},
+      </if>
+      <if test="unitlevel != null" >
+        #{unitlevel,jdbcType=VARCHAR},
+      </if>
+      <if test="intermediatecourt != null" >
+        #{intermediatecourt,jdbcType=VARCHAR},
+      </if>
+      <if test="highcourt != null" >
+        #{highcourt,jdbcType=VARCHAR},
+      </if>
+      <if test="procuratorate != null" >
+        #{procuratorate,jdbcType=VARCHAR},
+      </if>
+      <if test="prisontype != null" >
+        #{prisontype,jdbcType=VARCHAR},
+      </if>
+      <if test="prisonarealevel != null" >
+        #{prisonarealevel,jdbcType=VARCHAR},
+      </if>
+      <if test="criminalcoderules != null" >
+        #{criminalcoderules,jdbcType=VARCHAR},
+      </if>
+      <if test="delflag != null" >
+        #{delflag,jdbcType=VARCHAR},
+      </if>
+      <if test="opflag != null" >
+        #{opflag,jdbcType=DECIMAL},
+      </if>
+      <if test="remark != null" >
+        #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="text1 != null" >
+        #{text1,jdbcType=VARCHAR},
+      </if>
+      <if test="text2 != null" >
+        #{text2,jdbcType=VARCHAR},
+      </if>
+      <if test="text3 != null" >
+        #{text3,jdbcType=VARCHAR},
+      </if>
+      <if test="text4 != null" >
+        #{text4,jdbcType=VARCHAR},
+      </if>
+      <if test="int1 != null" >
+        #{int1,jdbcType=DECIMAL},
+      </if>
+      <if test="int2 != null" >
+        #{int2,jdbcType=DECIMAL},
+      </if>
+      <if test="opid != null" >
+        #{opid,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <insert id="insertToHistory" parameterType="com.sinog2c.model.system.SystemOrganization" >
+    insert into TBSYS_ORGINFO_HIS
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="orgid != null" >
+        ORGID,
+      </if>
+      <if test="porgid != null" >
+        PORGID,
+      </if>
+      <if test="belongorgid != null" >
+        BELONGORGID,
+      </if>
+      <if test="name != null" >
+        NAME,
+      </if>
+      <if test="shortname != null" >
+        SHORTNAME,
+      </if>
+      <if test="fullname != null" >
+        FULLNAME,
+      </if>
+      <if test="sn != null" >
+        SN,
+      </if>
+      <if test="exttel != null" >
+        EXTTEL,
+      </if>
+      <if test="fax != null" >
+        FAX,
+      </if>
+      <if test="extcontacts != null" >
+        EXTCONTACTS,
+      </if>
+      <if test="city != null" >
+        CITY,
+      </if>
+      <if test="address != null" >
+        ADDRESS,
+      </if>
+      <if test="postcode != null" >
+        POSTCODE,
+      </if>
+      <if test="email != null" >
+        EMAIL,
+      </if>
+      <if test="description != null" >
+        DESCRIPTION,
+      </if>
+      <if test="busline != null" >
+        BUSLINE,
+      </if>
+      <if test="dutyexplain != null" >
+        DUTYEXPLAIN,
+      </if>
+      <if test="benefit != null" >
+        BENEFIT,
+      </if>
+      <if test="unitlevel != null" >
+        UNITLEVEL,
+      </if>
+      <if test="intermediatecourt != null" >
+        INTERMEDIATECOURT,
+      </if>
+      <if test="highcourt != null" >
+        HIGHCOURT,
+      </if>
+      <if test="procuratorate != null" >
+        PROCURATORATE,
+      </if>
+      <if test="prisontype != null" >
+        PRISONTYPE,
+      </if>
+      <if test="prisonarealevel != null" >
+        PRISONAREALEVEL,
+      </if>
+      <if test="criminalcoderules != null" >
+        CRIMINALCODERULES,
+      </if>
+      <if test="delflag != null" >
+        DELFLAG,
+      </if>
+      <if test="opflag != null" >
+        OPFLAG,
+      </if>
+      <if test="remark != null" >
+        REMARK,
+      </if>
+      <if test="text1 != null" >
+        TEXT1,
+      </if>
+      <if test="text2 != null" >
+        TEXT2,
+      </if>
+      <if test="text3 != null" >
+        TEXT3,
+      </if>
+      <if test="text4 != null" >
+        TEXT4,
+      </if>
+      <if test="int1 != null" >
+        INT1,
+      </if>
+      <if test="int2 != null" >
+        INT2,
+      </if>
+      <if test="opid != null" >
+        OPID,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="orgid != null" >
+        #{orgid,jdbcType=VARCHAR},
+      </if>
+      <if test="porgid != null" >
+        #{porgid,jdbcType=VARCHAR},
+      </if>
+      <if test="belongorgid != null" >
+        #{belongorgid,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null" >
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="shortname != null" >
+        #{shortname,jdbcType=VARCHAR},
+      </if>
+      <if test="fullname != null" >
+        #{fullname,jdbcType=VARCHAR},
+      </if>
+      <if test="sn != null" >
+        #{sn,jdbcType=DECIMAL},
+      </if>
+      <if test="exttel != null" >
+        #{exttel,jdbcType=VARCHAR},
+      </if>
+      <if test="fax != null" >
+        #{fax,jdbcType=VARCHAR},
+      </if>
+      <if test="extcontacts != null" >
+        #{extcontacts,jdbcType=VARCHAR},
+      </if>
+      <if test="city != null" >
+        #{city,jdbcType=VARCHAR},
+      </if>
+      <if test="address != null" >
+        #{address,jdbcType=VARCHAR},
+      </if>
+      <if test="postcode != null" >
+        #{postcode,jdbcType=VARCHAR},
+      </if>
+      <if test="email != null" >
+        #{email,jdbcType=VARCHAR},
+      </if>
+      <if test="description != null" >
+        #{description,jdbcType=VARCHAR},
+      </if>
+      <if test="busline != null" >
+        #{busline,jdbcType=VARCHAR},
+      </if>
+      <if test="dutyexplain != null" >
+        #{dutyexplain,jdbcType=VARCHAR},
+      </if>
+      <if test="benefit != null" >
+        #{benefit,jdbcType=VARCHAR},
+      </if>
+      <if test="unitlevel != null" >
+        #{unitlevel,jdbcType=VARCHAR},
+      </if>
+      <if test="intermediatecourt != null" >
+        #{intermediatecourt,jdbcType=VARCHAR},
+      </if>
+      <if test="highcourt != null" >
+        #{highcourt,jdbcType=VARCHAR},
+      </if>
+      <if test="procuratorate != null" >
+        #{procuratorate,jdbcType=VARCHAR},
+      </if>
+      <if test="prisontype != null" >
+        #{prisontype,jdbcType=VARCHAR},
+      </if>
+      <if test="prisonarealevel != null" >
+        #{prisonarealevel,jdbcType=VARCHAR},
+      </if>
+      <if test="criminalcoderules != null" >
+        #{criminalcoderules,jdbcType=VARCHAR},
+      </if>
+      <if test="delflag != null" >
+        #{delflag,jdbcType=VARCHAR},
+      </if>
+      <if test="opflag != null" >
+        #{opflag,jdbcType=DECIMAL},
+      </if>
+      <if test="remark != null" >
+        #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="text1 != null" >
+        #{text1,jdbcType=VARCHAR},
+      </if>
+      <if test="text2 != null" >
+        #{text2,jdbcType=VARCHAR},
+      </if>
+      <if test="text3 != null" >
+        #{text3,jdbcType=VARCHAR},
+      </if>
+      <if test="text4 != null" >
+        #{text4,jdbcType=VARCHAR},
+      </if>
+      <if test="int1 != null" >
+        #{int1,jdbcType=DECIMAL},
+      </if>
+      <if test="int2 != null" >
+        #{int2,jdbcType=DECIMAL},
+      </if>
+      <if test="opid != null" >
+        #{opid,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <delete id="delete" parameterType="com.sinog2c.model.system.SystemOrganization">
+  	delete from TBSYS_ORGINFO where DELFLAG=0 and ORGID=#{orgid}
+  </delete>
+  
+  <update id="update" parameterType="com.sinog2c.model.system.SystemOrganization">
+  	update TBSYS_ORGINFO
+	<set>
+      <if test="name != null" >
+        NAME=#{name},
+      </if>
+      <if test="shortname != null" >
+        SHORTNAME=#{shortname},
+      </if>
+      <if test="fullname != null" >
+        FULLNAME=#{fullname},
+      </if>
+      <if test="sn != null" >
+        SN=#{sn},
+      </if>
+      <if test="exttel != null" >
+        EXTTEL=#{exttel},
+      </if>
+      <if test="fax != null" >
+        FAX=#{fax},
+      </if>
+      <if test="extcontacts != null" >
+        EXTCONTACTS=#{extcontacts},
+      </if>
+      <if test="city != null" >
+        CITY=#{city},
+      </if>
+      <if test="address != null" >
+        ADDRESS=#{address},
+      </if>
+      <if test="postcode != null" >
+        POSTCODE=#{postcode},
+      </if>
+      <if test="email != null" >
+        EMAIL=#{email},
+      </if>
+      <if test="description != null" >
+        DESCRIPTION=#{description},
+      </if>
+      <if test="busline != null" >
+        BUSLINE=#{busline},
+      </if>
+      <if test="dutyexplain != null" >
+        DUTYEXPLAIN=#{dutyexplain},
+      </if>
+      <if test="benefit != null" >
+        BENEFIT=#{benefit},
+      </if>
+      <if test="unitlevel != null" >
+        UNITLEVEL=#{unitlevel},
+      </if>
+      <if test="intermediatecourt != null" >
+        INTERMEDIATECOURT=#{intermediatecourt},
+      </if>
+      <if test="highcourt != null" >
+        HIGHCOURT=#{highcourt},
+      </if>
+      <if test="procuratorate != null" >
+        PROCURATORATE=#{procuratorate},
+      </if>
+      <if test="prisontype != null" >
+        PRISONTYPE=#{prisontype},
+      </if>
+      <if test="prisonarealevel != null" >
+        PRISONAREALEVEL=#{prisonarealevel},
+      </if>
+      <if test="criminalcoderules != null" >
+        CRIMINALCODERULES=#{criminalcoderules},
+      </if>
+      <if test="remark != null" >
+        REMARK=#{remark},
+      </if>
+      <if test="text1 != null" >
+        TEXT1=#{text1},
+      </if>
+      <if test="text2 != null" >
+        TEXT2=#{text2},
+      </if>
+      <if test="text3 != null" >
+        TEXT3=#{text3},
+      </if>
+      <if test="text4 != null" >
+        TEXT4=#{text4},
+      </if>
+      <if test="int1 != null" >
+        INT1=#{int1},
+      </if>
+      <if test="int2 != null" >
+        INT2=#{int2},
+      </if>
+	</set>
+	where ORGID=#{orgid}
+  </update>
+
+  <update id="updateByMap" parameterType="Map">
+  	update TBSYS_ORGINFO
+	<set>
+      <if test="name != null" >
+        NAME=#{name},
+      </if>
+      <if test="shortname != null" >
+        SHORTNAME=#{shortname},
+      </if>
+      <if test="fullname != null" >
+        FULLNAME=#{fullname},
+      </if>
+      <if test="sn != null" >
+        SN=#{sn},
+      </if>
+      <if test="exttel != null" >
+        EXTTEL=#{exttel},
+      </if>
+      <if test="fax != null" >
+        FAX=#{fax},
+      </if>
+      <if test="extcontacts != null" >
+        EXTCONTACTS=#{extcontacts},
+      </if>
+      <if test="city != null" >
+        CITY=#{city},
+      </if>
+      <if test="address != null" >
+        ADDRESS=#{address},
+      </if>
+      <if test="postcode != null" >
+        POSTCODE=#{postcode},
+      </if>
+      <if test="email != null" >
+        EMAIL=#{email},
+      </if>
+      <if test="description != null" >
+        DESCRIPTION=#{description},
+      </if>
+      <if test="busline != null" >
+        BUSLINE=#{busline},
+      </if>
+      <if test="dutyexplain != null" >
+        DUTYEXPLAIN=#{dutyexplain},
+      </if>
+      <if test="benefit != null" >
+        BENEFIT=#{benefit},
+      </if>
+      <if test="unitlevel != null" >
+        UNITLEVEL=#{unitlevel},
+      </if>
+      <if test="intermediatecourt != null" >
+        INTERMEDIATECOURT=#{intermediatecourt},
+      </if>
+      <if test="highcourt != null" >
+        HIGHCOURT=#{highcourt},
+      </if>
+      <if test="procuratorate != null" >
+        PROCURATORATE=#{procuratorate},
+      </if>
+      <if test="prisontype != null" >
+        PRISONTYPE=#{prisontype},
+      </if>
+      <if test="prisonarealevel != null" >
+        PRISONAREALEVEL=#{prisonarealevel},
+      </if>
+      <if test="criminalcoderules != null" >
+        CRIMINALCODERULES=#{criminalcoderules},
+      </if>
+      <if test="opflag != null" >
+        OPFLAG=#{opflag},
+      </if>
+      <if test="remark != null" >
+        REMARK=#{remark},
+      </if>
+      <if test="text1 != null" >
+        TEXT1=#{text1},
+      </if>
+      <if test="text2 != null" >
+        TEXT2=#{text2},
+      </if>
+      <if test="text3 != null" >
+        TEXT3=#{text3},
+      </if>
+      <if test="text4 != null" >
+        TEXT4=#{text4},
+      </if>
+      <if test="int1 != null" >
+        INT1=#{int1},
+      </if>
+      <if test="int2 != null" >
+        INT2=#{int2},
+      </if>
+	</set>
+	where ORGID=#{orgid}
+  </update>
+
+  <select id="getByOrgId" resultMap="BaseResultMap">    <!-- 根据ID获取 -->
+	 select * from TBSYS_ORGINFO where ORGID=#{orgid} and rownum=1
+  </select>
+  <select id="getByPorgId" resultMap="BaseResultMap">    <!-- 根据ID获取 -->
+	 select * from TBSYS_ORGINFO where PORGID=#{porgid} order by PORGID asc
+  </select>
+  <select id="getProvinceCode" resultMap="BaseResultMap">    <!-- 根据ID获取 -->
+	select a.*
+	  from tbsys_orginfo a
+	 where a.unitlevel = 2
+	 start with a.orgid = #{orgid}
+	connect by prior a.porgid = a.orgid
+  </select>  
+  <select id="getByUserid" resultMap="BaseResultMap">    <!-- 根据userid获取1条 -->
+	 select * from TBSYS_ORGINFO  o
+	 	where ORGID in
+	 	(
+	 		select ORGID from TBSYS_USER_ORG uo
+	 		where  rownum=1 and USERID = #{userid}
+	 	) and rownum=1
+	 	 order by ORGID asc
+  </select>
+  
+  <select id="selectAll" resultMap="BaseResultMap">    <!-- 查询表中的所有信息 -->
+	 select * from TBSYS_ORGINFO where DELFLAG=0 order by SN asc, ORGID asc
+  </select>
+    
+  <select id="listByPorgid" resultMap="BaseResultMap">    <!-- 根据PID查询表中的所有子org信息 -->
+  	select * from TBSYS_ORGINFO t where DELFLAG=0
+  		<if test="unitlevel!=null and unitlevel!=''">  
+        	and unitlevel = #{unitlevel}
+      	</if>
+		start with t.orgid= #{porgid} connect by prior t.orgid =t.porgid
+		order by SN asc, ORGID asc
+  </select>
+
+  <select id="listByLevel" resultMap="BaseResultMap">    <!-- 根据级别显示信息 -->
+  	select * from TBSYS_ORGINFO t where DELFLAG=0
+		and UNITLEVEL = #{unitlevel}
+  </select>
+  
+  <select id="getOrgMapByLevel" resultType="Map">    <!-- 根据级别显示信息 -->
+  	select t.orgid, t.name from TBSYS_ORGINFO t where DELFLAG=0
+		and UNITLEVEL = #{unitlevel}
+		<if test="porgid!=null and porgid!=''">
+	  		and t.porgid=#{porgid}
+	  	</if>
+  </select>
+  
+  <!-- 根据当前用户所在部门Id查询表中的所有监区 -->
+  <select id="selectJianQuByPorgid" resultMap="BaseResultMap">    
+  	select t.* from TBSYS_ORGINFO t  where t.DELFLAG=0 and t.UNITLEVEL='4' and t.porgid=#{porgid} or orgid=#{porgid}
+  	<if test="key!=null and key!=''">  
+        and name like concat(concat('%', #{key}), '%')
+      </if>
+  </select>
+  <select id="getAllByPage" resultMap="BaseResultMap">    <!-- 分页查询表中的所有信息 -->
+	 SELECT * FROM 
+	 	( SELECT A.*, ROWNUM RN 
+		 	FROM 
+		 	(
+		 		SELECT * FROM TBSYS_ORGINFO
+		 		  where DELFLAG=0
+		 		  order by SN asc, ORGID asc
+		 	) A 
+		 	WHERE ROWNUM &lt;= #{end,jdbcType=DECIMAL}
+	 	) 
+	 	WHERE RN &gt;= #{start,jdbcType=DECIMAL}
+  </select>
+  <select id="countAll" resultType="int">  <!-- 查询表中记录总数  getOrgWithUserByOrgId-->
+		select count(*) c from TBSYS_ORGINFO
+  </select>
+  <select id="getOrgWithUserByOrgId" resultType="HashMap">
+		SELECT orgid, porgid,NAME FROM tbsys_orginfo a where DELFLAG=0 START WITH a.orgid=#{orgId} CONNECT BY PRIOR a.orgid=a.porgid
+		UNION
+		SELECT '0'||b.userid AS orgid,departid AS porgid,NAME  FROM tbsys_userinfo b WHERE DEPARTID IN (
+		SELECT a.orgid FROM tbsys_orginfo a where DELFLAG=0 START WITH a.orgid=#{orgId} CONNECT BY PRIOR a.orgid=a.porgid)
+  </select>
+  <select id="getOrganizationByuserid" resultType="Map">
+		<!-- SELECT orgid, porgid,name FROM tbsys_orginfo a where DELFLAG=0 and UNITLEVEL = '4' START WITH a.orgid=#{orgid} CONNECT BY PRIOR a.orgid=a.porgid -->
+        select org.*,info.name from TBFLOW_ORG_ORG org,TBSYS_ORGINFO info where org.orgid=#{orgid} and org.dorgid=info.orgid and UNITLEVEL in ('4','11') order by dorgid
+  </select>
+    <select id="getSonPrisonByPorgId" resultMap="BaseResultMap">    
+	select * from tbsys_orginfo where porgid in (select orgid from tbsys_orginfo where porgid=#{porgid})
+  </select>
+   <select id="getGrandSonPrisonByPorgId" resultMap="BaseResultMap">    
+   select * from tbsys_orginfo where porgid in (select orgid from tbsys_orginfo where porgid in (select orgid from tbsys_orginfo where porgid=#{porgid}))
+  </select>
+  
+  <select id="getOrginfoByOrgnameAndDepartid" resultMap="BaseResultMap" parameterType="Map">    
+   	select * from tbsys_orginfo 
+   	where name=#{orgname} 
+   	   and porgid in (select og.dorgid from tbflow_org_org og where og.orgid=#{departid})
+  </select>
+  
+  <select id="getPrisonarealevelByPorgId" resultMap="BaseResultMap">
+    select A.*, ROWNUM RN from (select * from TBSYS_ORGINFO t where DELFLAG=0
+        and t.porgid = #{progid} and prisonarealevel='1')  A where
+         ROWNUM = 1
+  </select>
+  <select id="getExportdepart" resultMap="BaseResultMap" resultType="java.util.HashMap">    <!-- 根据ID获取 -->
+	select t.orgid, t.porgid, t.name
+	  from tbsys_orginfo t
+	 start with t.orgid = #{departid,jdbcType=VARCHAR}
+	connect by prior t.orgid = t.porgid
+	       and t.unitlevel != 3
+	 order by t.sn
+  </select>   
+  <select id="getDepartById"  resultType="map">
+  	select t.name,t.orgid 
+  	from tbsys_orginfo t 
+  	where (t.orgid=#{progid} or t.porgid=#{progid} 
+  				or t.porgid in (select t.orgid from tbsys_orginfo t where t.porgid=#{progid})
+  			 )
+  	<if test="unitlevel==2 and unitlevel!=null and unitlevel!=''">
+  		and t.unitlevel='3'
+  	</if>
+  	<if test="unitlevel!=2 and unitlevel!=null and unitlevel!=''">
+  		and (t.unitlevel='4' or t.unitlevel='11' or t.unitlevel='12')   
+  	</if>
+  	order by t.orgid
+  	
+  </select>
+  <select id="getDep" resultType="java.lang.String">
+      select a.unitlevel from TBSYS_ORGINFO a where a.orgid=(select orgid from tbsys_user_org tt where tt.userid=#{userid} and tt.orgid=#{departid})
+  </select>
+  <select id="getCrimidStatus" resultType="Map">
+  		select t.name,t.noid,t.codetype,t.codeid from TBSYS_CODE t where t.Pcodeid=#{codetype}  
+  </select>
+  <select id="getCodeListByCodeType" resultType="Map">
+  		select t.codename as name,t.id as noid,t.codetype,t.codeid from TBSYS_CODE_DEPARTID t where t.codetype=#{codetype}  and t.departid=#{departid} order by sn
+  </select>
+  <select id="getNameByid" resultType="java.lang.String">
+  		select name from TBSYS_ORGINFO where orgid=#{id}
+  </select>
+  <select id="getDeptInfo" resultMap="BaseResultMap" >
+  	select t.* from TBSYS_ORGINFO t where t.orgid in (SELECT DORGID FROM TBFLOW_ORG_ORG WHERE ORGID = #{departid})
+  </select>
+  <select id="getNumByid" resultType="int">
+  	select count(1) from TBFLOW_ORG_ORG where orgid=#{str1} and dorgid=#{str2}
+  </select>
+  <select id="getNumByDepartid" resultType="int">
+  	select count(1) from tbsys_orginfo where orgid=#{userdepartid} and porgid=#{porgid}
+  </select>
+  <select id="getOrginfoByOrgid" parameterType="String" resultType="com.sinog2c.model.system.SystemOrganization">
+  	select * from tbsys_orginfo t where t.orgid=#{userId}
+  </select>
+  <!-- 查询出省局以及省局一下的所有单位和部门 -->
+  <select id="getSjDeptInfo" resultType="map">
+       select orgid,porgid,name from TBSYS_ORGINFO start with orgid=#{orgid} connect by porgid=prior orgid
+  </select>
+  <!-- 根据单位id和部门级别查询机构信息 -->
+  <select id="listByLevelByMap" parameterType="Map" resultType="com.sinog2c.model.system.SystemOrganization">
+  		select * from tbsys_orginfo a where a.orgid in (select dorgid from tbflow_org_org g where orgid=#{orgid}) and
+  		 ( unitlevel=#{unitlevel} or unitlevel =#{funitlevel})
+  		 order by a.orgid
+  </select>
+  <select id="getDepartidByName" parameterType="Map" resultType="com.sinog2c.model.system.SystemOrganization">
+  		select orgid,porgid,name,unitlevel from tbsys_orginfo t where 1=1 
+	  		<if test="departname!=null and departname!=''">
+		  		and t.name=#{departname}
+		  	</if>
+	  		<if test="orgid!=null and orgid!=''">
+		  		and t.orgid=#{orgid}
+		  	</if>
+  			and exists (
+  				select 'x' from tbflow_org_org org where org.orgid=#{departid} and org.dorgid=t.orgid
+  			)
+  </select>
+  
+  
+	<select id="getAllOrginInfo" resultType="com.sinog2c.model.system.SystemOrganization">
+		select orgid,porgid,name
+		from TBSYS_ORGINFO where DELFLAG=0
+	</select>
+
+	<select id="getAllOrginfoAndmember" resultType="com.sinog2c.model.system.SystemOrganization">
+		SELECT orgid,
+		porgid,NAME, 0 as isLeaf, 0 as expanded, -1 as int1 FROM
+		tbsys_orginfo
+		where DELFLAG='0'
+		UNION
+		SELECT 'U'|| b.userid AS orgid,departid AS
+		porgid,NAME, 1 as isLeaf, 1 as
+		expanded,gender as int1
+		FROM
+		tbsys_userinfo b WHERE DELFLAG ='0'
+	</select>
+	
+	<select id="getOrginfoByFlowdraftid" parameterType="Map" resultType="Map">
+		SELECT b.*
+		  FROM TBFLOW_BASE a, TBSYS_ORGINFO b
+		 WHERE a.flowdraftid = #{flowdraftid}
+		       AND F_GETAPPLYDEPART (a.applyid) = b.orgid(+)
+  </select>
+  
+  
+   <select id="getOrganizationByPorgid" parameterType="Map" resultType="Map">
+        select org.*,info.name from TBFLOW_ORG_ORG org,TBSYS_ORGINFO info where 1=1
+        and org.dorgid=info.orgid 
+        <if test="porgid!=null and porgid!=''">
+        	and org.orgid=#{porgid} 
+        </if>
+        <if test="unitlevel!=null and unitlevel!=''">
+	  		and UNITLEVEL = #{unitlevel} 
+	  	</if>
+        order by dorgid
+  </select>
+</mapper>

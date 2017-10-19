@@ -1,0 +1,265 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.sinog2c.dao.api.officeAssistant.TbuserAddressbooksMapper" >
+  <resultMap id="BaseResultMap" type="com.sinog2c.model.officeAssistant.TbuserAddressbooks" >
+    <result column="LINKMANID" property="linkmanid" jdbcType="DECIMAL" />
+    <result column="GROUPID" property="groupid" jdbcType="DECIMAL" />
+    <result column="NAME" property="name" jdbcType="VARCHAR" />
+    <result column="GENDER" property="gender" jdbcType="VARCHAR" />
+    <result column="NICKNAME" property="nickname" jdbcType="VARCHAR" />
+    <result column="DUTY" property="duty" jdbcType="VARCHAR" />
+    <result column="SPOUSE" property="spouse" jdbcType="VARCHAR" />
+    <result column="CHILDREN" property="children" jdbcType="VARCHAR" />
+    <result column="MOBILE" property="mobile" jdbcType="VARCHAR" />
+    <result column="TELEPHONE" property="telephone" jdbcType="VARCHAR" />
+    <result column="EMAIL" property="email" jdbcType="VARCHAR" />
+    <result column="QQ" property="qq" jdbcType="VARCHAR" />
+    <result column="MSN" property="msn" jdbcType="VARCHAR" />
+    <result column="DEPNAME" property="depname" jdbcType="VARCHAR" />
+    <result column="DEPADDRESS" property="depaddress" jdbcType="VARCHAR" />
+    <result column="DEPPOSTCODE" property="deppostcode" jdbcType="VARCHAR" />
+    <result column="DEPTELEPHONE" property="deptelephone" jdbcType="VARCHAR" />
+    <result column="DEPFAX" property="depfax" jdbcType="VARCHAR" />
+    <result column="HOMEADDRESS" property="homeaddress" jdbcType="VARCHAR" />
+    <result column="HOMEPOSTCODE" property="homepostcode" jdbcType="VARCHAR" />
+    <result column="HOMETELEPHONE" property="hometelephone" jdbcType="VARCHAR" />
+    <result column="BIRTHDAY" property="birthday" jdbcType="TIMESTAMP" />
+    <result column="REMARK" property="remark" jdbcType="VARCHAR" />
+    <result column="OPTIME" property="optime" jdbcType="TIMESTAMP" />
+    <result column="OPID" property="opid" jdbcType="VARCHAR" />
+  </resultMap>
+  <!-- 新增联系人 -->
+  <insert id="addPerson" parameterType="com.sinog2c.model.officeAssistant.TbuserAddressbooks" >
+	<selectKey resultType="int" order="BEFORE" keyProperty="linkmanid">
+	select SEQ_linkmanid.nextval  as linkmanid from dual
+	</selectKey>
+	insert into TBUSER_ADDRESSBOOKS (linkmanid, GROUPID, NAME, 
+      GENDER, NICKNAME, DUTY, 
+      SPOUSE, CHILDREN, MOBILE, 
+      TELEPHONE, EMAIL, QQ, 
+      MSN, DEPNAME, DEPADDRESS, 
+      DEPPOSTCODE, DEPTELEPHONE, DEPFAX, 
+      HOMEADDRESS, HOMEPOSTCODE, HOMETELEPHONE, 
+      BIRTHDAY, REMARK,OPID)
+    values (#{linkmanid,jdbcType=DECIMAL}, #{groupid,jdbcType=DECIMAL}, #{name,jdbcType=VARCHAR}, 
+      #{gender,jdbcType=VARCHAR}, #{nickname,jdbcType=VARCHAR}, #{duty,jdbcType=VARCHAR}, 
+      #{spouse,jdbcType=VARCHAR}, #{children,jdbcType=VARCHAR}, #{mobile,jdbcType=VARCHAR}, 
+      #{telephone,jdbcType=VARCHAR}, #{email,jdbcType=VARCHAR}, #{qq,jdbcType=VARCHAR}, 
+      #{msn,jdbcType=VARCHAR}, #{depname,jdbcType=VARCHAR}, #{depaddress,jdbcType=VARCHAR}, 
+      #{deppostcode,jdbcType=VARCHAR}, #{deptelephone,jdbcType=VARCHAR}, #{depfax,jdbcType=VARCHAR}, 
+      #{homeaddress,jdbcType=VARCHAR}, #{homepostcode,jdbcType=VARCHAR}, #{hometelephone,jdbcType=VARCHAR}, 
+      #{birthday,jdbcType=DATE}, #{remark,jdbcType=VARCHAR},#{opid,jdbcType=VARCHAR})
+ </insert>
+  <insert id="insertSelective" parameterType="com.sinog2c.model.officeAssistant.TbuserAddressbooks" >
+    insert into TBUSER_ADDRESSBOOKS
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="linkmanid != null" >
+        LINKMANID,
+      </if>
+      <if test="groupid != null" >
+        GROUPID,
+      </if>
+      <if test="name != null" >
+        NAME,
+      </if>
+      <if test="gender != null" >
+        GENDER,
+      </if>
+      <if test="nickname != null" >
+        NICKNAME,
+      </if>
+      <if test="duty != null" >
+        DUTY,
+      </if>
+      <if test="spouse != null" >
+        SPOUSE,
+      </if>
+      <if test="children != null" >
+        CHILDREN,
+      </if>
+      <if test="mobile != null" >
+        MOBILE,
+      </if>
+      <if test="telephone != null" >
+        TELEPHONE,
+      </if>
+      <if test="email != null" >
+        EMAIL,
+      </if>
+      <if test="qq != null" >
+        QQ,
+      </if>
+      <if test="msn != null" >
+        MSN,
+      </if>
+      <if test="depname != null" >
+        DEPNAME,
+      </if>
+      <if test="depaddress != null" >
+        DEPADDRESS,
+      </if>
+      <if test="deppostcode != null" >
+        DEPPOSTCODE,
+      </if>
+      <if test="deptelephone != null" >
+        DEPTELEPHONE,
+      </if>
+      <if test="depfax != null" >
+        DEPFAX,
+      </if>
+      <if test="homeaddress != null" >
+        HOMEADDRESS,
+      </if>
+      <if test="homepostcode != null" >
+        HOMEPOSTCODE,
+      </if>
+      <if test="hometelephone != null" >
+        HOMETELEPHONE,
+      </if>
+      <if test="birthday != null" >
+        BIRTHDAY,
+      </if>
+      <if test="remark != null" >
+        REMARK,
+      </if>
+      <if test="optime != null" >
+        OPTIME,
+      </if>
+      <if test="opid != null" >
+        OPID,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="linkmanid != null" >
+        #{linkmanid,jdbcType=DECIMAL},
+      </if>
+      <if test="groupid != null" >
+        #{groupid,jdbcType=DECIMAL},
+      </if>
+      <if test="name != null" >
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="gender != null" >
+        #{gender,jdbcType=VARCHAR},
+      </if>
+      <if test="nickname != null" >
+        #{nickname,jdbcType=VARCHAR},
+      </if>
+      <if test="duty != null" >
+        #{duty,jdbcType=VARCHAR},
+      </if>
+      <if test="spouse != null" >
+        #{spouse,jdbcType=VARCHAR},
+      </if>
+      <if test="children != null" >
+        #{children,jdbcType=VARCHAR},
+      </if>
+      <if test="mobile != null" >
+        #{mobile,jdbcType=VARCHAR},
+      </if>
+      <if test="telephone != null" >
+        #{telephone,jdbcType=VARCHAR},
+      </if>
+      <if test="email != null" >
+        #{email,jdbcType=VARCHAR},
+      </if>
+      <if test="qq != null" >
+        #{qq,jdbcType=VARCHAR},
+      </if>
+      <if test="msn != null" >
+        #{msn,jdbcType=VARCHAR},
+      </if>
+      <if test="depname != null" >
+        #{depname,jdbcType=VARCHAR},
+      </if>
+      <if test="depaddress != null" >
+        #{depaddress,jdbcType=VARCHAR},
+      </if>
+      <if test="deppostcode != null" >
+        #{deppostcode,jdbcType=VARCHAR},
+      </if>
+      <if test="deptelephone != null" >
+        #{deptelephone,jdbcType=VARCHAR},
+      </if>
+      <if test="depfax != null" >
+        #{depfax,jdbcType=VARCHAR},
+      </if>
+      <if test="homeaddress != null" >
+        #{homeaddress,jdbcType=VARCHAR},
+      </if>
+      <if test="homepostcode != null" >
+        #{homepostcode,jdbcType=VARCHAR},
+      </if>
+      <if test="hometelephone != null" >
+        #{hometelephone,jdbcType=VARCHAR},
+      </if>
+      <if test="birthday != null" >
+        #{birthday,jdbcType=DATE},
+      </if>
+      <if test="remark != null" >
+        #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="optime != null" >
+        #{optime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="opid != null" >
+        #{opid,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <!-- 根据id删除联系人 -->
+  <delete id="deletePersonByLinManid" parameterType="Object">
+		delete from tbuser_addressbooks where linkmanid = #{LinkManId}
+  </delete>
+   <!-- 根据分组id删除联系人 -->
+  <delete id="deletePersonByGroupId" parameterType="Object">
+		delete from tbuser_addressbooks where groupid= #{groupId}
+  </delete>
+  <!-- 修改联系人 -->
+ <update id="updatePerson" parameterType="Object" >
+	 update TBUSER_ADDRESSBOOKS set  
+	  <trim  suffixOverrides="," >
+        groupid=#{groupid,jdbcType=DECIMAL},
+        name=#{name,jdbcType=VARCHAR},
+        gender=#{gender,jdbcType=VARCHAR},
+        nickname=#{nickname,jdbcType=VARCHAR},
+        duty=#{duty,jdbcType=VARCHAR},
+        spouse=#{spouse,jdbcType=VARCHAR},
+        children=#{children,jdbcType=VARCHAR},
+        mobile=#{mobile,jdbcType=VARCHAR},
+        telephone=#{telephone,jdbcType=VARCHAR},
+        email=#{email,jdbcType=VARCHAR},
+        qq=#{qq,jdbcType=VARCHAR},
+        msn=#{msn,jdbcType=VARCHAR},
+        depname=#{depname,jdbcType=VARCHAR},
+        depaddress=#{depaddress,jdbcType=VARCHAR},
+        deppostcode=#{deppostcode,jdbcType=VARCHAR},
+        deptelephone=#{deptelephone,jdbcType=VARCHAR},
+        depfax=#{depfax,jdbcType=VARCHAR},
+        homeaddress=#{homeaddress,jdbcType=VARCHAR},
+        homepostcode= #{homepostcode,jdbcType=VARCHAR},
+        hometelephone=#{hometelephone,jdbcType=VARCHAR},
+        remark=#{remark,jdbcType=VARCHAR},
+        opid=#{opid,jdbcType=VARCHAR},
+        birthday=#{birthday,jdbcType=DATE}
+    </trim> where  linkmanid=#{linkmanid}
+	</update>
+  <!-- 查询所有 的联系人 -->
+  <select id="selectAll" resultType="java.util.HashMap"> 
+  	select * from TBUSER_ADDRESSBOOKS where groupid in
+  	<foreach item="item" index="index" collection="list" open="(" separator="," close=")">   
+        #{item}   
+    </foreach> 
+  </select>
+  <!-- 根据id查询联系人 -->
+ <select id="selectPersonByLinkManId"  resultType="java.util.HashMap"  parameterType="String">
+  	<!-- select * from tbuser_addressbooks where linkmanid =#{LinkManId} -->
+  	select s.*,g.name as groupname from tbuser_addressbooks s,TBUSER_ADDRESSBOOK_GROUP g 
+  	where s.linkmanid =#{LinkManId} and S.GROUPID=g.groupid(+)
+  </select> 
+  <!-- 根据用户id和 文件夹内容判断是否有权限操作 -->
+  <select id="whetherPermissions" resultType="java.util.HashMap">
+        select * from TBSYS_ROLE_RES r where r.roleid in 
+        (select u.roleid from TBSYS_USERS_ROLES u where u.userid = #{userid}) and r.resid=#{perid}
+  </select>
+</mapper>

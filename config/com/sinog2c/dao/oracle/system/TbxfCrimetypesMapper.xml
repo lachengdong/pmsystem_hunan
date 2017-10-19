@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.sinog2c.dao.api.system.TbxfCrimetypesMapper" >
+  <resultMap id="BaseResultMap" type="com.sinog2c.model.system.TbxfCrimetypes" >
+    <id column="TYPEID" property="typeid" jdbcType="DECIMAL" />
+    <result column="NAME" property="name" jdbcType="VARCHAR" />
+    <result column="DEPARTID" property="departid" jdbcType="VARCHAR" />
+    <result column="ISDEL" property="isdel" jdbcType="DECIMAL" />
+    <result column="REMARK" property="remark" jdbcType="VARCHAR" />
+    <result column="OPID" property="opid" jdbcType="VARCHAR" />
+    <result column="OPTIME" property="optime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    TYPEID, NAME, DEPARTID, ISDEL, REMARK, OPID, OPTIME
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from TBXF_CRIMETYPES
+    where TYPEID = #{typeid,jdbcType=DECIMAL}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from TBXF_CRIMETYPES
+    where TYPEID = #{typeid,jdbcType=DECIMAL}
+  </delete>
+  <insert id="insert" parameterType="com.sinog2c.model.system.TbxfCrimetypes" >
+    insert into TBXF_CRIMETYPES (TYPEID, NAME, DEPARTID, 
+      ISDEL, REMARK, OPID, 
+      OPTIME)
+    values (#{typeid,jdbcType=DECIMAL}, #{name,jdbcType=VARCHAR}, #{departid,jdbcType=VARCHAR}, 
+      #{isdel,jdbcType=DECIMAL}, #{remark,jdbcType=VARCHAR}, #{opid,jdbcType=VARCHAR}, 
+      #{optime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.sinog2c.model.system.TbxfCrimetypes" >
+    insert into TBXF_CRIMETYPES
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="typeid != null" >
+        TYPEID,
+      </if>
+      <if test="name != null" >
+        NAME,
+      </if>
+      <if test="departid != null" >
+        DEPARTID,
+      </if>
+      <if test="isdel != null" >
+        ISDEL,
+      </if>
+      <if test="remark != null" >
+        REMARK,
+      </if>
+      <if test="opid != null" >
+        OPID,
+      </if>
+      <if test="optime != null" >
+        OPTIME,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="typeid != null" >
+        #{typeid,jdbcType=DECIMAL},
+      </if>
+      <if test="name != null" >
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="departid != null" >
+        #{departid,jdbcType=VARCHAR},
+      </if>
+      <if test="isdel != null" >
+        #{isdel,jdbcType=DECIMAL},
+      </if>
+      <if test="remark != null" >
+        #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="opid != null" >
+        #{opid,jdbcType=VARCHAR},
+      </if>
+      <if test="optime != null" >
+        #{optime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.sinog2c.model.system.TbxfCrimetypes" >
+    update TBXF_CRIMETYPES
+    <set >
+      <if test="name != null" >
+        NAME = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="departid != null" >
+        DEPARTID = #{departid,jdbcType=VARCHAR},
+      </if>
+      <if test="isdel != null" >
+        ISDEL = #{isdel,jdbcType=DECIMAL},
+      </if>
+      <if test="remark != null" >
+        REMARK = #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="opid != null" >
+        OPID = #{opid,jdbcType=VARCHAR},
+      </if>
+      <if test="optime != null" >
+        OPTIME = #{optime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where TYPEID = #{typeid,jdbcType=DECIMAL}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.sinog2c.model.system.TbxfCrimetypes" >
+    update TBXF_CRIMETYPES
+    set NAME = #{name,jdbcType=VARCHAR},
+      DEPARTID = #{departid,jdbcType=VARCHAR},
+      ISDEL = #{isdel,jdbcType=DECIMAL},
+      REMARK = #{remark,jdbcType=VARCHAR},
+      OPID = #{opid,jdbcType=VARCHAR},
+      OPTIME = #{optime,jdbcType=TIMESTAMP}
+    where TYPEID = #{typeid,jdbcType=DECIMAL}
+  </update>
+</mapper>

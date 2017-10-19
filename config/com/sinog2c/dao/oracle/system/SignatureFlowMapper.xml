@@ -1,0 +1,398 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.sinog2c.dao.api.system.SignatureFlowMapper" >
+  <resultMap id="BaseResultMap" type="com.sinog2c.model.system.SignatureFlow" >
+    <result column="FLOWDRAFTID" property="flowdraftid" jdbcType="VARCHAR" />
+    <result column="TEMPID" property="tempid" jdbcType="VARCHAR" />
+    <result column="SEALNUM" property="sealnum" jdbcType="DECIMAL" />
+    <result column="NOTATIONNUM" property="notationnum" jdbcType="DECIMAL" />
+    <result column="ISABLE" property="isable" jdbcType="DECIMAL" />
+    <result column="DELFLAG" property="delflag" jdbcType="DECIMAL" />
+    <result column="TEXT1" property="text1" jdbcType="VARCHAR" />
+    <result column="TEXT2" property="text2" jdbcType="VARCHAR" />
+    <result column="TEXT3" property="text3" jdbcType="VARCHAR" />
+    <result column="TEXT4" property="text4" jdbcType="VARCHAR" />
+    <result column="INT1" property="int1" jdbcType="DECIMAL" />
+    <result column="INT2" property="int2" jdbcType="DECIMAL" />
+    <result column="INT3" property="int3" jdbcType="DECIMAL" />
+    <result column="INT4" property="int4" jdbcType="DECIMAL" />
+    <result column="OPID" property="opid" jdbcType="VARCHAR" />
+    <result column="OPTIME" property="optime" jdbcType="DATE" />
+    <result column="REMARK" property="remark" jdbcType="VARCHAR" />
+    <result column="OPERATETYPE" property="operatetype" jdbcType="VARCHAR" />
+    <result column="CURRNODEID" property="currnodeid" jdbcType="VARCHAR" />
+    <result column="LASTNODEID" property="lastnodeid" jdbcType="VARCHAR" />
+    <result column="LASTSEALNUM" property="lastsealnum" jdbcType="DECIMAL" />
+    <result column="REQUARESEALNUM" property="requaresealnum" jdbcType="DECIMAL" />
+    <result column="PDFPATH" property="pdfpath" jdbcType="DECIMAL" />
+    <result column="OPERATEIP" property="operateip" jdbcType="DECIMAL" />
+  </resultMap>
+  <insert id="insert" parameterType="com.sinog2c.model.system.SignatureFlow" >
+    insert into TBSYS_SIGNATUREFLOW (FLOWDRAFTID, TEMPID, SEALNUM, 
+      NOTATIONNUM, ISABLE, DELFLAG, 
+      TEXT1, TEXT2, TEXT3, 
+      TEXT4, INT1, INT2, 
+      INT3, INT4, OPID, OPTIME, 
+      REMARK, OPERATETYPE, CURRNODEID, 
+      LASTNODEID, LASTSEALNUM, REQUARESEALNUM)
+    values (#{flowdraftid,jdbcType=VARCHAR}, #{tempid,jdbcType=VARCHAR}, #{sealnum,jdbcType=DECIMAL}, 
+      #{notationnum,jdbcType=DECIMAL}, #{isable,jdbcType=DECIMAL}, #{delflag,jdbcType=DECIMAL}, 
+      #{text1,jdbcType=VARCHAR}, #{text2,jdbcType=VARCHAR}, #{text3,jdbcType=VARCHAR}, 
+      #{text4,jdbcType=VARCHAR}, #{int1,jdbcType=DECIMAL}, #{int2,jdbcType=DECIMAL}, 
+      #{int3,jdbcType=DECIMAL}, #{int4,jdbcType=DECIMAL}, #{opid,jdbcType=VARCHAR}, #{optime,jdbcType=DATE}, 
+      #{remark,jdbcType=VARCHAR}, #{operatetype,jdbcType=VARCHAR}, #{currnodeid,jdbcType=VARCHAR}, #{lastnodeid,jdbcType=VARCHAR},
+      #{lastsealnum,jdbcType=DECIMAL}, #{requaresealnum,jdbcType=DECIMAL})
+  </insert>
+  <insert id="insertSelective" parameterType="com.sinog2c.model.system.SignatureFlow" >
+    insert into TBSYS_SIGNATUREFLOW
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="flowdraftid != null" >
+        FLOWDRAFTID,
+      </if>
+      <if test="tempid != null" >
+        TEMPID,
+      </if>
+      <if test="sealnum != null" >
+        SEALNUM,
+      </if>
+      <if test="notationnum != null" >
+        NOTATIONNUM,
+      </if>
+      <if test="isable != null" >
+        ISABLE,
+      </if>
+      <if test="delflag != null" >
+        DELFLAG,
+      </if>
+      <if test="text1 != null" >
+        TEXT1,
+      </if>
+      <if test="text2 != null" >
+        TEXT2,
+      </if>
+      <if test="text3 != null" >
+        TEXT3,
+      </if>
+      <if test="text4 != null" >
+        TEXT4,
+      </if>
+      <if test="int1 != null" >
+        INT1,
+      </if>
+      <if test="int2 != null" >
+        INT2,
+      </if>
+      <if test="int3 != null" >
+        INT3,
+      </if>
+      <if test="int4 != null" >
+        INT4,
+      </if>
+      <if test="opid != null" >
+        OPID,
+      </if>
+      <if test="optime != null" >
+        OPTIME,
+      </if>
+      <if test="remark != null" >
+        REMARK,
+      </if>
+      <if test="operatetype != null" >
+        OPERATETYPE,
+      </if>
+      <if test="currnodeid != null" >
+        CURRNODEID,
+      </if>
+      <if test="lastnodeid != null" >
+        LASTNODEID,
+      </if>
+      <if test="lastsealnum != null" >
+        LASTSEALNUM,
+      </if>
+      <if test="requaresealnum != null" >
+        REQUARESEALNUM,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="flowdraftid != null" >
+        #{flowdraftid,jdbcType=VARCHAR},
+      </if>
+      <if test="tempid != null" >
+        #{tempid,jdbcType=VARCHAR},
+      </if>
+      <if test="sealnum != null" >
+        #{sealnum,jdbcType=DECIMAL},
+      </if>
+      <if test="notationnum != null" >
+        #{notationnum,jdbcType=DECIMAL},
+      </if>
+      <if test="isable != null" >
+        #{isable,jdbcType=DECIMAL},
+      </if>
+      <if test="delflag != null" >
+        #{delflag,jdbcType=DECIMAL},
+      </if>
+      <if test="text1 != null" >
+        #{text1,jdbcType=VARCHAR},
+      </if>
+      <if test="text2 != null" >
+        #{text2,jdbcType=VARCHAR},
+      </if>
+      <if test="text3 != null" >
+        #{text3,jdbcType=VARCHAR},
+      </if>
+      <if test="text4 != null" >
+        #{text4,jdbcType=VARCHAR},
+      </if>
+      <if test="int1 != null" >
+        #{int1,jdbcType=DECIMAL},
+      </if>
+      <if test="int2 != null" >
+        #{int2,jdbcType=DECIMAL},
+      </if>
+      <if test="int3 != null" >
+        #{int3,jdbcType=DECIMAL},
+      </if>
+      <if test="int4 != null" >
+        #{int4,jdbcType=DECIMAL},
+      </if>
+      <if test="opid != null" >
+        #{opid,jdbcType=VARCHAR},
+      </if>
+      <if test="optime != null" >
+        #{optime,jdbcType=DATE},
+      </if>
+      <if test="remark != null" >
+        #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="operatetype != null" >
+        #{operatetype,jdbcType=VARCHAR},
+      </if>
+      <if test="currnodeid != null" >
+        #{currnodeid,jdbcType=VARCHAR},
+      </if>
+      <if test="lastnodeid != null" >
+        #{lastnodeid,jdbcType=VARCHAR},
+      </if>
+      <if test="lastsealnum != null" >
+        #{lastsealnum,jdbcType=DECIMAL},
+      </if>
+      <if test="requaresealnum != null" >
+        #{requaresealnum,jdbcType=DECIMAL},
+      </if>
+    </trim>
+  </insert>
+  
+  <insert id="insertMapSelective" parameterType="Map" >
+    insert into TBSYS_SIGNATUREFLOW
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="flowdraftid != null" >
+        FLOWDRAFTID,
+      </if>
+      <if test="tempid != null" >
+        TEMPID,
+      </if>
+      <if test="sealnum != null" >
+        SEALNUM,
+      </if>
+      <if test="notationnum != null" >
+        NOTATIONNUM,
+      </if>
+      <if test="isable != null" >
+        ISABLE,
+      </if>
+      <if test="delflag != null" >
+        DELFLAG,
+      </if>
+      <if test="text1 != null" >
+        TEXT1,
+      </if>
+      <if test="text2 != null" >
+        TEXT2,
+      </if>
+      <if test="text3 != null" >
+        TEXT3,
+      </if>
+      <if test="text4 != null" >
+        TEXT4,
+      </if>
+      <if test="int1 != null" >
+        INT1,
+      </if>
+      <if test="int2 != null" >
+        INT2,
+      </if>
+      <if test="int3 != null" >
+        INT3,
+      </if>
+      <if test="int4 != null" >
+        INT4,
+      </if>
+      <if test="opid != null" >
+        OPID,
+      </if>
+      <if test="optime != null" >
+        OPTIME,
+      </if>
+      <if test="remark != null" >
+        REMARK,
+      </if>
+      <if test="operatetype != null" >
+        OPERATETYPE,
+      </if>
+      <if test="currnodeid != null" >
+        CURRNODEID,
+      </if>
+      <if test="lastnodeid != null" >
+        LASTNODEID,
+      </if>
+      <if test="lastsealnum != null" >
+        LASTSEALNUM,
+      </if>
+      <if test="requaresealnum != null" >
+        REQUARESEALNUM,
+      </if>
+      <if test="pdfpath != null" >
+        PDFPATH,
+      </if>
+      <if test="operateip != null" >
+        OPERATEIP,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="flowdraftid != null" >
+        #{flowdraftid,jdbcType=VARCHAR},
+      </if>
+      <if test="tempid != null" >
+        #{tempid,jdbcType=VARCHAR},
+      </if>
+      <if test="sealnum != null" >
+        #{sealnum,jdbcType=DECIMAL},
+      </if>
+      <if test="notationnum != null" >
+        #{notationnum,jdbcType=DECIMAL},
+      </if>
+      <if test="isable != null" >
+        #{isable,jdbcType=DECIMAL},
+      </if>
+      <if test="delflag != null" >
+        #{delflag,jdbcType=DECIMAL},
+      </if>
+      <if test="text1 != null" >
+        #{text1,jdbcType=VARCHAR},
+      </if>
+      <if test="text2 != null" >
+        #{text2,jdbcType=VARCHAR},
+      </if>
+      <if test="text3 != null" >
+        #{text3,jdbcType=VARCHAR},
+      </if>
+      <if test="text4 != null" >
+        #{text4,jdbcType=VARCHAR},
+      </if>
+      <if test="int1 != null" >
+        #{int1,jdbcType=DECIMAL},
+      </if>
+      <if test="int2 != null" >
+        #{int2,jdbcType=DECIMAL},
+      </if>
+      <if test="int3 != null" >
+        #{int3,jdbcType=DECIMAL},
+      </if>
+      <if test="int4 != null" >
+        #{int4,jdbcType=DECIMAL},
+      </if>
+      <if test="opid != null" >
+        #{opid,jdbcType=VARCHAR},
+      </if>
+      <if test="optime != null" >
+        #{optime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="remark != null" >
+        #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="operatetype != null" >
+        #{operatetype,jdbcType=VARCHAR},
+      </if>
+      <if test="currnodeid != null" >
+        #{currnodeid,jdbcType=VARCHAR},
+      </if>
+      <if test="lastnodeid != null" >
+        #{lastnodeid,jdbcType=VARCHAR},
+      </if>
+      <if test="lastsealnum != null" >
+        #{lastsealnum,jdbcType=DECIMAL},
+      </if>
+      <if test="requaresealnum != null" >
+        #{requaresealnum,jdbcType=DECIMAL},
+      </if>
+      <if test="pdfpath != null" >
+        #{pdfpath,jdbcType=DECIMAL},
+      </if>
+      <if test="operateip != null" >
+        #{operateip,jdbcType=DECIMAL},
+      </if>
+    </trim>
+  </insert>
+  
+  <select id="getLastSignatureFlow" parameterType="Map" resultType="Map">
+	   select * from (
+			select t.* from TBSYS_SIGNATUREFLOW t 
+			where t.flowdraftid=#{flowdraftid}
+			and t.tempid = #{tempid}
+			order by t.OPTIME desc
+		) where rownum=1
+  </select>
+  
+  <select id="findLastFlowNodeSignatureFlow" parameterType="Map" resultType="com.sinog2c.model.system.SignatureFlow">
+	   select * from (
+			select t.* 
+			 from TBSYS_SIGNATUREFLOW t 
+			where t.flowdraftid=#{flowdraftid}
+			   and t.tempid = #{tempid}
+			   and t.operatetype != 'save'
+			order by t.OPTIME desc
+	   ) where rownum=1
+  </select>
+  
+  <select id="findLastFlowNodeSignatureFlows" parameterType="Map" resultType="com.sinog2c.model.system.SignatureFlow">
+	   select 
+		  ts.*
+		from TBSYS_SIGNATUREFLOW ts,
+			    (select 
+			      max(t.flowdraftid) as flowdraftid,
+			      t.tempid,
+			      max(t.optime) as optime
+			    from TBSYS_SIGNATUREFLOW t
+			    where t.flowdraftid=#{flowdraftid}
+			      and t.tempid in (${tempid})
+			    group by t.tempid
+			    ) tm
+		where ts.flowdraftid=#{flowdraftid}
+		  and ts.tempid in (${tempid})
+		  and ts.optime=tm.optime
+  </select>
+  <select id="getSignatureFlowByMap" parameterType="Map" resultType="Map">
+     select to_char(t.optime, 'yyyy-MM-dd HH24:mi:ss') optime,cc.tempname,us.name opname,t.* 
+         from TBSYS_SIGNATUREFLOW t ,TBSYS_USERINFO us,
+             (select aa.* from tbsys_template aa,
+               (select max(t.departid) as maxdepartid, tempid
+                  from tbsys_template t
+                 where t.type = '2'
+                   and (departid = '0' or departid = #{departid} or departid = #{orgid} 
+                           or departid = (select porgid from TBSYS_ORGINFO where orgid = #{departid})
+                       ) group by t.tempid) bb          
+                     where aa.tempid = bb.tempid and aa.departid = bb.maxdepartid) cc
+         where 1=1  
+            <if test="flowdraftid != null and flowdraftid != ''" >
+                and t.flowdraftid=#{flowdraftid}
+            </if>
+            <if test="tempid != null and tempid != ''" >
+                and t.tempid = #{tempid}
+            </if>
+            and t.opid=us.userid
+            and cc.tempid = t.tempid
+            order by t.OPTIME desc
+        
+  </select>
+</mapper>

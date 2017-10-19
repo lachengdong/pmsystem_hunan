@@ -1,0 +1,307 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.sinog2c.dao.api.user.UserReportMapper" >
+  <resultMap id="BaseResultMap" type="com.sinog2c.model.user.UserReport" >
+    <id column="RID" property="rid" jdbcType="VARCHAR" />
+    <result column="RESID" property="resid" jdbcType="VARCHAR" />
+    <result column="PLANID" property="planid" jdbcType="DECIMAL" />
+    <result column="NAME" property="name" jdbcType="VARCHAR" />
+    <result column="TYPE" property="type" jdbcType="VARCHAR" />
+    <result column="SN" property="sn" jdbcType="DECIMAL" />
+    <result column="DELFLAG" property="delflag" jdbcType="VARCHAR" />
+    <result column="REMARK" property="remark" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    RID, RESID, PLANID, NAME, TYPE, SN, DELFLAG, REMARK
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from TBUSER_USERREPORT
+    where RID = #{rid,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from TBUSER_USERREPORT
+    where RID = #{rid,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.sinog2c.model.user.UserReport" >
+    insert into TBUSER_USERREPORT (RID, RESID, PLANID, 
+      NAME, TYPE, SN, DELFLAG, 
+      REMARK)
+    values (#{rid,jdbcType=VARCHAR}, #{resid,jdbcType=VARCHAR}, #{planid,jdbcType=DECIMAL}, 
+      #{name,jdbcType=VARCHAR}, #{type,jdbcType=VARCHAR}, #{sn,jdbcType=DECIMAL}, #{delflag,jdbcType=VARCHAR}, 
+      #{remark,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.sinog2c.model.user.UserReport" >
+  	<selectKey keyProperty="rid" resultType="java.lang.String" order="BEFORE">
+		select SEQ_USERREPORT_ID.nextval as rid from dual
+  	</selectKey>
+    insert into TBUSER_USERREPORT
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="rid != null" >
+        RID,
+      </if>
+      <if test="resid != null" >
+        RESID,
+      </if>
+      <if test="planid != null" >
+        PLANID,
+      </if>
+      <if test="name != null" >
+        NAME,
+      </if>
+      <if test="type != null" >
+        TYPE,
+      </if>
+      <if test="sn != null" >
+        SN,
+      </if>
+      <if test="delflag != null" >
+        DELFLAG,
+      </if>
+      <if test="remark != null" >
+        REMARK,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="rid != null" >
+        #{rid,jdbcType=VARCHAR},
+      </if>
+      <if test="resid != null" >
+        #{resid,jdbcType=VARCHAR},
+      </if>
+      <if test="planid != null" >
+        #{planid,jdbcType=DECIMAL},
+      </if>
+      <if test="name != null" >
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="type != null" >
+        #{type,jdbcType=VARCHAR},
+      </if>
+      <if test="sn != null" >
+        #{sn,jdbcType=DECIMAL},
+      </if>
+      <if test="delflag != null" >
+        #{delflag,jdbcType=VARCHAR},
+      </if>
+      <if test="remark != null" >
+        #{remark,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.sinog2c.model.user.UserReport" >
+    update TBUSER_USERREPORT
+    <set >
+      <if test="resid != null" >
+        RESID = #{resid,jdbcType=VARCHAR},
+      </if>
+      <if test="planid != null" >
+        PLANID = #{planid,jdbcType=DECIMAL},
+      </if>
+      <if test="name != null" >
+        NAME = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="type != null" >
+        TYPE = #{type,jdbcType=VARCHAR},
+      </if>
+      <if test="sn != null" >
+        SN = #{sn,jdbcType=DECIMAL},
+      </if>
+      <if test="delflag != null" >
+        DELFLAG = #{delflag,jdbcType=VARCHAR},
+      </if>
+      <if test="remark != null" >
+        REMARK = #{remark,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where RID = #{rid,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.sinog2c.model.user.UserReport" >
+    update TBUSER_USERREPORT
+    set RESID = #{resid,jdbcType=VARCHAR},
+      PLANID = #{planid,jdbcType=DECIMAL},
+      NAME = #{name,jdbcType=VARCHAR},
+      TYPE = #{type,jdbcType=VARCHAR},
+      SN = #{sn,jdbcType=DECIMAL},
+      DELFLAG = #{delflag,jdbcType=VARCHAR},
+      REMARK = #{remark,jdbcType=VARCHAR}
+    where RID = #{rid,jdbcType=VARCHAR}
+  </update>
+  
+  
+   <select id="queryPreviewReportCount" resultType="int">  <!-- 查询搜索记录总数 -->
+   		 SELECT count(1) 
+		 	FROM 
+		 	(
+		 		SELECT u.name,u.type,u.sn,u.remark, q.name as planname, r.name as resourcename
+				  FROM TBUSER_USERREPORT u left join TBSYS_RESOURCES r on u.resid=r.resid left join TBSYS_QUERYPLAN q on u.planid=q.planid 
+				  where u.DELFLAG=0
+				  	<if test="type != null and type != '' " >
+				 	and u.type= #{type}
+				 	</if>
+				 	<if test="name != null and name != '' " >
+				 	and u.name like  '%'||#{name}||'%'   
+				 	</if>
+		 	) A 
+		 	WHERE 1=1
+		 	<if test="sortField != null and sortField != '' and sortOrder != null and sortOrder !=''" >
+		 	 order by a.${sortField} ${sortOrder} 
+		 	</if>
+		 	<if test="sortField == null or sortField == '' or sortOrder == null or sortOrder ==''" >
+		 	  order by a.SN asc 
+		 	</if>
+  </select>
+     <select id="queryBaobiaoCount" resultType="int">  <!-- 查询搜索记录总数 -->
+	 	select count(*) c from TBUSER_USERREPORT r
+	 	where r.DELFLAG=0 order by sn 
+ 	 </select>
+ 	 
+    <select id="queryPreviewResReportCount" resultType="int">    <!-- 预览打印查询数据总数用 -->
+    	SELECT count(1)
+			  FROM TBUSER_USERREPORT u,
+			  (SELECT s.resid
+                      FROM TBSYS_RESOURCES e,
+                           (SELECT DISTINCT e.resid AS resid
+                              FROM TBSYS_ROLE_RES e
+                             WHERE  e.roleid IN (SELECT roleid
+                                                  FROM TBSYS_USERS_ROLES
+                                                 WHERE userid = #{userid,jdbcType=VARCHAR})) s
+                     WHERE e.resid = s.resid and e.restypeid=18) t0
+			   where u.DELFLAG=0 and  u.resid=t0.resid 
+			    and nvl(u.remark,'1111') &lt;&gt; 'gonggao'
+	 		  order by u.SN asc
+    </select> 
+    <select id="queryPreviewResReportGonggaoCount" resultType="int">
+    	SELECT count(1)
+			  FROM TBUSER_USERREPORT u,
+			  (SELECT s.resid
+                      FROM TBSYS_RESOURCES e,
+                           (SELECT DISTINCT e.resid AS resid
+                              FROM TBSYS_ROLE_RES e
+                             WHERE  e.roleid IN (SELECT roleid
+                                                  FROM TBSYS_USERS_ROLES
+                                                 WHERE userid = #{userid,jdbcType=VARCHAR})) s
+                     WHERE e.resid = s.resid and e.restypeid=18) t0
+			   where u.DELFLAG=0 and  u.resid=t0.resid and u.remark='gonggao'
+    </select>
+   <select id="getUserReportByType" resultMap="BaseResultMap">    <!-- 分页搜索表中的信息 预览打印用 -->
+	 SELECT * FROM 
+	 	( SELECT A.*, ROWNUM RN 
+		 	FROM 
+		 	(
+		 		SELECT u.*
+				  FROM TBUSER_USERREPORT u,
+				  (SELECT s.resid
+                       FROM TBSYS_RESOURCES e,
+                            (SELECT DISTINCT e.resid AS resid
+                               FROM TBSYS_ROLE_RES e
+                              WHERE  e.roleid IN (SELECT roleid
+                                                   FROM TBSYS_USERS_ROLES
+                                                  WHERE userid = #{userid,jdbcType=VARCHAR})) s
+                      WHERE e.resid = s.resid and e.restypeid=18) t0
+				   where u.DELFLAG=0 and  u.resid=t0.resid 
+				   and nvl(u.remark,'1111') &lt;&gt; 'gonggao'
+			      <if test="type != null and type != '' " >
+			       and u.type = #{type,jdbcType=VARCHAR}
+			      </if>
+		 		  order by u.SN asc
+		 	) A 
+		 	<if test="end != null and end != '' " >
+		 	WHERE ROWNUM &lt;= #{end,jdbcType=DECIMAL}
+		 	</if>
+	 	) 
+	 	<if test="start != null and start != '' " >
+	 	WHERE RN &gt;= #{start,jdbcType=DECIMAL} 
+	 	</if>
+  </select> 
+  <select id="getUserReportGonggaoByType" resultMap="BaseResultMap">    <!-- 分页搜索表中的信息 预览打印用 -->
+	 SELECT * FROM 
+	 	( SELECT A.*, ROWNUM RN 
+		 	FROM 
+		 	(
+		 		SELECT u.*
+				  FROM TBUSER_USERREPORT u,
+				  (SELECT s.resid
+                       FROM TBSYS_RESOURCES e,
+                            (SELECT DISTINCT e.resid AS resid
+                               FROM TBSYS_ROLE_RES e
+                              WHERE  e.roleid IN (SELECT roleid
+                                                   FROM TBSYS_USERS_ROLES
+                                                  WHERE userid = #{userid,jdbcType=VARCHAR})) s
+                      WHERE e.resid = s.resid and e.restypeid=18) t0
+				   where u.DELFLAG=0 and  u.resid=t0.resid 
+				   and u.remark='gonggao'
+			      <if test="type != null and type != '' " >
+			       and u.type = #{type,jdbcType=VARCHAR}
+			      </if>
+		 		  order by u.SN asc
+		 	) A 
+		 	<if test="end != null and end != '' " >
+		 	WHERE ROWNUM &lt;= #{end,jdbcType=DECIMAL}
+		 	</if>
+	 	) 
+	 	<if test="start != null and start != '' " >
+	 	WHERE RN &gt;= #{start,jdbcType=DECIMAL} 
+	 	</if>
+  </select> 
+  <select id="getUserReportPageList" resultMap="BaseResultMap">    <!-- 分页搜索表中的信息 预览打印用 -->
+	 SELECT * FROM 
+	 	( SELECT A.*, ROWNUM RN 
+		 	FROM 
+		 	(
+		 		SELECT u.*
+				  FROM TBUSER_USERREPORT u where u.DELFLAG=0
+		 		  order by u.SN asc
+		 	) A 
+		 	WHERE ROWNUM &lt;= #{end,jdbcType=DECIMAL}
+	 	) 
+	 	WHERE RN &gt;= #{start,jdbcType=DECIMAL} 
+  </select> 
+  
+   <select id="getReportManagePageList" resultType="java.util.Map">    <!-- 分页搜索表中的信息 报表管理用-->
+	 SELECT * FROM 
+	 	( SELECT A.*, ROWNUM RN 
+		 	FROM 
+		 	(
+		 		SELECT u.*, q.name as planname, r.name as resourcename
+				  FROM TBUSER_USERREPORT u left join TBSYS_RESOURCES r on u.resid=r.resid left join TBSYS_QUERYPLAN q on u.planid=q.planid 
+				  where u.DELFLAG=0
+				  	<if test="type != null and type != '' " >
+				 	and u.type= #{type}
+				 	</if>
+				 	<if test="name != null and name != '' " >
+				 	and u.name like  '%'||#{name}||'%'   
+				 	</if>
+		 	) A 
+		 	WHERE ROWNUM &lt;= #{end,jdbcType=DECIMAL}
+		 	<if test="sortField != null and sortField != '' and sortOrder != null and sortOrder !=''" >
+		 	 order by a.${sortField} ${sortOrder} 
+		 	</if>
+		 	<if test="sortField == null or sortField == '' or sortOrder == null or sortOrder ==''" >
+		 	  order by a.SN asc 
+		 	</if>
+	 	) 
+	 	WHERE RN &gt;= #{start,jdbcType=DECIMAL} 
+  </select> 
+  
+  
+   <select id="selectAllReport"  resultType="java.util.Map">
+     select rid as confid, name from TBUSER_USERREPORT order by sn
+   </select>
+   
+    <select id="getTemplateSchemeList" resultMap="BaseResultMap">    <!-- 获取word模版报表下拉方案 -->
+ 		SELECT u.*
+		  FROM TBUSER_USERREPORT u,
+		  (SELECT s.resid
+                     FROM TBSYS_RESOURCES e,
+                          (SELECT DISTINCT e.resid AS resid
+                             FROM TBSYS_ROLE_RES e
+                            WHERE  e.roleid IN (SELECT roleid
+                                                 FROM TBSYS_USERS_ROLES
+                                                WHERE userid = #{userid,jdbcType=VARCHAR})) s
+                    WHERE e.resid = s.resid and e.restypeid=33) t0
+		   where u.DELFLAG=0 and  u.resid=t0.resid 
+ 		  order by u.SN asc
+  </select> 
+</mapper>

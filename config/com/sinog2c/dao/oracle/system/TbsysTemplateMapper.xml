@@ -1,0 +1,1481 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.sinog2c.dao.api.system.TbsysTemplateMapper" >
+  <resultMap id="BaseResultMap" type="com.sinog2c.model.system.TbsysTemplate" >
+    <result column="TEMPID" property="tempid" jdbcType="VARCHAR" />
+    <result column="FUNCTIONNAME" property="functionname" jdbcType="VARCHAR" />
+    <result column="TEMPNAME" property="tempname" jdbcType="VARCHAR" />
+    <result column="DELFLAG" property="delflag" jdbcType="DECIMAL" />
+    <result column="TYPE" property="type" jdbcType="DECIMAL" />
+    <result column="FINDID" property="findid" jdbcType="DECIMAL" />
+    <result column="REMARK" property="remark" jdbcType="VARCHAR" />
+    <result column="DEPARTID" property="departid" jdbcType="VARCHAR" />
+    <result column="OPTIME" property="optime" jdbcType="TIMESTAMP" />
+    <result column="OPID" property="opid" jdbcType="VARCHAR" />
+    <result column="TEMPTYPE" property="temptype" jdbcType="VARCHAR" />
+    <result column="UNEDITEDFIELDS" property="uneditedfields" jdbcType="VARCHAR" />
+  </resultMap>
+  <resultMap id="ResultMapWithBLOBs" type="com.sinog2c.model.system.TbsysTemplate" extends="BaseResultMap" >
+    <result column="CONTENT" property="content" jdbcType="CLOB" />
+  </resultMap>
+  <sql id="Blob_Column_List" >
+    CONTENT
+  </sql>
+ 
+  <insert id="insertSelective" parameterType="com.sinog2c.model.system.TbsysTemplate" >
+    insert into TBSYS_TEMPLATE
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="tempid != null" >
+        TEMPID,
+      </if>
+      <if test="functionname != null" >
+        FUNCTIONNAME,
+      </if>
+      <if test="tempname != null" >
+        TEMPNAME,
+      </if>
+      <if test="delflag != null" >
+        DELFLAG,
+      </if>
+      <if test="type != null" >
+        TYPE,
+      </if>
+      <if test="findid != null" >
+        FINDID,
+      </if>
+      <if test="remark != null" >
+        REMARK,
+      </if>
+      <if test="departid != null" >
+        DEPARTID,
+      </if>
+      <if test="optime != null" >
+        OPTIME,
+      </if>
+      <if test="opid != null" >
+        OPID,
+      </if>
+      <if test="content != null" >
+        CONTENT,
+      </if>
+      <if test="temptype != null">
+      	TEMPTYPE,
+      </if>
+      <if test="generaltype != null">
+      	GENERALTYPE,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="tempid != null" >
+        #{tempid,jdbcType=VARCHAR},
+      </if>
+      <if test="functionname != null" >
+        #{functionname,jdbcType=VARCHAR},
+      </if>
+      <if test="tempname != null" >
+        #{tempname,jdbcType=VARCHAR},
+      </if>
+      <if test="delflag != null" >
+        #{delflag,jdbcType=DECIMAL},
+      </if>
+      <if test="type != null" >
+        #{type,jdbcType=DECIMAL},
+      </if>
+      <if test="findid != null" >
+        #{findid,jdbcType=DECIMAL},
+      </if>
+      <if test="remark != null" >
+        #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="departid != null" >
+        #{departid,jdbcType=VARCHAR},
+      </if>
+      <if test="optime != null" >
+        #{optime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="opid != null" >
+        #{opid,jdbcType=VARCHAR},
+      </if>
+      <if test="content != null" >
+        #{content,jdbcType=CLOB},
+      </if>
+      <if test="temptype != null" >
+        #{temptype,jdbcType=VARCHAR},  
+      </if>    
+      <if test="generaltype != null" >
+        #{generaltype,jdbcType=VARCHAR},  
+      </if>      
+    </trim>
+  </insert>
+  <!-- 根据Id修改数据 -->
+  <update id="updateTemplateDetail" parameterType="Object">
+	update TBSYS_TEMPLATE set
+	<trim  suffixOverrides=",">
+      	<if test="tempname != null" >
+     		TEMPNAME = #{tempname,jdbcType=VARCHAR},
+   		</if>
+   		<if test="functionname != null" >
+     		FUNCTIONNAME = #{functionname,jdbcType=VARCHAR},
+   		</if>
+      	<if test="content != null" >
+     		CONTENT = #{content,jdbcType=CLOB},
+   		</if>
+      	<if test="findid != null" >
+     		FINDID = #{findid,jdbcType=DECIMAL},
+   		</if>
+      	<if test="optime != null" >
+     		OPTIME = #{optime,jdbcType=TIMESTAMP},
+   		</if>
+   		<if test="opid != null" >
+     		OPID = #{opid,jdbcType=VARCHAR},
+   		</if>
+   		<if test="temptype != null" >
+     		TEMPTYPE = #{temptype,jdbcType=VARCHAR},
+   		</if>  
+   		<if test="generaltype != null" >
+	        GENERALTYPE = #{generaltype,jdbcType=VARCHAR},  
+	    </if>    
+   		<if test="departid != null" >
+     		DEPARTID = #{departid,jdbcType=VARCHAR},
+   		</if>  		
+   	</trim> 
+    where tempid=#{tempid}
+  </update>
+  
+  <update id="updateTemplateDetail2" parameterType="Object">
+	update TBSYS_TEMPLATE set
+	<trim  suffixOverrides=",">
+      	<if test="tempid != null" >
+     		TEMPID = #{tempid,jdbcType=VARCHAR},
+   		</if>
+   		<if test="tempname != null" >
+     		TEMPNAME = #{tempname,jdbcType=VARCHAR},
+   		</if>
+   		<if test="functionname != null" >
+     		FUNCTIONNAME = #{functionname,jdbcType=VARCHAR},
+   		</if>
+      	<if test="content != null" >
+     		CONTENT = #{content,jdbcType=CLOB},
+   		</if>
+      	<if test="findid != null" >
+     		FINDID = #{findid,jdbcType=DECIMAL},
+   		</if>
+      	<if test="optime != null" >
+     		OPTIME = #{optime,jdbcType=TIMESTAMP},
+   		</if>
+   		<if test="opid != null" >
+     		OPID = #{opid,jdbcType=VARCHAR},
+   		</if>
+   		<if test="temptype != null" >
+     		TEMPTYPE = #{temptype,jdbcType=VARCHAR},
+   		</if>  
+   		<if test="sn != null" >
+     		sn = #{sn,jdbcType=DECIMAL},
+   		</if>
+   		<!-- sn 和generaltype不为null为法院的 -->
+   		<if test="sn != null and generaltype != null" >
+     		GENERALTYPE = #{generaltype,jdbcType=VARCHAR}
+   		</if>
+<!--   		<if test="generaltype != null" >-->
+<!--	        GENERALTYPE = #{generaltype,jdbcType=VARCHAR},  -->
+<!--	    </if>    -->
+<!--   		<if test="departid != null" >-->
+<!--     		DEPARTID = #{departid,jdbcType=VARCHAR},-->
+<!--   		</if>  		-->
+   	</trim> 
+    where tempid=#{tempid} and departid = #{departid}
+<!--    where tempid=#{tempid1} and departid = #{departid1} and generaltype = #{generaltype1}-->
+  </update>
+  
+  <!-- 根据部门Id查询所对应的模版，并进行分页 -->
+   <select id="getTemplateList" resultType="com.sinog2c.model.system.TbsysTemplate">
+	SELECT * FROM 
+		
+	 	(SELECT A.*, ROWNUM RN FROM 
+		 		(select aa.*
+				  from tbsys_template aa,
+				  
+				       (select max(t.departid) as maxdepartid, tempid
+				          from tbsys_template t
+				         where t.type = #{type}
+				           and (departid = '0' or departid = #{departid} or
+				               departid in
+				               (select porgid from TBSYS_ORGINFO where orgid = #{departid}))
+				         group by t.tempid) bb
+				         
+							 where aa.tempid = bb.tempid
+				   				and aa.departid = bb.maxdepartid
+						<if test="key!=null and key!=''">  
+		        			and (aa.tempname like '%'||#{key}||'%' or aa.functionname like '%'||#{key}||'%' or aa.tempid like '%'||#{key}||'%')
+		    			</if>
+				
+			 		<if test="sortField!=null and sortField!=''" > 
+	     				order by aa.${sortField} ${sortOrder}
+	    			</if>
+		 	 ) A 
+		 	WHERE ROWNUM &lt;= #{end,jdbcType=DECIMAL}
+	 	) 
+	 	WHERE RN &gt;= #{start,jdbcType=DECIMAL}
+  </select>
+  <!-- 根据部门Id查询所对应的模版总数 -->
+  <select id="getCount" resultType="int">  
+		select count(aa.tempid)
+				  from tbsys_template aa,
+				       (select max(t.departid) as maxdepartid, tempid
+				          from tbsys_template t
+				         where t.type = #{type}
+				           and (departid = '0' or departid = #{departid} or
+				               departid in
+				               (select porgid from TBSYS_ORGINFO where orgid = #{departid}))
+				         group by t.tempid) bb
+							 where aa.tempid = bb.tempid
+				   				and aa.departid = bb.maxdepartid
+					<if test="key!=null and key!=''">  
+		        			and (aa.tempname like '%'||#{key}||'%' or aa.functionname like '%'||#{key}||'%' or aa.tempid like '%'||#{key}||'%')
+		    			</if>
+   </select>
+
+  <select id="countAll" resultType="int">  
+		SELECT count(*) as c FROM TBSYS_TEMPLATE where 1=1
+   </select>
+
+   <select id="listAll" resultMap="BaseResultMap">
+	 SELECT TEMPID, FUNCTIONNAME, TEMPNAME, DELFLAG,TYPE, FINDID, REMARK, DEPARTID, 
+      OPTIME, OPID ,GENERALTYPE
+      FROM TBSYS_TEMPLATE 
+      where 1=1 and DELFLAG =0
+      order by TEMPID asc
+  </select>
+
+
+	<!-- 通过查询方案Id得到sql语句 -->
+  <select id="getSqlText" resultType="String">
+  		select sqltext from TBSYS_QUERYPLANSQL where PLANID=#{planid}
+  </select>
+  
+  <!-- 根据模板Id查询模板内容   公共方法 不能改，有需要自己写sql -->
+  <select id="getTemplateDetail" parameterType="Map" resultType="com.sinog2c.model.system.TbsysTemplate">
+  		select * from (SELECT * FROM TBSYS_TEMPLATE m where m.tempid =#{tempid} 
+  		<if test="departid!=null and departid!=''">
+ 			and (departid = '0' or departid = #{departid} 
+           		or departid in (select porgid from TBSYS_ORGINFO where orgid = #{departid})
+           			<if test="orgid!=null and orgid!=''">
+			 			 or departid = #{orgid} or departid in (select porgid from TBSYS_ORGINFO where orgid = #{orgid})
+			 		</if>
+               )
+ 		</if>
+ 		order by departid desc) where rownum=1
+  </select>
+  
+  <!-- 公示情况 获取模板  -->
+  <select id="getTemplateGongshi" parameterType="String" resultType="com.sinog2c.model.system.TbsysTemplate">
+  		SELECT * FROM TBSYS_TEMPLATE m where m.tempid =#{tempid}
+  		<if test="departid!=null and departid!=''" >  
+  		 and departid =#{departid}
+  		</if>
+  </select>
+  <!-- 根据模板Id删除数据 -->
+  <delete id="deleteTemplateDetail" parameterType="Object">
+  		delete from TBSYS_TEMPLATE where tempid=#{tempid}
+  		<if test="departid != null" >
+        	and departid =#{departid,jdbcType=VARCHAR}
+        </if>
+  </delete>
+  <delete id="deleteCourtUserModelByTempid" parameterType="Object">
+  		delete from TBSYS_COURT_USER_TEMPLATE where tempid=#{tempid}
+  </delete>
+  <!-- 查询方案生成的sql文 -->  
+  <select id="getDocumentContent" resultType="java.util.HashMap">
+  	   <if test="sql!=null and sql!=''">${sql}</if> 
+  </select>
+  <select id="getDocumentContentList" resultType="java.util.HashMap">
+	   <if test="sql!=null and sql!=''">${sql}</if> 
+  </select>
+
+
+  <!-- 查询出所有的 部门 -->
+  <select id="getOrgMap" resultType="java.util.Map">
+        select * from TBSYS_ORGINFO t where t.porgid=#{departid}
+  </select>
+  <!-- 查询出 选择的罪犯的减刑 信息 -->
+  <select id="getCrimeJxInfo" resultType="java.util.Map">
+       select * from UV_JXJS_CASE c where c.applyid in (${crimids}) and notissue != -1
+  </select>
+  <select id="getCrimeJxInfo1" resultType="java.util.Map">
+SELECT info.name AS name,
+       flow.orgid as orgid,
+       TO_CHAR(info.birthday,'yyyy"年"MM"月"dd"日"') AS csrq,
+       round((crime.crimedate-info.birthday)/365) as fzsnl,
+       crime.maincase AS zm,
+       crime.crimid AS zfbh,
+       TO_CHAR(crime.crimedate,'yyyy"年"MM"月"dd"日"') AS fzsj,
+        to_char(crime.JUDGEDATE,'yyyy"年"MM"月"dd"日"') as pjrq,
+      F_FORMATYMD(crime.PUNISHMENTYEAR,crime.PUNISHMENTMONTH,crime.PUNISHMENTDAY,'0') as ypxq,
+      F_LOSEPOWER(crime.LOSEPOWERYEAR,crime.LOSEPOWERMONTH,crime.LOSEPOWEREDAY) as bz,
+      TO_CHAR( crime.sentencestime,'yyyy"年"MM"月"dd"日"')  AS xqqr,
+
+      TO_CHAR( crime.sentenceetime,'yyyy"年"MM"月"dd"日"') AS xqzr,
+
+      TO_CHAR(crime.inprisondate,'yyyy"年"MM"月"dd"日"') as rjrq,
+
+       decode(ration.sentencechageinfo,null,'无刑期变动情况','','无刑期变动情况',ration.sentencechageinfo)  as xqbg,
+       decode(ration.rewardinfo,null,'无；','','无；',replace(ration.rewardinfo,'\r\n','；')) as hjqk,
+
+       (case ration.REPORTAUDIT when 1 then '报局审核罪犯' else ' ' end)  as bjshf,
+
+       (case ration.CRIMCLASS when '1' then '三类罪犯' else ' ' end)  as slf,
+       flow.ksyj||pshyj   AS jxfd,
+(case when ts.REWARDSTART is not null then f_formatdate(ts.REWARDSTART) else f_formatdate(crime.INPRISONDATE) end) as khqr,
+
+f_formatdate(thisBt.EXAMINEEND) as khzr,
+       decode(crime.FORFEIT,'','',null,'',0,'','并处罚金'||crime.FORFEIT||'元，') as ypfj   
+  FROM 
+       (select tsd.*,tcb.EXAMINEEND from TBXF_SENTENCEALTERATION tsd 
+
+  left join  TBXF_COMMUTEPAROLE_BATCH tcb on tsd.batchid=tcb.batchid) ts,
+      (select * from (select * from TBXF_COMMUTEPAROLE_BATCH where DEPARTID= #{departid} order by CURYEAR desc,BATCH desc ) where rownum=1) thisBt,
+TBXF_PRISONERPERFORMANCEMERGE tpr,
+       UV_JXJS_CASE  flow,
+       TBPRISONER_BASEINFO info,
+       TBPRISONER_BASE_CRIME crime,
+       TBXF_SENTENCEALTERATION ration     
+ WHERE   flow.applyid = info.crimid
+       AND flow.applyid = crime.crimid
+       AND flow.applyid = ration.crimid
+       and flow.notissue!='-1'
+       and (${applyids})
+       and flow.applyid = ts.crimid
+       and flow.applyid = tpr.crimid
+       and tpr.batchid=thisBt.batchid
+       and flow.departid=#{departid}
+      </select>
+       <select id="getCrimeJxInfo2" resultType="java.util.Map">
+SELECT info.name AS name,
+       flow.orgid as orgid,
+       TO_CHAR(info.birthday,'yyyy"年"MM"月"dd"日"') AS csrq,
+       round((crime.crimedate-info.birthday)/365) as fzsnl,
+       crime.maincase AS zm,
+       crime.crimid AS zfbh,
+       TO_CHAR(crime.crimedate,'yyyy"年"MM"月"dd"日"') AS fzsj,
+        to_char(crime.JUDGEDATE,'yyyy"年"MM"月"dd"日"') as pjrq,
+      F_FORMATYMD(crime.PUNISHMENTYEAR,crime.PUNISHMENTMONTH,crime.PUNISHMENTDAY,'0') as ypxq,
+      F_LOSEPOWER(crime.LOSEPOWERYEAR,crime.LOSEPOWERMONTH,crime.LOSEPOWEREDAY) as bz,
+      TO_CHAR( crime.sentencestime,'yyyy"年"MM"月"dd"日"')  AS xqqr,
+
+      TO_CHAR( crime.sentenceetime,'yyyy"年"MM"月"dd"日"') AS xqzr,
+
+      TO_CHAR(crime.inprisondate,'yyyy"年"MM"月"dd"日"') as rjrq,
+
+       decode(ration.sentencechageinfo,null,'无刑期变动情况','','无刑期变动情况',ration.sentencechageinfo)  as xqbg,
+       decode(ration.rewardinfo,null,'无；','','无；',replace(ration.rewardinfo,'\r\n','；')) as hjqk,
+
+       (case ration.REPORTAUDIT when 1 then '报局审核罪犯' else ' ' end)  as bjshf,
+
+       (case ration.CRIMCLASS when '1' then '三类罪犯' else ' ' end)  as slf,
+       flow.pshyj||flow.jyzyj   AS jxfd,
+(case when ts.REWARDSTART is not null then f_formatdate(ts.REWARDSTART) else f_formatdate(crime.INPRISONDATE) end) as khqr,
+
+f_formatdate(thisBt.EXAMINEEND) as khzr,
+       decode(crime.FORFEIT,'','',null,'',0,'','并处罚金'||crime.FORFEIT||'元，') as ypfj   
+  FROM 
+       (select tsd.*,tcb.EXAMINEEND from TBXF_SENTENCEALTERATION tsd 
+
+  left join  TBXF_COMMUTEPAROLE_BATCH tcb on tsd.batchid=tcb.batchid) ts,
+      (select * from (select * from TBXF_COMMUTEPAROLE_BATCH where DEPARTID= #{departid} order by CURYEAR desc,BATCH desc ) where rownum=1) thisBt,
+TBXF_PRISONERPERFORMANCEMERGE tpr,
+       UV_JXJS_CASE  flow,
+       TBPRISONER_BASEINFO info,
+       TBPRISONER_BASE_CRIME crime,
+       TBXF_SENTENCEALTERATION ration     
+ WHERE   flow.applyid = info.crimid
+       AND flow.applyid = crime.crimid
+       AND flow.applyid = ration.crimid
+       and flow.notissue!='-1'
+       and  (${applyids})
+       and flow.applyid = ts.crimid
+       and flow.applyid = tpr.crimid
+       and tpr.batchid=thisBt.batchid
+       and flow.departid=#{departid}
+      </select>
+  <!-- 查询出 监狱 选择的罪犯 中的罪犯 -->
+  <select id="getJxJsCaseList" resultType="java.util.Map">
+       select * from uv_jxjs_case where 1= 1--applyid in 
+       <if test="crimids != null">
+            and (${applyids}) and notissue != -1
+       </if>
+  </select>
+  <select id="getCuryearBatch" resultType="java.util.HashMap">
+	    select curyear,batch,batchid from  TBXF_COMMUTEPAROLE_BATCH c where c.departid=#{departid,jdbcType=VARCHAR} and remark='999'
+  </select>
+  <select id="listAllByType" resultMap="BaseResultMap">
+		SELECT TEMPID,
+		FUNCTIONNAME, TEMPNAME, DELFLAG,TYPE, FINDID, REMARK,
+		DEPARTID,
+		OPTIME,
+		OPID ,GENERALTYPE
+		FROM TBSYS_TEMPLATE
+		where 1=1 and DELFLAG =0 and
+		TYPE=#{type}
+		order by TEMPID asc
+	</select>
+	<insert id="insertSelective1" parameterType="com.sinog2c.model.system.TbsysTemplate">
+		insert into TBSYS_TEMPLATE
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="tempid != null">
+				TEMPID,
+			</if>
+			<if test="departid != null">
+				DEPARTID,
+			</if>
+			<if test="functionname != null">
+				FUNCTIONNAME,
+			</if>
+			<if test="tempname != null">
+				TEMPNAME,
+			</if>
+			<if test="delflag != null">
+				DELFLAG,
+			</if>
+			<if test="type != null">
+				TYPE,
+			</if>
+			<if test="findid != null">
+				FINDID,
+			</if>
+			<if test="remark != null">
+				REMARK,
+			</if>
+			<if test="optime != null">
+				OPTIME,
+			</if>
+			<if test="opid != null">
+				OPID,
+			</if>
+			<if test="uneditedfields != null">
+				UNEDITEDFIELDS,
+			</if>
+			<if test="temptype != null">
+				TEMPTYPE,
+			</if>
+			<if test="generaltype != null">
+				GENERALTYPE,
+			</if>
+			<if test="sn != null">
+				SN,
+			</if>
+			<if test="keyfields != null">
+				KEYFIELDS,
+			</if>
+			<if test="gridheaders1 != null">
+				GRIDHEADERS1,
+			</if>
+			<if test="gridheaders2 != null">
+				GRIDHEADERS2,
+			</if>
+			<if test="mainsqltemp != null">
+				MAINSQLTEMP,
+			</if>
+			<if test="mainsqltemp2 != null">
+				MAINSQLTEMP2,
+			</if>
+			<if test="maincountsql != null">
+				MAINCOUNTSQL,
+			</if>
+			<if test="content != null">
+				CONTENT,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="tempid != null">
+				#{tempid,jdbcType=VARCHAR},
+			</if>
+			<if test="departid != null">
+				#{departid,jdbcType=VARCHAR},
+			</if>
+			<if test="functionname != null">
+				#{functionname,jdbcType=VARCHAR},
+			</if>
+			<if test="tempname != null">
+				#{tempname,jdbcType=VARCHAR},
+			</if>
+			<if test="delflag != null">
+				#{delflag,jdbcType=DECIMAL},
+			</if>
+			<if test="type != null">
+				#{type,jdbcType=DECIMAL},
+			</if>
+			<if test="findid != null">
+				#{findid,jdbcType=DECIMAL},
+			</if>
+			<if test="remark != null">
+				#{remark,jdbcType=VARCHAR},
+			</if>
+			<if test="optime != null">
+				#{optime,jdbcType=DATE},
+			</if>
+			<if test="opid != null">
+				#{opid,jdbcType=VARCHAR},
+			</if>
+			<if test="uneditedfields != null">
+				#{uneditedfields,jdbcType=VARCHAR},
+			</if>
+			<if test="temptype != null">
+				#{temptype,jdbcType=VARCHAR},
+			</if>
+			<if test="generaltype != null">
+				#{generaltype,jdbcType=VARCHAR},
+			</if>
+			<if test="sn != null">
+				#{sn,jdbcType=DECIMAL},
+			</if>
+			<if test="keyfields != null">
+				#{keyfields,jdbcType=VARCHAR},
+			</if>
+			<if test="gridheaders1 != null">
+				#{gridheaders1,jdbcType=VARCHAR},
+			</if>
+			<if test="gridheaders2 != null">
+				#{gridheaders2,jdbcType=VARCHAR},
+			</if>
+			<if test="mainsqltemp != null">
+				#{mainsqltemp,jdbcType=VARCHAR},
+			</if>
+			<if test="mainsqltemp2 != null">
+				#{mainsqltemp2,jdbcType=VARCHAR},
+			</if>
+			<if test="maincountsql != null">
+				#{maincountsql,jdbcType=VARCHAR},
+			</if>
+			<if test="content != null">
+				#{content,jdbcType=CLOB},
+			</if>
+		</trim>
+	</insert>
+  <!-- 查询出所有的资源内容 -->
+  <select id="getResourceMapObject" resultType="java.util.Map">
+       select resid,presid,name from TBSYS_RESOURCES
+  </select>
+  <select id="ajaxGettemptype" resultType="java.util.HashMap">
+       select t.codeid,t.pcodeid,t.name from TBSYS_CODE t where t.codetype=#{codetype,jdbcType=VARCHAR} order by t.sn
+  </select>
+ <select id="getTemplateByTempAndDept" parameterType="Map" resultType="com.sinog2c.model.system.TbsysTemplate">
+  		SELECT * FROM TBSYS_TEMPLATE m where m.tempid =#{tempid} and departid = #{departid}
+  </select> 
+  <select id="threeClassCriminalShuoMing" resultType="map">
+        select * from TBSYS_TEMPLATE tb where tb.tempid=#{tempid} and tb.departid=#{departid}
+  </select>
+  <select id="ajaxGetTempid" resultType="int" >
+        select seq_tbsys_template.nextval c from dual
+  </select>
+  <!-- 查询 所在的单位 -->
+  <select id="getDepartNameByDepartid" resultType="string">
+        select name from TBSYS_ORGINFO where orgid=#{departid}
+  </select>
+  
+   <!-- 根据法院系统模版 -->
+   <select id="getCourtSystemModelList" resultType="map">
+	SELECT * FROM 
+	 	(SELECT A.*, ROWNUM RN FROM 
+		 	(select c.* from 
+		 		(select a.tempid,a.tempname,q.name as planname,a.sn,a.departid,a.generaltype,
+		 		(select c.name from TBSYS_CODE c where c.codetype='GK1103' and c.CODEID=a.TEMPTYPE) as temptypename
+				 from tbsys_template a,TBSYS_QUERYPLAN q where a.findid=q.planid(+) and a.type='1' and a.departid = #{departid}
+					<if test="key!=null and key!=''">  
+		        		and a.tempname like '%'||#{key}||'%' 
+		    		</if>
+				   ) c
+		 		<if test="sortField!=null and sortField!=''" > 
+     				order by c.${sortField} ${sortOrder}
+    			</if>
+		 	 ) A 
+		 	WHERE ROWNUM &lt;= #{end,jdbcType=DECIMAL}
+	 	) 
+	 	WHERE RN &gt;= #{start,jdbcType=DECIMAL}
+  </select>
+   <!-- 查询法院模版总数 -->
+  <select id="getCourtSystemModelCount" resultType="int">  
+		select count(1)  from tbsys_template a where a.type='1' and a.departid = #{departid}
+		<if test="key!=null and key!=''">  
+		      and a.tempname like '%'||#{key}||'%'
+		</if>
+   </select>
+    <!-- 获取法院单个模板-->
+  <select id="getCourtTemplateById" resultType="com.sinog2c.model.system.TbsysTemplate">
+  		SELECT * FROM TBSYS_TEMPLATE m where m.tempid =#{tempid}
+  		<if test="departid!=null and departid!=''" >  
+  		 and departid =#{departid}
+  		</if>
+  </select>
+   <select id="getCourtUserTemplateById" resultType="string">
+  		SELECT decode(count(1),0,'insert','update') as insertorupdate FROM TBSYS_COURT_USER_TEMPLATE m 
+  		where m.tempid =#{tempid} and m.userid=#{userid}
+  </select>
+   <insert id="insertCourtUserTemplate" parameterType="Map"  >
+    insert into TBSYS_COURT_USER_TEMPLATE
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="tempid != null" >
+        TEMPID,
+      </if>
+      <if test="opid != null" >
+        userid,
+      </if>
+      <if test="content != null" >
+        TMTEXT,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="tempid != null" >
+        #{tempid,jdbcType=VARCHAR},
+      </if>
+      <if test="opid != null" >
+        #{opid,jdbcType=VARCHAR},
+      </if>
+      <if test="content != null" >
+        #{content,jdbcType=CLOB},
+      </if>
+    </trim>
+  </insert>
+   <update id="updateCourtUserTemplateById" parameterType="Map" >
+	update TBSYS_COURT_USER_TEMPLATE set
+	<trim  suffixOverrides=",">
+      	<if test="content != null" >
+     		TMTEXT = #{content,jdbcType=CLOB},
+   		</if> 		
+   	</trim> 
+    where tempid=#{tempid} and userid=#{opid}
+  </update>
+  <select id="getCourtUserTemplateTextById" resultType="map">
+  		SELECT * FROM TBSYS_COURT_USER_TEMPLATE m 
+  		where m.tempid =#{tempid} and m.userid=#{userid}
+  </select>
+  <select id="getLiAnApproveList" parameterType="Map"  resultType="Map"> 
+  SELECT * FROM 
+	 (SELECT A.*, ROWNUM RN FROM 
+	 	(
+			select
+			<if test="displaycolumn1 != null and displaycolumn1 != 'false'" >
+     			displaycolumn1,
+   			</if>
+			<if test="displaycolumn2 != null and displaycolumn2 != 'false'" >
+     			displaycolumn2,
+   			</if>
+			<if test="displaycolumn3 != null and displaycolumn3 != 'false'" >
+     			displaycolumn3,
+   			</if>
+			<if test="displaycolumn4 != null and displaycolumn4 != 'false'" >
+     			displaycolumn4,
+   			</if>
+			<if test="displaycolumn5 != null and displaycolumn5 != 'false'" >
+     			displaycolumn5,
+   			</if>
+			<if test="displaycolumn6 != null and displaycolumn6 != 'false'" >
+     			F_FORMATDATE(displaycolumn6) displaycolumn6,
+   			</if>
+			<if test="displaycolumn7 != null and displaycolumn7 != 'false'" >
+     			displaycolumn7,
+   			</if>
+			<if test="displaycolumn8 != null and displaycolumn8 != 'false'" >
+     			displaycolumn8,
+   			</if>
+			<if test="displaycolumn9 != null and displaycolumn9 != 'false'" >
+     			displaycolumn9,
+   			</if>
+			<if test="displaycolumn10 != null and displaycolumn10 != 'false'" >
+     			displaycolumn10,
+   			</if>
+   			
+   			<if test="displaycolumn11 != null and displaycolumn11 != 'false'" >
+     			displaycolumn11,
+   			</if>
+   			<if test="displaycolumn12 != null and displaycolumn12 != 'false'" >
+     			displaycolumn12,
+   			</if>
+   			<if test="displaycolumn13 != null and displaycolumn13 != 'false'" >
+     			displaycolumn13,
+   			</if>
+   			<if test="displaycolumn14 != null and displaycolumn14 != 'false'" >
+     			F_FORMATDATE(displaycolumn14) displaycolumn14,
+   			</if>
+   			<if test="displaycolumn15 != null and displaycolumn15 != 'false'" >
+     			displaycolumn15,
+   			</if>
+   			<if test="displaycolumn16 != null and displaycolumn16 != 'false'" >
+     			displaycolumn16,
+   			</if>
+   			<if test="displaycolumn17 != null and displaycolumn17 != 'false'" >
+     			displaycolumn17,
+   			</if>
+   			<if test="displaycolumn18 != null and displaycolumn18 != 'false'" >
+     			displaycolumn18,
+   			</if>
+   			<if test="displaycolumn19 != null and displaycolumn19 != 'false'" >
+     			displaycolumn19,
+   			</if>
+   			<if test="displaycolumn20 != null and displaycolumn20 != 'false'" >
+     			displaycolumn20,
+   			</if>
+   			
+   			<if test="displaycolumn21 != null and displaycolumn21 != 'false'" >
+     			displaycolumn21,
+   			</if>
+   			<if test="displaycolumn22 != null and displaycolumn22 != 'false'" >
+     			displaycolumn22,
+   			</if>
+   			<if test="displaycolumn23 != null and displaycolumn23 != 'false'" >
+     			displaycolumn23,
+   			</if>
+   			<if test="displaycolumn24 != null and displaycolumn24 != 'false'" >
+     			displaycolumn24,
+   			</if>
+   			<if test="displaycolumn25 != null and displaycolumn25 != 'false'" >
+     			displaycolumn25,
+   			</if>
+   			<if test="displaycolumn26 != null and displaycolumn26 != 'false'" >
+     			displaycolumn26,
+   			</if>
+   			<if test="displaycolumn27 != null and displaycolumn27 != 'false'" >
+     			displaycolumn27,
+   			</if>
+   			<if test="displaycolumn28 != null and displaycolumn28 != 'false'" >
+     			displaycolumn28,
+   			</if>
+   			<if test="displaycolumn29 != null and displaycolumn29 != 'false'" >
+     			displaycolumn29,
+   			</if>
+   			<if test="displaycolumn30 != null and displaycolumn30 != 'false'" >
+     			displaycolumn30,
+   			</if>
+   			
+   			<if test="displaycolumn31 != null and displaycolumn31 != 'false'" >
+     			displaycolumn31,
+   			</if>
+   			<if test="displaycolumn32 != null and displaycolumn32 != 'false'" >
+     			displaycolumn32,
+   			</if>
+   			<if test="displaycolumn33 != null and displaycolumn33 != 'false'" >
+     			F_FORMATDATE(displaycolumn33) displaycolumn33,
+   			</if>
+   			<if test="displaycolumn34 != null and displaycolumn34 != 'false'" >
+     			displaycolumn34,
+   			</if>
+   			<if test="displaycolumn35 != null and displaycolumn35 != 'false'" >
+     			F_FORMATDATE(displaycolumn35) displaycolumn35,
+   			</if>
+   			<if test="displaycolumn36 != null and displaycolumn36 != 'false'" >
+     			displaycolumn36,
+   			</if>
+   			<if test="displaycolumn37 != null and displaycolumn37 != 'false'" >
+     			displaycolumn37,
+   			</if>
+   			<if test="displaycolumn38 != null and displaycolumn38 != 'false'" >
+     			F_FORMATDATE(displaycolumn38) displaycolumn38,
+   			</if>
+   			<if test="displaycolumn39 != null and displaycolumn39 != 'false'" >
+     			F_FORMATDATE(displaycolumn39) displaycolumn39,
+   			</if>
+   			<if test="displaycolumn40 != null and displaycolumn40 != 'false'" >
+     			displaycolumn40,
+   			</if>
+   			
+   			<if test="displaycolumn41 != null and displaycolumn41 != 'false'" >
+     			displaycolumn41,
+   			</if>
+   			<if test="displaycolumn42 != null and displaycolumn42 != 'false'" >
+     			F_FORMATDATE(displaycolumn42) displaycolumn42,
+   			</if>
+   			<if test="displaycolumn43 != null and displaycolumn43 != 'false'" >
+     			displaycolumn43,
+   			</if>
+   			<if test="displaycolumn44 != null and displaycolumn44 != 'false'" >
+     			F_FORMATDATE(displaycolumn44) displaycolumn44,
+   			</if>
+   			<if test="displaycolumn45 != null and displaycolumn45 != 'false'" >
+     			displaycolumn45,
+   			</if>
+   			<if test="displaycolumn46 != null and displaycolumn46 != 'false'" >
+     			displaycolumn46,
+   			</if>
+   			<if test="displaycolumn47 != null and displaycolumn47 != 'false'" >
+     			displaycolumn47,
+   			</if>
+   			<if test="displaycolumn48 != null and displaycolumn48 != 'false'" >
+     			displaycolumn48,
+   			</if>
+   			<if test="displaycolumn49 != null and displaycolumn49 != 'false'" >
+     			displaycolumn49,
+   			</if>
+   			<if test="displaycolumn50 != null and displaycolumn50 != 'false'" >
+     			displaycolumn50,
+   			</if>
+   			
+   			<if test="displaycolumn51 != null and displaycolumn51 != 'false'" >
+     			displaycolumn51,
+   			</if>
+   			<if test="displaycolumn52 != null and displaycolumn52 != 'false'" >
+     			displaycolumn52,
+   			</if>
+   			<if test="displaycolumn53 != null and displaycolumn53 != 'false'" >
+     			F_FORMATDATE(displaycolumn53) displaycolumn53,
+   			</if>
+   			<if test="displaycolumn54 != null and displaycolumn54 != 'false'" >
+     			displaycolumn54,
+   			</if>
+   			<if test="displaycolumn55 != null and displaycolumn55 != 'false'" >
+     			displaycolumn55,
+   			</if>
+   			<if test="displaycolumn56 != null and displaycolumn56 != 'false'" >
+     			displaycolumn56,
+   			</if>
+   			<if test="displaycolumn57 != null and displaycolumn57 != 'false'" >
+     			displaycolumn57,
+   			</if>
+   			<if test="displaycolumn58 != null and displaycolumn58 != 'false'" >
+     			displaycolumn58,
+   			</if>
+   			<if test="displaycolumn59 != null and displaycolumn59 != 'false'" >
+     			displaycolumn59,
+   			</if>
+   			<if test="displaycolumn60 != null and displaycolumn60 != 'false'" >
+     			displaycolumn60,
+   			</if>
+   			
+   			<if test="displaycolumn61 != null and displaycolumn61 != 'false'" >
+     			displaycolumn61,
+   			</if>
+   			<if test="displaycolumn62 != null and displaycolumn62 != 'false'" >
+     			displaycolumn62,
+   			</if>
+   			<if test="displaycolumn63 != null and displaycolumn63 != 'false'" >
+     			displaycolumn63,
+   			</if>
+   			<if test="displaycolumn64 != null and displaycolumn64 != 'false'" >
+     			displaycolumn64,
+   			</if>
+   			<if test="displaycolumn65 != null and displaycolumn65 != 'false'" >
+     			displaycolumn65,
+   			</if>
+   			<if test="displaycolumn66 != null and displaycolumn66 != 'false'" >
+     			displaycolumn66,
+   			</if>
+   			<if test="displaycolumn67 != null and displaycolumn67 != 'false'" >
+     			displaycolumn67,
+   			</if>
+   			<if test="displaycolumn68 != null and displaycolumn68 != 'false'" >
+     			displaycolumn68,
+   			</if>
+   			<if test="displaycolumn69 != null and displaycolumn69 != 'false'" >
+     			displaycolumn69,
+   			</if>
+   			<if test="displaycolumn70 != null and displaycolumn70 != 'false'" >
+     			displaycolumn70,
+   			</if>
+   			
+   			<if test="displaycolumn71 != null and displaycolumn71 != 'false'" >
+     			displaycolumn71,
+   			</if>
+   			<if test="displaycolumn72 != null and displaycolumn72 != 'false'" >
+     			displaycolumn72,
+   			</if>
+   			<if test="displaycolumn73 != null and displaycolumn73 != 'false'" >
+     			displaycolumn73,
+   			</if>
+   			<if test="displaycolumn74 != null and displaycolumn74 != 'false'" >
+     			displaycolumn74,
+   			</if>
+   			<if test="displaycolumn75 != null and displaycolumn75 != 'false'" >
+     			displaycolumn75,
+   			</if>
+   			<if test="displaycolumn76 != null and displaycolumn76 != 'false'" >
+     			displaycolumn76,
+   			</if>
+   			<if test="displaycolumn77 != null and displaycolumn77 != 'false'" >
+     			displaycolumn77,
+   			</if>
+   			<if test="displaycolumn78 != null and displaycolumn78 != 'false'" >
+     			displaycolumn78,
+   			</if>
+   			<if test="displaycolumn79 != null and displaycolumn79 != 'false'" >
+     			displaycolumn79,
+   			</if>
+   			<if test="displaycolumn80 != null and displaycolumn80 != 'false'" >
+     			displaycolumn80,
+   			</if>
+   			
+   			<if test="displaycolumn81 != null and displaycolumn81 != 'false'" >
+     			displaycolumn81,
+   			</if>
+   			<if test="displaycolumn82 != null and displaycolumn82 != 'false'" >
+     			displaycolumn82,
+   			</if>
+   			<if test="displaycolumn83 != null and displaycolumn83 != 'false'" >
+     			displaycolumn83,
+   			</if>
+   			<if test="displaycolumn84 != null and displaycolumn84 != 'false'" >
+     			displaycolumn84,
+   			</if>
+   			<if test="displaycolumn85 != null and displaycolumn85 != 'false'" >
+     			displaycolumn85,
+   			</if>
+   			<if test="displaycolumn86 != null and displaycolumn86 != 'false'" >
+     			displaycolumn86,
+   			</if>
+   			<if test="displaycolumn87 != null and displaycolumn87 != 'false'" >
+     			displaycolumn87,
+   			</if>
+   			<if test="displaycolumn88 != null and displaycolumn88 != 'false'" >
+     			displaycolumn88,
+   			</if>
+   			<if test="displaycolumn89 != null and displaycolumn89 != 'false'" >
+     			displaycolumn89,
+   			</if>
+   			<if test="displaycolumn90 != null and displaycolumn90 != 'false'" >
+     			displaycolumn90,
+   			</if>
+   			
+   			<if test="displaycolumn91 != null and displaycolumn91 != 'false'" >
+     			displaycolumn91,
+   			</if>
+   			
+			'' emptyval
+		from  UV_STATISTICS_QUERYINFO T
+		WHERE 1=1
+		<if test="conditioncolumn1 != null and conditioncolumn1 == '1'" >
+     		AND T.ORGID1 = #{orgid}
+   		</if>
+		<if test="conditioncolumn1 != null and conditioncolumn1 == '2'" >
+     		AND T.ORGID1 not in ( #{orgid})
+   		</if>
+		<if test="conditioncolumn2 != null and conditioncolumn2 !=''" >
+     		AND T.displaycolumn1 = #{conditioncolumn2}
+   		</if>
+		<if test="conditioncolumn3 != null and conditioncolumn3 !=''" >
+     		AND T.CATEGORY = #{conditioncolumn3}
+   		</if>
+   		
+		<if test="conditioncolumn41 != null and conditioncolumn41 !=''" >
+     		AND T.displaycolumn14 &gt; #{conditioncolumn41}
+   		</if>
+   		<if test="conditioncolumn42 != null and conditioncolumn42 !=''" >
+     		AND T.displaycolumn14 &lt; #{conditioncolumn42}
+   		</if>
+   		
+		<if test="conditioncolumn51 != null and conditioncolumn51 !=''" >
+     		AND T.displaycolumn63 &gt; #{conditioncolumn51}
+   		</if>
+		<if test="conditioncolumn52 != null and conditioncolumn52 !=''" >
+     		AND T.displaycolumn63 &lt; #{conditioncolumn52}
+   		</if>
+   		
+		<if test="conditioncolumn61 != null and conditioncolumn61 !=''" >
+     		AND T.displaycolumn63 &gt; #{conditioncolumn61}
+   		</if>
+		<if test="conditioncolumn62 != null and conditioncolumn62 !=''" >
+     		AND T.displaycolumn63 &lt; #{conditioncolumn62}
+   		</if>
+   		
+		<if test="conditioncolumn71 != null and conditioncolumn71 !=''" >
+     		AND T.displaycolumn6 &gt; #{conditioncolumn71}
+   		</if>
+		<if test="conditioncolumn72 != null and conditioncolumn72 !=''" >
+     		AND T.displaycolumn6 &lt; #{conditioncolumn72}
+   		</if>
+   		
+		<if test="conditioncolumn81 != null and conditioncolumn81 !=''" >
+     		AND T.COURTNAME = #{conditioncolumn81}
+   		</if>
+		<if test="conditioncolumn82 != null and conditioncolumn82 !=''" >
+     		AND T.COURTTITLE =  #{conditioncolumn82}
+   		</if>
+   		
+		<if test="conditioncolumn91 != null and conditioncolumn91 !=''" >
+     		AND T.PUNISHMENTYEAR &gt; #{conditioncolumn91}
+   		</if>
+		<if test="conditioncolumn92 != null and conditioncolumn92 !=''" >
+     		AND T.PUNISHMENTYEAR &lt; #{conditioncolumn92}
+   		</if>
+   		
+		<if test="conditioncolumn101 != null and conditioncolumn101 !=''" >
+     		AND T.PUNISHMENTYEAR &gt; #{conditioncolumn101}
+   		</if>
+		<if test="conditioncolumn102 != null and conditioncolumn102 !=''" >
+     		AND T.PUNISHMENTYEAR &lt; #{conditioncolumn102}
+   		</if>
+   		
+		<if test="conditioncolumn111 != null and conditioncolumn111 !=''" >
+     		AND T.COURTCHANGEYEAR &gt; #{conditioncolumn111}
+   		</if>
+		<if test="conditioncolumn112 != null and conditioncolumn112 !=''" >
+     		AND T.COURTCHANGEYEAR &lt; #{conditioncolumn112}
+   		</if>
+   		
+		<if test="conditioncolumn12 != null and conditioncolumn12 !=''" >
+     		AND T.DISPLAYCOLUMN9 = #{conditioncolumn12}
+   		</if>
+		<if test="conditioncolumn13 != null and conditioncolumn13 !=''" >
+     		AND T.DISPLAYCOLUMN64 = #{conditioncolumn13}
+   		</if>
+   		
+		<if test="conditioncolumn141 != null and conditioncolumn141 !=''" >
+     		AND T.displaycolumn16 &gt; #{conditioncolumn141}
+   		</if>
+		<if test="conditioncolumn142 != null and conditioncolumn142 !=''" >
+     		AND T.displaycolumn16 &lt; #{conditioncolumn142}
+   		</if>
+   		
+		<if test="conditioncolumn15 != null and conditioncolumn15 !=''" >
+     		AND T.displaycolumn64 = #{conditioncolumn15}
+   		</if>
+		<if test="conditioncolumn16 != null and conditioncolumn16 !=''" >
+     		AND T.displaycolumn46 = #{conditioncolumn16}
+   		</if>
+		<if test="conditioncolumn17 != null and conditioncolumn17 !=''" >
+     		AND T.displaycolumn47 = #{conditioncolumn17}
+   		</if>
+		<if test="conditioncolumn18 != null and conditioncolumn18 !=''" >
+     		AND T.displaycolumn68 = #{conditioncolumn18}
+   		</if>
+   		
+		<if test="conditioncolumn191 != null and conditioncolumn191 !=''" >
+     		AND T.displaycolumn53 &gt; #{conditioncolumn191}
+   		</if>
+		<if test="conditioncolumn192 != null and conditioncolumn192 !=''" >
+     		AND T.displaycolumn53&lt; #{conditioncolumn192}
+   		</if>
+   		
+		<if test="conditioncolumn201 != null and conditioncolumn201 !=''" >
+     		AND T.displaycolumn54 &gt; #{conditioncolumn201}
+   		</if>
+		<if test="conditioncolumn202 != null and conditioncolumn202 !=''" >
+     		AND T.displaycolumn54 &lt; #{conditioncolumn202}
+   		</if>
+   		
+		<if test="conditioncolumn21 != null and conditioncolumn21 !=''" >
+     		AND T.COMMUTATION = #{conditioncolumn21}
+   		</if>
+   		
+		<if test="conditioncolumn221 != null and conditioncolumn221 !=''" >
+     		AND T.PUNISHMENTYEAR &gt; #{conditioncolumn221}
+   		</if>
+		<if test="conditioncolumn222 != null and conditioncolumn222 !=''" >
+     		AND T.PUNISHMENTYEAR &lt; #{conditioncolumn222}
+   		</if>
+   		
+		<if test="conditioncolumn231 != null and conditioncolumn231 !=''" >
+     		AND T.NOWPUNISHMENTYEAR &gt; #{conditioncolumn231}
+   		</if>
+		<if test="conditioncolumn232 != null and conditioncolumn232 !=''" >
+     		AND T.NOWPUNISHMENTYEAR &lt; #{conditioncolumn232}
+   		</if>
+   		
+		<if test="conditioncolumn24 != null and conditioncolumn24 !=''" >
+     		AND T.NOWPUNISHMENTYEAR = #{conditioncolumn24}
+   		</if>
+   		
+		<if test="conditioncolumn251 != null and conditioncolumn251 !=''" >
+     		AND T.DISPLAYCOLUMN12 &gt; #{conditioncolumn251}
+   		</if>
+		<if test="conditioncolumn252 != null and conditioncolumn252 !=''" >
+     		AND T.DISPLAYCOLUMN12 &lt; #{conditioncolumn252}
+   		</if>
+   		
+		<if test="conditioncolumn261 != null and conditioncolumn261 !=''" >
+     		AND T.displaycolumn52 &gt; #{conditioncolumn261}
+   		</if>
+		<if test="conditioncolumn262 != null and conditioncolumn262 !=''" >
+     		AND T.displaycolumn52 &lt; #{conditioncolumn262}
+   		</if>
+   		
+		<if test="conditioncolumn271 != null and conditioncolumn271 !=''" >
+     		AND T.displaycolumn62 &gt; #{conditioncolumn271}
+   		</if>
+		<if test="conditioncolumn272 != null and conditioncolumn272 !=''" >
+     		AND T.displaycolumn62 &lt; #{conditioncolumn272}
+   		</if>
+   		
+		<if test="conditioncolumn28 != null and conditioncolumn28 !=''" >
+     		AND T.displaycolumn43 = #{conditioncolumn28}
+   		</if>
+		<if test="conditioncolumn29 != null and conditioncolumn29 !=''" >
+     		AND T.displaycolumn67 = #{conditioncolumn29}
+   		</if>
+		<if test="conditioncolumn30 != null and conditioncolumn30 !=''" >
+     		AND T.displaycolumn21 = #{conditioncolumn30}
+   		</if>
+   		
+		<if test="conditioncolumn311 != null and conditioncolumn311 !=''" >
+     		AND T.ADDRESSCODE &gt; #{conditioncolumn311}
+   		</if>
+		<if test="conditioncolumn312 != null and conditioncolumn312 !=''" >
+     		AND T.DISPLAYCOLUMN28 &lt; #{conditioncolumn312}
+   		</if>
+   		
+		<if test="conditioncolumn32 != null and conditioncolumn32 !=''" >
+     		AND T.SPECIALCONTROL = #{conditioncolumn32}
+   		</if>
+		<if test="conditioncolumn33 != null and conditioncolumn33 !=''" >
+     		AND T.displaycolumn71 = #{conditioncolumn33}
+   		</if>
+		<if test="conditioncolumn34 != null and conditioncolumn34 !=''" >
+     		AND T.conditioncolumn34 = #{conditioncolumn34}
+   		</if>
+   		<!--  
+		<if test="conditioncolumn35 != null and conditioncolumn35 !=''" >
+     		AND T.conditioncolumn35 = #{conditioncolumn35},
+   		</if>
+   		-->
+		<if test="conditioncolumn36 != null and conditioncolumn36 !=''" >
+     		AND T.displaycolumn70 = #{conditioncolumn36}
+   		</if>
+		<if test="conditioncolumn37 != null and conditioncolumn37 !=''" >
+     		AND T.displaycolumn70 = #{conditioncolumn37}
+   		</if>
+   		<!-- 保外就医 -->
+   		<!--  
+		<if test="conditioncolumn38 != null and conditioncolumn38 !=''" >
+     		AND T.conditioncolumn38 = #{conditioncolumn38}
+   		</if>
+   		-->
+   		<!--  
+		<if test="conditioncolumn39 != null and conditioncolumn39 !=''" >
+     		AND T.conditioncolumn39 = #{conditioncolumn39}
+   		</if>
+   		-->
+   		<!-- 驻监检查室意见 -->
+   		<!--  
+		<if test="conditioncolumn40 != null and conditioncolumn40 !=''" >
+     		AND T.displaycolumn80 = #{conditioncolumn40}
+   		</if>
+   		-->
+   		
+		<if test="conditioncolumn410 != null and conditioncolumn410 !=''" >
+     		AND T.displaycolumn83 = #{conditioncolumn410}
+   		</if>
+		<if test="conditioncolumn420 != null and conditioncolumn420 !=''" >
+     		AND T.displaycolumn84 = #{conditioncolumn420}
+   		</if>
+		<if test="conditioncolumn43 != null and conditioncolumn43 !=''" >
+     		AND T.displaycolumn86 = #{conditioncolumn43}
+   		</if>
+		<if test="conditioncolumn44 != null and conditioncolumn44 !=''" >
+     		AND T.displaycolumn87 = #{conditioncolumn44}
+   		</if>
+		<if test="conditioncolumn45 != null and conditioncolumn45 !=''" >
+     		AND T.displaycolumn88 = #{conditioncolumn45}
+   		</if>
+		<if test="conditioncolumn46 != null and conditioncolumn46 !=''" >
+     		AND T.displaycolumn89 = #{conditioncolumn46}
+   		</if>
+		<if test="conditioncolumn47 != null and conditioncolumn47 !=''" >
+     		AND T.displaycolumn90 = #{conditioncolumn47}
+   		</if>
+		<if test="conditioncolumn48 != null and conditioncolumn48 !=''" >
+     		AND T.displaycolumn91 = #{conditioncolumn48}
+   		</if>
+   	 ) A 
+		 	WHERE ROWNUM &lt;= #{end,jdbcType=DECIMAL}
+	 	) 
+	 	WHERE RN &gt;= #{start,jdbcType=DECIMAL}
+  </select>
+
+  <select id="getLiAnApproveCount" parameterType="Map" resultType="int">
+		select  count(*) c  from  UV_STATISTICS_QUERYINFO T
+		WHERE 1=1
+		<if test="conditioncolumn1 != null and conditioncolumn1 == '1'" >
+     		AND T.ORGID1 = #{orgid}
+   		</if>
+		<if test="conditioncolumn1 != null and conditioncolumn1 == '2'" >
+     		AND T.ORGID1 not in ( #{orgid})
+   		</if>
+		<if test="conditioncolumn2 != null and conditioncolumn2 !=''" >
+     		AND T.displaycolumn1 = #{conditioncolumn2}
+   		</if>
+		<if test="conditioncolumn3 != null and conditioncolumn3 !=''" >
+     		AND T.CATEGORY = #{conditioncolumn3}
+   		</if>
+   		
+		<if test="conditioncolumn41 != null and conditioncolumn41 !=''" >
+     		AND T.displaycolumn14 &gt; #{conditioncolumn41}
+   		</if>
+   		<if test="conditioncolumn42 != null and conditioncolumn42 !=''" >
+     		AND T.displaycolumn14 &lt; #{conditioncolumn42}
+   		</if>
+   		
+		<if test="conditioncolumn51 != null and conditioncolumn51 !=''" >
+     		AND T.displaycolumn63 &gt; #{conditioncolumn51}
+   		</if>
+		<if test="conditioncolumn52 != null and conditioncolumn52 !=''" >
+     		AND T.displaycolumn63 &lt; #{conditioncolumn52}
+   		</if>
+   		
+		<if test="conditioncolumn61 != null and conditioncolumn61 !=''" >
+     		AND T.displaycolumn63 &gt; #{conditioncolumn61}
+   		</if>
+		<if test="conditioncolumn62 != null and conditioncolumn62 !=''" >
+     		AND T.displaycolumn63 &lt; #{conditioncolumn62}
+   		</if>
+   		
+		<if test="conditioncolumn71 != null and conditioncolumn71 !=''" >
+     		AND T.displaycolumn6 &gt; #{conditioncolumn71}
+   		</if>
+		<if test="conditioncolumn72 != null and conditioncolumn72 !=''" >
+     		AND T.displaycolumn6 &lt; #{conditioncolumn72}
+   		</if>
+   		
+		<if test="conditioncolumn81 != null and conditioncolumn81 !=''" >
+     		AND T.COURTNAME = #{conditioncolumn81}
+   		</if>
+		<if test="conditioncolumn82 != null and conditioncolumn82 !=''" >
+     		AND T.COURTTITLE =  #{conditioncolumn82}
+   		</if>
+   		
+		<if test="conditioncolumn91 != null and conditioncolumn91 !=''" >
+     		AND T.PUNISHMENTYEAR &gt; #{conditioncolumn91}
+   		</if>
+		<if test="conditioncolumn92 != null and conditioncolumn92 !=''" >
+     		AND T.PUNISHMENTYEAR &lt; #{conditioncolumn92}
+   		</if>
+   		
+		<if test="conditioncolumn101 != null and conditioncolumn101 !=''" >
+     		AND T.PUNISHMENTYEAR &gt; #{conditioncolumn101}
+   		</if>
+		<if test="conditioncolumn102 != null and conditioncolumn102 !=''" >
+     		AND T.PUNISHMENTYEAR &lt; #{conditioncolumn102}
+   		</if>
+   		
+		<if test="conditioncolumn111 != null and conditioncolumn111 !=''" >
+     		AND T.COURTCHANGEYEAR &gt; #{conditioncolumn111}
+   		</if>
+		<if test="conditioncolumn112 != null and conditioncolumn112 !=''" >
+     		AND T.COURTCHANGEYEAR &lt; #{conditioncolumn112}
+   		</if>
+   		
+		<if test="conditioncolumn12 != null and conditioncolumn12 !=''" >
+     		AND T.DISPLAYCOLUMN9 = #{conditioncolumn12}
+   		</if>
+		<if test="conditioncolumn13 != null and conditioncolumn13 !=''" >
+     		AND T.DISPLAYCOLUMN64 = #{conditioncolumn13}
+   		</if>
+   		
+		<if test="conditioncolumn141 != null and conditioncolumn141 !=''" >
+     		AND T.displaycolumn16 &gt; #{conditioncolumn141}
+   		</if>
+		<if test="conditioncolumn142 != null and conditioncolumn142 !=''" >
+     		AND T.displaycolumn16 &lt; #{conditioncolumn142}
+   		</if>
+   		
+		<if test="conditioncolumn15 != null and conditioncolumn15 !=''" >
+     		AND T.displaycolumn64 = #{conditioncolumn15}
+   		</if>
+		<if test="conditioncolumn16 != null and conditioncolumn16 !=''" >
+     		AND T.displaycolumn46 = #{conditioncolumn16}
+   		</if>
+		<if test="conditioncolumn17 != null and conditioncolumn17 !=''" >
+     		AND T.displaycolumn47 = #{conditioncolumn17}
+   		</if>
+		<if test="conditioncolumn18 != null and conditioncolumn18 !=''" >
+     		AND T.displaycolumn68 = #{conditioncolumn18}
+   		</if>
+   		
+		<if test="conditioncolumn191 != null and conditioncolumn191 !=''" >
+     		AND T.displaycolumn53 &gt; #{conditioncolumn191}
+   		</if>
+		<if test="conditioncolumn192 != null and conditioncolumn192 !=''" >
+     		AND T.displaycolumn53&lt; #{conditioncolumn192}
+   		</if>
+   		
+		<if test="conditioncolumn201 != null and conditioncolumn201 !=''" >
+     		AND T.displaycolumn54 &gt; #{conditioncolumn201}
+   		</if>
+		<if test="conditioncolumn202 != null and conditioncolumn202 !=''" >
+     		AND T.displaycolumn54 &lt; #{conditioncolumn202}
+   		</if>
+   		
+		<if test="conditioncolumn21 != null and conditioncolumn21 !=''" >
+     		AND T.COMMUTATION = #{conditioncolumn21}
+   		</if>
+   		
+		<if test="conditioncolumn221 != null and conditioncolumn221 !=''" >
+     		AND T.PUNISHMENTYEAR &gt; #{conditioncolumn221}
+   		</if>
+		<if test="conditioncolumn222 != null and conditioncolumn222 !=''" >
+     		AND T.PUNISHMENTYEAR &lt; #{conditioncolumn222}
+   		</if>
+   		
+		<if test="conditioncolumn231 != null and conditioncolumn231 !=''" >
+     		AND T.NOWPUNISHMENTYEAR &gt; #{conditioncolumn231}
+   		</if>
+		<if test="conditioncolumn232 != null and conditioncolumn232 !=''" >
+     		AND T.NOWPUNISHMENTYEAR &lt; #{conditioncolumn232}
+   		</if>
+   		
+		<if test="conditioncolumn24 != null and conditioncolumn24 !=''" >
+     		AND T.NOWPUNISHMENTYEAR = #{conditioncolumn24}
+   		</if>
+   		
+		<if test="conditioncolumn251 != null and conditioncolumn251 !=''" >
+     		AND T.DISPLAYCOLUMN12 &gt; #{conditioncolumn251}
+   		</if>
+		<if test="conditioncolumn252 != null and conditioncolumn252 !=''" >
+     		AND T.DISPLAYCOLUMN12 &lt; #{conditioncolumn252}
+   		</if>
+   		
+		<if test="conditioncolumn261 != null and conditioncolumn261 !=''" >
+     		AND T.displaycolumn52 &gt; #{conditioncolumn261}
+   		</if>
+		<if test="conditioncolumn262 != null and conditioncolumn262 !=''" >
+     		AND T.displaycolumn52 &lt; #{conditioncolumn262}
+   		</if>
+   		
+		<if test="conditioncolumn271 != null and conditioncolumn271 !=''" >
+     		AND T.displaycolumn62 &gt; #{conditioncolumn271}
+   		</if>
+		<if test="conditioncolumn272 != null and conditioncolumn272 !=''" >
+     		AND T.displaycolumn62 &lt; #{conditioncolumn272}
+   		</if>
+   		
+		<if test="conditioncolumn28 != null and conditioncolumn28 !=''" >
+     		AND T.displaycolumn43 = #{conditioncolumn28}
+   		</if>
+		<if test="conditioncolumn29 != null and conditioncolumn29 !=''" >
+     		AND T.displaycolumn67 = #{conditioncolumn29}
+   		</if>
+		<if test="conditioncolumn30 != null and conditioncolumn30 !=''" >
+     		AND T.displaycolumn21 = #{conditioncolumn30}
+   		</if>
+   		
+		<if test="conditioncolumn311 != null and conditioncolumn311 !=''" >
+     		AND T.ADDRESSCODE &gt; #{conditioncolumn311}
+   		</if>
+		<if test="conditioncolumn312 != null and conditioncolumn312 !=''" >
+     		AND T.DISPLAYCOLUMN28 &lt; #{conditioncolumn312}
+   		</if>
+   		
+		<if test="conditioncolumn32 != null and conditioncolumn32 !=''" >
+     		AND T.SPECIALCONTROL = #{conditioncolumn32}
+   		</if>
+		<if test="conditioncolumn33 != null and conditioncolumn33 !=''" >
+     		AND T.displaycolumn71 = #{conditioncolumn33}
+   		</if>
+		<if test="conditioncolumn34 != null and conditioncolumn34 !=''" >
+     		AND T.conditioncolumn34 = #{conditioncolumn34}
+   		</if>
+   		<!--  
+		<if test="conditioncolumn35 != null and conditioncolumn35 !=''" >
+     		AND T.conditioncolumn35 = #{conditioncolumn35},
+   		</if>
+   		-->
+		<if test="conditioncolumn36 != null and conditioncolumn36 !=''" >
+     		AND T.displaycolumn70 = #{conditioncolumn36}
+   		</if>
+		<if test="conditioncolumn37 != null and conditioncolumn37 !=''" >
+     		AND T.displaycolumn70 = #{conditioncolumn37}
+   		</if>
+   		<!-- 保外就医 -->
+   		<!--  
+		<if test="conditioncolumn38 != null and conditioncolumn38 !=''" >
+     		AND T.conditioncolumn38 = #{conditioncolumn38}
+   		</if>
+   		-->
+   		<!--  
+		<if test="conditioncolumn39 != null and conditioncolumn39 !=''" >
+     		AND T.conditioncolumn39 = #{conditioncolumn39}
+   		</if>
+   		-->
+   		<!-- 驻监检查室意见 -->
+   		<!--  
+		<if test="conditioncolumn40 != null and conditioncolumn40 !=''" >
+     		AND T.displaycolumn80 = #{conditioncolumn40}
+   		</if>
+   		-->
+   		
+		<if test="conditioncolumn410 != null and conditioncolumn410 !=''" >
+     		AND T.displaycolumn83 = #{conditioncolumn410}
+   		</if>
+		<if test="conditioncolumn420 != null and conditioncolumn420 !=''" >
+     		AND T.displaycolumn84 = #{conditioncolumn420}
+   		</if>
+		<if test="conditioncolumn43 != null and conditioncolumn43 !=''" >
+     		AND T.displaycolumn86 = #{conditioncolumn43}
+   		</if>
+		<if test="conditioncolumn44 != null and conditioncolumn44 !=''" >
+     		AND T.displaycolumn87 = #{conditioncolumn44}
+   		</if>
+		<if test="conditioncolumn45 != null and conditioncolumn45 !=''" >
+     		AND T.displaycolumn88 = #{conditioncolumn45}
+   		</if>
+		<if test="conditioncolumn46 != null and conditioncolumn46 !=''" >
+     		AND T.displaycolumn89 = #{conditioncolumn46}
+   		</if>
+		<if test="conditioncolumn47 != null and conditioncolumn47 !=''" >
+     		AND T.displaycolumn90 = #{conditioncolumn47}
+   		</if>
+		<if test="conditioncolumn48 != null and conditioncolumn48 !=''" >
+     		AND T.displaycolumn91 = #{conditioncolumn48}
+   		</if>
+  </select>
+  <update id="updateByPrimaryKeySelective" parameterType="com.sinog2c.model.system.TbsysTemplate">
+		update TBSYS_TEMPLATE
+		<set>
+			<if test="functionname != null">
+				FUNCTIONNAME = #{functionname,jdbcType=VARCHAR},
+			</if>
+			<if test="tempname != null">
+				TEMPNAME = #{tempname,jdbcType=VARCHAR},
+			</if>
+			<if test="delflag != null">
+				DELFLAG = #{delflag,jdbcType=DECIMAL},
+			</if>
+			<if test="type != null">
+				TYPE = #{type,jdbcType=DECIMAL},
+			</if>
+			<if test="findid != null">
+				FINDID = #{findid,jdbcType=DECIMAL},
+			</if>
+			<if test="remark != null">
+				REMARK = #{remark,jdbcType=VARCHAR},
+			</if>
+			<if test="optime != null">
+				OPTIME = #{optime,jdbcType=DATE},
+			</if>
+			<if test="opid != null">
+				OPID = #{opid,jdbcType=VARCHAR},
+			</if>
+			<if test="uneditedfields != null">
+				UNEDITEDFIELDS = #{uneditedfields,jdbcType=VARCHAR},
+			</if>
+			<if test="temptype != null">
+				TEMPTYPE = #{temptype,jdbcType=VARCHAR},
+			</if>
+			<if test="generaltype != null">
+				GENERALTYPE = #{generaltype,jdbcType=VARCHAR},
+			</if>
+			<if test="sn != null">
+				SN = #{sn,jdbcType=DECIMAL},
+			</if>
+			<if test="keyfields != null">
+				KEYFIELDS = #{keyfields,jdbcType=VARCHAR},
+			</if>
+			<if test="gridheaders1 != null">
+				GRIDHEADERS1 = #{gridheaders1,jdbcType=VARCHAR},
+			</if>
+			<if test="gridheaders2 != null">
+				GRIDHEADERS2 = #{gridheaders2,jdbcType=VARCHAR},
+			</if>
+			<if test="mainsqltemp != null">
+				MAINSQLTEMP = #{mainsqltemp,jdbcType=VARCHAR},
+			</if>
+			<if test="mainsqltemp2 != null">
+				MAINSQLTEMP2 = #{mainsqltemp2,jdbcType=VARCHAR},
+			</if>
+			<if test="maincountsql != null">
+				MAINCOUNTSQL=#{maincountsql,jdbcType=VARCHAR},
+			</if>
+			<if test="content != null">
+				CONTENT = #{content,jdbcType=CLOB},
+			</if>
+		</set>
+		where TEMPID = #{tempid,jdbcType=VARCHAR}
+		and DEPARTID =
+		#{departid,jdbcType=VARCHAR}
+	</update>
+</mapper>

@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.sinog2c.dao.api.system.RoleResourceWrapperMapper" >
+  <resultMap id="BaseResultMap" type="com.sinog2c.model.system.RoleResourceWrapper" >
+    <result column="ROLEID" property="roleid" jdbcType="DECIMAL" />
+    <result column="DEPARTID" property="departid" jdbcType="VARCHAR" />
+    <result column="RESID" property="resid" jdbcType="VARCHAR" />
+    <result column="OPTIME" property="optime" jdbcType="TIMESTAMP" />
+    <result column="OPID" property="opid" jdbcType="VARCHAR" />
+  </resultMap>
+  <insert id="insert" parameterType="com.sinog2c.model.system.RoleResourceWrapper" >
+    insert into TBSYS_ROLE_RES (ROLEID, DEPARTID, RESID, 
+      OPTIME, OPID)
+    values (#{roleid,jdbcType=DECIMAL}, #{departid,jdbcType=VARCHAR}, #{resid,jdbcType=VARCHAR}, 
+      #{optime,jdbcType=TIMESTAMP}, #{opid,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.sinog2c.model.system.RoleResourceWrapper" >
+    insert into TBSYS_ROLE_RES
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="roleid != null" >
+        ROLEID,
+      </if>
+      <if test="departid != null" >
+        DEPARTID,
+      </if>
+      <if test="resid != null" >
+        RESID,
+      </if>
+      <if test="optime != null" >
+        OPTIME,
+      </if>
+      <if test="opid != null" >
+        OPID,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="roleid != null" >
+        #{roleid,jdbcType=DECIMAL},
+      </if>
+      <if test="departid != null" >
+        #{departid,jdbcType=VARCHAR},
+      </if>
+      <if test="resid != null" >
+        #{resid,jdbcType=VARCHAR},
+      </if>
+      <if test="optime != null" >
+        #{optime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="opid != null" >
+        #{opid,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+
+  <!-- 考虑以后采用标志位 -->
+  <delete id="delete" parameterType="com.sinog2c.model.system.RoleResourceWrapper" >
+    delete from TBSYS_ROLE_RES
+    where ROLEID=#{roleid,jdbcType=VARCHAR}
+    and RESID=#{resid,jdbcType=VARCHAR}
+  </delete>
+  
+  <select id="getAllByRoleid" resultMap="BaseResultMap">    <!-- 分页查询表中的所有信息 -->
+	 SELECT * FROM TBSYS_ROLE_RES
+	 	where ROLEID=#{roleid,jdbcType=VARCHAR}
+	 	order by RESID desc
+  </select>
+
+  <select id="getAllByPage" resultMap="BaseResultMap">    <!-- 分页查询表中的所有信息 -->
+	 SELECT * FROM 
+	 	( SELECT A.*, ROWNUM RN 
+		 	FROM 
+		 	(
+		 		SELECT * FROM TBSYS_ROLE_RES
+		 		  order by ROLEID desc
+		 	) A 
+		 	WHERE ROWNUM &lt;= #{end,jdbcType=DECIMAL}
+	 	) 
+	 	WHERE RN &gt;= #{start,jdbcType=DECIMAL}
+  </select>
+  
+  <select id="countAll" resultType="int">  <!-- 查询表中记录总数 -->
+		select count(*) c from TBSYS_ROLE_RES
+  </select>  
+</mapper>

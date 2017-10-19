@@ -1,0 +1,540 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.sinog2c.dao.api.dbmsnew.DbmsDaochuListInfoMapper" >
+  <resultMap id="BaseResultMap" type="com.sinog2c.model.dbmsnew.DbmsDaochuListInfo" >
+    <id column="FILEID" property="fileid" jdbcType="VARCHAR" />
+    <result column="FILENAME" property="filename" jdbcType="VARCHAR" />
+    <result column="FILEREALNAME" property="filerealname" jdbcType="VARCHAR" />
+    <result column="FILEPATH" property="filepath" jdbcType="VARCHAR" />
+    <result column="CREATEDATE" property="createdate" jdbcType="TIMESTAMP" />
+    <result column="SCHEMEID" property="schemeid" jdbcType="VARCHAR" />
+    <result column="DDCNAME" property="ddcname" jdbcType="VARCHAR" />
+    <result column="CREATEMENDER" property="createmender" jdbcType="VARCHAR" />
+    <result column="UPDATETIME" property="updatetime" jdbcType="TIMESTAMP" />
+    <result column="UPDATEMENDER" property="updatemender" jdbcType="VARCHAR" />
+    <result column="REMARK" property="remark" jdbcType="VARCHAR" />
+    <result column="DELFLG" property="delflg" jdbcType="VARCHAR" />
+    <result column="SDID" property="sdid" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    FILEID, FILENAME, FILEREALNAME, FILEPATH, CREATEDATE, SCHEMEID, CREATEMENDER, UPDATETIME, 
+    UPDATEMENDER, REMARK, DELFLG, SDID,TEXT1,TEXT2,TEXT3,TEXT4,TEXT5,TEXT6,TEXT7,TEXT8,TEXT9,TEXT10
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from DBMS_DAOCHU_LIST_INFO
+    where FILEID = #{fileid,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from DBMS_DAOCHU_LIST_INFO
+    where FILEID = #{fileid,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.sinog2c.model.dbmsnew.DbmsDaochuListInfo" >
+    insert into DBMS_DAOCHU_LIST_INFO (FILEID, FILENAME, FILEREALNAME, 
+      FILEPATH, CREATEDATE, SCHEMEID, 
+      CREATEMENDER, UPDATETIME, UPDATEMENDER, 
+      REMARK, DELFLG, SDID
+      )
+    values (#{fileid,jdbcType=VARCHAR}, #{filename,jdbcType=VARCHAR}, #{filerealname,jdbcType=VARCHAR}, 
+      #{filepath,jdbcType=VARCHAR}, #{createdate,jdbcType=TIMESTAMP}, #{schemeid,jdbcType=VARCHAR}, 
+      #{createmender,jdbcType=VARCHAR}, #{updatetime,jdbcType=TIMESTAMP}, #{updatemender,jdbcType=VARCHAR}, 
+      #{remark,jdbcType=VARCHAR}, #{delflg,jdbcType=VARCHAR}, #{sdid,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.sinog2c.model.dbmsnew.DbmsDaochuListInfo" >
+    insert into DBMS_DAOCHU_LIST_INFO
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="fileid != null" >
+        FILEID,
+      </if>
+      <if test="filename != null" >
+        FILENAME,
+      </if>
+      <if test="filerealname != null" >
+        FILEREALNAME,
+      </if>
+      <if test="filepath != null" >
+        FILEPATH,
+      </if>
+      <if test="createdate != null" >
+        CREATEDATE,
+      </if>
+      <if test="schemeid != null" >
+        SCHEMEID,
+      </if>
+      <if test="createmender != null" >
+        CREATEMENDER,
+      </if>
+      <if test="updatetime != null" >
+        UPDATETIME,
+      </if>
+      <if test="updatemender != null" >
+        UPDATEMENDER,
+      </if>
+      <if test="remark != null" >
+        REMARK,
+      </if>
+      <if test="delflg != null" >
+        DELFLG,
+      </if>
+      <if test="sdid != null" >
+        SDID,
+      </if>
+      <if test="text1 != null" >
+        text1,
+      </if>
+      <if test="text2 != null" >
+        text2,
+      </if>
+      <if test="text3 != null" >
+        text3,
+      </if>
+      <if test="text4 != null" >
+        text4,
+      </if>
+      <if test="text5 != null" >
+        text5,
+      </if> 
+      <if test="text6 != null" >
+        text6,
+      </if>
+      <if test="text7 != null" >
+        text7,
+      </if>
+      <if test="text8 != null" >
+        text8,
+      </if>
+      <if test="text9 != null" >
+        text9,
+      </if>
+      <if test="text10 != null" >
+        text10
+      </if>          
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="fileid != null" >
+        #{fileid,jdbcType=VARCHAR},
+      </if>
+      <if test="filename != null" >
+        #{filename,jdbcType=VARCHAR},
+      </if>
+      <if test="filerealname != null" >
+        #{filerealname,jdbcType=VARCHAR},
+      </if>
+      <if test="filepath != null" >
+        #{filepath,jdbcType=VARCHAR},
+      </if>
+      <if test="createdate != null" >
+        #{createdate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="schemeid != null" >
+        #{schemeid,jdbcType=VARCHAR},
+      </if>
+      <if test="createmender != null" >
+        #{createmender,jdbcType=VARCHAR},
+      </if>
+      <if test="updatetime != null" >
+        #{updatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updatemender != null" >
+        #{updatemender,jdbcType=VARCHAR},
+      </if>
+      <if test="remark != null" >
+        #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="delflg != null" >
+        #{delflg,jdbcType=VARCHAR},
+      </if>
+      <if test="sdid != null" >
+        #{sdid,jdbcType=VARCHAR},
+      </if>
+      <if test="text1 != null" >
+        #{text1,jdbcType=VARCHAR},
+      </if>
+      <if test="text2 != null" >
+        #{text2,jdbcType=VARCHAR},
+      </if>
+      <if test="text3 != null" >
+        #{text3,jdbcType=VARCHAR},
+      </if>
+      <if test="text4 != null" >
+        #{text4,jdbcType=VARCHAR},
+      </if>
+      <if test="text5 != null" >
+        #{text5,jdbcType=VARCHAR},
+      </if> 
+      <if test="text6 != null" >
+        #{text6,jdbcType=VARCHAR},
+      </if>
+      <if test="text7 != null" >
+        #{text7,jdbcType=VARCHAR},
+      </if>
+      <if test="text8 != null" >
+        #{text8,jdbcType=VARCHAR},
+      </if>
+      <if test="text9 != null" >
+        #{text9,jdbcType=VARCHAR},
+      </if>
+      <if test="text10 != null" >
+        #{text10,jdbcType=VARCHAR},
+      </if>          
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.sinog2c.model.dbmsnew.DbmsDaochuListInfo" >
+    update DBMS_DAOCHU_LIST_INFO
+    <set >
+      <if test="filename != null" >
+        FILENAME = #{filename,jdbcType=VARCHAR},
+      </if>
+      <if test="filerealname != null" >
+        FILEREALNAME = #{filerealname,jdbcType=VARCHAR},
+      </if>
+      <if test="filepath != null" >
+        FILEPATH = #{filepath,jdbcType=VARCHAR},
+      </if>
+      <if test="createdate != null" >
+        CREATEDATE = #{createdate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="schemeid != null" >
+        SCHEMEID = #{schemeid,jdbcType=VARCHAR},
+      </if>
+      <if test="createmender != null" >
+        CREATEMENDER = #{createmender,jdbcType=VARCHAR},
+      </if>
+      <if test="updatetime != null" >
+        UPDATETIME = #{updatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updatemender != null" >
+        UPDATEMENDER = #{updatemender,jdbcType=VARCHAR},
+      </if>
+      <if test="remark != null" >
+        REMARK = #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="delflg != null" >
+        DELFLG = #{delflg,jdbcType=VARCHAR},
+      </if>
+      <if test="sdid != null" >
+        SDID = #{sdid,jdbcType=VARCHAR},
+      </if>
+       <if test="text7 != null" >
+        TEXT7 = #{text7,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where FILEID = #{fileid,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.sinog2c.model.dbmsnew.DbmsDaochuListInfo" >
+    update DBMS_DAOCHU_LIST_INFO
+    set FILENAME = #{filename,jdbcType=VARCHAR},
+      FILEREALNAME = #{filerealname,jdbcType=VARCHAR},
+      FILEPATH = #{filepath,jdbcType=VARCHAR},
+      CREATEDATE = #{createdate,jdbcType=TIMESTAMP},
+      SCHEMEID = #{schemeid,jdbcType=VARCHAR},
+      CREATEMENDER = #{createmender,jdbcType=VARCHAR},
+      UPDATETIME = #{updatetime,jdbcType=TIMESTAMP},
+      UPDATEMENDER = #{updatemender,jdbcType=VARCHAR},
+      REMARK = #{remark,jdbcType=VARCHAR},
+      DELFLG = #{delflg,jdbcType=VARCHAR},
+      SDID = #{sdid,jdbcType=VARCHAR}
+    where FILEID = #{fileid,jdbcType=VARCHAR}
+  </update>
+  
+  <!-- 查询表中的所有信息 -->
+  <select id="listMapByPage" resultType="Map" parameterType="Map" >
+	select * from
+    ( 
+	    select a.*, rownum rn from
+	    (
+			select s.*, c.ddcname as DDCNAME
+			  from DBMS_DAOCHU_LIST_INFO s
+			  left join DBMS_DATAS_CHEME_NEW c on s.schemeid=c.ddcid
+		    where 1=1
+		    <if test="sdid!=null and sdid!=''">  
+		   		 and  s.sdid=#{sdid}
+		    </if>
+		    <if test="key!=null and key!=''">  
+		        and s.FILENAME like '%'||#{key}||'%' 
+		    </if>
+			<if test="sortField!=null and sortField!='' and sortOrder!=null and sortOrder!=''">  
+	 		  order by  ${sortField} ${sortOrder}
+		    </if>
+	  	) a 
+	    <if test="end!=null and end!=''">
+	   		where rownum &lt;= #{end}
+	   	</if> 
+    )
+   	<if test="start!=null and start!=''">
+   		where  rn &gt;= #{start}
+   	</if>
+  </select>  
+
+  <select id="countAll" resultType="int">  <!-- 查询表中记录总数 -->
+		select count(*) c from DBMS_DAOCHU_LIST_INFO s
+		where 1=1 and (s.DELFLG is null or s.DELFLG =0)
+  </select>
+
+  <select id="listAll" resultMap="BaseResultMap">    <!-- 分页查询表中的所有信息 -->
+	 SELECT * FROM 
+	 	( SELECT A.*, ROWNUM RN 
+		 	FROM 
+		 	(
+				select s.*, c.ddcname as DDCNAME
+				  from DBMS_DAOCHU_LIST_INFO s
+				  left join DBMS_DATAS_CHEME_NEW c on s.schemeid=c.ddcid
+				  where 1=1 and (s.DELFLG is null or s.DELFLG =0)
+				<if test="sortField!=null and sortField!='' and sortOrder!=null and sortOrder!=''">  
+		 		  order by  ${sortField} ${sortOrder}
+			    </if>
+		 	) A 
+		 	WHERE ROWNUM &lt;= #{end,jdbcType=DECIMAL}
+	 	) 
+	 	WHERE RN &gt;= #{start,jdbcType=DECIMAL}
+  </select>
+
+  <select id="countByCondition" resultType="int" parameterType="Map" >  <!-- 根据条件查询表中记录数 -->
+		select count(*) c from DBMS_DAOCHU_LIST_INFO s
+		  where 1=1 and (s.DELFLG is null or s.DELFLG =0) and (s.TEXT6 is null or s.TEXT6 =0)
+			<if test="sdid!=null and sdid!=''">  
+		   		 and  sdid=#{sdid}
+		    </if>
+		    <if test="filename !=null and filename !=''">  
+		        and FILENAME like '%'||#{filename}||'%' 
+		    </if>
+		    <if test="filerealname !=null and filerealname !=''">  
+		        and FILEREALNAME like '%'||#{filerealname}||'%' 
+		    </if>
+		    <if test="schemeid !=null and schemeid !=''">  
+		        and SCHEMEID like '%'||#{schemeid}||'%' 
+		    </if>
+  </select>
+
+  <select id="listByCondition" resultMap="BaseResultMap" parameterType="Map" >    <!-- 分页查询表中的信息 -->
+	 SELECT * FROM 
+	 	( SELECT A.*, ROWNUM RN 
+		 	FROM 
+		 	(
+				select s.*, 
+					   (case when c.ddcname is null then s.filename
+					   	else c.ddcname
+					    end) as DDCNAME
+				  from DBMS_DAOCHU_LIST_INFO s
+				  left join DBMS_DATAS_CHEME_NEW c on s.schemeid=c.ddcid
+			 	where 1=1 and (s.DELFLG is null or s.DELFLG =0) and (s.TEXT6 is null or s.TEXT6 =0)
+				<if test="sdid!=null and sdid!=''">  
+			   		 and  s.sdid=#{sdid}
+			    </if>
+			    <if test="filename !=null and filename !=''">  
+			        and s.FILENAME like '%'||#{filename}||'%' 
+			    </if>
+			    <if test="filerealname !=null and filerealname !=''">  
+			        and s.FILEREALNAME like '%'||#{filerealname}||'%' 
+			    </if>
+			    <if test="schemeid !=null and schemeid !=''">  
+			        and s.SCHEMEID like '%'||#{schemeid}||'%' 
+			    </if>
+				<if test="sortField!=null and sortField!='' and sortOrder!=null and sortOrder!=''">  
+		 		  order by  ${sortField} ${sortOrder}
+			    </if>
+		 	) A 
+		 	WHERE ROWNUM &lt;= #{end,jdbcType=DECIMAL}
+	 	)
+	 	WHERE RN &gt;= #{start,jdbcType=DECIMAL}
+  </select>
+  <!--根据文件名查找实体信息  -->
+  <select id="selectByFileRealName" resultMap="BaseResultMap" parameterType="java.lang.String">
+  select 
+    <include refid="Base_Column_List" />
+    from DBMS_DAOCHU_LIST_INFO
+    where FILEREALNAME = #{filerealname,jdbcType=VARCHAR}
+  </select>
+   <!--查找解压的文件数量  -->
+  <select id="countUnZipDbmsDaochuListInfoData" resultType="int">
+  SELECT count(*) from 
+    (select fileid,filepath,filerealname,createdate1,text7
+          from ( 
+               select ddli.fileid,ddli.filepath,ddli.filerealname,to_char(ddli.createdate,'yyyy-MM-dd') as createdate1,ddli.createdate,decode(ddli.text7,'0','未导入','已导入') as text7
+              from DBMS_DAOCHU_LIST_INFO ddli
+              where ddli.text6='1'
+             )
+          order by createdate
+             )
+  </select>
+  
+    <!--查找未解压的文件数量  -->
+  <select id="countZipDbmsDaochuListInfoData" resultType="int">
+  SELECT count(*) from 
+    (select fileid,filepath,filerealname,createdate1,text7
+          from ( 
+               select ddli.fileid,ddli.filepath,ddli.filerealname,to_char(ddli.createdate,'yyyy-MM-dd') as createdate1,ddli.createdate,decode(ddli.text7,'0','未解压','已解压') as text7
+              from DBMS_DAOCHU_LIST_INFO ddli
+              where ddli.text6='0'
+             )
+          order by createdate
+             )
+  </select>
+  <!-- 查找未解压的文件 -->
+  <select id="getZipDbmsDaochuListInfoData" parameterType="Map" resultType="Map">
+  select * from
+        ( select a.*, rownum rn
+          from (
+            select fileid,filepath,filerealname,createdate1,text7
+          from ( 
+               select ddli.fileid,ddli.filepath,ddli.filerealname,to_char(ddli.createdate,'yyyy-MM-dd') as createdate1,ddli.createdate,decode(ddli.text7,'0','未解压','已解压') as text7
+              from DBMS_DAOCHU_LIST_INFO ddli
+              where ddli.text6='0'
+             )
+          order by createdate
+      
+             ) a 
+         <if test="start!=null and start!=''">
+            where rownum &lt;= #{end}
+         </if> 
+        )
+         <if test="start!=null and start!=''">
+           where  rn &gt;= #{start}
+         </if>
+  </select>
+  
+  <!-- 查找解压的文件 -->
+  <select id="getUnZipDbmsDaochuListInfoData" parameterType="Map" resultType="Map">
+  select * from
+        ( select a.*, rownum rn
+          from (
+            select fileid,filepath,filerealname,createdate1,text7
+          from ( 
+               select ddli.fileid,ddli.filepath,ddli.filerealname,to_char(ddli.createdate,'yyyy-MM-dd') as createdate1,ddli.createdate,decode(ddli.text7,'0','未导入','已导入') as text7
+              from DBMS_DAOCHU_LIST_INFO ddli
+              where ddli.text6='1'
+             )
+          order by createdate
+      
+             ) a 
+         <if test="start!=null and start!=''">
+            where rownum &lt;= #{end}
+         </if> 
+        )
+         <if test="start!=null and start!=''">
+           where  rn &gt;= #{start}
+         </if>
+  </select>
+  
+  <update id="updateByMap" parameterType="Map" >
+    update DBMS_DAOCHU_LIST_INFO
+    <set >
+      <if test="filename != null" >
+        FILENAME = #{filename,jdbcType=VARCHAR},
+      </if>
+      <if test="filerealname != null" >
+        FILEREALNAME = #{filerealname,jdbcType=VARCHAR},
+      </if>
+      <if test="filepath != null" >
+        FILEPATH = #{filepath,jdbcType=VARCHAR},
+      </if>
+      <if test="createdate != null" >
+        CREATEDATE = #{createdate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="schemeid != null" >
+        SCHEMEID = #{schemeid,jdbcType=VARCHAR},
+      </if>
+      <if test="createmender != null" >
+        CREATEMENDER = #{createmender,jdbcType=VARCHAR},
+      </if>
+      <if test="updatetime != null" >
+        UPDATETIME = #{updatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updatemender != null" >
+        UPDATEMENDER = #{updatemender,jdbcType=VARCHAR},
+      </if>
+      <if test="remark != null" >
+        REMARK = #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="delflg != null" >
+        DELFLG = #{delflg,jdbcType=VARCHAR},
+      </if>
+      <if test="sdid != null" >
+        SDID = #{sdid,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where FILEID = #{fileid,jdbcType=VARCHAR}
+  </update>
+
+  <insert id="insertByMap" parameterType="Map" >
+    insert into DBMS_DAOCHU_LIST_INFO
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="fileid != null" >
+        FILEID,
+      </if>
+      <if test="filename != null" >
+        FILENAME,
+      </if>
+      <if test="filerealname != null" >
+        FILEREALNAME,
+      </if>
+      <if test="filepath != null" >
+        FILEPATH,
+      </if>
+      <if test="createdate != null" >
+        CREATEDATE,
+      </if>
+      <if test="schemeid != null" >
+        SCHEMEID,
+      </if>
+      <if test="createmender != null" >
+        CREATEMENDER,
+      </if>
+      <if test="updatetime != null" >
+        UPDATETIME,
+      </if>
+      <if test="updatemender != null" >
+        UPDATEMENDER,
+      </if>
+      <if test="remark != null" >
+        REMARK,
+      </if>
+      <if test="delflg != null" >
+        DELFLG,
+      </if>
+      <if test="sdid != null" >
+        SDID,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="fileid != null" >
+        #{fileid,jdbcType=VARCHAR},
+      </if>
+      <if test="filename != null" >
+        #{filename,jdbcType=VARCHAR},
+      </if>
+      <if test="filerealname != null" >
+        #{filerealname,jdbcType=VARCHAR},
+      </if>
+      <if test="filepath != null" >
+        #{filepath,jdbcType=VARCHAR},
+      </if>
+      <if test="createdate != null" >
+        #{createdate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="schemeid != null" >
+        #{schemeid,jdbcType=VARCHAR},
+      </if>
+      <if test="createmender != null" >
+        #{createmender,jdbcType=VARCHAR},
+      </if>
+      <if test="updatetime != null" >
+        #{updatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updatemender != null" >
+        #{updatemender,jdbcType=VARCHAR},
+      </if>
+      <if test="remark != null" >
+        #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="delflg != null" >
+        #{delflg,jdbcType=VARCHAR},
+      </if>
+      <if test="sdid != null" >
+        #{sdid,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+</mapper>

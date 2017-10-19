@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.sinog2c.dao.api.file.FileFolderPrivateMapper">
+	<resultMap id="BaseResultMap" type="com.sinog2c.model.file.FileFolderPrivate">
+		<id column="ID" property="id" jdbcType="DECIMAL" />
+		<result column="PARENT_ID" property="parentId" jdbcType="DECIMAL" />
+		<result column="FOLDER_ORDER" property="folderOrder" jdbcType="DECIMAL" />
+		<result column="FOLDER_NAME" property="folderName" jdbcType="VARCHAR" />
+		<result column="CREATE_USER" property="createUser" jdbcType="VARCHAR" />
+		<result column="CREATE_TIME" property="createTime" jdbcType="TIMESTAMP" />
+		<result column="attchmentId" property="attchmentId" jdbcType="DECIMAL" />	
+		<result column="ISSHARED" property="isShared" jdbcType="DECIMAL" />	
+		<result column="IS_EDITABLE" property="isEditable" jdbcType="DECIMAL" />
+	</resultMap>
+	<sql id="Base_Column_List">
+		ID, PARENT_ID, FOLDER_ORDER, FOLDER_NAME, CREATE_USER, CREATE_TIME
+	</sql>
+	<select id="selectByPrimaryKey" resultMap="BaseResultMap"
+		parameterType="java.lang.Long">
+		select
+		<include refid="Base_Column_List" />
+		from FILE_FOLDER_PRIVATE
+		where ID = #{id,jdbcType=DECIMAL}
+	</select>
+	<delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+		delete from FILE_FOLDER_PRIVATE
+		where ID = #{id,jdbcType=DECIMAL}
+	</delete>
+	<insert id="insert" parameterType="com.sinog2c.model.file.FileFolderPrivate">
+		insert into FILE_FOLDER_PRIVATE (ID, PARENT_ID, FOLDER_ORDER,
+		FOLDER_NAME, CREATE_USER, CREATE_TIME
+		)
+		values (#{id,jdbcType=DECIMAL}, #{parentId,jdbcType=DECIMAL},
+		#{folderOrder,jdbcType=DECIMAL},
+		#{folderName,jdbcType=VARCHAR}, #{createUser,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}
+		)
+	</insert>
+	<insert id="insertSelective" parameterType="com.sinog2c.model.file.FileFolderPrivate">
+		insert into FILE_FOLDER_PRIVATE
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				ID,
+			</if>
+			<if test="parentId != null">
+				PARENT_ID,
+			</if>
+			<if test="folderOrder != null">
+				FOLDER_ORDER,
+			</if>
+			<if test="folderName != null">
+				FOLDER_NAME,
+			</if>
+			<if test="createUser != null">
+				CREATE_USER,
+			</if>
+			<if test="createTime != null">
+				CREATE_TIME,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				#{id,jdbcType=DECIMAL},
+			</if>
+			<if test="parentId != null">
+				#{parentId,jdbcType=DECIMAL},
+			</if>
+			<if test="folderOrder != null">
+				#{folderOrder,jdbcType=DECIMAL},
+			</if>
+			<if test="folderName != null">
+				#{folderName,jdbcType=VARCHAR},
+			</if>
+			<if test="createUser != null">
+				#{createUser,jdbcType=VARCHAR},
+			</if>
+			<if test="createTime != null">
+				#{createTime,jdbcType=TIMESTAMP},
+			</if>
+		</trim>
+	</insert>
+	<update id="updateByPrimaryKeySelective" parameterType="com.sinog2c.model.file.FileFolderPrivate">
+		update FILE_FOLDER_PRIVATE
+		<set>
+			<if test="parentId != null">
+				PARENT_ID = #{parentId,jdbcType=DECIMAL},
+			</if>
+			<if test="folderOrder != null">
+				FOLDER_ORDER = #{folderOrder,jdbcType=DECIMAL},
+			</if>
+			<if test="folderName != null">
+				FOLDER_NAME = #{folderName,jdbcType=VARCHAR},
+			</if>
+			<if test="createUser != null">
+				CREATE_USER = #{createUser,jdbcType=VARCHAR},
+			</if>
+			<if test="createTime != null">
+				CREATE_TIME = #{createTime,jdbcType=TIMESTAMP},
+			</if>
+		</set>
+		where ID = #{id,jdbcType=DECIMAL}
+	</update>
+	<update id="updateByPrimaryKey" parameterType="com.sinog2c.model.file.FileFolderPrivate">
+		update FILE_FOLDER_PRIVATE
+		set PARENT_ID = #{parentId,jdbcType=DECIMAL},
+		FOLDER_ORDER = #{folderOrder,jdbcType=DECIMAL},
+		FOLDER_NAME = #{folderName,jdbcType=VARCHAR},
+		CREATE_USER = #{createUser,jdbcType=VARCHAR},
+		CREATE_TIME = #{createTime,jdbcType=TIMESTAMP}
+		where ID = #{id,jdbcType=DECIMAL}
+	</update>
+	
+	<select id="getNextId" resultType="java.lang.Long">  <!-- 获取下一个ID -->
+		SELECT file_folder_private_id_seq.NEXTVAL FROM DUAL
+	</select>	
+
+	<select id="getfolderbyUserid" resultMap="BaseResultMap"
+		parameterType="java.lang.String">
+		select FILE_FOLDER_PRIVATE.*,OA_ATTACHMENT.ID attchmentId, 1 as IS_EDITABLE, F_ISShared(FILE_FOLDER_PRIVATE.ID) as ISSHARED
+		from FILE_FOLDER_PRIVATE Join OA_ATTACHMENT on FILE_FOLDER_PRIVATE.ID=OA_ATTACHMENT.PK
+		where CREATE_USER = #{createUser,jdbcType=VARCHAR} and model='file_folder_private'
+	</select>
+	
+	<select id="getSharedFolderByUserId1" resultMap="BaseResultMap" parameterType="java.lang.String">
+		select
+		<include refid="Base_Column_List" />
+		from FILE_FOLDER_PRIVATE t
+		start with ID in(
+		select  FOLDER_ID from FILE_FOLDER_SHARE 
+		where	IUID = #{iuid,jdbcType=VARCHAR} )		
+		connect by prior t.ID =t.PARENT_ID	
+	</select>
+	
+	<select id="getSharedFolderByUserId" resultMap="BaseResultMap" parameterType="java.lang.String">
+		select t.*,	FILE_FOLDER_SHARE.IS_EDITABLE
+		from FILE_FOLDER_PRIVATE t
+				join FILE_FOLDER_SHARE on t.ID=FILE_FOLDER_SHARE.FOLDER_ID
+		where	IUID = #{iuid,jdbcType=VARCHAR} 	
+	
+	</select>
+</mapper>

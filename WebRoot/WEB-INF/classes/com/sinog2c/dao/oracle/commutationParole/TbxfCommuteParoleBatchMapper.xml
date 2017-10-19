@@ -1,0 +1,673 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.sinog2c.dao.api.commutationParole.TbxfCommuteParoleBatchMapper" >
+  <resultMap id="BaseResultMap" type="com.sinog2c.model.commutationParole.TbxfCommuteParoleBatch" >
+    <id column="BATCHID" property="batchid" jdbcType="DECIMAL" />
+    <result column="DEPARTID" property="departid" jdbcType="VARCHAR" />
+    <result column="CURYEAR" property="curyear" jdbcType="VARCHAR" />
+    <result column="BATCH" property="batch" jdbcType="DECIMAL" />
+    <result column="EXAMINEEND" property="examineend" jdbcType="DATE" />
+    <result column="REMAINDERPUNISHMENT" property="remainderpunishment" jdbcType="DATE" />
+    <result column="REMARK" property="remark" jdbcType="VARCHAR" />
+    <result column="OPID" property="opid" jdbcType="VARCHAR" />
+    <result column="OPTIME" property="optime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    BATCHID, DEPARTID, CURYEAR, BATCH, EXAMINEEND, REMAINDERPUNISHMENT, REMARK, OPID, 
+    OPTIME
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from TBXF_COMMUTEPAROLE_BATCH
+    where BATCHID = #{batchid,jdbcType=DECIMAL}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from TBXF_COMMUTEPAROLE_BATCH
+    where BATCHID = #{batchid,jdbcType=DECIMAL}
+  </delete>
+  <insert id="insert" parameterType="com.sinog2c.model.commutationParole.TbxfCommuteParoleBatch" >
+  	<selectKey keyProperty="batchid" resultType="long" order="BEFORE">
+		select to_number(concat(#{departid,jdbcType=VARCHAR},SEQ_BASE_DOC_ID.nextval)) as BATCHID from dual
+  	</selectKey>
+    insert into TBXF_COMMUTEPAROLE_BATCH (BATCHID, DEPARTID, CURYEAR, 
+      BATCH, EXAMINEEND, REMAINDERPUNISHMENT, 
+      REMARK, OPID)
+    values (#{batchid,jdbcType=DECIMAL}, #{departid,jdbcType=VARCHAR}, #{curyear,jdbcType=VARCHAR}, 
+      #{batch,jdbcType=DECIMAL}, #{examineend,jdbcType=DATE}, #{remainderpunishment,jdbcType=DATE}, 
+      #{remark,jdbcType=VARCHAR}, #{opid,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.sinog2c.model.commutationParole.TbxfCommuteParoleBatch" >
+    insert into TBXF_COMMUTEPAROLE_BATCH
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="batchid != null" >
+        BATCHID,
+      </if>
+      <if test="departid != null" >
+        DEPARTID,
+      </if>
+      <if test="curyear != null" >
+        CURYEAR,
+      </if>
+      <if test="batch != null" >
+        BATCH,
+      </if>
+      <if test="examineend != null" >
+        EXAMINEEND,
+      </if>
+      <if test="remainderpunishment != null" >
+        REMAINDERPUNISHMENT,
+      </if>
+      <if test="remark != null" >
+        REMARK,
+      </if>
+      <if test="opid != null" >
+        OPID,
+      </if>
+      <if test="optime != null" >
+        OPTIME,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="batchid != null" >
+        #{batchid,jdbcType=DECIMAL},
+      </if>
+      <if test="departid != null" >
+        #{departid,jdbcType=VARCHAR},
+      </if>
+      <if test="curyear != null" >
+        #{curyear,jdbcType=VARCHAR},
+      </if>
+      <if test="batch != null" >
+        #{batch,jdbcType=DECIMAL},
+      </if>
+      <if test="examineend != null" >
+        #{examineend,jdbcType=DATE},
+      </if>
+      <if test="remainderpunishment != null" >
+        #{remainderpunishment,jdbcType=DATE},
+      </if>
+      <if test="remark != null" >
+        #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="opid != null" >
+        #{opid,jdbcType=VARCHAR},
+      </if>
+      <if test="optime != null" >
+        #{optime,jdbcType=DATE},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.sinog2c.model.commutationParole.TbxfCommuteParoleBatch" >
+    update TBXF_COMMUTEPAROLE_BATCH
+    <set >
+      <if test="departid != null" >
+        DEPARTID = #{departid,jdbcType=VARCHAR},
+      </if>
+      <if test="curyear != null" >
+        CURYEAR = #{curyear,jdbcType=VARCHAR},
+      </if>
+      <if test="batch != null" >
+        BATCH = #{batch,jdbcType=DECIMAL},
+      </if>
+      <if test="examineend != null" >
+        EXAMINEEND = #{examineend,jdbcType=DATE},
+      </if>
+      <if test="remainderpunishment != null" >
+        REMAINDERPUNISHMENT = #{remainderpunishment,jdbcType=DATE},
+      </if>
+      <if test="remark != null" >
+        REMARK = #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="opid != null" >
+        OPID = #{opid,jdbcType=VARCHAR},
+      </if>
+      <if test="optime != null" >
+        OPTIME = #{optime,jdbcType=DATE},
+      </if>
+    </set>
+    where BATCHID = #{batchid,jdbcType=DECIMAL}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.sinog2c.model.commutationParole.TbxfCommuteParoleBatch" >
+    update TBXF_COMMUTEPAROLE_BATCH
+    set DEPARTID = #{departid,jdbcType=VARCHAR},
+      CURYEAR = #{curyear,jdbcType=VARCHAR},
+      BATCH = #{batch,jdbcType=DECIMAL},
+      EXAMINEEND = #{examineend,jdbcType=DATE},
+      REMAINDERPUNISHMENT = #{remainderpunishment,jdbcType=DATE},
+      REMARK = #{remark,jdbcType=VARCHAR},
+      OPID = #{opid,jdbcType=VARCHAR},
+      OPTIME = #{optime,jdbcType=TIMESTAMP}
+    where BATCHID = #{batchid,jdbcType=DECIMAL}
+  </update>
+  
+  <select id="getgetCommuteParoleBatchCount" resultType="int">
+  	select count(*) from tbxf_commuteparole_batch t where 1=1
+  	<trim prefix="" suffix="" suffixOverrides=",">
+ 		<if test="departid!=null and departid!=''"> and t.DEPARTID = #{departid} </if>
+ 	</trim>
+  	<trim prefix="" suffix="" suffixOverrides=",">
+ 		<if test="key!=null and key!=''"> and t.CURYEAR = #{key} </if>
+ 	</trim>
+  </select>
+  
+  <select id="getCommuteParoleBatchInfo" resultType="Map" parameterType="Map">
+  		select batchid,CURYEAR,BATCH 
+  		from (select t.batchid, t.CURYEAR,t.BATCH 
+  			  from tbxf_commuteparole_batch t 
+  			  where 1=1  and t.departid =#{departid} 
+  			  order by t.CURYEAR desc,t.BATCH desc
+  			 ) 
+  		where rownum = 1
+  </select>
+
+  <select id="getCurrentCommuteParoleBatch" resultType="Map" parameterType="Map">
+ 		select * from (select rownum as xuhao,a.* from (select t.* from tbxf_commuteparole_batch t 
+        	where 1=1  and t.departid = #{departid} order by t.CURYEAR desc,t.BATCH desc) a ) where xuhao = #{xuhao,jdbcType=DECIMAL}
+  </select>
+    
+  <select id="getCommuteParoleBatchList" parameterType="Object" resultType="com.sinog2c.model.commutationParole.TbxfCommuteParoleBatch">
+  	select * from
+    ( 
+	    select a.*, rownum rn from
+	    (
+		    select * from tbxf_commuteparole_batch t where 1=1
+		    <trim prefix="" suffix="" suffixOverrides=",">
+		 		<if test="departid!=null and departid!=''"> and t.DEPARTID = #{departid} </if>
+		 	</trim>
+		    <trim prefix="" suffix="" suffixOverrides=",">
+		 		<if test="key!=null and key!=''"> and t.CURYEAR = #{key} </if>
+		 	</trim>
+		 	order by t.curyear desc,t.batch desc
+		 	<trim prefix="" suffix="" suffixOverrides=",">
+				<if test="sortField!=null and sortField!=''"> , ${sortField} ${sortOrder}</if>
+			</trim>
+	  	) a 
+	    <if test="end!=null and end!=''">
+	   		where rownum &lt;= #{end}
+	   	</if> 
+    )
+   	<if test="start!=null and start!=''">
+   		where  rn &gt;= #{start}
+   	</if>
+  </select>
+  <select id="callStoredProcedure" parameterType="String">
+  		<![CDATA[   
+		   {call TIANJIN_EXAMIN(#{departid})}   
+		]]> 
+  </select>
+  <select id="callShStoredProcedure" parameterType="String">
+  		<![CDATA[   
+		   {call SHANGHAI_EXAMIN(#{departid})}   
+		]]> 
+  </select>
+
+  <select id="callPublicStoredProcedure" parameterType="String">
+  		<![CDATA[   
+		   {call PUBLIC_EXAMIN(#{departid})}   
+		]]> 
+  </select>
+  
+  <select id="callSenotherinfoProcedure" parameterType="String">
+  		<![CDATA[   
+		   {call TIANJIN_SENOTHERINFO(#{departid})}   
+		]]> 
+  </select>
+  <select id="callPublicSenotherinfoProcedure" parameterType="String">
+  		<![CDATA[   
+		   {call PUBLIC_SENOTHERINFO(#{departid})}   
+		]]> 
+  </select>
+  <select id="callPublicCallBackProcedure" parameterType="String">
+  		<![CDATA[   
+		   {call PUBLIC_SCREEN_CALLBACK(#{departid})}   
+		]]> 
+  </select>
+  
+  <select id="callPunishmentProcedure" parameterType="String">
+  		<![CDATA[   
+		   {call tianjin_punishment(#{departid})}   
+		]]> 
+  </select>
+  
+  <select id="callCriminaltypemappingProcedure" parameterType="String">
+  		<![CDATA[   
+		   {call P_CRIMINALTYPEMAPPING(#{departid})}   
+		]]> 
+  </select>
+      
+  <select id="selectMaxBatch" resultType="int">
+	select nvl(max(batch),0)+1 from tbxf_commuteparole_batch where departid = #{departid} and curyear = #{year}
+  </select>
+  
+  <!-- 
+     减过刑的才计算减刑间隔期
+  	计算罪犯的减刑间隔期：上次的减刑的相关日期  至  批次设置的考核止日
+  	上次的减刑的相关日期：监狱呈报日期/法院判裁日期等
+  	F_ISDATE(b.courtsanction, 'yyyy-MM-dd') = a.courtsanction 可能有错误
+   -->
+  <select id="getIntervaldateList" resultType="Map" parameterType="Map">
+    select a.crimid, 
+    		GETDISOFTWODATE(
+    			nvl(F_ISDATE(b.reporttime, 'yyyy-MM-dd'),a.courtsanction), f.examineend
+    		) as intervaldate
+    		
+    from (select t.crimid,
+                   ${courtsanction} as courtsanction
+             from TBDATA_SENTCHAGE t
+             where t.category = '7'
+             group by t.crimid
+           ) a,
+           tbxf_sentencealteration sen,
+           TBDATA_SENTCHAGE b,
+           (select ${examineend} as examineend
+              from (select c.*
+                        from tbxf_commuteparole_batch c
+                        where c.departid = #{departid}
+                         order by c.curyear desc, c.batch desc
+                      ) e
+              where rownum = 1
+           ) f
+     where a.crimid = b.crimid
+      	and a.crimid = sen.crimid
+      	and sen.jailid = #{departid}
+     	and F_ISDATE(b.courtsanction, 'yyyy-MM-dd') = a.courtsanction  
+  </select>
+  
+  <!-- 通过表TBXF_SENTENCEALTERATION的裁判余刑年、月、日，批次设置的余刑起算日
+  	计算出现余刑年、月、日 
+  -->
+  <select id="getSurplusSentence" resultType="Map" parameterType="Map">
+	select a.crimid,
+	       (case when a.punishmentyear = '9995' or a.punishmentyear = '9996' 
+	       		  then a.punishmentyear
+	        else GETDISOFTWODATE(f.remainderpunishment, a.courtchangeto)
+	        end ) as surplussentence,
+	       f.batchid
+	  from TBXF_SENTENCEALTERATION a,
+	       (select e.remainderpunishment,
+			  		  e.departid, 
+			  		  e.batchid
+            from (select c.*
+	                  from tbxf_commuteparole_batch c
+	                  where c.departid = #{departid}
+	                  order by c.curyear desc, c.batch desc
+                    ) e
+             where rownum=1
+           ) f
+	 where a.jailid = f.departid
+  </select>
+  
+  <select id="selectdepartidlist" resultType="java.lang.String">
+  	select distinct departid from tbxf_commuteparole_batch 
+  </select>
+  <select id="checkUnfinishedCase" parameterType="Object" resultType="int">
+	select count(*)
+	  from TBFLOW_BASE t, UV_FLOW a, TBXF_SCREENING b
+	 where t.flowdefid = 'other_zfjyjxjssp'
+	   and t.flowdraftid = a.flowdraftid
+	   and t.applyid=b.crimid
+	   and a.nodeid not in('1','-1') 
+	   and b.departid=#{departid}
+  </select>
+  <delete id="deleteMergeByBatchid" parameterType="java.lang.Long" >
+	delete from TBXF_PRISONERPERFORMANCEMERGE t where t.batchid=${batchid}
+  </delete>  
+  <!--  宁夏生成数据 -->
+  <update id="shengChengData1">
+        UPDATE TBXF_SCREENING
+   		SET departid = #{departid},
+   		status=#{status},
+   		cstatus=#{cstatus},
+   		batchid=(select batchid from 
+   		               (select * from TBXF_COMMUTEPAROLE_BATCH where curyear =
+   		                      (select MAX(curyear) from TBXF_COMMUTEPAROLE_BATCH where departid=#{departid}) 
+   		                            and departid=#{departid} order by batch DESC) where ROWNUM=1),
+		isdeclare=#{isdeclare}
+ 		where crimid IN (select crimid from TBXF_SCREENING where crimid IN (select crimid from TBPRISONER_BASEINFO))
+  </update>
+  <!--  清空最大批次 -->
+  <update id="clearMaxBatch" parameterType="Map">
+        UPDATE TBXF_COMMUTEPAROLE_BATCH t
+   		SET t.REMARK = ''
+ 		where departid=#{departid}
+  </update>
+  <!--  设置最大批次 -->
+  <update id="updateMaxBatch" parameterType="Map">
+        UPDATE TBXF_COMMUTEPAROLE_BATCH t 
+   		SET t.REMARK = '999'
+ 		where departid=#{departid} and batchid=(select batchid from 
+   		               (select * from TBXF_COMMUTEPAROLE_BATCH where curyear =
+   		                      (select MAX(curyear) from TBXF_COMMUTEPAROLE_BATCH where departid=#{departid}) 
+   		                            and departid=#{departid} order by batch DESC) where ROWNUM=1)
+  </update>
+  <!--  设置罪犯类型 -->
+  <update id="updateCrimeType" parameterType="Map">
+	insert into TBXF_CRIMETYPESMAPPING(crimid,typeid)
+	select t.crimid,'10018'  from TBPRISONER_BASE_CRIME t
+	where (decode(forfeit,'0',null,forfeit) is not null or decode(forfeitureproperty,'0',null,forfeitureproperty) is not null)
+	and not exists(select 'x' from TBXF_CRIMETYPESMAPPING a where t.crimid = a.crimid and a.typeid = '10018')  and t.orgid=#{departid}
+  </update>  
+  <insert id="shengChengData2">
+         insert into TBXF_SCREENING(departid,status,cstatus,isdeclare,crimid,punid,batchid) 
+  	  	 values(#{departid},#{status},#{cstatus},#{isdeclare},#{crimid},0,
+  		 (select batchid from (select * from TBXF_COMMUTEPAROLE_BATCH where curyear =
+   	     (select MAX(curyear) from TBXF_COMMUTEPAROLE_BATCH where departid=#{departid}) and departid=#{departid} order by batch DESC) 
+         where ROWNUM=1))
+  </insert>
+  <select id="shengChengData3" resultType="map">
+       select * from TBPRISONER_BASEINFO where crimid not in (select crimid from TBXF_SCREENING)
+  </select>
+  
+  <select id="callCPScreeingDataProcedure" parameterType="String">
+  		<![CDATA[   
+		   {call CP_XFZX_SCREEINGDATA(${departid},${id},'${userid}')}   
+		]]> 
+  </select>
+  <update id="generateQualificationList" parameterType="String">
+        update TBXF_PRISONERPERFORMANCEMERGE pm set pm.INT16=1
+		where exists (
+		   select 'x'
+		   from TBXF_SCREENING ts,
+		        (select t.batchid from TBXF_COMMUTEPAROLE_BATCH t where t.departid=#{departid} and t.remark='999') bt
+		   where ts.status=1
+		     and ts.cstatus=1
+		     and ts.batchid=bt.batchid
+		     and ts.crimid=pm.crimid
+		     and ts.batchid=pm.batchid
+		)
+  </update>
+  
+  <delete id="deleteQualifierTemp" parameterType="String" >
+	delete from TBXF_QUALIFIER_TEMP t where t.departid=${departid}
+  </delete>
+  
+  
+  <select id="getKaoHeNum4HuNan" parameterType="String" resultType="Map">
+       select
+       		sen.crimid,
+       		sen.batchid,
+		    TO_NUMBER(kh.SUMFEN) INT24,
+		    TO_NUMBER(kh.Leijibiaoyang) as INT2,
+		    TO_NUMBER(kh.Yufen) as INT40,
+
+		    ljjf.jiangfen as INT28, 
+		    ljkf.koufen as INT45,
+		    pljkf.pkoufen as TEXT3,
+		    zdwg.wg_num as TEXT4
+		from tbxf_sentencealteration sen,
+		     KHJC_KAOHEFEN kh,
+		     (
+		      SELECT z.PR_ID1 as crimid,
+		            sum(nvl(to_number(z.awps_score),0)) as jiangfen
+		      FROM zhunan_rckh z,
+		           tbxf_sentencealteration sen
+		      WHERE z.awps_score &gt; 0
+		        and z.pr_id1=sen.crimid
+		        AND z.awps_date &gt;= sen.rewardstart
+		        AND z.awps_date &lt;= sen.rewardend
+		      group by z.PR_ID1
+		     ) ljjf, 
+		     
+		     (
+		      SELECT z.PR_ID1 as crimid,
+		             sum( abs(nvl(to_number(z.awps_score),0)) ) as koufen
+		      FROM zhunan_rckh z,
+		           tbxf_sentencealteration sen
+		      WHERE z.awps_score &lt; 0
+		        and z.pr_id1=sen.crimid
+		        AND z.awps_date &gt;= sen.rewardstart
+		        AND z.awps_date &lt;= sen.rewardend
+		      group by z.PR_ID1
+		     ) ljkf,
+		     
+		     (
+		      SELECT z.PR_ID1 as crimid,
+		             sum( abs(nvl(to_number(z.awps_score),0)) ) as pkoufen
+		      FROM zhunan_rckh z,
+		           tbxf_sentencealteration sen
+		      WHERE z.awps_score &lt; 0
+		        and z.pr_id1=sen.crimid
+		        AND z.awps_date &gt;= ADD_MONTHS(sen.rewardend, -12) + 1
+		        AND z.awps_date &lt;= sen.rewardend
+		      group by z.PR_ID1
+		     ) pljkf, 
+		     
+		     (
+		      SELECT 
+		          z.pr_id1 as crimid,
+		          COUNT(z.id) AS wg_num
+		      FROM zhunan_rckh z,
+		           tbxf_sentencealteration sen
+		      WHERE z.pr_id1=sen.crimid
+		        AND z.awps_score &lt;= -150
+		        AND awps_date &gt;= sen.rewardstart
+		        AND awps_date &lt;= sen.rewardend
+		      GROUP BY z.pr_id1
+		     ) zdwg 
+		where sen.crimid = kh.crimid(+)
+		  and sen.crimid = ljjf.crimid(+)
+		  and sen.crimid = ljkf.crimid(+)
+		  and sen.crimid = pljkf.crimid(+)
+		  and sen.crimid = zdwg.crimid(+)
+		  and sen.jailid= #{departid}
+		  and not exists (select 'x' from tbflow_base tb
+		                    where tb.flowdefid = 'other_zfjyjxjssp' and tb.applyid=sen.crimid
+		                      and (tb.state=-2 or tb.state=-1 or tb.state=0 or tb.state=2)
+		                 )
+  </select>
+  
+  
+  <select id="getKaoHeNum4HuNanSingle" parameterType="String" resultType="Map">
+       select
+       		sen.crimid,
+       		sen.batchid,
+		    TO_NUMBER(kh.SUMFEN) INT24,
+		    TO_NUMBER(kh.Leijibiaoyang) as INT2,
+		    TO_NUMBER(kh.Yufen) as INT40,
+
+		    ljjf.jiangfen as INT28, 
+		    ljkf.koufen as INT45,
+		    pljkf.pkoufen as TEXT3,
+		    zdwg.wg_num as TEXT4
+		from tbxf_sentencealteration sen,
+		     KHJC_KAOHEFEN kh,
+		     (
+		      SELECT z.PR_ID1 as crimid,
+		            sum(nvl(to_number(z.awps_score),0)) as jiangfen
+		      FROM zhunan_rckh z,
+		           tbxf_sentencealteration sen
+		      WHERE z.awps_score &gt; 0
+		        and z.pr_id1=sen.crimid
+		        AND z.awps_date &gt;= sen.rewardstart
+		        AND z.awps_date &lt;= sen.rewardend
+		      group by z.PR_ID1
+		     ) ljjf, 
+		     
+		     (
+		      SELECT z.PR_ID1 as crimid,
+		             sum( abs(nvl(to_number(z.awps_score),0)) ) as koufen
+		      FROM zhunan_rckh z,
+		           tbxf_sentencealteration sen
+		      WHERE z.awps_score &lt; 0
+		        and z.pr_id1=sen.crimid
+		        AND z.awps_date &gt;= sen.rewardstart
+		        AND z.awps_date &lt;= sen.rewardend
+		      group by z.PR_ID1
+		     ) ljkf,
+		     
+		     (
+		      SELECT z.PR_ID1 as crimid,
+		             sum( abs(nvl(to_number(z.awps_score),0)) ) as pkoufen
+		      FROM zhunan_rckh z,
+		           tbxf_sentencealteration sen
+		      WHERE z.awps_score &lt; 0
+		        and z.pr_id1=sen.crimid
+		        AND z.awps_date &gt;= ADD_MONTHS(sen.rewardend, -12) + 1
+		        AND z.awps_date &lt;= sen.rewardend
+		      group by z.PR_ID1
+		     ) pljkf, 
+		     
+		     (
+		      SELECT 
+		          z.pr_id1 as crimid,
+		          COUNT(z.id) AS wg_num
+		      FROM zhunan_rckh z,
+		           tbxf_sentencealteration sen
+		      WHERE z.pr_id1=sen.crimid
+		        AND z.awps_score &lt;= -150
+		        AND awps_date &gt;= sen.rewardstart
+		        AND awps_date &lt;= sen.rewardend
+		      GROUP BY z.pr_id1
+		     ) zdwg 
+		where sen.crimid = kh.crimid(+)
+		  and sen.crimid = ljjf.crimid(+)
+		  and sen.crimid = ljkf.crimid(+)
+		  and sen.crimid = pljkf.crimid(+)
+		  and sen.crimid = zdwg.crimid(+)
+		  and sen.crimid= #{crimid}
+		  and sen.batchid is not null
+  </select>
+  
+  
+  
+  <select id="getJiangLiInfo4HuNan" parameterType="String" resultType="Map">
+  		SELECT
+		  (a.mingxi || '奖励' || a.fenshu || '分') jiangli,
+		  crimid
+		FROM
+		  (
+			   SELECT z.PR_ID1 AS crimid,
+			       TO_CHAR(TO_NUMBER(z.awps_score)) AS fenshu,
+			       z.awps_abstract mingxi
+			   FROM zhunan_rckh z,
+			        tbxf_sentencealteration sen
+			   WHERE z.PR_ID1 = sen.crimid
+			     AND z.awps_score &gt; 0
+			     AND z.awps_date &gt;= sen.rewardstart
+			     AND z.awps_date &lt;= sen.rewardend
+			     AND sen.jailid=#{departid}
+			   ORDER BY z.awps_date
+		  ) a
+  </select>
+  
+  <select id="getJiangLiInfo4HuNanSingle" parameterType="String" resultType="Map">
+  		SELECT
+		  (a.mingxi || '奖励' || a.fenshu || '分') jiangli,
+		  crimid
+		FROM
+		  (
+			   SELECT z.PR_ID1 AS crimid,
+			       TO_CHAR(TO_NUMBER(z.awps_score)) AS fenshu,
+			       z.awps_abstract mingxi
+			   FROM zhunan_rckh z,
+			        tbxf_sentencealteration sen
+			   WHERE z.PR_ID1 = sen.crimid
+			     AND z.awps_score &gt; 0
+			     AND z.awps_date &gt;= sen.rewardstart
+			     AND z.awps_date &lt;= sen.rewardend
+			     AND sen.crimid=#{crimid}
+			   ORDER BY z.awps_date
+		  ) a
+  </select>
+  
+  <select id="getKoufenInfoList4HuNan" parameterType="String" resultType="Map">
+  		SELECT
+		  (a.mingxi || '扣' || a.fenshu || '分') koufen,
+		  crimid
+		FROM
+		  (
+			   SELECT z.PR_ID1 AS crimid,
+			       abs(TO_NUMBER(z.awps_score)) AS fenshu,
+			       z.awps_abstract mingxi
+			   FROM zhunan_rckh z,
+			        tbxf_sentencealteration sen
+			   WHERE z.PR_ID1 = sen.crimid
+			     AND z.awps_score &lt; 0
+			     AND z.awps_date &gt;= sen.rewardstart
+			     AND z.awps_date &lt;= sen.rewardend
+			     AND sen.jailid=#{departid}
+			  ORDER BY z.awps_date
+		  ) a
+  </select>
+  
+  
+  <select id="getKoufenInfoList4HuNanSingle" parameterType="String" resultType="Map">
+  		SELECT
+		  (a.mingxi || '扣' || a.fenshu || '分') koufen,
+		  crimid
+		FROM
+		  (
+			   SELECT z.PR_ID1 AS crimid,
+			       abs(TO_NUMBER(z.awps_score)) AS fenshu,
+			       z.awps_abstract mingxi
+			   FROM zhunan_rckh z,
+			        tbxf_sentencealteration sen
+			   WHERE z.PR_ID1 = sen.crimid
+			     AND z.awps_score &lt; 0
+			     AND z.awps_date &gt;= sen.rewardstart
+			     AND z.awps_date &lt;= sen.rewardend
+			     AND sen.crimid=#{crimid}
+			  ORDER BY z.awps_date
+		  ) a
+  </select>
+  
+  
+  <select id="getJiJiFenziList4HuNan" parameterType="String" resultType="Map">
+  		select
+		  tt.crimid,
+		  (
+		    (case when F_ISNUMBER(tt.jj_year) = -1 then to_number(to_char(tt.audit_date, 'yyyy')) -1 
+		      else to_number(tt.jj_year) 
+		     end) || tt.jj_type
+		  ) as jj_info
+		from
+		  (
+		    SELECT z.PR_ID1 AS crimid,
+		           SUBSTR(z.AWPS_ABSTRACT, instr(z.AWPS_ABSTRACT,'年')-4, 4) as jj_year,
+		           z.audit_date,
+		           (case when z.AWPS_ABSTRACT like '%省%' THEN '(省)' else '(狱)' end) as jj_type
+		    FROM ZHUNAN_RCKH z,
+		        tbxf_sentencealteration sen
+		    WHERE z.AWPS_ABSTRACT LIKE '%积极分子%'
+		      AND z.PR_ID1 = sen.crimid
+		      AND z.awps_date &gt;= sen.rewardstart
+		      AND z.awps_date &lt;= sen.rewardend
+		      AND sen.jailid=#{departid}
+		    ORDER BY z.awps_date
+		  ) tt
+  </select>
+  
+  <select id="getJiJiFenziList4HuNanSingle" parameterType="String" resultType="Map">
+  		select
+		  tt.crimid,
+		  (
+		    (case when F_ISNUMBER(tt.jj_year) = -1 then to_number(to_char(tt.audit_date, 'yyyy')) -1 
+		      else to_number(tt.jj_year) 
+		     end) || tt.jj_type
+		  ) as jj_info
+		from
+		  (
+		    SELECT z.PR_ID1 AS crimid,
+		           SUBSTR(z.AWPS_ABSTRACT, instr(z.AWPS_ABSTRACT,'年')-4, 4) as jj_year,
+		           z.audit_date,
+		           (case when z.AWPS_ABSTRACT like '%省%' THEN '(省)' else '(狱)' end) as jj_type
+		    FROM ZHUNAN_RCKH z,
+		        tbxf_sentencealteration sen
+		    WHERE z.AWPS_ABSTRACT LIKE '%积极分子%'
+		      AND z.PR_ID1 = sen.crimid
+		      AND z.awps_date &gt;= sen.rewardstart
+		      AND z.awps_date &lt;= sen.rewardend
+		      AND sen.crimid=#{crimid}
+		    ORDER BY z.awps_date
+		  ) tt
+  </select>
+  
+  
+  <select id="callProcInitSentenceData" parameterType="Map">
+  		<![CDATA[   
+		   {call P_COMMUTE_COLCULAT_DATA_SINGLE(#{departid}, #{crimid})}   
+		]]> 
+  </select>
+  
+</mapper>

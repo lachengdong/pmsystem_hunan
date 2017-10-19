@@ -1,0 +1,269 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.sinog2c.dao.api.user.UserGrantDetailMapper" >
+  <resultMap id="BaseResultMap" type="com.sinog2c.model.user.UserGrantDetail" >
+    <id column="RESID" property="resid" jdbcType="VARCHAR" />
+    <id column="USERID" property="userid" jdbcType="VARCHAR" />
+    <id column="OPID" property="opid" jdbcType="VARCHAR" />
+    <result column="PRESID" property="presid" jdbcType="VARCHAR" />
+    <result column="NAME" property="name" jdbcType="VARCHAR" />
+    <result column="DISTIME" property="distime" jdbcType="TIMESTAMP" />
+    <result column="OPTIME" property="optime" jdbcType="TIMESTAMP" />
+    <result column="NOTICEID" property="noticeid" jdbcType="DECIMAL"/>
+  </resultMap>
+  <sql id="Base_Column_List" >
+    RESID, USERID, OPID, PRESID, NAME, DISTIME, OPTIME
+  </sql>
+  
+  <insert id="insert" parameterType="com.sinog2c.model.user.UserGrantDetail" >
+    insert into TBUSER_USERRES (RESID, USERID, OPID, 
+      PRESID, NAME, DISTIME, 
+      OPTIME)
+    values (#{resid,jdbcType=VARCHAR}, #{userid,jdbcType=VARCHAR}, #{opid,jdbcType=VARCHAR}, 
+      #{presid,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR}, #{distime,jdbcType=DATE}, 
+      #{optime,jdbcType=DATE})
+  </insert>
+  
+  <insert id="insertSelective" parameterType="com.sinog2c.model.user.UserGrantDetail" >
+    insert into TBUSER_USERRES
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="resid != null" >
+        RESID,
+      </if>
+      <if test="userid != null" >
+        USERID,
+      </if>
+      <if test="opid != null" >
+        OPID,
+      </if>
+      <if test="presid != null" >
+        PRESID,
+      </if>
+      <if test="name != null" >
+        NAME,
+      </if>
+      <if test="distime != null" >
+        DISTIME,
+      </if>
+      <if test="optime != null" >
+        OPTIME,
+      </if>
+      <if test="noticeid != null">
+        NOTICEID
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="resid != null" >
+        #{resid,jdbcType=VARCHAR},
+      </if>
+      <if test="userid != null" >
+        #{userid,jdbcType=VARCHAR},
+      </if>
+      <if test="opid != null" >
+        #{opid,jdbcType=VARCHAR},
+      </if>
+      <if test="presid != null" >
+        #{presid,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null" >
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="distime != null" >
+        #{distime,jdbcType=DATE},
+      </if>
+      <if test="optime != null" >
+        #{optime,jdbcType=DATE},
+      </if>
+      <if test="noticeid != null">
+        #{noticeid,jdbcType=DECIMAL}
+      </if>
+    </trim>
+  </insert>
+  
+  <update id="update" parameterType="com.sinog2c.model.user.UserGrantDetail" >
+    update TBUSER_USERRES
+    set PRESID = #{presid,jdbcType=VARCHAR},
+      NAME = #{name,jdbcType=VARCHAR},
+      DISTIME = #{distime,jdbcType=DATE},
+      OPTIME = #{optime,jdbcType=DATE}
+    where RESID = #{resid,jdbcType=VARCHAR}
+      and USERID = #{userid,jdbcType=VARCHAR}
+      and OPID = #{opid,jdbcType=VARCHAR}
+  </update>
+  
+  <update id="updateSelective" parameterType="com.sinog2c.model.user.UserGrantDetail" >
+    update TBUSER_USERRES
+    <set >
+      <if test="presid != null" >
+        PRESID = #{presid,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null" >
+        NAME = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="distime != null" >
+        DISTIME = #{distime,jdbcType=DATE},
+      </if>
+      <if test="optime != null" >
+        OPTIME = #{optime,jdbcType=DATE},
+      </if>
+    </set>
+    where RESID = #{resid,jdbcType=VARCHAR}
+      and USERID = #{userid,jdbcType=VARCHAR}
+      and OPID = #{opid,jdbcType=VARCHAR}
+  </update>
+  
+  <delete id="delete" parameterType="com.sinog2c.model.user.UserGrantDetail" >
+    delete from TBUSER_USERRES
+      where 1=1
+        and USERID = #{userid,jdbcType=VARCHAR}
+        and OPID = #{opid,jdbcType=VARCHAR}
+      <if test="resid != null" >
+      	and RESID = #{resid,jdbcType=VARCHAR} 
+      </if>
+  </delete>
+  
+  <select id="getByKey" resultMap="BaseResultMap" parameterType="com.sinog2c.model.user.UserGrantDetail" >
+    select 
+    <include refid="Base_Column_List" />
+    from TBUSER_USERRES
+    where RESID = #{resid,jdbcType=VARCHAR}
+      and USERID = #{userid,jdbcType=VARCHAR}
+      and OPID = #{opid,jdbcType=VARCHAR}
+  </select>
+  
+  <select id="countAll" resultType="int">  <!-- 查询表中记录总数 -->
+		select count(*) c from TBUSER_USERRES
+  </select>
+  
+  <select id="listAll" resultMap="BaseResultMap">    <!-- 查询表中的所有信息 -->
+ 		SELECT * FROM TBUSER_USERRES  
+ 		  order by  userid asc
+  </select>
+  
+  <select id="listAllByPage" resultMap="BaseResultMap">    <!-- 分页查询表中的所有信息 -->
+	 SELECT * FROM 
+	 	( SELECT A.*, ROWNUM RN 
+		 	FROM 
+		 	(
+		 		SELECT * FROM TBUSER_USERRES
+				 <if test="sortField!=null and sortField!='' and sortOrder!=null and sortOrder!=''">  
+		 		  order by  ${sortField} ${sortOrder}
+			     </if>
+		 	) A 
+		 	WHERE ROWNUM &lt;= #{end,jdbcType=DECIMAL}
+	 	) 
+	 	WHERE RN &gt;= #{start,jdbcType=DECIMAL}
+  </select>
+  
+  <select id="listByUseridOpid" resultMap="BaseResultMap">    <!-- 查询表中的用户授权其他用户的信息 -->
+		SELECT * FROM TBUSER_USERRES
+		     <where>
+		     	<if test="userid != null">
+		     		USERID = #{userid,jdbcType=VARCHAR}
+		     	</if>
+		     	<if test="opid != null">
+		     		and OPID = #{opid,jdbcType=VARCHAR}
+		     	</if>
+		     	<!-- 需要用noticeid的直接赋值，不需要的默认传值0，所以当为0 的时候不添加此条件 -->
+		     	<if test="noticeid != null and noticeid != 0 and noticeid != ''">
+		     	    and noticeid =#{noticeid}
+		     	</if>
+		     </where>
+ 		  order by  userid asc
+  </select>
+  
+  <select id="listByUserid" resultMap="BaseResultMap">    <!-- 查询表中授权给userid的所有信息 -->
+	 SELECT * FROM TBUSER_USERRES
+		  where USERID = #{userid,jdbcType=VARCHAR}
+ 		  order by  userid asc
+  </select>
+  <!-- 如果点击 撤销授权，那么执行下面两条sql -->
+  <update id="updateStateByNoticeid">
+      UPDATE TBUSER_NOTICE
+			   SET state = 2,
+			       endtime =
+			          to_date (to_char (sysdate-1/(24*60), 'yyyy-MM-dd hh24:mi'), 'yyyy-MM-dd hh24:mi')
+			  WHERE noticeid = #{noticeid}
+  </update>
+  <update id="updateEndtimeByNoticeid">
+      UPDATE TBUSER_USERRES
+			   SET  distime =
+			          to_date (to_char (sysdate-1/(24*60), 'yyyy-MM-dd hh24:mi'), 'yyyy-MM-dd hh24:mi')
+			 WHERE noticeid = #{noticeid}
+  </update>
+  <!-- 删除 已经 给目标用户赋值的权限 -->
+  <delete id="deleteUserGrants">
+      delete from TBUSER_USERRES tb where tb.noticeid=#{noticeid}
+  </delete>
+  <!--
+  <delete id="deleteDisableGrants">
+  	  delete TBUSER_USERRES tu  
+  	  	where tu.noticeid is null 
+  	  		or (exists (select 1 from TBUSER_NOTICE tn 
+  	  						where tu.noticeid=tn.noticeid 
+  	  							and tu.noticeid is not null 
+  	  							and (tn.state=2 or tn.endtime &lt; sysdate))
+				and tu.opid=#{opid} and tu.userid=#{userid})
+  </delete> -->
+  <insert id="insertHisSelective" parameterType="com.sinog2c.model.user.UserGrantDetail" >
+    insert into TBUSER_USERRES_HIS
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="resid != null" >
+        RESID,
+      </if>
+      <if test="userid != null" >
+        USERID,
+      </if>
+      <if test="opid != null" >
+        OPID,
+      </if>
+      <if test="presid != null" >
+        PRESID,
+      </if>
+      <if test="name != null" >
+        NAME,
+      </if>
+      <if test="distime != null" >
+        DISTIME,
+      </if>
+      <if test="optime != null" >
+        OPTIME,
+      </if>
+      <if test="noticeid != null">
+        NOTICEID
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="resid != null" >
+        #{resid,jdbcType=VARCHAR},
+      </if>
+      <if test="userid != null" >
+        #{userid,jdbcType=VARCHAR},
+      </if>
+      <if test="opid != null" >
+        #{opid,jdbcType=VARCHAR},
+      </if>
+      <if test="presid != null" >
+        #{presid,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null" >
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="distime != null" >
+        #{distime,jdbcType=DATE},
+      </if>
+      <if test="optime != null" >
+        #{optime,jdbcType=DATE},
+      </if>
+      <if test="noticeid != null">
+        #{noticeid,jdbcType=DECIMAL}
+      </if>
+    </trim>
+  </insert>
+  
+  <delete id="deleteByPresid" parameterType="java.lang.String">
+		delete from
+		TBUSER_USERRES
+		where PRESID = #{presid,jdbcType=VARCHAR}
+	</delete>
+</mapper>

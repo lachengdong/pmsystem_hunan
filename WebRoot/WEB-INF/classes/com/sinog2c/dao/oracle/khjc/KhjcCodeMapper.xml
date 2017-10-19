@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.sinog2c.dao.api.khjc.KhjcCodeMapper" >
+  <resultMap id="BaseResultMap" type="com.sinog2c.model.khjc.KhjcCode" >
+    <id column="CODETYPE" property="codetype" jdbcType="VARCHAR" />
+    <id column="PROVINCE" property="province" jdbcType="VARCHAR" />
+    <id column="CODEID" property="codeid" jdbcType="VARCHAR" />
+    <result column="CODENAME" property="codename" jdbcType="VARCHAR" />
+    <result column="ORDERBY" property="orderby" jdbcType="VARCHAR" />
+    <result column="REMARK" property="remark" jdbcType="VARCHAR" />
+    <result column="PARENTID" property="parentid" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    CODETYPE, PROVINCE, CODEID, CODENAME, ORDERBY, REMARK, PARENTID
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="com.sinog2c.model.khjc.KhjcCodeKey" >
+    select 
+    <include refid="Base_Column_List" />
+    from KHJC_CODE
+    where CODETYPE = #{codetype,jdbcType=VARCHAR}
+      and PROVINCE = #{province,jdbcType=VARCHAR}
+      and CODEID = #{codeid,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="com.sinog2c.model.khjc.KhjcCodeKey" >
+    delete from KHJC_CODE
+    where CODETYPE = #{codetype,jdbcType=VARCHAR}
+      and PROVINCE = #{province,jdbcType=VARCHAR}
+      and CODEID = #{codeid,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.sinog2c.model.khjc.KhjcCode" >
+    insert into KHJC_CODE (CODETYPE, PROVINCE, CODEID, 
+      CODENAME, ORDERBY, REMARK, 
+      PARENTID)
+    values (#{codetype,jdbcType=VARCHAR}, #{province,jdbcType=VARCHAR}, #{codeid,jdbcType=VARCHAR}, 
+      #{codename,jdbcType=VARCHAR}, #{orderby,jdbcType=VARCHAR}, #{remark,jdbcType=VARCHAR}, 
+      #{parentid,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.sinog2c.model.khjc.KhjcCode" >
+    insert into KHJC_CODE
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="codetype != null" >
+        CODETYPE,
+      </if>
+      <if test="province != null" >
+        PROVINCE,
+      </if>
+      <if test="codeid != null" >
+        CODEID,
+      </if>
+      <if test="codename != null" >
+        CODENAME,
+      </if>
+      <if test="orderby != null" >
+        ORDERBY,
+      </if>
+      <if test="remark != null" >
+        REMARK,
+      </if>
+      <if test="parentid != null" >
+        PARENTID,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="codetype != null" >
+        #{codetype,jdbcType=VARCHAR},
+      </if>
+      <if test="province != null" >
+        #{province,jdbcType=VARCHAR},
+      </if>
+      <if test="codeid != null" >
+        #{codeid,jdbcType=VARCHAR},
+      </if>
+      <if test="codename != null" >
+        #{codename,jdbcType=VARCHAR},
+      </if>
+      <if test="orderby != null" >
+        #{orderby,jdbcType=VARCHAR},
+      </if>
+      <if test="remark != null" >
+        #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="parentid != null" >
+        #{parentid,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.sinog2c.model.khjc.KhjcCode" >
+    update KHJC_CODE
+    <set >
+      <if test="codename != null" >
+        CODENAME = #{codename,jdbcType=VARCHAR},
+      </if>
+      <if test="orderby != null" >
+        ORDERBY = #{orderby,jdbcType=VARCHAR},
+      </if>
+      <if test="remark != null" >
+        REMARK = #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="parentid != null" >
+        PARENTID = #{parentid,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where CODETYPE = #{codetype,jdbcType=VARCHAR}
+      and PROVINCE = #{province,jdbcType=VARCHAR}
+      and CODEID = #{codeid,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.sinog2c.model.khjc.KhjcCode" >
+    update KHJC_CODE
+    set CODENAME = #{codename,jdbcType=VARCHAR},
+      ORDERBY = #{orderby,jdbcType=VARCHAR},
+      REMARK = #{remark,jdbcType=VARCHAR},
+      PARENTID = #{parentid,jdbcType=VARCHAR}
+    where CODETYPE = #{codetype,jdbcType=VARCHAR}
+      and PROVINCE = #{province,jdbcType=VARCHAR}
+      and CODEID = #{codeid,jdbcType=VARCHAR}
+  </update>
+  <select id="selectValueByCodeType" resultType="com.sinog2c.model.khjc.KhjcCode" parameterType="String" >
+    select  * from KHJC_CODE where CODETYPE = #{codetype} order by orderby
+  </select>
+</mapper>

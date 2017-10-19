@@ -1,0 +1,1555 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.sinog2c.dao.api.khjc.TbxfCommutationMapper" >
+  <resultMap id="BaseResultMap" type="com.sinog2c.model.khjc.TbxfCommutation" >
+    <id column="DOCID" property="docid" jdbcType="VARCHAR" />
+    <result column="FLOWDEFID" property="flowdefid" jdbcType="VARCHAR" />
+    <result column="CRIMID" property="crimid" jdbcType="VARCHAR" />
+    <result column="CRIMINALNAME" property="criminalname" jdbcType="VARCHAR" />
+    <result column="SHORTNAME" property="shortname" jdbcType="VARCHAR" />
+    <result column="CASEYEAR" property="caseyear" jdbcType="VARCHAR" />
+    <result column="CASENO" property="caseno" jdbcType="VARCHAR" />
+    <result column="CASETYPE" property="casetype" jdbcType="VARCHAR" />
+    <result column="COMMUTETYPE" property="commutetype" jdbcType="DECIMAL" />
+    <result column="BATCHID" property="batchid" jdbcType="DECIMAL" />
+    <result column="BATCH" property="batch" jdbcType="DECIMAL" />
+    <result column="COMMUTEYEAR" property="commuteyear" jdbcType="VARCHAR" />
+    <result column="COMMUTEMONTH" property="commutemonth" jdbcType="VARCHAR" />
+    <result column="COMMUTEDAY" property="commuteday" jdbcType="VARCHAR" />
+    <result column="DEPRIVEPR" property="deprivepr" jdbcType="VARCHAR" />
+    <result column="DEPARTID" property="departid" jdbcType="VARCHAR" />
+    <result column="APPLYDATE" property="applydate" jdbcType="DATE" />
+    <result column="SEALDATE" property="sealdate" jdbcType="VARCHAR" />
+    <result column="APPROVEDATE" property="approvedate" jdbcType="VARCHAR" />
+    <result column="STARTDATE" property="startdate" jdbcType="DATE" />
+    <result column="ENDDATE" property="enddate" jdbcType="DATE" />
+    <result column="CONENT" property="conent" jdbcType="VARCHAR" />
+    <result column="DELFLAG" property="delflag" jdbcType="VARCHAR" />
+    <result column="CREATETIME" property="createtime" jdbcType="DATE" />
+    <result column="CREATEMENDER" property="createmender" jdbcType="VARCHAR" />
+    <result column="UPDATETIME" property="updatetime" jdbcType="DATE" />
+    <result column="UPDATEMENDER" property="updatemender" jdbcType="VARCHAR" />
+    <result column="PERFORMFINE" property="performfine" jdbcType="VARCHAR" />
+    <result column="RETURNFINE" property="returnfine" jdbcType="VARCHAR" />
+    <result column="COMPENSATE" property="compensate" jdbcType="VARCHAR" />
+    <result column="FORFEITASSET" property="forfeitasset" jdbcType="VARCHAR" />
+    <result column="REFORMBEHAVE" property="reformbehave" jdbcType="VARCHAR" />
+    <result column="IFOPENCOURT" property="ifopencourt" jdbcType="VARCHAR" />
+    <result column="WORKTYPE" property="worktype" jdbcType="VARCHAR" />
+    <result column="REGISTERDATE" property="registerdate" jdbcType="VARCHAR" />
+    <result column="INTAKEDATE" property="intakedate" jdbcType="VARCHAR" />
+    <result column="DIVISIONDATE" property="divisiondate" jdbcType="VARCHAR" />
+    <result column="CLOSEDATE" property="closedate" jdbcType="VARCHAR" />
+    <result column="JUDGMENTDATE" property="judgmentdate" jdbcType="VARCHAR" />
+    <result column="COLLEGIATEDATE" property="collegiatedate" jdbcType="VARCHAR" />
+    <result column="ARCHIVEDATE" property="archivedate" jdbcType="VARCHAR" />
+    <result column="LENIENTSTRICT" property="lenientstrict" jdbcType="VARCHAR" />
+    <result column="ISCHECK" property="ischeck" jdbcType="VARCHAR" />
+    <result column="ISBACKUP" property="isbackup" jdbcType="VARCHAR" />
+    <result column="SUGGESTION1" property="suggestion1" jdbcType="VARCHAR" />
+    <result column="SUGGESTION2" property="suggestion2" jdbcType="VARCHAR" />
+    <result column="SUGGESTION3" property="suggestion3" jdbcType="VARCHAR" />
+    <result column="SUGGESTION4" property="suggestion4" jdbcType="VARCHAR" />
+    <result column="SUGGESTION5" property="suggestion5" jdbcType="VARCHAR" />
+    <result column="SUGGESTION6" property="suggestion6" jdbcType="VARCHAR" />
+    <result column="SUGGESTION7" property="suggestion7" jdbcType="VARCHAR" />
+    <result column="SUGGESTION8" property="suggestion8" jdbcType="VARCHAR" />
+    <result column="SUGGESTION9" property="suggestion9" jdbcType="VARCHAR" />
+    <result column="SUGGESTION10" property="suggestion10" jdbcType="VARCHAR" />
+    <result column="SUGGESTION21" property="suggestion21" jdbcType="VARCHAR" />
+    <result column="SUGGESTION22" property="suggestion22" jdbcType="VARCHAR" />
+    <result column="SUGGESTION23" property="suggestion23" jdbcType="VARCHAR" />
+    <result column="SUGGESTION24" property="suggestion24" jdbcType="VARCHAR" />
+    <result column="SUGGESTION25" property="suggestion25" jdbcType="VARCHAR" />
+    <result column="SUGGESTION26" property="suggestion26" jdbcType="VARCHAR" />
+    <result column="SUGGESTION27" property="suggestion27" jdbcType="VARCHAR" />
+    <result column="SUGGESTION28" property="suggestion28" jdbcType="VARCHAR" />
+    <result column="SUGGESTION29" property="suggestion29" jdbcType="VARCHAR" />
+    <result column="SUGGESTION30" property="suggestion30" jdbcType="VARCHAR" />
+    <result column="SUGGESTION41" property="suggestion41" jdbcType="VARCHAR" />
+    <result column="SUGGESTION42" property="suggestion42" jdbcType="VARCHAR" />
+    <result column="SUGGESTION43" property="suggestion43" jdbcType="VARCHAR" />
+    <result column="SUGGESTION44" property="suggestion44" jdbcType="VARCHAR" />
+    <result column="SUGGESTION45" property="suggestion45" jdbcType="VARCHAR" />
+    <result column="SUGGESTION46" property="suggestion46" jdbcType="VARCHAR" />
+    <result column="SUGGESTION47" property="suggestion47" jdbcType="VARCHAR" />
+    <result column="SUGGESTION48" property="suggestion48" jdbcType="VARCHAR" />
+    <result column="SUGGESTION49" property="suggestion49" jdbcType="VARCHAR" />
+    <result column="SUGGESTION50" property="suggestion50" jdbcType="VARCHAR" />
+    <result column="TEXT1" property="text1" jdbcType="VARCHAR" />
+    <result column="TEXT2" property="text2" jdbcType="VARCHAR" />
+    <result column="TEXT3" property="text3" jdbcType="VARCHAR" />
+    <result column="TEXT4" property="text4" jdbcType="VARCHAR" />
+    <result column="TEXT5" property="text5" jdbcType="VARCHAR" />
+    <result column="INT1" property="int1" jdbcType="DECIMAL" />
+    <result column="INT2" property="int2" jdbcType="DECIMAL" />
+    <result column="INT3" property="int3" jdbcType="DECIMAL" />
+    <result column="INT4" property="int4" jdbcType="DECIMAL" />
+    <result column="INT5" property="int5" jdbcType="DECIMAL" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    DOCID, FLOWDEFID, CRIMID, CRIMINALNAME, SHORTNAME, CASEYEAR, CASENO, CASETYPE, COMMUTETYPE, 
+    BATCHID, BATCH, COMMUTEYEAR, COMMUTEMONTH, COMMUTEDAY, DEPRIVEPR, DEPARTID, APPLYDATE, 
+    SEALDATE, APPROVEDATE, STARTDATE, ENDDATE, CONENT, DELFLAG, CREATETIME, CREATEMENDER, 
+    UPDATETIME, UPDATEMENDER, PERFORMFINE, RETURNFINE, COMPENSATE, FORFEITASSET, REFORMBEHAVE, 
+    IFOPENCOURT, WORKTYPE, REGISTERDATE, INTAKEDATE, DIVISIONDATE, CLOSEDATE, JUDGMENTDATE, 
+    COLLEGIATEDATE, ARCHIVEDATE, LENIENTSTRICT, ISCHECK, ISBACKUP, SUGGESTION1, SUGGESTION2, 
+    SUGGESTION3, SUGGESTION4, SUGGESTION5, SUGGESTION6, SUGGESTION7, SUGGESTION8, SUGGESTION9, 
+    SUGGESTION10, SUGGESTION21, SUGGESTION22, SUGGESTION23, SUGGESTION24, SUGGESTION25, 
+    SUGGESTION26, SUGGESTION27, SUGGESTION28, SUGGESTION29, SUGGESTION30, SUGGESTION41, 
+    SUGGESTION42, SUGGESTION43, SUGGESTION44, SUGGESTION45, SUGGESTION46, SUGGESTION47, 
+    SUGGESTION48, SUGGESTION49, SUGGESTION50, TEXT1, TEXT2, TEXT3, TEXT4, TEXT5, INT1, 
+    INT2, INT3, INT4, INT5
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from TBXF_COMMUTATION
+    where DOCID = #{docid,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from TBXF_COMMUTATION
+    where DOCID = #{docid,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.sinog2c.model.khjc.TbxfCommutation" >
+    insert into TBXF_COMMUTATION (DOCID, FLOWDEFID, CRIMID, 
+      CRIMINALNAME, SHORTNAME, CASEYEAR, 
+      CASENO, CASETYPE, COMMUTETYPE, 
+      BATCHID, BATCH, COMMUTEYEAR, 
+      COMMUTEMONTH, COMMUTEDAY, DEPRIVEPR, 
+      DEPARTID, APPLYDATE, SEALDATE, 
+      APPROVEDATE, STARTDATE, ENDDATE, 
+      CONENT, DELFLAG, CREATETIME, 
+      CREATEMENDER, UPDATETIME, UPDATEMENDER, 
+      PERFORMFINE, RETURNFINE, COMPENSATE, 
+      FORFEITASSET, REFORMBEHAVE, IFOPENCOURT, 
+      WORKTYPE, REGISTERDATE, INTAKEDATE, 
+      DIVISIONDATE, CLOSEDATE, JUDGMENTDATE, 
+      COLLEGIATEDATE, ARCHIVEDATE, LENIENTSTRICT, 
+      ISCHECK, ISBACKUP, SUGGESTION1, 
+      SUGGESTION2, SUGGESTION3, SUGGESTION4, 
+      SUGGESTION5, SUGGESTION6, SUGGESTION7, 
+      SUGGESTION8, SUGGESTION9, SUGGESTION10, 
+      SUGGESTION21, SUGGESTION22, SUGGESTION23, 
+      SUGGESTION24, SUGGESTION25, SUGGESTION26, 
+      SUGGESTION27, SUGGESTION28, SUGGESTION29, 
+      SUGGESTION30, SUGGESTION41, SUGGESTION42, 
+      SUGGESTION43, SUGGESTION44, SUGGESTION45, 
+      SUGGESTION46, SUGGESTION47, SUGGESTION48, 
+      SUGGESTION49, SUGGESTION50, TEXT1, 
+      TEXT2, TEXT3, TEXT4, 
+      TEXT5, INT1, INT2, 
+      INT3, INT4, INT5)
+    values (#{docid,jdbcType=VARCHAR}, #{flowdefid,jdbcType=VARCHAR}, #{crimid,jdbcType=VARCHAR}, 
+      #{criminalname,jdbcType=VARCHAR}, #{shortname,jdbcType=VARCHAR}, #{caseyear,jdbcType=VARCHAR}, 
+      #{caseno,jdbcType=VARCHAR}, #{casetype,jdbcType=VARCHAR}, #{commutetype,jdbcType=DECIMAL}, 
+      #{batchid,jdbcType=DECIMAL}, #{batch,jdbcType=DECIMAL}, #{commuteyear,jdbcType=VARCHAR}, 
+      #{commutemonth,jdbcType=VARCHAR}, #{commuteday,jdbcType=VARCHAR}, #{deprivepr,jdbcType=VARCHAR}, 
+      #{departid,jdbcType=VARCHAR}, #{applydate,jdbcType=DATE}, #{sealdate,jdbcType=VARCHAR}, 
+      #{approvedate,jdbcType=VARCHAR}, #{startdate,jdbcType=DATE}, #{enddate,jdbcType=DATE}, 
+      #{conent,jdbcType=VARCHAR}, #{delflag,jdbcType=VARCHAR}, #{createtime,jdbcType=DATE}, 
+      #{createmender,jdbcType=VARCHAR}, #{updatetime,jdbcType=DATE}, #{updatemender,jdbcType=VARCHAR}, 
+      #{performfine,jdbcType=VARCHAR}, #{returnfine,jdbcType=VARCHAR}, #{compensate,jdbcType=VARCHAR}, 
+      #{forfeitasset,jdbcType=VARCHAR}, #{reformbehave,jdbcType=VARCHAR}, #{ifopencourt,jdbcType=VARCHAR}, 
+      #{worktype,jdbcType=VARCHAR}, #{registerdate,jdbcType=VARCHAR}, #{intakedate,jdbcType=VARCHAR}, 
+      #{divisiondate,jdbcType=VARCHAR}, #{closedate,jdbcType=VARCHAR}, #{judgmentdate,jdbcType=VARCHAR}, 
+      #{collegiatedate,jdbcType=VARCHAR}, #{archivedate,jdbcType=VARCHAR}, #{lenientstrict,jdbcType=VARCHAR}, 
+      #{ischeck,jdbcType=VARCHAR}, #{isbackup,jdbcType=VARCHAR}, #{suggestion1,jdbcType=VARCHAR}, 
+      #{suggestion2,jdbcType=VARCHAR}, #{suggestion3,jdbcType=VARCHAR}, #{suggestion4,jdbcType=VARCHAR}, 
+      #{suggestion5,jdbcType=VARCHAR}, #{suggestion6,jdbcType=VARCHAR}, #{suggestion7,jdbcType=VARCHAR}, 
+      #{suggestion8,jdbcType=VARCHAR}, #{suggestion9,jdbcType=VARCHAR}, #{suggestion10,jdbcType=VARCHAR}, 
+      #{suggestion21,jdbcType=VARCHAR}, #{suggestion22,jdbcType=VARCHAR}, #{suggestion23,jdbcType=VARCHAR}, 
+      #{suggestion24,jdbcType=VARCHAR}, #{suggestion25,jdbcType=VARCHAR}, #{suggestion26,jdbcType=VARCHAR}, 
+      #{suggestion27,jdbcType=VARCHAR}, #{suggestion28,jdbcType=VARCHAR}, #{suggestion29,jdbcType=VARCHAR}, 
+      #{suggestion30,jdbcType=VARCHAR}, #{suggestion41,jdbcType=VARCHAR}, #{suggestion42,jdbcType=VARCHAR}, 
+      #{suggestion43,jdbcType=VARCHAR}, #{suggestion44,jdbcType=VARCHAR}, #{suggestion45,jdbcType=VARCHAR}, 
+      #{suggestion46,jdbcType=VARCHAR}, #{suggestion47,jdbcType=VARCHAR}, #{suggestion48,jdbcType=VARCHAR}, 
+      #{suggestion49,jdbcType=VARCHAR}, #{suggestion50,jdbcType=VARCHAR}, #{text1,jdbcType=VARCHAR}, 
+      #{text2,jdbcType=VARCHAR}, #{text3,jdbcType=VARCHAR}, #{text4,jdbcType=VARCHAR}, 
+      #{text5,jdbcType=VARCHAR}, #{int1,jdbcType=DECIMAL}, #{int2,jdbcType=DECIMAL}, 
+      #{int3,jdbcType=DECIMAL}, #{int4,jdbcType=DECIMAL}, #{int5,jdbcType=DECIMAL})
+  </insert>
+  <insert id="insertSelective" parameterType="com.sinog2c.model.khjc.TbxfCommutation" >
+    insert into TBXF_COMMUTATION
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="docid != null" >
+        DOCID,
+      </if>
+      <if test="flowdefid != null" >
+        FLOWDEFID,
+      </if>
+      <if test="crimid != null" >
+        CRIMID,
+      </if>
+      <if test="criminalname != null" >
+        CRIMINALNAME,
+      </if>
+      <if test="shortname != null" >
+        SHORTNAME,
+      </if>
+      <if test="caseyear != null" >
+        CASEYEAR,
+      </if>
+      <if test="caseno != null" >
+        CASENO,
+      </if>
+      <if test="casetype != null" >
+        CASETYPE,
+      </if>
+      <if test="commutetype != null" >
+        COMMUTETYPE,
+      </if>
+      <if test="batchid != null" >
+        BATCHID,
+      </if>
+      <if test="batch != null" >
+        BATCH,
+      </if>
+      <if test="commuteyear != null" >
+        COMMUTEYEAR,
+      </if>
+      <if test="commutemonth != null" >
+        COMMUTEMONTH,
+      </if>
+      <if test="commuteday != null" >
+        COMMUTEDAY,
+      </if>
+      <if test="deprivepr != null" >
+        DEPRIVEPR,
+      </if>
+      <if test="departid != null" >
+        DEPARTID,
+      </if>
+      <if test="applydate != null" >
+        APPLYDATE,
+      </if>
+      <if test="sealdate != null" >
+        SEALDATE,
+      </if>
+      <if test="approvedate != null" >
+        APPROVEDATE,
+      </if>
+      <if test="startdate != null" >
+        STARTDATE,
+      </if>
+      <if test="enddate != null" >
+        ENDDATE,
+      </if>
+      <if test="conent != null" >
+        CONENT,
+      </if>
+      <if test="delflag != null" >
+        DELFLAG,
+      </if>
+      <if test="createtime != null" >
+        CREATETIME,
+      </if>
+      <if test="createmender != null" >
+        CREATEMENDER,
+      </if>
+      <if test="updatetime != null" >
+        UPDATETIME,
+      </if>
+      <if test="updatemender != null" >
+        UPDATEMENDER,
+      </if>
+      <if test="performfine != null" >
+        PERFORMFINE,
+      </if>
+      <if test="returnfine != null" >
+        RETURNFINE,
+      </if>
+      <if test="compensate != null" >
+        COMPENSATE,
+      </if>
+      <if test="forfeitasset != null" >
+        FORFEITASSET,
+      </if>
+      <if test="reformbehave != null" >
+        REFORMBEHAVE,
+      </if>
+      <if test="ifopencourt != null" >
+        IFOPENCOURT,
+      </if>
+      <if test="worktype != null" >
+        WORKTYPE,
+      </if>
+      <if test="registerdate != null" >
+        REGISTERDATE,
+      </if>
+      <if test="intakedate != null" >
+        INTAKEDATE,
+      </if>
+      <if test="divisiondate != null" >
+        DIVISIONDATE,
+      </if>
+      <if test="closedate != null" >
+        CLOSEDATE,
+      </if>
+      <if test="judgmentdate != null" >
+        JUDGMENTDATE,
+      </if>
+      <if test="collegiatedate != null" >
+        COLLEGIATEDATE,
+      </if>
+      <if test="archivedate != null" >
+        ARCHIVEDATE,
+      </if>
+      <if test="lenientstrict != null" >
+        LENIENTSTRICT,
+      </if>
+      <if test="ischeck != null" >
+        ISCHECK,
+      </if>
+      <if test="isbackup != null" >
+        ISBACKUP,
+      </if>
+      <if test="suggestion1 != null" >
+        SUGGESTION1,
+      </if>
+      <if test="suggestion2 != null" >
+        SUGGESTION2,
+      </if>
+      <if test="suggestion3 != null" >
+        SUGGESTION3,
+      </if>
+      <if test="suggestion4 != null" >
+        SUGGESTION4,
+      </if>
+      <if test="suggestion5 != null" >
+        SUGGESTION5,
+      </if>
+      <if test="suggestion6 != null" >
+        SUGGESTION6,
+      </if>
+      <if test="suggestion7 != null" >
+        SUGGESTION7,
+      </if>
+      <if test="suggestion8 != null" >
+        SUGGESTION8,
+      </if>
+      <if test="suggestion9 != null" >
+        SUGGESTION9,
+      </if>
+      <if test="suggestion10 != null" >
+        SUGGESTION10,
+      </if>
+      <if test="suggestion21 != null" >
+        SUGGESTION21,
+      </if>
+      <if test="suggestion22 != null" >
+        SUGGESTION22,
+      </if>
+      <if test="suggestion23 != null" >
+        SUGGESTION23,
+      </if>
+      <if test="suggestion24 != null" >
+        SUGGESTION24,
+      </if>
+      <if test="suggestion25 != null" >
+        SUGGESTION25,
+      </if>
+      <if test="suggestion26 != null" >
+        SUGGESTION26,
+      </if>
+      <if test="suggestion27 != null" >
+        SUGGESTION27,
+      </if>
+      <if test="suggestion28 != null" >
+        SUGGESTION28,
+      </if>
+      <if test="suggestion29 != null" >
+        SUGGESTION29,
+      </if>
+      <if test="suggestion30 != null" >
+        SUGGESTION30,
+      </if>
+      <if test="suggestion41 != null" >
+        SUGGESTION41,
+      </if>
+      <if test="suggestion42 != null" >
+        SUGGESTION42,
+      </if>
+      <if test="suggestion43 != null" >
+        SUGGESTION43,
+      </if>
+      <if test="suggestion44 != null" >
+        SUGGESTION44,
+      </if>
+      <if test="suggestion45 != null" >
+        SUGGESTION45,
+      </if>
+      <if test="suggestion46 != null" >
+        SUGGESTION46,
+      </if>
+      <if test="suggestion47 != null" >
+        SUGGESTION47,
+      </if>
+      <if test="suggestion48 != null" >
+        SUGGESTION48,
+      </if>
+      <if test="suggestion49 != null" >
+        SUGGESTION49,
+      </if>
+      <if test="suggestion50 != null" >
+        SUGGESTION50,
+      </if>
+      <if test="text1 != null" >
+        TEXT1,
+      </if>
+      <if test="text2 != null" >
+        TEXT2,
+      </if>
+      <if test="text3 != null" >
+        TEXT3,
+      </if>
+      <if test="text4 != null" >
+        TEXT4,
+      </if>
+      <if test="text5 != null" >
+        TEXT5,
+      </if>
+      <if test="int1 != null" >
+        INT1,
+      </if>
+      <if test="int2 != null" >
+        INT2,
+      </if>
+      <if test="int3 != null" >
+        INT3,
+      </if>
+      <if test="int4 != null" >
+        INT4,
+      </if>
+      <if test="int5 != null" >
+        INT5,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="docid != null" >
+        #{docid,jdbcType=VARCHAR},
+      </if>
+      <if test="flowdefid != null" >
+        #{flowdefid,jdbcType=VARCHAR},
+      </if>
+      <if test="crimid != null" >
+        #{crimid,jdbcType=VARCHAR},
+      </if>
+      <if test="criminalname != null" >
+        #{criminalname,jdbcType=VARCHAR},
+      </if>
+      <if test="shortname != null" >
+        #{shortname,jdbcType=VARCHAR},
+      </if>
+      <if test="caseyear != null" >
+        #{caseyear,jdbcType=VARCHAR},
+      </if>
+      <if test="caseno != null" >
+        #{caseno,jdbcType=VARCHAR},
+      </if>
+      <if test="casetype != null" >
+        #{casetype,jdbcType=VARCHAR},
+      </if>
+      <if test="commutetype != null" >
+        #{commutetype,jdbcType=DECIMAL},
+      </if>
+      <if test="batchid != null" >
+        #{batchid,jdbcType=DECIMAL},
+      </if>
+      <if test="batch != null" >
+        #{batch,jdbcType=DECIMAL},
+      </if>
+      <if test="commuteyear != null" >
+        #{commuteyear,jdbcType=VARCHAR},
+      </if>
+      <if test="commutemonth != null" >
+        #{commutemonth,jdbcType=VARCHAR},
+      </if>
+      <if test="commuteday != null" >
+        #{commuteday,jdbcType=VARCHAR},
+      </if>
+      <if test="deprivepr != null" >
+        #{deprivepr,jdbcType=VARCHAR},
+      </if>
+      <if test="departid != null" >
+        #{departid,jdbcType=VARCHAR},
+      </if>
+      <if test="applydate != null" >
+        #{applydate,jdbcType=DATE},
+      </if>
+      <if test="sealdate != null" >
+        #{sealdate,jdbcType=VARCHAR},
+      </if>
+      <if test="approvedate != null" >
+        #{approvedate,jdbcType=VARCHAR},
+      </if>
+      <if test="startdate != null" >
+        #{startdate,jdbcType=DATE},
+      </if>
+      <if test="enddate != null" >
+        #{enddate,jdbcType=DATE},
+      </if>
+      <if test="conent != null" >
+        #{conent,jdbcType=VARCHAR},
+      </if>
+      <if test="delflag != null" >
+        #{delflag,jdbcType=VARCHAR},
+      </if>
+      <if test="createtime != null" >
+        #{createtime,jdbcType=DATE},
+      </if>
+      <if test="createmender != null" >
+        #{createmender,jdbcType=VARCHAR},
+      </if>
+      <if test="updatetime != null" >
+        #{updatetime,jdbcType=DATE},
+      </if>
+      <if test="updatemender != null" >
+        #{updatemender,jdbcType=VARCHAR},
+      </if>
+      <if test="performfine != null" >
+        #{performfine,jdbcType=VARCHAR},
+      </if>
+      <if test="returnfine != null" >
+        #{returnfine,jdbcType=VARCHAR},
+      </if>
+      <if test="compensate != null" >
+        #{compensate,jdbcType=VARCHAR},
+      </if>
+      <if test="forfeitasset != null" >
+        #{forfeitasset,jdbcType=VARCHAR},
+      </if>
+      <if test="reformbehave != null" >
+        #{reformbehave,jdbcType=VARCHAR},
+      </if>
+      <if test="ifopencourt != null" >
+        #{ifopencourt,jdbcType=VARCHAR},
+      </if>
+      <if test="worktype != null" >
+        #{worktype,jdbcType=VARCHAR},
+      </if>
+      <if test="registerdate != null" >
+        #{registerdate,jdbcType=VARCHAR},
+      </if>
+      <if test="intakedate != null" >
+        #{intakedate,jdbcType=VARCHAR},
+      </if>
+      <if test="divisiondate != null" >
+        #{divisiondate,jdbcType=VARCHAR},
+      </if>
+      <if test="closedate != null" >
+        #{closedate,jdbcType=VARCHAR},
+      </if>
+      <if test="judgmentdate != null" >
+        #{judgmentdate,jdbcType=VARCHAR},
+      </if>
+      <if test="collegiatedate != null" >
+        #{collegiatedate,jdbcType=VARCHAR},
+      </if>
+      <if test="archivedate != null" >
+        #{archivedate,jdbcType=VARCHAR},
+      </if>
+      <if test="lenientstrict != null" >
+        #{lenientstrict,jdbcType=VARCHAR},
+      </if>
+      <if test="ischeck != null" >
+        #{ischeck,jdbcType=VARCHAR},
+      </if>
+      <if test="isbackup != null" >
+        #{isbackup,jdbcType=VARCHAR},
+      </if>
+      <if test="suggestion1 != null" >
+        #{suggestion1,jdbcType=VARCHAR},
+      </if>
+      <if test="suggestion2 != null" >
+        #{suggestion2,jdbcType=VARCHAR},
+      </if>
+      <if test="suggestion3 != null" >
+        #{suggestion3,jdbcType=VARCHAR},
+      </if>
+      <if test="suggestion4 != null" >
+        #{suggestion4,jdbcType=VARCHAR},
+      </if>
+      <if test="suggestion5 != null" >
+        #{suggestion5,jdbcType=VARCHAR},
+      </if>
+      <if test="suggestion6 != null" >
+        #{suggestion6,jdbcType=VARCHAR},
+      </if>
+      <if test="suggestion7 != null" >
+        #{suggestion7,jdbcType=VARCHAR},
+      </if>
+      <if test="suggestion8 != null" >
+        #{suggestion8,jdbcType=VARCHAR},
+      </if>
+      <if test="suggestion9 != null" >
+        #{suggestion9,jdbcType=VARCHAR},
+      </if>
+      <if test="suggestion10 != null" >
+        #{suggestion10,jdbcType=VARCHAR},
+      </if>
+      <if test="suggestion21 != null" >
+        #{suggestion21,jdbcType=VARCHAR},
+      </if>
+      <if test="suggestion22 != null" >
+        #{suggestion22,jdbcType=VARCHAR},
+      </if>
+      <if test="suggestion23 != null" >
+        #{suggestion23,jdbcType=VARCHAR},
+      </if>
+      <if test="suggestion24 != null" >
+        #{suggestion24,jdbcType=VARCHAR},
+      </if>
+      <if test="suggestion25 != null" >
+        #{suggestion25,jdbcType=VARCHAR},
+      </if>
+      <if test="suggestion26 != null" >
+        #{suggestion26,jdbcType=VARCHAR},
+      </if>
+      <if test="suggestion27 != null" >
+        #{suggestion27,jdbcType=VARCHAR},
+      </if>
+      <if test="suggestion28 != null" >
+        #{suggestion28,jdbcType=VARCHAR},
+      </if>
+      <if test="suggestion29 != null" >
+        #{suggestion29,jdbcType=VARCHAR},
+      </if>
+      <if test="suggestion30 != null" >
+        #{suggestion30,jdbcType=VARCHAR},
+      </if>
+      <if test="suggestion41 != null" >
+        #{suggestion41,jdbcType=VARCHAR},
+      </if>
+      <if test="suggestion42 != null" >
+        #{suggestion42,jdbcType=VARCHAR},
+      </if>
+      <if test="suggestion43 != null" >
+        #{suggestion43,jdbcType=VARCHAR},
+      </if>
+      <if test="suggestion44 != null" >
+        #{suggestion44,jdbcType=VARCHAR},
+      </if>
+      <if test="suggestion45 != null" >
+        #{suggestion45,jdbcType=VARCHAR},
+      </if>
+      <if test="suggestion46 != null" >
+        #{suggestion46,jdbcType=VARCHAR},
+      </if>
+      <if test="suggestion47 != null" >
+        #{suggestion47,jdbcType=VARCHAR},
+      </if>
+      <if test="suggestion48 != null" >
+        #{suggestion48,jdbcType=VARCHAR},
+      </if>
+      <if test="suggestion49 != null" >
+        #{suggestion49,jdbcType=VARCHAR},
+      </if>
+      <if test="suggestion50 != null" >
+        #{suggestion50,jdbcType=VARCHAR},
+      </if>
+      <if test="text1 != null" >
+        #{text1,jdbcType=VARCHAR},
+      </if>
+      <if test="text2 != null" >
+        #{text2,jdbcType=VARCHAR},
+      </if>
+      <if test="text3 != null" >
+        #{text3,jdbcType=VARCHAR},
+      </if>
+      <if test="text4 != null" >
+        #{text4,jdbcType=VARCHAR},
+      </if>
+      <if test="text5 != null" >
+        #{text5,jdbcType=VARCHAR},
+      </if>
+      <if test="int1 != null" >
+        #{int1,jdbcType=DECIMAL},
+      </if>
+      <if test="int2 != null" >
+        #{int2,jdbcType=DECIMAL},
+      </if>
+      <if test="int3 != null" >
+        #{int3,jdbcType=DECIMAL},
+      </if>
+      <if test="int4 != null" >
+        #{int4,jdbcType=DECIMAL},
+      </if>
+      <if test="int5 != null" >
+        #{int5,jdbcType=DECIMAL},
+      </if>
+    </trim>
+  </insert>
+  
+  <insert id="insertSelectiveByMap" parameterType="Map" >
+    insert into TBXF_COMMUTATION
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="docid != null" >
+        DOCID,
+      </if>
+      <if test="flowdefid != null" >
+        FLOWDEFID,
+      </if>
+      <if test="crimid != null" >
+        CRIMID,
+      </if>
+      <if test="criminalname != null" >
+        CRIMINALNAME,
+      </if>
+      <if test="shortname != null" >
+        SHORTNAME,
+      </if>
+      <if test="caseyear != null" >
+        CASEYEAR,
+      </if>
+      <if test="caseno != null" >
+        CASENO,
+      </if>
+      <if test="casetype != null" >
+        CASETYPE,
+      </if>
+      <if test="commutetype != null" >
+        COMMUTETYPE,
+      </if>
+      <if test="batchid != null" >
+        BATCHID,
+      </if>
+      <if test="batch != null" >
+        BATCH,
+      </if>
+      <if test="commuteyear != null" >
+        COMMUTEYEAR,
+      </if>
+      <if test="commutemonth != null" >
+        COMMUTEMONTH,
+      </if>
+      <if test="commuteday != null" >
+        COMMUTEDAY,
+      </if>
+      <if test="deprivepr != null" >
+        DEPRIVEPR,
+      </if>
+      <if test="departid != null" >
+        DEPARTID,
+      </if>
+      <if test="applydate != null" >
+        APPLYDATE,
+      </if>
+      <if test="sealdate != null" >
+        SEALDATE,
+      </if>
+      <if test="approvedate != null" >
+        APPROVEDATE,
+      </if>
+      <if test="startdate != null" >
+        STARTDATE,
+      </if>
+      <if test="enddate != null" >
+        ENDDATE,
+      </if>
+      <if test="conent != null" >
+        CONENT,
+      </if>
+      <if test="delflag != null" >
+        DELFLAG,
+      </if>
+      <if test="createtime != null" >
+        CREATETIME,
+      </if>
+      <if test="createmender != null" >
+        CREATEMENDER,
+      </if>
+      <if test="updatetime != null" >
+        UPDATETIME,
+      </if>
+      <if test="updatemender != null" >
+        UPDATEMENDER,
+      </if>
+      <if test="performfine != null" >
+        PERFORMFINE,
+      </if>
+      <if test="returnfine != null" >
+        RETURNFINE,
+      </if>
+      <if test="compensate != null" >
+        COMPENSATE,
+      </if>
+      <if test="forfeitasset != null" >
+        FORFEITASSET,
+      </if>
+      <if test="reformbehave != null" >
+        REFORMBEHAVE,
+      </if>
+      <if test="ifopencourt != null" >
+        IFOPENCOURT,
+      </if>
+      <if test="worktype != null" >
+        WORKTYPE,
+      </if>
+      <if test="registerdate != null" >
+        REGISTERDATE,
+      </if>
+      <if test="intakedate != null" >
+        INTAKEDATE,
+      </if>
+      <if test="divisiondate != null" >
+        DIVISIONDATE,
+      </if>
+      <if test="closedate != null" >
+        CLOSEDATE,
+      </if>
+      <if test="judgmentdate != null" >
+        JUDGMENTDATE,
+      </if>
+      <if test="collegiatedate != null" >
+        COLLEGIATEDATE,
+      </if>
+      <if test="archivedate != null" >
+        ARCHIVEDATE,
+      </if>
+      <if test="lenientstrict != null" >
+        LENIENTSTRICT,
+      </if>
+      <if test="ischeck != null" >
+        ISCHECK,
+      </if>
+      <if test="isbackup != null" >
+        ISBACKUP,
+      </if>
+      <if test="suggestion1 != null" >
+        SUGGESTION1,
+      </if>
+      <if test="suggestion2 != null" >
+        SUGGESTION2,
+      </if>
+      <if test="suggestion3 != null" >
+        SUGGESTION3,
+      </if>
+      <if test="suggestion4 != null" >
+        SUGGESTION4,
+      </if>
+      <if test="suggestion5 != null" >
+        SUGGESTION5,
+      </if>
+      <if test="suggestion6 != null" >
+        SUGGESTION6,
+      </if>
+      <if test="suggestion7 != null" >
+        SUGGESTION7,
+      </if>
+      <if test="suggestion8 != null" >
+        SUGGESTION8,
+      </if>
+      <if test="suggestion9 != null" >
+        SUGGESTION9,
+      </if>
+      <if test="suggestion10 != null" >
+        SUGGESTION10,
+      </if>
+      <if test="suggestion21 != null" >
+        SUGGESTION21,
+      </if>
+      <if test="suggestion22 != null" >
+        SUGGESTION22,
+      </if>
+      <if test="suggestion23 != null" >
+        SUGGESTION23,
+      </if>
+      <if test="suggestion24 != null" >
+        SUGGESTION24,
+      </if>
+      <if test="suggestion25 != null" >
+        SUGGESTION25,
+      </if>
+      <if test="suggestion26 != null" >
+        SUGGESTION26,
+      </if>
+      <if test="suggestion27 != null" >
+        SUGGESTION27,
+      </if>
+      <if test="suggestion28 != null" >
+        SUGGESTION28,
+      </if>
+      <if test="suggestion29 != null" >
+        SUGGESTION29,
+      </if>
+      <if test="suggestion30 != null" >
+        SUGGESTION30,
+      </if>
+      <if test="suggestion41 != null" >
+        SUGGESTION41,
+      </if>
+      <if test="suggestion42 != null" >
+        SUGGESTION42,
+      </if>
+      <if test="suggestion43 != null" >
+        SUGGESTION43,
+      </if>
+      <if test="suggestion44 != null" >
+        SUGGESTION44,
+      </if>
+      <if test="suggestion45 != null" >
+        SUGGESTION45,
+      </if>
+      <if test="suggestion46 != null" >
+        SUGGESTION46,
+      </if>
+      <if test="suggestion47 != null" >
+        SUGGESTION47,
+      </if>
+      <if test="suggestion48 != null" >
+        SUGGESTION48,
+      </if>
+      <if test="suggestion49 != null" >
+        SUGGESTION49,
+      </if>
+      <if test="suggestion50 != null" >
+        SUGGESTION50,
+      </if>
+      <if test="text1 != null" >
+        TEXT1,
+      </if>
+      <if test="text2 != null" >
+        TEXT2,
+      </if>
+      <if test="text3 != null" >
+        TEXT3,
+      </if>
+      <if test="text4 != null" >
+        TEXT4,
+      </if>
+      <if test="text5 != null" >
+        TEXT5,
+      </if>
+      <if test="int1 != null" >
+        INT1,
+      </if>
+      <if test="int2 != null" >
+        INT2,
+      </if>
+      <if test="int3 != null" >
+        INT3,
+      </if>
+      <if test="int4 != null" >
+        INT4,
+      </if>
+      <if test="int5 != null" >
+        INT5,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="docid != null" >
+        #{docid,jdbcType=VARCHAR},
+      </if>
+      <if test="flowdefid != null" >
+        #{flowdefid,jdbcType=VARCHAR},
+      </if>
+      <if test="crimid != null" >
+        #{crimid,jdbcType=VARCHAR},
+      </if>
+      <if test="criminalname != null" >
+        #{criminalname,jdbcType=VARCHAR},
+      </if>
+      <if test="shortname != null" >
+        #{shortname,jdbcType=VARCHAR},
+      </if>
+      <if test="caseyear != null" >
+        #{caseyear,jdbcType=VARCHAR},
+      </if>
+      <if test="caseno != null" >
+        #{caseno,jdbcType=VARCHAR},
+      </if>
+      <if test="casetype != null" >
+        #{casetype,jdbcType=VARCHAR},
+      </if>
+      <if test="commutetype != null" >
+        #{commutetype,jdbcType=DECIMAL},
+      </if>
+      <if test="batchid != null" >
+        #{batchid,jdbcType=DECIMAL},
+      </if>
+      <if test="batch != null" >
+        #{batch,jdbcType=DECIMAL},
+      </if>
+      <if test="commuteyear != null" >
+        #{commuteyear,jdbcType=VARCHAR},
+      </if>
+      <if test="commutemonth != null" >
+        #{commutemonth,jdbcType=VARCHAR},
+      </if>
+      <if test="commuteday != null" >
+        #{commuteday,jdbcType=VARCHAR},
+      </if>
+      <if test="deprivepr != null" >
+        #{deprivepr,jdbcType=VARCHAR},
+      </if>
+      <if test="departid != null" >
+        #{departid,jdbcType=VARCHAR},
+      </if>
+      <if test="applydate != null" >
+        #{applydate,jdbcType=DATE},
+      </if>
+      <if test="sealdate != null" >
+        #{sealdate,jdbcType=VARCHAR},
+      </if>
+      <if test="approvedate != null" >
+        #{approvedate,jdbcType=VARCHAR},
+      </if>
+      <if test="startdate != null" >
+        #{startdate,jdbcType=DATE},
+      </if>
+      <if test="enddate != null" >
+        #{enddate,jdbcType=DATE},
+      </if>
+      <if test="conent != null" >
+        #{conent,jdbcType=VARCHAR},
+      </if>
+      <if test="delflag != null" >
+        #{delflag,jdbcType=VARCHAR},
+      </if>
+      <if test="createtime != null" >
+        #{createtime,jdbcType=DATE},
+      </if>
+      <if test="createmender != null" >
+        #{createmender,jdbcType=VARCHAR},
+      </if>
+      <if test="updatetime != null" >
+        #{updatetime,jdbcType=DATE},
+      </if>
+      <if test="updatemender != null" >
+        #{updatemender,jdbcType=VARCHAR},
+      </if>
+      <if test="performfine != null" >
+        #{performfine,jdbcType=VARCHAR},
+      </if>
+      <if test="returnfine != null" >
+        #{returnfine,jdbcType=VARCHAR},
+      </if>
+      <if test="compensate != null" >
+        #{compensate,jdbcType=VARCHAR},
+      </if>
+      <if test="forfeitasset != null" >
+        #{forfeitasset,jdbcType=VARCHAR},
+      </if>
+      <if test="reformbehave != null" >
+        #{reformbehave,jdbcType=VARCHAR},
+      </if>
+      <if test="ifopencourt != null" >
+        #{ifopencourt,jdbcType=VARCHAR},
+      </if>
+      <if test="worktype != null" >
+        #{worktype,jdbcType=VARCHAR},
+      </if>
+      <if test="registerdate != null" >
+        #{registerdate,jdbcType=VARCHAR},
+      </if>
+      <if test="intakedate != null" >
+        #{intakedate,jdbcType=VARCHAR},
+      </if>
+      <if test="divisiondate != null" >
+        #{divisiondate,jdbcType=VARCHAR},
+      </if>
+      <if test="closedate != null" >
+        #{closedate,jdbcType=VARCHAR},
+      </if>
+      <if test="judgmentdate != null" >
+        #{judgmentdate,jdbcType=VARCHAR},
+      </if>
+      <if test="collegiatedate != null" >
+        #{collegiatedate,jdbcType=VARCHAR},
+      </if>
+      <if test="archivedate != null" >
+        #{archivedate,jdbcType=VARCHAR},
+      </if>
+      <if test="lenientstrict != null" >
+        #{lenientstrict,jdbcType=VARCHAR},
+      </if>
+      <if test="ischeck != null" >
+        #{ischeck,jdbcType=VARCHAR},
+      </if>
+      <if test="isbackup != null" >
+        #{isbackup,jdbcType=VARCHAR},
+      </if>
+      <if test="suggestion1 != null" >
+        #{suggestion1,jdbcType=VARCHAR},
+      </if>
+      <if test="suggestion2 != null" >
+        #{suggestion2,jdbcType=VARCHAR},
+      </if>
+      <if test="suggestion3 != null" >
+        #{suggestion3,jdbcType=VARCHAR},
+      </if>
+      <if test="suggestion4 != null" >
+        #{suggestion4,jdbcType=VARCHAR},
+      </if>
+      <if test="suggestion5 != null" >
+        #{suggestion5,jdbcType=VARCHAR},
+      </if>
+      <if test="suggestion6 != null" >
+        #{suggestion6,jdbcType=VARCHAR},
+      </if>
+      <if test="suggestion7 != null" >
+        #{suggestion7,jdbcType=VARCHAR},
+      </if>
+      <if test="suggestion8 != null" >
+        #{suggestion8,jdbcType=VARCHAR},
+      </if>
+      <if test="suggestion9 != null" >
+        #{suggestion9,jdbcType=VARCHAR},
+      </if>
+      <if test="suggestion10 != null" >
+        #{suggestion10,jdbcType=VARCHAR},
+      </if>
+      <if test="suggestion21 != null" >
+        #{suggestion21,jdbcType=VARCHAR},
+      </if>
+      <if test="suggestion22 != null" >
+        #{suggestion22,jdbcType=VARCHAR},
+      </if>
+      <if test="suggestion23 != null" >
+        #{suggestion23,jdbcType=VARCHAR},
+      </if>
+      <if test="suggestion24 != null" >
+        #{suggestion24,jdbcType=VARCHAR},
+      </if>
+      <if test="suggestion25 != null" >
+        #{suggestion25,jdbcType=VARCHAR},
+      </if>
+      <if test="suggestion26 != null" >
+        #{suggestion26,jdbcType=VARCHAR},
+      </if>
+      <if test="suggestion27 != null" >
+        #{suggestion27,jdbcType=VARCHAR},
+      </if>
+      <if test="suggestion28 != null" >
+        #{suggestion28,jdbcType=VARCHAR},
+      </if>
+      <if test="suggestion29 != null" >
+        #{suggestion29,jdbcType=VARCHAR},
+      </if>
+      <if test="suggestion30 != null" >
+        #{suggestion30,jdbcType=VARCHAR},
+      </if>
+      <if test="suggestion41 != null" >
+        #{suggestion41,jdbcType=VARCHAR},
+      </if>
+      <if test="suggestion42 != null" >
+        #{suggestion42,jdbcType=VARCHAR},
+      </if>
+      <if test="suggestion43 != null" >
+        #{suggestion43,jdbcType=VARCHAR},
+      </if>
+      <if test="suggestion44 != null" >
+        #{suggestion44,jdbcType=VARCHAR},
+      </if>
+      <if test="suggestion45 != null" >
+        #{suggestion45,jdbcType=VARCHAR},
+      </if>
+      <if test="suggestion46 != null" >
+        #{suggestion46,jdbcType=VARCHAR},
+      </if>
+      <if test="suggestion47 != null" >
+        #{suggestion47,jdbcType=VARCHAR},
+      </if>
+      <if test="suggestion48 != null" >
+        #{suggestion48,jdbcType=VARCHAR},
+      </if>
+      <if test="suggestion49 != null" >
+        #{suggestion49,jdbcType=VARCHAR},
+      </if>
+      <if test="suggestion50 != null" >
+        #{suggestion50,jdbcType=VARCHAR},
+      </if>
+      <if test="text1 != null" >
+        #{text1,jdbcType=VARCHAR},
+      </if>
+      <if test="text2 != null" >
+        #{text2,jdbcType=VARCHAR},
+      </if>
+      <if test="text3 != null" >
+        #{text3,jdbcType=VARCHAR},
+      </if>
+      <if test="text4 != null" >
+        #{text4,jdbcType=VARCHAR},
+      </if>
+      <if test="text5 != null" >
+        #{text5,jdbcType=VARCHAR},
+      </if>
+      <if test="int1 != null" >
+        #{int1,jdbcType=DECIMAL},
+      </if>
+      <if test="int2 != null" >
+        #{int2,jdbcType=DECIMAL},
+      </if>
+      <if test="int3 != null" >
+        #{int3,jdbcType=DECIMAL},
+      </if>
+      <if test="int4 != null" >
+        #{int4,jdbcType=DECIMAL},
+      </if>
+      <if test="int5 != null" >
+        #{int5,jdbcType=DECIMAL},
+      </if>
+    </trim>
+  </insert>
+  
+  <update id="updateByPrimaryKeySelective" parameterType="com.sinog2c.model.khjc.TbxfCommutation" >
+    update TBXF_COMMUTATION
+    <set >
+      <if test="flowdefid != null" >
+        FLOWDEFID = #{flowdefid,jdbcType=VARCHAR},
+      </if>
+      <if test="crimid != null" >
+        CRIMID = #{crimid,jdbcType=VARCHAR},
+      </if>
+      <if test="criminalname != null" >
+        CRIMINALNAME = #{criminalname,jdbcType=VARCHAR},
+      </if>
+      <if test="shortname != null" >
+        SHORTNAME = #{shortname,jdbcType=VARCHAR},
+      </if>
+      <if test="caseyear != null" >
+        CASEYEAR = #{caseyear,jdbcType=VARCHAR},
+      </if>
+      <if test="caseno != null" >
+        CASENO = #{caseno,jdbcType=VARCHAR},
+      </if>
+      <if test="casetype != null" >
+        CASETYPE = #{casetype,jdbcType=VARCHAR},
+      </if>
+      <if test="commutetype != null" >
+        COMMUTETYPE = #{commutetype,jdbcType=DECIMAL},
+      </if>
+      <if test="batchid != null" >
+        BATCHID = #{batchid,jdbcType=DECIMAL},
+      </if>
+      <if test="batch != null" >
+        BATCH = #{batch,jdbcType=DECIMAL},
+      </if>
+      <if test="commuteyear != null" >
+        COMMUTEYEAR = #{commuteyear,jdbcType=VARCHAR},
+      </if>
+      <if test="commutemonth != null" >
+        COMMUTEMONTH = #{commutemonth,jdbcType=VARCHAR},
+      </if>
+      <if test="commuteday != null" >
+        COMMUTEDAY = #{commuteday,jdbcType=VARCHAR},
+      </if>
+      <if test="deprivepr != null" >
+        DEPRIVEPR = #{deprivepr,jdbcType=VARCHAR},
+      </if>
+      <if test="departid != null" >
+        DEPARTID = #{departid,jdbcType=VARCHAR},
+      </if>
+      <if test="applydate != null" >
+        APPLYDATE = #{applydate,jdbcType=DATE},
+      </if>
+      <if test="sealdate != null" >
+        SEALDATE = #{sealdate,jdbcType=VARCHAR},
+      </if>
+      <if test="approvedate != null" >
+        APPROVEDATE = #{approvedate,jdbcType=VARCHAR},
+      </if>
+      <if test="startdate != null" >
+        STARTDATE = #{startdate,jdbcType=DATE},
+      </if>
+      <if test="enddate != null" >
+        ENDDATE = #{enddate,jdbcType=DATE},
+      </if>
+      <if test="conent != null" >
+        CONENT = #{conent,jdbcType=VARCHAR},
+      </if>
+      <if test="delflag != null" >
+        DELFLAG = #{delflag,jdbcType=VARCHAR},
+      </if>
+      <if test="createtime != null" >
+        CREATETIME = #{createtime,jdbcType=DATE},
+      </if>
+      <if test="createmender != null" >
+        CREATEMENDER = #{createmender,jdbcType=VARCHAR},
+      </if>
+      <if test="updatetime != null" >
+        UPDATETIME = #{updatetime,jdbcType=DATE},
+      </if>
+      <if test="updatemender != null" >
+        UPDATEMENDER = #{updatemender,jdbcType=VARCHAR},
+      </if>
+      <if test="performfine != null" >
+        PERFORMFINE = #{performfine,jdbcType=VARCHAR},
+      </if>
+      <if test="returnfine != null" >
+        RETURNFINE = #{returnfine,jdbcType=VARCHAR},
+      </if>
+      <if test="compensate != null" >
+        COMPENSATE = #{compensate,jdbcType=VARCHAR},
+      </if>
+      <if test="forfeitasset != null" >
+        FORFEITASSET = #{forfeitasset,jdbcType=VARCHAR},
+      </if>
+      <if test="reformbehave != null" >
+        REFORMBEHAVE = #{reformbehave,jdbcType=VARCHAR},
+      </if>
+      <if test="ifopencourt != null" >
+        IFOPENCOURT = #{ifopencourt,jdbcType=VARCHAR},
+      </if>
+      <if test="worktype != null" >
+        WORKTYPE = #{worktype,jdbcType=VARCHAR},
+      </if>
+      <if test="registerdate != null" >
+        REGISTERDATE = #{registerdate,jdbcType=VARCHAR},
+      </if>
+      <if test="intakedate != null" >
+        INTAKEDATE = #{intakedate,jdbcType=VARCHAR},
+      </if>
+      <if test="divisiondate != null" >
+        DIVISIONDATE = #{divisiondate,jdbcType=VARCHAR},
+      </if>
+      <if test="closedate != null" >
+        CLOSEDATE = #{closedate,jdbcType=VARCHAR},
+      </if>
+      <if test="judgmentdate != null" >
+        JUDGMENTDATE = #{judgmentdate,jdbcType=VARCHAR},
+      </if>
+      <if test="collegiatedate != null" >
+        COLLEGIATEDATE = #{collegiatedate,jdbcType=VARCHAR},
+      </if>
+      <if test="archivedate != null" >
+        ARCHIVEDATE = #{archivedate,jdbcType=VARCHAR},
+      </if>
+      <if test="lenientstrict != null" >
+        LENIENTSTRICT = #{lenientstrict,jdbcType=VARCHAR},
+      </if>
+      <if test="ischeck != null" >
+        ISCHECK = #{ischeck,jdbcType=VARCHAR},
+      </if>
+      <if test="isbackup != null" >
+        ISBACKUP = #{isbackup,jdbcType=VARCHAR},
+      </if>
+      <if test="suggestion1 != null" >
+        SUGGESTION1 = #{suggestion1,jdbcType=VARCHAR},
+      </if>
+      <if test="suggestion2 != null" >
+        SUGGESTION2 = #{suggestion2,jdbcType=VARCHAR},
+      </if>
+      <if test="suggestion3 != null" >
+        SUGGESTION3 = #{suggestion3,jdbcType=VARCHAR},
+      </if>
+      <if test="suggestion4 != null" >
+        SUGGESTION4 = #{suggestion4,jdbcType=VARCHAR},
+      </if>
+      <if test="suggestion5 != null" >
+        SUGGESTION5 = #{suggestion5,jdbcType=VARCHAR},
+      </if>
+      <if test="suggestion6 != null" >
+        SUGGESTION6 = #{suggestion6,jdbcType=VARCHAR},
+      </if>
+      <if test="suggestion7 != null" >
+        SUGGESTION7 = #{suggestion7,jdbcType=VARCHAR},
+      </if>
+      <if test="suggestion8 != null" >
+        SUGGESTION8 = #{suggestion8,jdbcType=VARCHAR},
+      </if>
+      <if test="suggestion9 != null" >
+        SUGGESTION9 = #{suggestion9,jdbcType=VARCHAR},
+      </if>
+      <if test="suggestion10 != null" >
+        SUGGESTION10 = #{suggestion10,jdbcType=VARCHAR},
+      </if>
+      <if test="suggestion21 != null" >
+        SUGGESTION21 = #{suggestion21,jdbcType=VARCHAR},
+      </if>
+      <if test="suggestion22 != null" >
+        SUGGESTION22 = #{suggestion22,jdbcType=VARCHAR},
+      </if>
+      <if test="suggestion23 != null" >
+        SUGGESTION23 = #{suggestion23,jdbcType=VARCHAR},
+      </if>
+      <if test="suggestion24 != null" >
+        SUGGESTION24 = #{suggestion24,jdbcType=VARCHAR},
+      </if>
+      <if test="suggestion25 != null" >
+        SUGGESTION25 = #{suggestion25,jdbcType=VARCHAR},
+      </if>
+      <if test="suggestion26 != null" >
+        SUGGESTION26 = #{suggestion26,jdbcType=VARCHAR},
+      </if>
+      <if test="suggestion27 != null" >
+        SUGGESTION27 = #{suggestion27,jdbcType=VARCHAR},
+      </if>
+      <if test="suggestion28 != null" >
+        SUGGESTION28 = #{suggestion28,jdbcType=VARCHAR},
+      </if>
+      <if test="suggestion29 != null" >
+        SUGGESTION29 = #{suggestion29,jdbcType=VARCHAR},
+      </if>
+      <if test="suggestion30 != null" >
+        SUGGESTION30 = #{suggestion30,jdbcType=VARCHAR},
+      </if>
+      <if test="suggestion41 != null" >
+        SUGGESTION41 = #{suggestion41,jdbcType=VARCHAR},
+      </if>
+      <if test="suggestion42 != null" >
+        SUGGESTION42 = #{suggestion42,jdbcType=VARCHAR},
+      </if>
+      <if test="suggestion43 != null" >
+        SUGGESTION43 = #{suggestion43,jdbcType=VARCHAR},
+      </if>
+      <if test="suggestion44 != null" >
+        SUGGESTION44 = #{suggestion44,jdbcType=VARCHAR},
+      </if>
+      <if test="suggestion45 != null" >
+        SUGGESTION45 = #{suggestion45,jdbcType=VARCHAR},
+      </if>
+      <if test="suggestion46 != null" >
+        SUGGESTION46 = #{suggestion46,jdbcType=VARCHAR},
+      </if>
+      <if test="suggestion47 != null" >
+        SUGGESTION47 = #{suggestion47,jdbcType=VARCHAR},
+      </if>
+      <if test="suggestion48 != null" >
+        SUGGESTION48 = #{suggestion48,jdbcType=VARCHAR},
+      </if>
+      <if test="suggestion49 != null" >
+        SUGGESTION49 = #{suggestion49,jdbcType=VARCHAR},
+      </if>
+      <if test="suggestion50 != null" >
+        SUGGESTION50 = #{suggestion50,jdbcType=VARCHAR},
+      </if>
+      <if test="text1 != null" >
+        TEXT1 = #{text1,jdbcType=VARCHAR},
+      </if>
+      <if test="text2 != null" >
+        TEXT2 = #{text2,jdbcType=VARCHAR},
+      </if>
+      <if test="text3 != null" >
+        TEXT3 = #{text3,jdbcType=VARCHAR},
+      </if>
+      <if test="text4 != null" >
+        TEXT4 = #{text4,jdbcType=VARCHAR},
+      </if>
+      <if test="text5 != null" >
+        TEXT5 = #{text5,jdbcType=VARCHAR},
+      </if>
+      <if test="int1 != null" >
+        INT1 = #{int1,jdbcType=DECIMAL},
+      </if>
+      <if test="int2 != null" >
+        INT2 = #{int2,jdbcType=DECIMAL},
+      </if>
+      <if test="int3 != null" >
+        INT3 = #{int3,jdbcType=DECIMAL},
+      </if>
+      <if test="int4 != null" >
+        INT4 = #{int4,jdbcType=DECIMAL},
+      </if>
+      <if test="int5 != null" >
+        INT5 = #{int5,jdbcType=DECIMAL},
+      </if>
+    </set>
+    where DOCID = #{docid,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.sinog2c.model.khjc.TbxfCommutation" >
+    update TBXF_COMMUTATION
+    set FLOWDEFID = #{flowdefid,jdbcType=VARCHAR},
+      CRIMID = #{crimid,jdbcType=VARCHAR},
+      CRIMINALNAME = #{criminalname,jdbcType=VARCHAR},
+      SHORTNAME = #{shortname,jdbcType=VARCHAR},
+      CASEYEAR = #{caseyear,jdbcType=VARCHAR},
+      CASENO = #{caseno,jdbcType=VARCHAR},
+      CASETYPE = #{casetype,jdbcType=VARCHAR},
+      COMMUTETYPE = #{commutetype,jdbcType=DECIMAL},
+      BATCHID = #{batchid,jdbcType=DECIMAL},
+      BATCH = #{batch,jdbcType=DECIMAL},
+      COMMUTEYEAR = #{commuteyear,jdbcType=VARCHAR},
+      COMMUTEMONTH = #{commutemonth,jdbcType=VARCHAR},
+      COMMUTEDAY = #{commuteday,jdbcType=VARCHAR},
+      DEPRIVEPR = #{deprivepr,jdbcType=VARCHAR},
+      DEPARTID = #{departid,jdbcType=VARCHAR},
+      APPLYDATE = #{applydate,jdbcType=DATE},
+      SEALDATE = #{sealdate,jdbcType=VARCHAR},
+      APPROVEDATE = #{approvedate,jdbcType=VARCHAR},
+      STARTDATE = #{startdate,jdbcType=DATE},
+      ENDDATE = #{enddate,jdbcType=DATE},
+      CONENT = #{conent,jdbcType=VARCHAR},
+      DELFLAG = #{delflag,jdbcType=VARCHAR},
+      CREATETIME = #{createtime,jdbcType=DATE},
+      CREATEMENDER = #{createmender,jdbcType=VARCHAR},
+      UPDATETIME = #{updatetime,jdbcType=DATE},
+      UPDATEMENDER = #{updatemender,jdbcType=VARCHAR},
+      PERFORMFINE = #{performfine,jdbcType=VARCHAR},
+      RETURNFINE = #{returnfine,jdbcType=VARCHAR},
+      COMPENSATE = #{compensate,jdbcType=VARCHAR},
+      FORFEITASSET = #{forfeitasset,jdbcType=VARCHAR},
+      REFORMBEHAVE = #{reformbehave,jdbcType=VARCHAR},
+      IFOPENCOURT = #{ifopencourt,jdbcType=VARCHAR},
+      WORKTYPE = #{worktype,jdbcType=VARCHAR},
+      REGISTERDATE = #{registerdate,jdbcType=VARCHAR},
+      INTAKEDATE = #{intakedate,jdbcType=VARCHAR},
+      DIVISIONDATE = #{divisiondate,jdbcType=VARCHAR},
+      CLOSEDATE = #{closedate,jdbcType=VARCHAR},
+      JUDGMENTDATE = #{judgmentdate,jdbcType=VARCHAR},
+      COLLEGIATEDATE = #{collegiatedate,jdbcType=VARCHAR},
+      ARCHIVEDATE = #{archivedate,jdbcType=VARCHAR},
+      LENIENTSTRICT = #{lenientstrict,jdbcType=VARCHAR},
+      ISCHECK = #{ischeck,jdbcType=VARCHAR},
+      ISBACKUP = #{isbackup,jdbcType=VARCHAR},
+      SUGGESTION1 = #{suggestion1,jdbcType=VARCHAR},
+      SUGGESTION2 = #{suggestion2,jdbcType=VARCHAR},
+      SUGGESTION3 = #{suggestion3,jdbcType=VARCHAR},
+      SUGGESTION4 = #{suggestion4,jdbcType=VARCHAR},
+      SUGGESTION5 = #{suggestion5,jdbcType=VARCHAR},
+      SUGGESTION6 = #{suggestion6,jdbcType=VARCHAR},
+      SUGGESTION7 = #{suggestion7,jdbcType=VARCHAR},
+      SUGGESTION8 = #{suggestion8,jdbcType=VARCHAR},
+      SUGGESTION9 = #{suggestion9,jdbcType=VARCHAR},
+      SUGGESTION10 = #{suggestion10,jdbcType=VARCHAR},
+      SUGGESTION21 = #{suggestion21,jdbcType=VARCHAR},
+      SUGGESTION22 = #{suggestion22,jdbcType=VARCHAR},
+      SUGGESTION23 = #{suggestion23,jdbcType=VARCHAR},
+      SUGGESTION24 = #{suggestion24,jdbcType=VARCHAR},
+      SUGGESTION25 = #{suggestion25,jdbcType=VARCHAR},
+      SUGGESTION26 = #{suggestion26,jdbcType=VARCHAR},
+      SUGGESTION27 = #{suggestion27,jdbcType=VARCHAR},
+      SUGGESTION28 = #{suggestion28,jdbcType=VARCHAR},
+      SUGGESTION29 = #{suggestion29,jdbcType=VARCHAR},
+      SUGGESTION30 = #{suggestion30,jdbcType=VARCHAR},
+      SUGGESTION41 = #{suggestion41,jdbcType=VARCHAR},
+      SUGGESTION42 = #{suggestion42,jdbcType=VARCHAR},
+      SUGGESTION43 = #{suggestion43,jdbcType=VARCHAR},
+      SUGGESTION44 = #{suggestion44,jdbcType=VARCHAR},
+      SUGGESTION45 = #{suggestion45,jdbcType=VARCHAR},
+      SUGGESTION46 = #{suggestion46,jdbcType=VARCHAR},
+      SUGGESTION47 = #{suggestion47,jdbcType=VARCHAR},
+      SUGGESTION48 = #{suggestion48,jdbcType=VARCHAR},
+      SUGGESTION49 = #{suggestion49,jdbcType=VARCHAR},
+      SUGGESTION50 = #{suggestion50,jdbcType=VARCHAR},
+      TEXT1 = #{text1,jdbcType=VARCHAR},
+      TEXT2 = #{text2,jdbcType=VARCHAR},
+      TEXT3 = #{text3,jdbcType=VARCHAR},
+      TEXT4 = #{text4,jdbcType=VARCHAR},
+      TEXT5 = #{text5,jdbcType=VARCHAR},
+      INT1 = #{int1,jdbcType=DECIMAL},
+      INT2 = #{int2,jdbcType=DECIMAL},
+      INT3 = #{int3,jdbcType=DECIMAL},
+      INT4 = #{int4,jdbcType=DECIMAL},
+      INT5 = #{int5,jdbcType=DECIMAL}
+    where DOCID = #{docid,jdbcType=VARCHAR}
+  </update>
+  
+  
+  <select id="getMaxCommuteCaseNo" resultType="String" parameterType="Map" >
+    	select max(to_number(nvl(caseno,'0'))) from TBXF_COMMUTATION t 
+    	where t.departid = #{departid,jdbcType=VARCHAR}
+    	<if test="caseyear!=null and caseyear!=''">
+			and t.CASEYEAR = #{caseyear,jdbcType=VARCHAR}
+		</if>
+		<if test="commutetype!=null and commutetype!=''">
+			and t.COMMUTETYPE = #{commutetype,jdbcType=DECIMAL}
+		</if>
+    	<if test="flowdefid!=null and flowdefid!=''">
+			and t.FLOWDEFID = #{flowdefid,jdbcType=VARCHAR}
+		</if>
+  </select>
+  
+  
+</mapper>

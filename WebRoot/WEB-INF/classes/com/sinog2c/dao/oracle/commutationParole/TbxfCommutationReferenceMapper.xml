@@ -1,0 +1,553 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.sinog2c.dao.api.commutationParole.TbxfCommutationReferenceMapper" >
+  <resultMap id="BaseResultMap" type="com.sinog2c.model.commutationParole.TbxfCommutationReference" >
+    <id column="REFID" property="refid" jdbcType="DECIMAL" />
+    <result column="PUNID" property="punid" jdbcType="DECIMAL" />
+    <result column="NAME" property="name" jdbcType="VARCHAR" />
+    <result column="CONTAINREWARDID" property="containrewardid" jdbcType="DECIMAL" />
+    <result column="LOWESTNUM" property="lowestnum" jdbcType="DECIMAL" />
+    <result column="HIGHESTNUM" property="highestnum" jdbcType="DECIMAL" />
+    <result column="SUGGESTNUM" property="suggestnum" jdbcType="DECIMAL" />
+    <result column="ISINTERVAL" property="isinterval" jdbcType="DECIMAL" />
+    <result column="ISDEL" property="isdel" jdbcType="DECIMAL" />
+    <result column="REMARK" property="remark" jdbcType="VARCHAR" />
+    <result column="OPID" property="opid" jdbcType="VARCHAR" />
+    <result column="OPTIME" property="optime" jdbcType="TIMESTAMP" />
+    <result column="REFLEVEL" property="reflevel" jdbcType="DECIMAL" />
+    <result column="BOQUANNUM" property="boquannum" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    REFID, PUNID, NAME, CONTAINREWARDID, LOWESTNUM, HIGHESTNUM, SUGGESTNUM, ISINTERVAL, 
+    ISDEL, REMARK, OPID, OPTIME, REFLEVEL, BOQUANNUM
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from TBXF_COMMUTATIONREFERENCE
+    where REFID = #{refid,jdbcType=DECIMAL}
+  </select>
+  <select id="getReferenceList" resultMap="BaseResultMap">
+	  select * from (
+		select to_number(c.senid||'001') as refid,c.name,1 as punid from TBXF_PRISONERSENTENCE c where c.senid in(
+		select max(senid) as senid from TBXF_PRISONERSENTENCE a  where a.senid in (select b.senid from TBXF_PUNISHMENTRANG b where b.departid=#{departid}) group by a.name)
+		 union
+		select to_number(c.senid||'002') as refid,c.name,2 as sqtype from TBXF_PRISONERSENTENCE c where c.senid in(
+		select max(senid) as senid from TBXF_PRISONERSENTENCE a  where a.senid in (select b.senid from TBXF_PUNISHMENTRANG b where b.departid=#{departid}) group by a.name)
+		 union 
+		select 1 as refid,'普通犯' as name,0 as sqtype from dual
+		 union 
+		select 2 as refid,'三类犯' as name,0 as sqtype from dual
+		 union
+		select 3 as refid,'不符合资格' as name, 0 as sqtype from dual
+		)
+	  <if test="sanlei==0">
+	  where punid not in(2) and refid not in (2)	
+	  </if>
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from TBXF_COMMUTATIONREFERENCE
+    where REFID = #{refid,jdbcType=DECIMAL}
+  </delete>
+  <insert id="insert" parameterType="com.sinog2c.model.commutationParole.TbxfCommutationReference" >
+  	<selectKey keyProperty="refid" resultType="int" order="BEFORE">
+		select SEQ_BASE_DOC_ID.nextval as REFID from dual
+  	</selectKey>
+    insert into TBXF_COMMUTATIONREFERENCE (REFID, PUNID, NAME, 
+       LOWESTNUM, HIGHESTNUM, 
+      SUGGESTNUM, ISINTERVAL, REFLEVEL,
+      REMARK, OPID, BOQUANNUM)
+    values (#{refid,jdbcType=DECIMAL}, #{punid,jdbcType=DECIMAL}, #{name,jdbcType=VARCHAR}, 
+      #{lowestnum,jdbcType=DECIMAL}, #{highestnum,jdbcType=DECIMAL}, 
+      #{suggestnum,jdbcType=DECIMAL}, #{isinterval,jdbcType=DECIMAL}, #{reflevel,jdbcType=DECIMAL},  
+      #{remark,jdbcType=VARCHAR}, #{opid,jdbcType=VARCHAR}, #{boquannum,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.sinog2c.model.commutationParole.TbxfCommutationReference" >
+    insert into TBXF_COMMUTATIONREFERENCE
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="refid != null" >
+        REFID,
+      </if>
+      <if test="punid != null" >
+        PUNID,
+      </if>
+      <if test="name != null" >
+        NAME,
+      </if>
+      <if test="containrewardid != null" >
+        CONTAINREWARDID,
+      </if>
+      <if test="lowestnum != null" >
+        LOWESTNUM,
+      </if>
+      <if test="highestnum != null" >
+        HIGHESTNUM,
+      </if>
+      <if test="suggestnum != null" >
+        SUGGESTNUM,
+      </if>
+      <if test="isinterval != null" >
+        ISINTERVAL,
+      </if>
+      <if test="isdel != null" >
+        ISDEL,
+      </if>
+      <if test="remark != null" >
+        REMARK,
+      </if>
+      <if test="opid != null" >
+        OPID,
+      </if>
+      <if test="optime != null" >
+        OPTIME,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="refid != null" >
+        #{refid,jdbcType=DECIMAL},
+      </if>
+      <if test="punid != null" >
+        #{punid,jdbcType=DECIMAL},
+      </if>
+      <if test="name != null" >
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="containrewardid != null" >
+        #{containrewardid,jdbcType=DECIMAL},
+      </if>
+      <if test="lowestnum != null" >
+        #{lowestnum,jdbcType=DECIMAL},
+      </if>
+      <if test="highestnum != null" >
+        #{highestnum,jdbcType=DECIMAL},
+      </if>
+      <if test="suggestnum != null" >
+        #{suggestnum,jdbcType=DECIMAL},
+      </if>
+      <if test="isinterval != null" >
+        #{isinterval,jdbcType=DECIMAL},
+      </if>
+      <if test="isdel != null" >
+        #{isdel,jdbcType=DECIMAL},
+      </if>
+      <if test="remark != null" >
+        #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="opid != null" >
+        #{opid,jdbcType=VARCHAR},
+      </if>
+      <if test="optime != null" >
+        #{optime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.sinog2c.model.commutationParole.TbxfCommutationReference" >
+    update TBXF_COMMUTATIONREFERENCE
+    <set >
+      <if test="punid != null" >
+        PUNID = #{punid,jdbcType=DECIMAL},
+      </if>
+      <if test="name != null" >
+        NAME = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="containrewardid != null" >
+        CONTAINREWARDID = #{containrewardid,jdbcType=DECIMAL},
+      </if>
+      <if test="lowestnum != null" >
+        LOWESTNUM = #{lowestnum,jdbcType=DECIMAL},
+      </if>
+      <if test="highestnum != null" >
+        HIGHESTNUM = #{highestnum,jdbcType=DECIMAL},
+      </if>
+      <if test="suggestnum != null" >
+        SUGGESTNUM = #{suggestnum,jdbcType=DECIMAL},
+      </if>
+      <if test="isinterval != null" >
+        ISINTERVAL = #{isinterval,jdbcType=DECIMAL},
+      </if>
+      <if test="isdel != null" >
+        ISDEL = #{isdel,jdbcType=DECIMAL},
+      </if>
+      <if test="remark != null" >
+        REMARK = #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="opid != null" >
+        OPID = #{opid,jdbcType=VARCHAR},
+      </if>
+      <if test="optime != null" >
+        OPTIME = #{optime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where REFID = #{refid,jdbcType=DECIMAL}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.sinog2c.model.commutationParole.TbxfCommutationReference" >
+    update TBXF_COMMUTATIONREFERENCE
+    set PUNID = #{punid,jdbcType=DECIMAL},
+      NAME = #{name,jdbcType=VARCHAR},
+      LOWESTNUM = #{lowestnum,jdbcType=DECIMAL},
+      HIGHESTNUM = #{highestnum,jdbcType=DECIMAL},
+      SUGGESTNUM = #{suggestnum,jdbcType=DECIMAL},
+      ISINTERVAL = #{isinterval,jdbcType=DECIMAL},
+      REMARK = #{remark,jdbcType=VARCHAR},
+      OPID = #{opid,jdbcType=VARCHAR},
+      OPTIME = #{optime,jdbcType=TIMESTAMP},
+      REFLEVEL = #{reflevel,jdbcType=DECIMAL},
+      BOQUANNUM = #{boquannum,jdbcType=VARCHAR}
+    where REFID = #{refid,jdbcType=DECIMAL}
+  </update>
+  
+  <select id="getCount" resultType="int">
+  	select count(*) from TBXF_COMMUTATIONREFERENCE t full join TBXF_MERGEREFERENCE t1 on t.REFID = t1.REFID left join TBXF_REWARDTYPES t3 on t1.REWARDID = t3.REWARDID where 1=1 
+  	<trim prefix="" suffix="" suffixOverrides=",">
+ 		<if test="punid!=null and punid!=''"> and t.PUNID=#{punid} </if>
+ 	</trim>
+  	<trim prefix="" suffix="" suffixOverrides=",">
+ 		<if test="key!=null and key!=''"> and t.NAME like '%'||#{key}||'%' </if>
+ 	</trim>
+  </select>
+  
+  <select id="getCommutationReferenceList" parameterType="Object" resultType="java.util.HashMap">
+  	select * from
+    ( 
+	    select a.*, rownum rn from
+	    (
+		    select t.*,
+			       case when t.lowestnum>0 then t.LOWESTNUM || '个月 至 ' || t.HIGHESTNUM || '个月' else '自动计算' end as ESTNUM,
+			       case when t.SUGGESTNUM>0 then t.SUGGESTNUM || '个月' else '自动计算' end as SUGGEST,
+			       t1.MERGEID,
+			       case when t.remark='0' then t1.SNO || '~' || t1.ENO || '次' else t1.SNO||'个月' end as no,
+			       t3.NAME as rewardname
+			  from TBXF_COMMUTATIONREFERENCE t
+			  full join TBXF_MERGEREFERENCE t1 on t.REFID = t1.REFID
+			  left join TBXF_REWARDTYPES t3 on t1.REWARDID = t3.REWARDID
+			 where 1 = 1 
+		    <trim prefix="" suffix="" suffixOverrides=",">
+		 		<if test="punid!=null and punid!=''"> and t.PUNID=#{punid} </if>
+		 	</trim>
+		    <trim prefix="" suffix="" suffixOverrides=",">
+		 		<if test="key!=null and key!=''"> and t.NAME like '%'||#{key}||'%' </if>
+		 	</trim>
+		 	<trim prefix="" suffix="" suffixOverrides=",">
+				<if test="sortField!=null and sortField!=''"> order by ${sortField}  ${sortOrder}</if>
+			</trim>
+	  	) a 
+	    <if test="end!=null and end!=''">
+	   		where rownum &lt;= #{end}
+	   	</if> 
+    )
+   	<if test="start!=null and start!=''">
+   		where  rn &gt;= #{start}
+   	</if>
+  </select>
+  <select id="commutationReferenceList" parameterType="Object" resultType="java.util.HashMap">
+  		SELECT t2.PUNID,
+  			   t2.TYPE,
+		       t2.PHID,
+		       t2.TYPEID,
+		       t2.SYEAR,
+		       t2.EYEAR,
+		       t2.GENDER,
+		       t2.SENID,
+		       t2.ORIGINALSTART,
+		       t2.ORIGINALEND,
+		       t2.SENTENCESTART,
+		       t2.SENTENCEEND,
+		       t2.STARTPERIOD,
+		       t2.ENDPERIOD,
+		       t2.INTERVALPERIOD,
+		       t2.ENDINTERVALPERIOD,
+		       t2.SENTENCETYPE,
+	           t2.INTERVALPERIODSCALE,
+	           t2.EXECUTIONSENTENCESCALE,
+	           t2.EXECUTIONSENTENCESSTART,
+	           t2.EXECUTIONSENTENCESEND,
+	           t2.RANGELIMIT,
+	           t2.EXECUTESENTENCELIMIT,
+	           t2.EXECUTESENTENCESCALELIMIT,
+		       t2.DEPARTID,
+		       t2.NOWSENTENCETYPE,
+		       t2.FIRSTCOMMUTATION,
+		       t2.ALREADYCOMMUTATION,
+		       t3.STIME,
+		       t3.ETIME
+		  FROM TBXF_PUNISHMENTRANG       t2,
+		       TBXF_PRISONERSENTENCE     t3
+		 where t2.SENID=t3.SENID
+               AND t2.APPROVETYPE='1'          
+		<trim prefix="" suffix="" suffixOverrides=",">
+			<if test="departid!=null and departid!=''"> and t2.DEPARTID = #{departid} </if>
+		</trim>
+		      ORDER BY t2.TYPE desc
+  </select>
+  <select id="getMergereferenceList" parameterType="Object" resultType="java.util.HashMap">
+  		SELECT t.REWARDID,
+		       t.SNO,
+		       t.ENO,
+		       t1.ISINTERVAL,
+		       t1.REFID,
+		       t2.PUNID,
+		       t2.PHID,
+		       t2.TYPEID,
+		       t2.SYEAR,
+		       t2.EYEAR,
+		       t2.GENDER,
+		       t2.SENID,
+		       t2.ORIGINALSTART,
+		       t2.ORIGINALEND,
+		       t2.SENTENCESTART,
+		       t2.SENTENCEEND,
+		       t2.STARTPERIOD,
+		       t2.ENDPERIOD,
+		       t2.INTERVALPERIOD,
+		       t2.ENDINTERVALPERIOD,
+		       t2.DEPARTID
+		  FROM TBXF_MERGEREFERENCE       t,
+		       TBXF_COMMUTATIONREFERENCE t1,
+		       TBXF_PUNISHMENTRANG       t2
+		 where t.refid = t1.refid and
+		 	   t1.punid = t2.punid
+		<trim prefix="" suffix="" suffixOverrides=",">
+			<if test="departid!=null and departid!=''"> and t2.DEPARTID = #{departid} </if>
+			<if test="refid!=null and departid!=''"> and t.refid = #{refid}</if>
+		</trim>
+  </select> 
+  <delete id="deleteMergereferenceByRefid" parameterType="java.lang.Integer" >
+	delete from tbxf_mergereference c where c.refid=#{refid,jdbcType=DECIMAL}
+  </delete>  
+  <select id ="getAmplitudeData" parameterType="String" resultType="java.util.HashMap">
+	  select  f2.crimid,f1.int5,f1.int6,f2.int1 as jxczfd,f2.int1 as "range",F2.tmp1 as specialcrim , 
+          (case c.punishmenttype when '有期徒刑' then '1' when '无期徒刑' then '2' when '死刑，缓期二年执行' then '3' 
+            else c.punishmenttype end
+          ) punishmenttype 
+    from TBXF_PRISONERPERFORMANCEMERGE F1,TBXF_SCREENING F2,
+        TBXF_COMMUTEPAROLE_BATCH b, Tbprisoner_Base_Crime c
+    where  F1.crimid = F2.crimid and f2.batchid= f1.batchid 
+        and f2.batchid=b.batchid and b.remark = '999'
+        and f1.crimid= c.crimid AND F1.crimid = #{crimid}
+  </select>
+  <select id="getRefids" resultMap="BaseResultMap">
+	select gg.refid
+	  from TBXF_COMMUTATIONREFERENCE gg
+	 where gg.punid in
+	       (select ff.punid
+	          from tbxf_punishmentrang ff
+	         where ff.departid = #{departid}
+	           and ff.typeid in(${typeid})
+	           and ff.senid in
+	               (select ee.senid
+	                  from TBXF_PRISONERSENTENCE ee
+	                 where ee.name in
+	                       (select dd.name
+	                          from TBXF_PRISONERSENTENCE dd
+	                         where dd.senid in (${senid}))))
+  </select>
+
+  <update id="batchUpdate"  parameterType="java.util.List">
+     begin 
+       <foreach collection="list" item="item" index="index" separator=";">
+	       update TBXF_SCREENING
+	       <set>
+	         status=${item.status},
+	         cstatus=${item.cstatus},
+	         batchid=${item.batchid},
+	         punid=${item.punid},
+	         excuse=#{item.excuse,jdbcType=CLOB},
+	         int1=${item.int1}
+	       </set>
+	       where crimid = #{item.crimid}
+       </foreach>
+     ;end;     
+  </update>
+
+  <update id="jiashibatchUpdate"  parameterType="java.util.List">
+     begin 
+       <foreach collection="list" item="item" index="index" separator=";">
+	       update TBXF_SCREENING
+	       <set>
+	         status=${item.status},
+	         cstatus=${item.cstatus},
+	         batchid=${item.batchid},
+	         int1=${item.int1},
+	         excuse=#{item.excuse,jdbcType=CLOB},
+	         int2=${item.int2},
+	         int3=${item.int3}
+	       </set>
+	       where crimid = #{item.crimid}
+       </foreach>
+     ;end;     
+  </update>
+
+  <update id="batchUpdateSx"  parameterType="java.util.List">
+     begin 
+       <foreach collection="list" item="item" index="index" separator=";">
+                update TBXF_SCREENING
+                <set>
+                  status=${item.status},
+                  cstatus=${item.cstatus},
+                  batchid=${item.batchid},
+                  punid=${item.punid},
+                  refid=${item.refid},
+                  isdeclare=${item.isdeclare}
+                </set>
+                where crimid = #{item.crimid}
+       </foreach>
+     ;end;     
+  </update>
+  <insert id="batchInsert">
+       insert into   TBXF_SCREENING(departid,crimid,status,cstatus,batchid,isdeclare,punid)
+       values(#{departid},#{crimid},#{status},#{cstatus},#{batchid},#{isdeclare},#{punid})
+  </insert>
+  
+  <!-- 判断 资格筛查中是否已经存在对应的数据 -->
+  <select id="getScreeingByBatchidAndDepartid" resultType="map">
+       select * from TBXF_SCREENING where batchid=#{batchid} and crimid=#{crimid}
+  </select>
+  <update id="batchUpdateSuggestopion"  parameterType="java.util.List">
+     begin 
+       <foreach collection="list" item="item" index="index" separator=";">
+                update TBXF_SCREENING
+                <set>
+                  refid = ${item.refid},
+                  int1 = ${item.suggest},
+                  status = ${item.status},
+                  cstatus = ${item.cstatus}
+                </set>
+                where crimid = #{item.crimid}
+       </foreach>
+     ;end;     
+  </update>    
+  <select id="getMergeandreferenceList" parameterType="Object" resultType="java.util.HashMap">
+      select * from (
+	    select rownum as rn,j.* from (
+			select a.*,b.punid,d.rangelimit,e.punishmentyear
+				from TBXF_PRISONERPERFORMANCEMERGE a,TBXF_SCREENING b,TBPRISONER_BASE_CRIME c,
+				TBXF_PUNISHMENTRANG d,TBXF_SENTENCEALTERATION e
+			where a.batchid=b.batchid and a.crimid=b.crimid and b.punid=d.punid
+				and a.crimid=c.crimid and b.status='1'
+				and a.departid=#{departid}
+				and a.crimid=e.crimid
+	   <if test="orgid!=null and orgid!=''">
+       		and c.orgid1= #{orgid}
+       </if>
+			order by a.crimid) j)
+	   <if test="end!=null and end!=''">
+         where rn &lt;= #{end}
+       </if>
+	   <if test="start!=null and start!=''">
+         and rn &gt;= #{start}
+       </if>
+  </select>
+  <select id="getMergeandreferenceCount" parameterType="Object" resultType="int">
+	select count(a.crimid)
+		from TBXF_PRISONERPERFORMANCEMERGE a,TBXF_SCREENING b,TBPRISONER_BASE_CRIME c
+	where a.batchid=b.batchid and a.crimid=b.crimid 
+		and a.crimid=c.crimid 
+		and b.departid=#{departid}
+	  <if test="orgid!=null and orgid!=''">
+        and c.orgid1 = #{orgid} 
+      </if> 
+        and b.status='1'
+	 order by a.crimid
+  </select>
+  <select id="getSanleiCount" parameterType="String" resultType="int">
+	select count(t.crimid)
+	  from tbxf_screening t, tbxf_sentencealteration a
+	 where t.departid = #{departid}
+	   and t.crimid = a.crimid
+	   and t.cstatus = 1
+	   and a.typeid = 10000  
+  </select>
+  <select id="getCommutationReferenceListData" resultMap="BaseResultMap" parameterType="Object" >
+    select 
+    <include refid="Base_Column_List" />
+    from TBXF_COMMUTATIONREFERENCE  b where b.punid in (select a.punid from tbxf_punishmentrang a where a.departid=#{departid})
+  </select>  
+  <insert id="insertAuto" parameterType="com.sinog2c.model.commutationParole.TbxfCommutationReference" >
+    insert into TBXF_COMMUTATIONREFERENCE (REFID, PUNID, NAME, 
+       LOWESTNUM, HIGHESTNUM, 
+      SUGGESTNUM, ISINTERVAL, REFLEVEL,
+      REMARK, OPID)
+    values (#{refid,jdbcType=DECIMAL}, #{punid,jdbcType=DECIMAL}, #{name,jdbcType=VARCHAR}, 
+      #{lowestnum,jdbcType=DECIMAL}, #{highestnum,jdbcType=DECIMAL}, 
+      #{suggestnum,jdbcType=DECIMAL}, #{isinterval,jdbcType=DECIMAL}, #{reflevel,jdbcType=DECIMAL},  
+      #{remark,jdbcType=VARCHAR}, #{opid,jdbcType=VARCHAR})
+  </insert>
+  <select id="getWideAndThinschemeList" parameterType="Object" resultType="java.util.HashMap">
+  	select * from
+    ( 
+	    select a.*, rownum rn from
+	    (
+			select t.punid,t.lssid,case when t.schemetype=0 then '从宽' else '从严' end schemetypeval,t.schemetype,
+			       t.criminaltype,a.name,t.lssintervalperiod,t.lssstartperiod,t.rangestart,t.remark
+			from TBXF_WIDEANDTHINSCHEME t,TBXF_CRIMETYPES a
+			where t.criminaltype=a.typeid
+		    <trim prefix="" suffix="" suffixOverrides=",">
+		 		<if test="punid!=null and punid!=''"> and t.PUNID=#{punid} </if>
+		 	</trim>
+		 	<trim prefix="" suffix="" suffixOverrides=",">
+				<if test="sortField!=null and sortField!=''"> order by ${sortField}  ${sortOrder}</if>
+			</trim>
+	  	) a 
+	    <if test="end!=null and end!=''">
+	   		where rownum &lt;= #{end}
+	   	</if> 
+    )
+   	<if test="start!=null and start!=''">
+   		where  rn &gt;= #{start}
+   	</if>
+  </select>
+  
+  <select id="commutationWideAndThinList" parameterType="Object" resultType="java.util.HashMap">
+	select a.crimid,punid,
+		sum(decode(lssintervalperiod,-1,0,lssintervalperiod)) lssintervalperiod,
+		sum(decode(lssexecutionsentences,-1,0,lssexecutionsentences)) lssexecutionsentences,
+		sum(decode(lssstartperiod,-1,0,lssstartperiod)) lssstartperiod,
+		sum(decode(rangestart,-1,0,rangestart)) rangestart,
+		sum(decode(a.typeid,'10012',decode(t.int1,-1,0,t.int1),0)) inprisonexecutionmonths,
+    	sum(decode(a.typeid,'10013',decode(t.int1,-1,0,t.int1),0)) yusinexecutionmonths
+		from TBXF_CRIMETYPESMAPPING a , TBXF_WIDEANDTHINSCHEME t , TBXF_SENTENCEALTERATION b
+	where a.typeid=t.criminaltype and a.crimid=b.crimid and (a.int1 in (0) or a.int1 is null)
+		<trim prefix="" suffix="" suffixOverrides=",">
+			<if test="departid!=null and departid!=''"> and b.jailid = #{departid} </if>
+		</trim>
+		group by t.punid,a.crimid order by a.crimid
+  </select>
+  <select id="getReferenceListBydepartid" parameterType="Object" resultType="java.util.HashMap">
+	select c.punid,c.refid,c.lowestnum,c.highestnum,c.suggestnum,c.isinterval,d.RANGELIMIT,c.remark
+		from TBXF_COMMUTATIONREFERENCE c, TBXF_PUNISHMENTRANG d 
+	where c.punid=d.punid
+		and d.departid=#{departid} order by c.reflevel
+  </select>
+  <select id="getMergeReferenceList" parameterType="Object" resultType="java.util.HashMap">
+	select d.mergeid,d.refid,e.actioncode,d.sno,d.eno 
+	    from TBXF_MERGEREFERENCE d,TBXF_REWARDTYPES e 
+	where d.rewardid=e.rewardid and d.refid in
+		(select refid
+			from TBXF_COMMUTATIONREFERENCE c, TBXF_PUNISHMENTRANG d 
+		where c.punid=d.punid
+			and d.departid=#{departid})
+  </select>
+  
+  
+  
+  
+  
+    <!-- INT3：假释筛查结果，    TMP4：假释筛查过程-->
+  <update id="qualifierUpdateScreening"  parameterType="java.util.List">
+     begin 
+       <foreach collection="list" item="item" index="index" separator=";">
+	       update TBXF_SCREENING
+	       <set>
+	         status=${item._status_jx},
+	         cstatus=${item._status_jx},
+	         batchid=${item.batchid},
+	         punid=${item.qid},
+	         excuse=#{item._process_jx,jdbcType=CLOB},
+	         INT3=#{item._status_js},
+	         TMP4=#{item._process_js}
+	       </set>
+	       where crimid = #{item.crimid}
+       </foreach>
+     ;end;     
+  </update>
+</mapper>

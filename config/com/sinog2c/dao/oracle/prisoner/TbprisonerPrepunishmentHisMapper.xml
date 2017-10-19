@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.sinog2c.dao.api.prisoner.TbprisonerPrepunishmentHisMapper" >
+  <resultMap id="BaseResultMap" type="com.sinog2c.model.prisoner.TbprisonerPrepunishmentHis" >
+    <result column="PUNID" property="punid" jdbcType="DECIMAL" />
+    <result column="CRIMID" property="crimid" jdbcType="VARCHAR" />
+    <result column="TYPE" property="type" jdbcType="VARCHAR" />
+    <result column="PUNISHMENTDATE" property="punishmentdate" jdbcType="TIMESTAMP" />
+    <result column="TIMELIMIT" property="timelimit" jdbcType="VARCHAR" />
+    <result column="STARTTIME" property="starttime" jdbcType="TIMESTAMP" />
+    <result column="ENDTIME" property="endtime" jdbcType="TIMESTAMP" />
+    <result column="CAUSEACTION" property="causeaction" jdbcType="VARCHAR" />
+    <result column="EXECUTINGORGAN" property="executingorgan" jdbcType="VARCHAR" />
+    <result column="ORGANNAME" property="organname" jdbcType="VARCHAR" />
+    <result column="ORGANAREA" property="organarea" jdbcType="VARCHAR" />
+    <result column="REMARK" property="remark" jdbcType="VARCHAR" />
+    <result column="OPID" property="opid" jdbcType="VARCHAR" />
+    <result column="OPTIME" property="optime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <insert id="insert" parameterType="com.sinog2c.model.prisoner.TbprisonerPrepunishmentHis" >
+    insert into TBPRISONER_PREPUNISHMENT_HIS (PUNID, CRIMID, TYPE, 
+      PUNISHMENTDATE, TIMELIMIT, STARTTIME, 
+      ENDTIME, CAUSEACTION, EXECUTINGORGAN, 
+      ORGANNAME, ORGANAREA, REMARK, 
+      OPID, OPTIME)
+    values (#{punid,jdbcType=DECIMAL}, #{crimid,jdbcType=VARCHAR}, #{type,jdbcType=VARCHAR}, 
+      #{punishmentdate,jdbcType=DATE}, #{timelimit,jdbcType=VARCHAR}, #{starttime,jdbcType=DATE}, 
+      #{endtime,jdbcType=DATE}, #{causeaction,jdbcType=VARCHAR}, #{executingorgan,jdbcType=VARCHAR}, 
+      #{organname,jdbcType=VARCHAR}, #{organarea,jdbcType=VARCHAR}, #{remark,jdbcType=VARCHAR}, 
+      #{opid,jdbcType=VARCHAR}, #{optime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.sinog2c.model.prisoner.TbprisonerPrepunishmentHis" >
+    insert into TBPRISONER_PREPUNISHMENT_HIS
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="punid != null" >
+        PUNID,
+      </if>
+      <if test="crimid != null" >
+        CRIMID,
+      </if>
+      <if test="type != null" >
+        TYPE,
+      </if>
+      <if test="punishmentdate != null" >
+        PUNISHMENTDATE,
+      </if>
+      <if test="timelimit != null" >
+        TIMELIMIT,
+      </if>
+      <if test="starttime != null" >
+        STARTTIME,
+      </if>
+      <if test="endtime != null" >
+        ENDTIME,
+      </if>
+      <if test="causeaction != null" >
+        CAUSEACTION,
+      </if>
+      <if test="executingorgan != null" >
+        EXECUTINGORGAN,
+      </if>
+      <if test="organname != null" >
+        ORGANNAME,
+      </if>
+      <if test="organarea != null" >
+        ORGANAREA,
+      </if>
+      <if test="remark != null" >
+        REMARK,
+      </if>
+      <if test="opid != null" >
+        OPID,
+      </if>
+      <if test="optime != null" >
+        OPTIME,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="punid != null" >
+        #{punid,jdbcType=DECIMAL},
+      </if>
+      <if test="crimid != null" >
+        #{crimid,jdbcType=VARCHAR},
+      </if>
+      <if test="type != null" >
+        #{type,jdbcType=VARCHAR},
+      </if>
+      <if test="punishmentdate != null" >
+        #{punishmentdate,jdbcType=DATE},
+      </if>
+      <if test="timelimit != null" >
+        #{timelimit,jdbcType=VARCHAR},
+      </if>
+      <if test="starttime != null" >
+        #{starttime,jdbcType=DATE},
+      </if>
+      <if test="endtime != null" >
+        #{endtime,jdbcType=DATE},
+      </if>
+      <if test="causeaction != null" >
+        #{causeaction,jdbcType=VARCHAR},
+      </if>
+      <if test="executingorgan != null" >
+        #{executingorgan,jdbcType=VARCHAR},
+      </if>
+      <if test="organname != null" >
+        #{organname,jdbcType=VARCHAR},
+      </if>
+      <if test="organarea != null" >
+        #{organarea,jdbcType=VARCHAR},
+      </if>
+      <if test="remark != null" >
+        #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="opid != null" >
+        #{opid,jdbcType=VARCHAR},
+      </if>
+      <if test="optime != null" >
+        #{optime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <select id="findBycrimid" resultType="com.sinog2c.model.prisoner.TbprisonerPrepunishmentHis">
+  	select * from TBPRISONER_PREPUNISHMENT_HIS where crimid=${crimid}
+  </select>
+</mapper>

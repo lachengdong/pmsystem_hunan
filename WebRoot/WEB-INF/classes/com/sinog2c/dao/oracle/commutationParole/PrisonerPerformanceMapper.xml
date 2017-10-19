@@ -1,0 +1,352 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.sinog2c.dao.api.commutationParole.PrisonerPerformanceMapper" >
+  <resultMap id="BaseResultMap" type="com.sinog2c.model.commutationParole.PrisonerPerformance" >
+    <id column="CRIID" property="criid" jdbcType="VARCHAR" />
+    <id column="OPTIME" property="optime" jdbcType="DATE" />
+    <result column="DEPARTID" property="departid" jdbcType="VARCHAR" />
+    <result column="INT1" property="int1" jdbcType="DECIMAL" />
+    <result column="INT2" property="int2" jdbcType="DECIMAL" />
+    <result column="INT3" property="int3" jdbcType="DECIMAL" />
+    <result column="INT4" property="int4" jdbcType="DECIMAL" />
+    <result column="INT5" property="int5" jdbcType="DECIMAL" />
+    <result column="INT6" property="int6" jdbcType="DECIMAL" />
+    <result column="INT7" property="int7" jdbcType="DECIMAL" />
+    <result column="INT8" property="int8" jdbcType="DECIMAL" />
+    <result column="INT9" property="int9" jdbcType="DECIMAL" />
+    <result column="INT10" property="int10" jdbcType="DECIMAL" />
+    <result column="ISMERGE" property="ismerge" jdbcType="DECIMAL" />
+    <result column="OPID" property="opid" jdbcType="VARCHAR" />
+    <result column="GETTIME" property="gettime" jdbcType="DATE" />
+  </resultMap>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    CRIID, OPTIME, DEPARTID, INT1, INT2, INT3, INT4, INT5, INT6, INT7, INT8, INT9, INT10, 
+    ISMERGE, OPID, GETTIME
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="com.sinog2c.model.commutationParole.PrisonerPerformanceKey" >
+    select 
+    <include refid="Base_Column_List" />
+    from TBXF_PRISONERPERFORMANCE
+    where CRIID = #{criid,jdbcType=VARCHAR}
+      and OPTIME = #{optime,jdbcType=DATE}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="com.sinog2c.model.commutationParole.PrisonerPerformanceKey" >
+    delete from TBXF_PRISONERPERFORMANCE
+    where CRIID = #{criid,jdbcType=VARCHAR}
+      and OPTIME = #{optime,jdbcType=DATE}
+  </delete>
+  <insert id="insert" parameterType="com.sinog2c.model.commutationParole.PrisonerPerformance" >
+    insert into TBXF_PRISONERPERFORMANCE (CRIID, OPTIME, DEPARTID, 
+      INT1, INT2, INT3, INT4, 
+      INT5, INT6, INT7, INT8, 
+      INT9, INT10, ISMERGE, 
+      OPID, GETTIME)
+    values (#{criid,jdbcType=VARCHAR}, #{optime,jdbcType=DATE}, #{departid,jdbcType=VARCHAR}, 
+      #{int1,jdbcType=DECIMAL}, #{int2,jdbcType=DECIMAL}, #{int3,jdbcType=DECIMAL}, #{int4,jdbcType=DECIMAL}, 
+      #{int5,jdbcType=DECIMAL}, #{int6,jdbcType=DECIMAL}, #{int7,jdbcType=DECIMAL}, #{int8,jdbcType=DECIMAL}, 
+      #{int9,jdbcType=DECIMAL}, #{int10,jdbcType=DECIMAL}, #{ismerge,jdbcType=DECIMAL}, 
+      #{opid,jdbcType=VARCHAR}, #{gettime,jdbcType=DATE})
+  </insert>
+  <insert id="insertSelective" parameterType="com.sinog2c.model.commutationParole.PrisonerPerformance" >
+    insert into TBXF_PRISONERPERFORMANCE
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="criid != null" >
+        CRIID,
+      </if>
+      <if test="optime != null" >
+        OPTIME,
+      </if>
+      <if test="departid != null" >
+        DEPARTID,
+      </if>
+      <if test="int1 != null" >
+        INT1,
+      </if>
+      <if test="int2 != null" >
+        INT2,
+      </if>
+      <if test="int3 != null" >
+        INT3,
+      </if>
+      <if test="int4 != null" >
+        INT4,
+      </if>
+      <if test="int5 != null" >
+        INT5,
+      </if>
+      <if test="int6 != null" >
+        INT6,
+      </if>
+      <if test="int7 != null" >
+        INT7,
+      </if>
+      <if test="int8 != null" >
+        INT8,
+      </if>
+      <if test="int9 != null" >
+        INT9,
+      </if>
+      <if test="int10 != null" >
+        INT10,
+      </if>
+      <if test="ismerge != null" >
+        ISMERGE,
+      </if>
+      <if test="opid != null" >
+        OPID,
+      </if>
+      <if test="gettime != null" >
+        GETTIME,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="criid != null" >
+        #{criid,jdbcType=VARCHAR},
+      </if>
+      <if test="optime != null" >
+        #{optime,jdbcType=DATE},
+      </if>
+      <if test="departid != null" >
+        #{departid,jdbcType=VARCHAR},
+      </if>
+      <if test="int1 != null" >
+        #{int1,jdbcType=DECIMAL},
+      </if>
+      <if test="int2 != null" >
+        #{int2,jdbcType=DECIMAL},
+      </if>
+      <if test="int3 != null" >
+        #{int3,jdbcType=DECIMAL},
+      </if>
+      <if test="int4 != null" >
+        #{int4,jdbcType=DECIMAL},
+      </if>
+      <if test="int5 != null" >
+        #{int5,jdbcType=DECIMAL},
+      </if>
+      <if test="int6 != null" >
+        #{int6,jdbcType=DECIMAL},
+      </if>
+      <if test="int7 != null" >
+        #{int7,jdbcType=DECIMAL},
+      </if>
+      <if test="int8 != null" >
+        #{int8,jdbcType=DECIMAL},
+      </if>
+      <if test="int9 != null" >
+        #{int9,jdbcType=DECIMAL},
+      </if>
+      <if test="int10 != null" >
+        #{int10,jdbcType=DECIMAL},
+      </if>
+      <if test="ismerge != null" >
+        #{ismerge,jdbcType=DECIMAL},
+      </if>
+      <if test="opid != null" >
+        #{opid,jdbcType=VARCHAR},
+      </if>
+      <if test="gettime != null" >
+        #{gettime,jdbcType=DATE},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update TBXF_PRISONERPERFORMANCE
+    <set >
+      <if test="record.criid != null" >
+        CRIID = #{record.criid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.optime != null" >
+        OPTIME = #{record.optime,jdbcType=DATE},
+      </if>
+      <if test="record.departid != null" >
+        DEPARTID = #{record.departid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.int1 != null" >
+        INT1 = #{record.int1,jdbcType=DECIMAL},
+      </if>
+      <if test="record.int2 != null" >
+        INT2 = #{record.int2,jdbcType=DECIMAL},
+      </if>
+      <if test="record.int3 != null" >
+        INT3 = #{record.int3,jdbcType=DECIMAL},
+      </if>
+      <if test="record.int4 != null" >
+        INT4 = #{record.int4,jdbcType=DECIMAL},
+      </if>
+      <if test="record.int5 != null" >
+        INT5 = #{record.int5,jdbcType=DECIMAL},
+      </if>
+      <if test="record.int6 != null" >
+        INT6 = #{record.int6,jdbcType=DECIMAL},
+      </if>
+      <if test="record.int7 != null" >
+        INT7 = #{record.int7,jdbcType=DECIMAL},
+      </if>
+      <if test="record.int8 != null" >
+        INT8 = #{record.int8,jdbcType=DECIMAL},
+      </if>
+      <if test="record.int9 != null" >
+        INT9 = #{record.int9,jdbcType=DECIMAL},
+      </if>
+      <if test="record.int10 != null" >
+        INT10 = #{record.int10,jdbcType=DECIMAL},
+      </if>
+      <if test="record.ismerge != null" >
+        ISMERGE = #{record.ismerge,jdbcType=DECIMAL},
+      </if>
+      <if test="record.opid != null" >
+        OPID = #{record.opid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.gettime != null" >
+        GETTIME = #{record.gettime,jdbcType=DATE},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update TBXF_PRISONERPERFORMANCE
+    set CRIID = #{record.criid,jdbcType=VARCHAR},
+      OPTIME = #{record.optime,jdbcType=DATE},
+      DEPARTID = #{record.departid,jdbcType=VARCHAR},
+      INT1 = #{record.int1,jdbcType=DECIMAL},
+      INT2 = #{record.int2,jdbcType=DECIMAL},
+      INT3 = #{record.int3,jdbcType=DECIMAL},
+      INT4 = #{record.int4,jdbcType=DECIMAL},
+      INT5 = #{record.int5,jdbcType=DECIMAL},
+      INT6 = #{record.int6,jdbcType=DECIMAL},
+      INT7 = #{record.int7,jdbcType=DECIMAL},
+      INT8 = #{record.int8,jdbcType=DECIMAL},
+      INT9 = #{record.int9,jdbcType=DECIMAL},
+      INT10 = #{record.int10,jdbcType=DECIMAL},
+      ISMERGE = #{record.ismerge,jdbcType=DECIMAL},
+      OPID = #{record.opid,jdbcType=VARCHAR},
+      GETTIME = #{record.gettime,jdbcType=DATE}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.sinog2c.model.commutationParole.PrisonerPerformance" >
+    update TBXF_PRISONERPERFORMANCE
+    <set >
+      <if test="departid != null" >
+        DEPARTID = #{departid,jdbcType=VARCHAR},
+      </if>
+      <if test="int1 != null" >
+        INT1 = #{int1,jdbcType=DECIMAL},
+      </if>
+      <if test="int2 != null" >
+        INT2 = #{int2,jdbcType=DECIMAL},
+      </if>
+      <if test="int3 != null" >
+        INT3 = #{int3,jdbcType=DECIMAL},
+      </if>
+      <if test="int4 != null" >
+        INT4 = #{int4,jdbcType=DECIMAL},
+      </if>
+      <if test="int5 != null" >
+        INT5 = #{int5,jdbcType=DECIMAL},
+      </if>
+      <if test="int6 != null" >
+        INT6 = #{int6,jdbcType=DECIMAL},
+      </if>
+      <if test="int7 != null" >
+        INT7 = #{int7,jdbcType=DECIMAL},
+      </if>
+      <if test="int8 != null" >
+        INT8 = #{int8,jdbcType=DECIMAL},
+      </if>
+      <if test="int9 != null" >
+        INT9 = #{int9,jdbcType=DECIMAL},
+      </if>
+      <if test="int10 != null" >
+        INT10 = #{int10,jdbcType=DECIMAL},
+      </if>
+      <if test="ismerge != null" >
+        ISMERGE = #{ismerge,jdbcType=DECIMAL},
+      </if>
+      <if test="opid != null" >
+        OPID = #{opid,jdbcType=VARCHAR},
+      </if>
+      <if test="gettime != null" >
+        GETTIME = #{gettime,jdbcType=DATE},
+      </if>
+    </set>
+    where CRIID = #{criid,jdbcType=VARCHAR}
+      and OPTIME = #{optime,jdbcType=DATE}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.sinog2c.model.commutationParole.PrisonerPerformance" >
+    update TBXF_PRISONERPERFORMANCE
+    set DEPARTID = #{departid,jdbcType=VARCHAR},
+      INT1 = #{int1,jdbcType=DECIMAL},
+      INT2 = #{int2,jdbcType=DECIMAL},
+      INT3 = #{int3,jdbcType=DECIMAL},
+      INT4 = #{int4,jdbcType=DECIMAL},
+      INT5 = #{int5,jdbcType=DECIMAL},
+      INT6 = #{int6,jdbcType=DECIMAL},
+      INT7 = #{int7,jdbcType=DECIMAL},
+      INT8 = #{int8,jdbcType=DECIMAL},
+      INT9 = #{int9,jdbcType=DECIMAL},
+      INT10 = #{int10,jdbcType=DECIMAL},
+      ISMERGE = #{ismerge,jdbcType=DECIMAL},
+      OPID = #{opid,jdbcType=VARCHAR},
+      GETTIME = #{gettime,jdbcType=DATE}
+    where CRIID = #{criid,jdbcType=VARCHAR}
+      and OPTIME = #{optime,jdbcType=DATE}
+  </update>
+  <select id="getCount" resultType="int">
+  		select count(*) from tbxf_prisonerperformance t where 1=1 	    
+		<trim prefix="" suffix="" suffixOverrides=",">
+	 		<if test="crimid!=null and crimid!=''"> and t.CRIID = #{crimid}</if>
+	 	</trim>
+  </select>
+  <select id="getPrisonerPerformanceList" parameterType="java.util.HashMap" resultType="java.util.HashMap">
+  	select * from
+    ( 
+	    select a.*, rownum rn from
+		(
+			select t.*,t1.name from tbxf_prisonerperformance t,tbsys_orginfo t1 where t.departid=t1.orgid(+)  	    
+			<trim prefix="" suffix="" suffixOverrides=",">
+		 		<if test="crimid!=null and crimid!=''"> and t.CRIID = #{crimid}</if>
+		 	</trim>
+	  	) a 
+	    <if test="end!=null and end!=''">
+	   		where rownum &lt;= #{end}
+	   	</if> 
+    )
+   	<if test="start!=null and start!=''">
+   		where  rn &gt;= #{start}
+   	</if>
+  </select>
+</mapper>

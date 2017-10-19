@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.sinog2c.dao.api.khjc.BgzlXfzxsqjlMapper">
+  <resultMap id="BaseResultMap" type="com.sinog2c.model.khjc.BgzlXfzxsqjl">
+    <id column="ID" jdbcType="VARCHAR" property="id" />
+    <result column="SHIJIAN" jdbcType="VARCHAR" property="shijian" />
+    <result column="YEWU" jdbcType="VARCHAR" property="yewu" />
+    <result column="SHOUQUANREN" jdbcType="VARCHAR" property="shouquanren" />
+    <result column="BEISHOUQUANREN" jdbcType="VARCHAR" property="beishouquanren" />
+    <result column="BANLIQINGKUANG" jdbcType="VARCHAR" property="banliqingkuang" />
+    <result column="BEIZHU" jdbcType="VARCHAR" property="beizhu" />
+    <result column="CUNZAIWENTI" jdbcType="VARCHAR" property="cunzaiwenti" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    ID, SHIJIAN, YEWU, SHOUQUANREN, BEISHOUQUANREN, BANLIQINGKUANG, BEIZHU, CUNZAIWENTI
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from BGZL_XFZXSQJL
+    where ID = #{id,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from BGZL_XFZXSQJL
+    where ID = #{id,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.sinog2c.model.khjc.BgzlXfzxsqjl">
+    insert into BGZL_XFZXSQJL (ID, SHIJIAN, YEWU, 
+      SHOUQUANREN, BEISHOUQUANREN, BANLIQINGKUANG, 
+      BEIZHU, CUNZAIWENTI)
+    values (#{id,jdbcType=VARCHAR}, #{shijian,jdbcType=VARCHAR}, #{yewu,jdbcType=VARCHAR}, 
+      #{shouquanren,jdbcType=VARCHAR}, #{beishouquanren,jdbcType=VARCHAR}, #{banliqingkuang,jdbcType=VARCHAR}, 
+      #{beizhu,jdbcType=VARCHAR}, #{cunzaiwenti,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.sinog2c.model.khjc.BgzlXfzxsqjl">
+    insert into BGZL_XFZXSQJL
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        ID,
+      </if>
+      <if test="shijian != null">
+        SHIJIAN,
+      </if>
+      <if test="yewu != null">
+        YEWU,
+      </if>
+      <if test="shouquanren != null">
+        SHOUQUANREN,
+      </if>
+      <if test="beishouquanren != null">
+        BEISHOUQUANREN,
+      </if>
+      <if test="banliqingkuang != null">
+        BANLIQINGKUANG,
+      </if>
+      <if test="beizhu != null">
+        BEIZHU,
+      </if>
+      <if test="cunzaiwenti != null">
+        CUNZAIWENTI,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=VARCHAR},
+      </if>
+      <if test="shijian != null">
+        #{shijian,jdbcType=VARCHAR},
+      </if>
+      <if test="yewu != null">
+        #{yewu,jdbcType=VARCHAR},
+      </if>
+      <if test="shouquanren != null">
+        #{shouquanren,jdbcType=VARCHAR},
+      </if>
+      <if test="beishouquanren != null">
+        #{beishouquanren,jdbcType=VARCHAR},
+      </if>
+      <if test="banliqingkuang != null">
+        #{banliqingkuang,jdbcType=VARCHAR},
+      </if>
+      <if test="beizhu != null">
+        #{beizhu,jdbcType=VARCHAR},
+      </if>
+      <if test="cunzaiwenti != null">
+        #{cunzaiwenti,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.sinog2c.model.khjc.BgzlXfzxsqjl">
+    update BGZL_XFZXSQJL
+    <set>
+      <if test="shijian != null">
+        SHIJIAN = #{shijian,jdbcType=VARCHAR},
+      </if>
+      <if test="yewu != null">
+        YEWU = #{yewu,jdbcType=VARCHAR},
+      </if>
+      <if test="shouquanren != null">
+        SHOUQUANREN = #{shouquanren,jdbcType=VARCHAR},
+      </if>
+      <if test="beishouquanren != null">
+        BEISHOUQUANREN = #{beishouquanren,jdbcType=VARCHAR},
+      </if>
+      <if test="banliqingkuang != null">
+        BANLIQINGKUANG = #{banliqingkuang,jdbcType=VARCHAR},
+      </if>
+      <if test="beizhu != null">
+        BEIZHU = #{beizhu,jdbcType=VARCHAR},
+      </if>
+      <if test="cunzaiwenti != null">
+        CUNZAIWENTI = #{cunzaiwenti,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where ID = #{id,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.sinog2c.model.khjc.BgzlXfzxsqjl">
+    update BGZL_XFZXSQJL
+    set SHIJIAN = #{shijian,jdbcType=VARCHAR},
+      YEWU = #{yewu,jdbcType=VARCHAR},
+      SHOUQUANREN = #{shouquanren,jdbcType=VARCHAR},
+      BEISHOUQUANREN = #{beishouquanren,jdbcType=VARCHAR},
+      BANLIQINGKUANG = #{banliqingkuang,jdbcType=VARCHAR},
+      BEIZHU = #{beizhu,jdbcType=VARCHAR},
+      CUNZAIWENTI = #{cunzaiwenti,jdbcType=VARCHAR}
+    where ID = #{id,jdbcType=VARCHAR}
+  </update>
+</mapper>

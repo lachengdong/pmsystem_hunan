@@ -1,0 +1,163 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.sinog2c.dao.api.prisoner.TbxfKpcjMapper" >
+  <resultMap id="BaseResultMap" type="com.sinog2c.model.prisoner.TbxfKpcj" >
+    <id column="PROPERTYID" property="propertyid" jdbcType="VARCHAR" />
+    <result column="CRIMID" property="crimid" jdbcType="VARCHAR" />
+    <result column="NAME" property="name" jdbcType="VARCHAR" />
+    <result column="KPCJ" property="kpcj" jdbcType="VARCHAR" />
+    <result column="BLRNAME" property="blrname" jdbcType="VARCHAR" />
+    <result column="REMARK1" property="remark1" jdbcType="VARCHAR" />
+    <result column="REMARK2" property="remark2" jdbcType="VARCHAR" />
+    <result column="REMARK3" property="remark3" jdbcType="VARCHAR" />
+    <result column="KPDATE" property="kpdate" jdbcType="VARCHAR" />
+    <result column="BLDATE" property="bldate" jdbcType="DATE" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    PROPERTYID, CRIMID, NAME, KPCJ, BLRNAME, REMARK1, REMARK2, REMARK3, KPDATE, BLDATE
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from TBXF_KPCJ
+    where PROPERTYID = #{propertyid,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from TBXF_KPCJ
+    where PROPERTYID = #{propertyid,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.sinog2c.model.prisoner.TbxfKpcj" >
+    insert into TBXF_KPCJ (PROPERTYID, CRIMID, NAME, 
+      KPCJ, BLRNAME, REMARK1, 
+      REMARK2, REMARK3, KPDATE, 
+      BLDATE)
+    values (#{propertyid,jdbcType=VARCHAR}, #{crimid,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR}, 
+      #{kpcj,jdbcType=VARCHAR}, #{blrname,jdbcType=VARCHAR}, #{remark1,jdbcType=VARCHAR}, 
+      #{remark2,jdbcType=VARCHAR}, #{remark3,jdbcType=VARCHAR}, #{kpdate,jdbcType=VARCHAR}, 
+      #{bldate,jdbcType=DATE})
+  </insert>
+  <insert id="insertSelective" parameterType="com.sinog2c.model.prisoner.TbxfKpcj" >
+    insert into TBXF_KPCJ
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="propertyid != null" >
+        PROPERTYID,
+      </if>
+      <if test="crimid != null" >
+        CRIMID,
+      </if>
+      <if test="name != null" >
+        NAME,
+      </if>
+      <if test="kpcj != null" >
+        KPCJ,
+      </if>
+      <if test="blrname != null" >
+        BLRNAME,
+      </if>
+      <if test="remark1 != null" >
+        REMARK1,
+      </if>
+      <if test="remark2 != null" >
+        REMARK2,
+      </if>
+      <if test="remark3 != null" >
+        REMARK3,
+      </if>
+      <if test="kpdate != null" >
+        KPDATE,
+      </if>
+      <if test="bldate != null" >
+        BLDATE,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="propertyid != null" >
+        #{propertyid,jdbcType=VARCHAR},
+      </if>
+      <if test="crimid != null" >
+        #{crimid,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null" >
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="kpcj != null" >
+        #{kpcj,jdbcType=VARCHAR},
+      </if>
+      <if test="blrname != null" >
+        #{blrname,jdbcType=VARCHAR},
+      </if>
+      <if test="remark1 != null" >
+        #{remark1,jdbcType=VARCHAR},
+      </if>
+      <if test="remark2 != null" >
+        #{remark2,jdbcType=VARCHAR},
+      </if>
+      <if test="remark3 != null" >
+        #{remark3,jdbcType=VARCHAR},
+      </if>
+      <if test="kpdate != null" >
+        #{kpdate,jdbcType=VARCHAR},
+      </if>
+      <if test="bldate != null" >
+        #{bldate,jdbcType=DATE},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.sinog2c.model.prisoner.TbxfKpcj" >
+    update TBXF_KPCJ
+    <set >
+      <if test="crimid != null" >
+        CRIMID = #{crimid,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null" >
+        NAME = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="kpcj != null" >
+        KPCJ = #{kpcj,jdbcType=VARCHAR},
+      </if>
+      <if test="blrname != null" >
+        BLRNAME = #{blrname,jdbcType=VARCHAR},
+      </if>
+      <if test="remark1 != null" >
+        REMARK1 = #{remark1,jdbcType=VARCHAR},
+      </if>
+      <if test="remark2 != null" >
+        REMARK2 = #{remark2,jdbcType=VARCHAR},
+      </if>
+      <if test="remark3 != null" >
+        REMARK3 = #{remark3,jdbcType=VARCHAR},
+      </if>
+      <if test="kpdate != null" >
+        KPDATE = #{kpdate,jdbcType=VARCHAR},
+      </if>
+      <if test="bldate != null" >
+        BLDATE = #{bldate,jdbcType=DATE},
+      </if>
+    </set>
+    where PROPERTYID = #{propertyid,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.sinog2c.model.prisoner.TbxfKpcj" >
+    update TBXF_KPCJ
+    set CRIMID = #{crimid,jdbcType=VARCHAR},
+      NAME = #{name,jdbcType=VARCHAR},
+      KPCJ = #{kpcj,jdbcType=VARCHAR},
+      BLRNAME = #{blrname,jdbcType=VARCHAR},
+      REMARK1 = #{remark1,jdbcType=VARCHAR},
+      REMARK2 = #{remark2,jdbcType=VARCHAR},
+      REMARK3 = #{remark3,jdbcType=VARCHAR},
+      KPDATE = #{kpdate,jdbcType=VARCHAR},
+      BLDATE = #{bldate,jdbcType=DATE}
+    where PROPERTYID = #{propertyid,jdbcType=VARCHAR}
+  </update>
+  
+  <select id="selectKPCJMaxidByCrimid" resultType="String" >
+    select nvl(max(propertyid),0)+1 from TBXF_KPCJ
+  </select>
+  
+  <select id="findByKPCJDetail" resultType="com.sinog2c.model.prisoner.TbxfKpcj" parameterType="Map">
+    select * from TBXF_KPCJ where crimid=#{crimid}
+  </select>
+   <select id="findByKPCJDetailCount" resultType="int" parameterType="Map">
+    select count(*) from TBXF_KPCJ where crimid=#{crimid}
+  </select>
+</mapper>

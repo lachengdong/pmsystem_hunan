@@ -1,0 +1,63 @@
+@CHARSET "UTF-8";
+/* 
+ *  @Description: common css
+ *  @author: haibao
+ *  @Update: 2014-6-6
+ */
+body{font: 12px/140% "Microsoft Yahei","宋体",'Arial','san-serif';background-color:#666666;color: #666;margin: 0;padding: 0;}
+img {max-width: 100%;height: auto;width: auto9;-ms-interpolation-mode: bicubic;vertical-align: middle;-moz-animation: fadein 350ms ease-out;-webkit-animation: fadein 350ms ease-out;-o-animation: fadein 350ms ease-out;animation: fadein 350ms ease-out;}
+a,span,footer{color:#fff; text-decoration:none;}
+p{margin:0;}
+ul{margin:0;padding:0;}
+li{list-style: none;}
+a:focus{outline: none;}
+.sorry{ position:absolute;
+         top:50%;
+		 left:14%;
+		 width:490px;
+		 height:100px;
+		 font-family:"宋体";
+		 font-size:30px; color:#fff;
+		 line-height:50px;
+	
+	}
+/* animation */
+@-webkit-keyframes fadein{
+    from{opacity: 0; }
+    to{opacity: 1; }
+}
+@-moz-keyframes fadein{
+    from{opacity: 0; }
+    to{opacity: 1; }
+}
+@-o-keyframes fadein{
+    from{opacity: 0; }
+    to{opacity: 1; }
+} 
+@keyframes fadein{
+    from{opacity: 0; }
+    to{opacity: 1; }
+}
+/* ----------------------------------------------- */
+
+/* 自定义样式 */
+.fl{float:left;}
+.fr{float:right;}
+.oh{overflow:hidden;}
+.tc{text-align:center;}
+.tr{text-align:right;}
+.tl{text-align:left;}
+.dn{display:none;}
+.db{display:block;}
+.dib{display:inline-block;}
+.cp{cursor:pointer;}
+.f14{font-size:14px;}
+.pt15{padding-top: 15px;}
+/* ----------------------------------------------- */
+
+.skinBg{width:100%;height:100%;position:absolute;left:0;top:0;z-index:-10;background-position:center 0;background-size:cover;background-attachment:fixed;background-repeat:no-repeat;background: url('../../../images/ywgk/images/1920.jpg') no-repeat;}
+#header{padding:14px 14px 0;overflow:hidden;}
+#header span{color:#fff;text-shadow:0 0 3px #333;float: left;line-height:20px;}
+.weatherIcon{width:18px;height:18px;display:inline-block;vertical-align:middle;margin-right:5px;}
+.wI1{background:url('../images/a1.png');}
+#header span.polutionLevel{color:#4CC74C;font-weight:700;margin-left:2px;}

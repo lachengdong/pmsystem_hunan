@@ -1,0 +1,498 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.sinog2c.dao.api.dbmsnew.DbmsDatasChemeNewMapper" >
+  <resultMap id="BaseResultMap" type="com.sinog2c.model.dbmsnew.DbmsDatasChemeNew" >
+    <id column="DDCID" property="ddcid" jdbcType="VARCHAR" />
+    <result column="DDCNAME" property="ddcname" jdbcType="VARCHAR" />
+    <result column="DDCTYPE" property="ddctype" jdbcType="VARCHAR" />
+    <result column="FROMDATABASEID" property="fromdatabaseid" jdbcType="VARCHAR" />
+    <result column="FROMDATABASENAME" property="fromdatabasename" jdbcType="VARCHAR" />
+    <result column="TODATABASEID" property="todatabaseid" jdbcType="VARCHAR" />
+    <result column="TODATABASENAME" property="todatabasename" jdbcType="VARCHAR" />
+    <result column="UPDATEMENDER" property="updatemender" jdbcType="VARCHAR" />
+    <result column="UPDATETIME" property="updatetime" jdbcType="TIMESTAMP" />
+    <result column="DDCEXPSCHEME" property="ddcexpscheme" jdbcType="VARCHAR" />
+    <result column="CREATETIME" property="createtime" jdbcType="TIMESTAMP" />
+    <result column="CREATEMENDER" property="createmender" jdbcType="VARCHAR" />
+    <result column="DELFLG" property="delflg" jdbcType="VARCHAR" />
+    <result column="SDID" property="sdid" jdbcType="VARCHAR" />
+    <result column="AUTORUNORDER" property="autorunorder" jdbcType="VARCHAR" />
+    <result column="AUTORUNCONDITION" property="autoruncondition" jdbcType="VARCHAR" />
+    <result column="AUTORUNINSERTONLY" property="autoruninsertonly" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    DDCID, DDCNAME, DDCTYPE, FROMDATABASEID, TODATABASEID, UPDATEMENDER, UPDATETIME, 
+    DDCEXPSCHEME, CREATETIME, CREATEMENDER, DELFLG, SDID, AUTORUNORDER, AUTORUNCONDITION, 
+    AUTORUNINSERTONLY
+  </sql>
+  <select id="selectByPrimaryKey" resultType="Map" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from DBMS_DATAS_CHEME_NEW
+    where DDCID = #{ddcid,jdbcType=VARCHAR}
+  </select>
+  
+  <select id="getById" resultMap="BaseResultMap" parameterType="Map" >
+    select 
+    <include refid="Base_Column_List" />
+    from DBMS_DATAS_CHEME_NEW
+    where DDCID = #{ddcid,jdbcType=VARCHAR}
+  </select>
+  
+  <select id="selectBySdid" resultType="Map" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from DBMS_DATAS_CHEME_NEW
+    where SDID = #{sdid,jdbcType=VARCHAR} and sdid is not null
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from DBMS_DATAS_CHEME_NEW
+    where DDCID = #{ddcid,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.sinog2c.model.dbmsnew.DbmsDatasChemeNew" >
+    insert into DBMS_DATAS_CHEME_NEW (DDCID, DDCNAME, DDCTYPE, 
+      FROMDATABASEID, TODATABASEID, UPDATEMENDER, 
+      UPDATETIME, DDCEXPSCHEME, CREATETIME, 
+      CREATEMENDER, DELFLG, SDID, 
+      AUTORUNORDER, AUTORUNCONDITION, AUTORUNINSERTONLY
+      )
+    values (#{ddcid,jdbcType=VARCHAR}, #{ddcname,jdbcType=VARCHAR}, #{ddctype,jdbcType=VARCHAR}, 
+      #{fromdatabaseid,jdbcType=VARCHAR}, #{todatabaseid,jdbcType=VARCHAR}, #{updatemender,jdbcType=VARCHAR}, 
+      #{updatetime,jdbcType=TIMESTAMP}, #{ddcexpscheme,jdbcType=VARCHAR}, #{createtime,jdbcType=TIMESTAMP}, 
+      #{createmender,jdbcType=VARCHAR}, #{delflg,jdbcType=VARCHAR}, #{sdid,jdbcType=VARCHAR}, 
+      #{autorunorder,jdbcType=VARCHAR}, #{autoruncondition,jdbcType=VARCHAR}, #{autoruninsertonly,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.sinog2c.model.dbmsnew.DbmsDatasChemeNew" >
+    insert into DBMS_DATAS_CHEME_NEW
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="ddcid != null" >
+        DDCID,
+      </if>
+      <if test="ddcname != null" >
+        DDCNAME,
+      </if>
+      <if test="ddctype != null" >
+        DDCTYPE,
+      </if>
+      <if test="fromdatabaseid != null" >
+        FROMDATABASEID,
+      </if>
+      <if test="todatabaseid != null" >
+        TODATABASEID,
+      </if>
+      <if test="updatemender != null" >
+        UPDATEMENDER,
+      </if>
+      <if test="updatetime != null" >
+        UPDATETIME,
+      </if>
+      <if test="ddcexpscheme != null" >
+        DDCEXPSCHEME,
+      </if>
+      <if test="createtime != null" >
+        CREATETIME,
+      </if>
+      <if test="createmender != null" >
+        CREATEMENDER,
+      </if>
+      <if test="delflg != null" >
+        DELFLG,
+      </if>
+      <if test="sdid != null" >
+        SDID,
+      </if>
+      <if test="autorunorder != null" >
+        AUTORUNORDER,
+      </if>
+      <if test="autoruncondition != null" >
+        AUTORUNCONDITION,
+      </if>
+      <if test="autoruninsertonly != null" >
+        AUTORUNINSERTONLY,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="ddcid != null" >
+        #{ddcid,jdbcType=VARCHAR},
+      </if>
+      <if test="ddcname != null" >
+        #{ddcname,jdbcType=VARCHAR},
+      </if>
+      <if test="ddctype != null" >
+        #{ddctype,jdbcType=VARCHAR},
+      </if>
+      <if test="fromdatabaseid != null" >
+        #{fromdatabaseid,jdbcType=VARCHAR},
+      </if>
+      <if test="todatabaseid != null" >
+        #{todatabaseid,jdbcType=VARCHAR},
+      </if>
+      <if test="updatemender != null" >
+        #{updatemender,jdbcType=VARCHAR},
+      </if>
+      <if test="updatetime != null" >
+        #{updatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="ddcexpscheme != null" >
+        #{ddcexpscheme,jdbcType=VARCHAR},
+      </if>
+      <if test="createtime != null" >
+        #{createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createmender != null" >
+        #{createmender,jdbcType=VARCHAR},
+      </if>
+      <if test="delflg != null" >
+        #{delflg,jdbcType=VARCHAR},
+      </if>
+      <if test="sdid != null" >
+        #{sdid,jdbcType=VARCHAR},
+      </if>
+      <if test="autorunorder != null" >
+        #{autorunorder,jdbcType=VARCHAR},
+      </if>
+      <if test="autoruncondition != null" >
+        #{autoruncondition,jdbcType=VARCHAR},
+      </if>
+      <if test="autoruninsertonly != null" >
+        #{autoruninsertonly,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.sinog2c.model.dbmsnew.DbmsDatasChemeNew" >
+    update DBMS_DATAS_CHEME_NEW
+    <set >
+      <if test="ddcname != null" >
+        DDCNAME = #{ddcname,jdbcType=VARCHAR},
+      </if>
+      <if test="ddctype != null" >
+        DDCTYPE = #{ddctype,jdbcType=VARCHAR},
+      </if>
+      <if test="fromdatabaseid != null" >
+        FROMDATABASEID = #{fromdatabaseid,jdbcType=VARCHAR},
+      </if>
+      <if test="todatabaseid != null" >
+        TODATABASEID = #{todatabaseid,jdbcType=VARCHAR},
+      </if>
+      <if test="updatemender != null" >
+        UPDATEMENDER = #{updatemender,jdbcType=VARCHAR},
+      </if>
+      <if test="updatetime != null" >
+        UPDATETIME = #{updatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="ddcexpscheme != null" >
+        DDCEXPSCHEME = #{ddcexpscheme,jdbcType=VARCHAR},
+      </if>
+      <if test="createtime != null" >
+        CREATETIME = #{createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createmender != null" >
+        CREATEMENDER = #{createmender,jdbcType=VARCHAR},
+      </if>
+      <if test="delflg != null" >
+        DELFLG = #{delflg,jdbcType=VARCHAR},
+      </if>
+      <if test="sdid != null" >
+        SDID = #{sdid,jdbcType=VARCHAR},
+      </if>
+      <if test="autorunorder != null" >
+        AUTORUNORDER = #{autorunorder,jdbcType=VARCHAR},
+      </if>
+      <if test="autoruncondition != null" >
+        AUTORUNCONDITION = #{autoruncondition,jdbcType=VARCHAR},
+      </if>
+      <if test="autoruninsertonly != null" >
+        AUTORUNINSERTONLY = #{autoruninsertonly,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where DDCID = #{ddcid,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.sinog2c.model.dbmsnew.DbmsDatasChemeNew" >
+    update DBMS_DATAS_CHEME_NEW
+    set DDCNAME = #{ddcname,jdbcType=VARCHAR},
+      DDCTYPE = #{ddctype,jdbcType=VARCHAR},
+      FROMDATABASEID = #{fromdatabaseid,jdbcType=VARCHAR},
+      TODATABASEID = #{todatabaseid,jdbcType=VARCHAR},
+      UPDATEMENDER = #{updatemender,jdbcType=VARCHAR},
+      UPDATETIME = #{updatetime,jdbcType=TIMESTAMP},
+      DDCEXPSCHEME = #{ddcexpscheme,jdbcType=VARCHAR},
+      CREATETIME = #{createtime,jdbcType=TIMESTAMP},
+      CREATEMENDER = #{createmender,jdbcType=VARCHAR},
+      DELFLG = #{delflg,jdbcType=VARCHAR},
+      SDID = #{sdid,jdbcType=VARCHAR},
+      AUTORUNORDER = #{autorunorder,jdbcType=VARCHAR},
+      AUTORUNCONDITION = #{autoruncondition,jdbcType=VARCHAR},
+      AUTORUNINSERTONLY = #{autoruninsertonly,jdbcType=VARCHAR}
+    where DDCID = #{ddcid,jdbcType=VARCHAR}
+  </update>
+  
+  <!-- 查询表中的所有信息 -->
+  <select id="listMapByPage" resultType="Map" parameterType="Map" >
+	select * from
+    ( 
+	    select a.*, rownum rn from
+	    (
+		    select * from  DBMS_DATAS_CHEME_NEW  where 1=1
+		    <if test="sdid!=null and sdid!=''">  
+		   		 and  sdid=#{sdid}
+		    </if>
+		    <if test="key!=null and key!=''">  
+		        and DDNAME like '%'||#{key}||'%' 
+		    </if>
+		    <if test="sortField!=null and sortOrder!=null" > 
+		     	order by ${sortField}  ${sortOrder}
+		    </if>
+	  	) a 
+	    <if test="end!=null and end!=''">
+	   		where rownum &lt;= #{end}
+	   	</if> 
+    )
+   	<if test="start!=null and start!=''">
+   		where  rn &gt;= #{start}
+   	</if>
+  </select>  
+
+  <select id="countAll" resultType="int">  <!-- 查询表中记录总数 -->
+		select count(*) c from DBMS_DATAS_CHEME_NEW
+  </select>
+
+  <select id="listAll" resultMap="BaseResultMap">    <!-- 分页查询表中的所有信息 -->
+	 SELECT * FROM 
+	 	( SELECT A.*, ROWNUM RN 
+		 	FROM 
+		 	( 
+		 		SELECT * FROM DBMS_DATAS_CHEME_NEW
+				<if test="sortField!=null and sortField!='' and sortOrder!=null and sortOrder!=''">  
+		 		  order by  ${sortField} ${sortOrder}
+			    </if>
+		 	) A 
+		 	WHERE ROWNUM &lt;= #{end,jdbcType=DECIMAL}
+	 	) 
+	 	WHERE RN &gt;= #{start,jdbcType=DECIMAL}
+  </select>
+
+  <select id="countByCondition" resultType="int" parameterType="Map" >  <!-- 根据条件查询表中记录数 -->
+		select count(*) c from DBMS_DATAS_CHEME_NEW
+	 	where 1=1 
+			 <if test="ddctype!=null and ddctype!=''">  
+		        and DDCTYPE like CONCAT(CONCAT('%', #{ddctype}), '%')
+		     </if>
+			 <if test="ddcname!=null and ddcname!=''">  
+		        and DDCNAME like CONCAT(CONCAT('%', #{ddcname}), '%')
+		     </if>
+		     
+			 <if test="sdid !=null and sdid !=''">  
+		        and SDID in (
+		        	select t.orgid from TBSYS_ORGINFO t
+ 					start with t.orgid= #{sdid} connect by prior t.orgid =t.porgid
+		        )
+		     </if>
+  </select>
+
+  <select id="listByCondition" resultMap="BaseResultMap" parameterType="Map" >    <!-- 分页查询表中的信息 -->
+	 SELECT * FROM 
+	 	( SELECT A.*, ROWNUM RN 
+		 	FROM 
+		 	(
+		 		select s.*, dfrom.ddname as FROMDATABASENAME, dbto.ddname as TODATABASENAME
+				  from DBMS_DATAS_CHEME_NEW s
+				  left join DBMS_DATABASE_NEW dfrom
+				    on s.fromdatabaseid = dfrom.ddid
+				  left join DBMS_DATABASE_NEW dbto
+				    on s.todatabaseid = dbto.ddid
+
+			 	where 1=1 
+				 <if test="ddctype!=null and ddctype!=''">  
+			        and s.DDCTYPE like CONCAT(CONCAT('%', #{ddctype}), '%')
+			     </if>
+				 <if test="ddcname!=null and ddcname!=''">  
+			        and s.DDCNAME like CONCAT(CONCAT('%', #{ddcname}), '%')
+			     </if>
+		     
+				 <if test="sdid !=null and sdid !=''">  
+			        and s.SDID in (
+			        	select t.orgid from TBSYS_ORGINFO t
+	 					start with t.orgid= #{sdid} connect by prior t.orgid =t.porgid
+			        )
+			     </if>
+			     <if test="departid!=null and departid!=''">  
+			        and s.sdid =#{departid} 
+			        <if test="sortField==null or sortField=='' or sortOrder==null or sortOrder==''">  
+		 		  	order by to_number(autorunorder)
+			     	</if>
+			     </if>
+				 <if test="sortField!=null and sortField!='' and sortOrder!=null and sortOrder!=''">  
+		 		  order by  ${sortField} ${sortOrder}
+			     </if>
+			      
+		 	) A 
+		 	WHERE ROWNUM &lt;= #{end,jdbcType=DECIMAL}
+	 	) 
+	 	WHERE RN &gt;= #{start,jdbcType=DECIMAL}
+  </select>
+  
+  <update id="updateByMap" parameterType="Map" >
+    update DBMS_DATAS_CHEME_NEW
+    <set >
+      <if test="ddcname != null" >
+        DDCNAME = #{ddcname,jdbcType=VARCHAR},
+      </if>
+      <if test="ddctype != null" >
+        DDCTYPE = #{ddctype,jdbcType=VARCHAR},
+      </if>
+      <if test="fromdatabaseid != null" >
+        FROMDATABASEID = #{fromdatabaseid,jdbcType=VARCHAR},
+      </if>
+      <if test="todatabaseid != null" >
+        TODATABASEID = #{todatabaseid,jdbcType=VARCHAR},
+      </if>
+      <if test="updatemender != null" >
+        UPDATEMENDER = #{updatemender,jdbcType=VARCHAR},
+      </if>
+      <if test="updatetime != null" >
+        UPDATETIME = #{updatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="ddcexpscheme != null" >
+        DDCEXPSCHEME = #{ddcexpscheme,jdbcType=VARCHAR},
+      </if>
+      <if test="createtime != null" >
+        CREATETIME = #{createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createmender != null" >
+        CREATEMENDER = #{createmender,jdbcType=VARCHAR},
+      </if>
+      <if test="delflg != null" >
+        DELFLG = #{delflg,jdbcType=VARCHAR},
+      </if>
+      <if test="sdid != null" >
+        SDID = #{sdid,jdbcType=VARCHAR},
+      </if>
+      <if test="autorunorder != null" >
+        AUTORUNORDER = #{autorunorder,jdbcType=VARCHAR},
+      </if>
+      <if test="autoruncondition != null" >
+        AUTORUNCONDITION = #{autoruncondition,jdbcType=VARCHAR},
+      </if>
+      <if test="autoruninsertonly != null" >
+        AUTORUNINSERTONLY = #{autoruninsertonly,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where DDCID = #{ddcid,jdbcType=VARCHAR}
+  </update>
+
+  <insert id="insertByMap" parameterType="Map" >
+    insert into DBMS_DATAS_CHEME_NEW
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="ddcid != null" >
+        DDCID,
+      </if>
+      <if test="ddcname != null" >
+        DDCNAME,
+      </if>
+      <if test="ddctype != null" >
+        DDCTYPE,
+      </if>
+      <if test="fromdatabaseid != null" >
+        FROMDATABASEID,
+      </if>
+      <if test="todatabaseid != null" >
+        TODATABASEID,
+      </if>
+      <if test="updatemender != null" >
+        UPDATEMENDER,
+      </if>
+      <if test="updatetime != null" >
+        UPDATETIME,
+      </if>
+      <if test="ddcexpscheme != null" >
+        DDCEXPSCHEME,
+      </if>
+      <if test="createtime != null" >
+        CREATETIME,
+      </if>
+      <if test="createmender != null" >
+        CREATEMENDER,
+      </if>
+      <if test="delflg != null" >
+        DELFLG,
+      </if>
+      <if test="sdid != null" >
+        SDID,
+      </if>
+      <if test="autorunorder != null" >
+        AUTORUNORDER,
+      </if>
+      <if test="autoruncondition != null" >
+        AUTORUNCONDITION,
+      </if>
+      <if test="autoruninsertonly != null" >
+        AUTORUNINSERTONLY,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="ddcid != null" >
+        #{ddcid,jdbcType=VARCHAR},
+      </if>
+      <if test="ddcname != null" >
+        #{ddcname,jdbcType=VARCHAR},
+      </if>
+      <if test="ddctype != null" >
+        #{ddctype,jdbcType=VARCHAR},
+      </if>
+      <if test="fromdatabaseid != null" >
+        #{fromdatabaseid,jdbcType=VARCHAR},
+      </if>
+      <if test="todatabaseid != null" >
+        #{todatabaseid,jdbcType=VARCHAR},
+      </if>
+      <if test="updatemender != null" >
+        #{updatemender,jdbcType=VARCHAR},
+      </if>
+      <if test="updatetime != null" >
+        #{updatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="ddcexpscheme != null" >
+        #{ddcexpscheme,jdbcType=VARCHAR},
+      </if>
+      <if test="createtime != null" >
+        #{createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createmender != null" >
+        #{createmender,jdbcType=VARCHAR},
+      </if>
+      <if test="delflg != null" >
+        #{delflg,jdbcType=VARCHAR},
+      </if>
+      <if test="sdid != null" >
+        #{sdid,jdbcType=VARCHAR},
+      </if>
+      <if test="autorunorder != null" >
+        #{autorunorder,jdbcType=VARCHAR},
+      </if>
+      <if test="autoruncondition != null" >
+        #{autoruncondition,jdbcType=VARCHAR},
+      </if>
+      <if test="autoruninsertonly != null" >
+        #{autoruninsertonly,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  
+  
+  <select id="getRemoteIp" resultType="Map" parameterType="Map" >
+    select 
+    	ddn.DDIP as ip
+    from DBMS_DATABASE_NEW ddn,
+    		DBMS_DATAS_CHEME_NEW dcn
+    where dcn.DDCID = #{ddcid,jdbcType=VARCHAR} 
+       and dcn.TODATABASEID=ddn.DDID
+  </select>
+  
+  <select id="getDbmsresolvewebxmlList" parameterType="java.util.HashMap" resultType="java.util.HashMap">
+	select * from DBMS_RESOLVE_WEBXML where 1=1 and ddcid=#{ddcid}
+		<if test="sdid !=null">
+      		and sdid= #{sdid,jdbcType=VARCHAR}
+      	</if>
+  </select>
+</mapper>

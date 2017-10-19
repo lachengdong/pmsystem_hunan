@@ -1,0 +1,228 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.sinog2c.dao.api.arch.ArchBoxMapper">
+	<resultMap id="BaseResultMap" type="com.sinog2c.model.arch.ArchBox">
+		<id column="ID" property="id" jdbcType="DECIMAL" />
+		<result column="BOX_NO" property="boxNo" jdbcType="VARCHAR" />
+		<result column="CREATE_USER" property="createUser" jdbcType="VARCHAR" />
+		<result column="ORG_ID" property="orgId" jdbcType="VARCHAR" />
+		<result column="IS_MOVE" property="isMove" jdbcType="DECIMAL" />
+		<result column="YEAR" property="year" jdbcType="DECIMAL" />
+		<result column="PLACE_ID" property="placeId" jdbcType="DECIMAL" />
+		<result column="REMARK" property="remark" jdbcType="VARCHAR" />
+		<result column="IS_ARCH" property="isArch" jdbcType="DECIMAL" />
+		<result column="SAVE_DATE" property="saveDate" jdbcType="VARCHAR" />
+		<result column="SECRET" property="secret" jdbcType="VARCHAR" />
+		<result column="DOC_NUM" property="docNum" jdbcType="VARCHAR" />
+		<result column="createUserName" property="createUserName"
+			jdbcType="VARCHAR" />
+		<result column="docsum" property="docsum" jdbcType="DECIMAL" />
+	</resultMap>
+	<sql id="Base_Column_List">
+		ID, BOX_NO, CREATE_USER, ORG_ID, IS_MOVE, YEAR, PLACE_ID,
+		REMARK,
+		IS_ARCH, SAVE_DATE,
+		SECRET, DOC_NUM
+	</sql>
+	<select id="selectByPrimaryKey" resultMap="BaseResultMap"
+		parameterType="java.lang.Long">
+		select
+		<include refid="Base_Column_List" />
+		from ARCH_BOX
+		where ID = #{id,jdbcType=DECIMAL}
+	</select>
+	<delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+		delete from
+		ARCH_BOX
+		where ID = #{id,jdbcType=DECIMAL}
+	</delete>
+	<insert id="insert" parameterType="com.sinog2c.model.arch.ArchBox">
+		insert into ARCH_BOX (ID,
+		BOX_NO, CREATE_USER,
+		ORG_ID, IS_MOVE, YEAR,
+		PLACE_ID, REMARK, IS_ARCH,
+		SAVE_DATE, SECRET, DOC_NUM
+		)
+		values (#{id,jdbcType=DECIMAL},
+		#{boxNo,jdbcType=VARCHAR},
+		#{createUser,jdbcType=VARCHAR},
+		#{orgId,jdbcType=VARCHAR}, #{isMove,jdbcType=DECIMAL},
+		#{year,jdbcType=DECIMAL},
+		#{placeId,jdbcType=DECIMAL},
+		#{remark,jdbcType=VARCHAR},
+		#{isArch,jdbcType=DECIMAL},
+		#{saveDate,jdbcType=VARCHAR}, #{secret,jdbcType=VARCHAR},
+		#{docNum,jdbcType=VARCHAR}
+		)
+	</insert>
+	<insert id="insertSelective" parameterType="com.sinog2c.model.arch.ArchBox">
+		insert into ARCH_BOX
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				ID,
+			</if>
+			<if test="boxNo != null">
+				BOX_NO,
+			</if>
+			<if test="createUser != null">
+				CREATE_USER,
+			</if>
+			<if test="orgId != null">
+				ORG_ID,
+			</if>
+			<if test="isMove != null">
+				IS_MOVE,
+			</if>
+			<if test="year != null">
+				YEAR,
+			</if>
+			<if test="placeId != null">
+				PLACE_ID,
+			</if>
+			<if test="remark != null">
+				REMARK,
+			</if>
+			<if test="isArch != null">
+				IS_ARCH,
+			</if>
+			<if test="saveDate != null">
+				SAVE_DATE,
+			</if>
+			<if test="secret != null">
+				SECRET,
+			</if>
+			<if test="docNum != null">
+				DOC_NUM,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				#{id,jdbcType=DECIMAL},
+			</if>
+			<if test="boxNo != null">
+				#{boxNo,jdbcType=VARCHAR},
+			</if>
+			<if test="createUser != null">
+				#{createUser,jdbcType=VARCHAR},
+			</if>
+			<if test="orgId != null">
+				#{orgId,jdbcType=VARCHAR},
+			</if>
+			<if test="isMove != null">
+				#{isMove,jdbcType=DECIMAL},
+			</if>
+			<if test="year != null">
+				#{year,jdbcType=DECIMAL},
+			</if>
+			<if test="placeId != null">
+				#{placeId,jdbcType=DECIMAL},
+			</if>
+			<if test="remark != null">
+				#{remark,jdbcType=VARCHAR},
+			</if>
+			<if test="isArch != null">
+				#{isArch,jdbcType=DECIMAL},
+			</if>
+			<if test="saveDate != null">
+				#{saveDate,jdbcType=VARCHAR},
+			</if>
+			<if test="secret != null">
+				#{secret,jdbcType=VARCHAR},
+			</if>
+			<if test="docNum != null">
+				#{docNum,jdbcType=VARCHAR},
+			</if>
+		</trim>
+	</insert>
+	<update id="updateByPrimaryKeySelective" parameterType="com.sinog2c.model.arch.ArchBox">
+		update ARCH_BOX
+		<set>
+			<if test="boxNo != null">
+				BOX_NO = #{boxNo,jdbcType=VARCHAR},
+			</if>
+			<if test="createUser != null">
+				CREATE_USER = #{createUser,jdbcType=VARCHAR},
+			</if>
+			<if test="orgId != null">
+				ORG_ID = #{orgId,jdbcType=VARCHAR},
+			</if>
+			<if test="isMove != null">
+				IS_MOVE = #{isMove,jdbcType=DECIMAL},
+			</if>
+			<if test="year != null">
+				YEAR = #{year,jdbcType=DECIMAL},
+			</if>
+			<if test="placeId != null">
+				PLACE_ID = #{placeId,jdbcType=DECIMAL},
+			</if>
+			<if test="remark != null">
+				REMARK = #{remark,jdbcType=VARCHAR},
+			</if>
+			<if test="isArch != null">
+				IS_ARCH = #{isArch,jdbcType=DECIMAL},
+			</if>
+			<if test="saveDate != null">
+				SAVE_DATE = #{saveDate,jdbcType=VARCHAR},
+			</if>
+			<if test="secret != null">
+				SECRET = #{secret,jdbcType=VARCHAR},
+			</if>
+			<if test="docNum != null">
+				DOC_NUM = #{docNum,jdbcType=VARCHAR},
+			</if>
+		</set>
+		where ID = #{id,jdbcType=DECIMAL}
+	</update>
+	<update id="updateByPrimaryKey" parameterType="com.sinog2c.model.arch.ArchBox">
+		update ARCH_BOX
+		set BOX_NO = #{boxNo,jdbcType=VARCHAR},
+		CREATE_USER =
+		#{createUser,jdbcType=VARCHAR},
+		ORG_ID = #{orgId,jdbcType=VARCHAR},
+		IS_MOVE = #{isMove,jdbcType=DECIMAL},
+		YEAR = #{year,jdbcType=DECIMAL},
+		PLACE_ID = #{placeId,jdbcType=DECIMAL},
+		REMARK =
+		#{remark,jdbcType=VARCHAR},
+		IS_ARCH = #{isArch,jdbcType=DECIMAL},
+		SAVE_DATE = #{saveDate,jdbcType=VARCHAR},
+		SECRET =
+		#{secret,jdbcType=VARCHAR},
+		DOC_NUM = #{docNum,jdbcType=VARCHAR}
+		where
+		ID = #{id,jdbcType=DECIMAL}
+	</update>
+
+	<select id="getarchboxbycondition" resultMap="BaseResultMap">
+		select F_getUserName(CREATE_USER) as
+		createUserName,F_GetArchFileCount(ID) as docsum ,a.* from (
+		select
+		rownum rn ,t.*
+		from ( select *
+		from ARCH_BOX
+		where IS_MOVE=0
+		<if test="boxNo != null and boxNo!=''">
+			And (BOX_NO like '%'||#{boxNo}||'%' or YEAR = #{boxNo})
+		</if>
+		<if test="sortField!=null and sortField !=''">
+			order by ${sortField} ${sortOrder}
+		</if>
+		)t where rownum&lt;=#{end,jdbcType=DECIMAL}) a
+		where a.rn&gt;=#{start,jdbcType=DECIMAL}
+	</select>
+	
+	<select id="getcountofarchboxbycondition" resultType="int">
+		select count(*) from ARCH_BOX
+		where IS_MOVE=0
+		<if test="boxNo != null and boxNo!=''">
+			And (BOX_NO like '%'||#{boxNo}||'%' or YEAR = #{boxNo})
+		</if>
+	</select>
+	
+	<select id="getAllArchBoxInfos" resultMap="BaseResultMap">
+		select * from ARCH_BOX
+		where IS_MOVE=0
+	</select>
+	
+	
+</mapper>

@@ -1,0 +1,527 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.sinog2c.dao.api.khjc.KhjccriminalmonthscoresdMapper" >
+  <resultMap id="BaseResultMap" type="com.sinog2c.model.khjc.Khjccriminalmonthscoresd" >
+    <id column="ID" property="id" jdbcType="VARCHAR" />
+    <result column="CRIMID" property="crimid" jdbcType="VARCHAR" />
+    <result column="EXAMTIME" property="examtime" jdbcType="VARCHAR" />
+    <result column="FENJIANQU" property="fenjianqu" jdbcType="VARCHAR" />
+    <result column="JIANQU" property="jianqu" jdbcType="VARCHAR" />
+    <result column="JIANYU" property="jianyu" jdbcType="VARCHAR" />
+    <result column="YUEDEFEN" property="yuedefen" jdbcType="VARCHAR" />
+    <result column="FENGXIANFEN" property="fengxianfen" jdbcType="VARCHAR" />
+    <result column="JIANGFEN" property="jiangfen" jdbcType="VARCHAR" />
+    <result column="JIANGFENREMARK" property="jiangfenremark" jdbcType="VARCHAR" />
+    <result column="KOUFEN" property="koufen" jdbcType="VARCHAR" />
+    <result column="KOUFENREMARK" property="koufenremark" jdbcType="VARCHAR" />
+    <result column="ZHUXIAOFEN" property="zhuxiaofen" jdbcType="VARCHAR" />
+    <result column="ZHUXIAOFENREMARK" property="zhuxiaofenremark" jdbcType="VARCHAR" />
+    <result column="DUIXIANZHEDIFEN" property="duixianzhedifen" jdbcType="VARCHAR" />
+    <result column="DUIXIANZHEDIFENREMARK" property="duixianzhedifenremark" jdbcType="VARCHAR" />
+    <result column="YUEZONGFEN" property="yuezongfen" jdbcType="VARCHAR" />
+    <result column="SHIJILEIJIZONGFEN" property="shijileijizongfen" jdbcType="VARCHAR" />
+    <result column="DUIXIANHOULEIJIZONGFEN" property="duixianhouleijizongfen" jdbcType="VARCHAR" />
+    <result column="YUEDEFENLOCK" property="yuedefenlock" jdbcType="VARCHAR" />
+    <result column="FENGXIANFENLOCK" property="fengxianfenlock" jdbcType="VARCHAR" />
+    <result column="UPDATETIME" property="updatetime" jdbcType="TIMESTAMP" />
+    <result column="UPDATEMENDER" property="updatemender" jdbcType="VARCHAR" />
+    <result column="DELFLAG" property="delflag" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    ID, CRIMID, EXAMTIME, FENJIANQU, JIANQU, JIANYU, YUEDEFEN, FENGXIANFEN, JIANGFEN, 
+    JIANGFENREMARK, KOUFEN, KOUFENREMARK, ZHUXIAOFEN, ZHUXIAOFENREMARK, DUIXIANZHEDIFEN, 
+    DUIXIANZHEDIFENREMARK, YUEZONGFEN, SHIJILEIJIZONGFEN, DUIXIANHOULEIJIZONGFEN, YUEDEFENLOCK, 
+    FENGXIANFENLOCK, UPDATETIME, UPDATEMENDER, DELFLAG
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from KHJC_CRIMINAL_MONTHSCORE_SD
+    where ID = #{id,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from KHJC_CRIMINAL_MONTHSCORE_SD
+    where ID = #{id,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.sinog2c.model.khjc.Khjccriminalmonthscoresd" >
+    insert into KHJC_CRIMINAL_MONTHSCORE_SD (ID, CRIMID, EXAMTIME, 
+      FENJIANQU, JIANQU, JIANYU, 
+      YUEDEFEN, FENGXIANFEN, JIANGFEN, 
+      JIANGFENREMARK, KOUFEN, KOUFENREMARK, 
+      ZHUXIAOFEN, ZHUXIAOFENREMARK, DUIXIANZHEDIFEN, 
+      DUIXIANZHEDIFENREMARK, YUEZONGFEN, SHIJILEIJIZONGFEN, 
+      DUIXIANHOULEIJIZONGFEN, YUEDEFENLOCK, FENGXIANFENLOCK, 
+      UPDATETIME, UPDATEMENDER, DELFLAG
+      )
+    values (#{id,jdbcType=VARCHAR}, #{crimid,jdbcType=VARCHAR}, #{examtime,jdbcType=VARCHAR}, 
+      #{fenjianqu,jdbcType=VARCHAR}, #{jianqu,jdbcType=VARCHAR}, #{jianyu,jdbcType=VARCHAR}, 
+      #{yuedefen,jdbcType=VARCHAR}, #{fengxianfen,jdbcType=VARCHAR}, #{jiangfen,jdbcType=VARCHAR}, 
+      #{jiangfenremark,jdbcType=VARCHAR}, #{koufen,jdbcType=VARCHAR}, #{koufenremark,jdbcType=VARCHAR}, 
+      #{zhuxiaofen,jdbcType=VARCHAR}, #{zhuxiaofenremark,jdbcType=VARCHAR}, #{duixianzhedifen,jdbcType=VARCHAR}, 
+      #{duixianzhedifenremark,jdbcType=VARCHAR}, #{yuezongfen,jdbcType=VARCHAR}, #{shijileijizongfen,jdbcType=VARCHAR}, 
+      #{duixianhouleijizongfen,jdbcType=VARCHAR}, #{yuedefenlock,jdbcType=VARCHAR}, #{fengxianfenlock,jdbcType=VARCHAR}, 
+      #{updatetime,jdbcType=TIMESTAMP}, #{updatemender,jdbcType=VARCHAR}, #{delflag,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.sinog2c.model.khjc.Khjccriminalmonthscoresd" >
+    insert into KHJC_CRIMINAL_MONTHSCORE_SD
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        ID,
+      </if>
+      <if test="crimid != null" >
+        CRIMID,
+      </if>
+      <if test="examtime != null" >
+        EXAMTIME,
+      </if>
+      <if test="fenjianqu != null" >
+        FENJIANQU,
+      </if>
+      <if test="jianqu != null" >
+        JIANQU,
+      </if>
+      <if test="jianyu != null" >
+        JIANYU,
+      </if>
+      <if test="yuedefen != null" >
+        YUEDEFEN,
+      </if>
+      <if test="fengxianfen != null" >
+        FENGXIANFEN,
+      </if>
+      <if test="jiangfen != null" >
+        JIANGFEN,
+      </if>
+      <if test="jiangfenremark != null" >
+        JIANGFENREMARK,
+      </if>
+      <if test="koufen != null" >
+        KOUFEN,
+      </if>
+      <if test="koufenremark != null" >
+        KOUFENREMARK,
+      </if>
+      <if test="zhuxiaofen != null" >
+        ZHUXIAOFEN,
+      </if>
+      <if test="zhuxiaofenremark != null" >
+        ZHUXIAOFENREMARK,
+      </if>
+      <if test="duixianzhedifen != null" >
+        DUIXIANZHEDIFEN,
+      </if>
+      <if test="duixianzhedifenremark != null" >
+        DUIXIANZHEDIFENREMARK,
+      </if>
+      <if test="yuezongfen != null" >
+        YUEZONGFEN,
+      </if>
+      <if test="shijileijizongfen != null" >
+        SHIJILEIJIZONGFEN,
+      </if>
+      <if test="duixianhouleijizongfen != null" >
+        DUIXIANHOULEIJIZONGFEN,
+      </if>
+      <if test="yuedefenlock != null" >
+        YUEDEFENLOCK,
+      </if>
+      <if test="fengxianfenlock != null" >
+        FENGXIANFENLOCK,
+      </if>
+      <if test="updatetime != null" >
+        UPDATETIME,
+      </if>
+      <if test="updatemender != null" >
+        UPDATEMENDER,
+      </if>
+      <if test="delflag != null" >
+        DELFLAG,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=VARCHAR},
+      </if>
+      <if test="crimid != null" >
+        #{crimid,jdbcType=VARCHAR},
+      </if>
+      <if test="examtime != null" >
+        #{examtime,jdbcType=VARCHAR},
+      </if>
+      <if test="fenjianqu != null" >
+        #{fenjianqu,jdbcType=VARCHAR},
+      </if>
+      <if test="jianqu != null" >
+        #{jianqu,jdbcType=VARCHAR},
+      </if>
+      <if test="jianyu != null" >
+        #{jianyu,jdbcType=VARCHAR},
+      </if>
+      <if test="yuedefen != null" >
+        #{yuedefen,jdbcType=VARCHAR},
+      </if>
+      <if test="fengxianfen != null" >
+        #{fengxianfen,jdbcType=VARCHAR},
+      </if>
+      <if test="jiangfen != null" >
+        #{jiangfen,jdbcType=VARCHAR},
+      </if>
+      <if test="jiangfenremark != null" >
+        #{jiangfenremark,jdbcType=VARCHAR},
+      </if>
+      <if test="koufen != null" >
+        #{koufen,jdbcType=VARCHAR},
+      </if>
+      <if test="koufenremark != null" >
+        #{koufenremark,jdbcType=VARCHAR},
+      </if>
+      <if test="zhuxiaofen != null" >
+        #{zhuxiaofen,jdbcType=VARCHAR},
+      </if>
+      <if test="zhuxiaofenremark != null" >
+        #{zhuxiaofenremark,jdbcType=VARCHAR},
+      </if>
+      <if test="duixianzhedifen != null" >
+        #{duixianzhedifen,jdbcType=VARCHAR},
+      </if>
+      <if test="duixianzhedifenremark != null" >
+        #{duixianzhedifenremark,jdbcType=VARCHAR},
+      </if>
+      <if test="yuezongfen != null" >
+        #{yuezongfen,jdbcType=VARCHAR},
+      </if>
+      <if test="shijileijizongfen != null" >
+        #{shijileijizongfen,jdbcType=VARCHAR},
+      </if>
+      <if test="duixianhouleijizongfen != null" >
+        #{duixianhouleijizongfen,jdbcType=VARCHAR},
+      </if>
+      <if test="yuedefenlock != null" >
+        #{yuedefenlock,jdbcType=VARCHAR},
+      </if>
+      <if test="fengxianfenlock != null" >
+        #{fengxianfenlock,jdbcType=VARCHAR},
+      </if>
+      <if test="updatetime != null" >
+        #{updatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updatemender != null" >
+        #{updatemender,jdbcType=VARCHAR},
+      </if>
+      <if test="delflag != null" >
+        #{delflag,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+    <insert id="insertByMap" parameterType="Map" >
+    insert into KHJC_CRIM_MONTH_SCORE
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="crimid != null" >
+        CRIMID,
+      </if>
+      <if test="biddate != null" >
+        biddate,
+      </if>
+      <if test="orgid1 != null" >
+        orgid1,
+      </if>
+      <if test="orgid2 != null" >
+        orgid2,
+      </if>
+      <if test="departid != null" >
+        departid,
+      </if>
+      <if test="yuedefen != null" >
+        YUEDEFEN,
+      </if>
+      <if test="fengxianfen != null" >
+        FENGXIANFEN,
+      </if>
+      <if test="jiangfen != null" >
+        JIANGFEN,
+      </if>
+      <if test="jiangfenremark != null" >
+        JIANGFENREMARK,
+      </if>
+      <if test="koufen != null" >
+        KOUFEN,
+      </if>
+      <if test="koufenremark != null" >
+        KOUFENREMARK,
+      </if>
+      <if test="duixian != null" >
+        duixian,
+      </if>
+      <if test="duixianremark != null" >
+        duixianremark,
+      </if>
+      <if test="yuezongfen != null" >
+        YUEZONGFEN,
+      </if>
+      <if test="leijizongfen != null" >
+        leijizongfen,
+      </if>
+      <if test="yuedefenlock != null" >
+        YUEDEFENLOCK,
+      </if>
+      <if test="fengxianfenlock != null" >
+        FENGXIANFENLOCK,
+      </if>
+      <if test="updatetime != null" >
+        UPDATETIME,
+      </if>
+      <if test="updatemender != null" >
+        UPDATEMENDER,
+      </if>
+      <if test="delflag != null" >
+        DELFLAG,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="crimid != null" >
+        #{crimid,jdbcType=VARCHAR},
+      </if>
+      <if test="biddate != null" >
+        #{biddate,jdbcType=VARCHAR},
+      </if>
+      <if test="orgid1 != null" >
+        #{orgid1,jdbcType=VARCHAR},
+      </if>
+      <if test="orgid2 != null" >
+        #{orgid2,jdbcType=VARCHAR},
+      </if>
+      <if test="departid != null" >
+        #{departid,jdbcType=VARCHAR},
+      </if>
+      <if test="yuedefen != null" >
+        #{yuedefen,jdbcType=VARCHAR},
+      </if>
+      <if test="fengxianfen != null" >
+        #{fengxianfen,jdbcType=VARCHAR},
+      </if>
+      <if test="jiangfen != null" >
+        #{jiangfen,jdbcType=VARCHAR},
+      </if>
+      <if test="jiangfenremark != null" >
+        #{jiangfenremark,jdbcType=VARCHAR},
+      </if>
+      <if test="koufen != null" >
+        #{koufen,jdbcType=VARCHAR},
+      </if>
+      <if test="koufenremark != null" >
+        #{koufenremark,jdbcType=VARCHAR},
+      </if>
+      <if test="duixian != null" >
+        #{duixian,jdbcType=VARCHAR},
+      </if>
+      <if test="duixianremark != null" >
+        #{duixianremark,jdbcType=VARCHAR},
+      </if>
+      <if test="yuezongfen != null" >
+        #{yuezongfen,jdbcType=VARCHAR},
+      </if>
+      <if test="leijizongfen != null" >
+        #{leijizongfen,jdbcType=VARCHAR},
+      </if>
+      <if test="updatetime != null" >
+        #{updatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updatemender != null" >
+        #{updatemender,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.sinog2c.model.khjc.Khjccriminalmonthscoresd" >
+    update KHJC_CRIMINAL_MONTHSCORE_SD
+    <set >
+      <if test="crimid != null" >
+        CRIMID = #{crimid,jdbcType=VARCHAR},
+      </if>
+      <if test="examtime != null" >
+        EXAMTIME = #{examtime,jdbcType=VARCHAR},
+      </if>
+      <if test="fenjianqu != null" >
+        FENJIANQU = #{fenjianqu,jdbcType=VARCHAR},
+      </if>
+      <if test="jianqu != null" >
+        JIANQU = #{jianqu,jdbcType=VARCHAR},
+      </if>
+      <if test="jianyu != null" >
+        JIANYU = #{jianyu,jdbcType=VARCHAR},
+      </if>
+      <if test="yuedefen != null" >
+        YUEDEFEN = #{yuedefen,jdbcType=VARCHAR},
+      </if>
+      <if test="fengxianfen != null" >
+        FENGXIANFEN = #{fengxianfen,jdbcType=VARCHAR},
+      </if>
+      <if test="jiangfen != null" >
+        JIANGFEN = #{jiangfen,jdbcType=VARCHAR},
+      </if>
+      <if test="jiangfenremark != null" >
+        JIANGFENREMARK = #{jiangfenremark,jdbcType=VARCHAR},
+      </if>
+      <if test="koufen != null" >
+        KOUFEN = #{koufen,jdbcType=VARCHAR},
+      </if>
+      <if test="koufenremark != null" >
+        KOUFENREMARK = #{koufenremark,jdbcType=VARCHAR},
+      </if>
+      <if test="zhuxiaofen != null" >
+        ZHUXIAOFEN = #{zhuxiaofen,jdbcType=VARCHAR},
+      </if>
+      <if test="zhuxiaofenremark != null" >
+        ZHUXIAOFENREMARK = #{zhuxiaofenremark,jdbcType=VARCHAR},
+      </if>
+      <if test="duixianzhedifen != null" >
+        DUIXIANZHEDIFEN = #{duixianzhedifen,jdbcType=VARCHAR},
+      </if>
+      <if test="duixianzhedifenremark != null" >
+        DUIXIANZHEDIFENREMARK = #{duixianzhedifenremark,jdbcType=VARCHAR},
+      </if>
+      <if test="yuezongfen != null" >
+        YUEZONGFEN = #{yuezongfen,jdbcType=VARCHAR},
+      </if>
+      <if test="shijileijizongfen != null" >
+        SHIJILEIJIZONGFEN = #{shijileijizongfen,jdbcType=VARCHAR},
+      </if>
+      <if test="duixianhouleijizongfen != null" >
+        DUIXIANHOULEIJIZONGFEN = #{duixianhouleijizongfen,jdbcType=VARCHAR},
+      </if>
+      <if test="yuedefenlock != null" >
+        YUEDEFENLOCK = #{yuedefenlock,jdbcType=VARCHAR},
+      </if>
+      <if test="fengxianfenlock != null" >
+        FENGXIANFENLOCK = #{fengxianfenlock,jdbcType=VARCHAR},
+      </if>
+      <if test="updatetime != null" >
+        UPDATETIME = #{updatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updatemender != null" >
+        UPDATEMENDER = #{updatemender,jdbcType=VARCHAR},
+      </if>
+      <if test="delflag != null" >
+        DELFLAG = #{delflag,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where ID = #{id,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.sinog2c.model.khjc.Khjccriminalmonthscoresd" >
+    update KHJC_CRIMINAL_MONTHSCORE_SD
+    set CRIMID = #{crimid,jdbcType=VARCHAR},
+      EXAMTIME = #{examtime,jdbcType=VARCHAR},
+      FENJIANQU = #{fenjianqu,jdbcType=VARCHAR},
+      JIANQU = #{jianqu,jdbcType=VARCHAR},
+      JIANYU = #{jianyu,jdbcType=VARCHAR},
+      YUEDEFEN = #{yuedefen,jdbcType=VARCHAR},
+      FENGXIANFEN = #{fengxianfen,jdbcType=VARCHAR},
+      JIANGFEN = #{jiangfen,jdbcType=VARCHAR},
+      JIANGFENREMARK = #{jiangfenremark,jdbcType=VARCHAR},
+      KOUFEN = #{koufen,jdbcType=VARCHAR},
+      KOUFENREMARK = #{koufenremark,jdbcType=VARCHAR},
+      ZHUXIAOFEN = #{zhuxiaofen,jdbcType=VARCHAR},
+      ZHUXIAOFENREMARK = #{zhuxiaofenremark,jdbcType=VARCHAR},
+      DUIXIANZHEDIFEN = #{duixianzhedifen,jdbcType=VARCHAR},
+      DUIXIANZHEDIFENREMARK = #{duixianzhedifenremark,jdbcType=VARCHAR},
+      YUEZONGFEN = #{yuezongfen,jdbcType=VARCHAR},
+      SHIJILEIJIZONGFEN = #{shijileijizongfen,jdbcType=VARCHAR},
+      DUIXIANHOULEIJIZONGFEN = #{duixianhouleijizongfen,jdbcType=VARCHAR},
+      YUEDEFENLOCK = #{yuedefenlock,jdbcType=VARCHAR},
+      FENGXIANFENLOCK = #{fengxianfenlock,jdbcType=VARCHAR},
+      UPDATETIME = #{updatetime,jdbcType=DATE},
+      UPDATEMENDER = #{updatemender,jdbcType=VARCHAR},
+      DELFLAG = #{delflag,jdbcType=VARCHAR}
+    where ID = #{id,jdbcType=VARCHAR}
+  </update>
+    <update id="updateByMap" parameterType="Map" >
+    update KHJC_CRIM_MONTH_SCORE set 
+    yuedefen = #{yuedefen,jdbcType=VARCHAR},
+	fengxianfen = #{fengxianfen,jdbcType=VARCHAR},
+	jiangfen = #{jiangfen,jdbcType=VARCHAR},
+	jiangfenremark = #{jiangfenremark,jdbcType=VARCHAR},
+	koufen = #{koufen,jdbcType=VARCHAR},
+	koufenremark = #{koufenremark,jdbcType=VARCHAR},
+	duixian=#{duixian,jdbcType=VARCHAR},
+	duixianremark = #{duixianremark,jdbcType=VARCHAR},
+	yuezongfen = #{yuezongfen,jdbcType=VARCHAR},
+	leijizongfen = #{leijizongfen,jdbcType=VARCHAR},
+	orgid1 = #{orgid1,jdbcType=VARCHAR},
+	orgid2 = #{orgid2,jdbcType=VARCHAR},
+	departid = #{departid,jdbcType=VARCHAR}
+where crimid=#{crimid,jdbcType=VARCHAR} and biddate = #{biddate,jdbcType=VARCHAR}
+  </update>
+  <select id="countForMonthCheck" resultType="int" parameterType="Map">
+  	SELECT count(*)
+    FROM STATIC_APPOINT_USER_INFO a,
+         (SELECT *
+            FROM KHJC_CRIM_MONTH_SCORE
+           WHERE biddate = #{biddate}) b,
+           TBPRISONER_BASEINFO c 
+   WHERE     a.crimid = b.crimid(+)
+         and a.crimid = c.crimid(+)
+         AND SUBSTR (A.SDONEDATE, 0, 6) = #{biddate}
+         AND a.orgid1 IN (SELECT T.DORGID
+                            FROM TBFLOW_ORG_ORG T
+                           WHERE T.ORGID = #{orgid})
+  </select>
+  <select id="getCriminalForMonthCheck" resultType="Map" parameterType="Map">
+  select * from (
+select a.*, rownum rn from(
+
+SELECT   a.crimid,
+         c.name as crimname,
+         NVL(b.yuedefen,0) as yuedefen,
+         NVL(b.fengxianfen,0) as fengxianfen,
+         NVL(b.jiangfen,0) as jiangfen,
+         b.jiangfenremark,
+         NVL(b.koufen,0) as koufen,
+         b.koufenremark,
+         NVL(b.duixian,0) as duixian,
+         b.duixianremark as duixianremark,
+         NVL(b.yuezongfen,0) as yuezongfen,
+         case when  NVL(b.leijizongfen,0) = 0 then NVL(d.leijizongfen,0)
+         else NVL(b.leijizongfen,0)
+         end as leijizongfen,
+         NVL(d.leijizongfen,0) as lastleijizongfen ,
+         b.yuzhifenflag,
+         a.orgid1,
+         a.orgid2,
+         a.orgid AS departid,
+         b.biddate
+    FROM STATIC_APPOINT_USER_INFO a,
+         (SELECT *
+            FROM KHJC_CRIM_MONTH_SCORE
+           WHERE biddate = #{biddate}) b,
+            (SELECT *
+            FROM KHJC_CRIM_MONTH_SCORE
+           WHERE biddate = #{lastbiddate}) d,
+           TBPRISONER_BASEINFO c 
+   WHERE     a.crimid = b.crimid(+)
+         AND a.crimid = d.crimid(+)
+         and a.crimid = c.crimid(+)
+         AND SUBSTR (A.SDONEDATE, 0, 6) = #{biddate}
+         AND a.orgid1 IN (SELECT T.DORGID
+                            FROM TBFLOW_ORG_ORG T
+                           WHERE T.ORGID = #{orgid})
+		<if test="sortField!=null and sortField!=''" > 
+	     	order by ${sortField}  ${sortOrder}
+	    </if>
+	) a 
+    <if test="start!=null and start!=''">
+   		where rownum &lt;= #{end}
+   	</if> 
+    )
+   	<if test="start!=null and start!=''">
+   		where  rn &gt;= #{start}
+   	</if>
+  </select>
+  
+  <select id="searchScoreByCrimid" resultType="Map" parameterType="Map">
+  		select NVL(sum(yuedefen),0)+NVL(sum(jiangfen),0) as sumleijifen ,sum(jiangfen) as sumjiangfen from (
+			select * from KHJC_CRIM_MONTH_SCORE where biddate between TO_CHAR(add_MONTHS(TO_DATE(#{date},'yyyyMM'),-12),'yyyyMM') and TO_CHAR(TO_DATE(#{date},'yyyyMM'),'yyyyMM')
+			and crimid=#{crimid}
+			order by crimid,biddate
+		) b 
+  </select>
+</mapper>

@@ -1,0 +1,143 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.sinog2c.dao.api.courtjoint.TbdataArchivesMapper" >
+  <resultMap id="BaseResultMap" type="com.sinog2c.model.courtjoint.TbdataArchives" >
+    <result column="ARCHIVESID" property="archivesid" jdbcType="VARCHAR" />
+    <result column="ARCHIVESNAME" property="archivesname" jdbcType="VARCHAR" />
+    <result column="ARCHIVESTYPE" property="archivestype" jdbcType="VARCHAR" />
+    <result column="ARCHIVESPATH" property="archivespath" jdbcType="VARCHAR" />
+    <result column="ARCHIVESSN" property="archivessn" jdbcType="VARCHAR" />
+    <result column="ARCHIVESCREATETIME" property="archivescreatetime" jdbcType="VARCHAR" />
+    <result column="ARCHIVESSENDTIME" property="archivessendtime" jdbcType="VARCHAR" />
+    <result column="ARCHIVESTYPENAME" property="archivestypename" jdbcType="VARCHAR" />
+    <result column="ARCHIVESSIZE" property="archivessize" jdbcType="VARCHAR" />
+    <result column="ARCHIVESREMARKE" property="archivesremarke" jdbcType="VARCHAR" />
+    <result column="OPID" property="opid" jdbcType="VARCHAR" />
+    <result column="OPTIME" property="optime" jdbcType="DATE" />
+    <result column="BATCHID" property="batchid" jdbcType="VARCHAR" />
+    <result column="CRIMID" property="crimid" jdbcType="VARCHAR" />
+    <result column="CASENUM" property="casenum" jdbcType="VARCHAR" />
+    <result column="CLASSIFICATION" property="classification" jdbcType="VARCHAR" />
+  </resultMap>
+  <insert id="insert" parameterType="com.sinog2c.model.courtjoint.TbdataArchives" >
+    insert into TBDATA_ARCHIVES (ARCHIVESID, ARCHIVESNAME, ARCHIVESTYPE, 
+      ARCHIVESPATH, ARCHIVESSN, ARCHIVESCREATETIME, 
+      ARCHIVESSENDTIME, ARCHIVESTYPENAME, ARCHIVESSIZE, 
+      ARCHIVESREMARKE, OPID, OPTIME, 
+      BATCHID, CRIMID, CASENUM, 
+      CLASSIFICATION)
+    values (#{archivesid,jdbcType=VARCHAR}, #{archivesname,jdbcType=VARCHAR}, #{archivestype,jdbcType=VARCHAR}, 
+      #{archivespath,jdbcType=VARCHAR}, #{archivessn,jdbcType=VARCHAR}, #{archivescreatetime,jdbcType=VARCHAR}, 
+      #{archivessendtime,jdbcType=VARCHAR}, #{archivestypename,jdbcType=VARCHAR}, #{archivessize,jdbcType=VARCHAR}, 
+      #{archivesremarke,jdbcType=VARCHAR}, #{opid,jdbcType=VARCHAR}, #{optime,jdbcType=DATE}, 
+      #{batchid,jdbcType=VARCHAR}, #{crimid,jdbcType=VARCHAR}, #{casenum,jdbcType=VARCHAR}, 
+      #{classification,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.sinog2c.model.courtjoint.TbdataArchives" >
+    insert into TBDATA_ARCHIVES
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="archivesid != null" >
+        ARCHIVESID,
+      </if>
+      <if test="archivesname != null" >
+        ARCHIVESNAME,
+      </if>
+      <if test="archivestype != null" >
+        ARCHIVESTYPE,
+      </if>
+      <if test="archivespath != null" >
+        ARCHIVESPATH,
+      </if>
+      <if test="archivessn != null" >
+        ARCHIVESSN,
+      </if>
+      <if test="archivescreatetime != null" >
+        ARCHIVESCREATETIME,
+      </if>
+      <if test="archivessendtime != null" >
+        ARCHIVESSENDTIME,
+      </if>
+      <if test="archivestypename != null" >
+        ARCHIVESTYPENAME,
+      </if>
+      <if test="archivessize != null" >
+        ARCHIVESSIZE,
+      </if>
+      <if test="archivesremarke != null" >
+        ARCHIVESREMARKE,
+      </if>
+      <if test="opid != null" >
+        OPID,
+      </if>
+      <if test="optime != null" >
+        OPTIME,
+      </if>
+      <if test="batchid != null" >
+        BATCHID,
+      </if>
+      <if test="crimid != null" >
+        CRIMID,
+      </if>
+      <if test="casenum != null" >
+        CASENUM,
+      </if>
+      <if test="classification != null" >
+        CLASSIFICATION,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="archivesid != null" >
+        #{archivesid,jdbcType=VARCHAR},
+      </if>
+      <if test="archivesname != null" >
+        #{archivesname,jdbcType=VARCHAR},
+      </if>
+      <if test="archivestype != null" >
+        #{archivestype,jdbcType=VARCHAR},
+      </if>
+      <if test="archivespath != null" >
+        #{archivespath,jdbcType=VARCHAR},
+      </if>
+      <if test="archivessn != null" >
+        #{archivessn,jdbcType=VARCHAR},
+      </if>
+      <if test="archivescreatetime != null" >
+        #{archivescreatetime,jdbcType=VARCHAR},
+      </if>
+      <if test="archivessendtime != null" >
+        #{archivessendtime,jdbcType=VARCHAR},
+      </if>
+      <if test="archivestypename != null" >
+        #{archivestypename,jdbcType=VARCHAR},
+      </if>
+      <if test="archivessize != null" >
+        #{archivessize,jdbcType=VARCHAR},
+      </if>
+      <if test="archivesremarke != null" >
+        #{archivesremarke,jdbcType=VARCHAR},
+      </if>
+      <if test="opid != null" >
+        #{opid,jdbcType=VARCHAR},
+      </if>
+      <if test="optime != null" >
+        #{optime,jdbcType=DATE},
+      </if>
+      <if test="batchid != null" >
+        #{batchid,jdbcType=VARCHAR},
+      </if>
+      <if test="crimid != null" >
+        #{crimid,jdbcType=VARCHAR},
+      </if>
+      <if test="casenum != null" >
+        #{casenum,jdbcType=VARCHAR},
+      </if>
+      <if test="classification != null" >
+        #{classification,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  
+    <select id="findByCrimidAndArchivesname" parameterType="Map" resultType="String">
+		select * from(select ARCHIVESPATH from tbdata_archives where crimid = #{crimid} and batchid = #{batchid} and ARCHIVESNAME like '%'||#{archivesname}||'%' order by ARCHIVESSENDTIME)where rownum = 1
+  </select>
+</mapper>

@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.sinog2c.dao.api.flow.FlowDeliverHisMapper">
+	<resultMap id="BaseResultMap" type="com.sinog2c.model.flow.FlowDeliverHis">
+		<result column="FLOWDEFID" jdbcType="VARCHAR" property="flowdefid" />
+		<result column="RESID" jdbcType="VARCHAR" property="resid" />
+		<result column="SNODEID" jdbcType="VARCHAR" property="snodeid" />
+		<result column="DNODEID" jdbcType="VARCHAR" property="dnodeid" />
+		<result column="EXPLAIN" jdbcType="VARCHAR" property="explain" />
+		<result column="STATE" jdbcType="DECIMAL" property="state" />
+		<result column="TEXT1" jdbcType="VARCHAR" property="text1" />
+		<result column="TEXT2" jdbcType="VARCHAR" property="text2" />
+		<result column="TEXT3" jdbcType="VARCHAR" property="text3" />
+		<result column="REMARK" jdbcType="VARCHAR" property="remark" />
+		<result column="OPTIME" jdbcType="TIMESTAMP" property="optime" />
+		<result column="OPID" jdbcType="VARCHAR" property="opid" />
+	</resultMap>
+	<insert id="insert" parameterType="com.sinog2c.model.flow.FlowDeliverHis">
+		insert into TBFLOW_DELIVER_HIS (FLOWDEFID, RESID, SNODEID,
+		DNODEID, EXPLAIN, STATE,
+		TEXT1, TEXT2, TEXT3,
+		REMARK, OPTIME, OPID)
+		values (#{flowdefid,jdbcType=VARCHAR}, #{resid,jdbcType=VARCHAR},
+		#{snodeid,jdbcType=VARCHAR},
+		#{dnodeid,jdbcType=VARCHAR}, #{explain,jdbcType=VARCHAR}, #{state,jdbcType=DECIMAL},
+		#{text1,jdbcType=VARCHAR}, #{text2,jdbcType=VARCHAR},
+		#{text3,jdbcType=VARCHAR},
+		#{remark,jdbcType=VARCHAR}, #{optime,jdbcType=TIMESTAMP}, #{opid,jdbcType=VARCHAR})
+  </insert>
+	<select id="countAll" resultType="int">  <!-- 查询表中记录总数 -->
+		select count(*) c from TBFLOW_DELIVER_HIS
+	</select>
+
+	<select id="selectAll" resultType="com.sinog2c.model.flow.FlowDeliverHis">    <!-- 查询表中的所有流程信息 -->
+		select * from TBFLOW_DELIVER_HIS order by optime asc
+	</select>
+
+	<select id="findById" parameterType="String"
+		resultType="com.sinog2c.model.flow.FlowDeliverHis"> <!-- 根据流程ID查找流程信息 -->
+		select * from TBFLOW_DELIVER_HIS 
+		<if test="flowdefid!=null and flowdefid!=''">  
+			where flowdefid=#{flowdefid}
+		</if>
+	</select>
+</mapper>

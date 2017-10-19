@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.sinog2c.dao.api.file.FileFolderPublicMapper" >
+  <resultMap id="BaseResultMap" type="com.sinog2c.model.file.FileFolderPublic" >
+    <id column="ID" property="id" jdbcType="DECIMAL" />
+    <result column="PARENT_ID" property="parentId" jdbcType="DECIMAL" />
+    <result column="FOLDER_NAME" property="folderName" jdbcType="VARCHAR" />
+    <result column="FOLDER_ORDER" property="folderOrder" jdbcType="DECIMAL" />
+    <result column="CREATE_TIME" property="createTime" jdbcType="DATE" />
+    <result column="CREATE_USER" property="createUser" jdbcType="VARCHAR" />
+    <result column="attchmentId" property="attchmentId" jdbcType="DECIMAL" />	
+  </resultMap>
+  <sql id="Base_Column_List" >
+    ID, PARENT_ID, FOLDER_NAME, FOLDER_ORDER, CREATE_TIME, CREATE_USER
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from FILE_FOLDER_PUBLIC
+    where ID = #{id,jdbcType=DECIMAL}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from FILE_FOLDER_PUBLIC
+    where ID = #{id,jdbcType=DECIMAL}
+  </delete>
+  <insert id="insert" parameterType="com.sinog2c.model.file.FileFolderPublic" >
+    insert into FILE_FOLDER_PUBLIC (ID, PARENT_ID, FOLDER_NAME, 
+      FOLDER_ORDER, CREATE_TIME, CREATE_USER
+      )
+    values (#{id,jdbcType=DECIMAL}, #{parentId,jdbcType=DECIMAL}, #{folderName,jdbcType=VARCHAR}, 
+      #{folderOrder,jdbcType=DECIMAL}, #{createTime,jdbcType=DATE}, #{createUser,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.sinog2c.model.file.FileFolderPublic" >
+    insert into FILE_FOLDER_PUBLIC
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        ID,
+      </if>
+      <if test="parentId != null" >
+        PARENT_ID,
+      </if>
+      <if test="folderName != null" >
+        FOLDER_NAME,
+      </if>
+      <if test="folderOrder != null" >
+        FOLDER_ORDER,
+      </if>
+      <if test="createTime != null" >
+        CREATE_TIME,
+      </if>
+      <if test="createUser != null" >
+        CREATE_USER,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=DECIMAL},
+      </if>
+      <if test="parentId != null" >
+        #{parentId,jdbcType=DECIMAL},
+      </if>
+      <if test="folderName != null" >
+        #{folderName,jdbcType=VARCHAR},
+      </if>
+      <if test="folderOrder != null" >
+        #{folderOrder,jdbcType=DECIMAL},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=DATE},
+      </if>
+      <if test="createUser != null" >
+        #{createUser,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.sinog2c.model.file.FileFolderPublic" >
+    update FILE_FOLDER_PUBLIC
+    <set >
+      <if test="parentId != null" >
+        PARENT_ID = #{parentId,jdbcType=DECIMAL},
+      </if>
+      <if test="folderName != null" >
+        FOLDER_NAME = #{folderName,jdbcType=VARCHAR},
+      </if>
+      <if test="folderOrder != null" >
+        FOLDER_ORDER = #{folderOrder,jdbcType=DECIMAL},
+      </if>
+      <if test="createTime != null" >
+        CREATE_TIME = #{createTime,jdbcType=DATE},
+      </if>
+      <if test="createUser != null" >
+        CREATE_USER = #{createUser,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where ID = #{id,jdbcType=DECIMAL}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.sinog2c.model.file.FileFolderPublic" >
+    update FILE_FOLDER_PUBLIC
+    set PARENT_ID = #{parentId,jdbcType=DECIMAL},
+      FOLDER_NAME = #{folderName,jdbcType=VARCHAR},
+      FOLDER_ORDER = #{folderOrder,jdbcType=DECIMAL},
+      CREATE_TIME = #{createTime,jdbcType=DATE},
+      CREATE_USER = #{createUser,jdbcType=VARCHAR}
+    where ID = #{id,jdbcType=DECIMAL}
+  </update>
+  
+  <select id="getNextId" resultType="java.lang.Long">  <!-- 获取下一个ID -->
+		SELECT file_folder_public_id_seq.NEXTVAL FROM DUAL
+	</select>	
+
+	<select id="getfolderbyUserid" resultMap="BaseResultMap"
+		parameterType="java.lang.String">
+		select FILE_FOLDER_PUBLIC.*,OA_ATTACHMENT.ID attchmentId 
+		from FILE_FOLDER_PUBLIC Join OA_ATTACHMENT on FILE_FOLDER_PUBLIC.ID=OA_ATTACHMENT.PK
+		where model='file_folder_public'
+	</select>
+</mapper>

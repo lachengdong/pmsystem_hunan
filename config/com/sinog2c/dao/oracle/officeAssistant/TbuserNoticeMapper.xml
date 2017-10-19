@@ -1,0 +1,713 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.sinog2c.dao.api.officeAssistant.TbuserNoticeMapper" >
+  <resultMap id="BaseResultMap" type="com.sinog2c.model.officeAssistant.TbuserNotice" >
+    <result column="NOTICEID" property="noticeid" jdbcType="DECIMAL" />
+    <result column="MESSAGETYPE" property="messagetype" jdbcType="DECIMAL" />
+    <result column="TITLE" property="title" jdbcType="VARCHAR" />
+    <result column="CONTENT" property="content" jdbcType="VARCHAR" />
+    <result column="USERNAME" property="username" jdbcType="VARCHAR" />
+    <result column="ENDTIME" property="endtime" jdbcType="TIMESTAMP" />
+    <result column="STARTTIME" property="starttime" jdbcType="TIMESTAMP" />
+    <result column="STATE" property="state" jdbcType="DECIMAL" />
+    <result column="CANCELTIME" property="canceltime" jdbcType="TIMESTAMP" />
+    <result column="TEXT1" property="text1" jdbcType="VARCHAR" />
+    <result column="TEXT2" property="text2" jdbcType="VARCHAR" />
+    <result column="TEXT3" property="text3" jdbcType="VARCHAR" />
+    <result column="REMARK" property="remark" jdbcType="VARCHAR" />
+    <result column="OPTIME" property="optime" jdbcType="TIMESTAMP" />
+    <result column="OPID" property="opid" jdbcType="VARCHAR" />
+    <result column="CZSTATE" property="czstate" jdbcType="VARCHAR"/>
+  </resultMap>
+  <insert id="insert" parameterType="com.sinog2c.model.officeAssistant.TbuserNotice" >
+  <selectKey resultType="int" order="BEFORE" keyProperty="noticeid">
+			select SEQ_TBUSER_NOTICE.nextval as NOTICEID from dual
+		</selectKey>
+    insert into TBUSER_NOTICE (NOTICEID, MESSAGETYPE, TITLE, 
+      CONTENT, USERNAME, ENDTIME, 
+      STARTTIME, STATE, CANCELTIME, 
+      TEXT1, TEXT2, TEXT3, 
+      REMARK, OPTIME, OPID)
+    values (#{noticeid,jdbcType=DECIMAL}, #{messagetype,jdbcType=DECIMAL}, #{title,jdbcType=VARCHAR}, 
+      #{content,jdbcType=VARCHAR}, #{username,jdbcType=VARCHAR}, #{endtime,jdbcType=DATE}, 
+      #{starttime,jdbcType=DATE}, #{state,jdbcType=DECIMAL}, #{canceltime,jdbcType=DATE}, 
+      #{text1,jdbcType=VARCHAR}, #{text2,jdbcType=VARCHAR}, #{text3,jdbcType=VARCHAR}, 
+      #{remark,jdbcType=VARCHAR}, #{optime,jdbcType=TIMESTAMP}, #{opid,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.sinog2c.model.officeAssistant.TbuserNotice" >
+    <selectKey resultType="int" order="BEFORE" keyProperty="noticeid">
+		select SEQ_TBUSER_NOTICE.nextval as NOTICEID from dual
+	</selectKey>
+    insert into TBUSER_NOTICE
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="noticeid != null" >
+        NOTICEID,
+      </if>
+      <if test="messagetype != null" >
+        MESSAGETYPE,
+      </if>
+      <if test="title != null" >
+        TITLE,
+      </if>
+      <if test="content != null" >
+        CONTENT,
+      </if>
+      <if test="username != null" >
+        USERNAME,
+      </if>
+      <if test="endtime != null" >
+        ENDTIME,
+      </if>
+      <if test="starttime != null" >
+        STARTTIME,
+      </if>
+      <if test="state != null" >
+        STATE,
+      </if>
+      <if test="canceltime != null" >
+        CANCELTIME,
+      </if>
+      <if test="text1 != null" >
+        TEXT1,
+      </if>
+      <if test="text2 != null" >
+        TEXT2,
+      </if>
+      <if test="text3 != null" >
+        TEXT3,
+      </if>
+      <if test="remark != null" >
+        REMARK,
+      </if>
+      <if test="optime != null" >
+        OPTIME,
+      </if>
+      <if test="opid != null" >
+        OPID,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="noticeid != null" >
+        #{noticeid,jdbcType=DECIMAL},
+      </if>
+      <if test="messagetype != null" >
+        #{messagetype,jdbcType=DECIMAL},
+      </if>
+      <if test="title != null" >
+        #{title,jdbcType=VARCHAR},
+      </if>
+      <if test="content != null" >
+        #{content,jdbcType=VARCHAR},
+      </if>
+      <if test="username != null" >
+        #{username,jdbcType=VARCHAR},
+      </if>
+      <if test="endtime != null" >
+        #{endtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="starttime != null" >
+      	#{starttime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="state != null" >
+        #{state,jdbcType=DECIMAL},
+      </if>
+      <if test="canceltime != null" >
+        #{canceltime,jdbcType=DATE},
+      </if>
+      <if test="text1 != null" >
+        #{text1,jdbcType=VARCHAR},
+      </if>
+      <if test="text2 != null" >
+        #{text2,jdbcType=VARCHAR},
+      </if>
+      <if test="text3 != null" >
+        #{text3,jdbcType=VARCHAR},
+      </if>
+      <if test="remark != null" >
+        #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="optime != null" >
+        #{optime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="opid != null" >
+        #{opid,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+
+  
+  <select id="queryAllUser" resultType="Map">
+  		select t.userid
+  		from tbsys_user_org t
+ 		where t.orgid in (select a.orgid
+                    from tbsys_orginfo a
+                   where a.porgid = #{porgid}
+                     and a.Unitlevel = '5')  
+  </select>
+  
+  <select id="queryNotice" parameterType="String" resultType="com.sinog2c.model.officeAssistant.TbuserNotice">
+  	    select * from tbuser_notice  where opid='sysauto' and remark='casecheck' and text1=#{crimid}
+  </select>
+  <select id="queryAllflowe" resultType="com.sinog2c.model.flow.UvFlow" parameterType="String">
+  	  select  t.fuyiflag as conent,t.text1 as opid,t.opname as opname,t.text6 as commenttext,t.departid as departid,t.applyid as applyid
+  			from uv_flow t where t.fuyiflag is not null
+  			 and t.flowdefid = #{flowdefid} 
+  </select>
+  <select id="selectAll" resultType="com.sinog2c.model.officeAssistant.TbuserNotice" parameterType="int">
+  	select * from tbuser_notice where messageType=#{type}
+  </select>
+  <select id="selectCount" resultType="int">
+  	SELECT count(*) FROM tbuser_notice t
+		 		  where t.messageType=#{type,jdbcType=DECIMAL} and t.opid=#{opid}
+		 		<trim prefix="" suffix="" suffixOverrides="," > 
+		 		<if test="title != null"> and t.title like '%'||#{title}||'%'</if>
+		 		</trim>
+		 		  and to_char(t.endtime,'yyyy-MM-dd')>=to_char(sysdate,'yyyy-MM-dd')
+  </select>
+  <select id="getAllNotice" resultMap="BaseResultMap">
+	select * from tbuser_notice t where t.noticeid in
+	  (select a.noticeid from tbuser_user_notice a where a.userid=#{userid} and a.state=#{state}) 
+	  and t.messagetype=#{messagetype} order by t.noticeid desc
+  </select>
+  <select id="selectDataById" resultType="com.sinog2c.model.officeAssistant.TbuserNotice">
+   SELECT * FROM 
+	 	( SELECT A.*, ROWNUM RN 
+		 	FROM 
+		 	(
+		 		SELECT * FROM tbuser_notice t
+		 		  where t.messageType=#{type,jdbcType=DECIMAL} and t.opid=#{opid}
+		 		<trim prefix="" suffix="" suffixOverrides="," > 
+		 		<if test="title != null"> and t.title like '%'||#{title}||'%'</if>
+		 		</trim>
+		 		  and to_char(t.endtime,'yyyy-MM-dd')>=to_char(sysdate,'yyyy-MM-dd')
+		 		<if test="sortField!=null and sortField!=''" > 
+                     order by ${sortField}  ${sortOrder}
+                </if>
+		 	) A 
+		 	WHERE ROWNUM &lt;= #{end,jdbcType=DECIMAL}
+	 	) 
+	 	WHERE RN &gt;= #{start,jdbcType=DECIMAL}
+  </select>
+  
+  <insert id="insertMessage" parameterType="String">
+  	<selectKey resultType="int" order="BEFORE" keyProperty="noticeid">
+		select SEQ_TBUSER_NOTICE.NEXTVAL as NOTICEID from dual
+	</selectKey>
+  	insert into TBUSER_NOTICE
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="noticeid != null" >
+        NOTICEID,
+      </if>
+      <if test="messagetype != null" >
+        MESSAGETYPE,
+      </if>
+      <if test="title != null" >
+        TITLE,
+      </if>
+      <if test="content != null" >
+        CONTENT,
+      </if>
+      <if test="username != null" >
+        USERNAME,
+      </if>
+      <if test="endtime != null" >
+        ENDTIME,
+      </if>
+      <if test="starttime != null" >
+        STARTTIME,
+      </if>
+      <if test="state != null" >
+        STATE,
+      </if>
+      <if test="canceltime != null" >
+        CANCELTIME,
+      </if>
+      <if test="text1 != null" >
+        TEXT1,
+      </if>
+      <if test="text2 != null" >
+        TEXT2,
+      </if>
+      <if test="text3 != null" >
+        TEXT3,
+      </if>
+      <if test="remark != null" >
+        REMARK,
+      </if>
+      <if test="optime != null" >
+        OPTIME,
+      </if>
+      <if test="opid != null" >
+        OPID,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="noticeid != null" >
+        #{noticeid,jdbcType=DECIMAL},
+      </if>
+      <if test="messagetype != null" >
+        #{messagetype,jdbcType=DECIMAL},
+      </if>
+      <if test="title != null" >
+        #{title,jdbcType=VARCHAR},
+      </if>
+      <if test="content != null" >
+        #{content,jdbcType=VARCHAR},
+      </if>
+      <if test="username != null" >
+        #{username,jdbcType=VARCHAR},
+      </if>
+      <if test="endtime != null" >
+        #{endtime,jdbcType=DATE},
+      </if>
+      <if test="starttime != null" >
+        #{starttime,jdbcType=DATE},
+      </if>
+      <if test="state != null" >
+        #{state,jdbcType=DECIMAL},
+      </if>
+      <if test="canceltime != null" >
+        #{canceltime,jdbcType=DATE},
+      </if>
+      <if test="text1 != null" >
+        #{text1,jdbcType=VARCHAR},
+      </if>
+      <if test="text2 != null" >
+        #{text2,jdbcType=VARCHAR},
+      </if>
+      <if test="text3 != null" >
+        #{text3,jdbcType=VARCHAR},
+      </if>
+      <if test="remark != null" >
+        #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="optime != null" >
+        #{optime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="opid != null" >
+        #{opid,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  
+  <insert id="insertMessageNew" parameterType="String">
+  	insert into TBUSER_NOTICE
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="noticeid != null" >
+        NOTICEID,
+      </if>
+      <if test="messagetype != null" >
+        MESSAGETYPE,
+      </if>
+      <if test="title != null" >
+        TITLE,
+      </if>
+      <if test="content != null" >
+        CONTENT,
+      </if>
+      <if test="username != null" >
+        USERNAME,
+      </if>
+      <if test="endtime != null" >
+        ENDTIME,
+      </if>
+      <if test="starttime != null" >
+        STARTTIME,
+      </if>
+      <if test="state != null" >
+        STATE,
+      </if>
+      <if test="canceltime != null" >
+        CANCELTIME,
+      </if>
+      <if test="text1 != null" >
+        TEXT1,
+      </if>
+      <if test="text2 != null" >
+        TEXT2,
+      </if>
+      <if test="text3 != null" >
+        TEXT3,
+      </if>
+      <if test="remark != null" >
+        REMARK,
+      </if>
+      <if test="optime != null" >
+        OPTIME,
+      </if>
+      <if test="opid != null" >
+        OPID,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="noticeid != null" >
+        #{noticeid,jdbcType=DECIMAL},
+      </if>
+      <if test="messagetype != null" >
+        #{messagetype,jdbcType=DECIMAL},
+      </if>
+      <if test="title != null" >
+        #{title,jdbcType=VARCHAR},
+      </if>
+      <if test="content != null" >
+        #{content,jdbcType=VARCHAR},
+      </if>
+      <if test="username != null" >
+        #{username,jdbcType=VARCHAR},
+      </if>
+      <if test="endtime != null" >
+        #{endtime,jdbcType=DATE},
+      </if>
+      <if test="starttime != null" >
+        #{starttime,jdbcType=DATE},
+      </if>
+      <if test="state != null" >
+        #{state,jdbcType=DECIMAL},
+      </if>
+      <if test="canceltime != null" >
+        #{canceltime,jdbcType=DATE},
+      </if>
+      <if test="text1 != null" >
+        #{text1,jdbcType=VARCHAR},
+      </if>
+      <if test="text2 != null" >
+        #{text2,jdbcType=VARCHAR},
+      </if>
+      <if test="text3 != null" >
+        #{text3,jdbcType=VARCHAR},
+      </if>
+      <if test="remark != null" >
+        #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="optime != null" >
+        #{optime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="opid != null" >
+        #{opid,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+    
+<!-- 公共方法不要改，根据noticeid查看单条数据    -->
+<select id="selectNoticeByNoticeId" resultType="com.sinog2c.model.officeAssistant.TbuserNotice" parameterType="int">
+  	select * from tbuser_notice where noticeid=#{noticeid}
+  </select>
+  <update id="update" parameterType="Object" >
+	update tbuser_notice set
+		<trim  suffixOverrides="," >
+	      	<if test="title != null" >
+	        	TITLE=#{title},
+	      	</if>
+	      	<if test="content != null" >
+	        	CONTENT=#{content},
+	      	</if>
+	      	<if test="username != null" >
+	        	USERNAME=#{username},
+	      	</if>
+	      	<if test="endtime != null" >
+	        	ENDTIME=#{endtime,jdbcType=TIMESTAMP},
+	      	</if>
+	      	<if test="starttime != null" >
+	        	STARTTIME=#{starttime,jdbcType=TIMESTAMP},
+	      	</if>
+	      	<if test="state != null" >
+	        	STATE=#{state},
+	      	</if>
+	      	<if test="canceltime != null" >
+	        	CANCELTIME=#{canceltime,jdbcType=TIMESTAMP},
+	      	</if>
+	      	<if test="text1 != null" >
+	        	TEXT1=#{text1},
+	      	</if>
+	      	<if test="text2 != null" >
+	        	TEXT2=#{text2},
+	      	</if>
+	      	<if test="text3 != null" >
+	        	TEXT3=#{text3},
+	      	</if>
+	      	<if test="remark != null" >
+	        	REMARK=#{remark},
+	      	</if>
+	      	<if test="optime != null" >
+	        	OPTIME=#{optime,jdbcType=TIMESTAMP},
+	      	</if>
+	      	<if test="opid != null" >
+	        	OPID=#{opid},
+	      	</if>
+    	</trim> 
+    where noticeid=#{noticeid}
+ </update>
+  <delete id="deleteUserNotice" parameterType="int">
+	delete from TBUSER_ADDRESSBOOK_GROUP where noticeid=#{id}
+ </delete>
+ <delete id="deleteNoticeid">
+ 	delete from tbuser_notice where noticeid=#{id}
+ </delete>
+  <!-- 根据noticeid删除日程事件 -->
+  <delete id="deleteNoticeByid" parameterType="Object">
+		delete from tbuser_notice where noticeid = #{noticeid}
+  </delete>
+  <delete id="delectIdList">
+  	delete from tbuser_notice where noticeid in
+  	<foreach item="item" index="index" collection="list" open="(" separator="," close=")">   
+        #{item}   
+    </foreach> 
+  </delete>
+  <select id="getCurrentWeekDataList" resultType="com.sinog2c.model.officeAssistant.TbuserNotice">
+   		SELECT *
+		  FROM TBUSER_NOTICE t
+		 where t.MESSAGETYPE = #{type,
+		 jdbcType = DECIMAL}
+		   and t.OPID = #{opid}
+		   and t.starttime &lt;= #{endDate}
+		   and t.endtime &gt;= #{startDate}
+		   and t.endtime &gt;= to_date(to_char(sysdate,'yyyy-MM-dd'),'yyyy-MM-dd')
+		 order by t.optime desc
+  </select>
+  <select id="getCurrentDateDataList" resultType="com.sinog2c.model.officeAssistant.TbuserNotice">
+   		SELECT *
+		  FROM TBUSER_NOTICE t
+		 where t.MESSAGETYPE = #{type,
+		 jdbcType = DECIMAL}
+		   and t.OPID = #{opid}
+		   and t.starttime &lt;= #{currentDate}
+		   and t.endtime &gt;= #{currentDate}
+		   and t.endtime &gt;= to_date(to_char(sysdate,'yyyy-MM-dd'),'yyyy-MM-dd')
+		 order by t.optime desc
+  </select>
+  <select id="getCurrentMonthDataList" resultType="com.sinog2c.model.officeAssistant.TbuserNotice">
+   		SELECT *
+		  FROM TBUSER_NOTICE t
+		 where t.MESSAGETYPE = #{type,
+		 jdbcType = DECIMAL}
+		   and t.OPID = #{opid}
+		   and ((t.starttime &gt;= #{startDate} or t.starttime &lt;= #{endDate}) or (t.endtime &gt;= #{startDate} or t.endtime &lt;= #{endDate}))
+		   and t.endtime &gt;= to_date(to_char(sysdate,'yyyy-MM-dd'),'yyyy-MM-dd')
+		 order by t.optime desc
+  </select>
+  <select id="getNoticePk" resultType="Map">
+  		select SEQ_TBUSER_NOTICE.nextval as NOTICEID from dual
+  </select>
+  <select id="getNextNotice" resultType="com.sinog2c.model.officeAssistant.TbuserNotice">
+  	select * from tbuser_notice a where a.noticeid in(
+	select t.noticeid from tbuser_user_notice t where t.userid=#{userid} and t.state=#{state}) and a.noticeid &lt; #{noticeid} order by a.noticeid desc
+  </select>  
+  <select id="getUserNotice" resultType="com.sinog2c.model.officeAssistant.TbuserNotice">
+  	   select * from tbuser_notice t where t.noticeid in 
+  	   (select noticeid from tbuser_user_notice where userid = #{userid}
+  	    and state = '0') 
+  	    <!-- and username=#{departid} -->
+  </select>
+  <!--  <update id="setEventStatus" parameterType="Object">
+  	update tbuser_user_notice set
+  	<trim  suffixOverrides="," >
+	       state=#{state}
+    	</trim> 
+    where noticeid=#{noticeid} and userid=#{userid}
+  </update>
+  -->
+  <update id="setEventStatus" parameterType="Object">
+  	update tbuser_user_notice set state='1' where noticeid=#{noticeid} and userid=#{userid}
+  </update>
+  <select id="getAllEvent" resultType="com.sinog2c.model.officeAssistant.TbuserNotice">
+  	 select * from (select t.*,rownum rs from (
+  	 select rownum,a.noticeid,a.title,a.messagetype,a.content,tt.state from tbuser_notice a,
+  	 tbuser_user_notice tt where a.noticeid =  tt.noticeid and tt.userid=#{userid}
+  	 <if test="state!=null and state!=''">
+  	 	and tt.state=#{state}
+  	 </if>
+  	 <if test="sortFileids!=null and sortFileids!=''" > 
+     	order by ${sortFileids}  ${sortOrders}
+    </if>
+    )t 
+    <if test="start!=null and start!=''">
+   		where  rownum &lt;= #{end}
+   	</if>
+     ) 
+     <if test="start!=null and start!=''">
+   		where  rs &gt;= #{start}
+   	</if> 
+  </select>
+  <update id="setEvent" parameterType="Object">
+  		update TBUSER_USER_NOTICE set
+  		<trim  suffixOverrides="," >
+  		 state=#{state}
+    	</trim>
+    	where userid=#{userid} and noticeid=#{noticeid}
+  </update>
+  <select id="getBath" resultType="com.sinog2c.model.commutationParole.TbxfCommuteParoleBatch">
+		select *
+		  from (select rownum as xuhao, b.*
+		          from (select *
+		                  from tbxf_commuteparole_batch a
+          <if test="departid!=null">
+          	where departid=#{departid}
+          </if>
+		                 order by a.curyear desc, a.batch desc) b) c
+		 where c.xuhao = 1
+		   and c.curyear || '_' || c.batch not in
+		       (select decode(d.text1, null, '0', '', '0', d.text1)
+          from tbuser_notice d)
+  </select>
+  <insert id="insertDataToUserNotice" parameterType="com.sinog2c.model.officeAssistant.TbuserNotice">
+	insert into tbuser_notice (NOTICEID, MESSAGETYPE, TITLE, 
+      CONTENT, USERNAME, ENDTIME, 
+      STARTTIME, STATE, CANCELTIME, 
+      TEXT1, TEXT2, TEXT3, 
+      REMARK, OPTIME, OPID)
+    values (#{noticeid,jdbcType=DECIMAL}, #{messagetype,jdbcType=DECIMAL}, #{title,jdbcType=VARCHAR}, 
+      #{content,jdbcType=VARCHAR}, #{username,jdbcType=VARCHAR}, #{endtime,jdbcType=DATE}, 
+      #{starttime,jdbcType=DATE}, #{state,jdbcType=DECIMAL}, #{canceltime,jdbcType=DATE}, 
+      #{text1,jdbcType=VARCHAR}, #{text2,jdbcType=VARCHAR}, #{text3,jdbcType=VARCHAR}, 
+      #{remark,jdbcType=VARCHAR}, #{optime,jdbcType=TIMESTAMP}, #{opid,jdbcType=VARCHAR})
+  </insert>
+  <select id="getNoticeList" resultType="com.sinog2c.model.officeAssistant.TbuserNotice">
+  	select * from tbuser_notice where opid ='sysauto'
+  </select>
+  <select id="selectNoticeid" resultType="int">
+  	select SEQ_TBUSER_NOTICE.nextval as NOTICEID from dual
+  </select>
+  <delete id="delectNotice" parameterType="java.lang.String">
+  	delete from tbuser_user_notice where noticeid=#{noticeid}
+  </delete>
+  <select id="getCount" resultType="int">
+  		select count(*) as s from tbuser_notice a,
+  	 tbuser_user_notice tt where a.noticeid =  tt.noticeid and tt.userid=#{userid}
+  </select>
+  <select id="selectGrantList" resultType="com.sinog2c.model.officeAssistant.TbuserNotice">
+  	SELECT * FROM 
+	 	( SELECT A.*, ROWNUM RN 
+		 	FROM 
+		 	(   SELECT t.NOTICEID,
+		 	           t.ENDTIME,
+		 	           t.STARTTIME,
+		 	           t.REMARK,
+		 	           u1.name AS username,
+		 	           u2.name as opid,
+		 	           <!-- mushuhong:授权管理重新做 -->
+				       t.username as tusername,
+                       t.opid as topid,
+                       CASE WHEN t.state = 2  THEN
+                                  '(撤销/废弃)授权'
+                            when t.endtime &lt; sysdate  then
+                                  '授权过期'
+                            ELSE
+                                  '使用中'
+                       END AS czstate   <!-- 未授权的用户state默认为-1 -->
+  					FROM TBUSER_NOTICE t,TBSYS_USERINFO u1, TBSYS_USERINFO u2 
+		 			WHERE t.username = u1.userid and t.opid = u2.userid and t.messageType=#{type} and t.opid=#{userid}
+		 		<trim prefix="" suffix="" suffixOverrides="," > 
+		 			<if test="key != null"> and u1.name like '%'||#{key}||'%'</if>
+		 		</trim>
+		 		<if test="sortField!=null and sortField!=''" > 
+			     	order by ${sortField}  ${sortOrder}
+			    </if>
+		 	) A 
+		 	WHERE ROWNUM &lt;= #{end,jdbcType=DECIMAL}
+	 	) 
+	 	WHERE RN &gt;= #{start,jdbcType=DECIMAL}
+  </select>
+  <select id="selectGrantCount" resultType="int">
+ 	   SELECT count(*) FROM TBUSER_NOTICE t,TBSYS_USERINFO u1
+ 			WHERE t.username = u1.userid and t.messageType=#{type} and t.opid=#{userid}
+ 		<trim prefix="" suffix="" suffixOverrides="," > 
+ 			<if test="key != null"> and u1.name like '%'||#{key}||'%'</if>
+ 		</trim>
+  </select>
+  
+	  <!--   查询出被授权限的内容 -->
+	  <select id="selectGrantList_bs" resultType="com.sinog2c.model.officeAssistant.TbuserNotice">
+	       SELECT * FROM 
+				 	( SELECT A.*, ROWNUM RN 
+					 	FROM 
+					 	(   SELECT t.NOTICEID,
+					 	           t.ENDTIME,
+					 	           t.STARTTIME,
+					 	           t.REMARK,
+					 	           u1.name AS username,
+					 	           u2.name as opid,
+					 	           <!-- mushuhong:授权管理重新做 -->
+							       t.username as tusername,
+			                       t.opid as topid,
+			                       CASE WHEN (SELECT COUNT (*)  FROM TBUSER_USERRES tb WHERE tb.noticeid=t.noticeid) = 0  THEN
+			                                  '授权撤销'
+			                            when t.endtime &lt; sysdate  then
+			                                  '授权过期'
+			                            ELSE
+			                                  '使用中'
+			                       END AS czstate   <!-- 未授权的用户state默认为-1 -->
+			  					FROM TBUSER_NOTICE t,TBSYS_USERINFO u1, TBSYS_USERINFO u2 
+					 			WHERE t.username = u1.userid and t.opid = u2.userid and t.messageType=#{type} and t.username=#{userid}
+					 		<trim prefix="" suffix="" suffixOverrides="," > 
+					 			<if test="key != null"> and u1.name like '%'||#{key}||'%'</if>
+					 		</trim>
+					 		<if test="sortField!=null and sortField!=''" > 
+						     	order by ${sortField}  ${sortOrder}
+						    </if>
+					 	) A 
+					 	WHERE ROWNUM &lt;= #{end,jdbcType=DECIMAL}
+				 	) 
+				 	WHERE RN &gt;= #{start,jdbcType=DECIMAL}
+	  </select>
+	  <!--   查询出被授权限的内容 条数-->
+	  <select id="selectGrantCount_bs" resultType="int">
+	      SELECT count(*) FROM TBUSER_NOTICE t,TBSYS_USERINFO u1
+ 			WHERE t.username = u1.userid and t.messageType=#{type} and t.opid=#{userid}
+	 		<trim prefix="" suffix="" suffixOverrides="," > 
+	 			<if test="key != null"> and u1.name like '%'||#{key}||'%'</if>
+	 		</trim>
+	  </select>
+      <!-- 查询出当前  选择的用户 一共有多少权限-->
+      <select id="checkXZUserBSGrant" resultType="map">
+<!--	       SELECT tu.*-->
+<!--				  FROM TBUSER_USERRES tu, TBUSER_NOTICE tn-->
+<!--				 WHERE     tu.userid = #{bsquserid}-->
+<!--				       AND tu.opid = #{showuserid}-->
+<!--				       AND tu.resid NOT IN (SELECT tb2.presid-->
+<!--				                              FROM TBUSER_USERRES tb2)-->
+<!--				       and tu.noticeid = tn.noticeid(+)-->
+<!--				       and tn.endtime > sysdate-->
+	       SELECT tu.resid
+				  FROM TBUSER_USERRES tu, TBUSER_NOTICE tn
+				 WHERE     tu.userid = #{bsquserid}
+				       AND tu.opid = #{showuserid}
+				       AND tu.resid NOT IN (SELECT tb2.presid
+				                              FROM TBUSER_USERRES tb2)
+				       AND tu.noticeid = tn.noticeid(+)
+				       AND tn.endtime > SYSDATE
+				UNION
+				SELECT resid
+				  FROM TBSYS_RESOURCES tr
+				 WHERE tr.resid IN (SELECT resid
+				                      FROM TBSYS_ROLE_RES rr
+				                     WHERE rr.roleid IN (SELECT ur.roleid
+				                                           FROM TBSYS_USERS_ROLES ur
+				                                          WHERE ur.userid = #{bsquserid}))
+				       AND tr.resid NOT IN (SELECT presid FROM TBSYS_RESOURCES)
+      </select>
+      <!-- 查询出 所有的最低级权限的上级权限 -->
+      <select id="queryMinGrantByNoticeids" resultType="map">
+          SELECT tu.*,F_SONALLPARENT(tu.resid,#{noticeid}) as remark
+				  FROM TBUSER_USERRES tu, TBUSER_NOTICE tn
+				 WHERE     tu.userid =  tn.username
+       				   AND tu.opid = tn.opid
+				       AND tu.resid NOT IN (SELECT tb2.presid
+				                              FROM TBUSER_USERRES tb2)
+				       and tu.noticeid = tn.noticeid(+)
+				       and tu.noticeid =#{noticeid}
+      </select>
+      <!-- 查询当前用户已经有的权限 -->
+      <select id="checkXZUserGrantids" resultType="map">
+           SELECT *
+				  FROM TBSYS_RESOURCES tc
+				 WHERE tc.resid IN
+				          (SELECT tr.resid
+				             FROM TBSYS_ROLE_RES tr
+				            WHERE tr.roleid IN (SELECT tu.roleid
+				                                  FROM TBSYS_USERS_ROLES tu
+				                                 WHERE tu.userid = (SELECT username
+				                                                      FROM TBUSER_NOTICE
+				                                                     WHERE noticeid = #{noticeid})))
+				       AND tc.resid NOT IN (SELECT presid FROM TBSYS_RESOURCES)
+      </select>
+</mapper>

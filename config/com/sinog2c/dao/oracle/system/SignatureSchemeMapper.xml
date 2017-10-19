@@ -1,0 +1,944 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.sinog2c.dao.api.system.SignatureSchemeMapper" >
+  <resultMap id="BaseResultMap" type="com.sinog2c.model.system.SignatureScheme" >
+    <id column="SIGNID" property="signid" jdbcType="DECIMAL" />
+    <result column="ORGID" property="orgid" jdbcType="VARCHAR" />
+    <result column="RESID" property="resid" jdbcType="VARCHAR" />
+    <result column="TEMPID" property="tempid" jdbcType="VARCHAR" />
+    <result column="SIGNTYPE" property="signtype" jdbcType="VARCHAR" />
+    <result column="NAME" property="name" jdbcType="VARCHAR" />
+    <result column="PROGRESS" property="progress" jdbcType="DECIMAL" />
+    <result column="CONTENT" property="content" jdbcType="VARCHAR" />
+    <result column="SCHEME" property="scheme" jdbcType="VARCHAR" />
+    <result column="DELFLAG" property="delflag" jdbcType="DECIMAL" />
+    <result column="REMARK" property="remark" jdbcType="VARCHAR" />
+    <result column="OPTIME" property="optime" jdbcType="TIMESTAMP" />
+    <result column="SEAL" property="seal" jdbcType="DECIMAL" />
+    <result column="NOTATION" property="notation" jdbcType="DECIMAL" />
+    <result column="FLOWDEFID" property="flowdefid" jdbcType="VARCHAR"/>
+    <result column="ISNOTCHECKPROGRESS" property="isnotcheckprogress" jdbcType="DECIMAL"/>
+    <result column="PSIGNID" property="psignid" jdbcType="DECIMAL" />
+    <result column="SOLUTIONID" property="solutionid" jdbcType="VARCHAR" />
+    <result column="ORDERBY" property="orderby" jdbcType="DECIMAL" />
+    <result column="ISSEAL" property="isseal" jdbcType="DECIMAL" />
+    <result column="ISNOTATION" property="isnotation" jdbcType="DECIMAL" />
+    <result column="PROTECTNODE" property="protectnode" jdbcType="VARCHAR" />
+    <result column="SEALTYPE" property="sealtype" jdbcType="VARCHAR" />
+    <result column="TEXT2" property="text2" jdbcType="VARCHAR" />
+    <result column="TEXT3" property="text3" jdbcType="VARCHAR" />
+    <result column="TEXT4" property="text4" jdbcType="VARCHAR" />
+    <result column="CURRNODEID" property="currnodeid" jdbcType="VARCHAR" />
+    <result column="REQUARESEALNUM" property="requaresealnum" jdbcType="DECIMAL" />
+    
+    <result column="FLOWFILTER" property="flowfilter" jdbcType="DECIMAL" />
+    <result column="ORGFILTER" property="orgfilter" jdbcType="DECIMAL" />
+    <result column="CONTENTFILTER" property="contentfilter" jdbcType="DECIMAL" />
+    <result column="PROCESSFILTER" property="processfilter" jdbcType="DECIMAL" />
+    
+  </resultMap>
+  <sql id="Base_Column_List" >
+    SIGNID, ORGID, TEMPID, SIGNTYPE, NAME, PROGRESS, CONTENT, SCHEME, DELFLAG, REMARK, 
+    OPTIME,FLOWDEFID,ISNOTCHECKPROGRESS,TEXT1,TEXT2,TEXT3,TEXT4,PSIGNID,SOLUTIONID,
+    ORDERBY,ISSEAL,ISNOTATION,RESID,NOTATION,SEAL,PROTECTNODE,SEALTYPE,CURRNODEID,
+    REQUARESEALNUM,FLOWFILTER,ORGFILTER,CONTENTFILTER,PROCESSFILTER
+  </sql>
+  <insert id="insertSelective" parameterType="com.sinog2c.model.system.SignatureScheme" >
+  	<!-- 先查询出主键,再执行插入 -->
+    <selectKey resultType="int" keyProperty="signid" order="BEFORE">
+   		select SEQ_LOG_ID.NEXTVAL  from dual
+    </selectKey>
+    insert into TBSYS_SIGNATURESCHEME
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="signid != null" >
+        SIGNID,
+      </if>
+      <if test="orgid != null" >
+        ORGID,
+      </if>
+      <if test="tempid != null" >
+        TEMPID,
+      </if>
+      <if test="signtype != null" >
+        SIGNTYPE,
+      </if>
+      <if test="name != null" >
+        NAME,
+      </if>
+      <if test="progress != null" >
+        PROGRESS,
+      </if>
+      <if test="content != null" >
+        CONTENT,
+      </if>
+      <if test="scheme != null" >
+        SCHEME,
+      </if>
+      <if test="delflag != null" >
+        DELFLAG,
+      </if>
+      <if test="remark != null" >
+        REMARK,
+      </if>
+      <if test="optime != null" >
+        OPTIME,
+      </if>
+      <if test="psignid != null" >
+        PSIGNID,
+      </if>
+      <if test="solutionid != null" >
+        SOLUTIONID,
+      </if>
+      <if test="orderby != null" >
+        ORDERBY,
+      </if>
+      <if test="isseal != null" >
+        ISSEAL,
+      </if>
+      <if test="isnotation != null" >
+        ISNOTATION,
+      </if>
+      <if test="protectnode != null" >
+        PROTECTNODE,
+      </if>
+      <if test="sealtype != null" >
+        SEALTYPE,
+      </if>
+      <if test="text2 != null" >
+        TEXT2,
+      </if>
+      <if test="text3 != null" >
+        TEXT3,
+      </if>
+      <if test="text4 != null" >
+        TEXT4,
+      </if>
+      <if test="currnodeid != null" >
+        CURRNODEID,
+      </if>
+      <if test="requaresealnum != null" >
+        REQUARESEALNUM,
+      </if>
+      
+      <if test="flowfilter != null" >
+        FLOWFILTER,
+      </if>
+      <if test="orgfilter != null" >
+        ORGFILTER,
+      </if>
+      <if test="contentfilter != null" >
+        CONTENTFILTER,
+      </if>
+      <if test="processfilter != null" >
+        PROCESSFILTER,
+      </if>
+      
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="signid != null" >
+        #{signid,jdbcType=DECIMAL},
+      </if>
+      <if test="orgid != null" >
+        #{orgid,jdbcType=VARCHAR},
+      </if>
+      <if test="tempid != null" >
+        #{tempid,jdbcType=VARCHAR},
+      </if>
+      <if test="signtype != null" >
+        #{signtype,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null" >
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="progress != null" >
+        #{progress,jdbcType=DECIMAL},
+      </if>
+      <if test="content != null" >
+        #{content,jdbcType=VARCHAR},
+      </if>
+      <if test="scheme != null" >
+        #{scheme,jdbcType=VARCHAR},
+      </if>
+      <if test="delflag != null" >
+        #{delflag,jdbcType=DECIMAL},
+      </if>
+      <if test="remark != null" >
+        #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="optime != null" >
+        #{optime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="psignid != null" >
+        #{psignid,jdbcType=DECIMAL},
+      </if>
+      <if test="solutionid != null" >
+        #{solutionid,jdbcType=VARCHAR},
+      </if>
+      <if test="orderby != null" >
+        #{orderby,jdbcType=DECIMAL},
+      </if>
+      <if test="isseal != null" >
+        #{isseal,jdbcType=DECIMAL},
+      </if>
+      <if test="isnotation != null" >
+        #{isnotation,jdbcType=DECIMAL},
+      </if>
+      <if test="protectnode != null" >
+        #{protectnode,jdbcType=VARCHAR},
+      </if>
+      <if test="sealtype != null" >
+        #{sealtype,jdbcType=VARCHAR},
+      </if>
+      <if test="text2 != null" >
+        #{text2,jdbcType=VARCHAR},
+      </if>
+      <if test="text3 != null" >
+        #{text3,jdbcType=VARCHAR},
+      </if>
+      <if test="text4 != null" >
+        #{text4,jdbcType=VARCHAR},
+      </if>
+      <if test="currnodeid != null" >
+        #{currnodeid,jdbcType=VARCHAR},
+      </if>
+      <if test="requaresealnum != null" >
+        #{requaresealnum,jdbcType=DECIMAL},
+      </if>
+      
+      <if test="flowfilter != null" >
+        #{flowfilter,jdbcType=DECIMAL},
+      </if>
+      <if test="orgfilter != null" >
+        #{orgfilter,jdbcType=DECIMAL},
+      </if>
+      <if test="contentfilter != null" >
+        #{contentfilter,jdbcType=DECIMAL},
+      </if>
+      <if test="processfilter != null" >
+        #{processfilter,jdbcType=DECIMAL},
+      </if>
+      
+    </trim>
+  </insert>
+  
+  <insert id="insertByMap" parameterType="Map" >
+  	<!-- 先查询出主键,再执行插入 -->
+    <selectKey resultType="int" keyProperty="signid" order="BEFORE">
+   		select SEQ_LOG_ID.NEXTVAL  from dual
+    </selectKey>
+    insert into TBSYS_SIGNATURESCHEME
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="signid != null" >
+        SIGNID,
+      </if>
+      <if test="orgid != null" >
+        ORGID,
+      </if>
+      <if test="tempid != null" >
+        TEMPID,
+      </if>
+      <if test="flowdefid != null" >
+        FLOWDEFID,
+      </if>
+      <if test="signtype != null" >
+        SIGNTYPE,
+      </if>
+      <if test="name != null" >
+        NAME,
+      </if>
+      <if test="progress != null" >
+        PROGRESS,
+      </if>
+      <if test="content != null" >
+        CONTENT,
+      </if>
+      <if test="scheme != null" >
+        SCHEME,
+      </if>
+      <if test="delflag != null" >
+        DELFLAG,
+      </if>
+      <if test="remark != null" >
+        REMARK,
+      </if>
+      <if test="resid != null">
+        RESID,
+      </if>
+      <if test="seal != null">
+        SEAL,
+      </if>
+      <if test="notation != null">
+        NOTATION
+      </if>
+      <if test="psignid != null" >
+        PSIGNID,
+      </if>
+      <if test="solutionid != null" >
+        SOLUTIONID,
+      </if>
+      <if test="orderby != null" >
+        ORDERBY,
+      </if>
+      <if test="isseal != null" >
+        ISSEAL,
+      </if>
+      <if test="isnotation != null" >
+        ISNOTATION,
+      </if>
+      <if test="isnotcheckprogress != null" >
+        ISNOTCHECKPROGRESS,
+      </if>
+      <if test="protectnode != null" >
+        PROTECTNODE,
+      </if>
+      <if test="sealtype != null" >
+        SEALTYPE,
+      </if>
+      <if test="text2 != null" >
+        TEXT2,
+      </if>
+      <if test="text3 != null" >
+        TEXT3,
+      </if>
+      <if test="text4 != null" >
+        TEXT4,
+      </if>
+      <if test="currnodeid != null" >
+        CURRNODEID,
+      </if>
+      <if test="requaresealnum != null" >
+        REQUARESEALNUM,
+      </if>
+      
+      <if test="flowfilter != null" >
+        FLOWFILTER,
+      </if>
+      <if test="orgfilter != null" >
+        ORGFILTER,
+      </if>
+      <if test="contentfilter != null" >
+        CONTENTFILTER,
+      </if>
+      <if test="processfilter != null" >
+        PROCESSFILTER,
+      </if>
+      
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="signid != null" >
+        #{signid,jdbcType=DECIMAL},
+      </if>
+      <if test="orgid != null" >
+        #{orgid,jdbcType=VARCHAR},
+      </if>
+      <if test="tempid != null" >
+        #{tempid,jdbcType=VARCHAR},
+      </if>
+      <if test="flowdefid != null" >
+        #{flowdefid,jdbcType=VARCHAR},
+      </if>
+      <if test="signtype != null" >
+        #{signtype,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null" >
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="progress != null" >
+        #{progress,jdbcType=DECIMAL},
+      </if>
+      <if test="content != null" >
+        #{content,jdbcType=VARCHAR},
+      </if>
+      <if test="scheme != null" >
+        #{scheme,jdbcType=VARCHAR},
+      </if>
+      <if test="delflag != null" >
+        #{delflag,jdbcType=DECIMAL},
+      </if>
+      <if test="remark != null" >
+        #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="resid != null" >
+        #{resid,jdbcType=VARCHAR},
+      </if>
+      <if test="seal != null">
+        #{seal,jdbcType=VARCHAR},
+      </if>
+      <if test="notation != null">
+        #{notation,jdbcType=VARCHAR}
+      </if>
+      <if test="psignid != null" >
+        #{psignid,jdbcType=DECIMAL},
+      </if>
+      <if test="solutionid != null" >
+        #{solutionid,jdbcType=VARCHAR},
+      </if>
+      <if test="orderby != null" >
+        #{orderby,jdbcType=DECIMAL},
+      </if>
+      <if test="isseal != null" >
+        #{isseal,jdbcType=DECIMAL},
+      </if>
+      <if test="isnotation != null" >
+        #{isnotation,jdbcType=DECIMAL},
+      </if>
+      <if test="isnotcheckprogress != null" >
+        #{isnotcheckprogress,jdbcType=DECIMAL},
+      </if>
+      <if test="protectnode != null" >
+        #{protectnode,jdbcType=VARCHAR},
+      </if>
+      <if test="sealtype != null" >
+        #{sealtype,jdbcType=VARCHAR},
+      </if>
+      <if test="text2 != null" >
+        #{text2,jdbcType=VARCHAR},
+      </if>
+      <if test="text3 != null" >
+        #{text3,jdbcType=VARCHAR},
+      </if>
+      <if test="text4 != null" >
+        #{text4,jdbcType=VARCHAR},
+      </if>
+      <if test="currnodeid != null" >
+        #{currnodeid,jdbcType=VARCHAR},
+      </if>
+      <if test="requaresealnum != null" >
+        #{requaresealnum,jdbcType=DECIMAL},
+      </if>
+      
+      <if test="flowfilter != null" >
+        #{flowfilter,jdbcType=DECIMAL},
+      </if>
+      <if test="orgfilter != null" >
+        #{orgfilter,jdbcType=DECIMAL},
+      </if>
+      <if test="contentfilter != null" >
+        #{contentfilter,jdbcType=DECIMAL},
+      </if>
+      <if test="processfilter != null" >
+        #{processfilter,jdbcType=DECIMAL},
+      </if>
+      
+    </trim>
+  </insert>
+  
+  <update id="updateSelective" parameterType="com.sinog2c.model.system.SignatureScheme" >
+    update TBSYS_SIGNATURESCHEME
+    <set >
+      <if test="orgid != null" >
+        ORGID = #{orgid,jdbcType=VARCHAR},
+      </if>
+      <if test="tempid != null" >
+        TEMPID = #{tempid,jdbcType=VARCHAR},
+      </if>
+      <if test="signtype != null" >
+        SIGNTYPE = #{signtype,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null" >
+        NAME = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="progress != null" >
+        PROGRESS = #{progress,jdbcType=DECIMAL},
+      </if>
+      <if test="content != null" >
+        CONTENT = #{content,jdbcType=VARCHAR},
+      </if>
+      <if test="scheme != null" >
+        SCHEME = #{scheme,jdbcType=VARCHAR},
+      </if>
+      <if test="delflag != null" >
+        DELFLAG = #{delflag,jdbcType=DECIMAL},
+      </if>
+      <if test="remark != null" >
+        REMARK = #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="psignid != null" >
+        PSIGNID = #{psignid,jdbcType=VARCHAR},
+      </if>
+      <if test="solutionid != null" >
+        SOLUTIONID = #{solutionid,jdbcType=VARCHAR},
+      </if>
+      <if test="orderby != null" >
+        ORDERBY = #{orderby,jdbcType=VARCHAR},
+      </if>
+      <if test="isseal != null" >
+        ISSEAL = #{isseal,jdbcType=VARCHAR},
+      </if>
+      <if test="isnotation != null" >
+        ISNOTATION = #{isnotation,jdbcType=VARCHAR},
+      </if>
+      <if test="protectnode != null" >
+        PROTECTNODE = #{protectnode,jdbcType=VARCHAR},
+      </if>
+      <if test="sealtype != null" >
+        SEALTYPE = #{sealtype,jdbcType=VARCHAR},
+      </if>
+      <if test="text2 != null" >
+        TEXT2 = #{text2,jdbcType=VARCHAR},
+      </if>
+      <if test="text3 != null" >
+        TEXT3 = #{text3,jdbcType=VARCHAR},
+      </if>
+      <if test="text4 != null" >
+        TEXT4 = #{text4,jdbcType=VARCHAR},
+      </if>
+      <if test="currnodeid != null" >
+        CURRNODEID = #{currnodeid,jdbcType=VARCHAR},
+      </if>
+      <if test="requaresealnum != null" >
+        REQUARESEALNUM = #{requaresealnum,jdbcType=DECIMAL},
+      </if>
+      
+      <if test="flowfilter != null" >
+        FLOWFILTER = #{flowfilter,jdbcType=DECIMAL},
+      </if>
+      <if test="orgfilter != null" >
+        ORGFILTER = #{orgfilter,jdbcType=DECIMAL},
+      </if>
+      <if test="contentfilter != null" >
+        CONTENTFILTER = #{contentfilter,jdbcType=DECIMAL},
+      </if>
+      <if test="processfilter != null" >
+        PROCESSFILTER = #{processfilter,jdbcType=DECIMAL},
+      </if>
+      
+    </set>
+    where SIGNID = #{signid,jdbcType=DECIMAL}
+  </update>
+  
+  <update id="updateByMap" parameterType="Map" >
+    update TBSYS_SIGNATURESCHEME
+    <set >
+      <if test="orgid != null" >
+        ORGID = #{orgid,jdbcType=VARCHAR},
+      </if>
+      <if test="tempid != null" >
+        TEMPID = #{tempid,jdbcType=VARCHAR},
+      </if>
+      <if test="flowdefid != null" >
+        FLOWDEFID = #{flowdefid,jdbcType=VARCHAR},
+      </if>
+      <if test="signtype != null" >
+        SIGNTYPE = #{signtype,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null" >
+        NAME = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="progress != null" >
+        PROGRESS = #{progress,jdbcType=DECIMAL},
+      </if>
+      <if test="content != null" >
+        CONTENT = #{content,jdbcType=VARCHAR},
+      </if>
+      <if test="scheme != null" >
+        SCHEME = #{scheme,jdbcType=VARCHAR},
+      </if>
+      <if test="delflag != null" >
+        DELFLAG = #{delflag,jdbcType=DECIMAL},
+      </if>
+      <if test="remark != null" >
+        REMARK = #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="optime != null" >
+        OPTIME = #{optime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="resid != null" >
+        RESID = #{resid,jdbcType=VARCHAR},
+      </if>
+      <if test="seal != null" >
+        SEAL = #{seal,jdbcType=TIMESTAMP}, 
+      </if>
+      <if test="notation != null" >
+        NOTATION = #{notation,jdbcType=VARCHAR},
+      </if>
+      <if test="psignid != null" >
+        PSIGNID = #{psignid,jdbcType=VARCHAR},
+      </if>
+      <if test="solutionid != null" >
+        SOLUTIONID = #{solutionid,jdbcType=VARCHAR},
+      </if>
+      <if test="orderby != null" >
+        ORDERBY = #{orderby,jdbcType=VARCHAR},
+      </if>
+      <if test="isseal != null" >
+        ISSEAL = #{isseal,jdbcType=VARCHAR},
+      </if>
+      <if test="isnotation != null" >       
+        ISNOTATION = #{isnotation,jdbcType=VARCHAR},
+      </if>
+      <if test="isnotcheckprogress != null" >
+        isnotcheckprogress = #{isnotcheckprogress,jdbcType=VARCHAR},
+      </if>
+      <if test="sealtype != null" >
+        SEALTYPE = #{sealtype,jdbcType=VARCHAR},
+      </if>
+      <if test="text2 != null" >
+        TEXT2 = #{text2,jdbcType=VARCHAR},
+      </if>
+      <if test="text3 != null" >
+        TEXT3 = #{text3,jdbcType=VARCHAR},
+      </if>
+      <if test="text4 != null" >
+        TEXT4 = #{text4,jdbcType=VARCHAR},
+      </if>
+      <if test="currnodeid != null" >
+        CURRNODEID = #{currnodeid,jdbcType=VARCHAR},
+      </if>
+      <if test="requaresealnum != null" >
+        REQUARESEALNUM = #{requaresealnum,jdbcType=DECIMAL},
+      </if>
+      
+      <if test="flowfilter != null" >
+        FLOWFILTER = #{flowfilter,jdbcType=DECIMAL},
+      </if>
+      <if test="orgfilter != null" >
+        ORGFILTER = #{orgfilter,jdbcType=DECIMAL},
+      </if>
+      <if test="contentfilter != null" >
+        CONTENTFILTER = #{contentfilter,jdbcType=DECIMAL},
+      </if>
+      <if test="processfilter != null" >
+        PROCESSFILTER = #{processfilter,jdbcType=DECIMAL},
+      </if>
+      
+      protectnode = #{protectnode,jdbcType=VARCHAR},
+    </set>
+    where SIGNID = #{signid,jdbcType=DECIMAL}
+  </update>
+  
+  <delete id="delete" parameterType="java.lang.Integer" >
+    delete from TBSYS_SIGNATURESCHEME where 1=1
+    	<if test="signid!=null and signid!='' ">  
+    		and signid = #{signid}
+	    </if>
+	    <if test="toid!=null and toid!='' ">  
+ 		  	and orgid=#{toid}
+	    </if>
+	    <if test="tempid!=null and tempid!='' ">  
+ 		  	and tempid=#{tempid}
+	    </if>
+  </delete>
+  
+  <select id="getNextId" resultType="int">  <!-- 获取下一个ID -->
+		select SEQ_SIGN_ID.NEXTVAL  from dual
+  </select>
+  
+  <select id="getById" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from TBSYS_SIGNATURESCHEME
+    where SIGNID = #{signid,jdbcType=DECIMAL}
+  </select>
+  
+  <select id="getMapById" resultType="Map" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from TBSYS_SIGNATURESCHEME
+    where SIGNID = #{signid,jdbcType=DECIMAL}
+  </select>
+  <!-- 签章 宁夏分离 -->
+  <select id="getMapById_nx" resultType="Map" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from TBSYS_SIGNATURESCHEME
+    where SIGNID = #{signid,jdbcType=DECIMAL}
+  </select>
+  
+  <select id="countAll" resultType="int">  <!-- 查询表中记录总数 -->
+		select count(*) c from TBSYS_SIGNATURESCHEME where 1=1
+			<if test="key!=null and key!='' ">  
+			 	and signtype like concat(concat('%', #{key}),'%') or name like concat(concat('%', #{key}),'%')
+			 	 or remark like concat(concat('%', #{key}),'%')
+			</if>
+			<if test="orgid!=null and orgid!='' ">  
+	 		  and orgid=#{orgid}
+		    </if>
+		    <if test="tempid!=null and tempid!='' ">  
+	 		  and tempid=#{tempid}
+		    </if>
+  </select>
+  
+  <select id="getCountByDepartid" resultType="int">  <!-- 按部门查询表中记录总数 -->
+		select count(*) c from TBSYS_SIGNATURESCHEME where orgid = #{fromid}  
+			<if test="tempid!=null and tempid!='' ">  
+	 		  and tempid=#{tempid}
+		    </if>
+  </select>
+  
+  <!-- 按单位查询签章方案数据 -->
+  <select id="getSignByDepart" resultType="java.util.HashMap">    
+     select sig.orgid||'@'||sig.tempid as id, tem.tempname as text,sig.orgid as parentid
+	  from (select t.tempid, t.orgid
+	          from TBSYS_SIGNATURESCHEME t
+	         group by tempid, t.orgid
+	         order by t.orgid) sig,
+	       TBSYS_ORGINFO org,
+	       TBSYS_TEMPLATE tem
+	 where sig.orgid = org.orgid
+	   and sig.tempid = tem.tempid
+	   AND tem.departid = (
+	   		SELECT MAX (t.departid) FROM tbsys_template t 
+	   			WHERE t.tempid = sig.tempid AND 
+	   			(departid = '0' OR departid = sig.orgid OR 
+	   			departid IN (SELECT porgid FROM TBSYS_ORGINFO WHERE orgid = sig.orgid)) 
+	   			GROUP BY t.tempid)
+	union 
+	select org2.orgid as id,org2.name as text,'-1' as parentid
+	from (select distinct t.orgid
+	          from TBSYS_SIGNATURESCHEME t
+	         ) sig2,
+	TBSYS_ORGINFO org2
+	where sig2.orgid=org2.orgid
+  </select>
+  
+  <!-- 拷贝签章方案 -->
+  <insert id="copySignByDepartid" parameterType="Object" >
+    insert into TBSYS_SIGNATURESCHEME
+        (SIGNID,ORGID,TEMPID,SIGNTYPE,NAME,PROGRESS,CONTENT,SCHEME,DELFLAG,REMARK,
+        FLOWDEFID,ISNOTCHECKPROGRESS,NOTATION,RESID,SEAL,TEXT1, PSIGNID,SOLUTIONID,ORDERBY,ISSEAL,ISNOTATION)
+        select SEQ_LOG_ID.NEXTVAL as SIGNID,replace(t.ORGID, '${fromid}', '${toid}') as ORGID,
+        	t.TEMPID,t.SIGNTYPE,t.NAME,t.PROGRESS,t.CONTENT,t.SCHEME,t.DELFLAG,t.REMARK,t.flowdefid,
+        	t.ISNOTCHECKPROGRESS,t.NOTATION,t.RESID,t.SEAL,t.TEXT1,
+        	t.PSIGNID, t.SOLUTIONID, t.ORDERBY, t.ISSEAL, t.ISNOTATION
+         from TBSYS_SIGNATURESCHEME t where t.orgid = #{fromid} 
+        	<if test="tempid!=null and tempid!='' ">  
+	 		  and tempid=#{tempid}
+		    </if>
+  </insert>
+  
+  <select id="listAllByPage" resultMap="BaseResultMap">    <!-- 分页查询表中的所有信息 -->
+	 SELECT * FROM 
+	 	( SELECT A.*, ROWNUM RN 
+		 	FROM 
+		 	(
+		 		SELECT * FROM TBSYS_SIGNATURESCHEME where 1=1
+		 		 <if test="key!=null and key!='' ">  
+		 		  and signtype like concat(concat('%', #{key}),'%') or name like concat(concat('%', #{key}),'%') 
+		 		  or remark like concat(concat('%', #{key}),'%')
+			     </if>
+			     <if test="orgid!=null and orgid!='' ">  
+		 		  and orgid=#{orgid}
+			     </if>
+			     <if test="tempid!=null and tempid!='' ">  
+		 		  and tempid=#{tempid}
+			     </if>
+				 <if test="sortField!=null and sortField!='' and sortOrder!=null and sortOrder!=''">  
+		 		  order by  ${sortField} ${sortOrder}
+			     </if>
+		 	) A 
+		 	WHERE ROWNUM &lt;= #{end,jdbcType=DECIMAL}
+	 	) 
+	 	WHERE RN &gt;= #{start,jdbcType=DECIMAL}
+  </select>  
+    <select id="getListAll" resultType="com.sinog2c.model.system.SignatureScheme">    <!-- 分页查询表中的所有信息 -->
+	     SELECT * FROM TBSYS_SIGNATURESCHEME T
+	     <if test="queryCondition!=null and queryCondition!=''">
+	     	WHERE T.SIGNID NOT IN(1,5,6,7,8) ORDER BY T.PROGRESS
+	     </if>
+	</select>
+	<select id="getSignatureSchemeList" resultType="com.sinog2c.model.system.SignatureScheme">    <!-- 分页查询表中的所有信息 -->
+	     SELECT ts.*
+		  FROM TBSYS_SIGNATURESCHEME ts,TBSYS_RESOURCES tre, TBSYS_ROLE_RES trr, TBSYS_USERS_ROLES tur
+		  WHERE trr.roleid = tur.roleid
+		  	AND trr.resid=tre.resid
+		  	AND tre.srurl = to_char(ts.signid)
+            and tre.resid = ts.resid
+            <!--and ts.orgid = #{departid} -->
+		  	AND tre.restypeid = '16'
+		  <if test="userid!=null and userid!=''">
+		  	AND tur.userid= #{userid}
+		  </if>
+		  order by progress asc
+	</select>
+	
+	<select id="getSignatureSchemesByUser" resultType="com.sinog2c.model.system.SignatureScheme">
+	     SELECT ts.*
+		  FROM TBSYS_RESOURCES tre, 
+		  			TBSYS_SIGNATURESCHEME ts,
+		  			TBSYS_ROLE_RES trr, 
+		  			TBSYS_USERS_ROLES tur
+		  WHERE tre.resid = ts.resid
+		  	AND trr.resid=tre.resid
+		  	AND trr.roleid = tur.roleid
+		  	AND tre.restypeid = #{restypeid}
+		   AND tur.userid= #{userid}
+		   
+		   <if test="tempid!=null and tempid!=''">
+		  		AND ts.tempid= #{tempid}
+		   </if>
+		   <if test="flowdefid!=null and flowdefid!=''">
+		  		AND ts.flowdefid= #{flowdefid}
+		   </if>
+		   <!-- AND ts.orgid = #{departid} delete by luan 20150426 -->
+		  order by ts.tempid, ts.progress asc
+	</select>
+	
+	<select id="getCourtSignatureSchemeList" resultType="com.sinog2c.model.system.SignatureScheme">    <!-- 分页查询表中的所有信息 -->
+	     SELECT ts.*
+		  FROM TBSYS_SIGNATURESCHEME ts 
+		  WHERE ts.resid in(
+		  	select tre.resid from TBSYS_RESOURCES tre where tre.restypeid = '16' AND tre.resid in(
+		  		select trr.resid from  TBSYS_ROLE_RES trr where trr.roleid in(
+		  			select tur.roleid from TBSYS_USERS_ROLES tur where tur.userid= #{userid}
+		  		)
+		  	)
+		  ) order by ts.PROGRESS
+	</select>
+    <select id="selectSignatureScheme" resultType="com.sinog2c.model.system.SignatureScheme">    <!-- 分页查询表中的所有信息 -->
+	     SELECT * FROM TBSYS_SIGNATURESCHEME where id=${id}
+    </select>
+    <select id="batchExportHandCaseFile" resultType="java.util.Map">
+         select e.*,r.docconent from TBFLOW_BASE e, TBFLOW_OTHER_FLOW w ,TBFLOW_BASE_OTHER r,TBPRISONER_BASE_CRIME m,TBFLOW f
+         where e.flowdefid='other_zfjyjxjssp' and substr(e.text6,5) in (${scope}) and 
+         e.flowdraftid=w.flowdraftid(+) and w.tempid=#{tempid} and w.otherid=r.otherid 
+         and e.applyid=m.crimid(+) and m.orgid1 in (select g.dorgid from TBFLOW_ORG_ORG g where g.orgid=#{orgid})
+         and e.flowdraftid=f.flowdraftid(+) and e.flowid=f.flowid(+) and f.nodeid='1'
+    </select>
+    <!-- 分页查询表中的所有信息 -->
+	<select id="getSignatureSchemeList_nx" resultType="com.sinog2c.model.system.SignatureScheme">   
+	     SELECT ts.*
+		  FROM TBSYS_SIGNATURESCHEME ts,TBSYS_RESOURCES tre, TBSYS_ROLE_RES trr, TBSYS_USERS_ROLES tur
+		  WHERE trr.roleid = tur.roleid
+		  	AND trr.resid=tre.resid
+		  	<!-- tre.srurl = ts.signid -->
+            and tre.resid = ts.resid
+            and ts.orgid = #{departid}
+		  	AND tre.restypeid = '16'
+		  <if test="userid!=null and userid!=''">
+		  	AND tur.userid= #{userid}
+		  </if>
+		  order by progress asc
+	</select>
+    <!-- 查询 签章方案(山西) 签章方案+签章进程-->
+    <select id="getSignSchemeType" resultType="java.util.Map">
+          select  scheme||','||progress as scheme,name as name  from TBSYS_SIGNATURESCHEME s ,(select b.resid from TBSYS_ROLE_RES b where b.roleid in 
+          (select roleid from TBSYS_USERS_ROLES where userid =#{userid})) t where s.resid=t.resid and  text1='1' order by s.progress
+    </select>
+    <!-- 罪犯信息(山西) -->
+    <select id="getCrimInfoByOrgid1" resultType="java.util.Map">
+          select c1.crimid,c1.name
+          
+          <if test="writType == 'JXJS_JXJSSHB'">
+               ,decode(c2.text8,null,' ','',' ',c2.text8) as text8,decode(c2.text8,null,'0','','0',c2.text8) as text8_8
+          </if>
+          <if test="writType == 'suggestreport' or writType == 'casecheckreport' ">
+              ,case when c4.int1 is not null then
+                 c4.int1
+                 else 
+                 0
+       		  end as text8,
+       		  case when c4.int1 is not null then
+                 c4.int1
+                 else 
+                 0
+       		  end as text8_8
+          </if>
+          
+          from (select b.crimid crimid,o.name as name,e.*  from TBPRISONER_BASE_CRIME b,TBPRISONER_BASEINFO o,UV_JXJS_CASE e
+  		  where b.orgid1 in (select  dorgid from TBFLOW_ORG_ORG where orgid=#{orgid}) and b.crimid=o.crimid(+) and b.crimid=e.applyid(+) ) c1,
+  		  TBFLOW_BASE c2, (select * from (select * from TBXF_COMMUTEPAROLE_BATCH where departid=#{departid} order by optime desc) where rownum=1) c3
+          
+          <if test="writType == 'suggestreport' or writType == 'casecheckreport' ">
+               ,TBFLOW_BASE_OTHER c4,
+                TBFLOW_OTHER_FLOW c5
+          </if>
+  		  where c1.crimid=c2.applyid and c1.flowdraftid=c2.flowdraftid  and c1.optime>=c3.optime
+  		  <if test="writType == 'suggestreport' or writType == 'casecheckreport' ">
+       		   and c1.flowdraftid=c5.flowdraftid
+       		   and c5.tempid=#{writType}
+               and c4.otherid=c5.otherid
+  		  </if>
+  		  <if test="whereSql != '' and whereSql != null">
+  			  and ${whereSql}
+  		  </if>
+    </select>
+    <!-- 更新签章进程 -->
+    <update id="updateSignProgressToFlowBase">
+          update 
+          <if test="writtype == 'JXJS_JXJSSHB'">
+               TBFLOW_BASE 
+               set text8=#{progress} where applyid||flowdraftid in
+               <foreach item="item" index="index" collection="list" open="(" separator="," close=")">
+                     #{item}
+               </foreach> 
+          </if>
+          <if test="writtype != 'JXJS_JXJSSHB'">
+               TBFLOW_BASE_OTHER
+               set int1=#{progress} where otherid = (select otherid from TBFLOW_OTHER_FLOW where
+	               tempid||flowdraftid in
+	               <foreach item="item" index="index" collection="list" open="(" separator="," close=")">
+	                     #{item}
+	               </foreach> 
+               )
+          </if>
+     </update>
+     <!-- 查询出最大的批次用于批量签章的位置 -->
+     <select id="signGetMaxCuryearMapper" resultType="map">
+          SELECT *
+			  FROM (  SELECT *
+			            FROM TBXF_COMMUTEPAROLE_BATCH
+			           WHERE curyear = (SELECT MAX (curyear)
+			                              FROM TBXF_COMMUTEPAROLE_BATCH
+			                             WHERE departid = #{departid})
+			                 AND departid = #{departid}
+			        ORDER BY batch DESC)
+			 WHERE ROWNUM = 1
+     </select>
+     
+     <select id="getSignatureSchemesByPsignid" resultType="com.sinog2c.model.system.SignatureScheme">
+	     SELECT ts.*
+		  FROM TBSYS_SIGNATURESCHEME ts
+		  WHERE ts.PSIGNID = #{psignid}
+		  ORDER BY ts.ORDERBY
+	</select>
+	
+	<select id="getPreSignatureScheme" parameterType="com.sinog2c.model.system.SignatureScheme" resultType="com.sinog2c.model.system.SignatureScheme">
+	     SELECT ts.*
+		  FROM TBSYS_SIGNATURESCHEME ts
+		  WHERE ts.ORGID = #{orgid}
+		  AND ts.tempid = #{tempid}
+		  AND ts.PROGRESS = #{progress}
+		  AND ts.FLOWDEFID = #{flowdefid}
+	</select>
+	
+	<select id="getSignatureSchemeByCondition" parameterType="Map" 
+		resultType="com.sinog2c.model.system.SignatureScheme">
+		   select * from(
+		      SELECT ts.*
+			  FROM TBSYS_RESOURCES tre, 
+			  			TBSYS_SIGNATURESCHEME ts,
+			  			TBSYS_ROLE_RES trr, 
+			  			TBSYS_USERS_ROLES tur
+			  WHERE tre.resid = ts.resid
+			  	AND trr.resid=tre.resid
+			  	AND trr.roleid = tur.roleid
+			  	AND tre.restypeid = '16'
+			   AND tur.userid= #{userid}
+			   AND ts.orgid = #{departid}
+			   AND ts.flowdefid=#{flowdefid}
+			   AND ts.tempid=#{tempid}
+			 ORDER BY ts.progress desc
+		) where rownum = 1
+	</select>
+	
+	<select id="getSignatureSchemeByResid" parameterType="String" 
+		resultType="com.sinog2c.model.system.SignatureScheme">
+		   SELECT decode(isseal,1,seal,-1) as seal,decode(isnotation,1,notation,-1) as notation,progress
+      		FROM  
+      		TBSYS_SIGNATURESCHEME ts
+			WHERE text2 like concat(concat('%', #{resid}),'%')
+	</select>
+	
+	
+	<select id="getCurrnodeidSignatureScheme" parameterType="Map" 
+		resultType="com.sinog2c.model.system.SignatureScheme">
+	     SELECT ts.*
+		  FROM TBSYS_SIGNATURESCHEME ts
+		  WHERE ts.ORGID = #{departid}
+		  AND ts.tempid = #{tempid}
+		  AND ts.FLOWDEFID = #{flowdefid}
+		  AND ts.CURRNODEID = #{currnodeid}
+	</select>
+	
+</mapper>

@@ -1,0 +1,290 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.sinog2c.dao.api.flow.FlowMapper">
+	<resultMap id="BaseResultMap" type="com.sinog2c.model.flow.Flow">
+		<result column="FLOWSN" jdbcType="VARCHAR" property="flowsn" />
+		<result column="FLOWDRAFTID" jdbcType="VARCHAR" property="flowdraftid" />
+		<result column="FLOWID" jdbcType="VARCHAR" property="flowid" />
+		<result column="NODEID" jdbcType="VARCHAR" property="nodeid" />
+		<result column="ORGID" jdbcType="VARCHAR" property="orgid" />
+		<result column="STATE" jdbcType="DECIMAL" property="state" />
+		<result column="STARTSUMMRY" jdbcType="VARCHAR" property="startsummry" />
+		<result column="ENDSUMMRY" jdbcType="VARCHAR" property="endsummry" />
+		<result column="COMMENTTEXT" jdbcType="VARCHAR" property="commenttext" />
+		<result column="EXAMINEID" jdbcType="VARCHAR" property="examineid" />
+		<result column="REMARK" jdbcType="VARCHAR" property="remark" />
+		<result column="TEXT1" jdbcType="VARCHAR" property="text1" />
+		<result column="TEXT2" jdbcType="VARCHAR" property="text2" />
+		<result column="TEXT3" jdbcType="VARCHAR" property="text3" />
+		<result column="TEXT4" jdbcType="VARCHAR" property="text4" />
+		<result column="TEXT5" jdbcType="VARCHAR" property="text5" />
+		<result column="TEXT6" jdbcType="VARCHAR" property="text6" />
+		<result column="INT1" jdbcType="DECIMAL" property="int1" />
+		<result column="INT2" jdbcType="DECIMAL" property="int2" />
+		<result column="OPNAME" jdbcType="VARCHAR" property="opname" />
+		<result column="OPID" jdbcType="VARCHAR" property="opid" />
+		<result column="OPERATEIP" jdbcType="VARCHAR" property="operateip" />
+		<result column="OPTIME" jdbcType="TIMESTAMP" property="optime" />
+		<result column="ORDERBY" jdbcType="DECIMAL" property="orderby" />
+		<result column="TEXT7" jdbcType="VARCHAR" property="text7"/>
+		<result column="PRENODEID" jdbcType="VARCHAR" property="prenodeid"/>
+		<result column="OPERATETYPE" jdbcType="VARCHAR" property="operatetype"/>
+		<result column="OPERATEID" jdbcType="VARCHAR" property="operateid"/>
+	</resultMap>
+	
+	<insert id="insert" parameterType="com.sinog2c.model.flow.Flow">
+		<selectKey keyProperty="flowsn" resultType="String" order="BEFORE">
+			select  seq_flow_flowsn.nextval||F_GETCURRENTTIME||replace(replace(UPPER(#{orgid,jdbcType=VARCHAR}),'C',''),'GK','') as flowsn  from dual
+		</selectKey>
+		insert into TBFLOW 
+		(
+			FLOWSN, 
+			FLOWDRAFTID, 
+			FLOWID, 
+			NODEID, 
+			ORGID,
+			STATE, 
+			STARTSUMMRY,
+			ENDSUMMRY, 
+			COMMENTTEXT, 
+			EXAMINEID,
+			REMARK,
+			TEXT1, 
+			TEXT2, 
+			TEXT3,
+			TEXT4, 
+			TEXT5, 
+			TEXT6,
+			TEXT7,
+			INT1, 
+			INT2, 
+			OPNAME,
+			OPID,
+			OPERATEIP, 
+			OPTIME,
+			ORDERBY,
+			PRENODEID,
+			OPERATETYPE,
+			OPERATEID
+		)
+		values (
+			#{flowsn,jdbcType=VARCHAR},
+			#{flowdraftid,jdbcType=VARCHAR},
+			#{flowid,jdbcType=VARCHAR}, 
+			#{nodeid,jdbcType=VARCHAR},
+			#{orgid,jdbcType=VARCHAR},
+			#{state,jdbcType=DECIMAL}, 
+			#{startsummry,jdbcType=VARCHAR},
+			#{endsummry,jdbcType=VARCHAR}, 
+			#{commenttext,jdbcType=VARCHAR},
+			#{examineid,jdbcType=VARCHAR}, 
+			#{remark,jdbcType=VARCHAR},
+			#{text1,jdbcType=VARCHAR}, 
+			#{text2,jdbcType=VARCHAR}, 
+			#{text3,jdbcType=VARCHAR},
+			#{text4,jdbcType=VARCHAR}, 
+			#{text5,jdbcType=VARCHAR},
+			#{text6,jdbcType=VARCHAR}, 
+			#{text7,jdbcType=VARCHAR},
+			#{int1,jdbcType=DECIMAL}, 
+			#{int2,jdbcType=DECIMAL}, 
+			#{opname,jdbcType=VARCHAR},
+			#{opid,jdbcType=VARCHAR}, 
+			#{operateip,jdbcType=VARCHAR}, 
+			#{optime,jdbcType=TIMESTAMP},
+			#{orderby,jdbcType=DECIMAL},
+			#{prenodeid,jdbcType=VARCHAR},
+			#{operatetype,jdbcType=VARCHAR},
+			#{operateid,jdbcType=VARCHAR}
+		)
+  </insert>
+  
+  	<!-- 查询表中记录总数 -->
+	<select id="countAll" resultType="int">  
+		select count(*) c from tbflow
+	</select>
+	<!-- 根据流程草稿ID判断是否存在呈批表 -->
+	<select id="validatecpb" resultType="int">  
+		select  count(*)  c  from  TBFLOW_OTHER_FLOW  where tempid = 'CQAJPSB' and flowdraftid = #{flowdraftid}
+	</select>
+	<!-- 查询表中的所有流程信息 -->
+	<select id="selectAll" parameterType="String" resultType="com.sinog2c.model.flow.Flow">    
+		select * from tbflow order by optime asc
+	</select>
+	<select id="getOpinion" parameterType="com.sinog2c.model.flow.Flow" resultType="com.sinog2c.model.flow.Flow">    
+		select * from tbflow where flowdraftid=#{flowdraftid} and optime = (select max(optime) from TBFLOW  where flowdraftid = #{flowdraftid,jdbcType=VARCHAR})
+	</select>
+	
+	<!-- 根据流程ID查找流程信息 -->
+	<select id="findById" parameterType="String" resultType="com.sinog2c.model.flow.Flow"> 
+		select * from 
+		( 
+			select * from tbflow where 1 = 1 and flowdraftid=#{flowdraftid} order by ORDERBY desc
+		) m 
+		where rownum = 1
+	</select>
+	
+	<!-- 获取流程id -->
+	<select id="getFlowid" resultType="String">  <!-- 查询表中记录总数 -->
+		select F_MAKEFLOWID(#{departid},#{orgid},#{flowdefid},#{isflow}) m from  dual
+	</select>
+	<!-- 全程留痕 -->
+	<select id="selectFlowForScar" parameterType="String" resultType="java.util.HashMap">
+		select  to_char(f.optime,'yyyy-MM-dd HH24:mi:ss') optime,u.duty,f.opname, f.operateip,
+		decode(f.text2,'defer','暂缓',decode(f.state,1,'同意',-1,'同意',2,'退回',3,'不同意',4,'退回复议','办理中'))  opinion,
+        f.nodeid,
+        <if test="flowdefid == 'other_zflbcrdsp'">
+            case when f.nodeid='0' then
+	             (select text1 from tbflow_base where flowdraftid=f.flowdraftid)
+	             when f.nodeid='N0001' or f.nodeid='N0002' then
+	             (select text2 from tbflow_base where flowdraftid=f.flowdraftid)
+	             when f.nodeid='N0003' or f.nodeid='N0004' or f.nodeid='N0006' then
+	             (select text3 from tbflow_base where flowdraftid=f.flowdraftid)
+	             when f.nodeid='N0005' then
+	             (select text4 from tbflow_base where flowdraftid=f.flowdraftid)
+	             when f.nodeid='N0007' or f.nodeid='1' then
+	             (select text5 from tbflow_base where flowdraftid=f.flowdraftid)
+           end as reason
+        </if>
+        <if test="flowdefid != 'other_zflbcrdsp'">
+            f.commenttext as reason
+        </if>
+		
+		 from TBFLOW f  left join TBSYS_USERINFO u
+		on f.opid = u.userid where  flowdraftid=#{flowdraftid}
+		<if test="tflag == null or tflag == ''" >
+			or f.flowdraftid in (select tb.flowdraftid from tbflow_base tb where tb.applyid=#{applyid} and tb.flowdefid=#{flowdefid})
+		</if>
+		order by f.optime desc
+	</select>
+	
+	<!-- 更新流转状态 -->
+	<update id="updateFlowState" >
+	 update TBFLOW
+      <set >
+      <if test="state != null and state != ''" >
+        state = #{state,jdbcType=DECIMAL},
+      </if>
+    </set>
+    where 1=1 and state = -1
+        <if test="flowdraftid != null and flowdraftid !=''" >
+        	 and flowdraftid = #{flowdraftid}
+        </if>
+	</update>
+	
+	<update id="updateByFlowdraftid" parameterType="com.sinog2c.model.flow.Flow">
+		update TBFLOW 
+		<set>
+			<if test="flowid != null">
+				flowid = #{flowid,jdbcType=VARCHAR}, 
+			</if>
+			<if test="nodeid != null">
+				nodeid = #{nodeid,jdbcType=VARCHAR},
+			</if>
+			<if test="orgid != null">
+				orgid = #{orgid,jdbcType=VARCHAR},
+			</if>
+			<if test="state != null">
+				state = #{state,jdbcType=DECIMAL}, 
+			</if>
+			<if test="startsummry!= null">
+				startsummry = #{startsummry,jdbcType=VARCHAR},
+			</if>
+			<if test="endsummry != null">
+				endsummry = #{endsummry,jdbcType=VARCHAR}, 
+			</if>
+			<if test="commenttext != null and commenttext != ''">
+				commenttext = #{commenttext,jdbcType=VARCHAR},
+			</if>
+			<if test="examineid != null and examineid !=''">
+				examineid = #{examineid,jdbcType=VARCHAR},
+			</if>
+			<if test="remark != null">
+				remark = #{remark,jdbcType=VARCHAR},
+			</if>
+			<if test="text1 != null">
+				text1 = #{text1,jdbcType=VARCHAR},
+			</if>
+			<if test="text2 != null">
+				text2 = #{text2,jdbcType=VARCHAR}, 
+			</if>
+			<if test="text3 != null">
+				text3 = #{text3,jdbcType=VARCHAR},
+			</if>
+			<if test="text4 != null">
+				text4 = #{text4,jdbcType=VARCHAR}, 
+			</if>
+			<if test="text5 != null">
+				text5 = #{text5,jdbcType=VARCHAR},
+			</if>
+			<if test="text6 != null">
+				text6 = #{text6,jdbcType=VARCHAR},
+			</if>
+			<if test="text7 != null">
+				text7 = #{text7,jdbcType=VARCHAR},
+			</if>
+			<if test="int1 != null">
+				int1 = #{int1,jdbcType=DECIMAL}, 
+			</if>
+			<if test="int2 != null">
+				int2 = #{int2,jdbcType=DECIMAL},
+			</if>
+			<if test="opname != null">
+				opname = #{opname,jdbcType=VARCHAR},
+			</if>
+			<if test="opid != null">
+				opid = #{opid,jdbcType=VARCHAR},
+			</if>
+			<if test="operateip != null">
+				operateip = #{operateip,jdbcType=VARCHAR},
+			</if>
+			<if test="optime != null">
+				optime = #{optime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="orderby != null">
+				orderby = #{orderby,jdbcType=DECIMAL},
+			</if>
+			
+			<if test="prenodeid != null">
+				prenodeid = #{prenodeid,jdbcType=VARCHAR},
+			</if>
+			<if test="operatetype != null">
+				operatetype = #{operatetype,jdbcType=VARCHAR},
+			</if>
+			<if test="operateid != null">
+				operateid = #{operateid,jdbcType=VARCHAR},
+			</if>
+		</set>
+		where flowdraftid = #{flowdraftid,jdbcType=VARCHAR}
+		  and optime = (
+		  				select max(optime) from TBFLOW  where flowdraftid = #{flowdraftid,jdbcType=VARCHAR}
+		  			 )
+	</update>
+	
+	<update id="updateZZByFlowSn" parameterType="com.sinog2c.model.flow.Flow">
+		update TBFLOW 
+		<set>
+			<if test="text1 != null">
+				text1 = #{text1,jdbcType=VARCHAR},
+			</if>
+			<if test="text2 != null">
+				text2 = #{text2,jdbcType=VARCHAR}
+			</if>
+			where flowsn=#{flowsn}
+		</set>
+	</update>
+	<!-- 陕西监狱办理保外案件，省局表单获取数据 -->
+	<select id="findflowByflowdefid" parameterType="Map" resultType="Map">
+			select  b.text21 as baozhengrenname,b.text5 as baozhengrenzhuzhi,text5 as  opcchangebehava ,b.text18 as baozhengrendanwei,b.text19 as baozhengrenguanxi,t.fjqyj1 as opcillinstance,t.jqyj as text51,t.ksyj as text61, t.pshyj as text71 ,t.jyzyj as text81
+			 from uv_bwjy_case t,tbflow_base b where t.flowdraftid=b.flowdraftid and  t.applyid=#{crimid} and t.flowdraftid=#{flowdraftid} 
+	</select>
+	
+	<select id="findByFristId" parameterType="String" resultType="com.sinog2c.model.flow.Flow"> 
+		select * from 
+		( 
+			select * from tbflow where 1 = 1 and flowdraftid=#{flowdraftid} order by ORDERBY asc
+		) m 
+		where rownum = 1
+	</select>
+	
+</mapper>

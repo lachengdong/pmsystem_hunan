@@ -1,0 +1,644 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.sinog2c.dao.api.statistical.StatisticalPunishmentParoleMapper" >
+  <resultMap id="BaseResultMap" type="com.sinog2c.model.statistical.StatisticalPunishmentParole" >
+    <id column="DEPARTID" property="departid" jdbcType="VARCHAR" />
+    <id column="YEARTYPE" property="yeartype" jdbcType="VARCHAR" />
+    <result column="JXHJ" property="jxhj" jdbcType="DECIMAL" />
+    <result column="JXZYFBL" property="jxzyfbl" jdbcType="VARCHAR" />
+    <result column="JXBLPC" property="jxblpc" jdbcType="DECIMAL" />
+    <result column="SHJWQ" property="shjwq" jdbcType="DECIMAL" />
+    <result column="SHJYQ" property="shjyq" jdbcType="DECIMAL" />
+    <result column="WQJYQ" property="wqjyq" jdbcType="DECIMAL" />
+    <result column="YQJYQ" property="yqjyq" jdbcType="DECIMAL" />
+    <result column="LIGONG" property="ligong" jdbcType="DECIMAL" />
+    <result column="CDCG" property="cdcg" jdbcType="DECIMAL" />
+    <result column="LBCFJX" property="lbcfjx" jdbcType="DECIMAL" />
+    <result column="ZLBCFBL" property="zlbcfbl" jdbcType="DECIMAL" />
+    <result column="YXCYSJX" property="yxcysjx" jdbcType="DECIMAL" />
+    <result column="ZYXCYSBL" property="zyxcysbl" jdbcType="VARCHAR" />
+    <result column="CHJX" property="chjx" jdbcType="DECIMAL" />
+    <result column="JXFYKTSL" property="jxfyktsl" jdbcType="DECIMAL" />
+    <result column="JXFYGD" property="jxfygd" jdbcType="DECIMAL" />
+    <result column="JSHJ" property="jshj" jdbcType="DECIMAL" />
+    <result column="JSZYFBL" property="jszyfbl" jdbcType="VARCHAR" />
+    <result column="JSBLPC" property="jsblpc" jdbcType="DECIMAL" />
+    <result column="LBCFJS" property="lbcfjs" jdbcType="DECIMAL" />
+    <result column="JSZLBCFBL" property="jszlbcfbl" jdbcType="VARCHAR" />
+    <result column="YXCYSJS" property="yxcysjs" jdbcType="DECIMAL" />
+    <result column="ZYXCYSJSBL" property="zyxcysjsbl" jdbcType="VARCHAR" />
+    <result column="CHJS" property="chjs" jdbcType="DECIMAL" />
+    <result column="CXJS" property="cxjs" jdbcType="DECIMAL" />
+    <result column="JSFYKTSL" property="jsfyktsl" jdbcType="DECIMAL" />
+    <result column="OPTIME" property="optime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    DEPARTID, YEARTYPE, JXHJ, JXZYFBL, JXBLPC, SHJWQ, SHJYQ, WQJYQ, YQJYQ, LIGONG, CDCG, 
+    LBCFJX, ZLBCFBL, YXCYSJX, ZYXCYSBL, CHJX, JXFYKTSL, JXFYGD, JSHJ, JSZYFBL, JSBLPC, 
+    LBCFJS, JSZLBCFBL, YXCYSJS, ZYXCYSJSBL, CHJS, CXJS, JSFYKTSL, OPTIME
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="com.sinog2c.model.statistical.StatisticalPunishmentParole" >
+    select 
+    <include refid="Base_Column_List" />
+    from STATISTICAL_PUNISHMENT_PAROLE
+    where DEPARTID = #{departid,jdbcType=VARCHAR}
+      and YEARTYPE = #{yeartype,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="com.sinog2c.model.statistical.StatisticalPunishmentParole" >
+    delete from STATISTICAL_PUNISHMENT_PAROLE
+    where DEPARTID = #{departid,jdbcType=VARCHAR}
+      and YEARTYPE = #{yeartype,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.sinog2c.model.statistical.StatisticalPunishmentParole" >
+    insert into STATISTICAL_PUNISHMENT_PAROLE (DEPARTID, YEARTYPE, JXHJ, 
+      JXZYFBL, JXBLPC, SHJWQ, 
+      SHJYQ, WQJYQ, YQJYQ, 
+      LIGONG, CDCG, LBCFJX, 
+      ZLBCFBL, YXCYSJX, ZYXCYSBL, 
+      CHJX, JXFYKTSL, JXFYGD, 
+      JSHJ, JSZYFBL, JSBLPC, 
+      LBCFJS, JSZLBCFBL, YXCYSJS, 
+      ZYXCYSJSBL, CHJS, CXJS, 
+      JSFYKTSL, OPTIME)
+    values (#{departid,jdbcType=VARCHAR}, #{yeartype,jdbcType=VARCHAR}, #{jxhj,jdbcType=DECIMAL}, 
+      #{jxzyfbl,jdbcType=VARCHAR}, #{jxblpc,jdbcType=DECIMAL}, #{shjwq,jdbcType=DECIMAL}, 
+      #{shjyq,jdbcType=DECIMAL}, #{wqjyq,jdbcType=DECIMAL}, #{yqjyq,jdbcType=DECIMAL}, 
+      #{ligong,jdbcType=DECIMAL}, #{cdcg,jdbcType=DECIMAL}, #{lbcfjx,jdbcType=DECIMAL}, 
+      #{zlbcfbl,jdbcType=DECIMAL}, #{yxcysjx,jdbcType=DECIMAL}, #{zyxcysbl,jdbcType=VARCHAR}, 
+      #{chjx,jdbcType=DECIMAL}, #{jxfyktsl,jdbcType=DECIMAL}, #{jxfygd,jdbcType=DECIMAL}, 
+      #{jshj,jdbcType=DECIMAL}, #{jszyfbl,jdbcType=VARCHAR}, #{jsblpc,jdbcType=DECIMAL}, 
+      #{lbcfjs,jdbcType=DECIMAL}, #{jszlbcfbl,jdbcType=VARCHAR}, #{yxcysjs,jdbcType=DECIMAL}, 
+      #{zyxcysjsbl,jdbcType=VARCHAR}, #{chjs,jdbcType=DECIMAL}, #{cxjs,jdbcType=DECIMAL}, 
+      #{jsfyktsl,jdbcType=DECIMAL}, #{optime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.sinog2c.model.statistical.StatisticalPunishmentParole" >
+    insert into STATISTICAL_PUNISHMENT_PAROLE
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="departid != null" >
+        DEPARTID,
+      </if>
+      <if test="yeartype != null" >
+        YEARTYPE,
+      </if>
+      <if test="jxhj != null" >
+        JXHJ,
+      </if>
+      <if test="jxzyfbl != null" >
+        JXZYFBL,
+      </if>
+      <if test="jxblpc != null" >
+        JXBLPC,
+      </if>
+      <if test="shjwq != null" >
+        SHJWQ,
+      </if>
+      <if test="shjyq != null" >
+        SHJYQ,
+      </if>
+      <if test="wqjyq != null" >
+        WQJYQ,
+      </if>
+      <if test="yqjyq != null" >
+        YQJYQ,
+      </if>
+      <if test="ligong != null" >
+        LIGONG,
+      </if>
+      <if test="cdcg != null" >
+        CDCG,
+      </if>
+      <if test="lbcfjx != null" >
+        LBCFJX,
+      </if>
+      <if test="zlbcfbl != null" >
+        ZLBCFBL,
+      </if>
+      <if test="yxcysjx != null" >
+        YXCYSJX,
+      </if>
+      <if test="zyxcysbl != null" >
+        ZYXCYSBL,
+      </if>
+      <if test="chjx != null" >
+        CHJX,
+      </if>
+      <if test="jxfyktsl != null" >
+        JXFYKTSL,
+      </if>
+      <if test="jxfygd != null" >
+        JXFYGD,
+      </if>
+      <if test="jshj != null" >
+        JSHJ,
+      </if>
+      <if test="jszyfbl != null" >
+        JSZYFBL,
+      </if>
+      <if test="jsblpc != null" >
+        JSBLPC,
+      </if>
+      <if test="lbcfjs != null" >
+        LBCFJS,
+      </if>
+      <if test="jszlbcfbl != null" >
+        JSZLBCFBL,
+      </if>
+      <if test="yxcysjs != null" >
+        YXCYSJS,
+      </if>
+      <if test="zyxcysjsbl != null" >
+        ZYXCYSJSBL,
+      </if>
+      <if test="chjs != null" >
+        CHJS,
+      </if>
+      <if test="cxjs != null" >
+        CXJS,
+      </if>
+      <if test="jsfyktsl != null" >
+        JSFYKTSL,
+      </if>
+      <if test="optime != null" >
+        OPTIME,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="departid != null" >
+        #{departid,jdbcType=VARCHAR},
+      </if>
+      <if test="yeartype != null" >
+        #{yeartype,jdbcType=VARCHAR},
+      </if>
+      <if test="jxhj != null" >
+        #{jxhj,jdbcType=DECIMAL},
+      </if>
+      <if test="jxzyfbl != null" >
+        #{jxzyfbl,jdbcType=VARCHAR},
+      </if>
+      <if test="jxblpc != null" >
+        #{jxblpc,jdbcType=DECIMAL},
+      </if>
+      <if test="shjwq != null" >
+        #{shjwq,jdbcType=DECIMAL},
+      </if>
+      <if test="shjyq != null" >
+        #{shjyq,jdbcType=DECIMAL},
+      </if>
+      <if test="wqjyq != null" >
+        #{wqjyq,jdbcType=DECIMAL},
+      </if>
+      <if test="yqjyq != null" >
+        #{yqjyq,jdbcType=DECIMAL},
+      </if>
+      <if test="ligong != null" >
+        #{ligong,jdbcType=DECIMAL},
+      </if>
+      <if test="cdcg != null" >
+        #{cdcg,jdbcType=DECIMAL},
+      </if>
+      <if test="lbcfjx != null" >
+        #{lbcfjx,jdbcType=DECIMAL},
+      </if>
+      <if test="zlbcfbl != null" >
+        #{zlbcfbl,jdbcType=DECIMAL},
+      </if>
+      <if test="yxcysjx != null" >
+        #{yxcysjx,jdbcType=DECIMAL},
+      </if>
+      <if test="zyxcysbl != null" >
+        #{zyxcysbl,jdbcType=VARCHAR},
+      </if>
+      <if test="chjx != null" >
+        #{chjx,jdbcType=DECIMAL},
+      </if>
+      <if test="jxfyktsl != null" >
+        #{jxfyktsl,jdbcType=DECIMAL},
+      </if>
+      <if test="jxfygd != null" >
+        #{jxfygd,jdbcType=DECIMAL},
+      </if>
+      <if test="jshj != null" >
+        #{jshj,jdbcType=DECIMAL},
+      </if>
+      <if test="jszyfbl != null" >
+        #{jszyfbl,jdbcType=VARCHAR},
+      </if>
+      <if test="jsblpc != null" >
+        #{jsblpc,jdbcType=DECIMAL},
+      </if>
+      <if test="lbcfjs != null" >
+        #{lbcfjs,jdbcType=DECIMAL},
+      </if>
+      <if test="jszlbcfbl != null" >
+        #{jszlbcfbl,jdbcType=VARCHAR},
+      </if>
+      <if test="yxcysjs != null" >
+        #{yxcysjs,jdbcType=DECIMAL},
+      </if>
+      <if test="zyxcysjsbl != null" >
+        #{zyxcysjsbl,jdbcType=VARCHAR},
+      </if>
+      <if test="chjs != null" >
+        #{chjs,jdbcType=DECIMAL},
+      </if>
+      <if test="cxjs != null" >
+        #{cxjs,jdbcType=DECIMAL},
+      </if>
+      <if test="jsfyktsl != null" >
+        #{jsfyktsl,jdbcType=DECIMAL},
+      </if>
+      <if test="optime != null" >
+        #{optime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <insert id="insertByMap" parameterType="Map" >
+    insert into STATISTICAL_PUNISHMENT_PAROLE
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="departid != null" >
+        DEPARTID,
+      </if>
+      <if test="yeartype != null" >
+        YEARTYPE,
+      </if>
+      <if test="jxhj != null" >
+        JXHJ,
+      </if>
+      <if test="jxzyfbl != null" >
+        JXZYFBL,
+      </if>
+      <if test="jxblpc != null" >
+        JXBLPC,
+      </if>
+      <if test="shjwq != null" >
+        SHJWQ,
+      </if>
+      <if test="shjyq != null" >
+        SHJYQ,
+      </if>
+      <if test="wqjyq != null" >
+        WQJYQ,
+      </if>
+      <if test="yqjyq != null" >
+        YQJYQ,
+      </if>
+      <if test="ligong != null" >
+        LIGONG,
+      </if>
+      <if test="cdcg != null" >
+        CDCG,
+      </if>
+      <if test="lbcfjx != null" >
+        LBCFJX,
+      </if>
+      <if test="zlbcfbl != null" >
+        ZLBCFBL,
+      </if>
+      <if test="yxcysjx != null" >
+        YXCYSJX,
+      </if>
+      <if test="zyxcysbl != null" >
+        ZYXCYSBL,
+      </if>
+      <if test="chjx != null" >
+        CHJX,
+      </if>
+      <if test="jxfyktsl != null" >
+        JXFYKTSL,
+      </if>
+      <if test="jxfygd != null" >
+        JXFYGD,
+      </if>
+      <if test="jshj != null" >
+        JSHJ,
+      </if>
+      <if test="jszyfbl != null" >
+        JSZYFBL,
+      </if>
+      <if test="jsblpc != null" >
+        JSBLPC,
+      </if>
+      <if test="lbcfjs != null" >
+        LBCFJS,
+      </if>
+      <if test="jszlbcfbl != null" >
+        JSZLBCFBL,
+      </if>
+      <if test="yxcysjs != null" >
+        YXCYSJS,
+      </if>
+      <if test="zyxcysjsbl != null" >
+        ZYXCYSJSBL,
+      </if>
+      <if test="chjs != null" >
+        CHJS,
+      </if>
+      <if test="cxjs != null" >
+        CXJS,
+      </if>
+      <if test="jsfyktsl != null" >
+        JSFYKTSL,
+      </if>
+      <if test="optime != null" >
+        OPTIME,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="departid != null" >
+        #{departid,jdbcType=VARCHAR},
+      </if>
+      <if test="yeartype != null" >
+        #{yeartype,jdbcType=VARCHAR},
+      </if>
+      <if test="jxhj != null" >
+        #{jxhj,jdbcType=DECIMAL},
+      </if>
+      <if test="jxzyfbl != null" >
+        #{jxzyfbl,jdbcType=VARCHAR},
+      </if>
+      <if test="jxblpc != null" >
+        #{jxblpc,jdbcType=DECIMAL},
+      </if>
+      <if test="shjwq != null" >
+        #{shjwq,jdbcType=DECIMAL},
+      </if>
+      <if test="shjyq != null" >
+        #{shjyq,jdbcType=DECIMAL},
+      </if>
+      <if test="wqjyq != null" >
+        #{wqjyq,jdbcType=DECIMAL},
+      </if>
+      <if test="yqjyq != null" >
+        #{yqjyq,jdbcType=DECIMAL},
+      </if>
+      <if test="ligong != null" >
+        #{ligong,jdbcType=DECIMAL},
+      </if>
+      <if test="cdcg != null" >
+        #{cdcg,jdbcType=DECIMAL},
+      </if>
+      <if test="lbcfjx != null" >
+        #{lbcfjx,jdbcType=DECIMAL},
+      </if>
+      <if test="zlbcfbl != null" >
+        #{zlbcfbl,jdbcType=DECIMAL},
+      </if>
+      <if test="yxcysjx != null" >
+        #{yxcysjx,jdbcType=DECIMAL},
+      </if>
+      <if test="zyxcysbl != null" >
+        #{zyxcysbl,jdbcType=VARCHAR},
+      </if>
+      <if test="chjx != null" >
+        #{chjx,jdbcType=DECIMAL},
+      </if>
+      <if test="jxfyktsl != null" >
+        #{jxfyktsl,jdbcType=DECIMAL},
+      </if>
+      <if test="jxfygd != null" >
+        #{jxfygd,jdbcType=DECIMAL},
+      </if>
+      <if test="jshj != null" >
+        #{jshj,jdbcType=DECIMAL},
+      </if>
+      <if test="jszyfbl != null" >
+        #{jszyfbl,jdbcType=VARCHAR},
+      </if>
+      <if test="jsblpc != null" >
+        #{jsblpc,jdbcType=DECIMAL},
+      </if>
+      <if test="lbcfjs != null" >
+        #{lbcfjs,jdbcType=DECIMAL},
+      </if>
+      <if test="jszlbcfbl != null" >
+        #{jszlbcfbl,jdbcType=VARCHAR},
+      </if>
+      <if test="yxcysjs != null" >
+        #{yxcysjs,jdbcType=DECIMAL},
+      </if>
+      <if test="zyxcysjsbl != null" >
+        #{zyxcysjsbl,jdbcType=VARCHAR},
+      </if>
+      <if test="chjs != null" >
+        #{chjs,jdbcType=DECIMAL},
+      </if>
+      <if test="cxjs != null" >
+        #{cxjs,jdbcType=DECIMAL},
+      </if>
+      <if test="jsfyktsl != null" >
+        #{jsfyktsl,jdbcType=DECIMAL},
+      </if>
+      <if test="optime != null" >
+        #{optime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.sinog2c.model.statistical.StatisticalPunishmentParole" >
+    update STATISTICAL_PUNISHMENT_PAROLE
+    <set >
+      <if test="jxhj != null" >
+        JXHJ = #{jxhj,jdbcType=DECIMAL},
+      </if>
+      <if test="jxzyfbl != null" >
+        JXZYFBL = #{jxzyfbl,jdbcType=VARCHAR},
+      </if>
+      <if test="jxblpc != null" >
+        JXBLPC = #{jxblpc,jdbcType=DECIMAL},
+      </if>
+      <if test="shjwq != null" >
+        SHJWQ = #{shjwq,jdbcType=DECIMAL},
+      </if>
+      <if test="shjyq != null" >
+        SHJYQ = #{shjyq,jdbcType=DECIMAL},
+      </if>
+      <if test="wqjyq != null" >
+        WQJYQ = #{wqjyq,jdbcType=DECIMAL},
+      </if>
+      <if test="yqjyq != null" >
+        YQJYQ = #{yqjyq,jdbcType=DECIMAL},
+      </if>
+      <if test="ligong != null" >
+        LIGONG = #{ligong,jdbcType=DECIMAL},
+      </if>
+      <if test="cdcg != null" >
+        CDCG = #{cdcg,jdbcType=DECIMAL},
+      </if>
+      <if test="lbcfjx != null" >
+        LBCFJX = #{lbcfjx,jdbcType=DECIMAL},
+      </if>
+      <if test="zlbcfbl != null" >
+        ZLBCFBL = #{zlbcfbl,jdbcType=DECIMAL},
+      </if>
+      <if test="yxcysjx != null" >
+        YXCYSJX = #{yxcysjx,jdbcType=DECIMAL},
+      </if>
+      <if test="zyxcysbl != null" >
+        ZYXCYSBL = #{zyxcysbl,jdbcType=VARCHAR},
+      </if>
+      <if test="chjx != null" >
+        CHJX = #{chjx,jdbcType=DECIMAL},
+      </if>
+      <if test="jxfyktsl != null" >
+        JXFYKTSL = #{jxfyktsl,jdbcType=DECIMAL},
+      </if>
+      <if test="jxfygd != null" >
+        JXFYGD = #{jxfygd,jdbcType=DECIMAL},
+      </if>
+      <if test="jshj != null" >
+        JSHJ = #{jshj,jdbcType=DECIMAL},
+      </if>
+      <if test="jszyfbl != null" >
+        JSZYFBL = #{jszyfbl,jdbcType=VARCHAR},
+      </if>
+      <if test="jsblpc != null" >
+        JSBLPC = #{jsblpc,jdbcType=DECIMAL},
+      </if>
+      <if test="lbcfjs != null" >
+        LBCFJS = #{lbcfjs,jdbcType=DECIMAL},
+      </if>
+      <if test="jszlbcfbl != null" >
+        JSZLBCFBL = #{jszlbcfbl,jdbcType=VARCHAR},
+      </if>
+      <if test="yxcysjs != null" >
+        YXCYSJS = #{yxcysjs,jdbcType=DECIMAL},
+      </if>
+      <if test="zyxcysjsbl != null" >
+        ZYXCYSJSBL = #{zyxcysjsbl,jdbcType=VARCHAR},
+      </if>
+      <if test="chjs != null" >
+        CHJS = #{chjs,jdbcType=DECIMAL},
+      </if>
+      <if test="cxjs != null" >
+        CXJS = #{cxjs,jdbcType=DECIMAL},
+      </if>
+      <if test="jsfyktsl != null" >
+        JSFYKTSL = #{jsfyktsl,jdbcType=DECIMAL},
+      </if>
+      <if test="optime != null" >
+        OPTIME = #{optime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where DEPARTID = #{departid,jdbcType=VARCHAR}
+      and YEARTYPE = #{yeartype,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByMap" parameterType="Map" >
+    update STATISTICAL_PUNISHMENT_PAROLE
+    <set >
+      <if test="jxhj != null" >
+        JXHJ = #{jxhj,jdbcType=DECIMAL},
+      </if>
+      <if test="jxzyfbl != null" >
+        JXZYFBL = #{jxzyfbl,jdbcType=VARCHAR},
+      </if>
+      <if test="jxblpc != null" >
+        JXBLPC = #{jxblpc,jdbcType=DECIMAL},
+      </if>
+      <if test="shjwq != null" >
+        SHJWQ = #{shjwq,jdbcType=DECIMAL},
+      </if>
+      <if test="shjyq != null" >
+        SHJYQ = #{shjyq,jdbcType=DECIMAL},
+      </if>
+      <if test="wqjyq != null" >
+        WQJYQ = #{wqjyq,jdbcType=DECIMAL},
+      </if>
+      <if test="yqjyq != null" >
+        YQJYQ = #{yqjyq,jdbcType=DECIMAL},
+      </if>
+      <if test="ligong != null" >
+        LIGONG = #{ligong,jdbcType=DECIMAL},
+      </if>
+      <if test="cdcg != null" >
+        CDCG = #{cdcg,jdbcType=DECIMAL},
+      </if>
+      <if test="lbcfjx != null" >
+        LBCFJX = #{lbcfjx,jdbcType=DECIMAL},
+      </if>
+      <if test="zlbcfbl != null" >
+        ZLBCFBL = #{zlbcfbl,jdbcType=DECIMAL},
+      </if>
+      <if test="yxcysjx != null" >
+        YXCYSJX = #{yxcysjx,jdbcType=DECIMAL},
+      </if>
+      <if test="zyxcysbl != null" >
+        ZYXCYSBL = #{zyxcysbl,jdbcType=VARCHAR},
+      </if>
+      <if test="chjx != null" >
+        CHJX = #{chjx,jdbcType=DECIMAL},
+      </if>
+      <if test="jxfyktsl != null" >
+        JXFYKTSL = #{jxfyktsl,jdbcType=DECIMAL},
+      </if>
+      <if test="jxfygd != null" >
+        JXFYGD = #{jxfygd,jdbcType=DECIMAL},
+      </if>
+      <if test="jshj != null" >
+        JSHJ = #{jshj,jdbcType=DECIMAL},
+      </if>
+      <if test="jszyfbl != null" >
+        JSZYFBL = #{jszyfbl,jdbcType=VARCHAR},
+      </if>
+      <if test="jsblpc != null" >
+        JSBLPC = #{jsblpc,jdbcType=DECIMAL},
+      </if>
+      <if test="lbcfjs != null" >
+        LBCFJS = #{lbcfjs,jdbcType=DECIMAL},
+      </if>
+      <if test="jszlbcfbl != null" >
+        JSZLBCFBL = #{jszlbcfbl,jdbcType=VARCHAR},
+      </if>
+      <if test="yxcysjs != null" >
+        YXCYSJS = #{yxcysjs,jdbcType=DECIMAL},
+      </if>
+      <if test="zyxcysjsbl != null" >
+        ZYXCYSJSBL = #{zyxcysjsbl,jdbcType=VARCHAR},
+      </if>
+      <if test="chjs != null" >
+        CHJS = #{chjs,jdbcType=DECIMAL},
+      </if>
+      <if test="cxjs != null" >
+        CXJS = #{cxjs,jdbcType=DECIMAL},
+      </if>
+      <if test="jsfyktsl != null" >
+        JSFYKTSL = #{jsfyktsl,jdbcType=DECIMAL},
+      </if>
+      <if test="optime != null" >
+        OPTIME = #{optime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where DEPARTID = #{departid,jdbcType=VARCHAR}
+      and YEARTYPE = #{yeartype,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.sinog2c.model.statistical.StatisticalPunishmentParole" >
+    update STATISTICAL_PUNISHMENT_PAROLE
+    set JXHJ = #{jxhj,jdbcType=DECIMAL},
+      JXZYFBL = #{jxzyfbl,jdbcType=VARCHAR},
+      JXBLPC = #{jxblpc,jdbcType=DECIMAL},
+      SHJWQ = #{shjwq,jdbcType=DECIMAL},
+      SHJYQ = #{shjyq,jdbcType=DECIMAL},
+      WQJYQ = #{wqjyq,jdbcType=DECIMAL},
+      YQJYQ = #{yqjyq,jdbcType=DECIMAL},
+      LIGONG = #{ligong,jdbcType=DECIMAL},
+      CDCG = #{cdcg,jdbcType=DECIMAL},
+      LBCFJX = #{lbcfjx,jdbcType=DECIMAL},
+      ZLBCFBL = #{zlbcfbl,jdbcType=DECIMAL},
+      YXCYSJX = #{yxcysjx,jdbcType=DECIMAL},
+      ZYXCYSBL = #{zyxcysbl,jdbcType=VARCHAR},
+      CHJX = #{chjx,jdbcType=DECIMAL},
+      JXFYKTSL = #{jxfyktsl,jdbcType=DECIMAL},
+      JXFYGD = #{jxfygd,jdbcType=DECIMAL},
+      JSHJ = #{jshj,jdbcType=DECIMAL},
+      JSZYFBL = #{jszyfbl,jdbcType=VARCHAR},
+      JSBLPC = #{jsblpc,jdbcType=DECIMAL},
+      LBCFJS = #{lbcfjs,jdbcType=DECIMAL},
+      JSZLBCFBL = #{jszlbcfbl,jdbcType=VARCHAR},
+      YXCYSJS = #{yxcysjs,jdbcType=DECIMAL},
+      ZYXCYSJSBL = #{zyxcysjsbl,jdbcType=VARCHAR},
+      CHJS = #{chjs,jdbcType=DECIMAL},
+      CXJS = #{cxjs,jdbcType=DECIMAL},
+      JSFYKTSL = #{jsfyktsl,jdbcType=DECIMAL},
+      OPTIME = #{optime,jdbcType=TIMESTAMP}
+    where DEPARTID = #{departid,jdbcType=VARCHAR}
+      and YEARTYPE = #{yeartype,jdbcType=VARCHAR}
+  </update>
+</mapper>

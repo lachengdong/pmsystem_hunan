@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.sinog2c.dao.api.arch.ArchTreeMapper">
+	<resultMap id="BaseResultMap" type="com.sinog2c.model.arch.ArchTree">
+		<id column="ID" property="id" jdbcType="DECIMAL" />
+		<result column="NO" property="no" jdbcType="VARCHAR" />
+		<result column="NAME" property="name" jdbcType="VARCHAR" />
+		<result column="REMARK" property="remark" jdbcType="VARCHAR" />
+		<result column="PARENT_ID" property="parentId" jdbcType="DECIMAL" />
+		<result column="CREATE_DATE" property="createDate" jdbcType="DATE" />
+		<result column="CREATE_USER" property="createUser" jdbcType="VARCHAR" />
+		<result column="TYPE" property="type" jdbcType="VARCHAR" />
+	</resultMap>
+	<sql id="Base_Column_List">
+		ID, NO, NAME, REMARK, PARENT_ID, CREATE_DATE, CREATE_USER, TYPE
+	</sql>
+	<select id="selectByPrimaryKey" resultMap="BaseResultMap"
+		parameterType="java.lang.Long">
+		select
+		<include refid="Base_Column_List" />
+		from ARCH_TREE
+		where ID = #{id,jdbcType=DECIMAL}
+	</select>
+	<delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+		delete from ARCH_TREE
+		where ID = #{id,jdbcType=DECIMAL}
+	</delete>
+	<insert id="insert" parameterType="com.sinog2c.model.arch.ArchTree">
+		insert into ARCH_TREE (ID, NO, NAME,
+		REMARK, PARENT_ID, CREATE_DATE,
+		CREATE_USER, TYPE)
+		values (#{id,jdbcType=DECIMAL}, #{no,jdbcType=VARCHAR},
+		#{name,jdbcType=VARCHAR},
+		#{remark,jdbcType=VARCHAR}, #{parentId,jdbcType=DECIMAL}, #{createDate,jdbcType=DATE},
+		#{createUser,jdbcType=VARCHAR}, #{type,jdbcType=VARCHAR})
+	</insert>
+	<insert id="insertSelective" parameterType="com.sinog2c.model.arch.ArchTree">
+		insert into ARCH_TREE
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				ID,
+			</if>
+			<if test="no != null">
+				NO,
+			</if>
+			<if test="name != null">
+				NAME,
+			</if>
+			<if test="remark != null">
+				REMARK,
+			</if>
+			<if test="parentId != null">
+				PARENT_ID,
+			</if>
+			<if test="createDate != null">
+				CREATE_DATE,
+			</if>
+			<if test="createUser != null">
+				CREATE_USER,
+			</if>
+			<if test="type != null">
+				TYPE,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				#{id,jdbcType=DECIMAL},
+			</if>
+			<if test="no != null">
+				#{no,jdbcType=VARCHAR},
+			</if>
+			<if test="name != null">
+				#{name,jdbcType=VARCHAR},
+			</if>
+			<if test="remark != null">
+				#{remark,jdbcType=VARCHAR},
+			</if>
+			<if test="parentId != null">
+				#{parentId,jdbcType=DECIMAL},
+			</if>
+			<if test="createDate != null">
+				#{createDate,jdbcType=DATE},
+			</if>
+			<if test="createUser != null">
+				#{createUser,jdbcType=VARCHAR},
+			</if>
+			<if test="type != null">
+				#{type,jdbcType=VARCHAR},
+			</if>
+		</trim>
+	</insert>
+	<update id="updateByPrimaryKeySelective" parameterType="com.sinog2c.model.arch.ArchTree">
+		update ARCH_TREE
+		<set>
+			<if test="no != null">
+				NO = #{no,jdbcType=VARCHAR},
+			</if>
+			<if test="name != null">
+				NAME = #{name,jdbcType=VARCHAR},
+			</if>
+			<if test="remark != null">
+				REMARK = #{remark,jdbcType=VARCHAR},
+			</if>
+			<if test="parentId != null">
+				PARENT_ID = #{parentId,jdbcType=DECIMAL},
+			</if>
+			<if test="createDate != null">
+				CREATE_DATE = #{createDate,jdbcType=DATE},
+			</if>
+			<if test="createUser != null">
+				CREATE_USER = #{createUser,jdbcType=VARCHAR},
+			</if>
+			<if test="type != null">
+				TYPE = #{type,jdbcType=VARCHAR},
+			</if>
+		</set>
+		where ID = #{id,jdbcType=DECIMAL}
+	</update>
+	<update id="updateByPrimaryKey" parameterType="com.sinog2c.model.arch.ArchTree">
+		update ARCH_TREE
+		set NO = #{no,jdbcType=VARCHAR},
+		NAME = #{name,jdbcType=VARCHAR},
+		REMARK = #{remark,jdbcType=VARCHAR},
+		PARENT_ID = #{parentId,jdbcType=DECIMAL},
+		CREATE_DATE = #{createDate,jdbcType=DATE},
+		CREATE_USER = #{createUser,jdbcType=VARCHAR},
+		TYPE = #{type,jdbcType=VARCHAR}
+		where ID = #{id,jdbcType=DECIMAL}
+	</update>
+
+	<select id="getAllArchFolder" resultMap="BaseResultMap">
+		select
+		<include refid="Base_Column_List" />
+		from ARCH_TREE
+	</select>
+
+	<select id="getNextId" resultType="java.lang.Long">  <!-- 获取下一个ID -->
+		SELECT ARCH_TREE_ID_SEQ.NEXTVAL FROM DUAL
+	</select>
+
+</mapper>

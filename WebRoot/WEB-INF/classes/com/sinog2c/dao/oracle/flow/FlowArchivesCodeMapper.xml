@@ -1,0 +1,283 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.sinog2c.dao.api.flow.FlowArchivesCodeMapper" >
+  <resultMap id="BaseResultMap" type="com.sinog2c.model.flow.FlowArchivesCode" >
+    <id column="DEPARTID" property="departid" jdbcType="VARCHAR" />
+    <id column="CODEID" property="codeid" jdbcType="VARCHAR" />
+    <result column="PCODEID" property="pcodeid" jdbcType="VARCHAR" />
+    <result column="NAME" property="name" jdbcType="VARCHAR" />
+    <result column="ISPOSITIVE" property="ispositive" jdbcType="DECIMAL" />
+    <result column="SN" property="sn" jdbcType="DECIMAL" />
+    <result column="SCEARCH" property="scearch" jdbcType="VARCHAR" />
+    <result column="REMARK" property="remark" jdbcType="VARCHAR" />
+    <result column="DELFLAG" property="delflag" jdbcType="VARCHAR" />
+    <result column="OPTIME" property="optime" jdbcType="TIMESTAMP" />
+    <result column="OPID" property="opid" jdbcType="VARCHAR" />
+    <result column="TEMPID" property="tempid" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    DEPARTID, CODEID, PCODEID, NAME, ISPOSITIVE, SN, SCEARCH, REMARK, DELFLAG, OPTIME, OPID, TEMPID
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="com.sinog2c.model.flow.FlowArchivesCodeKey" >
+    select 
+    <include refid="Base_Column_List" />
+    from TBFLOW_ARCHIVESCODE
+    where 1=1
+    <if test="departid != null and departid != ''">
+    	and (DEPARTID = #{departid,jdbcType=VARCHAR} or departid =(select porgid from tbsys_orginfo where orgid=#{departid}))
+    </if>
+      and CODEID = #{codeid,jdbcType=VARCHAR}
+  </select>
+  <select id="selectAllByDepid"  parameterType="Map" resultType="com.sinog2c.model.flow.FlowArchivesCode">
+  <if test="type!=null and type!=''">
+  	select tb.*
+  		from (
+  </if>
+  		SELECT a.departid,
+               a.codeid,
+               a.pcodeid,
+               a.name,
+               a.ispositive,
+               a.sn,
+               a.remark,
+               a.tempid
+          FROM ( SELECT *
+				            FROM TBFLOW_ARCHIVESCODE
+				           WHERE (   departid = 0
+				                  OR departid = #{departid}
+				                  OR departid IN (SELECT porgid
+				                                    FROM TBSYS_ORGINFO
+				                                   WHERE orgid = #{departid}))) a,
+				         (SELECT MAX (departid) maxdepartid,codeid as codeid
+				            FROM TBFLOW_ARCHIVESCODE
+				           WHERE (   departid = 0
+				                  OR departid = #{departid}
+				                  OR departid IN (SELECT porgid
+				                                    FROM TBSYS_ORGINFO
+				                                   WHERE orgid = #{departid}))
+				                                   group by codeid
+				                                   ) b
+				   WHERE a.departid = b.maxdepartid and a.codeid = b.codeid
+				   <if test="search!=null and search!=''">
+				   	and a.scearch like '%'||#{search}||'%'
+				   </if>
+				   ORDER BY a.sn, a.codeid
+				   
+				   <if test="type!=null and type!=''">
+				   ) tb 
+				   		where tb.codeid in (select t.codeid from TBFLOW_ARCHIVESCODE t
+                        	start with t.codeid = #{type} -- 查询资源表
+                       		connect by prior t.codeid = t.pcodeid)
+					</if>
+  </select>
+  <select id="selectAllByDepidByType" parameterType="Map" resultType="com.sinog2c.model.flow.FlowArchivesCode">
+  	SELECT *
+    FROM (SELECT *
+            FROM TBFLOW_ARCHIVESCODE
+           WHERE (   departid = 0
+                  OR departid = #{departid}
+                  OR departid IN (SELECT porgid
+                                    FROM TBSYS_ORGINFO
+                                   WHERE orgid = #{departid}))) a,
+         (SELECT MAX (departid) maxdepartid,codeid as codeid
+            FROM TBFLOW_ARCHIVESCODE
+           WHERE (   departid = 0
+                  OR departid = #{departid}
+                  OR departid IN (SELECT porgid
+                                    FROM TBSYS_ORGINFO
+                                   WHERE orgid = #{departid}))
+                                   group by codeid
+                                   ) b
+   WHERE a.departid = b.maxdepartid and a.codeid = b.codeid
+   <if test="type!=null and type!=''">
+   	and (a.pcodeid=#{type} or a.codeid=#{type})
+   </if>
+   ORDER BY a.sn, a.codeid
+  </select>
+  <select id="selectByTempid" resultType="com.sinog2c.model.flow.FlowArchivesCode">    <!-- 查询表中的所有流程信息 -->
+	select * from TBFLOW_ARCHIVESCODE where tempid = #{tempid} and DEPARTID = #{departid,jdbcType=VARCHAR}  order by codeid asc
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="com.sinog2c.model.flow.FlowArchivesCodeKey" >
+    delete from TBFLOW_ARCHIVESCODE
+    where DEPARTID = #{departid,jdbcType=VARCHAR}
+      and CODEID = #{codeid,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.sinog2c.model.flow.FlowArchivesCode" >
+      insert into TBFLOW_ARCHIVESCODE (DEPARTID, CODEID, PCODEID, 
+      NAME, ISPOSITIVE, SN, 
+      SCEARCH, REMARK, DELFLAG, 
+      OPTIME, OPID,TEMPID)
+      values (#{departid,jdbcType=VARCHAR}, #{codeid,jdbcType=VARCHAR}, #{pcodeid,jdbcType=VARCHAR}, 
+      #{name,jdbcType=VARCHAR}, #{ispositive,jdbcType=DECIMAL}, #{sn,jdbcType=DECIMAL}, 
+      #{scearch,jdbcType=VARCHAR}, #{remark,jdbcType=VARCHAR}, #{delflag,jdbcType=VARCHAR}, 
+      #{optime,jdbcType=TIMESTAMP}, #{opid,jdbcType=VARCHAR},#{tempid,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.sinog2c.model.flow.FlowArchivesCode" >
+    insert into TBFLOW_ARCHIVESCODE
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="departid != null" >
+        DEPARTID,
+      </if>
+      <if test="codeid != null" >
+        CODEID,
+      </if>
+      <if test="pcodeid != null" >
+        PCODEID,
+      </if>
+      <if test="name != null" >
+        NAME,
+      </if>
+      <if test="ispositive != null" >
+        ISPOSITIVE,
+      </if>
+      <if test="sn != null" >
+        SN,
+      </if>
+      <if test="scearch != null" >
+        SCEARCH,
+      </if>
+      <if test="remark != null" >
+        REMARK,
+      </if>
+      <if test="delflag != null" >
+        DELFLAG,
+      </if>
+      <if test="optime != null" >
+        OPTIME,
+      </if>
+      <if test="opid != null" >
+        OPID,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="departid != null" >
+        #{departid,jdbcType=VARCHAR},
+      </if>
+      <if test="codeid != null" >
+        #{codeid,jdbcType=VARCHAR},
+      </if>
+      <if test="pcodeid != null" >
+        #{pcodeid,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null" >
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="ispositive != null" >
+        #{ispositive,jdbcType=DECIMAL},
+      </if>
+      <if test="sn != null" >
+        #{sn,jdbcType=DECIMAL},
+      </if>
+      <if test="scearch != null" >
+        #{scearch,jdbcType=VARCHAR},
+      </if>
+      <if test="remark != null" >
+        #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="delflag != null" >
+        #{delflag,jdbcType=VARCHAR},
+      </if>
+      <if test="optime != null" >
+        #{optime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="opid != null" >
+        #{opid,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.sinog2c.model.flow.FlowArchivesCode" >
+    update TBFLOW_ARCHIVESCODE
+    <set >
+      <if test="pcodeid != null" >
+        PCODEID = #{pcodeid,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null" >
+        NAME = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="ispositive != null" >
+        ISPOSITIVE = #{ispositive,jdbcType=DECIMAL},
+      </if>
+      <if test="sn != null" >
+        SN = #{sn,jdbcType=DECIMAL},
+      </if>
+      <if test="scearch != null" >
+        SCEARCH = #{scearch,jdbcType=VARCHAR},
+      </if>
+      <if test="remark != null" >
+        REMARK = #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="delflag != null" >
+        DELFLAG = #{delflag,jdbcType=VARCHAR},
+      </if>
+      <if test="optime != null" >
+        OPTIME = #{optime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="opid != null" >
+        OPID = #{opid,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where DEPARTID = #{departid,jdbcType=VARCHAR}
+      and CODEID = #{codeid,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.sinog2c.model.flow.FlowArchivesCode" >
+    update TBFLOW_ARCHIVESCODE
+    set PCODEID = #{pcodeid,jdbcType=VARCHAR},
+      NAME = #{name,jdbcType=VARCHAR},
+      ISPOSITIVE = #{ispositive,jdbcType=DECIMAL},
+      SN = #{sn,jdbcType=DECIMAL},
+      SCEARCH = #{scearch,jdbcType=VARCHAR},
+      REMARK = #{remark,jdbcType=VARCHAR},
+      DELFLAG = #{delflag,jdbcType=VARCHAR},
+      OPTIME = #{optime,jdbcType=TIMESTAMP},
+      OPID = #{opid,jdbcType=VARCHAR},
+      tempid=#{tempid,jdbcType=VARCHAR}
+    where DEPARTID = #{departid,jdbcType=VARCHAR}
+      and CODEID = #{codeid,jdbcType=VARCHAR}
+  </update>
+  
+  <select id="selectAllByMap" parameterType="Map" resultType="com.sinog2c.model.flow.FlowArchivesCode">
+  		select * from (select a.*, rownum rn
+          from ( select * from TBFLOW_ARCHIVESCODE  t where 1=1
+  		<if test="departid!=null and departid!=''">
+  			and (t.departid =  #{departid} or t.departid = (select porgid from tbsys_orginfo where orgid = #{departid} ))
+  		</if>
+  		<if test="key != null and key != ''">
+  			and (t.name like '%'||#{key}||'%' or t.codeid like '%'||#{key}||'%' or t.pcodeid like '%'||#{key}||'%')
+  		</if>
+  		<if test="pcodeid!=null and pcodeid!=''">
+  			and t.pcodeid = #{pcodeid}
+  		</if>
+  		order by to_number(sn) asc
+         ) a 
+         where rownum &lt;= ${end})
+ 				where rn &gt;= ${start}
+ 		
+  </select>
+  
+  <select id="selectAllByMapCount" parameterType="Map" resultType="int">
+  	select count(1) from (select * from TBFLOW_ARCHIVESCODE  t where 1=1
+  		<if test="departid!=null and departid!=''">
+  			and (t.departid =  #{departid} or t.departid = (select porgid from tbsys_orginfo where orgid = #{departid} ))
+  		</if>
+  		<if test="key != null and key != ''">
+  			and (t.name like '%'||#{key}||'%' or t.codeid like '%'||#{key}||'%' or t.pcodeid like '%'||#{key}||'%')
+  		</if>
+  		<if test="pcodeid!=null and pcodeid!=''">
+  			and t.pcodeid = #{pcodeid}
+  		</if>
+  		)
+  </select>
+  
+  <select id="findCodeByMap" parameterType="Map" resultType="int">
+  		select count(1) from tbflow_archivescode where 1=1 
+  		<if test="codeid != null and codeid != ''">
+  			and codeid=#{codeid}
+  		</if> 
+  		<if test="deaprtid != null and deaprtid != ''">
+  			and (departid = #{departid} or departid =(select porgid from TBSYS_ORGINFO  where orgid=#{deparid}))
+  		</if>
+  </select>
+  <delete id="deleteCodeByMap" parameterType="Map" >
+  		delete from tbflow_archivescode where codeid=#{codeid} and departid=#{departid}
+  </delete>
+</mapper>

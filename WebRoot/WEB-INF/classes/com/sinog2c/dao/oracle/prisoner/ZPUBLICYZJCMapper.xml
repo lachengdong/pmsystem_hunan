@@ -1,0 +1,326 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.sinog2c.dao.api.prisoner.ZPUBLICYZJCMapper" >
+  <resultMap id="BaseResultMap" type="com.sinog2c.model.prisoner.ZPUBLICYZJC" >
+    <id column="ID" property="id" jdbcType="VARCHAR" />
+    <id column="BH" property="bh" jdbcType="VARCHAR" />
+    <result column="PZRQ" property="pzrq" jdbcType="VARCHAR" />
+    <result column="JCLB" property="jclb" jdbcType="VARCHAR" />
+    <result column="JCYY" property="jcyy" jdbcType="VARCHAR" />
+    <result column="JCJS" property="jcjs" jdbcType="VARCHAR" />
+    <result column="DB" property="db" jdbcType="VARCHAR" />
+    <result column="MJ" property="mj" jdbcType="VARCHAR" />
+    <result column="SFSY" property="sfsy" jdbcType="VARCHAR" />
+    <result column="JCQX" property="jcqx" jdbcType="DECIMAL" />
+    <result column="YHBH" property="yhbh" jdbcType="DECIMAL" />
+    <result column="LRSJ" property="lrsj" jdbcType="DATE" />
+    <result column="XGSJ" property="xgsj" jdbcType="VARCHAR" />
+    <result column="CBRQ" property="cbrq" jdbcType="VARCHAR" />
+    <result column="XFZBID" property="xfzbid" jdbcType="DECIMAL" />
+    <result column="JCZR" property="jczr" jdbcType="VARCHAR" />
+    <result column="JFDX" property="jfdx" jdbcType="VARCHAR" />
+    <result column="KH_ID" property="khId" jdbcType="VARCHAR" />
+    <result column="SDID" property="sdid" jdbcType="VARCHAR" />
+    <result column="ISDONE" property="isdone" jdbcType="DECIMAL" />
+    <result column="DONEDATE" property="donedate" jdbcType="DATE" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    ID, BH, PZRQ, JCLB, JCYY, JCJS, DB, MJ, SFSY, JCQX, YHBH, LRSJ, XGSJ, CBRQ, XFZBID, 
+    JCZR, JFDX, KH_ID, SDID, ISDONE, DONEDATE
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="com.sinog2c.model.prisoner.ZPUBLICYZJCKey" >
+    select 
+    <include refid="Base_Column_List" />
+    from ZPUBLIC_YZJC
+    where ID = #{id,jdbcType=VARCHAR}
+      and BH = #{bh,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="String" >
+    delete from ZPUBLIC_YZJC
+    where ID = #{id,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.sinog2c.model.prisoner.ZPUBLICYZJC" >
+    insert into ZPUBLIC_YZJC (ID, BH, PZRQ, 
+      JCLB, JCYY, JCJS, DB, 
+      MJ, SFSY, JCQX, YHBH, 
+      LRSJ, XGSJ, CBRQ, XFZBID, 
+      JCZR, JFDX, KH_ID, SDID, 
+      ISDONE, DONEDATE)
+    values (#{id,jdbcType=VARCHAR}, #{bh,jdbcType=VARCHAR}, #{pzrq,jdbcType=VARCHAR}, 
+      #{jclb,jdbcType=VARCHAR}, #{jcyy,jdbcType=VARCHAR}, #{jcjs,jdbcType=VARCHAR}, #{db,jdbcType=VARCHAR}, 
+      #{mj,jdbcType=VARCHAR}, #{sfsy,jdbcType=VARCHAR}, #{jcqx,jdbcType=DECIMAL}, #{yhbh,jdbcType=DECIMAL}, 
+      #{lrsj,jdbcType=DATE}, #{xgsj,jdbcType=VARCHAR}, #{cbrq,jdbcType=VARCHAR}, #{xfzbid,jdbcType=DECIMAL}, 
+      #{jczr,jdbcType=VARCHAR}, #{jfdx,jdbcType=VARCHAR}, #{khId,jdbcType=VARCHAR}, #{sdid,jdbcType=VARCHAR}, 
+      #{isdone,jdbcType=DECIMAL}, #{donedate,jdbcType=DATE})
+  </insert>
+  <insert id="insertSelective" parameterType="com.sinog2c.model.prisoner.ZPUBLICYZJC" >
+    insert into ZPUBLIC_YZJC
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        ID,
+      </if>
+      <if test="bh != null" >
+        BH,
+      </if>
+      <if test="pzrq != null" >
+        PZRQ,
+      </if>
+      <if test="jclb != null" >
+        JCLB,
+      </if>
+      <if test="jcyy != null" >
+        JCYY,
+      </if>
+      <if test="jcjs != null" >
+        JCJS,
+      </if>
+      <if test="db != null" >
+        DB,
+      </if>
+      <if test="mj != null" >
+        MJ,
+      </if>
+      <if test="sfsy != null" >
+        SFSY,
+      </if>
+      <if test="jcqx != null" >
+        JCQX,
+      </if>
+      <if test="yhbh != null" >
+        YHBH,
+      </if>
+      <if test="lrsj != null" >
+        LRSJ,
+      </if>
+      <if test="xgsj != null" >
+        XGSJ,
+      </if>
+      <if test="cbrq != null" >
+        CBRQ,
+      </if>
+      <if test="xfzbid != null" >
+        XFZBID,
+      </if>
+      <if test="jczr != null" >
+        JCZR,
+      </if>
+      <if test="jfdx != null" >
+        JFDX,
+      </if>
+      <if test="khId != null" >
+        KH_ID,
+      </if>
+      <if test="sdid != null" >
+        SDID,
+      </if>
+      <if test="isdone != null" >
+        ISDONE,
+      </if>
+      <if test="donedate != null" >
+        DONEDATE,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=VARCHAR},
+      </if>
+      <if test="bh != null" >
+        #{bh,jdbcType=VARCHAR},
+      </if>
+      <if test="pzrq != null" >
+        #{pzrq,jdbcType=VARCHAR},
+      </if>
+      <if test="jclb != null" >
+        #{jclb,jdbcType=VARCHAR},
+      </if>
+      <if test="jcyy != null" >
+        #{jcyy,jdbcType=VARCHAR},
+      </if>
+      <if test="jcjs != null" >
+        #{jcjs,jdbcType=VARCHAR},
+      </if>
+      <if test="db != null" >
+        #{db,jdbcType=VARCHAR},
+      </if>
+      <if test="mj != null" >
+        #{mj,jdbcType=VARCHAR},
+      </if>
+      <if test="sfsy != null" >
+        #{sfsy,jdbcType=VARCHAR},
+      </if>
+      <if test="jcqx != null" >
+        #{jcqx,jdbcType=DECIMAL},
+      </if>
+      <if test="yhbh != null" >
+        #{yhbh,jdbcType=DECIMAL},
+      </if>
+      <if test="lrsj != null" >
+        #{lrsj,jdbcType=DATE},
+      </if>
+      <if test="xgsj != null" >
+        #{xgsj,jdbcType=VARCHAR},
+      </if>
+      <if test="cbrq != null" >
+        #{cbrq,jdbcType=VARCHAR},
+      </if>
+      <if test="xfzbid != null" >
+        #{xfzbid,jdbcType=DECIMAL},
+      </if>
+      <if test="jczr != null" >
+        #{jczr,jdbcType=VARCHAR},
+      </if>
+      <if test="jfdx != null" >
+        #{jfdx,jdbcType=VARCHAR},
+      </if>
+      <if test="khId != null" >
+        #{khId,jdbcType=VARCHAR},
+      </if>
+      <if test="sdid != null" >
+        #{sdid,jdbcType=VARCHAR},
+      </if>
+      <if test="isdone != null" >
+        #{isdone,jdbcType=DECIMAL},
+      </if>
+      <if test="donedate != null" >
+        #{donedate,jdbcType=DATE},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.sinog2c.model.prisoner.ZPUBLICYZJC" >
+    update ZPUBLIC_YZJC
+    <set >
+      <if test="pzrq != null" >
+        PZRQ = #{pzrq,jdbcType=VARCHAR},
+      </if>
+      <if test="jclb != null" >
+        JCLB = #{jclb,jdbcType=VARCHAR},
+      </if>
+      <if test="jcyy != null" >
+        JCYY = #{jcyy,jdbcType=VARCHAR},
+      </if>
+      <if test="jcjs != null" >
+        JCJS = #{jcjs,jdbcType=VARCHAR},
+      </if>
+      <if test="db != null" >
+        DB = #{db,jdbcType=VARCHAR},
+      </if>
+      <if test="mj != null" >
+        MJ = #{mj,jdbcType=VARCHAR},
+      </if>
+      <if test="sfsy != null" >
+        SFSY = #{sfsy,jdbcType=VARCHAR},
+      </if>
+      <if test="jcqx != null" >
+        JCQX = #{jcqx,jdbcType=DECIMAL},
+      </if>
+      <if test="yhbh != null" >
+        YHBH = #{yhbh,jdbcType=DECIMAL},
+      </if>
+      <if test="lrsj != null" >
+        LRSJ = #{lrsj,jdbcType=DATE},
+      </if>
+      <if test="xgsj != null" >
+        XGSJ = #{xgsj,jdbcType=VARCHAR},
+      </if>
+      <if test="cbrq != null" >
+        CBRQ = #{cbrq,jdbcType=VARCHAR},
+      </if>
+      <if test="xfzbid != null" >
+        XFZBID = #{xfzbid,jdbcType=DECIMAL},
+      </if>
+      <if test="jczr != null" >
+        JCZR = #{jczr,jdbcType=VARCHAR},
+      </if>
+      <if test="jfdx != null" >
+        JFDX = #{jfdx,jdbcType=VARCHAR},
+      </if>
+      <if test="khId != null" >
+        KH_ID = #{khId,jdbcType=VARCHAR},
+      </if>
+      <if test="sdid != null" >
+        SDID = #{sdid,jdbcType=VARCHAR},
+      </if>
+      <if test="isdone != null" >
+        ISDONE = #{isdone,jdbcType=DECIMAL},
+      </if>
+      <if test="donedate != null" >
+        DONEDATE = #{donedate,jdbcType=DATE},
+      </if>
+    </set>
+    where ID = #{id,jdbcType=VARCHAR}
+      and BH = #{bh,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.sinog2c.model.prisoner.ZPUBLICYZJC" >
+    update ZPUBLIC_YZJC
+    set PZRQ = #{pzrq,jdbcType=VARCHAR},
+      JCLB = #{jclb,jdbcType=VARCHAR},
+      JCYY = #{jcyy,jdbcType=VARCHAR},
+      JCJS = #{jcjs,jdbcType=VARCHAR},
+      DB = #{db,jdbcType=VARCHAR},
+      MJ = #{mj,jdbcType=VARCHAR},
+      SFSY = #{sfsy,jdbcType=VARCHAR},
+      JCQX = #{jcqx,jdbcType=DECIMAL},
+      YHBH = #{yhbh,jdbcType=DECIMAL},
+      LRSJ = #{lrsj,jdbcType=DATE},
+      XGSJ = #{xgsj,jdbcType=VARCHAR},
+      CBRQ = #{cbrq,jdbcType=VARCHAR},
+      XFZBID = #{xfzbid,jdbcType=DECIMAL},
+      JCZR = #{jczr,jdbcType=VARCHAR},
+      JFDX = #{jfdx,jdbcType=VARCHAR},
+      KH_ID = #{khId,jdbcType=VARCHAR},
+      SDID = #{sdid,jdbcType=VARCHAR},
+      ISDONE = #{isdone,jdbcType=DECIMAL},
+      DONEDATE = #{donedate,jdbcType=DATE}
+    where ID = #{id,jdbcType=VARCHAR}
+      and BH = #{bh,jdbcType=VARCHAR}
+  </update>
+  
+  <select id="selectYZJCMaxidByCrimid" resultType="String" >
+    select nvl(max(id),0)+1 from ZPUBLIC_YZJC
+  </select>
+  <select id="findByYZJCDetail" resultType="com.sinog2c.model.prisoner.ZPUBLICYZJC" parameterType="Map">
+    select * from ZPUBLIC_YZJC where bh=#{bh}
+  </select>
+
+ 
+   <select id="findByYZJCDetailCount" resultType="int" parameterType="Map">
+    select count(*) from ZPUBLIC_YZJC where bh=#{bh}
+  </select>
+     <!-- 查询罪犯编号为crimid的所有的奖惩记录总数-->
+   <select id="findZPUBLICYZJCCount" resultType="int" parameterType="Map">
+     select  count(*)  from
+	    (
+		    select * from  ZPUBLIC_KHJF   t1 where  t1.BH = #{criminalid,jdbcType=VARCHAR} 
+		 	 		  <if test="querycondition != null and  querycondition !=''" >
+        and  t1.BZ like '%${querycondition}%'
+      </if>
+	  	)
+    
+  </select>
+  
+    <!-- 查询罪犯编号为crimid的所有的奖惩记录 -->
+   <select id="getZPUBLICYZJClist"   resultType="Map" parameterType="Map">  
+  	select * from
+    ( 
+	    select a.*, rownum rn from
+	    (
+		    select  * from ZPUBLIC_KHJF   t1 where 
+		    <trim prefix="" suffix="" suffixOverrides=",">
+		 		<if test="criminalid!=null and criminalid!=''"> t1.BH = #{criminalid,jdbcType=VARCHAR}  </if>
+		 		  <if test="querycondition != null  and querycondition !='' " >
+        and  t1.BZ like '%${querycondition}%'
+      </if>
+		 	</trim>		 	
+	  	) a 
+	    <if test="end!=null and end!=''">
+	   		where rownum &lt;= #{end}
+	   	</if> 
+    )
+   	<if test="start!=null and start!=''">
+   		where  rn &gt;= #{start} 
+   	</if>
+  </select>
+
+
+ 
+</mapper>

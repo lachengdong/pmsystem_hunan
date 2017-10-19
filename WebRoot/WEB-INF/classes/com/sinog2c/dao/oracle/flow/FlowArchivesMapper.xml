@@ -1,0 +1,242 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.sinog2c.dao.api.flow.FlowArchivesMapper">
+	<resultMap id="BaseResultMap" type="com.sinog2c.model.flow.FlowArchives">
+		<result column="ARCHIVEID" property="archiveid" jdbcType="VARCHAR" />
+		<result column="FLOWID" property="flowid" jdbcType="VARCHAR" />
+		<result column="SN" property="sn" jdbcType="DECIMAL" />
+		<result column="DEPARTID" property="departid" jdbcType="VARCHAR" />
+		<result column="TEXT1" property="text1" jdbcType="VARCHAR" />
+		<result column="TEXT2" property="text2" jdbcType="VARCHAR" />
+		<result column="TEXT3" property="text3" jdbcType="VARCHAR" />
+		<result column="TEXT4" property="text4" jdbcType="VARCHAR" />
+		<result column="TEXT5" property="text5" jdbcType="VARCHAR" />
+		<result column="TEXT6" property="text6" jdbcType="VARCHAR" />
+		<result column="INT1" property="int1" jdbcType="DECIMAL" />
+		<result column="INT2" property="int2" jdbcType="DECIMAL" />
+		<result column="OPID" property="opid" jdbcType="VARCHAR" />
+		<result column="OPTIME" property="optime" jdbcType="TIMESTAMP" />
+	</resultMap>
+	<resultMap id="ResultMapWithBLOBs" type="com.sinog2c.model.flow.FlowArchives"
+		extends="BaseResultMap">
+		<result column="DOCCONENT" property="docconent" jdbcType="CLOB" />
+	</resultMap>
+	<sql id="Blob_Column_List">
+		DOCCONENT
+  </sql>
+	<insert id="insert" parameterType="com.sinog2c.model.flow.FlowArchives">
+	<!-- <selectKey keyProperty="archiveid" resultType="int" order="BEFORE">
+		select  seq_archives_id.nextval as archiveid from dual
+	</selectKey>-->
+		insert into TBFLOW_ARCHIVES
+		(ARCHIVEID, FLOWID, SN,
+		DEPARTID,TEXT1, TEXT2,
+		TEXT3,TEXT4, TEXT5,
+		TEXT6,INT1,INT2, OPID,
+		OPTIME,DOCCONENT,PERSONID)
+		values (#{archiveid,jdbcType=VARCHAR},
+		#{flowid,jdbcType=VARCHAR},
+		#{sn,jdbcType=DECIMAL},
+		#{departid,jdbcType=VARCHAR},
+		#{text1,jdbcType=VARCHAR}, #{text2,jdbcType=VARCHAR},
+		#{text3,jdbcType=VARCHAR},
+		#{text4,jdbcType=VARCHAR},
+		#{text5,jdbcType=VARCHAR},
+		#{text6,jdbcType=VARCHAR},
+		#{int1,jdbcType=DECIMAL}, #{int2,jdbcType=DECIMAL},
+		#{opid,jdbcType=VARCHAR},
+		#{optime,jdbcType=TIMESTAMP},
+		#{docconent,jdbcType=CLOB},
+		#{personid,jdbcType=VARCHAR})
+  </insert>
+	<insert id="insertSelective" parameterType="com.sinog2c.model.flow.FlowArchives">
+		insert into TBFLOW_ARCHIVES
+		(ARCHIVEID, FLOWID, SN,
+		DEPARTID,TEXT1, TEXT2,
+		TEXT3,TEXT4, TEXT5,
+		TEXT6,INT1,INT2, OPID,
+		OPTIME,DOCCONENT)
+		values (#{archiveid,jdbcType=VARCHAR},
+		#{flowid,jdbcType=VARCHAR},
+		#{sn,jdbcType=DECIMAL},
+		#{departid,jdbcType=VARCHAR},
+		#{text1,jdbcType=VARCHAR}, #{text2,jdbcType=VARCHAR},
+		#{text3,jdbcType=VARCHAR},
+		#{text4,jdbcType=VARCHAR},
+		#{text5,jdbcType=VARCHAR},
+		#{text6,jdbcType=VARCHAR},
+		#{int1,jdbcType=DECIMAL}, #{int2,jdbcType=DECIMAL},
+		#{opid,jdbcType=VARCHAR},
+		#{optime,jdbcType=TIMESTAMP},
+		#{docconent,jdbcType=CLOB})
+  </insert>
+  <update id="update" parameterType="com.sinog2c.model.flow.FlowArchives">
+		update TBFLOW_ARCHIVES
+		<set>
+			<if test="docconent != null">
+				docconent = #{docconent,jdbcType=CLOB},
+			</if>
+			<if test="optime != null">
+				optime = #{optime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="opid != null">
+				opid = #{opid,jdbcType=VARCHAR},
+			</if>
+		</set>
+		where 1=1
+		<if test="flowid != null">
+			and flowid = #{flowid,jdbcType=VARCHAR}
+		</if>
+		<if test="archiveid != null">
+			and archiveid = #{archiveid,jdbcType=VARCHAR}
+		</if>
+  </update>
+  <select id="getArchiveid" resultType="String" parameterType="String">
+  		select  seq_archives_id.nextval||F_GETCURRENTTIME||replace(replace(#{departid},'c',''),'C','') as archiveid from dual
+  </select>
+	<select id="countAll" resultType="int">  <!-- 查询表中记录总数 -->
+		select count(*) c from TBFLOW_ARCHIVES
+	</select>
+
+	<select id="selectAll" resultType="com.sinog2c.model.flow.FlowArchives">    <!-- 查询表中的所有流程信息 -->
+		select * from TBFLOW_ARCHIVES order by FLOWID asc
+	</select>
+	
+	<select id="selectAllWithOutClob" resultType="com.sinog2c.model.flow.FlowArchives">    <!-- 查询表中的所有流程信息 -->
+		select archiveid, flowid from TBFLOW_ARCHIVES order by FLOWID asc
+	</select>
+	
+	<select id="findByFlowid" parameterType="String"
+		resultType="com.sinog2c.model.flow.FlowArchives"> <!-- 根据流程ID查找表信息 -->
+		select * from TBFLOW_ARCHIVES where flowid=#{flowid}
+	</select>
+	
+	<select id="findByArchiveid" parameterType="String"
+		resultType="com.sinog2c.model.flow.FlowArchives"> <!-- 根据归档ID查找表信息 -->
+		select * from TBFLOW_ARCHIVES where archiveid=#{archiveid}
+	</select>
+	
+	<delete id="delete" parameterType="String" flushCache="true"> <!-- 根据流程id 删除流程信息 -->
+		delete  from TBFLOW_ARCHIVES where flowid=#{flowid}
+	</delete>
+	
+	<delete id="removeByArchid" parameterType="String" flushCache="true"> <!-- 根据归档id 删除流程信息 -->
+		delete  from TBFLOW_ARCHIVES where archiveid=#{archiveid}
+	</delete>
+	<select id="findArchivesById" parameterType="Map" resultType="String">
+		select  a.docconent from TBFLOW_ARCHIVES a where a.archiveid in (select t.archiveid
+               from TBFLOW_BASE_archives t where t.personid = #{crimid}  and t.docid = #{docid})
+               and ROWNUM=1 order by a.optime
+	</select>
+	<!-- 获取正副档（卷） -->
+	<select id="findArchivesFolderById" parameterType="String"
+		resultType="com.sinog2c.model.flow.FlowArchives"> 
+	</select>
+	<!-- 查询需要归档的文件 -->
+	<select id="selectAllByArchDoc" parameterType="String" resultType="Map">
+	   select * from 
+	   (	
+		SELECT b.flowdraftid,
+	       a.otherid AS ID,
+	       b.tempid,
+	       a.docconent
+	  	FROM tbflow_base_other a,
+		(SELECT otherid, tempid, flowdraftid
+	          FROM tbflow_other_flow
+	          WHERE flowdraftid in 
+	          (
+					SELECT flowdraftid FROM 
+	          		(
+	          		 SELECT ROW_NUMBER () OVER (PARTITION BY flowid ORDER BY optime DESC)
+                  		LEV,
+               			r.*
+          				FROM tbflow_base r
+         			 WHERE 1 = 1 
+         			 <if test="personid!=null and personid!=''">
+						and applyid = #{personid}
+					 </if> 
+         			)
+					WHERE LEV = 1
+	          )
+		) b
+	   	WHERE a.otherid = b.otherid
+		UNION ALL
+		SELECT a.flowdraftid,
+	       a.baseid AS ID,
+	       a.othercodeid AS tempid,
+	       a.docconent
+	  	FROM tbflow_base_doc a,
+	       (SELECT flowdraftid FROM 
+				(
+	          		 SELECT ROW_NUMBER () OVER (PARTITION BY flowid ORDER BY optime DESC)
+                  		LEV,
+               			r.*
+          				FROM tbflow_base r
+         			 WHERE 1 = 1 
+         			 <if test="personid!=null and personid!=''">
+						and applyid = #{personid}
+					 </if> 
+         		)
+				WHERE LEV = 1
+			) b
+	 	WHERE a.flowdraftid = b.flowdraftid
+		)
+		order by flowdraftid asc
+	</select>
+	<!-- 查询需要归档的非流程文件 -->
+	<select id="selectAllByArchDocNoFlow" parameterType="Map" resultType="Map">
+	     SELECT docid as ID, tempid,docid as  flowdraftid,content as docconent
+	         FROM TBSYS_DOCUMENT
+	        WHERE docid in (  SELECT max(docid)
+                               FROM TBSYS_DOCUMENT
+                               WHERE 1=1
+	                           <if test="personid!=null and personid!=''">
+									and crimid = #{personid}
+							    </if> 
+	                                  <if test="archtempid!=null and archtempid!=''">
+									and tempid in (${archtempid})
+								</if> 
+	                            group by tempid) 
+	</select>
+	<!-- 省局保外办案打开电子档案表单 -->
+	<select id="getArchivesData" parameterType="Map" resultType="com.sinog2c.model.flow.FlowArchives">
+		select * from (select * from tbflow_archives aa where aa.archiveid in(select s.archiveid
+          from TBFLOW_BASE_ARCHIVES s
+         where s.personid = #{crimid}
+           and s.docid = #{docid}) order by aa.optime desc ) where rownum=1
+	</select>
+	<!-- 判断该档案是否归档，如果归档就返回档案id -->
+	<select id="judgeArchivesWhetherArchiving" resultType="String" parameterType="String">
+		select tba.archiveid from TBFLOW_BASE_ARCHIVES tba,(
+					select max(optime) as optime from TBFLOW_BASE_ARCHIVES  where personid=#{personid} and docid=#{codeid}
+		) tba1 where tba.optime= tba1.optime and personid=#{personid} and docid=#{codeid}
+	</select>
+	<select id="getDocconent" parameterType="Map" resultType="String">
+			select tt.docconent from tbflow_archives tt  where tt.archiveid = (select a.archiveid
+                         from (select t.archiveid from TBFLOW_BASE_ARCHIVES t where t.personid = #{crimid}
+                                  and t.docid = #{docid} order by t.optime desc) a  where rownum = 1)
+	</select>
+    <select id="getOneArchive" parameterType="Map" resultType="Map">
+		 select t.departid, t.personid, t.archiveid
+		  from tbflow_base_archives t, tbflow_archives tt
+		 where t.archiveid = tt.archiveid
+		   and t.personid in (${applyids})
+		   and (tt.int2 = 0 or tt.int2 is null)
+		   and rownum = 1
+    </select>  	
+    <update id="updateDecryptByArchiveid" parameterType="Map">
+		update tbflow_archives set
+				int2 = 1 
+		where 1=1
+			and archiveid = #{archiveid,jdbcType=VARCHAR}
+    </update>
+    
+    
+    <select id="getFlowarchiveidByFlowid" parameterType="String" resultType="Map">
+		 select tt.flowid,tt.archiveid
+		  from tbflow_archives tt
+		 where ${flowids}
+    </select>
+    
+     	
+</mapper>

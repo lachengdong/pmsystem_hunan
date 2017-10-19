@@ -1,0 +1,25 @@
+<project basedir="." default="antwar" name="pmsys">
+	<target name="init" description="设置需要的变量属性">
+		<property name="name" value="pmsystem"/>
+		<property name="webroot" value="${basedir}/WebRoot"/>
+		<property name="Tool_DOC" value="${basedir}/Tool_DOC/ProjectDocument"/>
+		<property name="war.dest" value="${basedir}/../pmsys_war"/>
+	</target>
+	<target name="antwar" depends="clean" description="打war包">
+		<war destfile="${war.dest}/${name}.war" webxml="${webroot}/WEB-INF/web.xml">
+			<fileset dir="${webroot}"/>
+			<zipfileset dir="${Tool_DOC}" prefix="Tool_DOC"></zipfileset>
+		</war>
+	</target>
+	<target name="createdir" depends="init" description="创建打包需要的路径">
+		<mkdir dir="${war.dest}"/>
+	</target>
+	<target name="clean" depends="createdir" description="清除原来的war包">
+		<delete>
+			<fileset dir="${war.dest}" includes="${name}.war"/>
+		</delete>
+	</target>
+</project>
+<!--
+只对MyEclipse编译过的项目进行war操作;参考地址: http://hello-player.iteye.com/blog/438319
+-->

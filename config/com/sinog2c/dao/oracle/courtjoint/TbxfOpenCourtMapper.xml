@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.sinog2c.dao.api.courtjoint.TbxfOpenCourtMapper">
+  <resultMap id="BaseResultMap" type="com.sinog2c.model.courtjoint.TbxfOpenCourt">
+    <result column="CRIMID" jdbcType="VARCHAR" property="crimid" />
+    <result column="CASENUM" jdbcType="VARCHAR" property="casenum" />
+    <result column="COURTYEAR" jdbcType="VARCHAR" property="courtyear" />
+    <result column="COURTSHORT" jdbcType="VARCHAR" property="courtshort" />
+    <result column="HANDLECOURT" jdbcType="VARCHAR" property="handlecourt" />
+    <result column="BATCHID" jdbcType="VARCHAR" property="batchid" />
+    <result column="OPENCOURTTIME" jdbcType="DATE" property="opencourttime" />
+    <result column="OPENCOURTEND" jdbcType="DATE" property="opencourtend" />
+    <result column="OPENCOURTSITE" jdbcType="VARCHAR" property="opencourtsite" />
+    <result column="OPENCOURTDATE" jdbcType="DATE" property="opencourtdate" />
+  </resultMap>
+  <insert id="insert" parameterType="com.sinog2c.model.courtjoint.TbxfOpenCourt">
+    insert into TBXF_OPENCOURT (CRIMID, CASENUM, COURTYEAR, 
+      COURTSHORT, HANDLECOURT, BATCHID, 
+      OPENCOURTTIME, OPENCOURTEND, OPENCOURTSITE, 
+      OPENCOURTDATE)
+    values (#{crimid,jdbcType=VARCHAR}, #{casenum,jdbcType=VARCHAR}, #{courtyear,jdbcType=VARCHAR}, 
+      #{courtshort,jdbcType=VARCHAR}, #{handlecourt,jdbcType=VARCHAR}, #{batchid,jdbcType=VARCHAR}, 
+      #{opencourttime,jdbcType=DATE}, #{opencourtend,jdbcType=DATE}, #{opencourtsite,jdbcType=VARCHAR}, 
+      #{opencourtdate,jdbcType=DATE})
+  </insert>
+  <insert id="insertSelective" parameterType="com.sinog2c.model.courtjoint.TbxfOpenCourt">
+    insert into TBXF_OPENCOURT
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="crimid != null">
+        CRIMID,
+      </if>
+      <if test="casenum != null">
+        CASENUM,
+      </if>
+      <if test="courtyear != null">
+        COURTYEAR,
+      </if>
+      <if test="courtshort != null">
+        COURTSHORT,
+      </if>
+      <if test="handlecourt != null">
+        HANDLECOURT,
+      </if>
+      <if test="batchid != null">
+        BATCHID,
+      </if>
+      <if test="opencourttime != null">
+        OPENCOURTTIME,
+      </if>
+      <if test="opencourtend != null">
+        OPENCOURTEND,
+      </if>
+      <if test="opencourtsite != null">
+        OPENCOURTSITE,
+      </if>
+      <if test="opencourtdate != null">
+        OPENCOURTDATE,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="crimid != null">
+        #{crimid,jdbcType=VARCHAR},
+      </if>
+      <if test="casenum != null">
+        #{casenum,jdbcType=VARCHAR},
+      </if>
+      <if test="courtyear != null">
+        #{courtyear,jdbcType=VARCHAR},
+      </if>
+      <if test="courtshort != null">
+        #{courtshort,jdbcType=VARCHAR},
+      </if>
+      <if test="handlecourt != null">
+        #{handlecourt,jdbcType=VARCHAR},
+      </if>
+      <if test="batchid != null">
+        #{batchid,jdbcType=VARCHAR},
+      </if>
+      <if test="opencourttime != null">
+        #{opencourttime,jdbcType=DATE},
+      </if>
+      <if test="opencourtend != null">
+        #{opencourtend,jdbcType=DATE},
+      </if>
+      <if test="opencourtsite != null">
+        #{opencourtsite,jdbcType=VARCHAR},
+      </if>
+      <if test="opencourtdate != null">
+        #{opencourtdate,jdbcType=DATE},
+      </if>
+    </trim>
+  </insert>
+  
+  <insert id="insertMap" parameterType="Map">
+    insert into TBXF_OPENCOURT (CRIMID, CASENUM, COURTYEAR, 
+      COURTSHORT, BATCHID, HANDLECOURT,
+      OPENCOURTTIME, OPENCOURTEND, OPENCOURTSITE, 
+      OPENCOURTDATE)
+    values (#{ZFBH,jdbcType=VARCHAR},#{AJBH,jdbcType=VARCHAR},#{COURTYEAR,jdbcType=VARCHAR},#{COURTSHORT,jdbcType=VARCHAR},#{PC,jdbcType=VARCHAR},
+		'c'||#{JBFY,jdbcType=VARCHAR},to_date(#{KTSJ,jdbcType=TIMESTAMP},'yyyy/MM/dd
+		HH24:mi:ss'),to_date(#{JSSJ,jdbcType=TIMESTAMP},'yyyy/MM/dd
+		HH24:mi:ss'),#{KTDD,jdbcType=VARCHAR},to_date(#{KTRQ,jdbcType=DATE},'yyyy/MM/dd'))
+  </insert>
+  
+      <select id="countByCrimidAndBatchid" parameterType="Map" resultType="int">
+  	select count(1) from TBXF_OPENCOURT where  batchid = #{batchid,jdbcType=VARCHAR}
+  </select>
+  
+  <select id="findByCrimidAndBatchid" parameterType="Map" resultType="Map">
+  	select * from
+		(
+			select a.*, rownum rn from
+		(
+  			select tb.CRIMID ,'(' ||tb.courtyear||')'||tb.courtshort as CASENUMBER,
+			(select tor.name from tbsys_orginfo tor where orgid = tb.HANDLECOURT and rownum = 1) as HANDLECOURT,
+			to_char(tb.OPENCOURTTIME,'yyyy-MM-dd HH:mm:ss') as OPENCOURTTIME,to_char(tb.OPENCOURTEND,'yyyy-MM-dd HH:mm:ss') as OPENCOURTEND,tb.OPENCOURTSITE,to_char(tb.OPENCOURTDATE,'yyyy-MM-dd') as OPENCOURTDATE,
+			tba.name as CRIMNAME
+			from TBXF_OPENCOURT tb ,tbprisoner_baseinfo tba
+		 	where tba.crimid = tb.crimid and  batchid = #{batchid,jdbcType=VARCHAR}
+			<if test="crimname!=null and crimname!=''">
+			and tba.name like '%'||#{crimname,jdbcType=VARCHAR}||'%'
+		</if>
+  		) a
+		<if test="end!=null and end!=''">
+			where rownum &lt;= #{end}
+		</if>
+		)
+		<if test="start!=null and start!=''">
+			where rn &gt;= #{start}
+		</if>
+  </select>
+</mapper>

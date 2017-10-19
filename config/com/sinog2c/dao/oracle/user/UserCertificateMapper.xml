@@ -1,0 +1,580 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.sinog2c.dao.api.user.UserCertificateMapper" >
+  <resultMap id="BaseResultMap" type="com.sinog2c.model.user.UserCertificate" >
+    <id column="ID" property="id" jdbcType="VARCHAR" />
+    <result column="CERTSN" property="certsn" jdbcType="VARCHAR" />
+    <result column="USERID" property="userid" jdbcType="VARCHAR" />
+    <result column="ISLOCKED" property="islocked" jdbcType="DECIMAL" />
+    <result column="CERTDATA" property="certdata" jdbcType="VARCHAR" />
+    <result column="STIME" property="stime" jdbcType="TIMESTAMP" />
+    <result column="ETIME" property="etime" jdbcType="TIMESTAMP" />
+    <result column="EXPLIAN" property="explian" jdbcType="VARCHAR" />
+    <result column="ISSUER" property="issuer" jdbcType="VARCHAR" />
+    <result column="DN" property="dn" jdbcType="VARCHAR" />
+    <result column="REMARK" property="remark" jdbcType="VARCHAR" />
+    <result column="TEXT1" property="text1" jdbcType="VARCHAR" />
+    <result column="TEXT2" property="text2" jdbcType="VARCHAR" />
+    <result column="TEXT3" property="text3" jdbcType="VARCHAR" />
+    <result column="TEXT4" property="text4" jdbcType="VARCHAR" />
+    <result column="TEXT5" property="text5" jdbcType="VARCHAR" />
+    <result column="TEXT6" property="text6" jdbcType="VARCHAR" />
+    <result column="TEXT7" property="text7" jdbcType="VARCHAR" />
+    <result column="INT1" property="int1" jdbcType="DECIMAL" />
+    <result column="INT2" property="int2" jdbcType="DECIMAL" />
+    <result column="OPTIME" property="optime" jdbcType="TIMESTAMP" />
+    <result column="OPID" property="opid" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    ID, CERTSN, USERID, ISLOCKED, CERTDATA, STIME, ETIME, EXPLIAN, ISSUER, DN, REMARK, TEXT1, 
+    TEXT2, TEXT3, TEXT4, TEXT5, TEXT6, TEXT7, INT1, INT2, OPTIME, OPID
+  </sql>
+  
+  <delete id="delete" parameterType="java.lang.String" >
+    delete from TBUSER_CERTIFICATE
+    where ID = #{id,jdbcType=VARCHAR}
+  </delete>
+  
+  <insert id="insert" parameterType="com.sinog2c.model.user.UserCertificate" >
+    insert into TBUSER_CERTIFICATE (ID, CERTSN, USERID, ISLOCKED, 
+      CERTDATA, STIME, ETIME, EXPLIAN, 
+      ISSUER, DN, REMARK, 
+      TEXT1, TEXT2, TEXT3, 
+      TEXT4, TEXT5, TEXT6, 
+      TEXT7, INT1, INT2, 
+      OPTIME, OPID)
+    values (#{id,jdbcType=VARCHAR}, #{certsn,jdbcType=VARCHAR}, #{userid,jdbcType=VARCHAR}, #{islocked,jdbcType=DECIMAL}, 
+      #{certdata,jdbcType=VARCHAR}, #{stime,jdbcType=TIMESTAMP}, #{etime,jdbcType=TIMESTAMP}, #{explian,jdbcType=VARCHAR}, 
+      #{issuer,jdbcType=VARCHAR}, #{dn,jdbcType=VARCHAR}, #{remark,jdbcType=VARCHAR}, 
+      #{text1,jdbcType=VARCHAR}, #{text2,jdbcType=VARCHAR}, #{text3,jdbcType=VARCHAR}, 
+      #{text4,jdbcType=VARCHAR}, #{text5,jdbcType=VARCHAR}, #{text6,jdbcType=VARCHAR}, 
+      #{text7,jdbcType=VARCHAR}, #{int1,jdbcType=DECIMAL}, #{int2,jdbcType=DECIMAL}, 
+      #{optime,jdbcType=TIMESTAMP}, #{opid,jdbcType=VARCHAR})
+  </insert>
+  
+  <insert id="insertSelective" parameterType="com.sinog2c.model.user.UserCertificate" >
+    insert into TBUSER_CERTIFICATE
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        ID,
+      </if>
+      <if test="certsn != null" >
+        CERTSN,
+      </if>
+      <if test="userid != null" >
+        USERID,
+      </if>
+      <if test="islocked != null" >
+        ISLOCKED,
+      </if>
+      <if test="certdata != null" >
+        CERTDATA,
+      </if>
+      <if test="stime != null" >
+        STIME,
+      </if>
+      <if test="etime != null" >
+        ETIME,
+      </if>
+      <if test="explian != null" >
+        EXPLIAN,
+      </if>
+      <if test="issuer != null" >
+        ISSUER,
+      </if>
+      <if test="dn != null" >
+        DN,
+      </if>
+      <if test="remark != null" >
+        REMARK,
+      </if>
+      <if test="text1 != null" >
+        TEXT1,
+      </if>
+      <if test="text2 != null" >
+        TEXT2,
+      </if>
+      <if test="text3 != null" >
+        TEXT3,
+      </if>
+      <if test="text4 != null" >
+        TEXT4,
+      </if>
+      <if test="text5 != null" >
+        TEXT5,
+      </if>
+      <if test="text6 != null" >
+        TEXT6,
+      </if>
+      <if test="text7 != null" >
+        TEXT7,
+      </if>
+      <if test="int1 != null" >
+        INT1,
+      </if>
+      <if test="int2 != null" >
+        INT2,
+      </if>
+      <if test="optime != null" >
+        OPTIME,
+      </if>
+      <if test="opid != null" >
+        OPID,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=VARCHAR},
+      </if>
+      <if test="certsn != null" >
+        #{certsn,jdbcType=VARCHAR},
+      </if>
+      <if test="userid != null" >
+        #{userid,jdbcType=VARCHAR},
+      </if>
+      <if test="islocked != null" >
+        #{islocked,jdbcType=DECIMAL},
+      </if>
+      <if test="certdata != null" >
+        #{certdata,jdbcType=VARCHAR},
+      </if>
+      <if test="stime != null" >
+        #{stime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="etime != null" >
+        #{etime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="explian != null" >
+        #{explian,jdbcType=VARCHAR},
+      </if>
+      <if test="issuer != null" >
+        #{issuer,jdbcType=VARCHAR},
+      </if>
+      <if test="dn != null" >
+        #{dn,jdbcType=VARCHAR},
+      </if>
+      <if test="remark != null" >
+        #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="text1 != null" >
+        #{text1,jdbcType=VARCHAR},
+      </if>
+      <if test="text2 != null" >
+        #{text2,jdbcType=VARCHAR},
+      </if>
+      <if test="text3 != null" >
+        #{text3,jdbcType=VARCHAR},
+      </if>
+      <if test="text4 != null" >
+        #{text4,jdbcType=VARCHAR},
+      </if>
+      <if test="text5 != null" >
+        #{text5,jdbcType=VARCHAR},
+      </if>
+      <if test="text6 != null" >
+        #{text6,jdbcType=VARCHAR},
+      </if>
+      <if test="text7 != null" >
+        #{text7,jdbcType=VARCHAR},
+      </if>
+      <if test="int1 != null" >
+        #{int1,jdbcType=DECIMAL},
+      </if>
+      <if test="int2 != null" >
+        #{int2,jdbcType=DECIMAL},
+      </if>
+      <if test="optime != null" >
+        #{optime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="opid != null" >
+        #{opid,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  
+  <insert id="insertByMap" parameterType="Map" >
+    insert into TBUSER_CERTIFICATE
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        ID,
+      </if>
+      <if test="certsn != null" >
+        CERTSN,
+      </if>
+      <if test="userid != null" >
+        USERID,
+      </if>
+      <if test="islocked != null" >
+        ISLOCKED,
+      </if>
+      <if test="certdata != null" >
+        CERTDATA,
+      </if>
+      <if test="stime != null" >
+        STIME,
+      </if>
+      <if test="etime != null" >
+        ETIME,
+      </if>
+      <if test="explian != null" >
+        EXPLIAN,
+      </if>
+      <if test="issuer != null" >
+        ISSUER,
+      </if>
+      <if test="dn != null" >
+        DN,
+      </if>
+      <if test="remark != null" >
+        REMARK,
+      </if>
+      <if test="text1 != null" >
+        TEXT1,
+      </if>
+      <if test="text2 != null" >
+        TEXT2,
+      </if>
+      <if test="text3 != null" >
+        TEXT3,
+      </if>
+      <if test="text4 != null" >
+        TEXT4,
+      </if>
+      <if test="text5 != null" >
+        TEXT5,
+      </if>
+      <if test="text6 != null" >
+        TEXT6,
+      </if>
+      <if test="text7 != null" >
+        TEXT7,
+      </if>
+      <if test="int1 != null" >
+        INT1,
+      </if>
+      <if test="int2 != null" >
+        INT2,
+      </if>
+      <if test="optime != null" >
+        OPTIME,
+      </if>
+      <if test="opid != null" >
+        OPID,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=VARCHAR},
+      </if>
+      <if test="certsn != null" >
+        #{certsn,jdbcType=VARCHAR},
+      </if>
+      <if test="userid != null" >
+        #{userid,jdbcType=VARCHAR},
+      </if>
+      <if test="islocked != null" >
+        #{islocked,jdbcType=DECIMAL},
+      </if>
+      <if test="certdata != null" >
+        #{certdata,jdbcType=VARCHAR},
+      </if>
+      <if test="stime != null" >
+        #{stime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="etime != null" >
+        #{etime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="explian != null" >
+        #{explian,jdbcType=VARCHAR},
+      </if>
+      <if test="issuer != null" >
+        #{issuer,jdbcType=VARCHAR},
+      </if>
+      <if test="dn != null" >
+        #{dn,jdbcType=VARCHAR},
+      </if>
+      <if test="remark != null" >
+        #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="text1 != null" >
+        #{text1,jdbcType=VARCHAR},
+      </if>
+      <if test="text2 != null" >
+        #{text2,jdbcType=VARCHAR},
+      </if>
+      <if test="text3 != null" >
+        #{text3,jdbcType=VARCHAR},
+      </if>
+      <if test="text4 != null" >
+        #{text4,jdbcType=VARCHAR},
+      </if>
+      <if test="text5 != null" >
+        #{text5,jdbcType=VARCHAR},
+      </if>
+      <if test="text6 != null" >
+        #{text6,jdbcType=VARCHAR},
+      </if>
+      <if test="text7 != null" >
+        #{text7,jdbcType=VARCHAR},
+      </if>
+      <if test="int1 != null" >
+        #{int1,jdbcType=DECIMAL},
+      </if>
+      <if test="int2 != null" >
+        #{int2,jdbcType=DECIMAL},
+      </if>
+      <if test="optime != null" >
+        #{optime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="opid != null" >
+        #{opid,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  
+  <update id="update" parameterType="com.sinog2c.model.user.UserCertificate" >
+    update TBUSER_CERTIFICATE
+    set CERTSN = #{certsn,jdbcType=VARCHAR},
+      USERID = #{userid,jdbcType=VARCHAR},
+      ISLOCKED = #{islocked,jdbcType=DECIMAL},
+      CERTDATA = #{certdata,jdbcType=VARCHAR},
+      STIME = #{stime,jdbcType=TIMESTAMP},
+      ETIME = #{etime,jdbcType=TIMESTAMP},
+      EXPLIAN = #{explian,jdbcType=VARCHAR},
+      ISSUER = #{issuer,jdbcType=VARCHAR},
+      DN = #{dn,jdbcType=VARCHAR},
+      REMARK = #{remark,jdbcType=VARCHAR},
+      TEXT1 = #{text1,jdbcType=VARCHAR},
+      TEXT2 = #{text2,jdbcType=VARCHAR},
+      TEXT3 = #{text3,jdbcType=VARCHAR},
+      TEXT4 = #{text4,jdbcType=VARCHAR},
+      TEXT5 = #{text5,jdbcType=VARCHAR},
+      TEXT6 = #{text6,jdbcType=VARCHAR},
+      TEXT7 = #{text7,jdbcType=VARCHAR},
+      INT1 = #{int1,jdbcType=DECIMAL},
+      INT2 = #{int2,jdbcType=DECIMAL},
+      OPTIME = #{optime,jdbcType=TIMESTAMP},
+      OPID = #{opid,jdbcType=VARCHAR}
+    where ID = #{id,jdbcType=VARCHAR}
+  </update>
+  
+  <update id="updateSelective" parameterType="com.sinog2c.model.user.UserCertificate" >
+    update TBUSER_CERTIFICATE
+    <set >
+      <if test="certsn != null" >
+        CERTSN = #{certsn,jdbcType=VARCHAR},
+      </if>
+      <if test="userid != null" >
+        USERID = #{userid,jdbcType=VARCHAR},
+      </if>
+      <if test="islocked != null" >
+        ISLOCKED = #{islocked,jdbcType=DECIMAL},
+      </if>
+      <if test="certdata != null" >
+        CERTDATA = #{certdata,jdbcType=VARCHAR},
+      </if>
+      <if test="stime != null" >
+        STIME = #{stime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="etime != null" >
+        ETIME = #{etime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="explian != null" >
+        EXPLIAN = #{explian,jdbcType=VARCHAR},
+      </if>
+      <if test="issuer != null" >
+        ISSUER = #{issuer,jdbcType=VARCHAR},
+      </if>
+      <if test="dn != null" >
+        DN = #{dn,jdbcType=VARCHAR},
+      </if>
+      <if test="remark != null" >
+        REMARK = #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="text1 != null" >
+        TEXT1 = #{text1,jdbcType=VARCHAR},
+      </if>
+      <if test="text2 != null" >
+        TEXT2 = #{text2,jdbcType=VARCHAR},
+      </if>
+      <if test="text3 != null" >
+        TEXT3 = #{text3,jdbcType=VARCHAR},
+      </if>
+      <if test="text4 != null" >
+        TEXT4 = #{text4,jdbcType=VARCHAR},
+      </if>
+      <if test="text5 != null" >
+        TEXT5 = #{text5,jdbcType=VARCHAR},
+      </if>
+      <if test="text6 != null" >
+        TEXT6 = #{text6,jdbcType=VARCHAR},
+      </if>
+      <if test="text7 != null" >
+        TEXT7 = #{text7,jdbcType=VARCHAR},
+      </if>
+      <if test="int1 != null" >
+        INT1 = #{int1,jdbcType=DECIMAL},
+      </if>
+      <if test="int2 != null" >
+        INT2 = #{int2,jdbcType=DECIMAL},
+      </if>
+      <if test="optime != null" >
+        OPTIME = #{optime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="opid != null" >
+        OPID = #{opid,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where ID = #{id,jdbcType=VARCHAR}
+  </update>
+  
+  <update id="updateByMap" parameterType="Map" >
+    update TBUSER_CERTIFICATE
+    <set >
+      <if test="certsn != null" >
+        CERTSN = #{certsn,jdbcType=VARCHAR},
+      </if>
+      <if test="userid != null" >
+        USERID = #{userid,jdbcType=VARCHAR},
+      </if>
+      <if test="islocked != null" >
+        ISLOCKED = #{islocked,jdbcType=DECIMAL},
+      </if>
+      <if test="certdata != null" >
+        CERTDATA = #{certdata,jdbcType=VARCHAR},
+      </if>
+      <if test="stime != null" >
+        STIME = #{stime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="etime != null" >
+        ETIME = #{etime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="explian != null" >
+        EXPLIAN = #{explian,jdbcType=VARCHAR},
+      </if>
+      <if test="issuer != null" >
+        ISSUER = #{issuer,jdbcType=VARCHAR},
+      </if>
+      <if test="dn != null" >
+        DN = #{dn,jdbcType=VARCHAR},
+      </if>
+      <if test="remark != null" >
+        REMARK = #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="text1 != null" >
+        TEXT1 = #{text1,jdbcType=VARCHAR},
+      </if>
+      <if test="text2 != null" >
+        TEXT2 = #{text2,jdbcType=VARCHAR},
+      </if>
+      <if test="text3 != null" >
+        TEXT3 = #{text3,jdbcType=VARCHAR},
+      </if>
+      <if test="text4 != null" >
+        TEXT4 = #{text4,jdbcType=VARCHAR},
+      </if>
+      <if test="text5 != null" >
+        TEXT5 = #{text5,jdbcType=VARCHAR},
+      </if>
+      <if test="text6 != null" >
+        TEXT6 = #{text6,jdbcType=VARCHAR},
+      </if>
+      <if test="text7 != null" >
+        TEXT7 = #{text7,jdbcType=VARCHAR},
+      </if>
+      <if test="int1 != null" >
+        INT1 = #{int1,jdbcType=DECIMAL},
+      </if>
+      <if test="int2 != null" >
+        INT2 = #{int2,jdbcType=DECIMAL},
+      </if>
+      <if test="optime != null" >
+        OPTIME = #{optime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="opid != null" >
+        OPID = #{opid,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where ID = #{id,jdbcType=VARCHAR}
+  </update>
+  
+  <select id="getByCertsn" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from TBUSER_CERTIFICATE
+    where CERTSN = #{certsn,jdbcType=VARCHAR}
+  </select>
+  
+  <select id="getById" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from TBUSER_CERTIFICATE
+    where ID = #{id,jdbcType=VARCHAR}
+  </select>
+  
+  <select id="listByUserId" resultMap="BaseResultMap" parameterType="Map" >
+    select <include refid="Base_Column_List" />
+   	from TBUSER_CERTIFICATE where 1=1
+   	<if test="userid != null" >
+       	and userid = #{userid,jdbcType=VARCHAR}
+    </if>
+  </select>
+  
+  <select id="countUserCertList" parameterType="Map" resultType="int">
+    select
+    	count(tc.id)
+    from TBUSER_CERTIFICATE tc,
+    	 TBSYS_USERINFO usr,
+    	 TBSYS_USER_ORG uo,
+    	 TBSYS_ORGINFO sog
+    where tc.userid = usr.userid
+      and tc.userid = uo.userid
+      and uo.orgid = sog.orgid
+      and exists (
+         select 'x' from tbflow_org_org og where og.orgid=#{orgid} and og.dorgid=uo.orgid
+      )
+   	<if test="select_orgid != null" >
+       	and uo.orgid = #{select_orgid,jdbcType=VARCHAR}
+    </if>
+    <if test="key != null" >
+       	and (usr.userid like '%'||#{key}||'%' or usr.name like '%'||#{key}||'%')
+    </if>
+  </select>
+  
+  <select id="getUserCertList" parameterType="Map" resultType="Map">
+  	SELECT * FROM 
+ 	( SELECT A.*, ROWNUM RN 
+	 	FROM 
+	 	(
+	 		select
+	 		    tc.id,
+		    	tc.userid,
+		    	usr.name,
+		    	tc.explian,
+		    	tc.certsn,
+		    	tc.dn,
+		    	sog.name as orgname
+		    from TBUSER_CERTIFICATE tc,
+		    	 TBSYS_USERINFO usr,
+		    	 TBSYS_USER_ORG uo,
+		    	 TBSYS_ORGINFO sog
+		    where tc.userid = usr.userid
+		      and tc.userid = uo.userid
+		      and uo.orgid = sog.orgid
+		      and exists (
+		         select 'x' from tbflow_org_org og where og.orgid=#{orgid} and og.dorgid=uo.orgid
+		      )
+		   	<if test="select_orgid != null" >
+		       	and uo.orgid = #{select_orgid,jdbcType=VARCHAR}
+		    </if>
+		    <if test="key != null" >
+		       	and (usr.userid like '%'||#{key}||'%' or usr.name like '%'||#{key}||'%')
+		    </if>
+		    
+	 	) A 
+	 	WHERE ROWNUM &lt;= #{end,jdbcType=DECIMAL}
+ 	)
+ 	WHERE RN &gt;= #{start,jdbcType=DECIMAL}
+  </select>
+  
+</mapper>

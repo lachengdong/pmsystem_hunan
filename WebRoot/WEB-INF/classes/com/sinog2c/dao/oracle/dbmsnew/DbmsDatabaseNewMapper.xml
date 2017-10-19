@@ -1,0 +1,625 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.sinog2c.dao.api.dbmsnew.DbmsDatabaseNewMapper" >
+  <resultMap id="BaseResultMap" type="com.sinog2c.model.dbmsnew.DbmsDatabaseNew" >
+    <id column="DDID" property="ddid" jdbcType="VARCHAR" />
+    <result column="DDNAME" property="ddname" jdbcType="VARCHAR" />
+    <result column="DDIP" property="ddip" jdbcType="VARCHAR" />
+    <result column="DATABASENAME" property="databasename" jdbcType="VARCHAR" />
+    <result column="DDORG" property="ddorg" jdbcType="VARCHAR" />
+    <result column="DATABASEUSER" property="databaseuser" jdbcType="VARCHAR" />
+    <result column="DATABASEPASSWORD" property="databasepassword" jdbcType="VARCHAR" />
+    <result column="PORT" property="port" jdbcType="DECIMAL" />
+    <result column="DATABASETYPE" property="databasetype" jdbcType="VARCHAR" />
+    <result column="UPDATEMENDER" property="updatemender" jdbcType="VARCHAR" />
+    <result column="UPDATETIME" property="updatetime" jdbcType="TIMESTAMP" />
+    <result column="CREATETIME" property="createtime" jdbcType="TIMESTAMP" />
+    <result column="CREATEMENDER" property="createmender" jdbcType="VARCHAR" />
+    <result column="DELFLG" property="delflg" jdbcType="VARCHAR" />
+    <result column="SDID" property="sdid" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    DDID, DDNAME, DDIP, DATABASENAME, DDORG, DATABASEUSER, DATABASEPASSWORD, PORT, DATABASETYPE, 
+    UPDATEMENDER, UPDATETIME, CREATETIME, CREATEMENDER, DELFLG, SDID
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from DBMS_DATABASE_NEW
+    where DDID = #{ddid,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from DBMS_DATABASE_NEW
+    where DDID = #{ddid,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.sinog2c.model.dbmsnew.DbmsDatabaseNew" >
+    insert into DBMS_DATABASE_NEW (DDID, DDNAME, DDIP, 
+      DATABASENAME, DDORG, DATABASEUSER, 
+      DATABASEPASSWORD, PORT, DATABASETYPE, 
+      UPDATEMENDER, UPDATETIME, CREATETIME, 
+      CREATEMENDER, DELFLG, SDID
+      )
+    values (#{ddid,jdbcType=VARCHAR}, #{ddname,jdbcType=VARCHAR}, #{ddip,jdbcType=VARCHAR}, 
+      #{databasename,jdbcType=VARCHAR}, #{ddorg,jdbcType=VARCHAR}, #{databaseuser,jdbcType=VARCHAR}, 
+      #{databasepassword,jdbcType=VARCHAR}, #{port,jdbcType=DECIMAL}, #{databasetype,jdbcType=VARCHAR}, 
+      #{updatemender,jdbcType=VARCHAR}, #{updatetime,jdbcType=TIMESTAMP}, #{createtime,jdbcType=TIMESTAMP}, 
+      #{createmender,jdbcType=VARCHAR}, #{delflg,jdbcType=VARCHAR}, #{sdid,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.sinog2c.model.dbmsnew.DbmsDatabaseNew" >
+    insert into DBMS_DATABASE_NEW
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="ddid != null" >
+        DDID,
+      </if>
+      <if test="ddname != null" >
+        DDNAME,
+      </if>
+      <if test="ddip != null" >
+        DDIP,
+      </if>
+      <if test="databasename != null" >
+        DATABASENAME,
+      </if>
+      <if test="ddorg != null" >
+        DDORG,
+      </if>
+      <if test="databaseuser != null" >
+        DATABASEUSER,
+      </if>
+      <if test="databasepassword != null" >
+        DATABASEPASSWORD,
+      </if>
+      <if test="port != null" >
+        PORT,
+      </if>
+      <if test="databasetype != null" >
+        DATABASETYPE,
+      </if>
+      <if test="updatemender != null" >
+        UPDATEMENDER,
+      </if>
+      <if test="updatetime != null" >
+        UPDATETIME,
+      </if>
+      <if test="createtime != null" >
+        CREATETIME,
+      </if>
+      <if test="createmender != null" >
+        CREATEMENDER,
+      </if>
+      <if test="delflg != null" >
+        DELFLG,
+      </if>
+      <if test="sdid != null" >
+        SDID,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="ddid != null" >
+        #{ddid,jdbcType=VARCHAR},
+      </if>
+      <if test="ddname != null" >
+        #{ddname,jdbcType=VARCHAR},
+      </if>
+      <if test="ddip != null" >
+        #{ddip,jdbcType=VARCHAR},
+      </if>
+      <if test="databasename != null" >
+        #{databasename,jdbcType=VARCHAR},
+      </if>
+      <if test="ddorg != null" >
+        #{ddorg,jdbcType=VARCHAR},
+      </if>
+      <if test="databaseuser != null" >
+        #{databaseuser,jdbcType=VARCHAR},
+      </if>
+      <if test="databasepassword != null" >
+        #{databasepassword,jdbcType=VARCHAR},
+      </if>
+      <if test="port != null" >
+        #{port,jdbcType=DECIMAL},
+      </if>
+      <if test="databasetype != null" >
+        #{databasetype,jdbcType=VARCHAR},
+      </if>
+      <if test="updatemender != null" >
+        #{updatemender,jdbcType=VARCHAR},
+      </if>
+      <if test="updatetime != null" >
+        #{updatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createtime != null" >
+        #{createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createmender != null" >
+        #{createmender,jdbcType=VARCHAR},
+      </if>
+      <if test="delflg != null" >
+        #{delflg,jdbcType=VARCHAR},
+      </if>
+      <if test="sdid != null" >
+        #{sdid,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.sinog2c.model.dbmsnew.DbmsDatabaseNew" >
+    update DBMS_DATABASE_NEW
+    <set >
+      <if test="ddname != null" >
+        DDNAME = #{ddname,jdbcType=VARCHAR},
+      </if>
+      <if test="ddip != null" >
+        DDIP = #{ddip,jdbcType=VARCHAR},
+      </if>
+      <if test="databasename != null" >
+        DATABASENAME = #{databasename,jdbcType=VARCHAR},
+      </if>
+      <if test="ddorg != null" >
+        DDORG = #{ddorg,jdbcType=VARCHAR},
+      </if>
+      <if test="databaseuser != null" >
+        DATABASEUSER = #{databaseuser,jdbcType=VARCHAR},
+      </if>
+      <if test="databasepassword != null" >
+        DATABASEPASSWORD = #{databasepassword,jdbcType=VARCHAR},
+      </if>
+      <if test="port != null" >
+        PORT = #{port,jdbcType=DECIMAL},
+      </if>
+      <if test="databasetype != null" >
+        DATABASETYPE = #{databasetype,jdbcType=VARCHAR},
+      </if>
+      <if test="updatemender != null" >
+        UPDATEMENDER = #{updatemender,jdbcType=VARCHAR},
+      </if>
+      <if test="updatetime != null" >
+        UPDATETIME = #{updatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createtime != null" >
+        CREATETIME = #{createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createmender != null" >
+        CREATEMENDER = #{createmender,jdbcType=VARCHAR},
+      </if>
+      <if test="delflg != null" >
+        DELFLG = #{delflg,jdbcType=VARCHAR},
+      </if>
+      <if test="sdid != null" >
+        SDID = #{sdid,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where DDID = #{ddid,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.sinog2c.model.dbmsnew.DbmsDatabaseNew" >
+    update DBMS_DATABASE_NEW
+    set DDNAME = #{ddname,jdbcType=VARCHAR},
+      DDIP = #{ddip,jdbcType=VARCHAR},
+      DATABASENAME = #{databasename,jdbcType=VARCHAR},
+      DDORG = #{ddorg,jdbcType=VARCHAR},
+      DATABASEUSER = #{databaseuser,jdbcType=VARCHAR},
+      DATABASEPASSWORD = #{databasepassword,jdbcType=VARCHAR},
+      PORT = #{port,jdbcType=DECIMAL},
+      DATABASETYPE = #{databasetype,jdbcType=VARCHAR},
+      UPDATEMENDER = #{updatemender,jdbcType=VARCHAR},
+      UPDATETIME = #{updatetime,jdbcType=TIMESTAMP},
+      CREATETIME = #{createtime,jdbcType=TIMESTAMP},
+      CREATEMENDER = #{createmender,jdbcType=VARCHAR},
+      DELFLG = #{delflg,jdbcType=VARCHAR},
+      SDID = #{sdid,jdbcType=VARCHAR}
+    where DDID = #{ddid,jdbcType=VARCHAR}
+  </update>
+
+  <!-- 查询表中的所有信息 -->
+  <select id="listDBConnMapByPage" resultType="Map" parameterType="Map" >
+	select * from
+    ( 
+	    select a.*, rownum rn from
+	    (
+		    select * from  DBMS_DATABASE_NEW  where 1=1
+		    <if test="sdid!=null and sdid!=''">  
+		   		 and  sdid=#{sdid}
+		    </if>
+		    <if test="key!=null and key!=''">  
+		        and DDNAME like '%'||#{key}||'%' 
+		    </if>
+		    <if test="sortField!=null and sortOrder!=null" > 
+		     	order by ${sortField}  ${sortOrder}
+		    </if>
+	  	) a 
+	    <if test="end!=null and end!=''">
+	   		where rownum &lt;= #{end}
+	   	</if> 
+    )
+   	<if test="start!=null and start!=''">
+   		where  rn &gt;= #{start}
+   	</if>
+  </select>  
+
+  <select id="countAll" resultType="int"  parameterType="Map" >  <!-- 查询表中记录总数 -->
+		select count(*) c from DBMS_DATABASE_NEW
+		     where 1=1 
+			 <if test="sdid !=null and sdid !=''">  
+		        and SDID in (
+		        	select t.orgid from TBSYS_ORGINFO t
+ 					start with t.orgid= #{sdid} connect by prior t.orgid =t.porgid
+		        )
+		     </if>
+  </select>
+
+  <select id="listAll" resultMap="BaseResultMap"  parameterType="Map" >    <!-- 表中的所有信息 -->
+ 		SELECT * FROM DBMS_DATABASE_NEW
+		     where 1=1 
+			 <if test="sdid !=null and sdid !=''">  
+		        and SDID in (
+		        	select t.orgid from TBSYS_ORGINFO t
+ 					start with t.orgid= #{sdid} connect by prior t.orgid =t.porgid
+		        )
+		     </if>
+ 		  order by  DDID asc
+  </select>
+  
+  <select id="getDbmsDataBaseNewByDepartid" resultMap="BaseResultMap"  parameterType="Map" >    <!-- 表中的所有信息 -->
+ 		SELECT * FROM DBMS_DATABASE_NEW
+		     where 1=1 and SDID = #{departid}
+		     <if test="dchangeflag!=null and dchangeflag!=''">
+		     	and dchangeflag=#{dchangeflag}
+		     </if>
+  </select>
+
+  <select id="countByCondition" resultType="int" parameterType="Map" >  <!-- 根据条件查询表中记录数 -->
+		select count(*) c from DBMS_DATABASE_NEW
+	 	where 1=1 
+			 <if test="databasetype!=null and databasetype!=''">  
+		        and DATABASETYPE like CONCAT(CONCAT('%', #{databasetype}), '%')
+		     </if>
+			 <if test="databasename!=null and databasename!=''">  
+		        and DATABASENAME like CONCAT(CONCAT('%', #{databasename}), '%')
+		     </if>
+			 <if test="ddip!=null and ddip!=''">
+		        and DDIP like CONCAT(CONCAT('%', #{ddip}), '%')
+		     </if>
+			 <if test="port!=null and port!=''">  
+		        and PORT like CONCAT(CONCAT('%', #{port}), '%')
+		     </if>
+		     
+			 <if test="sdid !=null and sdid !=''">  
+		        and SDID in (
+		        	select t.orgid from TBSYS_ORGINFO t
+ 					start with t.orgid= #{sdid} connect by prior t.orgid =t.porgid
+		        )
+		     </if>
+  </select>
+
+  <select id="listByCondition" resultMap="BaseResultMap" parameterType="Map" >    <!-- 分页查询表中的信息 -->
+	 SELECT * FROM 
+	 	( SELECT A.*, ROWNUM RN 
+		 	FROM 
+		 	(
+		 		SELECT * FROM DBMS_DATABASE_NEW
+			 	where 1=1 
+				 <if test="databasetype!=null and databasetype!=''">  
+			        and DATABASETYPE like CONCAT(CONCAT('%', #{databasetype}), '%')
+			     </if>
+				 <if test="databasename!=null and databasename!=''">  
+			        and DATABASENAME like CONCAT(CONCAT('%', #{databasename}), '%')
+			     </if>
+				 <if test="ddip!=null and ddip!=''">
+			        and DDIP like CONCAT(CONCAT('%', #{ddip}), '%')
+			     </if>
+				 <if test="port!=null and port!=''">  
+			        and PORT like CONCAT(CONCAT('%', #{port}), '%')
+			     </if>
+		     
+				 <if test="sdid !=null and sdid !=''">  
+			        and SDID in (
+			        	select t.orgid from TBSYS_ORGINFO t
+	 					start with t.orgid= #{sdid} connect by prior t.orgid =t.porgid
+			        )
+			     </if>
+		     
+				 <if test="sortField!=null and sortField!='' and sortOrder!=null and sortOrder!=''">  
+		 		  order by  ${sortField} ${sortOrder}
+			     </if>
+		 	) A 
+		 	WHERE ROWNUM &lt;= #{end,jdbcType=DECIMAL}
+	 	) 
+	 	WHERE RN &gt;= #{start,jdbcType=DECIMAL}
+  </select>
+  
+  
+  <select id="listByOrgid" resultType="Map">   
+  select * from 
+   ( select a.*, rownum rn
+    from
+    (
+			select  *  from TBDATA_EXCHANGEWRITING t
+			where 1=1
+			<if test="departid=null and departid!=''">   
+			and (t.porgid = #{departid}
+			or t.porgid = (select porgid from  tbsys_orginfo where orgid  = #{departid} )
+			or t.porgid = '0')
+			</if>
+	 ) a
+	<if test="start!=null and start!=''">
+   		where rownum &lt;= #{end}
+   	</if> 
+    )
+   	<if test="start!=null and start!=''">
+   		where  rn &gt;= #{start}
+   	</if>
+  </select>
+  <select id="listByOrgidCount"  resultType="int"  parameterType="Map">   <!-- 分页查询表中的信息 ORGID, PORGID, CLASSIFICATION, SUBCLASS-->
+	select count(*) c from TBDATA_EXCHANGEWRITING t  where 1=1 
+	<if test="departid=null and departid!=''">   
+			and	(t.porgid = #{departid}
+			or t.porgid = (select porgid from  tbsys_orginfo where orgid  = #{departid} )
+			or t.porgid = '0')
+	</if>
+	<if test="orgid!=null and orgid!=''">   
+   		 and orgid = #{orgid}
+   	</if>
+	<if test="porgid!=null and porgid!=''">   
+   		 and porgid = #{porgid}
+   	</if>
+	<if test="classification!=null and classification!=''">   
+   		 and classification = #{classification}
+   	</if>
+	<if test="subclass!=null and subclass!=''">   
+   		 and subclass = #{subclass}
+   	</if>
+  </select>
+
+
+  <update id="updateByMap" parameterType="Map" >
+    update DBMS_DATABASE_NEW
+    <set >
+      <if test="ddname != null" >
+        DDNAME = #{ddname,jdbcType=VARCHAR},
+      </if>
+      <if test="ddip != null" >
+        DDIP = #{ddip,jdbcType=VARCHAR},
+      </if>
+      <if test="databasename != null" >
+        DATABASENAME = #{databasename,jdbcType=VARCHAR},
+      </if>
+      <if test="ddorg != null" >
+        DDORG = #{ddorg,jdbcType=VARCHAR},
+      </if>
+      <if test="databaseuser != null" >
+        DATABASEUSER = #{databaseuser,jdbcType=VARCHAR},
+      </if>
+      <if test="databasepassword != null" >
+        DATABASEPASSWORD = #{databasepassword,jdbcType=VARCHAR},
+      </if>
+      <if test="port != null" >
+        PORT = #{port,jdbcType=DECIMAL},
+      </if>
+      <if test="databasetype != null" >
+        DATABASETYPE = #{databasetype,jdbcType=VARCHAR},
+      </if>
+      <if test="updatemender != null" >
+        UPDATEMENDER = #{updatemender,jdbcType=VARCHAR},
+      </if>
+      <if test="updatetime != null" >
+        UPDATETIME = #{updatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createtime != null" >
+        CREATETIME = #{createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createmender != null" >
+        CREATEMENDER = #{createmender,jdbcType=VARCHAR},
+      </if>
+      <if test="delflg != null" >
+        DELFLG = #{delflg,jdbcType=VARCHAR},
+      </if>
+      <if test="sdid != null" >
+        SDID = #{sdid,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where DDID = #{ddid,jdbcType=VARCHAR}
+  </update>
+  
+  <insert id="insertByMap" parameterType="Map" >
+    insert into DBMS_DATABASE_NEW
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="ddid != null" >
+        DDID,
+      </if>
+      <if test="ddname != null" >
+        DDNAME,
+      </if>
+      <if test="ddip != null" >
+        DDIP,
+      </if>
+      <if test="databasename != null" >
+        DATABASENAME,
+      </if>
+      <if test="ddorg != null" >
+        DDORG,
+      </if>
+      <if test="databaseuser != null" >
+        DATABASEUSER,
+      </if>
+      <if test="databasepassword != null" >
+        DATABASEPASSWORD,
+      </if>
+      <if test="port != null" >
+        PORT,
+      </if>
+      <if test="databasetype != null" >
+        DATABASETYPE,
+      </if>
+      <if test="updatemender != null" >
+        UPDATEMENDER,
+      </if>
+      <if test="updatetime != null" >
+        UPDATETIME,
+      </if>
+      <if test="createtime != null" >
+        CREATETIME,
+      </if>
+      <if test="createmender != null" >
+        CREATEMENDER,
+      </if>
+      <if test="delflg != null" >
+        DELFLG,
+      </if>
+      <if test="sdid != null" >
+        SDID,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="ddid != null" >
+        #{ddid,jdbcType=VARCHAR},
+      </if>
+      <if test="ddname != null" >
+        #{ddname,jdbcType=VARCHAR},
+      </if>
+      <if test="ddip != null" >
+        #{ddip,jdbcType=VARCHAR},
+      </if>
+      <if test="databasename != null" >
+        #{databasename,jdbcType=VARCHAR},
+      </if>
+      <if test="ddorg != null" >
+        #{ddorg,jdbcType=VARCHAR},
+      </if>
+      <if test="databaseuser != null" >
+        #{databaseuser,jdbcType=VARCHAR},
+      </if>
+      <if test="databasepassword != null" >
+        #{databasepassword,jdbcType=VARCHAR},
+      </if>
+      <if test="port != null" >
+        #{port,jdbcType=DECIMAL},
+      </if>
+      <if test="databasetype != null" >
+        #{databasetype,jdbcType=VARCHAR},
+      </if>
+      <if test="updatemender != null" >
+        #{updatemender,jdbcType=VARCHAR},
+      </if>
+      <if test="updatetime != null" >
+        #{updatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createtime != null" >
+        #{createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createmender != null" >
+        #{createmender,jdbcType=VARCHAR},
+      </if>
+      <if test="delflg != null" >
+        #{delflg,jdbcType=VARCHAR},
+      </if>
+      <if test="sdid != null" >
+        #{sdid,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  
+  <!-- 行文交换插入数据 -->
+  <insert id="insertByOrgid" parameterType="Map" >
+    insert into TBDATA_EXCHANGEWRITING
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="orgid != null" >
+        ORGID,
+      </if>
+      <if test="porgid != null" >
+        PORGID,
+      </if>
+      <if test="classification!= null" >
+        CLASSIFICATION,
+      </if>
+      <if test="subclass != null" >
+        SUBCLASS,
+      </if>
+      <if test="status != null" >
+        STATUS,
+      </if>
+      <if test="text1 != null" >
+        TEXT1,
+      </if>
+      <if test="text2 != null" >
+        TEXT2,
+      </if>
+      <if test="text3 != null" >
+        TEXT3,
+      </if>
+      <if test="remark != null" >
+        REMARK,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="orgid != null" >
+        #{orgid,jdbcType=VARCHAR},
+      </if>
+      <if test="porgid != null" >
+        #{porgid,jdbcType=VARCHAR},
+      </if>
+      <if test="classification!= null" >
+        #{classification,jdbcType=VARCHAR},
+      </if>
+      <if test="subclass != null" >
+        #{subclass,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null" >
+        #{status},
+      </if>
+      <if test="text1 != null" >
+        #{text1,jdbcType=VARCHAR},
+      </if>
+      <if test="text2 != null" >
+        #{text2,jdbcType=VARCHAR},
+      </if>
+      <if test="text3 != null" >
+        #{text3,jdbcType=VARCHAR},
+      </if>
+      <if test="remark != null" >
+        #{remark,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <!-- 行文交换插入数据 -->
+  <update id="updateByExchangeWritingMap" parameterType="Map" >
+    update  TBDATA_EXCHANGEWRITING
+     <set >
+      <if test="status != null" >
+       status = #{status},
+      </if>
+      <if test="text1 != null" >
+        text1 = #{text1,jdbcType=VARCHAR},
+      </if>
+      <if test="text2 != null" >
+        text2 = #{text2,jdbcType=VARCHAR},
+      </if>
+      <if test="text3 != null" >
+       text3 =  #{text3,jdbcType=VARCHAR},
+      </if>
+      <if test="remark != null" >
+        remark = #{remark,jdbcType=VARCHAR},
+      </if>
+       </set >
+      where 
+       <if test="orgid != null" >
+			orgid = #{orgid,jdbcType=VARCHAR},
+      </if>
+      <if test="porgid != null" >
+			porgid  =  #{porgid,jdbcType=VARCHAR},
+      </if>
+      <if test="classification!= null" >
+      		classification =   #{classification,jdbcType=VARCHAR},
+      </if>
+      <if test="subclass != null" >
+        	subclass = #{subclass,jdbcType=VARCHAR},
+      </if>
+  </update>
+  <select id="selectFromDatabaseByDdcid" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+	  from DBMS_DATABASE_NEW
+	 where DDID = (select fromdatabaseid
+	                 from DBMS_DATAS_CHEME_NEW
+	                where ddcid = #{ddcid, jdbcType = VARCHAR})
+  </select>
+</mapper>

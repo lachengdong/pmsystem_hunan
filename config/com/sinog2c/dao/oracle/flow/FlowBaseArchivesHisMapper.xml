@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.sinog2c.dao.api.flow.FlowBaseArchivesHisMapper" >
+  <resultMap id="BaseResultMap" type="com.sinog2c.model.flow.FlowBaseArchivesHis" >
+    <result column="PERSONID" property="personid" jdbcType="VARCHAR" />
+    <result column="PERSONNAME" property="personname" jdbcType="VARCHAR" />
+    <result column="ARCHIVEID" property="archiveid" jdbcType="VARCHAR" />
+    <result column="DOCYEAR" property="docyear" jdbcType="DECIMAL" />
+    <result column="NAME" property="name" jdbcType="VARCHAR" />
+    <result column="DOCID" property="docid" jdbcType="VARCHAR" />
+    <result column="TYPE" property="type" jdbcType="DECIMAL" />
+    <result column="RANK" property="rank" jdbcType="DECIMAL" />
+    <result column="ISATTACHED" property="isattached" jdbcType="DECIMAL" />
+    <result column="RETENTION" property="retention" jdbcType="DECIMAL" />
+    <result column="CLASSIFICATION" property="classification" jdbcType="DECIMAL" />
+    <result column="REMARK" property="remark" jdbcType="VARCHAR" />
+    <result column="OPID" property="opid" jdbcType="VARCHAR" />
+    <result column="OPTIME" property="optime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <insert id="insert" parameterType="com.sinog2c.model.flow.FlowBaseArchivesHis" >
+    insert into TBFLOW_BASE_ARCHIVES_HIS (PERSONID, PERSONNAME, ARCHIVEID, 
+      DOCYEAR, NAME, DOCID, 
+      TYPE, RANK, ISATTACHED, 
+      RETENTION, CLASSIFICATION, REMARK, 
+      OPID, OPTIME)
+    values (#{personid,jdbcType=VARCHAR}, #{personname,jdbcType=VARCHAR}, #{archiveid,jdbcType=VARCHAR}, 
+      #{docyear,jdbcType=DECIMAL}, #{name,jdbcType=VARCHAR}, #{docid,jdbcType=VARCHAR}, 
+      #{type,jdbcType=DECIMAL}, #{rank,jdbcType=DECIMAL}, #{isattached,jdbcType=DECIMAL}, 
+      #{retention,jdbcType=DECIMAL}, #{classification,jdbcType=DECIMAL}, #{remark,jdbcType=VARCHAR}, 
+      #{opid,jdbcType=VARCHAR}, #{optime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.sinog2c.model.flow.FlowBaseArchivesHis" >
+    insert into TBFLOW_BASE_ARCHIVES_HIS
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="personid != null" >
+        PERSONID,
+      </if>
+      <if test="personname != null" >
+        PERSONNAME,
+      </if>
+      <if test="archiveid != null" >
+        ARCHIVEID,
+      </if>
+      <if test="docyear != null" >
+        DOCYEAR,
+      </if>
+      <if test="name != null" >
+        NAME,
+      </if>
+      <if test="docid != null" >
+        DOCID,
+      </if>
+      <if test="type != null" >
+        TYPE,
+      </if>
+      <if test="rank != null" >
+        RANK,
+      </if>
+      <if test="isattached != null" >
+        ISATTACHED,
+      </if>
+      <if test="retention != null" >
+        RETENTION,
+      </if>
+      <if test="classification != null" >
+        CLASSIFICATION,
+      </if>
+      <if test="remark != null" >
+        REMARK,
+      </if>
+      <if test="opid != null" >
+        OPID,
+      </if>
+      <if test="optime != null" >
+        OPTIME,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="personid != null" >
+        #{personid,jdbcType=VARCHAR},
+      </if>
+      <if test="personname != null" >
+        #{personname,jdbcType=VARCHAR},
+      </if>
+      <if test="archiveid != null" >
+        #{archiveid,jdbcType=VARCHAR},
+      </if>
+      <if test="docyear != null" >
+        #{docyear,jdbcType=DECIMAL},
+      </if>
+      <if test="name != null" >
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="docid != null" >
+        #{docid,jdbcType=VARCHAR},
+      </if>
+      <if test="type != null" >
+        #{type,jdbcType=DECIMAL},
+      </if>
+      <if test="rank != null" >
+        #{rank,jdbcType=DECIMAL},
+      </if>
+      <if test="isattached != null" >
+        #{isattached,jdbcType=DECIMAL},
+      </if>
+      <if test="retention != null" >
+        #{retention,jdbcType=DECIMAL},
+      </if>
+      <if test="classification != null" >
+        #{classification,jdbcType=DECIMAL},
+      </if>
+      <if test="remark != null" >
+        #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="opid != null" >
+        #{opid,jdbcType=VARCHAR},
+      </if>
+      <if test="optime != null" >
+        #{optime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+</mapper>

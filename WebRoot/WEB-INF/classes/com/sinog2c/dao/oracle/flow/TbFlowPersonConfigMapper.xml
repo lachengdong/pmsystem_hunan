@@ -1,0 +1,320 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.sinog2c.dao.api.flow.TbFlowPersonConfigMapper" >
+  <resultMap id="BaseResultMap" type="com.sinog2c.model.flow.TbFlowPersonConfig" >
+    <id column="ID" property="id" jdbcType="VARCHAR" />
+    <id column="DEPARTID" property="departid" jdbcType="VARCHAR" />
+    <id column="FLOWDEFID" property="flowdefid" jdbcType="VARCHAR" />
+    <id column="NODEID" property="nodeid" jdbcType="VARCHAR" />
+    <id column="USERID" property="userid" jdbcType="VARCHAR" />
+    <result column="DUSERID" property="duserid" jdbcType="VARCHAR" />
+    <result column="REMARK" property="remark" jdbcType="VARCHAR" />
+    <result column="ORDERBY" property="orderby" jdbcType="DECIMAL" />
+    <result column="OPTIME" property="optime" jdbcType="DATE" />
+    <result column="OPID" property="opid" jdbcType="VARCHAR" />
+    <result column="TEXT1" property="text1" jdbcType="VARCHAR" />
+    <result column="TEXT2" property="text2" jdbcType="VARCHAR" />
+    <result column="TEXT3" property="text3" jdbcType="VARCHAR" />
+    <result column="TEXT4" property="text4" jdbcType="VARCHAR" />
+    <result column="INT1" property="int1" jdbcType="DECIMAL" />
+    <result column="INT2" property="int2" jdbcType="DECIMAL" />
+    <result column="INT3" property="int3" jdbcType="DECIMAL" />
+    <result column="INT4" property="int4" jdbcType="DECIMAL" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    ID,DEPARTID, FLOWDEFID, NODEID, USERID, DUSERID, REMARK, ORDERBY, OPTIME, OPID, TEXT1, 
+    TEXT2, TEXT3, TEXT4, INT1, INT2, INT3, INT4
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="com.sinog2c.model.flow.TbFlowPersonConfigKey" >
+    select 
+    <include refid="Base_Column_List" />
+    from TBFLOW_PERSONCONFIG
+    where DEPARTID = #{departid,jdbcType=VARCHAR}
+      and FLOWDEFID = #{flowdefid,jdbcType=VARCHAR}
+      and NODEID = #{nodeid,jdbcType=VARCHAR}
+      and USERID = #{userid,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="com.sinog2c.model.flow.TbFlowPersonConfigKey" >
+    delete from TBFLOW_PERSONCONFIG
+    where DEPARTID = #{departid,jdbcType=VARCHAR}
+      and FLOWDEFID = #{flowdefid,jdbcType=VARCHAR}
+      and NODEID = #{nodeid,jdbcType=VARCHAR}
+      and USERID = #{userid,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.sinog2c.model.flow.TbFlowPersonConfig" >
+    insert into TBFLOW_PERSONCONFIG (ID,DEPARTID, FLOWDEFID, NODEID, 
+      USERID, DUSERID, REMARK, 
+      ORDERBY, OPTIME, OPID, 
+      TEXT1, TEXT2, TEXT3, 
+      TEXT4, INT1, INT2, 
+      INT3, INT4)
+    values (#{id,jdbcType=VARCHAR}, #{departid,jdbcType=VARCHAR}, #{flowdefid,jdbcType=VARCHAR}, #{nodeid,jdbcType=VARCHAR}, 
+      #{userid,jdbcType=VARCHAR}, #{duserid,jdbcType=VARCHAR}, #{remark,jdbcType=VARCHAR}, 
+      #{orderby,jdbcType=DECIMAL}, #{optime,jdbcType=DATE}, #{opid,jdbcType=VARCHAR}, 
+      #{text1,jdbcType=VARCHAR}, #{text2,jdbcType=VARCHAR}, #{text3,jdbcType=VARCHAR}, 
+      #{text4,jdbcType=VARCHAR}, #{int1,jdbcType=DECIMAL}, #{int2,jdbcType=DECIMAL}, 
+      #{int3,jdbcType=DECIMAL}, #{int4,jdbcType=DECIMAL})
+  </insert>
+  <insert id="insertSelective" parameterType="com.sinog2c.model.flow.TbFlowPersonConfig" >
+  	<selectKey resultType="int" keyProperty="id" order="BEFORE">
+   		select SEQ_RES_ID.NEXTVAL  from dual
+    </selectKey>
+    insert into TBFLOW_PERSONCONFIG
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        ID,
+      </if>
+      <if test="departid != null" >
+        DEPARTID,
+      </if>
+      <if test="flowdefid != null" >
+        FLOWDEFID,
+      </if>
+      <if test="nodeid != null" >
+        NODEID,
+      </if>
+      <if test="userid != null" >
+        USERID,
+      </if>
+      <if test="duserid != null" >
+        DUSERID,
+      </if>
+      <if test="remark != null" >
+        REMARK,
+      </if>
+      <if test="orderby != null" >
+        ORDERBY,
+      </if>
+      <if test="optime != null" >
+        OPTIME,
+      </if>
+      <if test="opid != null" >
+        OPID,
+      </if>
+      <if test="text1 != null" >
+        TEXT1,
+      </if>
+      <if test="text2 != null" >
+        TEXT2,
+      </if>
+      <if test="text3 != null" >
+        TEXT3,
+      </if>
+      <if test="text4 != null" >
+        TEXT4,
+      </if>
+      <if test="int1 != null" >
+        INT1,
+      </if>
+      <if test="int2 != null" >
+        INT2,
+      </if>
+      <if test="int3 != null" >
+        INT3,
+      </if>
+      <if test="int4 != null" >
+        INT4,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=VARCHAR},
+      </if>
+      <if test="departid != null" >
+        #{departid,jdbcType=VARCHAR},
+      </if>
+      <if test="flowdefid != null" >
+        #{flowdefid,jdbcType=VARCHAR},
+      </if>
+      <if test="nodeid != null" >
+        #{nodeid,jdbcType=VARCHAR},
+      </if>
+      <if test="userid != null" >
+        #{userid,jdbcType=VARCHAR},
+      </if>
+      <if test="duserid != null" >
+        #{duserid,jdbcType=VARCHAR},
+      </if>
+      <if test="remark != null" >
+        #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="orderby != null" >
+        #{orderby,jdbcType=DECIMAL},
+      </if>
+      <if test="optime != null" >
+        #{optime,jdbcType=DATE},
+      </if>
+      <if test="opid != null" >
+        #{opid,jdbcType=VARCHAR},
+      </if>
+      <if test="text1 != null" >
+        #{text1,jdbcType=VARCHAR},
+      </if>
+      <if test="text2 != null" >
+        #{text2,jdbcType=VARCHAR},
+      </if>
+      <if test="text3 != null" >
+        #{text3,jdbcType=VARCHAR},
+      </if>
+      <if test="text4 != null" >
+        #{text4,jdbcType=VARCHAR},
+      </if>
+      <if test="int1 != null" >
+        #{int1,jdbcType=DECIMAL},
+      </if>
+      <if test="int2 != null" >
+        #{int2,jdbcType=DECIMAL},
+      </if>
+      <if test="int3 != null" >
+        #{int3,jdbcType=DECIMAL},
+      </if>
+      <if test="int4 != null" >
+        #{int4,jdbcType=DECIMAL},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.sinog2c.model.flow.TbFlowPersonConfig" >
+    update TBFLOW_PERSONCONFIG
+    <set >
+      <if test="userid != null" >
+        USERID = #{userid,jdbcType=VARCHAR},
+      </if>
+      <if test="duserid != null" >
+        DUSERID = #{duserid,jdbcType=VARCHAR},
+      </if>
+      <if test="remark != null" >
+        REMARK = #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="orderby != null" >
+        ORDERBY = #{orderby,jdbcType=DECIMAL},
+      </if>
+      <if test="optime != null" >
+        OPTIME = #{optime,jdbcType=DATE},
+      </if>
+      <if test="opid != null" >
+        OPID = #{opid,jdbcType=VARCHAR},
+      </if>
+      <if test="text1 != null" >
+        TEXT1 = #{text1,jdbcType=VARCHAR},
+      </if>
+      <if test="text2 != null" >
+        TEXT2 = #{text2,jdbcType=VARCHAR},
+      </if>
+      <if test="text3 != null" >
+        TEXT3 = #{text3,jdbcType=VARCHAR},
+      </if>
+      <if test="text4 != null" >
+        TEXT4 = #{text4,jdbcType=VARCHAR},
+      </if>
+      <if test="int1 != null" >
+        INT1 = #{int1,jdbcType=DECIMAL},
+      </if>
+      <if test="int2 != null" >
+        INT2 = #{int2,jdbcType=DECIMAL},
+      </if>
+      <if test="int3 != null" >
+        INT3 = #{int3,jdbcType=DECIMAL},
+      </if>
+      <if test="int4 != null" >
+        INT4 = #{int4,jdbcType=DECIMAL},
+      </if>
+    </set>
+    where DEPARTID = #{departid,jdbcType=VARCHAR}
+      and FLOWDEFID = #{flowdefid,jdbcType=VARCHAR}
+      and id = #{id,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.sinog2c.model.flow.TbFlowPersonConfig" >
+    update TBFLOW_PERSONCONFIG
+    set DUSERID = #{duserid,jdbcType=VARCHAR},
+      REMARK = #{remark,jdbcType=VARCHAR},
+      ORDERBY = #{orderby,jdbcType=DECIMAL},
+      OPTIME = #{optime,jdbcType=DATE},
+      OPID = #{opid,jdbcType=VARCHAR},
+      TEXT1 = #{text1,jdbcType=VARCHAR},
+      TEXT2 = #{text2,jdbcType=VARCHAR},
+      TEXT3 = #{text3,jdbcType=VARCHAR},
+      TEXT4 = #{text4,jdbcType=VARCHAR},
+      INT1 = #{int1,jdbcType=DECIMAL},
+      INT2 = #{int2,jdbcType=DECIMAL},
+      INT3 = #{int3,jdbcType=DECIMAL},
+      INT4 = #{int4,jdbcType=DECIMAL}
+    where DEPARTID = #{departid,jdbcType=VARCHAR}
+      and FLOWDEFID = #{flowdefid,jdbcType=VARCHAR}
+      and NODEID = #{nodeid,jdbcType=VARCHAR}
+      and USERID = #{userid,jdbcType=VARCHAR}
+  </update>
+  
+   <select id="getChengBanPersons" parameterType="Map" resultType="Map">
+		select us.name, us.userid
+		from TBSYS_USERINFO us,
+		  (
+			select 
+			  userid
+			from TBFLOW_PERSONCONFIG ts
+			where ts.departid=#{departid} 
+			  and ts.flowdefid=#{flowdefid}
+			  and ts.nodeid=#{nodeid}
+		  ) tf
+		where us.userid=tf.userid
+  </select>
+  
+  <select id="getNextApprovePersons" parameterType="Map" resultType="String">
+		select 
+			  duserid
+		from TBFLOW_PERSONCONFIG ts
+		where ts.departid=#{departid} 
+		  and ts.flowdefid=#{flowdefid}
+		  and ts.nodeid=#{nodeid}
+		  and userid=#{userid}
+  </select>
+  
+  <select id="getFlowDeliverType" parameterType="Map" resultType="Map">
+		select 
+			  ts.flowdefid as id, ts.name as text
+		from TBXF_FLOWDELIVERTYPES ts
+		where ts.flowdefid=#{flowdefid}
+  </select>
+  
+  <select id="getFlowDeliverNodeName" parameterType="Map" resultType="Map">
+		select 
+			  distinct ts.snodeid as id, ts.text3 as text
+		from TBFLOW_DELIVER ts
+		where ts.snodeid=#{nodeid}
+		   and ts.flowdefid=#{flowdefid}
+		   and ts.departid =#{departid}
+  </select>
+  
+  
+  <select id="ajaxGetFlowDeliverNodeid" parameterType="Map" resultType="Map">
+		select 
+			  distinct ts.snodeid as id, ts.text3 as text
+		from TBFLOW_DELIVER ts
+		where 1=1
+		   and ts.flowdefid=#{flowdefid}
+		   and ts.departid =#{departid}
+		order by ts.snodeid
+  </select>
+  
+    <select id="getFlowPersonConfigs" parameterType="Map" resultType="Map">
+		 select *
+          from(
+          		   select a.*, rownum rn
+          		   from(
+          		   		  select t.*
+		                  from TBFLOW_PERSONCONFIG t
+		                  where t.flowdefid=#{flowdefid}
+		                     and t.departid=#{departid}
+		                  order by t.orderby
+          		   ) a
+         		   where rownum &lt;= ${end}
+          )  where rn &gt;= ${start}
+	</select>
+	
+	<select id="countFlowPersonConfigs" parameterType="Map" resultType="int">
+		select count(*)
+        from TBFLOW_PERSONCONFIG t
+        where t.flowdefid=#{flowdefid}
+           and t.departid=#{departid}
+	</select>
+  
+</mapper>

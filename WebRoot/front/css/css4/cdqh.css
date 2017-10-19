@@ -1,0 +1,92 @@
+@charset "utf-8";
+/* CSS Document */
+
+body{color:#333333;} 
+.shadetabs{
+
+height:40px;
+line-height:40px;
+*padding: 3px 0;
+margin-left: 0;
+margin-bottom: 0;
+font: bold 18px Verdana;
+list-style-type: none;
+float:left;
+/*set to left, center, or right to align the menu as desired*/
+}
+
+.shadetabs li{
+display: block;
+float:left;
+margin: 0;
+height: 40px;
+line-height: 40px;
+*height:31px;
+line-height:31px\9;
+}
+
+.shadetabs li a{
+text-decoration: none;
+width:119px;
+text-align:center;
+display:block;
+float:left;
+color: #2d2b2b;
+background:url(/pmsys/front/images/tsjy/tsfubtbj.jpg) top left repeat-x;
+height:40px;
+line-height:40px;
+
+}
+
+.shadetabs li a:visited{
+color: #2d2b2b;
+height:37px;
+*line-height:37px;
+*padding-top:6px;
+
+}
+
+.shadetabs li a:hover{
+color: #2d2b2b;
+height:40px;
+text-decoration:none;
+}
+
+.shadetabs li.selected{
+position: relative;
+top: 1px;
+}
+
+.shadetabs li.selected a{ /*selected main tab style */
+background-image:url(/pmsys/front/images/tsjy/tsfubtbj2.jpg) ;
+height:40px;
+line-height:40px;
+width:119px;
+text-decoration:none;
+color:#0567a4;
+}
+
+.shadetabs li.selected a:hover{ /*selected main tab style */
+text-decoration:none;
+height:37px;
+}
+
+.tabcontentstyle{ /*style of tab content oontainer*/
+border: 1px solid gray;
+height:445px;
+width: 800px;
+margin-bottom: 1em;
+padding: 10px;
+clear:both;
+*margin-top:-3px;
+}
+
+.tabcontent{
+display:none;
+}
+
+@media print {
+.tabcontent {
+display:block!important;
+}
+}

@@ -1,0 +1,2800 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.sinog2c.dao.api.prisoner.TbprisonerBaseinfoMapper">
+	<resultMap id="BaseResultMap" type="com.sinog2c.model.prisoner.TbprisonerBaseinfo">
+		<id column="CRIMID" property="crimid" jdbcType="VARCHAR" />
+		<result column="DEPARTID" property="departid" jdbcType="VARCHAR" />
+		<result column="NAME" property="name" jdbcType="VARCHAR" />
+		<result column="USEDNAME" property="usedname" jdbcType="VARCHAR" />
+		<result column="NAMEPINYINSHORT" property="namepinyinshort"
+			jdbcType="VARCHAR" />
+		<result column="IDNUMBER" property="idnumber" jdbcType="VARCHAR" />
+		<result column="GENDER" property="gender" jdbcType="VARCHAR" />
+		<result column="BIRTHDAY" property="birthday" jdbcType="TIMESTAMP" />
+		<result column="NATION" property="nation" jdbcType="VARCHAR" />
+		<result column="POLITICALSTATUS" property="politicalstatus"
+			jdbcType="VARCHAR" />
+		<result column="EDUCATION" property="education" jdbcType="VARCHAR" />
+		<result column="MARITALSTATUS" property="maritalstatus"
+			jdbcType="VARCHAR" />
+		<result column="VOCATION" property="vocation" jdbcType="VARCHAR" />
+		<result column="VOCATIONCLASS" property="vocationclass"
+			jdbcType="VARCHAR" />
+		<result column="RANK" property="rank" jdbcType="VARCHAR" />
+		<result column="TITLES" property="titles" jdbcType="VARCHAR" />
+		<result column="MAJORS" property="majors" jdbcType="VARCHAR" />
+		<result column="TECHNICALGRADE" property="technicalgrade"
+			jdbcType="VARCHAR" />
+		<result column="SPECIALIST" property="specialist" jdbcType="VARCHAR" />
+		<result column="RELIGION" property="religion" jdbcType="VARCHAR" />
+		<result column="PARTIES" property="parties" jdbcType="VARCHAR" />
+		<result column="IDENTITY" property="identity" jdbcType="VARCHAR" />
+		<result column="GRADE" property="grade" jdbcType="VARCHAR" />
+		<result column="DUTY" property="duty" jdbcType="VARCHAR" />
+		<result column="COUNTRYAREA" property="countryarea" jdbcType="VARCHAR" />
+		<result column="ORIGIN" property="origin" jdbcType="VARCHAR" />
+		<result column="ORIGINPLACEAREA" property="originplacearea"
+			jdbcType="VARCHAR" />
+		<result column="ORIGINPLACEADDRESS" property="originplaceaddress"
+			jdbcType="VARCHAR" />
+		<result column="BIRTHAREA" property="birtharea" jdbcType="VARCHAR" />
+		<result column="BIRTHADDRESS" property="birthaddress" jdbcType="VARCHAR" />
+		<result column="REGISTERAREA" property="registerarea" jdbcType="VARCHAR" />
+		<result column="REGISTERADDRESS" property="registeraddress"
+			jdbcType="VARCHAR" />
+		<result column="REGISTERADDRESSDETAIL" property="registeraddressdetail"
+			jdbcType="VARCHAR" />
+		<result column="RESIDENCETYPE" property="residencetype"
+			jdbcType="VARCHAR" />
+		<result column="FAMILYADDRESS" property="familyaddress"
+			jdbcType="VARCHAR" />
+		<result column="ADDRESSCODE" property="addresscode" jdbcType="VARCHAR" />
+		<result column="ADDRESSAREA" property="addressarea" jdbcType="VARCHAR" />
+		<result column="ADDRESSDETAIL" property="addressdetail"
+			jdbcType="VARCHAR" />
+		<result column="POSTCODE" property="postcode" jdbcType="VARCHAR" />
+		<result column="PPROVINCE" property="pprovince" jdbcType="VARCHAR" />
+		<result column="WORKADDRESSDETAIL" property="workaddressdetail"
+			jdbcType="VARCHAR" />
+		<result column="WORKPOSTCODE" property="workpostcode" jdbcType="VARCHAR" />
+		<result column="ORGCONTACT" property="orgcontact" jdbcType="VARCHAR" />
+		<result column="CONTACTTEL" property="contacttel" jdbcType="VARCHAR" />
+		<result column="ORGMARK" property="orgmark" jdbcType="VARCHAR" />
+		<result column="REWARDPUNISH" property="rewardpunish" jdbcType="VARCHAR" />
+		<result column="ISESCUAGE" property="isescuage" jdbcType="VARCHAR" />
+		<result column="LANGUAGE" property="language" jdbcType="VARCHAR" />
+		<result column="WRITING" property="writing" jdbcType="VARCHAR" />
+		<result column="ACCENT" property="accent" jdbcType="VARCHAR" />
+		<result column="REMARK" property="remark" jdbcType="VARCHAR" />
+		<result column="OPID" property="opid" jdbcType="VARCHAR" />
+		<result column="OPTIME" property="optime" jdbcType="TIMESTAMP" />
+		<result column="FAMILYJCADDRESS" property="familyjcaddress" jdbcType="VARCHAR" />
+		<result column="ORIGIN_CODE" property="origin_code" jdbcType="VARCHAR" />
+		
+	</resultMap>
+	<sql id="Base_Column_List">
+		CRIMID, DEPARTID, NAME, USEDNAME, NAMEPINYINSHORT, IDNUMBER, GENDER,
+		BIRTHDAY, NATION,
+		POLITICALSTATUS, EDUCATION, MARITALSTATUS, VOCATION, VOCATIONCLASS, RANK, TITLES,
+		MAJORS, TECHNICALGRADE, SPECIALIST, RELIGION, PARTIES, "IDENTITY",
+		GRADE, DUTY, COUNTRYAREA,
+		ORIGIN, ORIGINPLACEAREA, ORIGINPLACEADDRESS, BIRTHAREA, BIRTHADDRESS,
+		REGISTERAREA,
+		REGISTERADDRESS, REGISTERADDRESSDETAIL, RESIDENCETYPE, FAMILYADDRESS, ADDRESSCODE,
+		ADDRESSAREA, ADDRESSDETAIL, POSTCODE, PPROVINCE, WORKADDRESSDETAIL,
+		WORKPOSTCODE,
+		ORGCONTACT, CONTACTTEL, ORGMARK, REWARDPUNISH, ISESCUAGE, LANGUAGE, WRITING,
+		ACCENT,
+		REMARK, OPID, OPTIME,familyjcaddress,origin_code
+  </sql>
+	<select id="selectByPrimaryKey" resultMap="BaseResultMap"
+		parameterType="java.lang.String">
+		select
+		<include refid="Base_Column_List" />
+		from TBPRISONER_BASEINFO
+		where CRIMID = #{crimid,jdbcType=VARCHAR}
+	</select>
+	<select id="selectPinYinByCrimid" resultType="String"
+		parameterType="java.lang.String">
+		select
+		substr(F_PINYIN(t.name),0,2)
+		from TBPRISONER_BASEINFO t
+		where CRIMID = #{crimid,jdbcType=VARCHAR}
+  </select>
+	<delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+		delete from TBPRISONER_BASEINFO
+		where CRIMID = #{crimid,jdbcType=VARCHAR}
+  </delete>
+	<insert id="insert" parameterType="com.sinog2c.model.prisoner.TbprisonerBaseinfo">
+		insert into TBPRISONER_BASEINFO (CRIMID, DEPARTID, NAME,
+		USEDNAME, NAMEPINYINSHORT, IDNUMBER,
+		GENDER, BIRTHDAY, NATION,
+		POLITICALSTATUS, EDUCATION, MARITALSTATUS,
+		VOCATION, VOCATIONCLASS, RANK,
+		TITLES, MAJORS, TECHNICALGRADE,
+		SPECIALIST, RELIGION, PARTIES,
+		IDENTITY, GRADE, DUTY,
+		COUNTRYAREA, ORIGIN, ORIGINPLACEAREA,
+		ORIGINPLACEADDRESS, BIRTHAREA, BIRTHADDRESS,
+		REGISTERAREA, REGISTERADDRESS, REGISTERADDRESSDETAIL,
+		RESIDENCETYPE, FAMILYADDRESS, ADDRESSCODE,
+		ADDRESSAREA, ADDRESSDETAIL, POSTCODE,
+		PPROVINCE, WORKADDRESSDETAIL, WORKPOSTCODE,
+		ORGCONTACT, CONTACTTEL, ORGMARK,
+		REWARDPUNISH, ISESCUAGE, LANGUAGE,
+		WRITING, ACCENT, REMARK,
+		OPID, OPTIME)
+		values (#{crimid,jdbcType=VARCHAR}, #{departid,jdbcType=VARCHAR},
+		#{name,jdbcType=VARCHAR},
+		#{usedname,jdbcType=VARCHAR}, #{namepinyinshort,jdbcType=VARCHAR}, #{idnumber,jdbcType=VARCHAR},
+		#{gender,jdbcType=VARCHAR}, #{birthday,jdbcType=DATE},
+		#{nation,jdbcType=VARCHAR},
+		#{politicalstatus,jdbcType=VARCHAR}, #{education,jdbcType=VARCHAR}, #{maritalstatus,jdbcType=VARCHAR},
+		#{vocation,jdbcType=VARCHAR}, #{vocationclass,jdbcType=VARCHAR},
+		#{rank,jdbcType=VARCHAR},
+		#{titles,jdbcType=VARCHAR}, #{majors,jdbcType=VARCHAR}, #{technicalgrade,jdbcType=VARCHAR},
+		#{specialist,jdbcType=VARCHAR}, #{religion,jdbcType=VARCHAR},
+		#{parties,jdbcType=VARCHAR},
+		#{identity,jdbcType=VARCHAR}, #{grade,jdbcType=VARCHAR}, #{duty,jdbcType=VARCHAR},
+		#{countryarea,jdbcType=VARCHAR}, #{origin,jdbcType=VARCHAR},
+		#{originplacearea,jdbcType=VARCHAR},
+		#{originplaceaddress,jdbcType=VARCHAR}, #{birtharea,jdbcType=VARCHAR},
+		#{birthaddress,jdbcType=VARCHAR},
+		#{registerarea,jdbcType=VARCHAR}, #{registeraddress,jdbcType=VARCHAR},
+		#{registeraddressdetail,jdbcType=VARCHAR},
+		#{residencetype,jdbcType=VARCHAR}, #{familyaddress,jdbcType=VARCHAR},
+		#{addresscode,jdbcType=VARCHAR},
+		#{addressarea,jdbcType=VARCHAR}, #{addressdetail,jdbcType=VARCHAR}, #{postcode,jdbcType=VARCHAR},
+		#{pprovince,jdbcType=VARCHAR}, #{workaddressdetail,jdbcType=VARCHAR},
+		#{workpostcode,jdbcType=VARCHAR},
+		#{orgcontact,jdbcType=VARCHAR}, #{contacttel,jdbcType=VARCHAR}, #{orgmark,jdbcType=VARCHAR},
+		#{rewardpunish,jdbcType=VARCHAR}, #{isescuage,jdbcType=VARCHAR},
+		#{language,jdbcType=VARCHAR},
+		#{writing,jdbcType=VARCHAR}, #{accent,jdbcType=VARCHAR}, #{remark,jdbcType=VARCHAR},
+		#{opid,jdbcType=VARCHAR}, #{optime,jdbcType=TIMESTAMP} )
+  </insert>
+	<insert id="insertSelective" parameterType="com.sinog2c.model.prisoner.TbprisonerBaseinfo">
+		insert into TBPRISONER_BASEINFO
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="crimid != null">
+				CRIMID,
+      </if>
+			<if test="departid != null">
+				DEPARTID,
+      </if>
+			<if test="name != null">
+				NAME,
+				NAMEPINYINSHORT,
+      </if>
+			<if test="usedname != null">
+				USEDNAME,
+      </if>
+			<if test="idnumber != null">
+				IDNUMBER,
+      </if>
+			<if test="gender != null">
+				GENDER,
+      </if>
+			<if test="birthday != null">
+				BIRTHDAY,
+      </if>
+			<if test="nation != null">
+				NATION,
+      </if>
+			<if test="politicalstatus != null">
+				POLITICALSTATUS,
+      </if>
+			<if test="education != null">
+				EDUCATION,
+      </if>
+			<if test="maritalstatus != null">
+				MARITALSTATUS,
+      </if>
+			<if test="vocation != null">
+				VOCATION,
+      </if>
+			<if test="vocationclass != null">
+				VOCATIONCLASS,
+      </if>
+			<if test="rank != null">
+				RANK,
+      </if>
+			<if test="titles != null">
+				TITLES,
+      </if>
+			<if test="majors != null">
+				MAJORS,
+      </if>
+			<if test="technicalgrade != null">
+				TECHNICALGRADE,
+      </if>
+			<if test="specialist != null">
+				SPECIALIST,
+      </if>
+			<if test="religion != null">
+				RELIGION,
+      </if>
+			<if test="parties != null">
+				PARTIES,
+      </if>
+			<if test="identity != null">
+				IDENTITY,
+      </if>
+			<if test="grade != null">
+				GRADE,
+      </if>
+			<if test="duty != null">
+				DUTY,
+      </if>
+			<if test="countryarea != null">
+				COUNTRYAREA,
+      </if>
+			<if test="origin != null">
+				ORIGIN,
+      </if>
+			<if test="originplacearea != null">
+				ORIGINPLACEAREA,
+      </if>
+			<if test="originplaceaddress != null">
+				ORIGINPLACEADDRESS,
+      </if>
+			<if test="birtharea != null">
+				BIRTHAREA,
+      </if>
+			<if test="birthaddress != null">
+				BIRTHADDRESS,
+      </if>
+			<if test="registerarea != null">
+				REGISTERAREA,
+      </if>
+			<if test="registeraddress != null">
+				REGISTERADDRESS,
+      </if>
+			<if test="registeraddressdetail != null">
+				REGISTERADDRESSDETAIL,
+      </if>
+			<if test="residencetype != null">
+				RESIDENCETYPE,
+      </if>
+			<if test="familyaddress != null">
+				FAMILYADDRESS,
+      </if>
+			<if test="addresscode != null">
+				ADDRESSCODE,
+      </if>
+			<if test="addressarea != null">
+				ADDRESSAREA,
+      </if>
+			<if test="addressdetail != null">
+				ADDRESSDETAIL,
+      </if>
+			<if test="postcode != null">
+				POSTCODE,
+      </if>
+			<if test="pprovince != null">
+				PPROVINCE,
+      </if>
+			<if test="workaddressdetail != null">
+				WORKADDRESSDETAIL,
+      </if>
+			<if test="workpostcode != null">
+				WORKPOSTCODE,
+      </if>
+			<if test="orgcontact != null">
+				ORGCONTACT,
+      </if>
+			<if test="contacttel != null">
+				CONTACTTEL,
+      </if>
+			<if test="orgmark != null">
+				ORGMARK,
+      </if>
+			<if test="rewardpunish != null">
+				REWARDPUNISH,
+      </if>
+			<if test="isescuage != null">
+				ISESCUAGE,
+      </if>
+			<if test="language != null">
+				LANGUAGE,
+      </if>
+			<if test="writing != null">
+				WRITING,
+      </if>
+			<if test="accent != null">
+				ACCENT,
+      </if>
+			<if test="remark != null">
+				REMARK,
+      </if>
+			<if test="opid != null">
+				OPID,
+      </if>
+			<if test="optime != null">
+				OPTIME,
+      </if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="crimid != null">
+				#{crimid,jdbcType=VARCHAR},
+      </if>
+			<if test="departid != null">
+				#{departid,jdbcType=VARCHAR},
+      </if>
+			<if test="name != null">
+				#{name,jdbcType=VARCHAR},
+				F_PINYIN(#{name,jdbcType=VARCHAR}),
+      </if>
+			<if test="usedname != null">
+				#{usedname,jdbcType=VARCHAR},
+      </if>
+			<if test="idnumber != null">
+				#{idnumber,jdbcType=VARCHAR},
+      </if>
+			<if test="gender != null">
+				#{gender,jdbcType=VARCHAR},
+      </if>
+			<if test="birthday != null">
+				#{birthday,jdbcType=DATE},
+      </if>
+			<if test="nation != null">
+				#{nation,jdbcType=VARCHAR},
+      </if>
+			<if test="politicalstatus != null">
+				#{politicalstatus,jdbcType=VARCHAR},
+      </if>
+			<if test="education != null">
+				#{education,jdbcType=VARCHAR},
+      </if>
+			<if test="maritalstatus != null">
+				#{maritalstatus,jdbcType=VARCHAR},
+      </if>
+			<if test="vocation != null">
+				#{vocation,jdbcType=VARCHAR},
+      </if>
+			<if test="vocationclass != null">
+				#{vocationclass,jdbcType=VARCHAR},
+      </if>
+			<if test="rank != null">
+				#{rank,jdbcType=VARCHAR},
+      </if>
+			<if test="titles != null">
+				#{titles,jdbcType=VARCHAR},
+      </if>
+			<if test="majors != null">
+				#{majors,jdbcType=VARCHAR},
+      </if>
+			<if test="technicalgrade != null">
+				#{technicalgrade,jdbcType=VARCHAR},
+      </if>
+			<if test="specialist != null">
+				#{specialist,jdbcType=VARCHAR},
+      </if>
+			<if test="religion != null">
+				#{religion,jdbcType=VARCHAR},
+      </if>
+			<if test="parties != null">
+				#{parties,jdbcType=VARCHAR},
+      </if>
+			<if test="identity != null">
+				#{identity,jdbcType=VARCHAR},
+      </if>
+			<if test="grade != null">
+				#{grade,jdbcType=VARCHAR},
+      </if>
+			<if test="duty != null">
+				#{duty,jdbcType=VARCHAR},
+      </if>
+			<if test="countryarea != null">
+				#{countryarea,jdbcType=VARCHAR},
+      </if>
+			<if test="origin != null">
+				#{origin,jdbcType=VARCHAR},
+      </if>
+			<if test="originplacearea != null">
+				#{originplacearea,jdbcType=VARCHAR},
+      </if>
+			<if test="originplaceaddress != null">
+				#{originplaceaddress,jdbcType=VARCHAR},
+      </if>
+			<if test="birtharea != null">
+				#{birtharea,jdbcType=VARCHAR},
+      </if>
+			<if test="birthaddress != null">
+				#{birthaddress,jdbcType=VARCHAR},
+      </if>
+			<if test="registerarea != null">
+				#{registerarea,jdbcType=VARCHAR},
+      </if>
+			<if test="registeraddress != null">
+				#{registeraddress,jdbcType=VARCHAR},
+      </if>
+			<if test="registeraddressdetail != null">
+				#{registeraddressdetail,jdbcType=VARCHAR},
+      </if>
+			<if test="residencetype != null">
+				#{residencetype,jdbcType=VARCHAR},
+      </if>
+			<if test="familyaddress != null">
+				#{familyaddress,jdbcType=VARCHAR},
+      </if>
+			<if test="addresscode != null">
+				#{addresscode,jdbcType=VARCHAR},
+      </if>
+			<if test="addressarea != null">
+				#{addressarea,jdbcType=VARCHAR},
+      </if>
+			<if test="addressdetail != null">
+				#{addressdetail,jdbcType=VARCHAR},
+      </if>
+			<if test="postcode != null">
+				#{postcode,jdbcType=VARCHAR},
+      </if>
+			<if test="pprovince != null">
+				#{pprovince,jdbcType=VARCHAR},
+      </if>
+			<if test="workaddressdetail != null">
+				#{workaddressdetail,jdbcType=VARCHAR},
+      </if>
+			<if test="workpostcode != null">
+				#{workpostcode,jdbcType=VARCHAR},
+      </if>
+			<if test="orgcontact != null">
+				#{orgcontact,jdbcType=VARCHAR},
+      </if>
+			<if test="contacttel != null">
+				#{contacttel,jdbcType=VARCHAR},
+      </if>
+			<if test="orgmark != null">
+				#{orgmark,jdbcType=VARCHAR},
+      </if>
+			<if test="rewardpunish != null">
+				#{rewardpunish,jdbcType=VARCHAR},
+      </if>
+			<if test="isescuage != null">
+				#{isescuage,jdbcType=VARCHAR},
+      </if>
+			<if test="language != null">
+				#{language,jdbcType=VARCHAR},
+      </if>
+			<if test="writing != null">
+				#{writing,jdbcType=VARCHAR},
+      </if>
+			<if test="accent != null">
+				#{accent,jdbcType=VARCHAR},
+      </if>
+			<if test="remark != null">
+				#{remark,jdbcType=VARCHAR},
+      </if>
+			<if test="opid != null">
+				#{opid,jdbcType=VARCHAR},
+      </if>
+			<if test="optime != null">
+				#{optime,jdbcType=TIMESTAMP},
+      </if>
+		</trim>
+	</insert>
+	<update id="updateByPrimaryKeySelective" parameterType="com.sinog2c.model.prisoner.TbprisonerBaseinfo">
+		update TBPRISONER_BASEINFO
+		<set>
+			<if test="departid != null">
+				DEPARTID = #{departid,jdbcType=VARCHAR},
+      </if>
+			<if test="name != null">
+				NAME = #{name,jdbcType=VARCHAR},
+				NAMEPINYINSHORT = F_PINYIN(#{name,jdbcType=VARCHAR}),
+      </if>
+			<if test="usedname != null">
+				USEDNAME = #{usedname,jdbcType=VARCHAR},
+      </if>
+			<if test="idnumber != null">
+				IDNUMBER = #{idnumber,jdbcType=VARCHAR},
+      </if>
+			<if test="gender != null">
+				GENDER = #{gender,jdbcType=VARCHAR},
+      </if>
+			<if test="birthday != null">
+				BIRTHDAY = #{birthday,jdbcType=DATE},
+      </if>
+			<if test="nation != null">
+				NATION = #{nation,jdbcType=VARCHAR},
+      </if>
+			<if test="politicalstatus != null">
+				POLITICALSTATUS = #{politicalstatus,jdbcType=VARCHAR},
+      </if>
+			<if test="education != null">
+				EDUCATION = #{education,jdbcType=VARCHAR},
+      </if>
+			<if test="maritalstatus != null">
+				MARITALSTATUS = #{maritalstatus,jdbcType=VARCHAR},
+      </if>
+			<if test="vocation != null">
+				VOCATION = #{vocation,jdbcType=VARCHAR},
+      </if>
+			<if test="vocationclass != null">
+				VOCATIONCLASS = #{vocationclass,jdbcType=VARCHAR},
+      </if>
+			<if test="rank != null">
+				RANK = #{rank,jdbcType=VARCHAR},
+      </if>
+			<if test="titles != null">
+				TITLES = #{titles,jdbcType=VARCHAR},
+      </if>
+			<if test="majors != null">
+				MAJORS = #{majors,jdbcType=VARCHAR},
+      </if>
+			<if test="technicalgrade != null">
+				TECHNICALGRADE = #{technicalgrade,jdbcType=VARCHAR},
+      </if>
+			<if test="specialist != null">
+				SPECIALIST = #{specialist,jdbcType=VARCHAR},
+      </if>
+			<if test="religion != null">
+				RELIGION = #{religion,jdbcType=VARCHAR},
+      </if>
+			<if test="parties != null">
+				PARTIES = #{parties,jdbcType=VARCHAR},
+      </if>
+			<if test="identity != null">
+				IDENTITY = #{identity,jdbcType=VARCHAR},
+      </if>
+			<if test="grade != null">
+				GRADE = #{grade,jdbcType=VARCHAR},
+      </if>
+			<if test="duty != null">
+				DUTY = #{duty,jdbcType=VARCHAR},
+      </if>
+			<if test="countryarea != null">
+				COUNTRYAREA = #{countryarea,jdbcType=VARCHAR},
+      </if>
+			<if test="origin != null">
+				ORIGIN = #{origin,jdbcType=VARCHAR},
+      </if>
+			<if test="originplacearea != null">
+				ORIGINPLACEAREA = #{originplacearea,jdbcType=VARCHAR},
+      </if>
+			<if test="originplaceaddress != null">
+				ORIGINPLACEADDRESS = #{originplaceaddress,jdbcType=VARCHAR},
+      </if>
+			<if test="birtharea != null">
+				BIRTHAREA = #{birtharea,jdbcType=VARCHAR},
+      </if>
+			<if test="birthaddress != null">
+				BIRTHADDRESS = #{birthaddress,jdbcType=VARCHAR},
+      </if>
+			<if test="registerarea != null">
+				REGISTERAREA = #{registerarea,jdbcType=VARCHAR},
+      </if>
+			<if test="registeraddress != null">
+				REGISTERADDRESS = #{registeraddress,jdbcType=VARCHAR},
+      </if>
+			<if test="registeraddressdetail != null">
+				REGISTERADDRESSDETAIL = #{registeraddressdetail,jdbcType=VARCHAR},
+      </if>
+			<if test="residencetype != null">
+				RESIDENCETYPE = #{residencetype,jdbcType=VARCHAR},
+      </if>
+			<if test="familyaddress != null">
+				FAMILYADDRESS = #{familyaddress,jdbcType=VARCHAR},
+      </if>
+			<if test="addresscode != null">
+				ADDRESSCODE = #{addresscode,jdbcType=VARCHAR},
+      </if>
+			<if test="addressarea != null">
+				ADDRESSAREA = #{addressarea,jdbcType=VARCHAR},
+      </if>
+			<if test="addressdetail != null">
+				ADDRESSDETAIL = #{addressdetail,jdbcType=VARCHAR},
+      </if>
+			<if test="postcode != null">
+				POSTCODE = #{postcode,jdbcType=VARCHAR},
+      </if>
+			<if test="pprovince != null">
+				PPROVINCE = #{pprovince,jdbcType=VARCHAR},
+      </if>
+			<if test="workaddressdetail != null">
+				WORKADDRESSDETAIL = #{workaddressdetail,jdbcType=VARCHAR},
+      </if>
+			<if test="workpostcode != null">
+				WORKPOSTCODE = #{workpostcode,jdbcType=VARCHAR},
+      </if>
+			<if test="orgcontact != null">
+				ORGCONTACT = #{orgcontact,jdbcType=VARCHAR},
+      </if>
+			<if test="contacttel != null">
+				CONTACTTEL = #{contacttel,jdbcType=VARCHAR},
+      </if>
+			<if test="orgmark != null">
+				ORGMARK = #{orgmark,jdbcType=VARCHAR},
+      </if>
+			<if test="rewardpunish != null">
+				REWARDPUNISH = #{rewardpunish,jdbcType=VARCHAR},
+      </if>
+			<if test="isescuage != null">
+				ISESCUAGE = #{isescuage,jdbcType=VARCHAR},
+      </if>
+			<if test="language != null">
+				LANGUAGE = #{language,jdbcType=VARCHAR},
+      </if>
+			<if test="writing != null">
+				WRITING = #{writing,jdbcType=VARCHAR},
+      </if>
+			<if test="accent != null">
+				ACCENT = #{accent,jdbcType=VARCHAR},
+      </if>
+			<if test="remark != null">
+				REMARK = #{remark,jdbcType=VARCHAR},
+      </if>
+			<if test="opid != null">
+				OPID = #{opid,jdbcType=VARCHAR},
+      </if>
+			<if test="optime != null">
+				OPTIME = #{optime,jdbcType=TIMESTAMP},
+      </if>
+		</set>
+		where CRIMID = #{crimid,jdbcType=VARCHAR}
+	</update>
+	<update id="updateByPrimaryKey" parameterType="com.sinog2c.model.prisoner.TbprisonerBaseinfo">
+		update TBPRISONER_BASEINFO
+		set DEPARTID = #{departid,jdbcType=VARCHAR},
+		NAME = #{name,jdbcType=VARCHAR},
+		USEDNAME = #{usedname,jdbcType=VARCHAR},
+		NAMEPINYINSHORT = #{namepinyinshort,jdbcType=VARCHAR},
+		IDNUMBER = #{idnumber,jdbcType=VARCHAR},
+		GENDER = #{gender,jdbcType=VARCHAR},
+		BIRTHDAY = #{birthday,jdbcType=DATE},
+		NATION = #{nation,jdbcType=VARCHAR},
+		POLITICALSTATUS = #{politicalstatus,jdbcType=VARCHAR},
+		EDUCATION = #{education,jdbcType=VARCHAR},
+		MARITALSTATUS = #{maritalstatus,jdbcType=VARCHAR},
+		VOCATION = #{vocation,jdbcType=VARCHAR},
+		VOCATIONCLASS = #{vocationclass,jdbcType=VARCHAR},
+		RANK = #{rank,jdbcType=VARCHAR},
+		TITLES = #{titles,jdbcType=VARCHAR},
+		MAJORS = #{majors,jdbcType=VARCHAR},
+		TECHNICALGRADE = #{technicalgrade,jdbcType=VARCHAR},
+		SPECIALIST = #{specialist,jdbcType=VARCHAR},
+		RELIGION = #{religion,jdbcType=VARCHAR},
+		PARTIES = #{parties,jdbcType=VARCHAR},
+		IDENTITY = #{identity,jdbcType=VARCHAR},
+		GRADE = #{grade,jdbcType=VARCHAR},
+		DUTY = #{duty,jdbcType=VARCHAR},
+		COUNTRYAREA = #{countryarea,jdbcType=VARCHAR},
+		ORIGIN = #{origin,jdbcType=VARCHAR},
+		ORIGINPLACEAREA = #{originplacearea,jdbcType=VARCHAR},
+		ORIGINPLACEADDRESS = #{originplaceaddress,jdbcType=VARCHAR},
+		BIRTHAREA = #{birtharea,jdbcType=VARCHAR},
+		BIRTHADDRESS = #{birthaddress,jdbcType=VARCHAR},
+		REGISTERAREA = #{registerarea,jdbcType=VARCHAR},
+		REGISTERADDRESS = #{registeraddress,jdbcType=VARCHAR},
+		REGISTERADDRESSDETAIL = #{registeraddressdetail,jdbcType=VARCHAR},
+		RESIDENCETYPE = #{residencetype,jdbcType=VARCHAR},
+		FAMILYADDRESS = #{familyaddress,jdbcType=VARCHAR},
+		ADDRESSCODE = #{addresscode,jdbcType=VARCHAR},
+		ADDRESSAREA = #{addressarea,jdbcType=VARCHAR},
+		ADDRESSDETAIL = #{addressdetail,jdbcType=VARCHAR},
+		POSTCODE = #{postcode,jdbcType=VARCHAR},
+		PPROVINCE = #{pprovince,jdbcType=VARCHAR},
+		WORKADDRESSDETAIL = #{workaddressdetail,jdbcType=VARCHAR},
+		WORKPOSTCODE = #{workpostcode,jdbcType=VARCHAR},
+		ORGCONTACT = #{orgcontact,jdbcType=VARCHAR},
+		CONTACTTEL = #{contacttel,jdbcType=VARCHAR},
+		ORGMARK = #{orgmark,jdbcType=VARCHAR},
+		REWARDPUNISH = #{rewardpunish,jdbcType=VARCHAR},
+		ISESCUAGE = #{isescuage,jdbcType=VARCHAR},
+		LANGUAGE = #{language,jdbcType=VARCHAR},
+		WRITING = #{writing,jdbcType=VARCHAR},
+		ACCENT = #{accent,jdbcType=VARCHAR},
+		REMARK = #{remark,jdbcType=VARCHAR},
+		OPID = #{opid,jdbcType=VARCHAR},
+		OPTIME = #{optime,jdbcType=TIMESTAMP}
+		where CRIMID = #{crimid,jdbcType=VARCHAR}
+  </update>
+  
+  <update id="makeNamePinyinShort" parameterType="com.sinog2c.model.prisoner.TbprisonerBaseinfo">
+  		update TBPRISONER_BASEINFO t set t.NAMEPINYINSHORT = UPPER(F_PINYIN(t.name))
+		where t.namepinyinshort is null
+  </update>
+	<!--  根据条件查询表中记录-->
+	<select id="selectAll" resultType="com.sinog2c.model.prisoner.TbprisonerBaseinfo">
+		select * from TBPRISONER_BASEINFO
+  </select>
+  
+  
+	<!-- 只保存大字段（没流程）、有新增功能带流程的罪犯列表页查询 -->
+	<select id="findByCondition" parameterType="Map" resultType="Map">
+		select * from(
+		select * from(
+		  select a.*, rownum rn
+		  from (
+		         SELECT
+		            tbi.crimid as crimid,
+		            tbi.name as name,
+		            tbi.gender as gender,
+		            tbi.nation as nation,
+		            tbi.birthday as birthday,
+		            tbi.familyaddress as familyaddress,
+		            tbc.orgname2 AS orgname
+		          from TBPRISONER_BASEINFO tbi,
+		               TBPRISONER_BASE_CRIME tbc    
+		          where tbi.crimid = tbc.crimid
+		          <if test="orgid!=null and orgid!=''">
+		            and tbc.ORGID2 IN ( SELECT a.dorgid FROM TBFLOW_ORG_ORG a where a.orgid = #{orgid})
+		          </if>
+		          <if test="key!=null and key!=''">
+		              and (
+		                tbi.crimid like concat(concat('%', #{key}), '%') 
+		                or tbi.name like concat(concat('%', #{key}), '%') 
+		                or tbi.namepinyinshort like concat(UPPER(#{key}),'%')
+		              )
+		          </if>
+		          <if test="status!=null and status!=''  and status==1">
+		            and tbc.DETAINSTATUS='在押'    
+		          </if>
+		          <if test="status!=null and status!=''  and status==2">
+		             and tbc.DETAINSTATUS='释放'    
+		          </if>
+		       ) a
+		          <if test="sortField!=null and sortField!=''">
+		              order by a.${sortField} ${sortOrder}
+		           </if>
+		  <if test="end!=null and end!=''">
+		  )
+		    where rownum &lt;= #{end}
+		  </if>
+		)
+		<if test="start!=null and start!=''">
+		 where rn &gt;= #{start}
+		</if>
+	</select>
+	
+	<select id="findByConditions" parameterType="Map" resultType="Map">
+		SELECT *
+		FROM (SELECT a.*, ROWNUM rn
+		FROM (SELECT info.crimid,
+		info.name,
+		getage (info.birthday) AS age,
+		info.gender,
+		info.birthday,
+		info.origin,
+		tbc.inprisondate,
+		tsa.reportaudit,
+		f_formatdate (tbc.sentencestime) AS xingqiqiri,
+		f_formatdate (tbc.sentenceetime) AS xingqizhiri,
+		f_formatdate (tbc.inprisondate) AS rujianriqi,
+		tbc.causeaction AS zuiming,
+		RTRIM (CASE WHEN tbc.isforeign = 1 or tbc.isforeign = '是' THEN '外籍犯' END   
+			  || CASE WHEN info.grade = 1 or info.grade = '是' THEN '处级以上干部' END 
+			  || CASE WHEN tbc.focus = 1 or tbc.focus = '是' THEN '重点关注' END
+            )AS crimtype,
+		decode(tbc.losepoweryear,'97','剥夺政治权利终身',null,'',0,'','剥夺政治权利'||F_FORMATYMD(tbc.LOSEPOWERYEAR,tbc.LOSEPOWERMONTH,tbc.LOSEPOWEREDAY,0))
+		||decode(tbc.forfeit,null,'',0,'','罚金'||tbc.forfeit||'元') as fujiaxing
+		FROM tbprisoner_base_crime tbc, tbprisoner_baseinfo
+		info,TBXF_SENTENCEALTERATION tsa,
+		(select tsr.crimid,bas.FLOWDRAFTID,flow.NODEID,REMAINDERPUNISHMENT,EXAMINEEND 
+              from TBXF_SCREENING tsr,tbxf_commuteparole_batch tss,TBFLOW_BASE bas,TBFLOW flow
+            where tsr.batchid=tss.batchid   
+            	and tsr.departid = #{departId}
+            	and bas.FLOWDEFID='other_zfjyjxjssp'
+            	and flow.nodeid='1'
+            	and flow.state = '1'
+            	and tsr.crimid=bas.applyid
+            	and bas.FLOWDRAFTID=flow.FLOWDRAFTID
+        ) ddd 
+		where info.crimid=tbc.crimid and info.crimid=ddd.crimid and info.crimid = tsa.crimid(+)
+		<if test="departId!=null and departId!=''">
+			and tbc.orgid1 in(select a.dorgid from TBFLOW_ORG_ORG a where a.orgid=#{departId}
+	    </if>
+		)
+		<if test="reportaudit!=null and reportaudit!=''">
+			and tsa.reportaudit=#{reportaudit}
+	    </if>
+		<if test="key!=null and key!=''">
+			and (info.crimid like concat(concat('%', #{key}), '%') or info.name like
+			concat(concat('%', #{key}), '%') or info.namepinyinshort like concat(UPPER(#{key}),'%'))
+	    </if>
+		<if test="sortField!=null and sortField!=''">
+			order by ${sortField} ${sortOrder}
+	    </if>
+		) a
+		<if test="start!=null and start!=''">
+			where rownum &lt;= #{end}
+	   	</if>
+		)
+		<if test="start!=null and start!=''">
+			where rn &gt;= #{start}
+	   	</if>
+	</select>
+
+	<select id="getNewCriminalList" parameterType="Map"
+		resultType="java.util.HashMap">
+		SELECT *
+		FROM (SELECT a.*, ROWNUM rn
+		FROM ( SELECT b.crimid , b.name , b.optime, e.fileno ,e.orgname1,
+		e.orgname2
+		FROM TBPRISONER_BASEINFO b, TBPRISONER_BASE_CRIME e
+		WHERE b.crimid = e.crimid
+		<if test="departId!=null and departId!=''">
+			and e.orgid1 in(select a.dorgid from TBFLOW_ORG_ORG a where a.orgid
+			=#{departId}
+	    </if>
+		<if test="orgid!=null and orgid!=''">
+			or a.orgid=#{orgid}
+	    </if>
+		)
+		<if test="key!=null and key!=''">
+			and (b.crimid like concat(concat('%', #{key}), '%') or b.name like
+			concat(concat('%', #{key}), '%') or b.namepinyinshort like concat(UPPER(#{key}),'%'))
+	    </if>
+		<if test="sortField!=null and sortField!=''">
+			order by b.${sortField} ${sortOrder}
+	    </if>
+		) a
+		<if test="start!=null and start!=''">
+			where rownum &lt;= #{end}
+	   	</if>
+		)
+		<if test="start!=null and start!=''">
+			where rn &gt;= #{start}
+	   	</if>
+	</select>
+	
+	<!-- 根据条件查询表中记录总数 -->
+	<select id="countAllByCondition" parameterType="Map" resultType="int">
+		SELECT
+		  count(tbi.crimid)
+		from TBPRISONER_BASEINFO tbi,
+		     TBPRISONER_BASE_CRIME tbc    
+		where tbi.crimid = tbc.crimid
+		<if test="orgid!=null and orgid!=''">
+		  and tbc.ORGID2 IN ( SELECT a.dorgid FROM TBFLOW_ORG_ORG a where a.orgid = #{orgid})
+		</if>
+		<if test="key!=null and key!=''">
+		    and (
+		      tbi.crimid like concat(concat('%', #{key}), '%') 
+		      or tbi.name like concat(concat('%', #{key}), '%') 
+		      or tbi.namepinyinshort like concat(UPPER(#{key}),'%')
+		    )
+		</if>
+		<if test="status!=null and status!=''  and status==1">
+		  and tbc.DETAINSTATUS='在押'    
+		</if>
+		<if test="status!=null and status!=''  and status==2">
+		   and tbc.DETAINSTATUS='释放'    
+		</if>
+	
+	</select>
+	
+	
+	<select id="countProvinceAllByCondition" parameterType="Map" resultType="int">
+		 
+				select count(a.CRIMID) c
+					from TBPRISONER_BASEINFO a
+				where 1 = 1
+				<if test="jailid!=null and jailid!=''">
+					and a.DEPARTID= #{jailid}
+				</if>
+				<if test="key!=null and key!=''">
+						and (a.CRIMID like concat(concat('%', #{key}), '%') or a.NAME like
+						concat(concat('%', #{key}), '%') or a.namepinyinshort like concat(UPPER(#{key}),'%'))
+			    </if>
+			    and a.DEPARTID IN (SELECT b.dorgid FROM TBFLOW_ORG_ORG b where b.orgid =#{departid})
+	</select>
+	
+	<select id="getProvinceBasicInfoList" parameterType="Map" resultType="Map">
+		SELECT *
+		FROM (SELECT af.*, ROWNUM rn
+			FROM (
+						select a.*,org.name as jailname
+							from TBPRISONER_BASEINFO a,TBSYS_ORGINFO org
+						where 1 = 1 and a.departid=org.orgid
+						<if test="jailid!=null and jailid!=''">
+							and a.DEPARTID= #{jailid}
+						</if>
+						<if test="key!=null and key!=''">
+								and (a.CRIMID like concat(concat('%', #{key}), '%') or a.NAME like
+								concat(concat('%', #{key}), '%') or a.namepinyinshort like concat(UPPER(#{key}),'%'))
+					    </if>
+					    and a.DEPARTID IN (SELECT b.dorgid FROM TBFLOW_ORG_ORG b where b.orgid =#{departid})
+		<if test="sortField!=null and sortField!=''">
+			order by a.${sortField} ${sortOrder}
+	    </if>
+		) af
+		<if test="end!=null and end!=''">
+			where rownum &lt;= #{end}
+	   	</if>
+		)
+		<if test="start!=null and start!=''">
+			where rn &gt;= #{start}
+	   	</if> 
+	</select>
+	
+	
+	<select id="countAllByConditions" parameterType="Map" resultType="int">
+		select count(*) c
+		FROM tbprisoner_base_crime tbc, tbprisoner_baseinfo
+		info,TBXF_SENTENCEALTERATION tsa,
+		(select tsr.crimid,bas.FLOWDRAFTID,flow.NODEID,REMAINDERPUNISHMENT,EXAMINEEND 
+              from TBXF_SCREENING tsr,tbxf_commuteparole_batch tss,TBFLOW_BASE bas,TBFLOW flow
+            where tsr.batchid=tss.batchid   
+                and tsr.departid = #{departId}
+                and bas.FLOWDEFID='other_zfjyjxjssp'
+                and flow.nodeid='1'
+                and flow.state = '1'
+                and tsr.crimid=bas.applyid
+                and bas.FLOWDRAFTID=flow.FLOWDRAFTID
+        ) ddd 
+		where info.crimid=tbc.crimid and info.crimid=ddd.crimid and info.crimid = tsa.crimid(+)
+		<if test="departId!=null and departId!=''">
+			and tbc.orgid1 in(select a.dorgid from TBFLOW_ORG_ORG a where a.orgid
+			=#{departId})
+	    </if>
+		<if test="key!=null and key!=''">
+			and (info.crimid like concat(concat('%', #{key}), '%') or info.name like
+			concat(concat('%', #{key}), '%') or info.namepinyinshort like concat(UPPER(#{key}),'%'))
+	    </if>
+	    <if test="reportaudit!=null and reportaudit!=''">
+            and tsa.reportaudit=#{reportaudit}
+        </if>
+	</select>
+	<select id="getNewCriminalCount" parameterType="Map" resultType="int">
+		select count(*) c from TBPRISONER_BASEINFO b, TBPRISONER_BASE_CRIME e
+		where 1 = 1 and b.CRIMID=e.CRIMID
+		<if test="departId!=null and departId!=''">
+			and e.orgid1 in(select a.dorgid from TBFLOW_ORG_ORG a where a.orgid
+			=#{departId})
+	    </if>
+		<if test="key!=null and key!=''">
+			and (b.crimid like concat(concat('%', #{key}), '%') or b.name like
+			concat(concat('%', #{key}), '%') or b.namepinyinshort like concat(UPPER(#{key}),'%'))
+	    </if>
+	</select>
+
+	<!-- 修改 三类罪犯的状态 -->
+	<update id="threeCrimeAffirmService">
+		update TBPRISONER_BASE_CRIME c set c.sanclassstatus=#{sanclassstatus} where
+		c.crimid=#{crimid}
+  </update>
+
+	<!-- 查询罪犯三类罪犯的信息 -->
+
+	<select id="getThreeOfCrimAffirmList_sx" resultType="map">
+		SELECT *
+		FROM (SELECT t.crimid,
+		t.orgname2,
+		t.arrestauthority,
+		t.judgmentname,
+		t.punishmenttype,
+		t.maincase,
+		TO_CHAR (t.sentencestime, 'yyyy-MM-dd') AS sentencestime,
+		TO_CHAR (t.sentenceetime, 'yyyy-MM-dd') AS sentenceetime,
+		o.name,
+		ROWNUM AS rn,
+		t.sanclassstatus
+		FROM TBPRISONER_BASE_CRIME t, TBPRISONER_BASEINFO o
+		WHERE t.crimid = o.crimid(+)
+		<if test="key != null and key != ''">
+			and (t.crimid like concat(concat('%', #{key}), '%') or o.name like
+			concat(concat('%', #{key}), '%') or o.namepinyinshort like concat(UPPER(#{key}),'%'))
+		           </if>
+		and (
+		t.orgid1 in (select dorgid from TBFLOW_ORG_ORG where orgid=#{orgid} )
+		or t.orgid2 in (select dorgid from TBFLOW_ORG_ORG where orgid=#{orgid} )
+		)
+		AND ROWNUM &lt;= #{end})
+		WHERE rn &gt; #{start}
+	</select>
+
+	<select id="getThreeOfCrimAffirmList_sxcount" resultType="map">
+		SELECT t.*
+		FROM TBPRISONER_BASE_CRIME t, TBPRISONER_BASEINFO o
+		WHERE t.crimid = o.crimid(+)
+		and (t.orgid1 in (select dorgid from TBFLOW_ORG_ORG where orgid=#{orgid}
+		)
+		or t.orgid2 in (select dorgid from TBFLOW_ORG_ORG where orgid=#{orgid} )
+		)
+		<if test="key != null and key != ''">
+			and (t.crimid like concat(concat('%', #{key}), '%') or o.name like
+			concat(concat('%', #{key}), '%') or o.namepinyinshort like concat(UPPER(#{key}),'%'))
+		               </if>
+	</select>
+	
+    <!-- 和流程相关的罪犯列表页数量查询 -->
+    <select id="countFindWithFlow" parameterType="Map" resultType="int">
+       SELECT  count(info.CRIMID)
+		FROM 
+			(
+				SELECT
+					tbi.BIRTHDAY,
+					tbi.CRIMID,
+					tbi.ADDRESSAREA,
+					tbi.FAMILYADDRESS,
+					tbi.DEPARTID,
+					tbi.GENDER,
+					tbi.NAME,
+					tbi.NATION,
+					tbi.ORIGIN,
+					
+					case when tbc.orgid2 is not null then tbc.orgid2 
+						else tbc.orgid1 
+					end AS orgmark,
+		
+					tbc.SENTENCESTIME,
+					tbc.SENTENCEETIME,
+					tbc.CAUSEACTION,
+					tbc.fileno,
+					tbc.sanclassstatus as usedname,
+					F_FORMATYMD(tbc.PUNISHMENTYEAR,tbc.PUNISHMENTMONTH,tbc.PUNISHMENTDAY) as ORIGINALYEAR,
+					
+					(
+						case when tbc.OLDPRISONER =1 or tbc.ILLPRISONER =1 or tbc.DEFORMITYPRISONER =1 then '老病残' end ||
+						case when tbc.postcrime =1 or tbc.undermine =1 or tbc.underworld =1 then ' 三类犯' end ||
+						case when tbc.casenature is not null then '重要罪犯' end
+					) as CRIMCLASS,
+					
+					case when tbc.orgname2 is not null then tbc.orgname2 else tbc.orgname1 end AS orgname,
+					
+					sen.COURTCHANGETO
+					
+				FROM TBPRISONER_BASEINFO tbi,
+					 TBPRISONER_BASE_CRIME tbc,
+					 TBXF_SENTENCEALTERATION sen
+				WHERE tbi.crimid = tbc.crimid
+				  and tbi.crimid = sen.crimid
+				<if test="status!=null and status!='' and status==1">
+					and tbc.DETAINSTATUS='在押'		
+				</if>
+				<if test="status!=null and status!='' and status==2">
+					and tbc.DETAINSTATUS='释放'		
+				</if>
+				<if test="condition!=null and condition!=''">
+					${condition}
+				</if>
+				<if test="key!=null and key!=''">
+					and ( tbi.CRIMID like concat(concat('%', #{key}), '%') 
+						  or tbi.NAME like concat(concat('%', #{key}), '%') 
+						  or tbi.namepinyinshort like concat(UPPER(#{key}),'%')
+						)
+				</if>
+				
+				<if test="zgorgid!=null and zgorgid!=''">
+					and tbc.ORGID2 IN (SELECT og.dorgid FROM TBFLOW_ORG_ORG og where og.orgid =#{zgorgid})
+				</if>
+				
+				<if test="departId!=null and departId!=''">
+					and tbc.ORGID2 IN (SELECT og2.dorgid FROM TBFLOW_ORG_ORG og2 where og2.orgid = #{departId})
+				</if>
+			) info,
+			
+			(
+				SELECT 
+					F1.FLOWDRAFTID as idnumber,
+					F1.CURRNODEID as duty,
+					F1.applyid,
+					F1.opname || '(' || F_FORMATDATE(F1.optime) || ')' as IDENTITY,
+					decode( f1.opid, #{userid}, decode(f1.state,null,4,'-1',0,'-2',1) ) orgcontact,
+					f1.state flowstate
+				FROM TBFLOW_BASE F1
+				WHERE 1=1
+				<if test="flowdefid!=null and flowdefid!=''">
+					and FLOWDEFID = #{flowdefid}
+				</if>
+			) fw
+			
+		WHERE info.CRIMID = fw.APPLYID(+)
+		<if test="state!=null and state!=''  and state==1">		--通过
+			and ( fw.duty is not null and fw.duty='1' )
+		</if>
+		
+		<if test="state!=null and state!=''  and state==2">		--未通过
+			and ( fw.duty is not null and fw.duty='-1' )
+		</if>
+		
+		<if test="state!=null and state!=''  and state==3">		--审批中
+			and ( fw.duty is not null and fw.duty !='1' and fw.duty !='-1' ) 
+		</if>
+		
+		<if test="state!=null and state!=''  and state==4">		--未处理
+			and fw.duty is null
+		</if>
+    </select>
+    
+    
+	<!-- 和流程相关的罪犯列表页查询 	DECODE(fw.duty, '1', '', fw.idnumber) idnumber				||' '||fw.IDENTITY	-->
+	<select id="findWithFlow" parameterType="Map" resultType="Map">
+		select * from
+			( select a.*, rownum rn from
+				(
+					SELECT  info.*,
+							fw.FLOWDRAFTID,
+							fw.idnumber,
+							fw.duty,
+							fw.applyid,
+							fw.orgcontact,
+							
+							case when fw.duty is null then '未处理'
+								 when fw.duty is not null and fw.duty !='1' and fw.duty !='-1' then decode(fw.flowstatus, null,'审批中',fw.flowstatus)
+								 when fw.duty is not null and fw.duty='-1' then '未通过 '||fw.IDENTITY
+								 when fw.duty is not null and fw.duty='1' then '通过 '||fw.IDENTITY
+							end as IDENTITY
+					FROM 
+						(
+							SELECT
+								tbi.BIRTHDAY,
+								tbi.CRIMID,
+								tbi.ADDRESSAREA,
+								tbi.FAMILYADDRESS,
+								tbi.DEPARTID,
+								tbi.GENDER,
+								tbi.NAME,
+								tbi.NATION,
+								tbi.ORIGIN,
+								
+								case when tbc.orgid2 is not null then tbc.orgid2 
+									else tbc.orgid1 
+								end AS orgmark,
+		
+								tbc.SENTENCESTIME,
+								tbc.SENTENCEETIME,
+								tbc.CAUSEACTION,
+								tbc.fileno,
+								tbc.sanclassstatus as usedname,
+								F_FORMATYMD(tbc.PUNISHMENTYEAR,tbc.PUNISHMENTMONTH,tbc.PUNISHMENTDAY) as ORIGINALYEAR,
+								
+								(
+									case when tbc.OLDPRISONER =1 or tbc.ILLPRISONER =1 or tbc.DEFORMITYPRISONER =1 then '老病残' end ||
+									case when tbc.postcrime =1 or tbc.undermine =1 or tbc.underworld =1 then ' 三类犯' end ||
+									case when tbc.casenature is not null then '重要罪犯' end
+								) as CRIMCLASS,
+								
+								case when tbc.orgname2 is not null then tbc.orgname2 else tbc.orgname1 end AS orgname,
+								
+								sen.COURTCHANGETO
+								
+							FROM TBPRISONER_BASEINFO tbi,
+								 TBPRISONER_BASE_CRIME tbc,
+								 TBXF_SENTENCEALTERATION sen
+							WHERE tbi.crimid = tbc.crimid
+							  and tbi.crimid = sen.crimid
+							<if test="status!=null and status!='' and status==1">
+								and tbc.DETAINSTATUS='在押'		
+							</if>
+							<if test="status!=null and status!='' and status==2">
+								and tbc.DETAINSTATUS='释放'		
+							</if>
+							<if test="condition!=null and condition!=''">
+								${condition}
+							</if>
+							<if test="key!=null and key!=''">
+								and ( tbi.CRIMID like concat(concat('%', #{key}), '%') 
+									  or tbi.NAME like concat(concat('%', #{key}), '%') 
+									  or tbi.namepinyinshort like concat(UPPER(#{key}),'%')
+									)
+							</if>
+							
+							<if test="zgorgid!=null and zgorgid!=''">
+								and tbc.ORGID2 IN (SELECT og.dorgid FROM TBFLOW_ORG_ORG og where og.orgid =#{zgorgid})
+							</if>
+							
+							<if test="departId!=null and departId!=''">
+								and tbc.ORGID2 IN (SELECT og2.dorgid FROM TBFLOW_ORG_ORG og2 where og2.orgid = #{departId})
+							</if>
+						) info,
+						
+						(
+							SELECT
+								F1.FLOWDRAFTID,
+								F1.FLOWDRAFTID as idnumber,
+								F1.CURRNODEID as duty,
+								F1.applyid,
+								F1.flowstatus,
+								F1.opname || '(' || F_FORMATDATE(F1.optime) || ')' as IDENTITY,
+								decode( f1.opid, #{userid}, decode(f1.state,null,4,'-1',0,'-2',1) ) orgcontact,
+								f1.state flowstate
+							FROM TBFLOW_BASE F1
+							WHERE 1=1
+							<if test="flowdefid!=null and flowdefid!=''">
+								and FLOWDEFID = #{flowdefid}
+							</if>
+						) fw
+						
+					WHERE info.CRIMID = fw.APPLYID(+)
+					<if test="state!=null and state!=''  and state==1">		--通过
+						and ( fw.duty is not null and fw.duty='1' )
+					</if>
+		
+					<if test="state!=null and state!=''  and state==2">		--未通过
+						and ( fw.duty is not null and fw.duty='-1' )
+					</if>
+		
+					<if test="state!=null and state!=''  and state==3">		--审批中
+						and ( fw.duty is not null and fw.duty !='1' and fw.duty !='-1' ) 
+					</if>
+		
+					<if test="state!=null and state!=''  and state==4">		--未处理
+						and fw.duty is null
+					</if>
+		
+					<if test="sortField!=null and sortField!=''">
+						order by ${sortField} ${sortOrder}
+					</if>
+				) a
+				<if test="end!=null and end!=''">
+					where rownum &lt;= #{end}
+				</if>
+			)
+		<if test="start!=null and start!=''">
+			where rn &gt;= #{start}
+		</if>
+	</select>
+	
+	
+	
+	<!-- 监区收押罪犯时得到罪犯编号 -->
+	<select id="getCrimid" parameterType="String" resultType="String">
+		select nvl(max(crimid),to_number(replace(#{departid},'c','') ||
+		'000000'))+1 as crimid from TBPRISONER_BASEINFO where subStr(crimid,0,4)=#{departid}
+    </select>
+    
+	<select id="checkCrimidAndFileno" parameterType="Map" resultType="int">
+		select count(*) from TBPRISONER_BASE_CRIME where 1=1 and orgid= #{departId}
+		<if test="crimid!=null and crimid!=''">
+			and crimid = #{crimid} 
+	    </if>
+	    <if test="fileno!=null and fileno!=''">
+			and fileno = #{fileno}
+	    </if>
+  </select>
+  
+	<!-- 获取拥有档案的犯人信息总数  -->
+	<select id="countGetCrimWithArchs" parameterType="Map" resultType="int">
+		select count(*) 
+		from TBPRISONER_BASEINFO b,
+			 TBPRISONER_BASE_CRIME c
+		where b.crimid=c.crimid
+		<if test="province!=null and province!=''">
+    			   and exists (
+    			   	  select 'x' from TBFLOW_ORG_ORG og where og.orgid=#{departid} and og.dorgid=c.orgid
+    			    )
+    	</if>
+    	<if test="province==null or province==''">
+    			 	and exists (
+    			   	  select 'x' from TBFLOW_ORG_ORG og where og.orgid=#{departid} and og.dorgid=c.orgid2
+    			    )
+    	</if>
+		<if test="key!=null and key!=''">
+			and (b.crimid like concat(concat('%', #{key}), '%') or b.name like
+			concat(concat('%', #{key}), '%') or b.namepinyinshort like  concat(UPPER(#{key}),'%'))
+	    </if>
+	</select>
+	
+	<!-- 获取拥有档案的犯人信息  -->
+	<select id="getCrimWithArchs" parameterType="Map" resultType="com.sinog2c.model.prisoner.TbprisonerBaseinfo">
+		select * from(
+			select x.*, rownum rn from
+				(select b.crimid,
+						b.name,
+						b.gender,
+						b.birthday,
+						b.nation,
+						b.registeraddressdetail,
+						courtchangeto,
+						sentencestime,
+						sentenceetime,
+						causeaction,
+						f_formatymd(originalyear,originalmonth,originalday,0) as originalyear,
+						decode(crimclass,'1','△','')||decode(reportaudit,'1','☆','') as crimclass
+    			 from TBPRISONER_BASEINFO b,
+    			 	  TBPRISONER_BASE_CRIME c,
+    			 	  TBXF_SENTENCEALTERATION n 
+    			 where b.crimid = c.crimid 
+    			   and b.crimid = n.crimid
+			<if test="province!=null and province!=''">
+	    			   and exists (
+	    			   	  select 'x' from TBFLOW_ORG_ORG og where og.orgid=#{departid} and og.dorgid=c.orgid
+	    			    )
+	    	</if>
+	    	<if test="province==null or province==''">
+	    			 	and exists (
+	    			   	  select 'x' from TBFLOW_ORG_ORG og where og.orgid=#{departid} and og.dorgid=c.orgid2
+	    			    )
+	    	</if>
+			<if test="key!=null and key!=''">
+				and (b.crimid like concat(concat('%', #{key}), '%') or b.name like
+				concat(concat('%', #{key}), '%') or b.namepinyinshort like concat(UPPER(#{key}),'%'))
+		    </if>
+			<if test="sortField!=null and sortField!=''">
+				order by b.${sortField} ${sortOrder}
+		    </if>
+		) x
+		<if test="start!=null and start!=''">
+			where rownum &lt;= #{end}
+	   	</if>
+		)
+		<if test="start!=null and start!=''">
+			where rn &gt;= #{start}
+   	</if>
+	</select>
+	<update id="updateByCrimid" parameterType="Map">
+		update TBPRISONER_BASEINFO
+		<set>
+			<if test="departid != null">
+				DEPARTID = #{departid,jdbcType=VARCHAR},
+      </if>
+			<if test="name != null">
+				NAME = #{name,jdbcType=VARCHAR},
+      </if>
+			<if test="usedname != null">
+				USEDNAME = #{usedname,jdbcType=VARCHAR},
+      </if>
+			<if test="namepinyinshort != null">
+				NAMEPINYINSHORT = #{namepinyinshort,jdbcType=VARCHAR},
+      </if>
+			<if test="idnumber != null">
+				IDNUMBER = #{idnumber,jdbcType=VARCHAR},
+      </if>
+			<if test="gender != null">
+				GENDER = #{gender,jdbcType=VARCHAR},
+      </if>
+			<if test="birthday != null">
+				BIRTHDAY = #{birthday,jdbcType=DATE},
+      </if>
+			<if test="nation != null">
+				NATION = #{nation,jdbcType=VARCHAR},
+      </if>
+			<if test="politicalstatus != null">
+				POLITICALSTATUS = #{politicalstatus,jdbcType=VARCHAR},
+      </if>
+			<if test="education != null">
+				EDUCATION = #{education,jdbcType=VARCHAR},
+      </if>
+			<if test="maritalstatus != null">
+				MARITALSTATUS = #{maritalstatus,jdbcType=VARCHAR},
+      </if>
+			<if test="vocation != null">
+				VOCATION = #{vocation,jdbcType=VARCHAR},
+      </if>
+			<if test="vocationclass != null">
+				VOCATIONCLASS = #{vocationclass,jdbcType=VARCHAR},
+      </if>
+			<if test="rank != null">
+				RANK = #{rank,jdbcType=VARCHAR},
+      </if>
+			<if test="titles != null">
+				TITLES = #{titles,jdbcType=VARCHAR},
+      </if>
+			<if test="majors != null">
+				MAJORS = #{majors,jdbcType=VARCHAR},
+      </if>
+			<if test="technicalgrade != null">
+				TECHNICALGRADE = #{technicalgrade,jdbcType=VARCHAR},
+      </if>
+			<if test="specialist != null">
+				SPECIALIST = #{specialist,jdbcType=VARCHAR},
+      </if>
+			<if test="religion != null">
+				RELIGION = #{religion,jdbcType=VARCHAR},
+      </if>
+			<if test="parties != null">
+				PARTIES = #{parties,jdbcType=VARCHAR},
+      </if>
+			<if test="identity != null">
+				IDENTITY = #{identity,jdbcType=VARCHAR},
+      </if>
+			<if test="grade != null">
+				GRADE = #{grade,jdbcType=VARCHAR},
+      </if>
+	 <if test="duty != null">
+				DUTY = #{duty,jdbcType=VARCHAR},
+      </if>
+	 <if test="countryarea != null">
+				COUNTRYAREA = #{countryarea,jdbcType=VARCHAR},
+      </if>
+	 <if test="origin != null">
+				ORIGIN = #{origin,jdbcType=VARCHAR},
+      </if>
+			<if test="originplacearea != null">
+				ORIGINPLACEAREA = #{originplacearea,jdbcType=VARCHAR},
+      </if>
+			<if test="originplaceaddress != null">
+				ORIGINPLACEADDRESS = #{originplaceaddress,jdbcType=VARCHAR},
+      </if>
+			<if test="birtharea != null">
+				BIRTHAREA = #{birtharea,jdbcType=VARCHAR},
+      </if>
+			<if test="birthaddress != null">
+				BIRTHADDRESS = #{birthaddress,jdbcType=VARCHAR},
+      </if>
+			<if test="registerarea != null">
+				REGISTERAREA = #{registerarea,jdbcType=VARCHAR},
+      </if>
+			<if test="registeraddress != null">
+				REGISTERADDRESS = #{registeraddress,jdbcType=VARCHAR},
+      </if>
+			<if test="registeraddressdetail != null">
+				REGISTERADDRESSDETAIL = #{registeraddressdetail,jdbcType=VARCHAR},
+      </if>
+			<if test="residencetype != null">
+				RESIDENCETYPE = #{residencetype,jdbcType=VARCHAR},
+      </if>
+			<if test="accent != null">
+				ACCENT = #{accent,jdbcType=VARCHAR},
+      </if>
+			<if test="addresscode != null">
+				ADDRESSCODE = #{addresscode,jdbcType=VARCHAR},
+      </if>
+			<if test="addressarea != null">
+				ADDRESSAREA = #{addressarea,jdbcType=VARCHAR},
+      </if>
+			<if test="familyaddress != null">
+				FAMILYADDRESS = #{familyaddress,jdbcType=VARCHAR},
+      </if>
+			<if test="addressdetail != null">
+				ADDRESSDETAIL = #{addressdetail,jdbcType=VARCHAR},
+      </if>
+			<if test="postcode != null">
+				POSTCODE = #{postcode,jdbcType=VARCHAR},
+      </if>
+			<if test="pprovince != null">
+				PPROVINCE = #{pprovince,jdbcType=VARCHAR},
+      </if>
+			<if test="workaddressdetail != null">
+				WORKADDRESSDETAIL = #{workaddressdetail,jdbcType=VARCHAR},
+      </if>
+			<if test="workpostcode != null">
+				WORKPOSTCODE = #{workpostcode,jdbcType=VARCHAR},
+      </if>
+			<if test="orgcontact != null">
+				ORGCONTACT = #{orgcontact,jdbcType=VARCHAR},
+      </if>
+			<if test="contacttel != null">
+				CONTACTTEL = #{contacttel,jdbcType=VARCHAR},
+      </if>
+			<if test="orgmark != null">
+				ORGMARK = #{orgmark,jdbcType=VARCHAR},
+      </if>
+			<if test="rewardpunish != null">
+				REWARDPUNISH = #{rewardpunish,jdbcType=VARCHAR},
+      </if>
+			<if test="isescuage != null">
+				ISESCUAGE = #{isescuage,jdbcType=VARCHAR},
+      </if>
+			<if test="language != null">
+				LANGUAGE = #{language,jdbcType=VARCHAR},
+      </if>
+			<if test="writing != null">
+				WRITING = #{writing,jdbcType=VARCHAR},
+      </if>
+			<if test="remark != null">
+				REMARK = #{remark,jdbcType=VARCHAR},
+      </if>
+			<if test="opid != null">
+				OPID = #{opid,jdbcType=VARCHAR},
+      </if>
+			<if test="optime != null">
+				OPTIME = #{optime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="familyjcaddress != null">
+           familyjcaddress = #{familyjcaddress,jdbcType=VARCHAR},
+      </if>
+      <if test="arrestauthorityshort != null">
+           arrestauthorityshort = #{arrestauthorityshort,jdbcType=CARCHAR},
+      </if>
+      <if test="arrestauthority_code != null">
+           arrestauthority_code = #{arrestauthority_code,jdbcType=VARCHAR},
+      </if>
+      <if test="origin_code != null">
+           origin_code = #{origin_code,jdbcType=VARCHAR},
+      </if>
+		</set>
+		where CRIMID = #{crimid,jdbcType=VARCHAR}
+
+	</update>
+	<select id="selectMySelfInfoByCrimid" parameterType="java.lang.String" resultType="java.util.HashMap">
+		SELECT info.name,info.gender,getage (info.birthday) AS age,CRIME.MAINCASE,INFO.REGISTERADDRESSDETAIL AS yuanji,
+			INFO.FAMILYADDRESS AS xian,to_char(CRIME.DETAINDATE,'yyyymmdd') as jiya,to_char(CRIME.ARRESTDATE,'yyyymmdd') AS daibu,
+			to_char(crime.JUDGEDATE,'yyyymmdd') AS yuanpandate,SENT.COURTNAME || SENT.COURTTITLE as yuanpanfayuan,
+			CASE WHEN crime.punishmenttype = '有期徒刑'
+				 THEN crime.punishmenttype|| F_FORMATYMD (crime.PUNISHMENTYEAR,crime.PUNISHMENTmonth,crime.PUNISHMENTday,0)
+				 when crime.punishmenttype = '无期徒刑'
+				 then crime.punishmenttype ELSE F_FORMATYMD (crime.PUNISHMENTYEAR,crime.PUNISHMENTmonth,crime.PUNISHMENTday,0)
+			END AS xingfa,
+			to_char(crime.SENTENCEETIME,'yyyymmdd') as xingmandate,RELATION.sentencechageinfoshort as gaipan,
+			case when info.REWARDPUNISH is null then '无' else '有' end as lieji
+		FROM TBPRISONER_BASEINFO info,TBPRISONER_BASE_CRIME crime,TBDATA_SENTCHAGE sent,tbxf_sentencealteration relation
+		WHERE INFO.CRIMID = crime.crimid AND INFO.CRIMID = SENT.CRIMID and RELATION.CRIMID = info.crimid AND SENT.CATEGORY = '1' and info.crimid=#{crimid}
+  </select>
+	<select id="getCrimeBaseInfo" parameterType="Map" resultType="java.util.HashMap">
+		select a.crimid as criminalid,
+		a.name as cbiname,
+		b.name as sddiscribe
+		--to_char(sysdate,'yyyy') as citcaseidyear,
+		--shortname as citcaseidbrief
+		from TBPRISONER_BASEINFO a,TBSYS_ORGINFO b
+		where a.departid = b.orgid
+		<if test="crimid != null">
+			and a.crimid = #{crimid}
+      </if>
+	</select>
+	<select id="getSanLeiFan" parameterType="Map" resultType="java.util.HashMap">
+		select * from (select a.*,rownum rn from (select
+		a.crimid,
+		t.name,
+		t.jailname,
+		f_formatymd(t.originalyear, t.originalmonth, t.originalday, 0) as ORIGINALYEARval,
+		t.originalyear,
+		a.sanclassstatus,
+		getage(t.brithday) as age,
+		to_char(a.inprisondate,'yyyy"年"MM"月"dd"日"') as inpersion,
+		to_char(a.sentencestime,'yyyy"年"MM"月"dd"日"') as sentencestime,
+		to_char(a.sentenceetime,'yyyy"年"MM"月"dd"日"') as sentenceetime,
+		a.causeaction
+		from TBXF_SENTENCEALTERATION t, TBPRISONER_BASE_CRIME a
+		where 1 = 1
+		<!-- and t.crimclass='1' -->
+
+		and t.jailid in(select orgid from TBSYS_ORGINFO t where porgid='1200')
+		and a.crimid=t.crimid and t.status='0'
+		<if test="key!=null and key!=''">
+			and (t.crimid like '%'||#{key}||'%' or t.name like '%'||#{key}||'%')
+		</if>
+		<if test="jailid!=null and jailid!=''">
+			and t.jailid=#{jailid} 
+  			</if>
+		<if test="state!=null and state!=''">
+			and a.sanclassstatus=#{state}
+  			</if>
+		) a where rownum &lt;=#{end})
+		where rn &gt;=#{start}
+		<if test="sortField!=null and sortField!=''">
+			order by ${sortField} ${sortOrder}
+		   </if>
+	</select>
+	<select id="getSLFcount" resultType="int">
+		select count(*) from TBXF_SENTENCEALTERATION t ,TBPRISONER_BASE_CRIME
+		a where 1=1
+		and t.crimid=a.crimid and t.jailid in(select orgid from TBSYS_ORGINFO t
+		where porgid='1200')
+		and t.status='0'
+		<if test="jailid!=null and jailid!=''">
+			and t.jailid=#{jailid}
+  	</if>
+		<if test="state!=null and state!=''">
+			and a.sanclassstatus=#{state}
+  	</if>
+		<trim prefix="" suffix="" suffixOverrides=",">
+			<if test="key!=null and key!=''">
+				and (t.crimid like '%'||#{key}||'%' or t.name like '%'||#{key}||'%')
+			</if>
+		</trim>
+	</select>
+	<update id="lockCriminal" parameterType="map">
+		${sql}
+  </update>
+	<select id="getJianYuName" resultType="Map">
+		select distinct(jailid),jailname from TBXF_SENTENCEALTERATION
+  </select>
+	<select id="getYuanPan" parameterType="map" resultType="java.lang.String">
+		${sql}
+  </select>
+	<select id="selectAllByDepartid" resultType="com.sinog2c.model.prisoner.TbprisonerBaseinfo">
+		select a.* from TBPRISONER_BASEINFO a , TBPRISONER_BASE_CRIME b 
+			where a.crimid=b.crimid(+) and b.orgid2 in (
+			SELECT DISTINCT b.dorgid
+			  FROM (    SELECT *
+			              FROM tbsys_orginfo
+			        START WITH orgid = #{departid}
+			        CONNECT BY PRIOR orgid = porgid) a,
+			       TBFLOW_ORG_ORG b
+			 WHERE a.orgid = b.orgid(+)
+			)
+  </select>
+  
+	<select id="getJianChaInfo" resultType="Map">
+		select * from (
+			select rownum rns ,a.* from(
+				select rownum rn ,
+						 t.crimid,
+						 t.name, 
+						 getage(t.birthday) as age,
+						 tt.causeaction,
+						 TIANJIN_GETYMD(tt.sentencestime) as sentencestime,
+						 TIANJIN_GETYMD(tt.sentenceetime) as sentenceetime,
+						 tt.punishmenttype,
+						 TIANJIN_GETYMD(tt.inprisondate) as inprisondate 
+				from TBPRISONER_BASEINFO t, 
+					    TBPRISONER_BASE_CRIME tt
+				where t.crimid = tt.crimid 
+				   and exists (
+				   		select 'x' from tbflow_org_org og where og.orgid=#{orgid} and og.dorgid=tt.orgid2
+				   )
+				<if test="key!=null and key!=''">
+					and (t.crimid like '%'||#{key}||'%' or t.name like '%'||#{key}||'%' or t.namepinyinshort like '%'||UPPER(#{key})||'%')
+				</if>
+				<if test="startdate!=null and startdate!='' and enddate!=null and enddate!=''">
+					and (
+							tt.inprisondate between to_date('${startdate}','yyyy-mm-dd') 
+														  and to_date('${enddate}','yyyy-mm-dd')
+						 )
+		       	</if>
+				<if test="(startdate!='' and enddate=='') or (startdate=='' and enddate!='')">
+					and (
+							tt.inprisondate &gt;= to_date('${startdate}','yyyy-mm-dd') or
+							 tt.inprisondate &lt;= to_date('${enddate}','yyyy-mm-dd')
+						 )
+	       		</if>
+				<if test="sortField!=null and sortField!=''">
+					order by ${sortField} ${sortOrder}
+	       		</if>
+			) a where a.rn &lt;=#{end}
+		) c where c.rns &gt;=#{start}
+	</select>
+	
+	<select id="getJianChaInfoCount" resultType="int">
+		select count(t.crimid)
+		from TBPRISONER_BASEINFO t, 
+			    TBPRISONER_BASE_CRIME tt
+		where t.crimid = tt.crimid 
+		   and exists (
+		   		select 'x' from tbflow_org_org og where og.orgid=#{orgid} and og.dorgid=tt.orgid2
+		   )
+		<if test="key!=null and key!=''">
+			and (t.crimid like '%'||#{key}||'%' or t.name like '%'||#{key}||'%' or t.namepinyinshort like '%'||UPPER(#{key})||'%')
+		</if>
+		<if test="startdate!=null and startdate!='' and enddate!=null and enddate!=''">
+			and (
+					tt.inprisondate between to_date('${startdate}','yyyy-mm-dd') 
+												  and to_date('${enddate}','yyyy-mm-dd')
+				 )
+       	</if>
+		<if test="(startdate!='' and enddate=='') or (startdate=='' and enddate!='')">
+			and (
+					tt.inprisondate &gt;= to_date('${startdate}','yyyy-mm-dd') or
+					 tt.inprisondate &lt;= to_date('${enddate}','yyyy-mm-dd')
+				 )
+      	</if>
+	</select>
+  
+	<select id="getZhendInfo" resultType="java.lang.String">
+		select * from (select text1 from TBSYS_DOCUMENT where crimid=#{crimid} and tempid=#{tempid} order by optime desc) where rownum=1
+	</select>
+	<select id="getbsjdyjByCrimid" resultType="String">
+		select * from (select flow.commenttext
+		from tbflow flow
+		where flow.flowdraftid in
+		(select base.flowdraftid
+		from tbflow_base base
+		where base.optime in (select max(t.optime)
+		from tbflow_base t
+		where t.applyid = #{crimid}
+		and t.flowdefid = #{flowdefid}
+		group by t.applyid)
+		and base.applyid = #{crimid}
+		and base.flowdefid = #{flowdefid}
+		)
+		and flow.nodeid = #{nodeid}
+		order by optime
+		) where rownum = 1
+  </select>
+	<delete id="deleteAccompliceByCrimid" parameterType="java.lang.String">
+		delete from TBPRISONER_ACCOMPLICE where
+		crimid=#{crimid,jdbcType=VARCHAR}
+  </delete>
+
+	<delete id="deleRelationByCrimid" parameterType="java.lang.String">
+		delete from TBPRISONER_SOCIAL_RELATION where
+		crimid=#{crimid,jdbcType=VARCHAR}
+  </delete>
+	<select id="getJitiShenHeBiao" resultType="Map">
+		select o.name as sddiscribe, b.name as cbiname,b.gender as cbigendername,
+		decode(to_number(c.ISRECIDIVISM)+to_number(c.RECIDIVIST),0,'是','否') as
+		zlgf,
+		c.jobs,b.registeraddressdetail as hujidi,t.sentencechageinfo as prisonterm, c.charge as
+		anyouhuizong,
+		decode(c.punishmentyear,0,'',c.punishmentyear||'年')||decode(c.punishmentmonth,0,'',c.punishmentmonth||'月')||decode(c.punishmentday,0,'',c.punishmentday||'天')
+		as zhuxing,
+		decode(t.punishmentyear,0,'',t.punishmentyear||'年')||decode(t.punishmentmonth,0,'',t.punishmentmonth||'月')||decode(t.punishmentday,0,'',t.punishmentday||'天')
+		as text1
+		from TBPRISONER_BASEINFO b,TBPRISONER_BASE_CRIME c,TBXF_SENTENCEALTERATION
+		t,TBSYS_ORGINFO o
+		where b.crimid=c.crimid and b.departid=o.orgid and b.crimid=t.crimid(+) and
+		b.crimid=#{crimid}
+  </select>
+
+  <!-- 根据罪犯编号查询出对应的基本信息 -->
+  <select id="getBaseInfoByCrimidMap" resultType="map" parameterType="String">
+        	 SELECT tc.crimid as 罪犯编号,
+           			tb.name as 罪犯姓名,
+		            tb.gender as 性别,
+		            to_char(tb.birthday,'yyyy"年"MM"月"dd"日"') as 出生日期,
+		            tb.nation as 民族,
+		            tb.familyaddress as 籍贯,--家庭住址
+		            tb.registeraddressdetail as 户籍,--户籍所在地
+		            tc.maincase as 罪名,
+		            (
+		            SELECT    '经'
+		                           || ta.courtname
+		                           || ta.courtname
+		                           || '于'
+		                           || TO_CHAR (to_date(ta.courtsanction,'yyyy-MM-dd'), 'yyyy"年"MM"月"dd"日"')
+		                           || '以'
+		                           || '('
+		                           || ta.courtyear
+		                           || ')'
+		                           || ta.courtshort
+		                           || '第'
+		                           || ta.courtsn
+		                           || '号刑事判决书判处'
+		                           ||      
+		                           case when to_char(ta.sentence)='9995' then 
+		                                  '无期徒刑'
+		                                   when to_char(ta.sentence)='9996' then 
+		                                  '死缓'
+		                                   when to_char(ta.sentence)='9997' then 
+		                                  '死刑'
+		                                  else
+		                                  '有期徒刑'
+		                                  ||to_number(substr(to_char(ta.sentence),0,2))||'年'
+		                                  ||decode(substr(to_char(ta.sentence),3,2),0,'',to_number(substr(to_char(ta.sentence),3,2))||'个月')
+		                                  ||decode(substr(to_char(ta.sentence),5,2),0,'',to_number(substr(to_char(ta.sentence),5,2))||'天')
+		                           end||
+		                           case when to_char(tc.forfeit) = '没收个人全部财产'  then 
+		                                  '，并处没收个人全部财产'
+		                                  when length(tc.forfeit) > 0 then 
+		                                  '，并处罚金'||replace(tc.forfeit,'元','')||'元'
+		                           end||
+		                           case when tc.losepoweryear = 97 then
+		                                  '、剥夺政治权利终身。'
+		                                  when tc.losepoweryear &lt;&gt; 97 and tc.losepoweryear &lt; 0 then
+		                                  '、剥夺政治权利'
+		                                  ||decode(tc.losepoweryear,0,'',tc.losepoweryear||'年')
+		                                  ||decode(tc.losepowermonth,0,'',tc.losepowermonth||'个月')
+		                                  ||decode(tc.losepowereday,0,'',tc.losepowereday||'天')||'。'
+		                                  else
+		                                  '。'
+		                           end as firstsun
+		                            
+		                      FROM TBDATA_SENTCHAGE ta, TBPRISONER_BASE_CRIME tc
+		                     WHERE     ta.crimid = #{crimid}
+		                           AND TA.CATEGORY = 1
+		                           AND ta.crimid = tc.crimid(+)
+		            ) as 判裁信息,--判裁信息
+		            decode(tc.sentencestime,null,'','',' ','自'||to_char(tc.sentencestime,'yyyy"年"MM"月"dd"日"')||'至')||decode(tc.sentenceetime,null,'','',' ',to_char(tc.sentenceetime,'yyyy"年"MM"月"dd"日"')) as 刑期起止,
+		            (select name  from TBSYS_ORGINFO where orgid = (select porgid from TBSYS_ORGINFO where orgid=#{departid})) as 监狱局,
+		            to_char(sysdate,'yyyyMMdd') as nowdate
+		  FROM TBPRISONER_BASE_CRIME tc, TBPRISONER_BASEINFO tb
+		 WHERE tc.crimid = #{crimid} 
+		     AND tc.crimid = tb.crimid(+)
+  </select>
+	<select id="getParoleApproveMap" parameterType="String"
+		resultType="Map">
+		select a.crimid,
+		a.name,
+		a.gender gendar,
+		decode(A.BIRTHDAY,null,'',to_char(A.BIRTHDAY,'yyyyMMdd')) birthday,
+		a.name applyname,
+		F_FORMATYMD(b.PUNISHMENTYEAR,b.PUNISHMENTMONTH,b.PUNISHMENTDAY,1)
+		yuanpanxingqi,
+		a.departid,
+		c.name||b.orgname1 depid,
+		b.Causeaction charge,
+		F_LOSEPOWER(b.LOSEPOWERYEAR,b.LOSEPOWERMONTH,b.LOSEPOWEREDAY)
+		||decode(b.FORFEIT,null,'','\r\n罚金'||b.FORFEIT||'元')
+		||decode(b.FORFEITUREPROPERTY,null,'','\r\n没收财产'||b.FORFEITUREPROPERTY||'元')
+		fujiaxing,
+		b.Punishmenttype imprisontype,
+		decode(t.COURTCHANGEFROM,null,'','自'||F_FORMATDATE(t.COURTCHANGEFROM)||'起')
+		xingqiqiri,
+		decode(t.COURTCHANGETO,null,'','至'||F_FORMATDATE(t.COURTCHANGETO)||'止')
+		xingqizhiri,
+		b.orgid2，
+		t.SENTENCECHAGEINFOSHORT||'\r\n'
+		||decode(a.REWARDPUNISH,null,''||a.REWARDPUNISH)
+		||t.REWARDINFO
+		||t.PUNISHINFO
+		as text1
+		from TBPRISONER_BASEINFO a,TBPRISONER_BASE_CRIME b,tbsys_orginfo
+		c,TBXF_SENTENCEALTERATION t
+		where a.crimid = b.crimid
+		and a.crimid = t.crimid
+		and a.departid = c.orgid
+		and a.crimid = #{crimid}
+  </select>
+	<update id="updateReportaudit" parameterType="String">
+		update TBXF_SENTENCEALTERATION set REPORTAUDIT=1 where crimid=#{crimid}
+  </update>
+  
+  
+  <!-- 根据条件查询罪犯记录总数 -->
+	<select id="countCrimNumByParaMap" parameterType="Map" resultType="int">
+		 SELECT count(tbi.crimid)
+		 from TBPRISONER_BASEINFO tbi,
+			  TBPRISONER_BASE_CRIME tbc,
+			  tbsys_orginfo dep
+		 where tbi.crimid=tbc.crimid 
+		   and tbc.orgid=dep.orgid
+		   and tbc.orgid2 in (select dorgid from TBFLOW_ORG_ORG too where too.orgid =#{orgid})
+		<if test="key!=null and key!=''">
+			and ( tbi.crimid like concat(concat('%', #{key}), '%') 
+				  or tbi.name like concat(concat('%', #{key}), '%') 
+				  or tbi.NAMEPINYINSHORT like concat(concat('%', UPPER(#{key})), '%')
+				)
+		</if>
+		<if test="status!=null and status!=''  and status==1">
+			and tbc.DETAINSTATUS='在押'		
+		</if>
+		<if test="status!=null and status!=''  and status==2">
+			and tbc.DETAINSTATUS='释放'		
+		</if>
+		<if test="zgorgid!=null and zgorgid!=''">
+			and ( tbc.orgid2=#{zgorgid} or tbc.orgid1=#{zgorgid} )
+		</if>
+	</select>
+	
+	<select id="getCrimInfoByParaMap" parameterType="Map" resultType="Map">
+		select * from
+			( select a.*, rownum rn
+			  from
+			    (SELECT tbi.crimid,
+						tbi.crimid as applyid,
+						tbi.name,
+						tbi.name as applyname,
+						tbc.chargeclass,
+						tbi.gender,
+						tbi.nation,
+						tbi.birthday,
+						getage(tbi.birthday) age,
+						tbi.familyaddress,
+						dep.name as departname,
+						tbc.fileno,
+						tbc.charge,
+						tbc.prison,
+						tbc.berth,
+						tbc.FORFEIT forfrit,
+						tbc.payment,
+						tbc.forfeitureproperty,
+						tbc.expropriation,
+						tbc.compensation,
+						tbc.fulfilcompensation,
+						(case when tbc.orgname2 is not null then tbc.orgname2 else tbc.orgname1 end) AS orgname
+						
+					 from TBPRISONER_BASEINFO tbi,
+						  TBPRISONER_BASE_CRIME tbc,
+						  tbsys_orginfo dep
+					 where tbi.crimid=tbc.crimid 
+					   and tbc.orgid=dep.orgid
+					   and tbc.orgid2 in (select dorgid from TBFLOW_ORG_ORG too where too.orgid =#{orgid})
+					<if test="key!=null and key!=''">
+						and ( tbi.crimid like concat(concat('%', #{key}), '%') 
+							  or tbi.name like concat(concat('%', #{key}), '%') 
+							  or tbi.NAMEPINYINSHORT like concat(concat('%', UPPER(#{key})), '%')
+							)
+					</if>
+					<if test="status!=null and status!=''  and status==1">
+						and tbc.DETAINSTATUS='在押'		
+					</if>
+					<if test="status!=null and status!=''  and status==2">
+						and tbc.DETAINSTATUS='释放'		
+					</if>
+					<if test="zgorgid!=null and zgorgid!=''">
+						and ( tbc.orgid2=#{zgorgid} or tbc.orgid1=#{zgorgid} )
+					</if>
+					<if test="sortField!=null and sortField!=''">
+						order by ${sortField} ${sortOrder}
+					</if>
+				) a
+			<if test="end!=null and end!=''">
+					where rownum &lt;= #{end}
+			</if>
+			)
+		<if test="start!=null and start!=''">
+			where rn &gt;= #{start}
+		</if>
+	</select>
+	
+	<select id="getCrimeNameByCrimid" parameterType="String" resultType="String">
+		select b.name from TBPRISONER_BASEINFO b where b.crimid=#{crimid}
+	</select>
+	<select id="getUnitlevelByCrimidOrgid" parameterType="String" resultType="String">
+		select t.unitlevel from TBSYS_ORGINFO t where t.orgid = (select a.orgid2 from TBPRISONER_BASE_CRIME a where a.crimid = #{crimid}) 
+	</select>
+	<select id="findCountByCrimid" resultType="int">
+		select count(*) from TBPRISONER_BASEINFO t where t.crimid = #{crimid}
+	</select>
+	
+	  <select id="callSentncechangByCrimid" parameterType="String">
+  		<![CDATA[   
+		   {call P_SENTNCECHANG_BY_CRIMID(#{crimid})}   
+		]]> 
+  </select>
+  <!-- 中文名称转拼音 -->
+  <select id="generatePYByCrimidMapper" resultType="map">
+       select substr(f_pinyin(name),0,2) as pyname from tbprisoner_baseinfo where crimid=#{crimid}
+  </select>
+  
+  <select id="querySocialRelationMapper" resultType="map">
+       select qrcode from TBPRISONER_SOCIAL_RELATION  where crimid=#{crimid} order by  srid desc
+  </select>
+  <select id="selectByCardOrCrimid" resultType="map" parameterType="Map">
+       SELECT t.name,
+         T.GENDER,
+         T.CAUSEACTION,
+         t.orgname1,
+         TO_CHAR(T.INPRISONDATE,'YYYY-MM-DD') INPRISONDATE,
+         T.SENTENCESTIME,
+         T.SENTENCEETIME,
+         T.PUNISHMENTYEAR,
+         T1.CXCODE,
+         T1.QRCODE,
+         T.PUNISHMENTTYPE,
+         DECODE(T.PUNISHMENTYEAR,'9996','','9995','',T.PUNISHMENTTYPE)||t.SENTENCE SENTENCE,
+         DECODE(T.NOWPUNISHMENTYEAR,'9996','','9995','','有期徒刑')||t.nowpunishment nowpunishment
+		 FROM   UV_YWGK_JBXX t, 
+		 (SELECT * FROM (SELECT ROW_NUMBER() OVER(PARTITION BY crimid ORDER BY SRID asc) rn, s.*  FROM 
+		 TBPRISONER_SOCIAL_RELATION s where s.qrcode is not null) WHERE rn = 1 ) t1 
+		 WHERE  1 = 1
+		 <if test="crimid!=null and crimid!=''">
+	   		AND (
+		   		t1.PAPERID=#{crimid}
+		   	   	or
+		   		t.crimid=#{crimid}
+	   		)
+   	    </if> 
+		 AND t.DETAINSTATUS = '在押'
+		 AND t.crimid = t1.crimid (+)
+         
+  </select>
+  <select id="getCurrentBatch" resultType="map">
+       select t.batch from tbxf_commuteparole_batch t where t.departid = #{departid} and t.remark = '999'
+  </select>
+  
+  
+  <!-- 更新刑期变动表的同时更新 基本信息表 -->
+  <update id="updateBaseByCrimid" parameterType="Map">
+        update TBPRISONER_BASE_CRIME 
+        <set>
+            <if test="judgmentname != null">
+	            judgmentname=#{judgmentname},
+      		</if>
+      		<if test="caseyear != null">
+	            caseyear=#{caseyear},
+      		</if>
+      		<if test="caseorgshort != null">
+	            caseorgshort=#{caseorgshort},
+      		</if>
+      		<if test="caseno != null">
+	            caseno=#{caseno},
+      		</if>
+      		<if test="executiondate != null">
+	            executiondate=#{executiondate, jdbcType=DATE},
+      		</if>
+      		<if test="sentencestime != null">
+	            sentencestime=#{sentencestime, jdbcType=DATE},
+      		</if>
+      		<if test="sentenceetime != null">
+	            sentenceetime=#{sentenceetime, jdbcType=DATE},
+      		</if>
+      		<if test="judgedate != null">
+	            judgedate=#{judgedate, jdbcType=DATE}, --判决时间
+      		</if>
+      		<if test="punishmentyear != null">
+	            punishmentyear=#{punishmentyear},  --原判刑期年
+      		</if>
+      		<if test="punishmentmonth != null">
+	            punishmentmonth=#{punishmentmonth}, --原判刑期月
+      		</if>
+      		<if test="punishmentday != null">
+	            punishmentday=#{punishmentday},  --原判刑期天
+      		</if>
+      		<if test="losepoweryear != null">
+	            losepoweryear=#{losepoweryear},   --原判剥夺政治权利年
+      		</if>
+      		<if test="losepowermonth != null">
+	            losepowermonth=#{losepowermonth},  --原判剥夺政治权利月
+      		</if>
+      		<if test="losepowereday != null">
+	            losepowereday=#{losepowereday}, --原判剥夺政治权利天
+      		</if>
+      		<if test="punishmenttype != null">
+	            punishmenttype=#{punishmenttype},
+      		</if>
+      		<if test="isremission != null">
+	            ISREMISSION=#{isremission},
+      		</if>
+            <if test="charge != null">
+            	charge=#{charge},
+            </if>
+        </set>
+         where crimid=#{crimid}
+  </update>
+  
+  <select id="getResidByUserid" resultType="map">
+      select b.resid from TBSYS_USERS_ROLES a,TBSYS_ROLE_RES b 
+		where a.userid = #{userid}
+		and a.roleid=b.roleid
+  </select>
+  
+  <!-- 新增罪犯基本信息 -->
+	<insert id="insertTbprisonerBaseCrimeMap" parameterType="java.util.HashMap">
+		insert into TBPRISONER_BASE_CRIME
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="crimid != null">
+				CRIMID,
+      </if>
+			<if test="orgid != null">
+				ORGID,
+      </if>
+			<if test="orgname1 != null">
+				ORGNAME1,
+      </if>
+			<if test="orgname2 != null">
+				ORGNAME2,
+      </if>
+			<if test="lawcaseno != null">
+				LAWCASENO,
+      </if>
+			<if test="crimeface != null">
+				CRIMEFACE,
+      </if>
+			<if test="crimedate != null">
+				CRIMEDATE,
+      </if>
+			<if test="isminor != null">
+				ISMINOR,
+      </if>
+			<if test="detaindate != null">
+				DETAINDATE,
+      </if>
+			<if test="arrestauthority != null">
+				ARRESTAUTHORITY,
+      </if>
+			<if test="arrestauthorityshort != null">
+				ARRESTAUTHORITYSHORT,
+      </if>
+			<if test="arrestdate != null">
+				ARRESTDATE,
+      </if>
+			<if test="bailstart != null">
+				BAILSTART,
+      </if>
+			<if test="bailend != null">
+				BAILEND,
+      </if>
+			<if test="sueorgan != null">
+				SUEORGAN,
+      </if>
+			<if test="sueorganshort != null">
+				SUEORGANSHORT,
+      </if>
+			<if test="sueyear != null">
+				SUEYEAR,
+      </if>
+			<if test="suecaseno != null">
+				SUECASENO,
+      </if>
+			<if test="sueno != null">
+				SUENO,
+      </if>
+			<if test="pedigreenum != null">
+				PEDIGREENUM,
+      </if>
+			<if test="jointcrimetype != null">
+				JOINTCRIMETYPE,
+      </if>
+			<if test="jointcrimes != null">
+				JOINTCRIMES,
+      </if>
+			<if test="inprisondate != null">
+				INPRISONDATE,
+      </if>
+			<if test="firsttrialsum != null">
+				FIRSTTRIALSUM,
+      </if>
+			<if test="appealtype != null">
+				APPEALTYPE,
+      </if>
+			<if test="appeal != null">
+				APPEAL,
+      </if>
+			<if test="sentencetype != null">
+				SENTENCETYPE,
+      </if>
+			<if test="judgmentname != null">
+				JUDGMENTNAME,
+      </if>
+			<if test="judgmentshort != null">
+				JUDGMENTSHORT,
+      </if>
+			<if test="caseyear != null">
+				CASEYEAR,
+      </if>
+			<if test="caseorgshort != null">
+				CASEORGSHORT,
+      </if>
+			<if test="caseno != null">
+				CASENO,
+      </if>
+			<if test="punishmenttype != null">
+				PUNISHMENTTYPE,
+      </if>
+			<if test="punishmentyear != null">
+				PUNISHMENTYEAR,
+      </if>
+			<if test="punishmentmonth != null">
+				PUNISHMENTMONTH,
+      </if>
+			<if test="punishmentday != null">
+				PUNISHMENTDAY,
+      </if>
+			<if test="sentencestime != null">
+				SENTENCESTIME,
+      </if>
+			<if test="sentenceetime != null">
+				SENTENCEETIME,
+      </if>
+			<if test="losepoweryear != null">
+				LOSEPOWERYEAR,
+      </if>
+			<if test="losepowermonth != null">
+				LOSEPOWERMONTH,
+      </if>
+			<if test="losepowereday != null">
+				LOSEPOWEREDAY,
+      </if>
+			<if test="forfeit != null">
+				FORFEIT,
+      </if>
+			<if test="isdeport != null">
+				ISDEPORT,
+      </if>
+			<if test="forfeitureproperty != null">
+				FORFEITUREPROPERTY,
+      </if>
+			<if test="other != null">
+				OTHER,
+      </if>
+			<if test="compensation != null">
+				COMPENSATION,
+      </if>
+			<if test="isremission != null">
+				ISREMISSION,
+      </if>
+			<if test="isparole != null">
+				ISPAROLE,
+      </if>
+			<if test="limitedremission != null">
+				LIMITEDREMISSION,
+      </if>
+			<if test="payment != null">
+				PAYMENT,
+      </if>
+			<if test="criminaltype != null">
+				CRIMINALTYPE,
+      </if>
+			<if test="issueddate != null">
+				ISSUEDDATE,
+      </if>
+			<if test="detainstatus != null">
+				DETAINSTATUS,
+      </if>
+			<if test="fleetype != null">
+				FLEETYPE,
+      </if>
+			<if test="isrecidivism != null">
+				ISRECIDIVISM,
+      </if>
+			<if test="recidivist != null">
+				RECIDIVIST,
+      </if>
+			<if test="cation != null">
+				CATION,
+      </if>
+			<if test="marriage != null">
+				MARRIAGE,
+      </if>
+			<if test="isruling != null">
+				ISRULING,
+      </if>
+			<if test="istakeeffect != null">
+				ISTAKEEFFECT,
+      </if>
+			<if test="courttype != null">
+				COURTTYPE,
+      </if>
+			<if test="casetype != null">
+				CASETYPE,
+      </if>
+			<if test="stolenmoney != null">
+				STOLENMONEY,
+      </if>
+			<if test="takeeffectdate != null">
+				TAKEEFFECTDATE,
+      </if>
+			<if test="sanctionno != null">
+				SANCTIONNO,
+      </if>
+			<if test="causeaction != null">
+				CAUSEACTION,
+      </if>
+			<if test="charge != null">
+				CHARGE,
+      </if>
+			<if test="judgedate != null">
+				JUDGEDATE,
+      </if>
+			<if test="whereto != null">
+				WHERETO,
+      </if>
+			<if test="watchhouse != null">
+				WATCHHOUSE,
+      </if>
+			<if test="detaintype != null">
+				DETAINTYPE,
+      </if>
+			<if test="detainprison != null">
+				DETAINPRISON,
+      </if>
+			<if test="specialcrimetype != null">
+				SPECIALCRIMETYPE,
+      </if>
+			<if test="fileno != null">
+				FILENO,
+      </if>
+			<if test="chargeclass != null">
+				CHARGECLASS,
+      </if>
+			<if test="custodytype != null">
+				CUSTODYTYPE,
+      </if>
+			<if test="commutation != null">
+				COMMUTATION,
+      </if>
+			<if test="drugs != null">
+				DRUGS,
+      </if>
+			<if test="gun != null">
+				GUN,
+      </if>
+			<if test="underworld != null">
+				UNDERWORLD,
+      </if>
+			<if test="wickedness != null">
+				WICKEDNESS,
+      </if>
+			<if test="takedrugs != null">
+				TAKEDRUGS,
+      </if>
+			<if test="escapes != null">
+				ESCAPES,
+      </if>
+			<if test="suicide != null">
+				SUICIDE,
+      </if>
+			<if test="assaultepolice != null">
+				ASSAULTEPOLICE,
+      </if>
+			<if test="othercase != null">
+				OTHERCASE,
+      </if>
+			<if test="jobs != null">
+				JOBS,
+      </if>
+			<if test="issuingauthority != null">
+				ISSUINGAUTHORITY,
+      </if>
+			<if test="returnloot != null">
+				RETURNLOOT,
+      </if>
+			<if test="fulfilcompensation != null">
+				FULFILCOMPENSATION,
+      </if>
+			<if test="expropriation != null">
+				EXPROPRIATION,
+      </if>
+			<if test="executiondate != null">
+				EXECUTIONDATE,
+      </if>
+			<if test="mediaattention != null">
+				MEDIAATTENTION,
+      </if>
+			<if test="focus != null">
+				FOCUS,
+      </if>
+			<if test="specialcontrol != null">
+				SPECIALCONTROL,
+      </if>
+			<if test="opinion != null">
+				OPINION,
+      </if>
+			<if test="sanclassstatus != null">
+				SANCLASSSTATUS,
+      </if>
+			<if test="oldprisoner != null">
+				OLDPRISONER,
+      </if>
+			<if test="illprisoner != null">
+				ILLPRISONER,
+      </if>
+			<if test="deformityprisoner != null">
+				DEFORMITYPRISONER,
+      </if>
+			<if test="redrugs != null">
+				REDRUGS,
+      </if>
+			<if test="crimes != null">
+				CRIMES,
+      </if>
+			<if test="overfourcrimes != null">
+				OVERFOURCRIMES,
+      </if>
+			<if test="seriousviolations != null">
+				SERIOUSVIOLATIONS,
+      </if>
+			<if test="combinedpunishment != null">
+				COMBINEDPUNISHMENT,
+      </if>
+			<if test="majorcriminal != null">
+				MAJORCRIMINAL,
+      </if>
+			<if test="strictlyplot != null">
+				STRICTLYPLOT,
+      </if>
+			<if test="postcrime != null">
+				POSTCRIME,
+      </if>
+			<if test="undermine != null">
+				UNDERMINE,
+      </if>
+			<if test="wideplots != null">
+				WIDEPLOTS,
+      </if>
+			<if test="sanremark != null">
+				SANREMARK,
+      </if>
+			<if test="principalaccessory != null">
+				PRINCIPALACCESSORY,
+      </if>
+			<if test="declarationproperty != null">
+				DECLARATIONPROPERTY,
+      </if>
+			<if test="crimtype != null">
+				CRIMTYPE,
+      </if>
+			<if test="maincase != null">
+				MAINCASE,
+      </if>
+			<if test="entryways != null">
+				ENTRYWAYS,
+      </if>
+			<if test="ischinese != null">
+				ISCHINESE,
+      </if>
+			<if test="isforeign != null">
+				ISFOREIGN,
+      </if>
+			<if test="isdeath != null">
+				ISDEATH,
+      </if>
+			<if test="orgid1 != null">
+				ORGID1,
+      </if>
+			<if test="orgid2 != null">
+				ORGID2,
+      </if>
+			<if test="remark != null">
+				REMARK,
+      </if>
+			<if test="opid != null">
+				OPID,
+      </if>
+			<if test="optime != null">
+				OPTIME,
+      </if>
+			<if test="falungong != null">
+				FALUNGONG,
+      </if>
+			<if test="qitaxiejiao != null">
+				QITAXIEJIAO,
+      </if>
+      		<if test="prison != null">
+				PRISON,
+      </if>
+      		<if test="berth != null">
+				BERTH,
+      </if>
+      <if test="returncompenstation != null">
+				RETURNCOMPENSTATION,
+      </if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="crimid != null">
+				#{crimid,jdbcType=VARCHAR},
+      </if>
+			<if test="orgid != null">
+				#{orgid,jdbcType=VARCHAR},
+      </if>
+			<if test="orgname1 != null">
+				#{orgname1,jdbcType=VARCHAR},
+      </if>
+			<if test="orgname2 != null">
+				#{orgname2,jdbcType=VARCHAR},
+      </if>
+			<if test="lawcaseno != null">
+				#{lawcaseno,jdbcType=VARCHAR},
+      </if>
+			<if test="crimeface != null">
+				#{crimeface,jdbcType=VARCHAR},
+      </if>
+			<if test="crimedate != null">
+				#{crimedate,jdbcType=DATE},
+      </if>
+			<if test="isminor != null">
+				#{isminor,jdbcType=VARCHAR},
+      </if>
+			<if test="detaindate != null">
+				#{detaindate,jdbcType=DATE},
+      </if>
+			<if test="arrestauthority != null">
+				#{arrestauthority,jdbcType=VARCHAR},
+      </if>
+			<if test="arrestauthorityshort != null">
+				#{arrestauthorityshort,jdbcType=VARCHAR},
+      </if>
+			<if test="arrestdate != null">
+				#{arrestdate,jdbcType=DATE},
+      </if>
+			<if test="bailstart != null">
+				#{bailstart,jdbcType=DATE},
+      </if>
+			<if test="bailend != null">
+				#{bailend,jdbcType=DATE},
+      </if>
+			<if test="sueorgan != null">
+				#{sueorgan,jdbcType=VARCHAR},
+      </if>
+			<if test="sueorganshort != null">
+				#{sueorganshort,jdbcType=VARCHAR},
+      </if>
+			<if test="sueyear != null">
+				#{sueyear,jdbcType=VARCHAR},
+      </if>
+			<if test="suecaseno != null">
+				#{suecaseno,jdbcType=VARCHAR},
+      </if>
+			<if test="sueno != null">
+				#{sueno,jdbcType=VARCHAR},
+      </if>
+			<if test="pedigreenum != null">
+				#{pedigreenum,jdbcType=DECIMAL},
+      </if>
+			<if test="jointcrimetype != null">
+				#{jointcrimetype,jdbcType=VARCHAR},
+      </if>
+			<if test="jointcrimes != null">
+				#{jointcrimes,jdbcType=DECIMAL},
+      </if>
+			<if test="inprisondate != null">
+				#{inprisondate,jdbcType=DATE},
+      </if>
+			<if test="firsttrialsum != null">
+				#{firsttrialsum,jdbcType=VARCHAR},
+      </if>
+			<if test="appealtype != null">
+				#{appealtype,jdbcType=VARCHAR},
+      </if>
+			<if test="appeal != null">
+				#{appeal,jdbcType=VARCHAR},
+      </if>
+			<if test="sentencetype != null">
+				#{sentencetype,jdbcType=VARCHAR},
+      </if>
+			<if test="judgmentname != null">
+				#{judgmentname,jdbcType=VARCHAR},
+      </if>
+			<if test="judgmentshort != null">
+				#{judgmentshort,jdbcType=VARCHAR},
+      </if>
+			<if test="caseyear != null">
+				#{caseyear,jdbcType=VARCHAR},
+      </if>
+			<if test="caseorgshort != null">
+				#{caseorgshort,jdbcType=VARCHAR},
+      </if>
+			<if test="caseno != null">
+				#{caseno,jdbcType=VARCHAR},
+      </if>
+			<if test="punishmenttype != null">
+				#{punishmenttype,jdbcType=VARCHAR},
+      </if>
+			<if test="punishmentyear != null">
+				#{punishmentyear,jdbcType=DECIMAL},
+      </if>
+			<if test="punishmentmonth != null">
+				#{punishmentmonth,jdbcType=DECIMAL},
+      </if>
+			<if test="punishmentday != null">
+				#{punishmentday,jdbcType=DECIMAL},
+      </if>
+			<if test="sentencestime != null">
+				#{sentencestime,jdbcType=DATE},
+      </if>
+			<if test="sentenceetime != null">
+				#{sentenceetime,jdbcType=DATE},
+      </if>
+			<if test="losepoweryear != null">
+				#{losepoweryear,jdbcType=DECIMAL},
+      </if>
+			<if test="losepowermonth != null">
+				#{losepowermonth,jdbcType=DECIMAL},
+      </if>
+			<if test="losepowereday != null">
+				#{losepowereday,jdbcType=DECIMAL},
+      </if>
+			<if test="forfeit != null">
+				#{forfeit,jdbcType=VARCHAR},
+      </if>
+			<if test="isdeport != null">
+				#{isdeport,jdbcType=VARCHAR},
+      </if>
+			<if test="forfeitureproperty != null">
+				#{forfeitureproperty,jdbcType=VARCHAR},
+      </if>
+			<if test="other != null">
+				#{other,jdbcType=VARCHAR},
+      </if>
+			<if test="compensation != null">
+				#{compensation,jdbcType=VARCHAR},
+      </if>
+			<if test="isremission != null">
+				#{isremission,jdbcType=DECIMAL},
+      </if>
+			<if test="isparole != null">
+				#{isparole,jdbcType=DECIMAL},
+      </if>
+			<if test="limitedremission != null">
+				#{limitedremission,jdbcType=VARCHAR},
+      </if>
+			<if test="payment != null">
+				#{payment,jdbcType=VARCHAR},
+      </if>
+			<if test="criminaltype != null">
+				#{criminaltype,jdbcType=VARCHAR},
+      </if>
+			<if test="issueddate != null">
+				#{issueddate,jdbcType=DATE},
+      </if>
+			<if test="detainstatus != null">
+				#{detainstatus,jdbcType=VARCHAR},
+      </if>
+			<if test="fleetype != null">
+				#{fleetype,jdbcType=VARCHAR},
+      </if>
+			<if test="isrecidivism != null">
+				#{isrecidivism,jdbcType=VARCHAR},
+      </if>
+			<if test="recidivist != null">
+				#{recidivist,jdbcType=VARCHAR},
+      </if>
+			<if test="cation != null">
+				#{cation,jdbcType=VARCHAR},
+      </if>
+			<if test="marriage != null">
+				#{marriage,jdbcType=VARCHAR},
+      </if>
+			<if test="isruling != null">
+				#{isruling,jdbcType=VARCHAR},
+      </if>
+			<if test="istakeeffect != null">
+				#{istakeeffect,jdbcType=VARCHAR},
+      </if>
+			<if test="courttype != null">
+				#{courttype,jdbcType=VARCHAR},
+      </if>
+			<if test="casetype != null">
+				#{casetype,jdbcType=VARCHAR},
+      </if>
+			<if test="stolenmoney != null">
+				#{stolenmoney,jdbcType=VARCHAR},
+      </if>
+			<if test="takeeffectdate != null">
+				#{takeeffectdate,jdbcType=DATE},
+      </if>
+			<if test="sanctionno != null">
+				#{sanctionno,jdbcType=VARCHAR},
+      </if>
+			<if test="causeaction != null">
+				#{causeaction,jdbcType=VARCHAR},
+      </if>
+			<if test="charge != null">
+				#{charge,jdbcType=VARCHAR},
+      </if>
+			<if test="judgedate != null">
+				#{judgedate,jdbcType=DATE},
+      </if>
+			<if test="whereto != null">
+				#{whereto,jdbcType=VARCHAR},
+      </if>
+			<if test="watchhouse != null">
+				#{watchhouse,jdbcType=VARCHAR},
+      </if>
+			<if test="detaintype != null">
+				#{detaintype,jdbcType=VARCHAR},
+      </if>
+			<if test="detainprison != null">
+				#{detainprison,jdbcType=VARCHAR},
+      </if>
+			<if test="specialcrimetype != null">
+				#{specialcrimetype,jdbcType=VARCHAR},
+      </if>
+			<if test="fileno != null">
+				#{fileno,jdbcType=VARCHAR},
+      </if>
+			<if test="chargeclass != null">
+				#{chargeclass,jdbcType=VARCHAR},
+      </if>
+			<if test="custodytype != null">
+				#{custodytype,jdbcType=VARCHAR},
+      </if>
+			<if test="commutation != null">
+				#{commutation,jdbcType=VARCHAR},
+      </if>
+			<if test="drugs != null">
+				#{drugs,jdbcType=VARCHAR},
+      </if>
+			<if test="gun != null">
+				#{gun,jdbcType=VARCHAR},
+      </if>
+			<if test="underworld != null">
+				#{underworld,jdbcType=VARCHAR},
+      </if>
+			<if test="wickedness != null">
+				#{wickedness,jdbcType=VARCHAR},
+      </if>
+			<if test="takedrugs != null">
+				#{takedrugs,jdbcType=VARCHAR},
+      </if>
+			<if test="escapes != null">
+				#{escapes,jdbcType=VARCHAR},
+      </if>
+			<if test="suicide != null">
+				#{suicide,jdbcType=VARCHAR},
+      </if>
+			<if test="assaultepolice != null">
+				#{assaultepolice,jdbcType=VARCHAR},
+      </if>
+			<if test="othercase != null">
+				#{othercase,jdbcType=VARCHAR},
+      </if>
+			<if test="jobs != null">
+				#{jobs,jdbcType=VARCHAR},
+      </if>
+			<if test="issuingauthority != null">
+				#{issuingauthority,jdbcType=VARCHAR},
+      </if>
+			<if test="returnloot != null">
+				#{returnloot,jdbcType=VARCHAR},
+      </if>
+			<if test="fulfilcompensation != null">
+				#{fulfilcompensation,jdbcType=VARCHAR},
+      </if>
+			<if test="expropriation != null">
+				#{expropriation,jdbcType=VARCHAR},
+      </if>
+			<if test="executiondate != null">
+				#{executiondate,jdbcType=DATE},
+      </if>
+			<if test="mediaattention != null">
+				#{mediaattention,jdbcType=VARCHAR},
+      </if>
+			<if test="focus != null">
+				#{focus,jdbcType=VARCHAR},
+      </if>
+			<if test="specialcontrol != null">
+				#{specialcontrol,jdbcType=VARCHAR},
+      </if>
+			<if test="opinion != null">
+				#{opinion,jdbcType=VARCHAR},
+      </if>
+			<if test="sanclassstatus != null">
+				#{sanclassstatus,jdbcType=VARCHAR},
+      </if>
+			<if test="oldprisoner != null">
+				#{oldprisoner,jdbcType=VARCHAR},
+      </if>
+			<if test="illprisoner != null">
+				#{illprisoner,jdbcType=VARCHAR},
+      </if>
+			<if test="deformityprisoner != null">
+				#{deformityprisoner,jdbcType=VARCHAR},
+      </if>
+			<if test="redrugs != null">
+				#{redrugs,jdbcType=VARCHAR},
+      </if>
+			<if test="crimes != null">
+				#{crimes,jdbcType=VARCHAR},
+      </if>
+			<if test="overfourcrimes != null">
+				#{overfourcrimes,jdbcType=VARCHAR},
+      </if>
+			<if test="seriousviolations != null">
+				#{seriousviolations,jdbcType=VARCHAR},
+      </if>
+			<if test="combinedpunishment != null">
+				#{combinedpunishment,jdbcType=VARCHAR},
+      </if>
+			<if test="majorcriminal != null">
+				#{majorcriminal,jdbcType=VARCHAR},
+      </if>
+			<if test="strictlyplot != null">
+				#{strictlyplot,jdbcType=VARCHAR},
+      </if>
+			<if test="postcrime != null">
+				#{postcrime,jdbcType=VARCHAR},
+      </if>
+			<if test="undermine != null">
+				#{undermine,jdbcType=VARCHAR},
+      </if>
+			<if test="wideplots != null">
+				#{wideplots,jdbcType=VARCHAR},
+      </if>
+			<if test="sanremark != null">
+				#{sanremark,jdbcType=VARCHAR},
+      </if>
+			<if test="principalaccessory != null">
+				#{principalaccessory,jdbcType=VARCHAR},
+      </if>
+			<if test="declarationproperty != null">
+				#{declarationproperty,jdbcType=VARCHAR},
+      </if>
+			<if test="crimtype != null">
+				#{crimtype,jdbcType=VARCHAR},
+      </if>
+			<if test="maincase != null">
+				#{maincase,jdbcType=VARCHAR},
+      </if>
+			<if test="entryways != null">
+				#{entryways,jdbcType=VARCHAR},
+      </if>
+			<if test="ischinese != null">
+				#{ischinese,jdbcType=VARCHAR},
+      </if>
+			<if test="isforeign != null">
+				#{isforeign,jdbcType=VARCHAR},
+      </if>
+			<if test="isdeath != null">
+				#{isdeath,jdbcType=DECIMAL},
+      </if>
+			<if test="orgid1 != null">
+				#{orgid1,jdbcType=VARCHAR},
+      </if>
+			<if test="orgid2 != null">
+				#{orgid2,jdbcType=VARCHAR},
+      </if>
+			<if test="remark != null">
+				#{remark,jdbcType=VARCHAR},
+      </if>
+			<if test="opid != null">
+				#{opid,jdbcType=VARCHAR},
+      </if>
+			<if test="optime != null">
+				#{optime,jdbcType=DATE},
+      </if>
+			<if test="falungong != null">
+				#{falungong,jdbcType=VARCHAR},
+      </if>
+			<if test="qitaxiejiao != null">
+				#{qitaxiejiao,jdbcType=VARCHAR},
+      </if>
+      		<if test="prison != null">
+				#{prison,jdbcType=VARCHAR},
+      </if>
+      		<if test="berth != null">
+				#{berth,jdbcType=VARCHAR},
+      </if>
+      <if test="returncompenstation != null">
+				#{returncompenstation,jdbcType=VARCHAR},
+      </if>
+		</trim>
+	</insert>
+  
+</mapper>

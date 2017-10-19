@@ -1,0 +1,780 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.sinog2c.dao.api.solution.FormParamMappingMapper" >
+  <resultMap id="BaseResultMap" type="com.sinog2c.model.solution.FormParamMapping" >
+    <id column="PARAMID" property="paramid" jdbcType="VARCHAR" />
+    <result column="SOLUTIONID" property="solutionid" jdbcType="VARCHAR" />
+    <result column="DETAILID" property="detailid" jdbcType="VARCHAR" />
+    <result column="SQLGROUPID" property="sqlgroupid" jdbcType="VARCHAR" />
+    <result column="SQLPARAMNAME" property="sqlparamname" jdbcType="VARCHAR" />
+    <result column="FORMFIELDNAME" property="formfieldname" jdbcType="VARCHAR" />
+    <result column="DATATYPE" property="datatype" jdbcType="DECIMAL" />
+    <result column="CYCLEFLAG" property="cycleflag" jdbcType="DECIMAL" />
+    <result column="NOTNULLFLAG" property="notnullflag" jdbcType="DECIMAL" />
+    <result column="NULLDELFLAG" property="nulldelflag" jdbcType="DECIMAL" />
+    <result column="NULLEMPTYVALUE" property="nullemptyvalue" jdbcType="VARCHAR" />
+    <result column="DELFLAG" property="delflag" jdbcType="DECIMAL" />
+    <result column="REMARK" property="remark" jdbcType="VARCHAR" />
+    <result column="CREATETIME" property="createtime" jdbcType="TIMESTAMP" />
+    <result column="UPDATETIME" property="updatetime" jdbcType="TIMESTAMP" />
+    <result column="CREATEMENDER" property="createmender" jdbcType="VARCHAR" />
+    <result column="UPDATEMENDER" property="updatemender" jdbcType="VARCHAR" />
+    <result column="SIGNFLAG" property="signflag" jdbcType="DECIMAL" />
+    <result column="INT1" property="int1" jdbcType="DECIMAL" />
+    <result column="INT2" property="int2" jdbcType="DECIMAL" />
+    <result column="INT3" property="int3" jdbcType="DECIMAL" />
+    <result column="INT4" property="int4" jdbcType="DECIMAL" />
+    <result column="INT5" property="int5" jdbcType="DECIMAL" />
+    <result column="TEXT1" property="text1" jdbcType="VARCHAR" />
+    <result column="TEXT2" property="text2" jdbcType="VARCHAR" />
+    <result column="TEXT3" property="text3" jdbcType="VARCHAR" />
+    <result column="TEXT4" property="text4" jdbcType="VARCHAR" />
+    <result column="TEXT5" property="text5" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    PARAMID, SOLUTIONID, DETAILID, SQLGROUPID, SQLPARAMNAME, FORMFIELDNAME, DATATYPE, 
+    CYCLEFLAG, NOTNULLFLAG, NULLDELFLAG, NULLEMPTYVALUE, DELFLAG, REMARK, CREATETIME, 
+    UPDATETIME, CREATEMENDER, UPDATEMENDER, SIGNFLAG, INT1, INT2, INT3, INT4, INT5, TEXT1, 
+    TEXT2, TEXT3, TEXT4, TEXT5
+  </sql>
+  <select id="selectById" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from TBSYS_FORM_PARAM_MAPPING
+    where PARAMID = #{paramid,jdbcType=VARCHAR}
+  </select>
+  <select id="selectByCombinationId" resultMap="BaseResultMap" parameterType="Map" >
+    select 
+    <include refid="Base_Column_List" />
+    from TBSYS_FORM_PARAM_MAPPING
+    where SOLUTIONID = #{solutionid,jdbcType=VARCHAR}
+      and DETAILID = #{detailid,jdbcType=VARCHAR}
+      and SQLGROUPID = #{sqlgroupid,jdbcType=VARCHAR}
+      and PARAMID = #{paramid,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteById" parameterType="java.lang.String" >
+    delete from TBSYS_FORM_PARAM_MAPPING
+    where PARAMID = #{paramid,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByMultiId" parameterType="Map" >
+    delete from TBSYS_FORM_PARAM_MAPPING
+    where PARAMID in (${paramid})
+  </delete>
+  <insert id="insert" parameterType="com.sinog2c.model.solution.FormParamMapping" >
+    insert into TBSYS_FORM_PARAM_MAPPING (PARAMID, SOLUTIONID, DETAILID, 
+      SQLGROUPID, SQLPARAMNAME, FORMFIELDNAME, 
+      DATATYPE, CYCLEFLAG, NOTNULLFLAG, 
+      NULLDELFLAG, NULLEMPTYVALUE, DELFLAG, 
+      REMARK, CREATETIME, UPDATETIME, 
+      CREATEMENDER, UPDATEMENDER, SIGNFLAG, 
+      INT1, INT2, INT3, INT4, 
+      INT5, TEXT1, TEXT2, 
+      TEXT3, TEXT4, TEXT5
+      )
+    values (#{paramid,jdbcType=VARCHAR}, #{solutionid,jdbcType=VARCHAR}, #{detailid,jdbcType=VARCHAR}, 
+      #{sqlgroupid,jdbcType=VARCHAR}, #{sqlparamname,jdbcType=VARCHAR}, #{formfieldname,jdbcType=VARCHAR}, 
+      #{datatype,jdbcType=DECIMAL}, #{cycleflag,jdbcType=DECIMAL}, #{notnullflag,jdbcType=DECIMAL}, 
+      #{nulldelflag,jdbcType=DECIMAL}, #{nullemptyvalue,jdbcType=VARCHAR}, #{delflag,jdbcType=DECIMAL}, 
+      #{remark,jdbcType=VARCHAR}, #{createtime,jdbcType=TIMESTAMP}, #{updatetime,jdbcType=TIMESTAMP}, 
+      #{createmender,jdbcType=VARCHAR}, #{updatemender,jdbcType=VARCHAR}, #{signflag,jdbcType=DECIMAL}, 
+      #{int1,jdbcType=DECIMAL}, #{int2,jdbcType=DECIMAL}, #{int3,jdbcType=DECIMAL}, #{int4,jdbcType=DECIMAL}, 
+      #{int5,jdbcType=DECIMAL}, #{text1,jdbcType=VARCHAR}, #{text2,jdbcType=VARCHAR}, 
+      #{text3,jdbcType=VARCHAR}, #{text4,jdbcType=VARCHAR}, #{text5,jdbcType=VARCHAR}
+      )
+  </insert>
+  
+  <insert id="insertSelective" parameterType="com.sinog2c.model.solution.FormParamMapping" >
+  	<selectKey resultType="int" keyProperty="paramid" order="BEFORE">
+   		select SEQ_RES_ID.NEXTVAL  from dual
+    </selectKey>
+    insert into TBSYS_FORM_PARAM_MAPPING
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="paramid != null" >
+        PARAMID,
+      </if>
+      <if test="solutionid != null" >
+        SOLUTIONID,
+      </if>
+      <if test="detailid != null" >
+        DETAILID,
+      </if>
+      <if test="sqlgroupid != null" >
+        SQLGROUPID,
+      </if>
+      <if test="sqlparamname != null" >
+        SQLPARAMNAME,
+      </if>
+      <if test="formfieldname != null" >
+        FORMFIELDNAME,
+      </if>
+      <if test="datatype != null" >
+        DATATYPE,
+      </if>
+      <if test="cycleflag != null" >
+        CYCLEFLAG,
+      </if>
+      <if test="notnullflag != null" >
+        NOTNULLFLAG,
+      </if>
+      <if test="nulldelflag != null" >
+        NULLDELFLAG,
+      </if>
+      <if test="nullemptyvalue != null" >
+        NULLEMPTYVALUE,
+      </if>
+      <if test="delflag != null" >
+        DELFLAG,
+      </if>
+      <if test="remark != null" >
+        REMARK,
+      </if>
+      <if test="createtime != null" >
+        CREATETIME,
+      </if>
+      <if test="updatetime != null" >
+        UPDATETIME,
+      </if>
+      <if test="createmender != null" >
+        CREATEMENDER,
+      </if>
+      <if test="updatemender != null" >
+        UPDATEMENDER,
+      </if>
+      <if test="signflag != null" >
+        SIGNFLAG,
+      </if>
+      <if test="int1 != null" >
+        INT1,
+      </if>
+      <if test="int2 != null" >
+        INT2,
+      </if>
+      <if test="int3 != null" >
+        INT3,
+      </if>
+      <if test="int4 != null" >
+        INT4,
+      </if>
+      <if test="int5 != null" >
+        INT5,
+      </if>
+      <if test="text1 != null" >
+        TEXT1,
+      </if>
+      <if test="text2 != null" >
+        TEXT2,
+      </if>
+      <if test="text3 != null" >
+        TEXT3,
+      </if>
+      <if test="text4 != null" >
+        TEXT4,
+      </if>
+      <if test="text5 != null" >
+        TEXT5,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="paramid != null" >
+        #{paramid,jdbcType=VARCHAR},
+      </if>
+      <if test="solutionid != null" >
+        #{solutionid,jdbcType=VARCHAR},
+      </if>
+      <if test="detailid != null" >
+        #{detailid,jdbcType=VARCHAR},
+      </if>
+      <if test="sqlgroupid != null" >
+        #{sqlgroupid,jdbcType=VARCHAR},
+      </if>
+      <if test="sqlparamname != null" >
+        #{sqlparamname,jdbcType=VARCHAR},
+      </if>
+      <if test="formfieldname != null" >
+        #{formfieldname,jdbcType=VARCHAR},
+      </if>
+      <if test="datatype != null" >
+        #{datatype,jdbcType=DECIMAL},
+      </if>
+      <if test="cycleflag != null" >
+        #{cycleflag,jdbcType=DECIMAL},
+      </if>
+      <if test="notnullflag != null" >
+        #{notnullflag,jdbcType=DECIMAL},
+      </if>
+      <if test="nulldelflag != null" >
+        #{nulldelflag,jdbcType=DECIMAL},
+      </if>
+      <if test="nullemptyvalue != null" >
+        #{nullemptyvalue,jdbcType=VARCHAR},
+      </if>
+      <if test="delflag != null" >
+        #{delflag,jdbcType=DECIMAL},
+      </if>
+      <if test="remark != null" >
+        #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="createtime != null" >
+        #{createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updatetime != null" >
+        #{updatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createmender != null" >
+        #{createmender,jdbcType=VARCHAR},
+      </if>
+      <if test="updatemender != null" >
+        #{updatemender,jdbcType=VARCHAR},
+      </if>
+      <if test="signflag != null" >
+        #{signflag,jdbcType=DECIMAL},
+      </if>
+      <if test="int1 != null" >
+        #{int1,jdbcType=DECIMAL},
+      </if>
+      <if test="int2 != null" >
+        #{int2,jdbcType=DECIMAL},
+      </if>
+      <if test="int3 != null" >
+        #{int3,jdbcType=DECIMAL},
+      </if>
+      <if test="int4 != null" >
+        #{int4,jdbcType=DECIMAL},
+      </if>
+      <if test="int5 != null" >
+        #{int5,jdbcType=DECIMAL},
+      </if>
+      <if test="text1 != null" >
+        #{text1,jdbcType=VARCHAR},
+      </if>
+      <if test="text2 != null" >
+        #{text2,jdbcType=VARCHAR},
+      </if>
+      <if test="text3 != null" >
+        #{text3,jdbcType=VARCHAR},
+      </if>
+      <if test="text4 != null" >
+        #{text4,jdbcType=VARCHAR},
+      </if>
+      <if test="text5 != null" >
+        #{text5,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByIdSelective" parameterType="com.sinog2c.model.solution.FormParamMapping" >
+    update TBSYS_FORM_PARAM_MAPPING
+    <set >
+      <if test="solutionid != null" >
+        SOLUTIONID = #{solutionid,jdbcType=VARCHAR},
+      </if>
+      <if test="detailid != null" >
+        DETAILID = #{detailid,jdbcType=VARCHAR},
+      </if>
+      <if test="sqlgroupid != null" >
+        SQLGROUPID = #{sqlgroupid,jdbcType=VARCHAR},
+      </if>
+      <if test="sqlparamname != null" >
+        SQLPARAMNAME = #{sqlparamname,jdbcType=VARCHAR},
+      </if>
+      <if test="formfieldname != null" >
+        FORMFIELDNAME = #{formfieldname,jdbcType=VARCHAR},
+      </if>
+      <if test="datatype != null" >
+        DATATYPE = #{datatype,jdbcType=DECIMAL},
+      </if>
+      <if test="cycleflag != null" >
+        CYCLEFLAG = #{cycleflag,jdbcType=DECIMAL},
+      </if>
+      <if test="notnullflag != null" >
+        NOTNULLFLAG = #{notnullflag,jdbcType=DECIMAL},
+      </if>
+      <if test="nulldelflag != null" >
+        NULLDELFLAG = #{nulldelflag,jdbcType=DECIMAL},
+      </if>
+      <if test="nullemptyvalue != null" >
+        NULLEMPTYVALUE = #{nullemptyvalue,jdbcType=VARCHAR},
+      </if>
+      <if test="delflag != null" >
+        DELFLAG = #{delflag,jdbcType=DECIMAL},
+      </if>
+      <if test="remark != null" >
+        REMARK = #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="createtime != null" >
+        CREATETIME = #{createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updatetime != null" >
+        UPDATETIME = #{updatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createmender != null" >
+        CREATEMENDER = #{createmender,jdbcType=VARCHAR},
+      </if>
+      <if test="updatemender != null" >
+        UPDATEMENDER = #{updatemender,jdbcType=VARCHAR},
+      </if>
+      <if test="signflag != null" >
+        SIGNFLAG = #{signflag,jdbcType=DECIMAL},
+      </if>
+      <if test="int1 != null" >
+        INT1 = #{int1,jdbcType=DECIMAL},
+      </if>
+      <if test="int2 != null" >
+        INT2 = #{int2,jdbcType=DECIMAL},
+      </if>
+      <if test="int3 != null" >
+        INT3 = #{int3,jdbcType=DECIMAL},
+      </if>
+      <if test="int4 != null" >
+        INT4 = #{int4,jdbcType=DECIMAL},
+      </if>
+      <if test="int5 != null" >
+        INT5 = #{int5,jdbcType=DECIMAL},
+      </if>
+      <if test="text1 != null" >
+        TEXT1 = #{text1,jdbcType=VARCHAR},
+      </if>
+      <if test="text2 != null" >
+        TEXT2 = #{text2,jdbcType=VARCHAR},
+      </if>
+      <if test="text3 != null" >
+        TEXT3 = #{text3,jdbcType=VARCHAR},
+      </if>
+      <if test="text4 != null" >
+        TEXT4 = #{text4,jdbcType=VARCHAR},
+      </if>
+      <if test="text5 != null" >
+        TEXT5 = #{text5,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where PARAMID = #{paramid,jdbcType=VARCHAR}
+  </update>
+  
+  <update id="updateById" parameterType="com.sinog2c.model.solution.FormParamMapping" >
+    update TBSYS_FORM_PARAM_MAPPING
+    set SOLUTIONID = #{solutionid,jdbcType=VARCHAR},
+      DETAILID = #{detailid,jdbcType=VARCHAR},
+      SQLGROUPID = #{sqlgroupid,jdbcType=VARCHAR},
+      SQLPARAMNAME = #{sqlparamname,jdbcType=VARCHAR},
+      FORMFIELDNAME = #{formfieldname,jdbcType=VARCHAR},
+      DATATYPE = #{datatype,jdbcType=DECIMAL},
+      CYCLEFLAG = #{cycleflag,jdbcType=DECIMAL},
+      NOTNULLFLAG = #{notnullflag,jdbcType=DECIMAL},
+      NULLDELFLAG = #{nulldelflag,jdbcType=DECIMAL},
+      NULLEMPTYVALUE = #{nullemptyvalue,jdbcType=VARCHAR},
+      DELFLAG = #{delflag,jdbcType=DECIMAL},
+      REMARK = #{remark,jdbcType=VARCHAR},
+      CREATETIME = #{createtime,jdbcType=TIMESTAMP},
+      UPDATETIME = #{updatetime,jdbcType=TIMESTAMP},
+      CREATEMENDER = #{createmender,jdbcType=VARCHAR},
+      UPDATEMENDER = #{updatemender,jdbcType=VARCHAR},
+      SIGNFLAG = #{signflag,jdbcType=DECIMAL},
+      INT1 = #{int1,jdbcType=DECIMAL},
+      INT2 = #{int2,jdbcType=DECIMAL},
+      INT3 = #{int3,jdbcType=DECIMAL},
+      INT4 = #{int4,jdbcType=DECIMAL},
+      INT5 = #{int5,jdbcType=DECIMAL},
+      TEXT1 = #{text1,jdbcType=VARCHAR},
+      TEXT2 = #{text2,jdbcType=VARCHAR},
+      TEXT3 = #{text3,jdbcType=VARCHAR},
+      TEXT4 = #{text4,jdbcType=VARCHAR},
+      TEXT5 = #{text5,jdbcType=VARCHAR}
+    where PARAMID = #{paramid,jdbcType=VARCHAR}
+  </update>
+  
+  <!-- 查询表中的所有信息 -->
+  <select id="listMapByPage" resultType="Map" parameterType="Map" >
+	select * from
+    ( 
+	    select a.*, rownum rn from
+	    (
+	    	select 
+		    <include refid="Base_Column_List" />
+		    from TBSYS_FORM_PARAM_MAPPING  where delflag=0
+		    <if test="solutionid !=null and solutionid !=''">  
+		   		 and  solutionid=#{solutionid}
+		    </if>
+		    <if test="detailid !=null and detailid !=''">
+		   		 and  detailid=#{detailid}
+		    </if>
+		    <if test="sqlgroupid !=null and sqlgroupid !=''">
+		   		 and  sqlgroupid=#{sqlgroupid}
+		    </if>
+		    <if test="paramid !=null and paramid !=''">
+		   		 and  paramid=#{paramid}
+		    </if>
+		    <if test="sqlparamname !=null and sqlparamname !=''">  
+		        and sqlparamname like '%'||#{sqlparamname}||'%' 
+		    </if>
+		    <if test="formfieldname !=null and formfieldname !=''">  
+		        and formfieldname like '%'||#{formfieldname}||'%' 
+		    </if>
+		    <if test="datatype !=null">  
+		   		 and datatype=#{datatype}
+		    </if>
+		    
+		    <if test="sortField!=null and sortOrder!=null" > 
+		     	order by ${sortField}  ${sortOrder}
+		    </if>
+	  	) a 
+	    <if test="end!=null and end!=''">
+	   		where rownum &lt;= #{end}
+	   	</if> 
+    )
+   	<if test="start!=null and start!=''">
+   		where  rn &gt;= #{start}
+   	</if>
+  </select>  
+
+  <select id="countAll" resultType="int">  <!-- 查询表中记录总数 -->
+		select count(*) c from TBSYS_FORM_PARAM_MAPPING  where delflag=0
+  </select>
+
+  <select id="listAll" resultMap="BaseResultMap">    <!-- 分页查询表中的所有信息 -->
+	 SELECT * FROM 
+	 	( SELECT A.*, ROWNUM RN 
+		 	FROM 
+		 	( 
+		 		SELECT 
+		 		<include refid="Base_Column_List" />
+		 		FROM TBSYS_FORM_PARAM_MAPPING
+		 		where delflag=0
+				<if test="sortField!=null and sortField!='' and sortOrder!=null and sortOrder!=''"> 
+			     	order by ${sortField}  ${sortOrder}
+			    </if>
+		 	) A 
+		 	WHERE ROWNUM &lt;= #{end,jdbcType=DECIMAL}
+	 	) 
+	 	WHERE RN &gt;= #{start,jdbcType=DECIMAL}
+  </select>
+
+  <select id="countByCondition" resultType="int" parameterType="Map" >  <!-- 根据条件查询表中记录数 -->
+		select count(*) c from TBSYS_FORM_PARAM_MAPPING
+	 	 where delflag=0
+	 	 	<if test="solutionid !=null and solutionid !=''">  
+		   		 and  solutionid=#{solutionid}
+		    </if>
+		    <if test="detailid !=null and detailid !=''">
+		   		 and  detailid=#{detailid}
+		    </if>
+		    <if test="sqlgroupid !=null and sqlgroupid !=''">
+		   		 and  sqlgroupid=#{sqlgroupid}
+		    </if>
+		    <if test="paramid !=null and paramid !=''">
+		   		 and  paramid=#{paramid}
+		    </if>
+		    <if test="sqlparamname !=null and sqlparamname !=''">  
+		        and sqlparamname like '%'||#{sqlparamname}||'%' 
+		    </if>
+		    <if test="formfieldname !=null and formfieldname !=''">  
+		        and formfieldname like '%'||#{formfieldname}||'%' 
+		    </if>
+		    <if test="datatype !=null">  
+		   		 and datatype=#{datatype}
+		    </if>
+  </select>
+
+  <select id="listByCondition" resultMap="BaseResultMap" parameterType="Map" >    <!-- 分页查询表中的信息 -->
+	 SELECT * FROM 
+	 	( SELECT A.*, ROWNUM RN 
+		 	FROM 
+		 	(
+		 		select 
+			    <include refid="Base_Column_List" />
+			    from TBSYS_FORM_PARAM_MAPPING   where delflag=0
+			    <if test="solutionid !=null and solutionid !=''">  
+		   		 and  solutionid=#{solutionid}
+			    </if>
+			    <if test="detailid !=null and detailid !=''">
+			   		 and  detailid=#{detailid}
+			    </if>
+			    <if test="sqlgroupid !=null and sqlgroupid !=''">
+			   		 and  sqlgroupid=#{sqlgroupid}
+			    </if>
+			    <if test="paramid !=null and paramid !=''">
+			   		 and  paramid=#{paramid}
+			    </if>
+			    <if test="sqlparamname !=null and sqlparamname !=''">  
+			        and sqlparamname like '%'||#{sqlparamname}||'%' 
+			    </if>
+			    <if test="formfieldname !=null and formfieldname !=''">  
+			        and formfieldname like '%'||#{formfieldname}||'%' 
+			    </if>
+			    <if test="datatype !=null">  
+			   		 and datatype=#{datatype}
+			    </if>
+			    
+			    <if test="sortField!=null and sortField!='' and sortOrder!=null and sortOrder!=''" > 
+			     	order by ${sortField}  ${sortOrder}
+			    </if>
+		 	) A 
+		    <if test="start !=null and end !=null" > 
+			 	WHERE ROWNUM &lt;= #{end,jdbcType=DECIMAL}
+		    </if>
+	 	) 
+	    <if test="start !=null and end !=null" > 
+	 		WHERE RN &gt;= #{start,jdbcType=DECIMAL}
+	    </if>
+  </select>
+  
+  <insert id="insertByMap" parameterType="Map" >
+  	<selectKey resultType="int" keyProperty="paramid" order="BEFORE">
+   		select SEQ_RES_ID.NEXTVAL  from dual
+    </selectKey>
+    insert into TBSYS_FORM_PARAM_MAPPING
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="paramid != null" >
+        PARAMID,
+      </if>
+      <if test="solutionid != null" >
+        SOLUTIONID,
+      </if>
+      <if test="detailid != null" >
+        DETAILID,
+      </if>
+      <if test="sqlgroupid != null" >
+        SQLGROUPID,
+      </if>
+      <if test="sqlparamname != null" >
+        SQLPARAMNAME,
+      </if>
+      <if test="formfieldname != null" >
+        FORMFIELDNAME,
+      </if>
+      <if test="datatype != null" >
+        DATATYPE,
+      </if>
+      <if test="cycleflag != null" >
+        CYCLEFLAG,
+      </if>
+      <if test="notnullflag != null" >
+        NOTNULLFLAG,
+      </if>
+      <if test="nulldelflag != null" >
+        NULLDELFLAG,
+      </if>
+      <if test="nullemptyvalue != null" >
+        NULLEMPTYVALUE,
+      </if>
+      <if test="delflag != null" >
+        DELFLAG,
+      </if>
+      <if test="remark != null" >
+        REMARK,
+      </if>
+      <if test="createtime != null" >
+        CREATETIME,
+      </if>
+      <if test="updatetime != null" >
+        UPDATETIME,
+      </if>
+      <if test="createmender != null" >
+        CREATEMENDER,
+      </if>
+      <if test="updatemender != null" >
+        UPDATEMENDER,
+      </if>
+      <if test="signflag != null" >
+        SIGNFLAG,
+      </if>
+      <if test="int1 != null" >
+        INT1,
+      </if>
+      <if test="int2 != null" >
+        INT2,
+      </if>
+      <if test="int3 != null" >
+        INT3,
+      </if>
+      <if test="int4 != null" >
+        INT4,
+      </if>
+      <if test="int5 != null" >
+        INT5,
+      </if>
+      <if test="text1 != null" >
+        TEXT1,
+      </if>
+      <if test="text2 != null" >
+        TEXT2,
+      </if>
+      <if test="text3 != null" >
+        TEXT3,
+      </if>
+      <if test="text4 != null" >
+        TEXT4,
+      </if>
+      <if test="text5 != null" >
+        TEXT5,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="paramid != null" >
+        #{paramid,jdbcType=VARCHAR},
+      </if>
+      <if test="solutionid != null" >
+        #{solutionid,jdbcType=VARCHAR},
+      </if>
+      <if test="detailid != null" >
+        #{detailid,jdbcType=VARCHAR},
+      </if>
+      <if test="sqlgroupid != null" >
+        #{sqlgroupid,jdbcType=VARCHAR},
+      </if>
+      <if test="sqlparamname != null" >
+        #{sqlparamname,jdbcType=VARCHAR},
+      </if>
+      <if test="formfieldname != null" >
+        #{formfieldname,jdbcType=VARCHAR},
+      </if>
+      <if test="datatype != null" >
+        #{datatype,jdbcType=DECIMAL},
+      </if>
+      <if test="cycleflag != null" >
+        #{cycleflag,jdbcType=DECIMAL},
+      </if>
+      <if test="notnullflag != null" >
+        #{notnullflag,jdbcType=DECIMAL},
+      </if>
+      <if test="nulldelflag != null" >
+        #{nulldelflag,jdbcType=DECIMAL},
+      </if>
+      <if test="nullemptyvalue != null" >
+        #{nullemptyvalue,jdbcType=VARCHAR},
+      </if>
+      <if test="delflag != null" >
+        #{delflag,jdbcType=DECIMAL},
+      </if>
+      <if test="remark != null" >
+        #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="createtime != null" >
+        #{createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updatetime != null" >
+        #{updatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createmender != null" >
+        #{createmender,jdbcType=VARCHAR},
+      </if>
+      <if test="updatemender != null" >
+        #{updatemender,jdbcType=VARCHAR},
+      </if>
+      <if test="signflag != null" >
+        #{signflag,jdbcType=DECIMAL},
+      </if>
+      <if test="int1 != null" >
+        #{int1,jdbcType=DECIMAL},
+      </if>
+      <if test="int2 != null" >
+        #{int2,jdbcType=DECIMAL},
+      </if>
+      <if test="int3 != null" >
+        #{int3,jdbcType=DECIMAL},
+      </if>
+      <if test="int4 != null" >
+        #{int4,jdbcType=DECIMAL},
+      </if>
+      <if test="int5 != null" >
+        #{int5,jdbcType=DECIMAL},
+      </if>
+      <if test="text1 != null" >
+        #{text1,jdbcType=VARCHAR},
+      </if>
+      <if test="text2 != null" >
+        #{text2,jdbcType=VARCHAR},
+      </if>
+      <if test="text3 != null" >
+        #{text3,jdbcType=VARCHAR},
+      </if>
+      <if test="text4 != null" >
+        #{text4,jdbcType=VARCHAR},
+      </if>
+      <if test="text5 != null" >
+        #{text5,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+
+  <update id="updateByMap" parameterType="Map" >
+    update TBSYS_FORM_PARAM_MAPPING
+    <set >
+      <if test="sqlparamname != null" >
+        SQLPARAMNAME = #{sqlparamname,jdbcType=VARCHAR},
+      </if>
+      <if test="formfieldname != null" >
+        FORMFIELDNAME = #{formfieldname,jdbcType=VARCHAR},
+      </if>
+      <if test="datatype != null" >
+        DATATYPE = #{datatype,jdbcType=DECIMAL},
+      </if>
+      <if test="cycleflag != null" >
+        CYCLEFLAG = #{cycleflag,jdbcType=DECIMAL},
+      </if>
+      <if test="notnullflag != null" >
+        NOTNULLFLAG = #{notnullflag,jdbcType=DECIMAL},
+      </if>
+      <if test="nulldelflag != null" >
+        NULLDELFLAG = #{nulldelflag,jdbcType=DECIMAL},
+      </if>
+      <if test="nullemptyvalue != null" >
+        NULLEMPTYVALUE = #{nullemptyvalue,jdbcType=VARCHAR},
+      </if>
+      <if test="delflag != null" >
+        DELFLAG = #{delflag,jdbcType=DECIMAL},
+      </if>
+      <if test="remark != null" >
+        REMARK = #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="createtime != null" >
+        CREATETIME = #{createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updatetime != null" >
+        UPDATETIME = #{updatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createmender != null" >
+        CREATEMENDER = #{createmender,jdbcType=VARCHAR},
+      </if>
+      <if test="updatemender != null" >
+        UPDATEMENDER = #{updatemender,jdbcType=VARCHAR},
+      </if>
+      <if test="signflag != null" >
+        SIGNFLAG = #{signflag,jdbcType=DECIMAL},
+      </if>
+      <if test="int1 != null" >
+        INT1 = #{int1,jdbcType=DECIMAL},
+      </if>
+      <if test="int2 != null" >
+        INT2 = #{int2,jdbcType=DECIMAL},
+      </if>
+      <if test="int3 != null" >
+        INT3 = #{int3,jdbcType=DECIMAL},
+      </if>
+      <if test="int4 != null" >
+        INT4 = #{int4,jdbcType=DECIMAL},
+      </if>
+      <if test="int5 != null" >
+        INT5 = #{int5,jdbcType=DECIMAL},
+      </if>
+      <if test="text1 != null" >
+        TEXT1 = #{text1,jdbcType=VARCHAR},
+      </if>
+      <if test="text2 != null" >
+        TEXT2 = #{text2,jdbcType=VARCHAR},
+      </if>
+      <if test="text3 != null" >
+        TEXT3 = #{text3,jdbcType=VARCHAR},
+      </if>
+      <if test="text4 != null" >
+        TEXT4 = #{text4,jdbcType=VARCHAR},
+      </if>
+      <if test="text5 != null" >
+        TEXT5 = #{text5,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where PARAMID = #{paramid,jdbcType=VARCHAR}
+     and SOLUTIONID = #{solutionid,jdbcType=VARCHAR}
+     and DETAILID = #{detailid,jdbcType=VARCHAR}
+     and SQLGROUPID = #{sqlgroupid,jdbcType=VARCHAR}
+  </update>
+
+</mapper>

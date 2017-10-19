@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.sinog2c.dao.api.system.SystemDictionaryMapper" >
+  <resultMap id="BaseResultMap" type="com.sinog2c.model.system.SystemDictionary" >
+    <id column="ENAME" property="ename" jdbcType="VARCHAR" />
+    <id column="ECOLNAME" property="ecolname" jdbcType="VARCHAR" />
+    <result column="DICTYPE" property="dictype" jdbcType="VARCHAR" />
+    <result column="CNAME" property="cname" jdbcType="VARCHAR" />
+    <result column="CCOLNAME" property="ccolname" jdbcType="VARCHAR" />
+    <result column="OPTIME" property="optime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    ENAME, ECOLNAME, DICTYPE, CNAME, CCOLNAME, OPTIME
+  </sql>
+  <!-- 根据条件查询表中记录 -->
+  <select id="selectAllByCondition" parameterType="Map" resultType="com.sinog2c.model.system.SystemDictionary">
+	select * from
+    ( select a.*, rownum rn
+    from
+    (
+    select * from TBSYS_DICTIONARY where 1=1 
+    <if test="key!=null and key!=''">  
+        and (
+        ecolname like concat(concat('%', #{key}), '%') 
+        or
+        cname like concat(concat('%', #{key}), '%')
+        or
+        ccolname like concat(concat('%', #{key}), '%')
+        )
+    </if>
+    <if test="tempid!=null and tempid!=''"> 
+    	and ename||ecolname  not in
+    	(
+    		select  ename||ecolname from  TBSYS_DICTIONARYTEMPLATE  where  tempid = #{tempid}
+    	)
+    </if>
+    <if test="sortField!=null and sortField!=''" > 
+     	order by ${sortField}  ${sortOrder}
+    </if>
+    ) a 
+    <if test="start!=null and start!=''">
+   		where rownum &lt;= #{end}
+   	</if> 
+    )
+   	<if test="start!=null and start!=''">
+   		where  rn &gt;= #{start}
+   	</if>
+  </select>
+  <!-- 根据条件查询表中记录总数 -->
+  <select id="countAllByCondition" parameterType="Map" resultType="int">
+	select count(*) c from TBSYS_DICTIONARY where 1=1 
+    <if test="key!=null and key!=''">  
+        and (
+        	ecolname like concat(concat('%', #{key}), '%') 
+        	or
+        	cname like concat(concat('%', #{key}), '%')
+        	or
+        	ccolname like concat(concat('%', #{key}), '%')
+        )
+    </if>
+    <if test="tempid!=null and tempid!=''"> 
+    	and ename||ecolname  not in
+    	(
+    		select  ename||ecolname from  TBSYS_DICTIONARYTEMPLATE  where  tempid = 'JWZX_ZFBQZDS'
+    	)
+    </if>
+  </select>
+   <select id="selectAllByTempid" parameterType="String" resultType="com.sinog2c.model.system.SystemDictionary">
+   		select b.* from TBSYS_DICTIONARYTEMPLATE a , TBSYS_DICTIONARY b  where  a.ecolname = b.ecolname 
+   		and a.ename = b.ename and a.tempid = #{tempid}
+   </select>
+</mapper>

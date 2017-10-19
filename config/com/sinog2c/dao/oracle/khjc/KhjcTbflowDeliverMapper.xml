@@ -1,0 +1,153 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.sinog2c.dao.api.khjc.KhjcTbflowDeliverMapper" >
+  <resultMap id="BaseResultMap" type="com.sinog2c.model.khjc.KhjcTbflowDeliver" >
+    <id column="FLOWDEFID" property="flowdefid" jdbcType="VARCHAR" />
+    <id column="DEPARTID" property="departid" jdbcType="VARCHAR" />
+    <id column="ORDERBY" property="orderby" jdbcType="VARCHAR" />
+    <result column="NODEID" property="nodeid" jdbcType="VARCHAR" />
+    <result column="TEXTNAME" property="textname" jdbcType="VARCHAR" />
+    <result column="DATENAME" property="datename" jdbcType="VARCHAR" />
+    <result column="SIGNANAME" property="signaname" jdbcType="VARCHAR" />
+    <result column="ISSEECHECK" property="isseecheck" jdbcType="VARCHAR" />
+    <result column="CREATETIME" property="createtime" jdbcType="DATE" />
+    <result column="REMARK" property="remark" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    FLOWDEFID, DEPARTID, ORDERBY, NODEID, TEXTNAME, DATENAME, SIGNANAME, ISSEECHECK, 
+    CREATETIME, REMARK
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="com.sinog2c.model.khjc.KhjcTbflowDeliverKey" >
+    select 
+    <include refid="Base_Column_List" />
+    from KHJC_TBFLOW_DELIVER
+    where FLOWDEFID = #{flowdefid,jdbcType=VARCHAR}
+      and DEPARTID = #{departid,jdbcType=VARCHAR}
+      and ORDERBY = #{orderby,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="com.sinog2c.model.khjc.KhjcTbflowDeliverKey" >
+    delete from KHJC_TBFLOW_DELIVER
+    where FLOWDEFID = #{flowdefid,jdbcType=VARCHAR}
+      and DEPARTID = #{departid,jdbcType=VARCHAR}
+      and ORDERBY = #{orderby,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.sinog2c.model.khjc.KhjcTbflowDeliver" >
+    insert into KHJC_TBFLOW_DELIVER (FLOWDEFID, DEPARTID, ORDERBY, 
+      NODEID, TEXTNAME, DATENAME, 
+      SIGNANAME, ISSEECHECK, CREATETIME, 
+      REMARK)
+    values (#{flowdefid,jdbcType=VARCHAR}, #{departid,jdbcType=VARCHAR}, #{orderby,jdbcType=VARCHAR}, 
+      #{nodeid,jdbcType=VARCHAR}, #{textname,jdbcType=VARCHAR}, #{datename,jdbcType=VARCHAR}, 
+      #{signaname,jdbcType=VARCHAR}, #{isseecheck,jdbcType=VARCHAR}, #{createtime,jdbcType=DATE}, 
+      #{remark,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.sinog2c.model.khjc.KhjcTbflowDeliver" >
+    insert into KHJC_TBFLOW_DELIVER
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="flowdefid != null" >
+        FLOWDEFID,
+      </if>
+      <if test="departid != null" >
+        DEPARTID,
+      </if>
+      <if test="orderby != null" >
+        ORDERBY,
+      </if>
+      <if test="nodeid != null" >
+        NODEID,
+      </if>
+      <if test="textname != null" >
+        TEXTNAME,
+      </if>
+      <if test="datename != null" >
+        DATENAME,
+      </if>
+      <if test="signaname != null" >
+        SIGNANAME,
+      </if>
+      <if test="isseecheck != null" >
+        ISSEECHECK,
+      </if>
+      <if test="createtime != null" >
+        CREATETIME,
+      </if>
+      <if test="remark != null" >
+        REMARK,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="flowdefid != null" >
+        #{flowdefid,jdbcType=VARCHAR},
+      </if>
+      <if test="departid != null" >
+        #{departid,jdbcType=VARCHAR},
+      </if>
+      <if test="orderby != null" >
+        #{orderby,jdbcType=VARCHAR},
+      </if>
+      <if test="nodeid != null" >
+        #{nodeid,jdbcType=VARCHAR},
+      </if>
+      <if test="textname != null" >
+        #{textname,jdbcType=VARCHAR},
+      </if>
+      <if test="datename != null" >
+        #{datename,jdbcType=VARCHAR},
+      </if>
+      <if test="signaname != null" >
+        #{signaname,jdbcType=VARCHAR},
+      </if>
+      <if test="isseecheck != null" >
+        #{isseecheck,jdbcType=VARCHAR},
+      </if>
+      <if test="createtime != null" >
+        #{createtime,jdbcType=DATE},
+      </if>
+      <if test="remark != null" >
+        #{remark,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.sinog2c.model.khjc.KhjcTbflowDeliver" >
+    update KHJC_TBFLOW_DELIVER
+    <set >
+      <if test="nodeid != null" >
+        NODEID = #{nodeid,jdbcType=VARCHAR},
+      </if>
+      <if test="textname != null" >
+        TEXTNAME = #{textname,jdbcType=VARCHAR},
+      </if>
+      <if test="datename != null" >
+        DATENAME = #{datename,jdbcType=VARCHAR},
+      </if>
+      <if test="signaname != null" >
+        SIGNANAME = #{signaname,jdbcType=VARCHAR},
+      </if>
+      <if test="isseecheck != null" >
+        ISSEECHECK = #{isseecheck,jdbcType=VARCHAR},
+      </if>
+      <if test="createtime != null" >
+        CREATETIME = #{createtime,jdbcType=DATE},
+      </if>
+      <if test="remark != null" >
+        REMARK = #{remark,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where FLOWDEFID = #{flowdefid,jdbcType=VARCHAR}
+      and DEPARTID = #{departid,jdbcType=VARCHAR}
+      and ORDERBY = #{orderby,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.sinog2c.model.khjc.KhjcTbflowDeliver" >
+    update KHJC_TBFLOW_DELIVER
+    set NODEID = #{nodeid,jdbcType=VARCHAR},
+      TEXTNAME = #{textname,jdbcType=VARCHAR},
+      DATENAME = #{datename,jdbcType=VARCHAR},
+      SIGNANAME = #{signaname,jdbcType=VARCHAR},
+      ISSEECHECK = #{isseecheck,jdbcType=VARCHAR},
+      CREATETIME = #{createtime,jdbcType=DATE},
+      REMARK = #{remark,jdbcType=VARCHAR}
+    where FLOWDEFID = #{flowdefid,jdbcType=VARCHAR}
+      and DEPARTID = #{departid,jdbcType=VARCHAR}
+      and ORDERBY = #{orderby,jdbcType=VARCHAR}
+  </update>
+</mapper>

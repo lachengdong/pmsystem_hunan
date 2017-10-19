@@ -1,0 +1,283 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.sinog2c.dao.api.system.SystemPermissionsMapper" >
+  <resultMap id="BaseResultMap" type="com.sinog2c.model.system.SystemPermissions" >
+    <result column="SPID" property="spid" jdbcType="VARCHAR" />
+    <result column="SPDISCRIBE" property="spdiscribe" jdbcType="VARCHAR" />
+    <result column="SPPARENT" property="spparent" jdbcType="VARCHAR" />
+    <result column="SMID" property="smid" jdbcType="VARCHAR" />
+    <result column="SPORDERBY" property="sporderby" jdbcType="DECIMAL" />
+    <result column="CREATETIME" property="createtime" jdbcType="TIMESTAMP" />
+    <result column="CREATEMENDER" property="createmender" jdbcType="VARCHAR" />
+    <result column="UPDATETIME" property="updatetime" jdbcType="TIMESTAMP" />
+    <result column="UPDATEMENDER" property="updatemender" jdbcType="VARCHAR" />
+    <result column="REMARK" property="remark" jdbcType="VARCHAR" />
+    <result column="ISSHOW" property="isshow" jdbcType="VARCHAR" />
+    <result column="DELFLG" property="delflg" jdbcType="VARCHAR" />
+    <result column="RID" property="rid" jdbcType="VARCHAR" />
+  </resultMap>
+  <insert id="insert" parameterType="com.sinog2c.model.system.SystemPermissions" >
+    insert into TBSYS_PERMISSIONS (SPID, SPDISCRIBE, SPPARENT, 
+      SMID, SPORDERBY, CREATETIME, 
+      CREATEMENDER, UPDATETIME, UPDATEMENDER, 
+      REMARK, ISSHOW, DELFLG, 
+      RID)
+    values (#{spid,jdbcType=VARCHAR}, #{spdiscribe,jdbcType=VARCHAR}, #{spparent,jdbcType=VARCHAR}, 
+      #{smid,jdbcType=VARCHAR}, #{sporderby,jdbcType=DECIMAL}, #{createtime,jdbcType=TIMESTAMP}, 
+      #{createmender,jdbcType=VARCHAR}, #{updatetime,jdbcType=TIMESTAMP}, #{updatemender,jdbcType=VARCHAR}, 
+      #{remark,jdbcType=VARCHAR}, #{isshow,jdbcType=VARCHAR}, #{delflg,jdbcType=VARCHAR}, 
+      #{rid,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.sinog2c.model.system.SystemPermissions" >
+    insert into TBSYS_PERMISSIONS
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="spid != null" >
+        SPID,
+      </if>
+      <if test="spdiscribe != null" >
+        SPDISCRIBE,
+      </if>
+      <if test="spparent != null" >
+        SPPARENT,
+      </if>
+      <if test="smid != null" >
+        SMID,
+      </if>
+      <if test="sporderby != null" >
+        SPORDERBY,
+      </if>
+      <if test="createtime != null" >
+        CREATETIME,
+      </if>
+      <if test="createmender != null" >
+        CREATEMENDER,
+      </if>
+      <if test="updatetime != null" >
+        UPDATETIME,
+      </if>
+      <if test="updatemender != null" >
+        UPDATEMENDER,
+      </if>
+      <if test="remark != null" >
+        REMARK,
+      </if>
+      <if test="isshow != null" >
+        ISSHOW,
+      </if>
+      <if test="delflg != null" >
+        DELFLG,
+      </if>
+      <if test="rid != null" >
+        RID,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="spid != null" >
+        #{spid,jdbcType=VARCHAR},
+      </if>
+      <if test="spdiscribe != null" >
+        #{spdiscribe,jdbcType=VARCHAR},
+      </if>
+      <if test="spparent != null" >
+        #{spparent,jdbcType=VARCHAR},
+      </if>
+      <if test="smid != null" >
+        #{smid,jdbcType=VARCHAR},
+      </if>
+      <if test="sporderby != null" >
+        #{sporderby,jdbcType=DECIMAL},
+      </if>
+      <if test="createtime != null" >
+        #{createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createmender != null" >
+        #{createmender,jdbcType=VARCHAR},
+      </if>
+      <if test="updatetime != null" >
+        #{updatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updatemender != null" >
+        #{updatemender,jdbcType=VARCHAR},
+      </if>
+      <if test="remark != null" >
+        #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="isshow != null" >
+        #{isshow,jdbcType=VARCHAR},
+      </if>
+      <if test="delflg != null" >
+        #{delflg,jdbcType=VARCHAR},
+      </if>
+      <if test="rid != null" >
+        #{rid,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <insert id="insertByMap" parameterType="Map" >
+    insert into TBSYS_PERMISSIONS
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="spid != null" >
+        SPID,
+      </if>
+      <if test="spdiscribe != null" >
+        SPDISCRIBE,
+      </if>
+      <if test="spparent != null" >
+        SPPARENT,
+      </if>
+      <if test="smid != null" >
+        SMID,
+      </if>
+      <if test="sporderby != null" >
+        SPORDERBY,
+      </if>
+      <if test="createmender != null" >
+        CREATEMENDER,
+      </if>
+      <if test="remark != null" >
+        REMARK,
+      </if>
+      <if test="isshow != null" >
+        ISSHOW,
+      </if>
+      <if test="delflg != null" >
+        DELFLG,
+      </if>
+      <if test="rid != null" >
+        RID,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="spid != null" >
+        #{spid,jdbcType=VARCHAR},
+      </if>
+      <if test="spdiscribe != null" >
+        #{spdiscribe,jdbcType=VARCHAR},
+      </if>
+      <if test="spparent != null" >
+        #{spparent,jdbcType=VARCHAR},
+      </if>
+      <if test="smid != null" >
+        #{smid,jdbcType=VARCHAR},
+      </if>
+      <if test="sporderby != null" >
+        #{sporderby,jdbcType=DECIMAL},
+      </if>
+      <if test="createmender != null" >
+        #{createmender,jdbcType=VARCHAR},
+      </if>
+      <if test="remark != null" >
+        #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="isshow != null" >
+        #{isshow,jdbcType=VARCHAR},
+      </if>
+      <if test="delflg != null" >
+        #{delflg,jdbcType=VARCHAR},
+      </if>
+      <if test="rid != null" >
+        #{rid,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <delete id="delete" parameterType="com.sinog2c.model.system.SystemPermissions">
+  	delete from TBSYS_PERMISSIONS where DELFLG=0 and SPID=#{spid}
+  </delete>
+  <update id="update" parameterType="com.sinog2c.model.system.SystemPermissions">
+  	update TBSYS_PERMISSIONS
+	<set>
+      <if test="spdiscribe != null" >
+        SPDISCRIBE=#{spdiscribe},
+      </if> 
+      <if test="spparent != null" >
+        SPPARENT=#{spparent},
+      </if>
+      <if test="smid != null" >
+        SMID=#{smid},
+      </if>
+      <if test="sporderby != null" >
+        SPORDERBY=#{sporderby},
+      </if>
+      <if test="createtime != null" >
+        CREATETIME=#{createtime},
+      </if>
+      <if test="createmender != null" >
+        CREATEMENDER=#{createmender},
+      </if>
+      <if test="updatetime != null" >
+        UPDATETIME=#{updatetime},
+      </if>
+      <if test="updatemender != null" >
+        UPDATEMENDER=#{updatemender},
+      </if>
+      <if test="remark != null" >
+        REMARK=#{remark},
+      </if>
+      <if test="isshow != null" >
+        ISSHOW=#{isshow},
+      </if>
+      <if test="rid != null" >
+        RID=#{rid},
+      </if>     
+	</set>
+	where SPID=#{spid}
+  </update>
+  <update id="updateByMap" parameterType="Map">
+  	update TBSYS_PERMISSIONS
+	<set>
+      <if test="spdiscribe != null" >
+        SPDISCRIBE=#{spdiscribe},
+      </if> 
+      <if test="spparent != null" >
+        SPPARENT=#{spparent},
+      </if>
+      <if test="smid != null" >
+        SMID=#{smid},
+      </if>
+      <if test="sporderby != null" >
+        SPORDERBY=#{sporderby},
+      </if>
+      <if test="updatetime != null" >
+        UPDATETIME=#{updatetime},
+      </if>
+      <if test="updatemender != null" >
+        UPDATEMENDER=#{updatemender},
+      </if>
+      <if test="remark != null" >
+        REMARK=#{remark},
+      </if>
+      <if test="isshow != null" >
+        ISSHOW=#{isshow},
+      </if>
+      <if test="rid != null" >
+        RID=#{rid},
+      </if>     
+	</set>
+	where SPID=#{spid}
+  </update>
+  <select id="getBySpid" resultMap="BaseResultMap">    <!-- 根据ID获取 -->
+	 select * from TBSYS_PERMISSIONS where SPID=#{spid} order by SPID asc
+  </select>
+  <select id="selectAll" resultMap="BaseResultMap">    <!-- 查询表中的所有信息 -->
+	 select * from TBSYS_PERMISSIONS where DELFLG=0 order by  SPID asc
+  </select>
+  <select id="getAllByPage" resultMap="BaseResultMap">    <!-- 分页查询表中的所有信息 -->
+	 SELECT * FROM 
+	 	( SELECT A.*, ROWNUM RN 
+		 	FROM 
+		 	(
+		 		SELECT * FROM TBSYS_PERMISSIONS
+		 		  where DELFLG=0
+		 		  order by SPID asc
+		 	) A 
+		 	WHERE ROWNUM &lt;= #{end,jdbcType=DECIMAL}
+	 	) 
+	 	WHERE RN &gt;= #{start,jdbcType=DECIMAL}
+  </select>
+  <select id="countAll" resultType="int">  <!-- 查询表中记录总数 -->
+		select count(*) c from TBSYS_PERMISSIONS
+  </select>
+  <select id="getNextId" resultType="int">  <!-- 获取下一个ID -->
+		select SEQ_PERMISSIONS_ID.NEXTVAL  from dual
+  </select>
+</mapper>

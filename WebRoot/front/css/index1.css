@@ -1,0 +1,400 @@
+@charset "utf-8";
+/* CSS Document */
+h2,h3,h4,em,strong{
+	font-weight:normal;	
+}
+body,h2,h3,h4,p,ul,li,pre,span,button,input,div,form,select,option{
+	margin:0;
+	padding:0;	
+}
+:link,:visited{
+	text-decoration:none;	
+}
+a{
+	outline:none;blr:expression(this.onFocus=this.blur());
+}
+img{
+	border:0 none;	
+}
+input{
+	border:0 none;	
+}
+ul{
+	list-style:none;	
+}
+.clear{
+	clear:both;	
+}
+body{
+	font-size:12px;
+	font-family:Arial;
+	line-height:1.5;
+	width:100%;
+	background:url(../images/index_bj.jpg) repeat-x #7abeed;
+}
+.iframe_top{
+	height:255px;
+	width:100%;	
+	z-index:2;
+}
+.iframe_tops{
+	height:255px;	
+	width:100%;	
+}
+.contents{
+	background:url(../images/content_bj.jpg) no-repeat;
+	width:1280px;
+	height:880px;
+	margin:0 auto;	
+}
+.con_left_nav{
+	width:580px;
+	padding-top:153px;
+	padding-left:60px;
+	float:left;
+}
+.con_left_nav ul li{
+	float:left;
+	background:url(../images/con_left_nbj.png) no-repeat;
+	width:226px;
+	height:88px;	
+	margin: 0 30px 50px;
+	text-align:center;
+	line-height:88px;
+	font-size:38px;
+	font-family:"隶书";
+}
+.con_left_nav ul li a{
+	color:#fff;	
+}
+.con_rit_tzgg{
+	background:url(../images/tzgg_bj.png) no-repeat;
+	width:429px;
+	height:517px;
+	float:left;	
+	margin-left: 103px;
+    margin-top: 100px;
+	float:left;
+}
+.con_rit_tzgg h2{
+	color: #fff;
+    font-family: "宋体";
+    font-size: 35px;
+    font-weight: bold;
+    height: 75px;
+    line-height: 75px;
+    text-align: center;
+}
+.con_rit_tzgg p{
+	color: #fff;
+    line-height: 35px;
+    padding: 25px;
+    text-align: justify;
+	font-size:16px;
+}
+.log3{
+	position:absolute;
+	margin-left: 249px;		
+}
+#box{
+	background:url(../images/ggbj.jpg) no-repeat;
+	width:1280px;
+	margin:0 auto;
+	height:988px;
+	margin-top:90px;	
+}
+.iframe_left{
+	position: absolute;
+    width: 235px;	
+	float:left;
+	background:none;
+}
+.iframe_lefts{
+	width: 235px;	
+	height:500px;
+	margin: 242px 0 0 88px;
+    position: absolute;	
+	background:none;
+}
+.box_rits{
+	float:left;
+	background:url(../images/cont_ritbj.png) no-repeat;
+	width:776px;
+	height:517px;
+	margin: 229px 0 0 345px;
+    position: absolute;	
+	padding:50px;
+}
+.box_rits p{
+	line-height:40px;
+	font-size:20px;	
+}
+.box_rits_list li{
+	line-height:35px;
+	font-size:20px;
+	font-family:"宋体";
+}
+.box_rits_list li a{
+	color:#000;	
+}
+.gkxx-bt{
+	font-size:25px;	
+	margin-bottom:15px;
+}
+.box_gkxxcd{
+	height: 607px;
+    padding: 17px 0 0 38px;
+    width: 840px;
+}
+.box_rits_gkxx li{
+	background:url(../images/gkxxbj.png) no-repeat;
+	width:122px;
+	height:35px;
+	line-height:35px;
+	text-align:center;
+	float:left;
+	margin-right:13px;
+	font-size:16px;	
+}
+.box_rits_gkxx li a{
+	color:#000;	
+}
+.paddingts{
+	margin-top:26px;	
+}
+.heights{
+	height:117px;	
+}
+#box2{
+	background:url(../images/box_bj2.jpg) no-repeat;
+	width:1280px;
+	height:988px;	
+	margin:0 auto;
+	margin-top:90px;
+}
+.registers{
+	background:url(../images/dl_bj.jpg) no-repeat;
+	width:882px;
+	height:616px;
+	margin: 235px 0 0 204px;
+    position: absolute;	
+}
+.yhczs{
+	font-size: 22px;
+    height: 156px;
+    line-height: 200px;
+    text-align: center;
+}
+.czsm{
+	padding:0 80px;	
+}
+.czsm li{
+	background:url(../images/czsmbj.jpg) no-repeat left center;	
+	line-height:30px;
+	padding-left:20px;
+	font-size:16px;
+}
+.czsm  .paddingls{
+	padding-top:0px;
+	background:url(../images/czsmbj.jpg) no-repeat left 10px;
+			
+}
+.gnlist{
+	padding: 0 61px 0 99px;	
+	position:absolute;	
+}
+.gnlist li{
+	background:url(../images/czsmbj2.jpg) no-repeat left center;
+	line-height:30px;
+	float:left;	
+	font-size:16px;
+	width:346px;
+	padding-left:15px;
+}
+.number{
+	padding:100px;	
+	font-size:14px;
+	font-weight:bold;
+}
+.srkinp{
+	float:left;
+	width:300px;	
+}
+.qndl{
+	font-weight:bold;	
+}
+.number input{
+	height:28px;
+	line-height:28px;
+	border:1px solid #edebec;
+	width:200px;	
+}
+.num_bat{
+	float:left;	
+	width: 300px;
+	margin-top: 28px;
+}
+.num_bat li{
+	background:url(../images/numbj.jpg) no-repeat;
+	width:55px;
+	height:22px;
+	line-height:22px;
+	text-align:center;
+	font-size:20px;
+	margin:10px;
+	float:left;	
+}
+.num_bat li a{
+	color:#000;
+}
+/*tsfy*/
+.tsfu_zcd{
+	position:absolute;
+	margin: 164px 0 0 379px;	
+}
+.tsfu_zcd ul{
+	float:left;	
+	width: 640px;
+}
+.tsfu_zcd ul li{
+	float:left;	
+	background:url(../images/fytsbj.png) no-repeat;
+	width:168px;
+	height:47px;
+	line-height:47px;
+	font-size: 18px;
+	text-align:center;
+}
+.tsfu_zcd ul li a{
+	color:#fff;	
+}
+.dltcs{
+	float:left;
+	margin-top:11px;
+	position:absolute;
+	margin-left:650px;
+	width:180px;
+	*margin-left:30px;	
+}
+.dltcs a{
+	width:66px;
+	height:32px;
+	line-height:32px;
+	text-align:center;
+	display:block;
+	float:left;
+	background:url(../images/dltcbj.png) no-repeat;	
+	margin-right:20px;
+	font-size:18px;
+	color:#fff;
+}
+.paddwid{
+	padding: 21px;
+    width: 835px;	
+	height:580px;
+}
+.tsfybts{
+	height:37px;
+	line-height:37px;
+	border:1px solid #d5d0d1;
+	background:url(../images/tsfubtbj.jpg) repeat-x;
+	font-size:26px;	
+	padding-left:20px;
+	width: 800px;
+}
+.searchs{
+	background:url(../images/searchs.png) no-repeat;
+	float: right;
+    height: 54px;
+    margin-right: 5px;
+    margin-top: -15px;
+    width: 54px;
+	*margin-top:-52px;
+}
+.tsfy_list{
+	border:1px solid #9fa0a1;	
+	margin-top:10px;
+	height:458px;
+	width: 819px;
+}
+.tsfy_list ul{
+	margin:20px;
+}
+.tsfy_list ul li{
+	font-size:16px;	
+	height: 35px;
+    line-height: 35px;
+}
+.tsfy_list ul li a{
+	display:block;
+	float:left;
+	color:#000;	
+}
+.tsfy_list ul li input{
+	float:right;
+	margin-right: 10px;	
+	font-size: 16px;
+}
+.pages{
+	margin-top:10px;
+	border-top:1px solid #aaabab;
+	margin: 10px -7px 0 -23px;
+	height: 53px;
+    line-height: 53px;	
+	padding: 0 30px;
+	font-size:18px;	
+}
+.pags2{
+	float:left;	
+}
+.pags1{
+	float:right;
+}
+.pags1 a{
+	color:#000;	
+}
+.pags1 a img{
+	vertical-align: middle;	
+}
+/*grxx*/
+.yhczs_ysb{
+	height: 50px;
+    line-height: 50px;	
+}
+.padding30{
+	padding:0 30px;	
+}
+.grxxlist{
+	padding: 0 54px;
+	position: absolute;	
+}
+.grxxlist li{
+	background:url(../images/czsmbj2.jpg) no-repeat left center;
+	line-height:30px;
+	float:left;	
+	font-size:16px;
+	width:319px;
+	padding-left:15px;
+}
+.numpadds{
+	padding: 111px 61px;
+}
+.grxximg{
+	position:absolute;	
+	margin: 18px 0 0 541px;
+}
+.grxximgs1{
+	position:absolute;	
+	margin: 18px 0 0 612px;	
+}
+
+
+
+.iframe_bottom{
+	width:100%;
+	height:103px;	
+}
+.iframe_bottoms{
+	width:100%;
+	height:103px;		
+}

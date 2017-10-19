@@ -1,0 +1,150 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.sinog2c.dao.api.oa.OaBgypMapper" >
+  <resultMap id="BaseResultMap" type="com.sinog2c.model.oa.OaBgyp" >
+    <id column="BGYPID" property="bgypid" jdbcType="VARCHAR" />
+    <result column="XUHAO" property="xuhao" jdbcType="VARCHAR" />
+    <result column="WPNAME" property="wpname" jdbcType="VARCHAR" />
+    <result column="LYSL" property="lysl" jdbcType="VARCHAR" />
+    <result column="LYRSIGN" property="lyrsign" jdbcType="VARCHAR" />
+    <result column="LYRQ" property="lyrq" jdbcType="DATE" />
+    <result column="REMARK" property="remark" jdbcType="VARCHAR" />
+    <result column="OPTIME" property="optime" jdbcType="DATE" />
+    <result column="OPID" property="opid" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    BGYPID, XUHAO, WPNAME, LYSL, LYRSIGN, LYRQ, REMARK, OPTIME, OPID
+  </sql>
+   <select id="getBgypList" resultType="java.util.HashMap" parameterType="java.util.HashMap">
+  		select 
+  		BGYPID, XUHAO, WPNAME, LYSL, LYRSIGN,
+  		to_char(LYRQ,'yyyy-MM-dd') lyrq, 
+  		OPTIME, OPID, REMARK
+  		from OA_BGYPJL t  where 1=1
+  		<if test="key!=null and key!=''">  
+          and t.wpname like CONCAT(CONCAT('%', #{key}), '%')
+      	</if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from OA_BGYPJL
+    where BGYPID = #{bgypid,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from OA_BGYPJL
+    where BGYPID = #{bgypid}
+  </delete>
+  <insert id="insert" parameterType="com.sinog2c.model.oa.OaBgyp" >
+    insert into OA_BGYPJL (BGYPID, XUHAO, WPNAME, 
+      LYSL, LYRSIGN, LYRQ, REMARK, OPTIME, OPID
+      )
+    values (#{bgypid,jdbcType=VARCHAR}, #{xuhao,jdbcType=VARCHAR}, #{wpname,jdbcType=VARCHAR}, 
+      #{lysl,jdbcType=VARCHAR}, #{lyrsign,jdbcType=VARCHAR}, #{lyrq,jdbcType=DATE}, #{remark,jdbcType=VARCHAR},
+      #{optime,jdbcType=DATE}, #{opid,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.sinog2c.model.oa.OaBgyp" >
+    insert into OA_BGYPJL
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="bgypid != null" >
+        BGYPID,
+      </if>
+      <if test="xuhao != null" >
+        XUHAO,
+      </if>
+      <if test="wpname != null" >
+        WPNAME,
+      </if>
+      <if test="lysl != null" >
+        LYSL,
+      </if>
+      <if test="lyrsign != null" >
+        LYRSIGN,
+      </if>
+      <if test="lyrq != null" >
+        LYRQ,
+      </if>
+      <if test="remark != null" >
+        REMARK,
+      </if>
+      <if test="optime != null" >
+        OPTIME,
+      </if>
+      <if test="opid != null" >
+        OPID,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="bgypid != null" >
+        #{bgypid,jdbcType=VARCHAR},
+      </if>
+      <if test="xuhao != null" >
+        #{xuhao,jdbcType=VARCHAR},
+      </if>
+      <if test="wpname != null" >
+        #{wpname,jdbcType=VARCHAR},
+      </if>
+      <if test="lysl != null" >
+        #{lysl,jdbcType=VARCHAR},
+      </if>
+      <if test="lyrsign != null" >
+        #{lyrsign,jdbcType=VARCHAR},
+      </if>
+      <if test="lyrq != null" >
+        #{lyrq,jdbcType=DATE},
+      </if>
+      <if test="remark != null" >
+        #{remark,jdbcType=VARCHAR},
+      </if>
+       <if test="optime != null" >
+        #{optime,jdbcType=DATE},
+      </if>
+       <if test="opid != null" >
+        #{opid,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.sinog2c.model.oa.OaBgyp" >
+    update OA_BGYPJL
+    <set >
+      <if test="xuhao != null" >
+        XUHAO = #{xuhao,jdbcType=VARCHAR},
+      </if>
+      <if test="wpname != null" >
+        WPNAME = #{wpname,jdbcType=VARCHAR},
+      </if>
+      <if test="lysl != null" >
+        LYSL = #{lysl,jdbcType=VARCHAR},
+      </if>
+      <if test="lyrsign != null" >
+        LYRSIGN = #{lyrsign,jdbcType=VARCHAR},
+      </if>
+      <if test="lyrq != null" >
+        LYRQ = #{lyrq,jdbcType=DATE},
+      </if>
+      <if test="remark != null" >
+        REMARK = #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="optime != null" >
+        OPTIME = #{remark,jdbcType=DATE},
+      </if>
+      <if test="opid != null" >
+        OPID = #{REMARK,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where BGYPID = #{bgypid,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.sinog2c.model.oa.OaBgyp" >
+    update OA_BGYPJL
+    set XUHAO = #{xuhao,jdbcType=VARCHAR},
+      WPNAME = #{wpname,jdbcType=VARCHAR},
+      LYSL = #{lysl,jdbcType=VARCHAR},
+      LYRSIGN = #{lyrsign,jdbcType=VARCHAR},
+      LYRQ = #{lyrq,jdbcType=DATE},
+      REMARK = #{remark,jdbcType=VARCHAR}
+      OPTIME = #{optime,jdbcType=DATE},
+      OPID = #{opid,jdbcType=VARCHAR}
+    where BGYPID = #{bgypid,jdbcType=VARCHAR}
+  </update>
+</mapper>

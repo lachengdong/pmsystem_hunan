@@ -1,0 +1,11 @@
+[
+{id:0,text:'内容'},
+{id:1,text:'ONLY'},
+{id:2,text:'刷卡'},
+{id:3,text:'购物'},
+{id:4,text:'TOP'},
+{id:5,text:'TAB'},
+{id:6,text:'流程'},
+{id:7,text:'退出'},
+{id:11,text:'其它'}
+]

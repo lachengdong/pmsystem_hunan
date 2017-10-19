@@ -1,0 +1,617 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.sinog2c.dao.api.flow.TbflowInstanceTaskMapper">
+	<resultMap id="BaseResultMap" type="com.sinog2c.model.flow.TbflowInstanceTask">
+		<id column="TASKID" jdbcType="VARCHAR" property="taskid" />
+		<result column="FLOWID" jdbcType="VARCHAR" property="flowid" />
+		<result column="FLOWDEFID" jdbcType="VARCHAR" property="flowdefid" />
+		<result column="ASSIGNEER" jdbcType="VARCHAR" property="assigneer" />
+		<result column="ASSIGNEERNAME" jdbcType="VARCHAR" property="assigneername" />
+		<result column="ASSIGNEERTIME" jdbcType="TIMESTAMP" property="assigneertime" />
+		<result column="STARTDATE" jdbcType="TIMESTAMP" property="startdate" />
+		<result column="ENDDATE" jdbcType="TIMESTAMP" property="enddate" />
+		<result column="CNODE" jdbcType="VARCHAR" property="cnode" />
+		<result column="CNODENAME" jdbcType="VARCHAR" property="cnodename" />
+		<result column="EXPLAIN" jdbcType="VARCHAR" property="explain" />
+		<result column="STATE" jdbcType="CHAR" property="state" />
+		<result column="LNODE" jdbcType="VARCHAR" property="lnode" />
+		<result column="LNODENAME" jdbcType="VARCHAR" property="lnodename" />
+		<result column="LASSIGNEER" jdbcType="VARCHAR" property="lassigneer" />
+		<result column="LASSIGNEERNAME" jdbcType="VARCHAR" property="lassigneername" />
+		<result column="FEEDBACK" jdbcType="VARCHAR" property="feedback" />
+		<result column="RESPONSE" jdbcType="CHAR" property="response" />
+		<result column="URGEINT1" jdbcType="DECIMAL" property="urgeint1" />
+		<result column="NOTE" jdbcType="VARCHAR" property="note" />
+		<result column="TEXT1" jdbcType="VARCHAR" property="text1" />
+		<result column="TEXT2" jdbcType="VARCHAR" property="text2" />
+		<result column="TEXT3" jdbcType="VARCHAR" property="text3" />
+		<result column="TEXT4" jdbcType="VARCHAR" property="text4" />
+	</resultMap>
+	<sql id="Base_Column_List">
+		TASKID, FLOWID, FLOWDEFID, ASSIGNEER, ASSIGNEERNAME,
+		ASSIGNEERTIME,
+		STARTDATE, ENDDATE,
+		CNODE, CNODENAME, EXPLAIN, STATE,
+		LNODE, LNODENAME, LASSIGNEER,
+		LASSIGNEERNAME, FEEDBACK,
+		RESPONSE,
+		URGEINT1, NOTE, TEXT1, TEXT2, TEXT3, TEXT4
+	</sql>
+	<select id="selectByPrimaryKey" parameterType="java.lang.String"
+		resultMap="BaseResultMap">
+		select
+		<include refid="Base_Column_List" />
+		from TBFLOW_TASK
+		where TASKID = #{taskid,jdbcType=VARCHAR}
+	</select>
+	<delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+		delete from
+		TBFLOW_TASK
+		where TASKID = #{taskid,jdbcType=VARCHAR}
+	</delete>
+	<insert id="insert" parameterType="com.sinog2c.model.flow.TbflowInstanceTask">
+		<selectKey keyProperty="taskid" order="BEFORE" resultType="String">
+			select SEQ_FLOW_TASKID.nextval as taskid from dual
+		</selectKey>
+		insert into TBFLOW_TASK (TASKID, FLOWID, FLOWDEFID, ASSIGNEER,
+		ASSIGNEERNAME, ASSIGNEERTIME, STARTDATE, ENDDATE, CNODE, CNODENAME,
+		EXPLAIN, STATE, LNODE, LNODENAME, LASSIGNEER, LASSIGNEERNAME,
+		FEEDBACK, RESPONSE, URGEINT1, NOTE, TEXT1, TEXT2, TEXT3, TEXT4 )
+		values (#{taskid,jdbcType=VARCHAR}, #{flowid,jdbcType=VARCHAR},
+		#{flowdefid,jdbcType=VARCHAR}, #{assigneer,jdbcType=VARCHAR},
+		#{assigneername,jdbcType=VARCHAR},
+		#{assigneertime,jdbcType=TIMESTAMP},
+		#{startdate,jdbcType=TIMESTAMP},
+		#{enddate,jdbcType=TIMESTAMP},
+		#{cnode,jdbcType=VARCHAR},
+		#{cnodename,jdbcType=VARCHAR},
+		#{explain,jdbcType=VARCHAR},
+		#{state,jdbcType=CHAR},
+		#{lnode,jdbcType=VARCHAR},
+		#{lnodename,jdbcType=VARCHAR},
+		#{lassigneer,jdbcType=VARCHAR},
+		#{lassigneername,jdbcType=VARCHAR},
+		#{feedback,jdbcType=VARCHAR},
+		#{response,jdbcType=CHAR},
+		#{urgeint1,jdbcType=DECIMAL},
+		#{note,jdbcType=VARCHAR},
+		#{text1,jdbcType=VARCHAR},
+		#{text2,jdbcType=VARCHAR},
+		#{text3,jdbcType=VARCHAR},
+		#{text4,jdbcType=VARCHAR} )
+	</insert>
+
+	<select id="getNextId" resultType="int">  <!-- 获取下一个ID -->
+		select SEQ_FLOW_TASKID.NEXTVAL from dual
+	</select>
+
+	<insert id="insertSelective" parameterType="com.sinog2c.model.flow.TbflowInstanceTask">
+		<selectKey keyProperty="taskid" order="BEFORE" resultType="String">
+			select SEQ_FLOW_TASKID.nextval as taskid from dual
+		</selectKey>
+		insert into TBFLOW_TASK
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="taskid != null">
+				TASKID,
+			</if>
+			<if test="flowid != null">
+				FLOWID,
+			</if>
+			<if test="flowdefid != null">
+				FLOWDEFID,
+			</if>
+			<if test="assigneer != null">
+				ASSIGNEER,
+			</if>
+			<if test="assigneername != null">
+				ASSIGNEERNAME,
+			</if>
+			<if test="assigneertime != null">
+				ASSIGNEERTIME,
+			</if>
+			<if test="startdate != null">
+				STARTDATE,
+			</if>
+			<if test="enddate != null">
+				ENDDATE,
+			</if>
+			<if test="cnode != null">
+				CNODE,
+			</if>
+			<if test="cnodename != null">
+				CNODENAME,
+			</if>
+			<if test="explain != null">
+				EXPLAIN,
+			</if>
+			<if test="state != null">
+				STATE,
+			</if>
+			<if test="lnode != null">
+				LNODE,
+			</if>
+			<if test="lnodename != null">
+				LNODENAME,
+			</if>
+			<if test="lassigneer != null">
+				LASSIGNEER,
+			</if>
+			<if test="lassigneername != null">
+				LASSIGNEERNAME,
+			</if>
+			<if test="feedback != null">
+				FEEDBACK,
+			</if>
+			<if test="response != null">
+				RESPONSE,
+			</if>
+			<if test="urgeint1 != null">
+				URGEINT1,
+			</if>
+			<if test="note != null">
+				NOTE,
+			</if>
+			<if test="text1 != null">
+				TEXT1,
+			</if>
+			<if test="text2 != null">
+				TEXT2,
+			</if>
+			<if test="text3 != null">
+				TEXT3,
+			</if>
+			<if test="text4 != null">
+				TEXT4,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="taskid != null">
+				#{taskid,jdbcType=VARCHAR},
+			</if>
+			<if test="flowid != null">
+				#{flowid,jdbcType=VARCHAR},
+			</if>
+			<if test="flowdefid != null">
+				#{flowdefid,jdbcType=VARCHAR},
+			</if>
+			<if test="assigneer != null">
+				#{assigneer,jdbcType=VARCHAR},
+			</if>
+			<if test="assigneername != null">
+				#{assigneername,jdbcType=VARCHAR},
+			</if>
+			<if test="assigneertime != null">
+				#{assigneertime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="startdate != null">
+				#{startdate,jdbcType=TIMESTAMP},
+			</if>
+			<if test="enddate != null">
+				#{enddate,jdbcType=TIMESTAMP},
+			</if>
+			<if test="cnode != null">
+				#{cnode,jdbcType=VARCHAR},
+			</if>
+			<if test="cnodename != null">
+				#{cnodename,jdbcType=VARCHAR},
+			</if>
+			<if test="explain != null">
+				#{explain,jdbcType=VARCHAR},
+			</if>
+			<if test="state != null">
+				#{state,jdbcType=CHAR},
+			</if>
+			<if test="lnode != null">
+				#{lnode,jdbcType=VARCHAR},
+			</if>
+			<if test="lnodename != null">
+				#{lnodename,jdbcType=VARCHAR},
+			</if>
+			<if test="lassigneer != null">
+				#{lassigneer,jdbcType=VARCHAR},
+			</if>
+			<if test="lassigneername != null">
+				#{lassigneername,jdbcType=VARCHAR},
+			</if>
+			<if test="feedback != null">
+				#{feedback,jdbcType=VARCHAR},
+			</if>
+			<if test="response != null">
+				#{response,jdbcType=CHAR},
+			</if>
+			<if test="urgeint1 != null">
+				#{urgeint1,jdbcType=DECIMAL},
+			</if>
+			<if test="note != null">
+				#{note,jdbcType=VARCHAR},
+			</if>
+			<if test="text1 != null">
+				#{text1,jdbcType=VARCHAR},
+			</if>
+			<if test="text2 != null">
+				#{text2,jdbcType=VARCHAR},
+			</if>
+			<if test="text3 != null">
+				#{text3,jdbcType=VARCHAR},
+			</if>
+			<if test="text4 != null">
+				#{text4,jdbcType=VARCHAR},
+			</if>
+		</trim>
+	</insert>
+	<insert id="insertSelective2" parameterType="com.sinog2c.model.flow.TbflowInstanceTask">		
+		insert into TBFLOW_TASK
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="taskid != null">
+				TASKID,
+			</if>
+			<if test="flowid != null">
+				FLOWID,
+			</if>
+			<if test="flowdefid != null">
+				FLOWDEFID,
+			</if>
+			<if test="assigneer != null">
+				ASSIGNEER,
+			</if>
+			<if test="assigneername != null">
+				ASSIGNEERNAME,
+			</if>
+			<if test="assigneertime != null">
+				ASSIGNEERTIME,
+			</if>
+			<if test="startdate != null">
+				STARTDATE,
+			</if>
+			<if test="enddate != null">
+				ENDDATE,
+			</if>
+			<if test="cnode != null">
+				CNODE,
+			</if>
+			<if test="cnodename != null">
+				CNODENAME,
+			</if>
+			<if test="explain != null">
+				EXPLAIN,
+			</if>
+			<if test="state != null">
+				STATE,
+			</if>
+			<if test="lnode != null">
+				LNODE,
+			</if>
+			<if test="lnodename != null">
+				LNODENAME,
+			</if>
+			<if test="lassigneer != null">
+				LASSIGNEER,
+			</if>
+			<if test="lassigneername != null">
+				LASSIGNEERNAME,
+			</if>
+			<if test="feedback != null">
+				FEEDBACK,
+			</if>
+			<if test="response != null">
+				RESPONSE,
+			</if>
+			<if test="urgeint1 != null">
+				URGEINT1,
+			</if>
+			<if test="note != null">
+				NOTE,
+			</if>
+			<if test="text1 != null">
+				TEXT1,
+			</if>
+			<if test="text2 != null">
+				TEXT2,
+			</if>
+			<if test="text3 != null">
+				TEXT3,
+			</if>
+			<if test="text4 != null">
+				TEXT4,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="taskid != null">
+				#{taskid,jdbcType=VARCHAR},
+			</if>
+			<if test="flowid != null">
+				#{flowid,jdbcType=VARCHAR},
+			</if>
+			<if test="flowdefid != null">
+				#{flowdefid,jdbcType=VARCHAR},
+			</if>
+			<if test="assigneer != null">
+				#{assigneer,jdbcType=VARCHAR},
+			</if>
+			<if test="assigneername != null">
+				#{assigneername,jdbcType=VARCHAR},
+			</if>
+			<if test="assigneertime != null">
+				#{assigneertime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="startdate != null">
+				#{startdate,jdbcType=TIMESTAMP},
+			</if>
+			<if test="enddate != null">
+				#{enddate,jdbcType=TIMESTAMP},
+			</if>
+			<if test="cnode != null">
+				#{cnode,jdbcType=VARCHAR},
+			</if>
+			<if test="cnodename != null">
+				#{cnodename,jdbcType=VARCHAR},
+			</if>
+			<if test="explain != null">
+				#{explain,jdbcType=VARCHAR},
+			</if>
+			<if test="state != null">
+				#{state,jdbcType=CHAR},
+			</if>
+			<if test="lnode != null">
+				#{lnode,jdbcType=VARCHAR},
+			</if>
+			<if test="lnodename != null">
+				#{lnodename,jdbcType=VARCHAR},
+			</if>
+			<if test="lassigneer != null">
+				#{lassigneer,jdbcType=VARCHAR},
+			</if>
+			<if test="lassigneername != null">
+				#{lassigneername,jdbcType=VARCHAR},
+			</if>
+			<if test="feedback != null">
+				#{feedback,jdbcType=VARCHAR},
+			</if>
+			<if test="response != null">
+				#{response,jdbcType=CHAR},
+			</if>
+			<if test="urgeint1 != null">
+				#{urgeint1,jdbcType=DECIMAL},
+			</if>
+			<if test="note != null">
+				#{note,jdbcType=VARCHAR},
+			</if>
+			<if test="text1 != null">
+				#{text1,jdbcType=VARCHAR},
+			</if>
+			<if test="text2 != null">
+				#{text2,jdbcType=VARCHAR},
+			</if>
+			<if test="text3 != null">
+				#{text3,jdbcType=VARCHAR},
+			</if>
+			<if test="text4 != null">
+				#{text4,jdbcType=VARCHAR},
+			</if>
+		</trim>
+	</insert>
+	<update id="updateByPrimaryKeySelective" parameterType="com.sinog2c.model.flow.TbflowInstanceTask">
+		update TBFLOW_TASK
+		<set>
+			<if test="flowid != null">
+				FLOWID = #{flowid,jdbcType=VARCHAR},
+			</if>
+			<if test="flowdefid != null">
+				FLOWDEFID = #{flowdefid,jdbcType=VARCHAR},
+			</if>
+			<if test="assigneer != null">
+				ASSIGNEER = #{assigneer,jdbcType=VARCHAR},
+			</if>
+			<if test="assigneername != null">
+				ASSIGNEERNAME = #{assigneername,jdbcType=VARCHAR},
+			</if>
+			<if test="assigneertime != null">
+				ASSIGNEERTIME = #{assigneertime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="startdate != null">
+				STARTDATE = #{startdate,jdbcType=TIMESTAMP},
+			</if>
+			<if test="enddate != null">
+				ENDDATE = #{enddate,jdbcType=TIMESTAMP},
+			</if>
+			<if test="cnode != null">
+				CNODE = #{cnode,jdbcType=VARCHAR},
+			</if>
+			<if test="cnodename != null">
+				CNODENAME = #{cnodename,jdbcType=VARCHAR},
+			</if>
+			<if test="explain != null">
+				EXPLAIN = #{explain,jdbcType=VARCHAR},
+			</if>
+			<if test="state != null">
+				STATE = #{state,jdbcType=CHAR},
+			</if>
+			<if test="lnode != null">
+				LNODE = #{lnode,jdbcType=VARCHAR},
+			</if>
+			<if test="lnodename != null">
+				LNODENAME = #{lnodename,jdbcType=VARCHAR},
+			</if>
+			<if test="lassigneer != null">
+				LASSIGNEER = #{lassigneer,jdbcType=VARCHAR},
+			</if>
+			<if test="lassigneername != null">
+				LASSIGNEERNAME = #{lassigneername,jdbcType=VARCHAR},
+			</if>
+			<if test="feedback != null">
+				FEEDBACK = #{feedback,jdbcType=VARCHAR},
+			</if>
+			<if test="response != null">
+				RESPONSE = #{response,jdbcType=CHAR},
+			</if>
+			<if test="urgeint1 != null">
+				URGEINT1 = #{urgeint1,jdbcType=DECIMAL},
+			</if>
+			<if test="note != null">
+				NOTE = #{note,jdbcType=VARCHAR},
+			</if>
+			<if test="text1 != null">
+				TEXT1 = #{text1,jdbcType=VARCHAR},
+			</if>
+			<if test="text2 != null">
+				TEXT2 = #{text2,jdbcType=VARCHAR},
+			</if>
+			<if test="text3 != null">
+				TEXT3 = #{text3,jdbcType=VARCHAR},
+			</if>
+			<if test="text4 != null">
+				TEXT4 = #{text4,jdbcType=VARCHAR},
+			</if>
+		</set>
+		where TASKID = #{taskid,jdbcType=VARCHAR}
+	</update>
+	<update id="updateByPrimaryKey" parameterType="com.sinog2c.model.flow.TbflowInstanceTask">
+		update TBFLOW_TASK
+		set FLOWID = #{flowid,jdbcType=VARCHAR},
+		FLOWDEFID =
+		#{flowdefid,jdbcType=VARCHAR},
+		ASSIGNEER =
+		#{assigneer,jdbcType=VARCHAR},
+		ASSIGNEERNAME =
+		#{assigneername,jdbcType=VARCHAR},
+		ASSIGNEERTIME =
+		#{assigneertime,jdbcType=TIMESTAMP},
+		STARTDATE =
+		#{startdate,jdbcType=TIMESTAMP},
+		ENDDATE =
+		#{enddate,jdbcType=TIMESTAMP},
+		CNODE = #{cnode,jdbcType=VARCHAR},
+		CNODENAME = #{cnodename,jdbcType=VARCHAR},
+		EXPLAIN =
+		#{explain,jdbcType=VARCHAR},
+		STATE = #{state,jdbcType=CHAR},
+		LNODE =
+		#{lnode,jdbcType=VARCHAR},
+		LNODENAME = #{lnodename,jdbcType=VARCHAR},
+		LASSIGNEER = #{lassigneer,jdbcType=VARCHAR},
+		LASSIGNEERNAME =
+		#{lassigneername,jdbcType=VARCHAR},
+		FEEDBACK =
+		#{feedback,jdbcType=VARCHAR},
+		RESPONSE = #{response,jdbcType=CHAR},
+		URGEINT1 = #{urgeint1,jdbcType=DECIMAL},
+		NOTE =
+		#{note,jdbcType=VARCHAR},
+		TEXT1 = #{text1,jdbcType=VARCHAR},
+		TEXT2 =
+		#{text2,jdbcType=VARCHAR},
+		TEXT3 = #{text3,jdbcType=VARCHAR},
+		TEXT4 =
+		#{text4,jdbcType=VARCHAR}
+		where TASKID = #{taskid,jdbcType=VARCHAR}
+	</update>
+
+	<delete id="deleteByflowid" parameterType="java.lang.String">
+		delete from
+		TBFLOW_TASK
+		where FLOWID = #{flowid,jdbcType=VARCHAR}
+	</delete>
+
+	<update id="updateByflownodeuserSelective" parameterType="com.sinog2c.model.flow.TbflowInstanceTask">
+		update TBFLOW_TASK
+		<set>
+			<if test="flowid != null">
+				FLOWID = #{flowid,jdbcType=VARCHAR},
+			</if>
+			<if test="flowdefid != null">
+				FLOWDEFID = #{flowdefid,jdbcType=VARCHAR},
+			</if>
+			<if test="assigneer != null">
+				ASSIGNEER = #{assigneer,jdbcType=VARCHAR},
+			</if>
+			<if test="assigneername != null">
+				ASSIGNEERNAME = #{assigneername,jdbcType=VARCHAR},
+			</if>
+			<if test="assigneertime != null">
+				ASSIGNEERTIME = #{assigneertime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="startdate != null">
+				STARTDATE = #{startdate,jdbcType=TIMESTAMP},
+			</if>
+			<if test="enddate != null">
+				ENDDATE = #{enddate,jdbcType=TIMESTAMP},
+			</if>
+			<if test="cnode != null">
+				CNODE = #{cnode,jdbcType=VARCHAR},
+			</if>
+			<if test="cnodename != null">
+				CNODENAME = #{cnodename,jdbcType=VARCHAR},
+			</if>
+			<if test="explain != null">
+				EXPLAIN = #{explain,jdbcType=VARCHAR},
+			</if>
+			<if test="state != null">
+				STATE = #{state,jdbcType=CHAR},
+			</if>
+			<if test="lnode != null">
+				LNODE = #{lnode,jdbcType=VARCHAR},
+			</if>
+			<if test="lnodename != null">
+				LNODENAME = #{lnodename,jdbcType=VARCHAR},
+			</if>
+			<if test="lassigneer != null">
+				LASSIGNEER = #{lassigneer,jdbcType=VARCHAR},
+			</if>
+			<if test="lassigneername != null">
+				LASSIGNEERNAME = #{lassigneername,jdbcType=VARCHAR},
+			</if>
+			<if test="feedback != null">
+				FEEDBACK = #{feedback,jdbcType=VARCHAR},
+			</if>
+			<if test="response != null">
+				RESPONSE = #{response,jdbcType=CHAR},
+			</if>
+			<if test="urgeint1 != null">
+				URGEINT1 = #{urgeint1,jdbcType=DECIMAL},
+			</if>
+			<if test="note != null">
+				NOTE = #{note,jdbcType=VARCHAR},
+			</if>
+			<if test="text1 != null">
+				TEXT1 = #{text1,jdbcType=VARCHAR},
+			</if>
+			<if test="text2 != null">
+				TEXT2 = #{text2,jdbcType=VARCHAR},
+			</if>
+			<if test="text3 != null">
+				TEXT3 = #{text3,jdbcType=VARCHAR},
+			</if>
+			<if test="text4 != null">
+				TEXT4 = #{text4,jdbcType=VARCHAR},
+			</if>
+		</set>
+		where FLOWID = #{flowid,jdbcType=VARCHAR} and CNODE =
+		#{cnode,jdbcType=VARCHAR}
+		<if test="assigneer != null">
+			and ASSIGNEER = #{assigneer,jdbcType=VARCHAR}
+		</if>
+		<if test="state != null">
+			and STATE = #{state,jdbcType=CHAR},
+		</if>
+	</update>
+
+	<select id="flowtaskisrollback" parameterType="java.lang.String"
+		resultType="com.sinog2c.model.flow.TbflowInstanceTask">
+		select
+		<include refid="Base_Column_List" />
+		from TBFLOW_TASK
+		where flowid = #{flowid} and cnode=#{cnode} and
+		state=#{state}
+	</select>
+
+	<select id="getflowTaskListByid" parameterType="java.lang.String"
+		resultType="com.sinog2c.model.flow.TbflowInstanceTask">
+		select
+		<include refid="Base_Column_List" />
+		from TBFLOW_TASK
+		where flowid = #{flowid}
+		order by
+		ASSIGNEERTIME,startdate asc
+	</select>
+
+</mapper>

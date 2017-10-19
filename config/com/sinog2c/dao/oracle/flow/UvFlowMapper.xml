@@ -1,0 +1,3443 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.sinog2c.dao.api.flow.UvFlowMapper" >
+  <resultMap id="BaseResultMap" type="com.sinog2c.model.flow.UvFlow" >
+    <result column="FLOWDRAFTID" property="flowdraftid" jdbcType="VARCHAR" />
+    <result column="FLOWID" property="flowid" jdbcType="VARCHAR" />
+    <result column="FLOWDEFID" property="flowdefid" jdbcType="VARCHAR" />
+    <result column="APPLYID" property="applyid" jdbcType="VARCHAR" />
+    <result column="APPLYNAME" property="applyname" jdbcType="VARCHAR" />
+    <result column="STARTDATETIME" property="startdatetime" jdbcType="TIMESTAMP" />
+    <result column="ENDDATETIME" property="enddatetime" jdbcType="TIMESTAMP" />
+    <result column="CONENT" property="conent" jdbcType="VARCHAR" />
+    <result column="ISLOCKED" property="islocked" jdbcType="DECIMAL" />
+    <result column="OPID" property="opid" jdbcType="VARCHAR" />
+    <result column="DEPARTID" property="departid" jdbcType="VARCHAR" />
+    <result column="NODEID" property="nodeid" jdbcType="VARCHAR" />
+    <result column="ORGID" property="orgid" jdbcType="VARCHAR" />
+    <result column="ROLEID" property="roleid" jdbcType="DECIMAL" />
+    <result column="STATE" property="state" jdbcType="DECIMAL" />
+    <result column="STARTSUMMRY" property="startsummry" jdbcType="VARCHAR" />
+    <result column="ENDSUMMRY" property="endsummry" jdbcType="VARCHAR" />
+    <result column="COMMENTTEXT" property="commenttext" jdbcType="VARCHAR" />
+    <result column="INT1" property="int1" jdbcType="DECIMAL" />
+    <result column="INT2" property="int2" jdbcType="DECIMAL" />
+    <result column="INT3" property="int3" jdbcType="DECIMAL" />
+    <result column="INT4" property="int4" jdbcType="DECIMAL" />
+    <result column="INT5" property="int5" jdbcType="DECIMAL" />
+    <result column="TEXT1" property="text1" jdbcType="VARCHAR" />
+    <result column="TEXT2" property="text2" jdbcType="VARCHAR" />
+    <result column="TEXT3" property="text3" jdbcType="VARCHAR" />
+    <result column="TEXT4" property="text4" jdbcType="VARCHAR" />
+    <result column="TEXT5" property="text5" jdbcType="VARCHAR" />
+    <result column="TEXT6" property="text6" jdbcType="VARCHAR" />
+    <result column="TEXT12" property="text12" jdbcType="VARCHAR" />
+    <result column="CASETYPE" property="casetype" jdbcType="VARCHAR" />
+  </resultMap>
+  
+  <!-- 根据自定义流程ID查找流程信息 -->
+  <select id="findByFlowdefid" parameterType="Map" resultType="com.sinog2c.model.flow.UvFlow">
+	select * from
+    ( select a.*, rownum rn
+    from
+    (
+    		select * from (
+				    select uf.* ,e.resid,
+				    				(case 
+				    						<foreach collection="list" index="index" item="item">  
+										      	when tr.porgid=#{item.provinceid} and uf.nodeid=#{item.nodeid} and uf.flowdefid=#{item.flowdefid} and uf.state = -1
+								    	    	then (case when uf.optime+#{item.days} &lt;= sysdate  then 1 else 0 end)
+										   </foreach>
+								    	else 1
+								    	end
+								     ) as wardenOperFlag
+				    from uv_flow uf, TBSYS_ORGINFO tr,TBFLOW_DELIVER e
+				     where 1=1  
+				     AND UF.FLOWDEFID = e.FLOWDEFID(+)
+                     AND UF.NODEID = e.SNODEID(+)
+                     AND UF.STATE = e.STATE(+)
+                     AND UF.DEPARTID = e.DEPARTID(+)
+				     and tr.orgid = #{departid}
+					    AND uf.orgid in 
+					    (
+					    	select dorgid from  tbflow_org_org where orgid = #{orgid} 
+					    )
+					    and uf.flowid is not null
+					<if test="connsql!=null and connsql!=''"> 
+						and  (
+								(
+									(${connsql}) and uf.state in (-1,2)
+								)
+								 <if test="suid!=null and suid!=''"> 
+				   	 				or (uf.state in(0,-2) and uf.opid = #{suid})
+				   				 </if>  
+							)
+					</if>    
+				    <if test="applyid!=null and applyid!=''"> 
+				    	and uf.applyid=#{applyid}
+				    </if>
+				    <if test="flowdefid!=null and flowdefid!=''"> 
+				    	and uf.flowdefid=#{flowdefid}
+				    </if>
+				    <if test="isarch!=null and isarch!=''"> 
+				    	and uf.flowdefid not in ('arch_zfdajysp','arch_zfdajdsp')
+				    </if>
+				    <if test="key!=null and key!=''">  
+				        and uf.conent like concat(concat('%', #{key}), '%')
+				    </if>
+		) where wardenOperFlag = 1
+	    <if test="sortField!=null and sortField!=''" > 
+	     	order by ${sortField}  ${sortOrder}
+	    </if>
+    ) a 
+    <if test="start!=null and start!=''">
+   		where rownum &lt;= #{end}
+   	</if> 
+    )
+   	<if test="start!=null and start!=''">
+   		where  rn &gt;= #{start}
+   	</if>
+  </select>
+  
+  <!-- 根据自定义流程ID查找流程信息(山东待办事项用) -->
+  <select id="findByFlowdefidForSD" parameterType="Map" resultType="map">
+	select * from
+    ( select a.*, rownum rn
+    from
+    (
+    		select tempid,tempname,flowdefid,wardenOperFlag,resid,nodeid,count(resid) as count from (
+				    select c.tempid,d.tempname,uf.flowdefid,UF.NODEID,UF.STATE,E.resid,
+				    				(case 
+				    						<foreach collection="list" index="index" item="item">  
+										      	when tr.porgid=#{item.provinceid} and uf.nodeid=#{item.nodeid} and uf.flowdefid=#{item.flowdefid} and uf.state = -1
+								    	    	then (case when uf.optime+#{item.days} &lt;= sysdate  then 1 else 0 end)
+										   </foreach>
+								    	else 1
+								    	end
+								     ) as wardenOperFlag
+				    FROM uv_flow uf, TBSYS_ORGINFO tr,TBFLOW_OTHER_FLOW c,TBSYS_TEMPLATE d,TBFLOW_DELIVER e
+				     where 1=1
+				     AND UF.FLOWDEFID = e.FLOWDEFID(+)
+                     AND UF.NODEID = e.SNODEID(+)
+                     AND UF.STATE = e.STATE(+)
+				     AND UF.FLOWDRAFTID = C.FLOWDRAFTID(+)
+                     AND c.tempid=d.tempid(+) 
+				     and tr.orgid = #{departid}
+					    AND uf.orgid in 
+					    (
+					    	select dorgid from  tbflow_org_org where orgid = #{orgid} 
+					    )
+					    and uf.flowid is not null
+					<if test="connsql!=null and connsql!=''"> 
+						and  (
+								(
+									(${connsql}) and uf.state in (-1,2)
+								)
+								 <if test="suid!=null and suid!=''"> 
+				   	 				or (uf.state in(0,-2) and uf.opid = #{suid})
+				   				 </if>  
+							)
+					</if>    
+				    <if test="applyid!=null and applyid!=''"> 
+				    	and uf.applyid=#{applyid}
+				    </if>
+				    <if test="flowdefid!=null and flowdefid!=''"> 
+				    	and uf.flowdefid=#{flowdefid}
+				    </if>
+				    <if test="isarch!=null and isarch!=''"> 
+				    	and uf.flowdefid not in ('arch_zfdajysp','arch_zfdajdsp')
+				    </if>
+				    <if test="key!=null and key!=''">  
+				        and uf.conent like concat(concat('%', #{key}), '%')
+				    </if>
+		) where wardenOperFlag = 1
+		GROUP BY flowdefid,nodeid,resid,tempid,tempname,wardenOperFlag
+	    <if test="sortField!=null and sortField!=''" > 
+	     	order by ${sortField}  ${sortOrder}
+	    </if>
+    ) a 
+    <if test="start!=null and start!=''">
+   		where rownum &lt;= #{end}
+   	</if> 
+    )
+   	<if test="start!=null and start!=''">
+   		where  rn &gt;= #{start}
+   	</if>
+  </select>
+  <!-- 根据条件查询表中记录总数 -->
+  <select id="countAllByCondition" parameterType="Map" resultType="int">
+  		select count(*) from (
+		    select uf.* ,
+		    				(case 
+		    						<foreach collection="list" index="index" item="item">  
+								      	when tr.porgid=#{item.provinceid} and uf.nodeid=#{item.nodeid} and uf.flowdefid=#{item.flowdefid} and uf.state = -1
+						    	    	then (case when uf.optime + #{item.days} &lt;= sysdate  then 1 else 0 end)
+								   </foreach>
+						    	else 1
+						    	end
+						     ) as wardenOperFlag
+		    from uv_flow uf, TBSYS_ORGINFO tr
+		    
+		     where 1=1  and tr.orgid = #{departid}
+			     AND uf.orgid in 
+			    (
+			    	select dorgid from  tbflow_org_org where orgid = #{orgid} 
+			    )
+			    and uf.flowid is not null 
+			<if test="connsql!=null and connsql!=''"> 
+				and  (
+						(
+							(${connsql}) and uf.state in (-1,2)
+						)
+						 <if test="suid!=null and suid!=''"> 
+		   	 				or (uf.state in(0,-2) and uf.opid = #{suid})
+		   				 </if>  
+					)
+			</if>    
+		    <if test="applyid!=null and applyid!=''"> 
+		    	and uf.applyid=#{applyid}
+		    </if>
+		    <if test="flowdefid!=null and flowdefid!=''"> 
+		    	and uf.flowdefid=#{flowdefid}
+		    </if>
+		    <if test="isarch!=null and isarch!=''"> 
+		    	and uf.flowdefid not in ('arch_zfdajysp','arch_zfdajdsp')
+		    </if>
+		    <if test="key!=null and key!=''">  
+		        and uf.conent like concat(concat('%', #{key}), '%')
+		    </if>
+		) where wardenOperFlag = 1
+	   
+  </select>
+  
+  
+  <!-- 根据自定义流程ID查找流程信息 -->
+  <select id="findByMapParams" parameterType="Map" resultType="com.sinog2c.model.flow.UvFlow">
+	select * from
+    ( select a.*, rownum rn
+    from
+    (
+    		
+				    select 
+				    	tb.applyid,
+				    	tb.applyname,
+				    	tb.conent,
+				    	t.startsummry,
+				    	t.opname,
+				    	t.optime,
+				    	t.FLOWDRAFTID,
+				    	tb.flowid,
+				    	tb.orgid
+				    from tbflow_base tb,
+				    	 tbprisoner_baseinfo bbb,
+					
+						(SELECT 
+						   T1.startsummry,
+	                       T1.opname,
+	                       T1.optime,
+	                       T1.FLOWDRAFTID
+	               		FROM TBFLOW T1
+	              		WHERE 1 = 1
+	                      AND NOT EXISTS
+	                             (SELECT 1
+	                                FROM TBFLOW T2
+	                               WHERE T1.FLOWDRAFTID = T2.FLOWDRAFTID
+	                                     AND T2.ORDERBY > T1.ORDERBY
+	                             )
+	                     ) t
+				    where 1=1 
+				    	and tb.applyid=bbb.crimid
+						and t.flowdraftid=tb.flowdraftid
+				    	and tb.orgid in 
+					    (
+					    	select dorgid from  tbflow_org_org where orgid = #{orgid} 
+					    )
+					    and tb.flowid is not null 
+					
+					<if test="connsql!=null and connsql!=''"> 
+						and  (
+								(
+									(${connsql}) and tb.state in (-1,2,3)
+								)
+								 <if test="suid!=null and suid!=''">
+				   	 				or (tb.state in(0,-2) and tb.opid = #{suid})
+				   				 </if>
+							)
+					</if>   
+				    <if test="applyid!=null and applyid!=''"> 
+				    	and tb.applyid=#{applyid}
+				    </if>
+				    <if test="flowdefid!=null and flowdefid!=''"> 
+				    	and tb.flowdefid=#{flowdefid}
+				    </if>
+				    <if test="isarch!=null and isarch!=''"> 
+				    	and tb.flowdefid not in ('arch_zfdajysp','arch_zfdajdsp')
+				    </if>
+				    <if test="key!=null and key!=''">  
+				        and (tb.conent like concat(concat('%', #{key}), '%') 
+				        	or tb.applyid like concat(concat('%', #{key}), '%')
+				         	or tb.applyname like concat(concat('%', #{key}), '%')
+				         	or bbb.namepinyinshort like concat(UPPER(#{key}),'%'))
+				    </if>
+				    order by tb.applyid, tb.conent
+		
+    ) a 
+    <if test="start!=null and start!=''">
+   		where rownum &lt;= #{end}
+   	</if> 
+    )
+   	<if test="start!=null and start!=''">
+   		where  rn &gt;= #{start}
+   	</if>
+  </select>
+  <!-- 根据条件查询表中记录总数 -->
+  <select id="countByMapParams"  parameterType="Map" resultType="int">
+  		select count(*) from (
+		    select * 
+		    from tbflow_base tb,tbprisoner_baseinfo bbb ,
+			(SELECT 
+					   T1.startsummry,
+                       T1.opname,
+                       T1.optime,
+                       T1.FLOWDRAFTID
+               FROM TBFLOW T1
+              WHERE 1 = 1
+                    AND NOT EXISTS
+                               (SELECT 1
+                                  FROM TBFLOW T2
+                                 WHERE T1.FLOWDRAFTID = T2.FLOWDRAFTID
+                                       AND T2.ORDERBY > T1.ORDERBY)) t
+		    
+		     where 1=1
+				and tb.applyid=bbb.crimid
+		     	and tb.flowdraftid=t.flowdraftid
+		    	and tb.orgid in 
+			    (
+			    	select dorgid from  tbflow_org_org where orgid = #{orgid} 
+			    )
+			    and tb.flowid is not null 
+			<if test="connsql!=null and connsql!=''"> 
+				and  (
+						(
+							(${connsql}) and tb.state in (-1,2,3)
+						)
+						 <if test="suid!=null and suid!=''"> 
+		   	 				or (tb.state in(0,-2) and tb.opid = #{suid})
+		   				 </if>  
+					)
+			</if>    
+		    <if test="applyid!=null and applyid!=''"> 
+		    	and tb.applyid=#{applyid}
+		    </if>
+		    <if test="flowdefid!=null and flowdefid!=''"> 
+		    	and tb.flowdefid=#{flowdefid}
+		    </if>
+		    <if test="isarch!=null and isarch!=''"> 
+		    	and tb.flowdefid not in ('arch_zfdajysp','arch_zfdajdsp')
+		    </if>
+		    <if test="key!=null and key!=''">  
+		        and (tb.conent like concat(concat('%', #{key}), '%') 
+		        	or tb.applyid like concat(concat('%', #{key}), '%')
+		         	or tb.applyname like concat(concat('%', #{key}), '%')
+		         	or bbb.namepinyinshort like concat(UPPER(#{key}),'%')
+		         	)
+		    </if>
+		)
+  </select>
+  
+  
+  <!-- 根据减刑假释流程ID查找流程信息 -->
+   <select id="findCommutatioByCondition" parameterType="Map" resultType="Map">
+	select * from
+    	(	select a.*, rownum rn
+    		from
+    		(
+		    	select * from (
+		    			select 
+		    			tbc.orgname1,
+				    	uf.flowid,
+				    	uf.flowdraftid ,
+				    	uf.nodeid as lastnodeid, 
+				    	uf.state,uf.conent, 
+				    	uf.optime as operatetime,
+				    	uf.text8,
+				    	sysdate as currdate, 
+				    	
+			    		(case when tr.porgid=#{provinceid} and uf.nodeid=#{nodeid} and uf.state = -1
+				    	    then (case when uf.optime+#{days} &lt;= sysdate  then 1 else 0 end)
+				    		else 1 end
+			    		) as wardenOperFlag,
+				    	
+				    	t.crimid,t.name,getage(t.BRITHDAY) as age, 
+				    	t.PREDATE,
+				    	t.areaid as orgid, 
+				    	SENTENCESTIME,
+						SENTENCEETIME,
+						COURTCHANGETO,
+						CAUSEACTION,						
+						tr.porgid,
+				    	'(' || substr(uf.text6,1,4) || ')' || tr.shortname ||(case when uf.int1=0 then '减字' when uf.int1=1 then '假字' else '' end) ||'第' ||substr(uf.text6,5) || '号' as ANJIANHAO,
+				    	F_FORMATYMD(ORIGINALYEAR,ORIGINALMONTH,ORIGINALDAY,0) as ORIGINALYEAR,
+		 				F_FORMATYMD(NOWPUNISHMENTYEAR,NOWPUNISHMENTMONTH,NOWPUNISHMENTDAY,0)  AS nowpunishmentyear,
+		 				GETDISOFTWODATE(PREDATE,EXAMINEEND) as JIANGGEQI
+		    			from 
+		    			(
+		    				select  
+		    				tsr.crimid,
+    						REMAINDERPUNISHMENT,
+    						EXAMINEEND 
+    						from 	TBXF_SCREENING tsr ,
+    								tbxf_commuteparole_batch tss
+                         			where 1=1
+                         			--	and tsr.status='1'
+				                		and tsr.batchid=tss.batchid 
+				                    --    and tsr.cstatus='1'
+				                        and tsr.isdeclare='2'
+				                        and tsr.departid = #{departid}
+						) ddd,
+			    		uv_flow uf ,
+			    		tbprisoner_baseinfo bbb,
+			    		TBXF_SENTENCEALTERATION t ,
+			    		TBPRISONER_BASE_CRIME tbc,
+			    		TBSYS_ORGINFO tr
+			    	 	where 1=1 
+			    	 	and  ddd.crimid = applyid
+			    	 	and ddd.crimid = bbb.crimid 
+			    	 	and uf.applyid = t.crimid 
+			    	 	and ddd.crimid=tbc.crimid
+			    	 	and uf.flowid is not null
+			    	 	and tr.orgid = #{departid}
+				    	and uf.orgid in 
+					    (
+					    	select dorgid from  tbflow_org_org where orgid = #{orgid} 
+					    )
+					    <if test="connsql!=null and connsql!='' and banjieqingkuang!=1 and banjieqingkuang!=3"> 
+							and  (
+									(
+										(${connsql}) and uf.state in (-1,2)
+										<if test="flowdefid!=null and flowdefid!=''"> 
+									    	and flowdefid=#{flowdefid}
+									    </if>
+									 )
+									 <if test="suid!=null and suid!=''"> 
+					   	 				or (uf.state in(0,-2) and uf.opid = #{suid})
+					   				 </if>  
+								)
+						</if> 
+					    <if test="banjieqingkuang!=null and banjieqingkuang!='' and banjieqingkuang==1">
+					         and not exists (select 1 from uv_flow uvt where 1=1 and  
+									(
+										(${connsql}) and uvt.state in (-1,2)
+										and uvt.flowid=uf.flowid
+										<if test="flowdefid!=null and flowdefid!=''"> 
+									    	and flowdefid=#{flowdefid}
+									    </if>
+									 ))
+							and exists (select 1 from tbflow tt where tt.flowid=uf.flowid and tt.opid = #{suid} and tt.state&lt;&gt;0 and tt.state&lt;&gt;-2 and not exists (select 1 from tbflow ttb where tt.flowid=ttb.flowid and tt.opid = ttb.opid and ttb.optime>tt.optime)) 
+			    	    </if> 
+			    	    <if test="banjieqingkuang!=null and banjieqingkuang!='' and banjieqingkuang==3">
+							and (uf.nodeid='1' or uf.nodeid='-1') and exists (select 1 from tbflow tt where tt.flowid=uf.flowid and tt.opid = #{suid})
+			    	    </if> 
+					    <if test="applyid!=null and applyid!=''"> 
+					    	and applyid=#{applyid}
+					    </if>
+					    <if test="flowdefid!=null and flowdefid!=''"> 
+					    	and flowdefid=#{flowdefid}
+					    </if>
+					    <if test="state!=null and state!=''"> 
+					   	 	and state in (${state})
+					    </if>
+					    <if test="key!=null and key!=''">  
+					        and (t.crimid like '%'||#{key}||'%' or t.name like '%'||#{key}||'%' or bbb.namepinyinshort like concat(UPPER(#{key}),'%'))
+					    </if>
+					    <if test="casetype!=null and casetype!=''">  
+					        and uf.casetype=#{casetype}
+					    </if>
+					    <if test="casenums!=null and casenums!=''">
+							and uf.text6 in (${casenums})
+					    </if>
+					    <if test="year!=null and year!=''">
+							and SUBSTR(nvl(uf.text6,0), 1, 4) = #{year}
+			    	 	</if>
+			    	 	
+			    	 	<if test="xingqileixing!=null and xingqileixing!=''  and xingqileixing==1">
+				and ((t.NOWPUNISHMENTYEAR!='9995'  and  t.NOWPUNISHMENTYEAR!='9996')  or ( t.NOWPUNISHMENTYEAR is null))
+    	 </if>
+    	 <if test="xingqileixing!=null and xingqileixing!=''  and xingqileixing==2">
+				and t.NOWPUNISHMENTYEAR ='9995'  
+    	 </if>
+    	 <if test="xingqileixing!=null and xingqileixing!=''  and xingqileixing==3">
+				and t.NOWPUNISHMENTYEAR ='9996'  
+    	 </if>
+    	 <if test="jianqu!=null and jianqu!=''">
+				and uf.orgid = #{jianqu}
+    	 </if>
+			    	 	
+				    order by to_number(uf.text6)
+				) where wardenOperFlag = 1
+			    <if test="sortField!=null and sortField!=''" > 
+			     	order by ${sortField}  ${sortOrder}
+			    </if>
+			) a 
+		    <if test="start!=null and start!=''">
+		   		where rownum &lt;= #{end}
+		   	</if> 
+    	)
+	   	<if test="start!=null and start!=''">
+	   		where  rn &gt;= #{start}
+	   	</if>
+  </select>
+  <!-- 根据TBXF_SENTENCEALTERATION表中的JAILTO字段值为2的过滤被退案的 -->
+  <select id="findTuiAnByCondition" parameterType="Map" resultType="Map">
+	select * from
+    ( 
+	    select a.*, rownum rn from
+	    (
+	      select * from (
+		  select btc.orgname1,
+		  fff.flowdraftid,fff.flowid,fff.nodeid as lastnodeid,fff.state,fff.conent,fff.text6, getage(eee.BRITHDAY) as age,
+		   '(' || substr(fff.text6,1,4) || ')' || tr.shortname || (case when fff.int1=0 then '减字' when fff.int1=1 then '假字' else '' end) ||'第' ||substr(fff.text6,5) || '号' as ANJIANHAO,
+		  eee.crimid,eee.name,
+		  eee.PREDATE,
+		  eee.areaid,
+		  SENTENCESTIME,
+		 SENTENCEETIME,
+		 F_FORMATYMD(ORIGINALYEAR,ORIGINALMONTH,ORIGINALDAY,0) as ORIGINALYEAR,
+		 F_FORMATYMD(NOWPUNISHMENTYEAR,NOWPUNISHMENTMONTH,NOWPUNISHMENTDAY,0)  AS nowpunishmentyear,
+		 decode(eee.PUNISHMENTYEAR,
+              '9995',
+              '无期',
+              '9996',
+              '死缓',
+              decode(eee.PUNISHMENTYEAR,'0','',null,'',eee.PUNISHMENTYEAR || '年') ||
+              		 decode(eee.PUNISHMENTMONTH,'0',decode(eee.PUNISHMENTDAY, '0', '', null, '','零'), null,
+                     decode(eee.PUNISHMENTDAY, '0', '', null, '','零'),
+                     eee.PUNISHMENTMONTH || '个月') ||
+              decode(eee.PUNISHMENTDAY, '0', '', null, '', eee.PUNISHMENTDAY || '天')) as shengyuxingqi,
+              
+             GETDISOFTWODATE(PREDATE, EXAMINEEND) as JIANGGEQI 
+       
+       from 
+		(select tsr.crimid,REMAINDERPUNISHMENT,EXAMINEEND from TBXF_SCREENING tsr ,tbxf_commuteparole_batch tss
+                         where 1=1
+                         and tsr.batchid=tss.batchid 
+                         and tsr.isdeclare='2'
+                         and tsr.departid = #{departid}
+			) ddd,
+			TBXF_SENTENCEALTERATION  eee, 
+			TBPRISONER_BASE_CRIME btc,
+			uv_flow fff,
+			TBSYS_ORGINFO tr
+			where ddd.crimid = eee.crimid
+			and 	ddd.crimid = btc.crimid
+			and ddd.crimid = fff.applyid
+			and tr.orgid = #{departid}
+            and (btc.orgid2 IN (SELECT too.dorgid
+                                                      FROM tbflow_org_org too
+                                                     WHERE too.orgid = #{orgid})  or btc.orgid1 IN (SELECT too.dorgid
+                                                      FROM tbflow_org_org too
+                                                     WHERE too.orgid = #{orgid}) )
+            and fff.FLOWDEFID = #{flowdefid}
+			and eee.JAILTO=#{jailto}
+		 <trim prefix="" suffix="" suffixOverrides=",">
+		 		<if test="key!=null and key!=''"> and (eee.crimid like '%'||#{key}||'%' or eee.name like '%'||#{key}||'%')</if>
+		 </trim>
+		 order by to_number(fff.text6))
+		 <trim prefix="" suffix="" suffixOverrides=",">
+				<if test="sortField!=null and sortField!=''">order by ${sortField} ${sortOrder}</if>
+		</trim>
+	  	) a 
+	    <if test="end!=null and end!=''">
+	   		where rownum &lt;= #{end}
+	   	</if> 
+       )
+   	 <if test="start!=null and start!=''">
+   		where  rn &gt;= #{start}
+     </if>
+  </select>
+  
+  <!-- 根据减刑假释条件查询表中记录总数 -->
+  <select id="countAllOfCommuteByCondition" parameterType="Map" resultType="int">
+	select count(*) from (
+   			select 
+		    	(case when tr.porgid=#{provinceid} and uf.nodeid=#{nodeid} and uf.state = -1
+		    	    then (case when uf.optime+#{days} &lt;= sysdate  then 1 else 0 end)
+		    		else 1
+		    		end
+		    	) as wardenOperFlag
+   			from 
+   			(
+   				select  
+   				tsr.crimid,
+ 						REMAINDERPUNISHMENT,
+ 						EXAMINEEND 
+ 						from 	TBXF_SCREENING tsr ,
+ 								tbxf_commuteparole_batch tss
+                      			where	1=1
+                      			--  and tsr.status='1'
+		                			and tsr.batchid=tss.batchid 
+		                        --	and tsr.cstatus='1'
+		                        	and tsr.isdeclare='2'
+		                        	and tsr.departid = #{departid}
+			) ddd,
+    		uv_flow uf ,
+    		tbprisoner_baseinfo bbb,
+    		TBXF_SENTENCEALTERATION t ,
+    		TBPRISONER_BASE_CRIME tbc,
+    		TBSYS_ORGINFO tr
+    	 	where 1=1 
+    	 	and  ddd.crimid = applyid 
+    	 	and ddd.crimid=bbb.crimid
+    	 	and uf.applyid = t.crimid 
+    	 	and ddd.crimid=tbc.crimid
+    	 	and uf.flowid is not null
+    	 	and tr.orgid = #{departid}
+	    	and uf.orgid in 
+		    (
+		    	select dorgid from  tbflow_org_org where orgid = #{orgid} 
+		    )
+		    <if test="connsql!=null and connsql!='' and banjieqingkuang!=1 and banjieqingkuang!=3"> 
+							and  (
+									(
+										(${connsql}) and uf.state in (-1,2)
+										<if test="flowdefid!=null and flowdefid!=''"> 
+									    	and flowdefid=#{flowdefid}
+									    </if>
+									 )
+									 <if test="suid!=null and suid!=''"> 
+					   	 				or (uf.state in(0,-2) and uf.opid = #{suid})
+					   				 </if>  
+								)
+						</if> 
+					    <if test="banjieqingkuang!=null and banjieqingkuang!='' and banjieqingkuang==1">
+					         and not exists (select 1 from uv_flow uvt where 1=1 and  
+									(
+										(${connsql}) and uvt.state in (-1,2)
+										and uvt.flowid=uf.flowid
+										<if test="flowdefid!=null and flowdefid!=''"> 
+									    	and flowdefid=#{flowdefid}
+									    </if>
+									 ))
+							and exists (select 1 from tbflow tt where tt.flowid=uf.flowid and tt.opid = #{suid} and tt.state&lt;&gt;0 and tt.state&lt;&gt;-2 and not exists (select 1 from tbflow ttb where tt.flowid=ttb.flowid and tt.opid = ttb.opid and ttb.optime>tt.optime)) 
+			    	    </if> 
+			    	    <if test="banjieqingkuang!=null and banjieqingkuang!='' and banjieqingkuang==3">
+							and (uf.nodeid='1' or uf.nodeid='-1') and exists (select 1 from tbflow tt where tt.flowid=uf.flowid and tt.opid = #{suid})
+			    	    </if>  
+		    <if test="applyid!=null and applyid!=''"> 
+		    	and applyid=#{applyid}
+		    </if>
+		    <if test="flowdefid!=null and flowdefid!=''"> 
+		    	and flowdefid=#{flowdefid}
+		    </if>
+		    <if test="state!=null and state!=''"> 
+		   	 	and state in (${state})
+		    </if>
+		    <if test="key!=null and key!=''">  
+		        and (t.crimid like '%'||#{key}||'%' or t.name like '%'||#{key}||'%' or bbb.namepinyinshort like concat(UPPER(#{key}),'%'))
+		    </if>
+		    <if test="casetype!=null and casetype!=''">  
+                and uf.casetype=#{casetype}
+            </if>
+		    <if test="casenums!=null and casenums!=''">
+				and uf.text6 in (${casenums})
+		    </if>
+		    <if test="year!=null and year!=''">
+				and SUBSTR(nvl(uf.text6,0), 1, 4) = #{year}
+    	 	</if>
+    	 	
+    	  <if test="xingqileixing!=null and xingqileixing!=''  and xingqileixing==1">
+				and ((t.NOWPUNISHMENTYEAR!='9995'  and  t.NOWPUNISHMENTYEAR!='9996')  or ( t.NOWPUNISHMENTYEAR is null))
+    	 </if>
+    	 <if test="xingqileixing!=null and xingqileixing!=''  and xingqileixing==2">
+				and t.NOWPUNISHMENTYEAR ='9995'  
+    	 </if>
+    	 <if test="xingqileixing!=null and xingqileixing!=''  and xingqileixing==3">
+				and t.NOWPUNISHMENTYEAR ='9996'  
+    	 </if>
+    	 <if test="jianqu!=null and jianqu!=''">
+				and uf.orgid = #{jianqu}
+    	 </if>
+	    order by to_number(uf.text6)
+	) where wardenOperFlag = 1
+  </select>
+  
+  <!-- 根据减刑假释条件查询表中案件号 
+  	去掉过滤条件： and uf.orgid in (select dorgid from  tbflow_org_org where orgid = #{orgid} )
+  -->
+  <select id="getCasenumsOfCommuteByCondition" parameterType="Map" resultType="Map">
+	select casenums from (
+   			select 
+		    	(case when tr.porgid=#{provinceid} and uf.nodeid=#{nodeid} and uf.flowdefid=#{flowdefidConn} and uf.state = -1
+		    	    then (case when uf.optime+#{days} &lt;= sysdate  then 1 else 0 end)
+		    		else 1
+		    		end
+		    	) as wardenOperFlag,
+		    	uf.text6 as casenums
+   			from uv_flow uf,
+    				TBSYS_ORGINFO tr
+    	 	where tr.orgid = #{departid}
+	    	
+		    <if test="connsql!=null and connsql!=''"> 
+				and  (
+						(
+							${connsql} and uf.state in (-1,2)
+							<if test="flowdefid!=null and flowdefid!=''"> 
+						    	and flowdefid=#{flowdefid}
+						    </if>
+						 )
+						 <if test="suid!=null and suid!=''"> 
+		   	 				or (uf.state in(0,-2) and uf.opid = #{suid})
+		   				 </if>  
+					)
+			</if>  
+		    <if test="flowdefid!=null and flowdefid!=''"> 
+		    	and flowdefid=#{flowdefid}
+		    </if>
+		    
+		    <if test="casetype!=null and casetype=='100'">
+               and (uf.int1 = 0 or uf.int1 = 1)
+               <choose>
+	                <when test="provincecode != departid and casenums !=null" >
+	                    and uf.text6 in (${casenums})
+	                </when>
+	                <when test="provincecode == departid and casenums !=null" >
+	                   and uf.text11 in (${casenums})
+	                </when>    
+	           </choose>
+	        </if>
+	        <if test="casetype!=null and casetype!='100'">
+	         	and uf.text7 = #{casetype}
+	        </if>
+	        <if test="casenums!=null and casetype!='100'">
+	         	AND uf.text6 in (${casenums})
+	        </if>
+	    order by to_number(uf.text6)
+	) where wardenOperFlag = 1
+  </select>
+  
+   <!-- 被退案总数 -->
+  <select id="countAllOfTuiAnByCondition" parameterType="Map" resultType="int">
+		select count(ddd.crimid) c from 
+		(select tsr.crimid,REMAINDERPUNISHMENT from TBXF_SCREENING tsr ,tbxf_commuteparole_batch tss
+			where 1=1
+               and tsr.batchid=tss.batchid
+               and tsr.isdeclare='2'
+               and tsr.departid = #{departid}
+		) ddd,
+		TBXF_SENTENCEALTERATION  eee, 
+		TBPRISONER_BASE_CRIME btc,
+		uv_flow fff
+		where	1=1
+		and ddd.crimid = eee.crimid
+		and ddd.crimid = btc.crimid
+		and ddd.crimid = fff.applyid
+		and (btc.orgid2 IN (SELECT too.dorgid FROM tbflow_org_org too
+                                                     WHERE too.orgid = #{orgid})  or btc.orgid1 IN (SELECT too.dorgid
+                                                      FROM tbflow_org_org too
+                                                     WHERE too.orgid = #{orgid}) )
+        and fff.FLOWDEFID = #{flowdefid}
+		and eee.JAILTO=#{jailto}
+		 <trim prefix="" suffix="" suffixOverrides=",">
+		 		<if test="key!=null and key!=''"> and (eee.crimid like '%'||#{key}||'%' or eee.name like '%'||#{key}||'%')</if>
+		 </trim>
+  </select>
+  
+  
+  <!-- 根据减刑假释流程ID查找流程信息 -->
+   <select id="findProvinceCommutatioByCondition" parameterType="Map" resultType="Map">
+	select * from
+    ( select a.*, rownum rn
+    from
+    (
+    	select * from (
+		    select 
+		    	uf.*,t.crimid,t.jailinfo,t.jailname,t.jailid,t.name, uf.nodeid as lastnodeid,
+		    	t.COURTCHANGETO,SENTENCESTIME,SENTENCEETIME,CAUSEACTION,F_FORMATYMD(ORIGINALYEAR,ORIGINALMONTH,ORIGINALDAY,0) as ORIGINALYEAR,decode(CRIMCLASS,'1','△','')||decode(REPORTAUDIT,'1','☆','') as CRIMCLASS,
+		    	'(' || substr(uf.text6,1,4) || ')' || tr.shortname ||uf.casetype||'第' ||substr(uf.text6,5) || '号' as ANJIANHAO
+		    	from
+		    		uv_flow uf,
+		    		TBXF_SENTENCEALTERATION t,TBPRISONER_BASE_CRIME B,
+		    		TBSYS_ORGINFO tr
+		    	where uf.applyid = t.crimid
+		    	and uf.applyid = b.crimid
+		    	and uf.flowid is not null
+		    	and tr.orgid = #{departid}
+		    	and uf.orgid in 
+			    (
+			    	select dorgid from  tbflow_org_org where orgid = #{orgid} 
+			    )
+			<if test="jailid!=null and jailid!=''">
+					and uf.orgid=#{jailid}
+			</if>
+			<if test="connsql!=null and connsql!=''"> 
+				and  (
+							(
+								${connsql} and uf.state in (-1,2)
+								<if test="flowdefid!=null and flowdefid!=''"> 
+									   and flowdefid=#{flowdefid}
+								</if>
+							 )
+								<if test="suid!=null and suid!=''"> 
+					   	 			or (uf.state in(0,-2) and uf.opid = #{suid})
+					   			</if>  
+						)
+			</if>
+			<if test="flowdefid!=null and flowdefid!=''"> 
+					and flowdefid=#{flowdefid}
+			</if>
+			<if test="state!=null and state!=''"> 
+					and state in (${state})
+			</if>
+		    <if test="casenums!=null and casenums!=''">
+				and uf.text6 in (${casenums})
+    		</if>
+    		<if test="year!=null and year!=''">
+	    		and substr(uf.text6,0,4)=#{year}
+	    	</if>
+		    <if test="key!=null and key!=''">  
+		        and t.name like concat(concat('%', #{key}), '%')
+		    </if>
+		    <if test="casetype!=null and casetype!=''">
+                and uf.casetype = #{casetype} 
+            </if>
+		    order by uf.text6
+	   )
+    <if test="sortField!=null and sortField!=''" > 
+     	order by ${sortField}  ${sortOrder}
+    </if>
+    ) a 
+    <if test="start!=null and start!=''">
+   		where rownum &lt;= #{end}
+   	</if> 
+    )
+   	<if test="start!=null and start!=''">
+   		where  rn &gt;= #{start}
+   	</if>
+  </select>
+  
+  
+  <!-- 根据减刑假释条件查询表中记录总数 -->
+  <select id="countAllOfProvinceCommuteByCondition" parameterType="Map" resultType="int">
+		select 
+		    	count(uf.applyid)
+		    	from
+		    		uv_flow uf,
+		    		TBXF_SENTENCEALTERATION t
+		    	where uf.applyid = t.crimid
+		    	and uf.flowid is not null
+		    	and uf.orgid in 
+			    (
+			    	select dorgid from  tbflow_org_org where orgid = #{orgid} 
+			    )
+			<if test="jailid!=null and jailid!=''">
+					and uf.orgid=#{jailid}
+			</if>
+			<if test="connsql!=null and connsql!=''"> 
+				and  (
+							(
+								${connsql} and uf.state in (-1,2)
+								<if test="flowdefid!=null and flowdefid!=''"> 
+									   and flowdefid=#{flowdefid}
+								</if>
+							 )
+								<if test="suid!=null and suid!=''"> 
+					   	 			or (uf.state in(0,-2) and uf.opid = #{suid})
+					   			</if>  
+						)
+			</if>
+			<if test="flowdefid!=null and flowdefid!=''"> 
+					and flowdefid=#{flowdefid}
+			</if>
+			<if test="state!=null and state!=''"> 
+					and state in (${state})
+			</if>
+		    <if test="casenums!=null and casenums!=''">
+				and uf.text6 in (${casenums})
+    		</if>
+		    <if test="key!=null and key!=''">  
+		        and t.name like concat(concat('%', #{key}), '%')
+		    </if>
+		    <if test="casetype!=null and casetype!=''">
+                and uf.casetype = #{casetype} 
+            </if>
+  </select>
+  
+  
+  <!-- 经办人办案总数 -->
+  <select id="countAllOfJinBanRenCommute" parameterType="Map" resultType="int">
+	select count(ddd.crimid) c from 
+		(select tsr.crimid,REMAINDERPUNISHMENT,tss.CURYEAR,tss.BATCH from TBXF_SCREENING tsr ,tbxf_commuteparole_batch tss
+			where 1=1
+               and tsr.batchid=tss.batchid 
+               and tsr.isdeclare='2'
+               and tsr.departid = #{departid}
+		) ddd,
+		TBXF_SENTENCEALTERATION  eee, 
+		TBPRISONER_BASE_CRIME btc,
+		tbprisoner_baseinfo bbb,
+		uv_flow fff
+		where	1=1
+		and ddd.crimid = eee.crimid
+		and ddd.crimid = bbb.crimid
+		and ddd.crimid = btc.crimid
+		and ddd.crimid = fff.applyid
+		and ddd.CURYEAR = substr(fff.text6,0,4)
+		and ddd.BATCH = fff.int6
+		and (btc.orgid2 IN (SELECT too.dorgid FROM tbflow_org_org too
+                                WHERE too.orgid = #{orgid})  or btc.orgid1 IN (SELECT too.dorgid
+                                 FROM tbflow_org_org too
+                                WHERE too.orgid = #{orgid}) )
+        and fff.FLOWDEFID = #{flowdefid}
+		<if test="suid!=null and suid!=''"> 
+	   	 	 and (
+   	 	 			(fff.nodeid = '0' and fff.state in (2,-1)) 
+ 	 	 			or 
+  	 	 			(fff.state in(0,-2) and fff.opid = #{suid})
+	   	 	 	)
+	     </if>
+		 <trim prefix="" suffix="" suffixOverrides=",">
+		 		<if test="key!=null and key!=''"> and (eee.crimid like '%'||#{key}||'%' or eee.name like '%'||#{key}||'%' or bbb.namepinyinshort like concat(UPPER(#{key}),'%'))</if>
+		 </trim>
+		 <if test="casenums!=null and casenums!=''">
+				and fff.text6 in (${casenums})
+    	 </if>
+		 <if test="casetype!=null and casetype!=''">
+				and fff.casetype = #{casetype}
+    	 </if>
+    	 <if test="year!=null and year!=''">
+				and SUBSTR(nvl(fff.text6,0), 1, 4) = #{year}
+    	 </if>
+    	  <if test="xingqileixing!=null and xingqileixing!=''  and xingqileixing==1">
+				and ((btc.PUNISHMENTYEAR !='9995'  and btc.PUNISHMENTYEAR !='9996')  or (btc.PUNISHMENTYEAR is null))
+    	 </if>
+    	   <if test="xingqileixing!=null and xingqileixing!=''  and xingqileixing==2">
+				and btc.PUNISHMENTYEAR ='9995'  
+    	 </if>
+    	   <if test="xingqileixing!=null and xingqileixing!=''  and xingqileixing==3">
+				and btc.PUNISHMENTYEAR ='9996'  
+    	 </if>
+    	 <if test="jianqu!=null and jianqu!=''">
+				and fff.orgid = #{jianqu}
+    	 </if>
+  </select>
+  
+  
+  <!-- 经办人办案数据 -->
+   <select id="findCommutatioOfJianBanRen" parameterType="Map" resultType="Map">
+	
+	select * from
+    ( 
+	    select a.*, rownum rn from
+	    (
+	      select * from (
+		  select btc.orgname1,
+		  fff.flowdraftid,fff.flowid,fff.nodeid as lastnodeid,fff.state,fff.conent,fff.text6, getage(eee.BRITHDAY) as age,
+		   '(' || substr(fff.text6,1,4) || ')' || tr.shortname || (case when fff.int1=0 then '减字' when fff.int1=1 then '假字' else '' end) ||'第' ||substr(fff.text6,5) || '号' as ANJIANHAO,
+		  eee.crimid,eee.name,
+		  eee.PREDATE,
+		  eee.areaid,
+		  SENTENCESTIME,
+		 SENTENCEETIME,
+		 F_FORMATYMD(ORIGINALYEAR,ORIGINALMONTH,ORIGINALDAY,0) as ORIGINALYEAR,
+		 /*F_FORMATYMD(NOWPUNISHMENTYEAR,NOWPUNISHMENTMONTH,NOWPUNISHMENTDAY,0)  AS nowpunishmentyear,*/
+		 (CASE
+              WHEN eee.NOWPUNISHMENTYEAR = '9996'
+              THEN
+                 '死缓'
+              WHEN eee.NOWPUNISHMENTYEAR = '9995'
+              THEN
+                 '无期徒刑'
+              ELSE
+                 GETDISOFTWODATE (ddd.REMAINDERPUNISHMENT,eee.COURTCHANGETO)
+         END) as nowpunishmentyear,
+		 decode(eee.PUNISHMENTYEAR,
+              '9995',
+              '无期',
+              '9996',
+              '死缓',
+              decode(eee.PUNISHMENTYEAR,'0','',null,'',eee.PUNISHMENTYEAR || '年') ||
+              		 decode(eee.PUNISHMENTMONTH,'0',decode(eee.PUNISHMENTDAY, '0', '', null, '','零'), null,
+                     decode(eee.PUNISHMENTDAY, '0', '', null, '','零'),
+                     eee.PUNISHMENTMONTH || '个月') ||
+              decode(eee.PUNISHMENTDAY,'0','', null,'',eee.PUNISHMENTDAY ||'天')) as shengyuxingqi,
+             
+             GETDISOFTWODATE(PREDATE, EXAMINEEND) as JIANGGEQI 
+       
+       from 
+		(select tsr.crimid,REMAINDERPUNISHMENT,EXAMINEEND, tss.CURYEAR,tss.BATCH from TBXF_SCREENING tsr ,tbxf_commuteparole_batch tss
+                         where 1=1
+                         -- and tsr.status='1'
+                         and tsr.batchid=tss.batchid 
+                         -- and tsr.cstatus='1'
+                         and tsr.isdeclare='2'
+                         and tsr.departid = #{departid}
+			) ddd,
+			TBXF_SENTENCEALTERATION  eee, 
+			TBPRISONER_BASE_CRIME btc,
+			tbprisoner_baseinfo bbb,
+			uv_flow fff,
+			TBSYS_ORGINFO tr
+			where ddd.crimid = eee.crimid
+			and ddd.crimid = btc.crimid
+			and ddd.crimid = bbb.crimid
+			and ddd.crimid = fff.applyid
+			and tr.orgid = #{departid}
+			and ddd.CURYEAR = substr(fff.text6,0,4)
+			and ddd.BATCH = fff.int6
+            and (btc.orgid2 IN (SELECT too.dorgid FROM tbflow_org_org too
+                                   WHERE too.orgid = #{orgid})  or btc.orgid1 IN (SELECT too.dorgid
+                                    FROM tbflow_org_org too
+                                   WHERE too.orgid = #{orgid}) )
+            and fff.FLOWDEFID = #{flowdefid}
+            <if test="suid!=null and suid!=''">
+				and 
+				(
+					(fff.nodeid = '0' and fff.state in (2,-1))
+					or 
+					(fff.state in(0,-2) and fff.opid = #{suid})
+				)
+    	 	</if>
+		 <trim prefix="" suffix="" suffixOverrides=",">
+		 		<if test="key!=null and key!=''"> and (eee.crimid like '%'||#{key}||'%' or eee.name like '%'||#{key}||'%' or bbb.namepinyinshort like concat(UPPER(#{key}),'%'))</if>
+		 </trim>
+		 <if test="casenums!=null and casenums!=''">
+				and fff.text6 in (${casenums})
+    	 </if>
+    	 <if test="casetype!=null and casetype!=''">
+				and fff.casetype = #{casetype}
+    	 </if>
+    	 <if test="year!=null and year!=''">
+				and SUBSTR(nvl(fff.text6,0), 1, 4) = #{year}
+    	 </if>
+    	  <if test="xingqileixing!=null and xingqileixing!=''  and xingqileixing==1">
+				and ((btc.PUNISHMENTYEAR !='9995'  and  btc.PUNISHMENTYEAR!='9996')  or ( btc.PUNISHMENTYEAR is null))
+    	 </if>
+    	   <if test="xingqileixing!=null and xingqileixing!=''  and xingqileixing==2">
+				and btc.PUNISHMENTYEAR ='9995'  
+    	 </if>
+    	   <if test="xingqileixing!=null and xingqileixing!=''  and xingqileixing==3">
+				and btc.PUNISHMENTYEAR ='9996'  
+    	 </if>
+    	 <if test="jianqu!=null and jianqu!=''">
+				and fff.orgid = #{jianqu}
+    	 </if>
+		 order by to_number(fff.text6))
+		 <trim prefix="" suffix="" suffixOverrides=",">
+				<if test="sortField!=null and sortField!=''">order by ${sortField} ${sortOrder}</if>
+		</trim>
+	  	) a 
+	    <if test="end!=null and end!=''">
+	   		where rownum &lt;= #{end}
+	   	</if> 
+       )
+   	 <if test="start!=null and start!=''">
+   		where  rn &gt;= #{start}
+     </if>
+	
+  </select>
+  
+   <!-- 根据减刑假释条件查询表中记录总数 -->
+  <select id="getFlowidByCrimid" parameterType="Map" resultType="String">
+	select aa1.flowid
+          from TBFLOW_BASE aa1,
+               (select max(tb1.optime) as maxoptime, tb1.applyid
+                  from TBFLOW_BASE tb1
+                 where tb1.flowdefid = #{flowdefid}
+                 and tb1.applyid = #{applyid}
+                 group by tb1.applyid) bb1
+         where aa1.optime = bb1.maxoptime
+           and aa1.applyid = bb1.applyid
+           and aa1.flowdefid = #{flowdefid}
+           and aa1.flowid is not null
+  </select>
+  
+  
+  <!-- 减假罪犯的减假类刑 -->
+  <select id="getPrisonerParoleType" parameterType="Map" resultType="Map">
+	select 
+		fff.int1 as paroletype,
+		(case when eee.NOWPUNISHMENTYEAR is not null then eee.NOWPUNISHMENTYEAR
+			  else eee.ORIGINALYEAR
+			  end
+		) as NOWPUNISHMENTYEAR
+       from 
+			TBXF_SENTENCEALTERATION  eee, 
+			(select * from 
+				(select ttt.*
+				  from  uv_flow ttt
+				 where ttt.applyid = #{crimid}
+				   and ttt.FLOWDEFID = #{flowdefid} order by ttt.optime desc
+				   ) where rownum = 1
+   			) fff
+	 	where eee.crimid = #{crimid}
+		  and eee.crimid = fff.applyid
+          and fff.FLOWDEFID = #{flowdefid}
+  </select>
+  
+  <select id="getFlowidByFlowdraftid" parameterType="Map" resultType="String">
+	select aa1.flowid
+          from TBFLOW_BASE aa1
+         where aa1.flowdraftid=#{flowdraftid}
+  </select>
+  <select id="getStateByFlowdraftid" parameterType="Map" resultType="String">
+	select aa1.state
+          from UV_FLOW aa1
+         where aa1.flowdraftid=#{flowdraftid}
+  </select>
+  
+  <select id="getNodeidByFlowdraftid" parameterType="Map" resultType="String">
+	select aa1.nodeid from UV_FLOW aa1 where aa1.flowdraftid=#{flowdraftid}
+  </select>
+  
+<!-- 查询已办事项的列表 -->
+  <select id="selecthavetodoitemByOpid" parameterType="Map" resultType="com.sinog2c.model.flow.UvFlow">
+    select * from( 
+    	select a.*, rownum rn from(
+    		select t.applyname,t.conent,t.optime,t.applydatetime,
+                decode(u.state,1,decode(u.nodeid,'1','完成','-1','否决','通过'),2,'退回',3,'不予办理',4,'退回复议','办理中') as endsummry
+            from TBFLOW_BASE t, TBFLOW f,uv_flow u
+         where 1 = 1 and t.flowdraftid= f.flowdraftid and t.flowdraftid= u.flowdraftid and t.flowid=f.flowid and (f.state!='-2' or f.state!='2')
+    and f.opid=#{departid}
+    <if test="key!=null and key!=''">  
+        and (t.applyname like concat(concat('%', #{key}), '%'))
+    </if>
+     <if test="sptype!=null and sptype!=''">  
+        and (t.conent like concat(concat('%', #{sptype}), '%'))
+    </if>
+     <if test="sptime1!=null and sptime1!=''" >  
+       and to_char(t.optime,'yyyy-MM-dd') &gt;= #{sptime1}
+    </if>
+     <if test="sptime2!=null and sptime2!=''" >  
+       and to_char(t.optime,'yyyy-MM-dd') &lt;= #{sptime2}
+    </if>
+    <if test="sortField!=null and sortField!=''" > 
+     	order by ${sortField}  ${sortOrder}
+    </if>
+    ) a 
+    <if test="end!=null and end!=''">
+   		where rownum &lt;= #{end}
+   	</if> 
+    )
+   	<if test="start!=null and start!=''">
+   		where  rn &gt;= #{start}
+   	</if>
+  </select>
+  <!-- 已办事项的列表分页 -->
+   <select id="selectCount1" parameterType="Map" resultType="java.lang.Integer" >
+  	select count(*) from uv_flow t where t.opid=#{departid}
+  	<if test="key!=null and key!=''">  
+        and (t.applyname like concat(concat('%', #{key}), '%'))
+    </if>
+     <if test="sptype!=null and sptype!=''">  
+        and (t.conent like concat(concat('%', #{sptype}), '%'))
+    </if>
+     <if test="sptime1!=null and sptime1!=''" >  
+       and to_char(t.optime,'yyyy-MM-dd') &gt;= #{sptime1}
+    </if>
+     <if test="sptime2!=null and sptime2!=''" >  
+       and to_char(t.optime,'yyyy-MM-dd') &lt;= #{sptime2}
+    </if>
+  </select>
+  
+   <select id="getCaseLiAnData" parameterType="Map" resultType="Map" >
+  		select applyname
+  		from uv_flow t 
+  		where t.flowdefid = #{flowdefid} 
+  		  and t.applyid in (#{crimids}) 
+  		  and t.state in (-2,-1,0,2)
+  </select>
+  
+   <select id="getSJCaseLiAnData" parameterType="Map" resultType="Map" >
+  		select applyname from uv_flow t where t.flowdraftid in (${flowdraftids}) and t.text11 is not null
+  </select>
+  
+  <!-- 获取需要做检察意见书的罪犯信息 -->
+  <select id="getCaseCheckList" parameterType="Map" resultType="Map">
+      select a1.*,'('||SUBSTR(a1.text6, 0,4)||')'||(select shortname from TBSYS_ORGINFO where orgid='1411')||a1.casetype||'第'||SUBSTR(a1.text6, 5)||'号' as anjianhao,
+       case when to_number(a1.punishmentyear) = 9995 then
+               '无期'
+              when to_number(a1.punishmentyear) = 9996 then
+               '死缓'
+              when to_number(a1.punishmentyear) = 9997 then
+               '死刑'
+              else
+              decode(a1.punishmentyear,0,'',a1.punishmentyear||'年')||decode(a1.punishmentmonth,0,'',a1.punishmentmonth||'个月')||decode(a1.punishmentday,0,'',a1.punishmentday||'天')
+       end as originalyear,
+       case when fuyiflag is null then
+              0
+              else
+              1
+       end as approvestate
+     from (select rownum as rn,s.* from (select * from (select af.*,wo.docconent from (
+	    SELECT  UF.*,pri.punishmentyear,pri.punishmentmonth,pri.punishmentday  FROM UV_FLOW UF,Tbprisoner_Base_Crime PRI  WHERE UF.FLOWDEFID = 'other_zfjyjxjssp'   and PRI.Crimid = UF.applyid 
+	      <if test="key != null and key != ''">
+	          and ( (uf.applyid like concat(concat('%', #{key}), '%') ) or (uf.applyname like concat(concat('%', #{key}), '%') ) )
+	      </if>
+	      AND (PRI.ORGID1 IN (SELECT DORGID FROM TBFLOW_ORG_ORG WHERE ORGID = #{orgid}) or pri.orgid2 in (select dorgid from tbflow_org_org where orgid=#{orgid})) and ((nodeid in ('N0004','N0005','N0003') and state in(-2,0)) or (nodeid  in ('N0004','N0005','N0003') and state in(-1,2)))) af,
+            (select w1.flowdraftid,w1.flowid,w2.docconent from TBFLOW_OTHER_FLOW w1,TBFLOW_BASE_OTHER w2 where w1.otherid=w2.otherid(+) and  w1.tempid='casecheckreport' ) wo
+               where af.flowdraftid=wo.flowdraftid(+) and af.flowid=wo.flowid(+)
+                  ) order by to_number(text6)) s where rownum &lt;= #{end} ) a1  where rn &gt;=#{start}
+      <!-- select *
+          from (select a.*, rownum rn
+              from (select *
+                  from (select fff.flowdraftid,
+                               fff.flowid,
+                               fff.nodeid as lastnodeid,
+                               fff.state,
+                               fff.approvestate,
+                               fff.commenttext,
+                               '(' || substr(fff.text6, 1, 4) || ')' ||
+                               JAILNAME || '减字第' || substr(fff.text6, 5) || '号' as ANJIANHAO,
+                               eee.crimid,
+                               eee.name,
+                               eee.COURTSANCTION,
+                               eee.areaid,
+                               (case
+                                 when ORIGINALYEAR = '9996' then
+                                  '死缓'
+                                 when ORIGINALYEAR = '9995' then
+                                  '无期徒刑'
+                                 else
+                                  (case
+                                    when ORIGINALYEAR is not null and
+                                         ORIGINALYEAR != 0 then
+                                     ORIGINALYEAR || '年'
+                                    else
+                                     ''
+                                  end) || (case
+                                    when ORIGINALMONTH is not null and
+                                         ORIGINALMONTH != 0 then
+                                     ORIGINALMONTH || '月'
+                                    when ORIGINALMONTH = '0' then
+                                     ''
+                                    else
+                                     ''
+                                  end) || (case
+                                    when ORIGINALDAY is not null and
+                                         ORIGINALDAY != 0 then
+                                     ORIGINALDAY || '天'
+                                    when ORIGINALDAY = '0' then
+                                     ''
+                                    else
+                                     ''
+                                  end)
+                               end) as ORIGINALYEAR
+                          from (select tsr.crimid,
+                                       REMAINDERPUNISHMENT,
+                                       EXAMINEEND
+                                  from TBXF_SCREENING           tsr,
+                                       tbxf_commuteparole_batch tss
+                                 where tsr.status = '1'
+                                   and tsr.batchid = tss.batchid
+                                   and tsr.cstatus = '1'
+                                   and tsr.isdeclare = '2'
+                                   and tsr.departid = #{departid}) ddd,
+                               TBXF_SENTENCEALTERATION eee,
+                               TBPRISONER_BASE_CRIME btc,
+                               (select a.*, c.nodeid, c.orgid, c.state, c.commenttext, c.int2 as approvestate
+                                  from tbflow_base a,
+                                       (SELECT b.*
+                                          FROM (SELECT MAX(optime) maxoptime,
+                                                       flowdraftid
+                                                  FROM tbflow
+                                                 GROUP BY flowdraftid) d,
+                                               tbflow b
+                                         WHERE d.flowdraftid = b.flowdraftid
+                                         <if test="nodeid!=null and nodeid!=''">
+	   									       AND b.nodeid=#{nodeid}
+	   									 </if> 
+                                         	<if test="approvestype==22">
+	   									       AND b.int2 is null
+	   									    </if>	   									 
+	   									 	<if test="approvestype!='' and approvestype==0">
+	   									       AND b.int2 = 0
+	   									    </if>
+	   									    <if test="approvestype==1">
+	   									       AND b.int2 = 1
+	   									    </if>								 	   									 
+                                               AND d.maxoptime = b.optime) c
+                                 where a.flowdraftid = c.flowdraftid
+                                       <if test="key!=null and key!=''">
+                                           AND a.text6 like CONCAT(CONCAT('%', #{key}), '%')
+                                       </if>) fff
+                         where ddd.crimid = eee.crimid
+                           and ddd.crimid = btc.crimid
+                           and ddd.crimid = fff.applyid
+                           and eee.areaid in
+                               (select too.dorgid
+                                  from tbflow_org_org too
+                                )
+                           and fff.state in (1,-1)
+                         order by fff.text6)
+             <trim prefix="" suffix="" suffixOverrides=",">
+			     <if test="sortField!=null and sortField!=''">order by ${sortField} ${sortOrder}</if>
+		     </trim>            
+             ) a
+         	 <if test="end!=null and end!=''">
+	   		     where rownum &lt;= #{end}
+	   	     </if> 
+	   	     )
+   			<if test="start!=null and start!=''">
+   				where rn &gt;= #{start}
+   			</if>  
+        -->	     
+  </select>
+  <select id="getCountCaseCheckList" parameterType="Map" resultType="int">
+      select count(*) from (
+
+	  SELECT  UF.*  FROM UV_FLOW UF,Tbprisoner_Base_Crime PRI  WHERE UF.FLOWDEFID = 'other_zfjyjxjssp'   and PRI.Crimid = UF.applyid 
+	  AND (PRI.ORGID1 IN (SELECT DORGID FROM TBFLOW_ORG_ORG WHERE ORGID = #{orgid}) or pri.orgid2 in (select dorgid from tbflow_org_org where orgid=#{orgid})) and ((nodeid='N0007' and state in(0)) or (nodeid='N0006' and state in(-1,2)))
+
+      ) order by to_number(text6)
+			<!-- select count(*)
+                  from (select fff.flowdraftid,
+                               fff.flowid,
+                               fff.nodeid as lastnodeid,
+                               fff.state,
+                               fff.approvestate,
+                               fff.commenttext,
+                               '(' || substr(fff.text6, 1, 4) || ')' ||
+                               JAILNAME || '减字第' || substr(fff.text6, 5) || '号' as ANJIANHAO,
+                               eee.crimid,
+                               eee.name,
+                               eee.COURTSANCTION,
+                               eee.areaid,
+                               (case
+                                 when ORIGINALYEAR = '9996' then
+                                  '死缓'
+                                 when ORIGINALYEAR = '9995' then
+                                  '无期徒刑'
+                                 else
+                                  (case
+                                    when ORIGINALYEAR is not null and
+                                         ORIGINALYEAR != 0 then
+                                     ORIGINALYEAR || '年'
+                                    else
+                                     ''
+                                  end) || (case
+                                    when ORIGINALMONTH is not null and
+                                         ORIGINALMONTH != 0 then
+                                     ORIGINALMONTH || '月'
+                                    when ORIGINALMONTH = '0' then
+                                     ''
+                                    else
+                                     ''
+                                  end) || (case
+                                    when ORIGINALDAY is not null and
+                                         ORIGINALDAY != 0 then
+                                     ORIGINALDAY || '天'
+                                    when ORIGINALDAY = '0' then
+                                     ''
+                                    else
+                                     ''
+                                  end)
+                               end) as ORIGINALYEAR
+                          from (select tsr.crimid,
+                                       REMAINDERPUNISHMENT,
+                                       EXAMINEEND
+                                  from TBXF_SCREENING           tsr,
+                                       tbxf_commuteparole_batch tss
+                                 where tsr.status = '1'
+                                   and tsr.batchid = tss.batchid
+                                   and tsr.cstatus = '1'
+                                   and tsr.isdeclare = '2'
+                                   and tsr.departid = #{departid}) ddd,
+                               TBXF_SENTENCEALTERATION eee,
+                               TBPRISONER_BASE_CRIME btc,
+                               (select a.*, c.nodeid, c.orgid, c.state, c.commenttext, c.int2 as approvestate
+                                  from tbflow_base a,
+                                       (SELECT b.*
+                                          FROM (SELECT MAX(optime) maxoptime,
+                                                       flowdraftid
+                                                  FROM tbflow
+                                                 GROUP BY flowdraftid) d,
+                                               tbflow b
+                                         WHERE d.flowdraftid = b.flowdraftid
+                                         <if test="nodeid!=null and nodeid!=''">
+	   									       AND b.nodeid=#{nodeid}
+	   									 </if> 
+                                         	<if test="approvestype==22">
+	   									       AND b.int2 is null
+	   									    </if>	   									 
+	   									 	<if test="approvestype!='' and approvestype==0">
+	   									       AND b.int2 = 0
+	   									    </if>
+	   									    <if test="approvestype==1">
+	   									       AND b.int2 = 1
+	   									    </if>								 	   									 
+                                               AND d.maxoptime = b.optime) c
+                                 where a.flowdraftid = c.flowdraftid
+                                       <if test="key!=null and key!=''">
+                                           AND a.text6 like CONCAT(CONCAT('%', #{key}), '%')
+                                       </if>) fff
+                         where ddd.crimid = eee.crimid
+                           and ddd.crimid = btc.crimid
+                           and ddd.crimid = fff.applyid
+                           and eee.areaid in
+                               (select too.dorgid
+                                  from tbflow_org_org too
+                                )
+                           and fff.state in (1,-1)
+                         order by fff.text6)	 -->
+  </select>
+  
+  
+  <select id="jailBaoWaiLiAnList" resultType="Map" parameterType="Map" >
+		select * from
+			( select a.*, rownum rn
+				from
+				(
+					select  sen.crimid,
+							tbi.name, 
+							getage(sen.BRITHDAY) as age, 
+							sen.AREAID as orgid,
+							tbc.CAUSEACTION, 
+							tbc.SENTENCESTIME, 
+							tbc.SENTENCEETIME,
+							tbc.INPRISONDATE
+					from TBXF_SENTENCEALTERATION sen,
+						 TBPRISONER_BASE_CRIME tbc,
+						 tbprisoner_baseinfo tbi 
+					where 1=1 
+						 and sen.crimid=tbc.crimid 
+						 and sen.crimid=tbi.crimid 
+					    and (sen.status = 0 or  sen.status = 1)
+					  and not exists
+						(
+							select 'x' from uv_flow uf 
+							 where uf.flowdefid= #{flowdefid}
+								and uf.applyid = sen.crimid
+								and uf.state in (-2,-1,0,2)
+						 )
+		
+						and exists (
+							select  'x' 
+							from TBFLOW_ORG_ORG too 
+							where too.orgid = #{orgid}
+							  and tbc.orgid2 = too.dorgid
+						)
+							<if test="provincecode =='4400'">
+						and exists (
+						select 'x' from uv_flow uf 
+							 where uf.flowdefid='other_jyyybwjysp'
+								and uf.applyid = sen.crimid
+								and uf.state = 1
+						
+						)
+					</if>
+					<if test="jailid!=null and jailid!=''">
+						and jailid = #{jailid} 
+					</if>
+					<if test="key!=null and key!=''">
+						and (tbi.crimid like concat(concat('%', #{key}), '%') 
+							or tbi.name like concat(concat('%', #{key}), '%') 
+							or tbi.namepinyinshort like concat(UPPER(#{key}),'%')
+						)
+					</if>
+					<if test="sortField!=null and sortField!=''">
+						order by ${sortField} ${sortOrder}
+					</if>
+		
+				) a where rownum &lt;= #{end}
+		)where rn &gt;= #{start}
+  </select>
+  
+ 
+  <select id="jailBaoWaiLiAnList123" resultType="Map" parameterType="Map" >
+		select * from
+			( select a.*, rownum rn
+				from
+				(
+					  select tbi.crimid,
+                    tbi.name,
+                        getage(t.BRITHDAY) as age,
+          tbc.CAUSEACTION, 
+          tbc.sentencestime,
+                       tbc.sentenceetime,
+       <!--  TO_CHAR(tbc.sentencestime, 'yyyy"年"MM"月"dd"日"') AS sentencestime,  -->
+        <!--TO_CHAR(tbc.sentenceetime, 'yyyy"年"MM"月"dd"日"') AS sentenceetime,  -->
+         tbc.INPRISONDATE,
+         t.jailname
+  from uv_flow uf, 
+       TBPRISONER_BASEINFO tbi,
+       TBPRISONER_BASE_CRIME tbc,
+       TBXF_SENTENCEALTERATION t 
+  where uf.nodeid='1' 
+    and uf.flowdefid='other_jybwjycbsp'    
+    and uf.applyid=tbi.crimid 
+    and tbi.crimid = tbc.crimid
+    and t.crimid = tbi.crimid
+    and not exists (select 'x'
+                           from uv_flow uf
+                          where uf.flowdefid = 'other_zfbwjysjhydjb'
+                            and uf.applyid = t.crimid
+                            and uf.state in (-2, -1, 0, 2))
+    and tbc.orgid in (
+select dorgid from tbflow_org_org og where og.orgid=#{orgid}
+    )
+   <if test="key!=null and key!=''">
+						and (tbi.crimid like concat(concat('%', #{key}), '%') 
+							or tbi.name like concat(concat('%', #{key}), '%') 
+							or tbi.namepinyinshort like concat(UPPER(#{key}),'%')
+						)
+					</if>
+				) a where rownum &lt;= #{end}
+		)where rn &gt;= #{start}
+  </select>
+  
+  <select id="jailBaoWaiLiAnCount" resultType="int" parameterType="Map" >
+		select  count(sen.crimid)
+		from TBXF_SENTENCEALTERATION sen,
+			 TBPRISONER_BASE_CRIME tbc,
+			 tbprisoner_baseinfo tbi 
+		where 1=1 
+		     and sen.crimid=tbc.crimid 
+			 and sen.crimid=tbi.crimid 
+		     and (sen.status = 0 or  sen.status = 1)
+		  and not exists
+			(
+				select 'x' from uv_flow uf 
+					where uf.flowdefid= #{flowdefid}
+					and uf.applyid = sen.crimid
+					and uf.state in (-2,-1,0,2)
+			 )
+		
+			and exists (
+				select  'x' 
+				from TBFLOW_ORG_ORG too 
+				where too.orgid = #{orgid}
+				  and tbc.orgid2 = too.dorgid
+			)
+			<if test="provincecode =='4400'">
+						and exists (
+						select 'x' from uv_flow uf 
+							 where uf.flowdefid='other_jyyybwjysp'
+								and uf.applyid = sen.crimid
+								and uf.state = 1
+						
+						)
+					</if>
+		<if test="jailid!=null and jailid!=''">
+			and jailid = #{jailid} 
+		</if>
+		<if test="key!=null and key!=''">
+			and (tbi.crimid like concat(concat('%', #{key}), '%') 
+				or tbi.name like concat(concat('%', #{key}), '%') 
+				or tbi.namepinyinshort like concat(UPPER(#{key}),'%')
+			)
+		</if>
+  </select>
+  
+  
+  
+  
+  <select id="jailBaoWaiLiAnCount123" resultType="int" parameterType="Map" >
+		select  count(t.crimid)
+		 from uv_flow uf, 
+       TBPRISONER_BASEINFO tbi,
+       TBPRISONER_BASE_CRIME tbc,
+       TBXF_SENTENCEALTERATION t 
+  where uf.nodeid='1' 
+    and uf.flowdefid='other_jybwjycbsp'    
+    and uf.applyid=tbi.crimid 
+    and tbi.crimid = tbc.crimid
+    and t.crimid = tbi.crimid
+    and tbc.orgid in (
+select dorgid from tbflow_org_org og where og.orgid=#{orgid}
+    )
+  </select>
+
+  <select id="getBaoWaiJianBanRenList" resultType="Map" parameterType="Map" >
+	select * from
+	( select a.*, rownum rn
+	from
+	 (select * from
+		(select  '('||substr(fff.text6,0,4)||')'||tr.shortname||'初保字第'||substr(fff.text6,5)||'号' as caseno,
+			'('||substr(fff.text6,0,4)||')'||tr.shortname||'续保字第'||substr(fff.text6,5)||'号' as xubaocaseno,
+			t.crimid,t.name, getage(t.BRITHDAY) as age, t.COURTCHANGETO, fff.commenttext, t.areaid,
+			F_FORMATYMD(NOWPUNISHMENTYEAR,NOWPUNISHMENTMONTH,NOWPUNISHMENTDAY,0)  AS nowpunishmentyear,
+			fff.flowdraftid, fff.flowid, fff.text6 as casenum,fff.nodeid as lastnodeid,fff.conent,fff.state
+		from TBXF_SENTENCEALTERATION t, uv_flow fff,TBSYS_ORGINFO tr,tbprisoner_baseinfo bbb 
+		where t.crimid = fff.applyid
+			and t.crimid = bbb.crimid 
+			and fff.FLOWDEFID = #{flowdefid}
+			and tr.orgid = #{departid}
+			and t.areaid in (select  too.dorgid from TBFLOW_ORG_ORG too where too.orgid = #{orgid})
+		 <if test="suid!=null and suid!=''">
+				and 
+				(
+					(fff.nodeid = '0' and fff.state in (2,-1,0))
+					or 
+					((fff.state = 0 or fff.state = -2)and fff.opid = #{suid})
+				)
+    	 </if>
+	    <if test="casenums!=null and casenums!=''">
+					and fff.text6 in (${casenums})
+	    </if>
+	     <if test="xingqileixing!=null and xingqileixing!=''  and xingqileixing==1">
+				and ((t.NOWPUNISHMENTYEAR!='9995'  and  t.NOWPUNISHMENTYEAR!='9996')  or ( t.NOWPUNISHMENTYEAR is null))
+    	 </if>
+    	   <if test="xingqileixing!=null and xingqileixing!=''  and xingqileixing==2">
+				and t.NOWPUNISHMENTYEAR ='9995'  
+    	 </if>
+    	   <if test="xingqileixing!=null and xingqileixing!=''  and xingqileixing==3">
+				and t.NOWPUNISHMENTYEAR ='9996'  
+    	 </if>
+	    <if test="jianqu!=null and jianqu!=''">
+					and fff.orgid in (${jianqu})
+	    </if>
+		<if test="key!=null and key!=''">
+			and (t.crimid like concat(concat('%', #{key}), '%') 
+			or t.name like concat(concat('%', #{key}), '%') or bbb.namepinyinshort like concat(UPPER(#{key}),'%')) 
+	    </if>
+	    <if test="year != null and year != ''">
+	        and fff.text6 like concat(concat('%',#{year}),'%')
+	    </if>
+	    order by fff.text6
+	)
+	<if test="sortField!=null and sortField!=''">
+		order by ${sortField} ${sortOrder}
+    </if>
+	) a
+	<if test="end!=null and end!=''">
+		where rownum &lt;= #{end}
+   	</if>
+	)
+	<if test="start!=null and start!=''">
+		where rn &gt;= #{start}
+   	</if>
+  </select>
+  
+  <select id="countBaoWaiJianBanRenList" resultType="int" parameterType="Map" >
+	select  count(t.crimid)
+		from TBXF_SENTENCEALTERATION t, uv_flow fff,TBSYS_ORGINFO tr,tbprisoner_baseinfo bbb 
+		where t.crimid = fff.applyid
+			and t.crimid=bbb.crimid 
+			and fff.FLOWDEFID = #{flowdefid}
+			and tr.orgid = #{departid}
+			and t.areaid in (select  too.dorgid from TBFLOW_ORG_ORG too where too.orgid = #{orgid})
+		 <if test="suid!=null and suid!=''">
+				and 
+				(
+					(fff.nodeid = '0' and fff.state in (2,-1,0))
+					or 
+					(fff.state in(0,-2) and fff.opid = #{suid})
+				)
+    	 </if>
+	    <if test="casenums!=null and casenums!=''">
+					and fff.text6 in (${casenums})
+	    </if>
+	     <if test="xingqileixing!=null and xingqileixing!=''  and xingqileixing==1">
+				and ((t.NOWPUNISHMENTYEAR!='9995'  and  t.NOWPUNISHMENTYEAR!='9996')  or ( t.NOWPUNISHMENTYEAR is null))
+    	 </if>
+    	   <if test="xingqileixing!=null and xingqileixing!=''  and xingqileixing==2">
+				and t.NOWPUNISHMENTYEAR ='9995'  
+    	 </if>
+    	   <if test="xingqileixing!=null and xingqileixing!=''  and xingqileixing==3">
+				and t.NOWPUNISHMENTYEAR ='9996'  
+    	 </if>
+	    <if test="jianqu!=null and jianqu!=''">
+					and fff.orgid in (${jianqu})
+	    </if>
+		<if test="key!=null and key!=''">
+			and (t.crimid like concat(concat('%', #{key}), '%') 
+			or t.name like concat(concat('%', #{key}), '%') or bbb.namepinyinshort like concat(UPPER(#{key}),'%'))
+	    </if>
+  </select>
+  
+  
+  <!-- 根据减刑假释流程ID查找流程信息 -->
+   <select id="getBaoWaiJailCaseList" parameterType="Map" resultType="Map">
+	select * from
+    ( select a.*, rownum rn
+    from
+    (
+    	select * from (
+		    select 
+		    	uf.*,t.crimid,t.name, uf.nodeid as lastnodeid,getage(t.BRITHDAY) as age, t.COURTCHANGETO, 
+		    	F_FORMATYMD(NOWPUNISHMENTYEAR,NOWPUNISHMENTMONTH,NOWPUNISHMENTDAY,0)  AS nowpunishmentyear,
+		    	'(' || substr(uf.text6,1,4) || ')' || tr.shortname || uf.casetype||'第' ||substr(uf.text6,5) || '号' as caseno
+		    	from
+		    		uv_flow uf,
+		    		tbprisoner_baseinfo bbb,
+		    		TBXF_SENTENCEALTERATION t,
+		    		TBSYS_ORGINFO tr
+		    	where uf.applyid = t.crimid
+		    	and t.crimid=bbb.crimid 
+		    	and uf.flowid is not null
+		    	and tr.orgid = #{departid}
+		    	and uf.orgid in 
+			    (
+			    	select dorgid from  tbflow_org_org where orgid = #{orgid} 
+			    )
+			<if test="connsql!=null and connsql!=''"> 
+				and  (
+							(
+							    <!-- connsql里面都是or判断，必须用括号括住，此处是一个整体判断 整体和后面的and同时成立 -->
+								(${connsql}) and uf.state in (-1,2)
+								<if test="flowdefid!=null and flowdefid!=''"> 
+									   and flowdefid=#{flowdefid}
+								</if>
+							 )
+								<if test="suid!=null and suid!=''"> 
+					   	 			or (uf.state in(0,-2) and uf.opid = #{suid})
+					   			</if>  
+						)
+			</if>
+			<if test="flowdefid!=null and flowdefid!=''"> 
+					and flowdefid=#{flowdefid}
+			</if>
+			<if test="state!=null and state!=''"> 
+					and state in (${state})
+			</if>
+			
+			 <if test="casenums!=null and casenums!=''">
+					and uf.text6 in (${casenums})
+	    </if>
+	     <if test="xingqileixing!=null and xingqileixing!=''  and xingqileixing==1">
+				and ((t.NOWPUNISHMENTYEAR!='9995'  and  t.NOWPUNISHMENTYEAR!='9996')  or ( t.NOWPUNISHMENTYEAR is null))
+    	 </if>
+    	   <if test="xingqileixing!=null and xingqileixing!=''  and xingqileixing==2">
+				and t.NOWPUNISHMENTYEAR ='9995'  
+    	 </if>
+    	   <if test="xingqileixing!=null and xingqileixing!=''  and xingqileixing==3">
+				and t.NOWPUNISHMENTYEAR ='9996'  
+    	 </if>
+	    <if test="jianqu!=null and jianqu!=''">
+					and uf.orgid in (${jianqu})
+	    </if>
+	    <if test="year!=null and year!=''">
+	    	and substr(uf.text6,1,4)=#{year}
+	    </if>
+			
+		    <if test="casenums!=null and casenums!=''">
+				and uf.text6 in (${casenums})
+    		</if>
+		    <if test="key!=null and key!=''">  
+		        and (t.name like concat(concat('%', #{key}), '%') or t.crimid like concat(concat('%', #{key}), '%')or bbb.namepinyinshort like concat(UPPER(#{key}),'%'))
+		    </if>
+		    order by uf.text6
+	   )
+    <if test="sortField!=null and sortField!=''" > 
+     	order by ${sortField}  ${sortOrder}
+    </if>
+    ) a 
+    <if test="start!=null and start!=''">
+   		where rownum &lt;= #{end}
+   	</if> 
+    )
+   	<if test="start!=null and start!=''">
+   		where  rn &gt;= #{start}
+   	</if>
+  </select>
+  
+  
+   <select id="countBaoWaiJailCaseList" parameterType="Map" resultType="int">
+	    select 
+	    	count(t.crimid)
+	    	from
+	    		uv_flow uf,
+	    		tbprisoner_baseinfo bbb,
+	    		TBXF_SENTENCEALTERATION t,
+	    		TBSYS_ORGINFO tr
+	    	where uf.applyid = t.crimid
+	    	and t.crimid=bbb.crimid 
+	    	and uf.flowid is not null
+	    	and tr.orgid = #{departid}
+	    	and uf.orgid in 
+		    (
+		    	select dorgid from  tbflow_org_org where orgid = #{orgid} 
+		    )
+		<if test="connsql!=null and connsql!=''"> 
+			and  (
+						(
+						 <!-- connsql里面都是or判断，必须用括号括住，此处是一个整体判断 整体和后面的and同时成立 -->
+							(${connsql}) and uf.state in (-1,2)
+							<if test="flowdefid!=null and flowdefid!=''">
+								   and flowdefid=#{flowdefid}
+							</if>
+						 )
+							<if test="suid!=null and suid!=''"> 
+				   	 			or (uf.state in(0,-2) and uf.opid = #{suid})
+				   			</if>  
+					)
+		</if>
+		<if test="flowdefid!=null and flowdefid!=''"> 
+				and flowdefid=#{flowdefid}
+		</if>
+		<if test="state!=null and state!=''"> 
+				and state in (${state})
+		</if>
+		 <if test="xingqileixing!=null and xingqileixing!=''  and xingqileixing==1">
+				and ((t.NOWPUNISHMENTYEAR!='9995'  and  t.NOWPUNISHMENTYEAR!='9996')  or ( t.NOWPUNISHMENTYEAR is null))
+    	 </if>
+    	   <if test="xingqileixing!=null and xingqileixing!=''  and xingqileixing==2">
+				and t.NOWPUNISHMENTYEAR ='9995'  
+    	 </if>
+    	   <if test="xingqileixing!=null and xingqileixing!=''  and xingqileixing==3">
+				and t.NOWPUNISHMENTYEAR ='9996'  
+    	 </if>
+	    <if test="jianqu!=null and jianqu!=''">
+					and uf.orgid in (${jianqu})
+	    </if>
+	    <if test="casenums!=null and casenums!=''">
+			and uf.text6 in (${casenums})
+   		</if>
+   		 <if test="year!=null and year!=''">
+	    	and substr(uf.text6,1,4)=#{year}
+	    </if>
+	    <if test="key!=null and key!=''">  
+	         and (t.name like concat(concat('%', #{key}), '%') or t.crimid like concat(concat('%', #{key}), '%')or bbb.namepinyinshort like concat(UPPER(#{key}),'%'))
+	    </if>
+  </select>
+  
+  <!-- '('||substr(t.CASENO||'',0,4)||')'||t.JAILNAME||'减字第'||substr(t.CASENO||'',5)||'号' as caseno, -->
+<!--  保外省局立案-->
+  <select id="getProvinceOutPrisonLiAnList" resultType="Map" parameterType="Map" >
+	select * from
+		( select a.*, rownum rn
+		from
+		(select * from 
+			(select  t.JAILNAME, t.crimid,t.name, t.JAILINFO,t.jailid, getage(t.BRITHDAY) as age, t.COURTCHANGETO,
+				       tc.CAUSEACTION,tc.SENTENCESTIME,tc.SENTENCEETIME,tc.INPRISONDATE,t.changetype
+			from TBXF_SENTENCEALTERATION t, TBPRISONER_BASE_CRIME tc
+			where 
+			    t.changetype in ('初保','续保')
+				and t.crimid=tc.crimid
+				and t.crimid not in
+					(
+						select distinct(tb.applyid) from tbflow tf,tbflow_base tb where tf.flowdraftid=tb.flowdraftid 
+								and tb.flowdefid= #{flowdefid}
+					 			and tf.state in (-2,-1,0,1,2)
+					 )
+			and t.JAILID in (select  too.dorgid from TBFLOW_ORG_ORG too where too.orgid = #{orgid})
+		<if test="jailid!=null and jailid!=''">
+			and jailid = #{jailid} 
+	    </if>
+		<if test="key!=null and key!=''">
+			and (crimid like concat(concat('%', #{key}), '%') 
+			or name like concat(concat('%', #{key}), '%') 
+	    </if>
+      )
+    	<if test="sortField!=null and sortField!=''">
+			order by ${sortField} ${sortOrder}
+    	</if>
+	) a
+	<if test="end!=null and end!=''">
+		where rownum &lt;= #{end}
+   	</if>
+	)
+	<if test="start!=null and start!=''">
+		where rn &gt;= #{start}
+   	</if>
+  </select>
+  
+  <select id="countProvinceOutPrisonLiAnList" resultType="int" parameterType="Map" >
+		select  count(t.crimid)
+			from TBXF_SENTENCEALTERATION t, TBPRISONER_BASE_CRIME tc
+			where 
+			    t.crimid=tc.crimid
+				and t.changetype in ('初保','续保')
+				and t.crimid not in
+					(
+						select distinct(tb.applyid) from tbflow tf,tbflow_base tb where tf.flowdraftid=tb.flowdraftid 
+								and tb.flowdefid= #{flowdefid}
+					 			and tf.state in (-2,-1,0,1,2)
+					 )
+			and t.JAILID in (select  too.dorgid from TBFLOW_ORG_ORG too where too.orgid = #{orgid})
+		<if test="jailid!=null and jailid!=''">
+			and jailid = #{jailid} 
+	    </if>
+		<if test="key!=null and key!=''">
+			and (crimid like concat(concat('%', #{key}), '%') 
+			or name like concat(concat('%', #{key}), '%') 
+	    </if>
+  </select>
+  
+  
+  <select id="getOutPrisonChuShiList" resultType="Map" parameterType="Map" >
+	select * from
+	( select a.*, rownum rn
+	from
+	 (select * from
+		(select  t.JAILNAME, 
+			'('||substr(fff.text6,0,4)||')'||tr.shortname||'保字第'||substr(fff.text6,5)||'号' as caseno,crime.maincase ,
+			getage(t.BRITHDAY) as age, t.crimid,t.name, t.JAILINFO,t.jailid, t.COURTCHANGETO,fff.commenttext as shenpiyj,
+			fff.flowdraftid, fff.flowid, fff.text6 as casenum,fff.nodeid as lastnodeid, c.text18 as opcillinstance,c.text19 as opcillcheckresult
+		from TBXF_SENTENCEALTERATION t,TBPRISONER_BASE_CRIME crime, uv_flow fff,TBSYS_ORGINFO tr,(select c.applyid,c.text18,c.text19 from tbflow_base c,
+       		 (select max(b.optime) as optime,b.applyid from tbflow_base b where b.flowdefid='doc_bwbqzdsp' group by b.applyid) d
+			    where c.applyid=d.applyid and c.optime=d.optime and c.flowdefid='doc_bwbqzdsp') c
+		where t.crimid = fff.applyid
+			and fff.FLOWDEFID = #{flowdefid}
+			and t.crimid=c.applyid(+)
+			and tr.orgid = #{departid}
+			and t.crimid = crime.crimid 
+			and t.JAILID in (select  too.dorgid from TBFLOW_ORG_ORG too where too.orgid = #{orgid})
+		 <if test="suid!=null and suid!=''">
+				and 
+				(
+					(fff.nodeid = '0' and fff.state in (2,-1))
+					or 
+					(fff.state in(0,-2) and fff.opid = #{suid})
+				)
+    	 </if>
+		<if test="jailid!=null and jailid!=''">
+			and jailid = #{jailid}
+	    </if>
+	    <if test="casenums!=null and casenums!=''">
+					and fff.text6 in (${casenums})
+	    </if>
+	    <if test="year!=null and year!=''">
+	    	and substr(fff.text6,0,4)=#{year}
+	    </if>
+		<if test="key!=null and key!=''">
+			and (crimid like concat(concat('%', #{key}), '%') 
+			or name like concat(concat('%', #{key}), '%') 
+	    </if>
+	    order by fff.text6
+	)
+	<if test="sortField!=null and sortField!=''">
+		order by ${sortField} ${sortOrder}
+    </if>
+	) a
+	<if test="end!=null and end!=''">
+		where rownum &lt;= #{end}
+   	</if>
+	)
+	<if test="start!=null and start!=''">
+		where rn &gt;= #{start}
+   	</if>
+  </select>
+  
+  <select id="countOutPrisonChuShiList" resultType="int" parameterType="Map" >
+	select count(t.crimid)
+		from TBXF_SENTENCEALTERATION t, uv_flow fff,TBSYS_ORGINFO tr
+		where t.crimid = fff.applyid
+			and fff.FLOWDEFID = #{flowdefid}
+			and tr.orgid = #{departid}
+			and t.JAILID in (select  too.dorgid from TBFLOW_ORG_ORG too where too.orgid = #{orgid})
+		 <if test="suid!=null and suid!=''">
+				and 
+				(
+					(fff.nodeid = '0' and fff.state in (2,-1))
+					or 
+					(fff.state in(0,-2) and fff.opid = #{suid})
+				)
+    	 </if>
+		<if test="jailid!=null and jailid!=''">
+			and jailid = #{jailid}
+	    </if>
+	    <if test="casenums!=null and casenums!=''">
+					and fff.text6 in (${casenums})
+	    </if>
+		<if test="key!=null and key!=''">
+			and (crimid like concat(concat('%', #{key}), '%') 
+			or name like concat(concat('%', #{key}), '%') 
+	    </if>
+  </select>
+  
+  
+   <select id="getOutPrisonProvinceCaseList" parameterType="Map" resultType="Map">
+		select * from
+	    ( select a.*, rownum rn
+	    from
+	    (
+	    	select * from (
+			    select 
+			    	uf.*,t.crimid,t.jailinfo,t.jailname,t.jailid,t.name, uf.nodeid as lastnodeid, getage(t.BRITHDAY) as age,
+			    	'(' || substr(uf.text6,1,4) || ')' || tr.shortname || '保字第' ||substr(uf.text6,5) || '号' as caseno
+			    	from
+			    		uv_flow uf,
+			    		TBXF_SENTENCEALTERATION t,
+			    		TBSYS_ORGINFO tr
+			    	where uf.applyid = t.crimid
+			    	and uf.flowid is not null
+			    	and tr.orgid = #{departid}
+			    	and uf.orgid in 
+				    (
+				    	select dorgid from  tbflow_org_org where orgid = #{orgid} 
+				    )
+				<if test="jailid!=null and jailid!=''">
+						and uf.orgid=#{jailid}
+				</if>
+				<if test="connsql!=null and connsql!=''"> 
+					and  (
+								(
+									${connsql} and uf.state in (-1,2)
+									<if test="flowdefid!=null and flowdefid!=''"> 
+										   and flowdefid=#{flowdefid}
+									</if>
+								 )
+								<if test="suid!=null and suid!=''"> 
+					   	 			or (uf.state in(0,-2) and uf.opid = #{suid})
+					   			</if>  
+							)
+				</if>
+				<if test="flowdefid!=null and flowdefid!=''"> 
+						and flowdefid=#{flowdefid}
+				</if>
+				<if test="state!=null and state!=''"> 
+						and state in (${state})
+				</if>
+			    <if test="casenums!=null and casenums!=''">
+					and uf.text6 in (${casenums})
+	    		</if>
+	    		<if test="year!=null and year!=''">
+	    			and substr(uf.text6,0,4)=#{year}
+	    		</if>
+			    <if test="key!=null and key!=''">  
+			        and t.name like concat(concat('%', #{key}), '%')
+			    </if>
+			    order by uf.text6
+		   )
+	    <if test="sortField!=null and sortField!=''" > 
+	     	order by ${sortField}  ${sortOrder}
+	    </if>
+	    ) a 
+	    <if test="start!=null and start!=''">
+	   		where rownum &lt;= #{end}
+	   	</if> 
+	    )
+	   	<if test="start!=null and start!=''">
+	   		where  rn &gt;= #{start}
+	   	</if>
+  </select>
+  
+  <select id="countOutPrisonProvinceCaseList" parameterType="Map" resultType="int">
+		select 
+	    	count(t.crimid)
+	    	from
+	    		uv_flow uf,
+	    		TBXF_SENTENCEALTERATION t,
+	    		TBSYS_ORGINFO tr
+	    	where uf.applyid = t.crimid
+	    	and uf.flowid is not null
+	    	and tr.orgid = #{departid}
+	    	and uf.orgid in 
+		    (
+		    	select dorgid from  tbflow_org_org where orgid = #{orgid} 
+		    )
+		<if test="jailid!=null and jailid!=''">
+				and uf.orgid=#{jailid}
+		</if>
+		<if test="connsql!=null and connsql!=''"> 
+			and  (
+						(
+							${connsql} and uf.state in (-1,2)
+							<if test="flowdefid!=null and flowdefid!=''"> 
+								   and flowdefid=#{flowdefid}
+							</if>
+						 )
+						<if test="suid!=null and suid!=''"> 
+			   	 			or (uf.state in(0,-2) and uf.opid = #{suid})
+			   			</if>  
+					)
+		</if>
+		<if test="flowdefid!=null and flowdefid!=''"> 
+				and flowdefid=#{flowdefid}
+		</if>
+		<if test="state!=null and state!=''"> 
+				and state in (${state})
+		</if>
+	    <if test="casenums!=null and casenums!=''">
+			and uf.text6 in (${casenums})
+   		</if>
+	    <if test="key!=null and key!=''">  
+	        and t.name like concat(concat('%', #{key}), '%')
+	    </if>
+  </select>
+  
+  
+  <!--  法院案件办理列表数据 -->
+  <select id="getCourtCaseHandleList" parameterType="Map" resultType="Map">
+		select * from
+	    ( select a.*, rownum rn
+	    from
+	    (
+	    	select * from (
+			    select
+			    	uf.*,t.crimid,t.jailname,t.jailid,t.name, uf.nodeid as lastnodeid, getage(t.BRITHDAY) as age, tb.causeaction,
+			    	'(' || substr(uf.text6,1,4) || ')' || tr.shortname ||uf.casetype||'第' ||substr(uf.text6,5) || '号' as caseno,
+			    	F_GETCOURTPROCESS (uf.NODEID, uf.STATE, tc.text1, tc.CHIEFJUSTICE, uf.TEXT23) as processid,
+			    	(select tbc.name from TBSYS_CODE tbc where tbc.CODETYPE='GK053' 
+			    	and tbc.codeid = F_GETCOURTPROCESS (uf.NODEID, uf.STATE, tc.text1, tc.CHIEFJUSTICE, uf.TEXT23)) as process,
+			    	bg.qianzhangjincheng as qianzhangjincheng,substr(uf.text6,5) as anjianhao,substr(uf.text6,0,4) as anjiannian,
+			    	b.heyitingyijian ,
+			    	(select c.remark from TBSYS_CODE c where c.codetype='GK053' and c.codeid=F_GETCOURTPROCESS (uf.NODEID, uf.STATE, tc.text1, tc.CHIEFJUSTICE, uf.TEXT23)) as yanse
+			    	from
+			    		uv_flow uf,
+			    		TBXF_SENTENCEALTERATION t,
+			    		TBPRISONER_BASE_CRIME tb,
+			    		TBCOURT_CASEFULLCOURT tc,
+			    		TBSYS_ORGINFO tr,
+			    		UV_COURT_BIGDATA bg,
+			    		TBCOURT_FLOW_BASEINFO b
+			      where tc.text1 = #{userid}
+			        and uf.applyid = t.crimid(+)
+					and uf.applyid = tb.crimid
+					and uf.flowdraftid = tc.int1
+					and uf.flowdefid=#{flowdefid}
+			    	and tr.orgid=#{departid}
+			    	and uf.state in (-1,0,2,4,1,-2)
+			    	and uf.departid=#{departid}
+			    	and uf.flowdraftid = bg.flowdraftid
+			    	and uf.flowdraftid = b.flowdraftid(+)
+			    	and bg.doctype='XFZX_FYLAB'
+				<if test="jailid!=null and jailid!=''">
+						and uf.orgid=#{jailid}
+				</if>
+			    <if test="casenums!=null and casenums!=''">
+					and uf.text6 in (${casenums})
+	    		</if>
+			    <if test="key!=null and key!=''">  
+			        and t.name like concat(concat('%', #{key}), '%')
+			    </if>
+		  )
+	    <if test="sortField!=null and sortField!=''">
+			<if test="sortField = 'caseno'" > 
+	    		order by to_number(anjiannian) ${sortOrder}, to_number(anjianhao) ${sortOrder}
+	    	</if>
+	    	<if test="sortField != 'caseno'" > 
+	     		order by ${sortField}  ${sortOrder}
+	     	</if>
+	    </if>
+	    ) a 
+	    <if test="start!=null and start!=''">
+	   		where rownum &lt;= #{end}
+	   	</if> 
+	    )
+	   	<if test="start!=null and start!=''">
+	   		where  rn &gt;= #{start}
+	   	</if>
+  </select>
+  <select id="getCourtCaseGuiDangList" parameterType="Map" resultType="Map">
+  	select * from
+	    ( select a.*, rownum rn
+	    from
+	    (
+	    	select * from (
+			    select
+			    	uf.*,t.crimid,t.jailname,t.jailid,t.name, uf.nodeid as lastnodeid, getage(t.BRITHDAY) as age, tb.causeaction,
+			    	'(' || substr(uf.text6,1,4) || ')' || tr.shortname ||uf.casetype||'第' ||substr(uf.text6,5) || '号' as caseno,
+			    	substr(uf.text6,0,4) as anjiannian,substr(uf.text6,5) as anjianhao,
+			    	decode(state,1,'通过',decode(state,3,'未通过',decode(state,4,'退回复议','审批中'))) process 
+			    	from
+			    		uv_flow uf,
+			    		TBXF_SENTENCEALTERATION t,
+			    		TBPRISONER_BASE_CRIME tb,
+			    		TBCOURT_CASEFULLCOURT tc,
+			    		TBSYS_ORGINFO tr
+			      where tc.text1 = #{userid}
+			        and uf.applyid = t.crimid(+)
+					and uf.applyid = tb.crimid
+					and uf.flowdraftid = tc.int1
+					and uf.flowdefid=#{flowdefid}
+			    	and tr.orgid=#{departid}
+			    	and uf.state in (-2,-1,0,1,2,3,4)
+			    	and uf.departid=#{departid}
+				<if test="jailid!=null and jailid!=''">
+						and uf.orgid=#{jailid}
+				</if>
+			    <if test="casenums!=null and casenums!=''">
+					and uf.text6 in (${casenums})
+	    		</if>
+			    <if test="key!=null and key!=''">  
+			       and (t.name like concat(concat('%', #{key}), '%') or substr(uf.text6, 5)=#{key})
+			    </if>
+		  )
+	    <if test="sortField!=null and sortField!=''">
+			<if test="sortField = 'caseno'" > 
+	    		order by to_number(anjiannian) ${sortOrder}, to_number(anjianhao) ${sortOrder}
+	    	</if>
+	    	<if test="sortField != 'caseno'" > 
+	     		order by ${sortField}  ${sortOrder}
+	     	</if>
+	    </if>
+	    ) a 
+	    <if test="start!=null and start!=''">
+	   		where rownum &lt;= #{end}
+	   	</if> 
+	    )
+	   	<if test="start!=null and start!=''">
+	   		where  rn &gt;= #{start}
+	   	</if>
+  </select>
+ 
+  <!-- 
+  <select id="getCourtCaseHandleList" parameterType="Map" resultType="Map">
+		select * from
+	( select a.*, rownum rn
+	from
+	 (select * from
+		(select  t.JAILNAME, '('||substr(fff.text6,0,4)||')'||tr.shortname||'减字第'||substr(fff.text6,5)||'号' as caseno,
+			t.crimid,t.name, t.JAILINFO,t.jailid,t.COURTCHANGETO,
+			fff.flowdraftid, fff.flowid, fff.text6 as casenum,fff.nodeid as lastnodeid,fff.fuyiflag
+		from TBXF_SENTENCEALTERATION t, uv_flow fff,TBSYS_ORGINFO tr
+		where t.crimid = fff.applyid
+			and fff.FLOWDEFID = #{flowdefid}
+			and tr.orgid = #{departid}
+			and t.JAILID in (select  too.dorgid from TBFLOW_ORG_ORG too where too.orgid = #{orgid})
+		 <if test="suid!=null and suid!=''">
+				and 
+				(
+					(fff.nodeid = '0' and fff.state in (0,2,-1))
+					or 
+					(fff.state = 0 and fff.opid = #{suid})
+				)
+    	 </if>
+		<if test="jailid!=null and jailid!=''">
+			and jailid = #{jailid}
+	    </if>
+	    <if test="casenums!=null and casenums!=''">
+					and fff.text6 in (${casenums})
+	    </if>
+		<if test="key!=null and key!=''">
+			and (crimid like concat(concat('%', #{key}), '%') 
+			or name like concat(concat('%', #{key}), '%') 
+	    </if>
+	    order by fff.text6
+	)
+	<if test="sortField!=null and sortField!=''">
+		order by ${sortField} ${sortOrder}
+    </if>
+	) a
+	<if test="end!=null and end!=''">
+		where rownum &lt;= #{end}
+   	</if>
+	)
+	<if test="start!=null and start!=''">
+		where rn &gt;= #{start}
+   	</if>
+  </select>
+   -->
+  
+  <!-- 法院案件办理列表数据总数  -->
+  <select id="countCourtCaseHandleList" parameterType="Map" resultType="int">
+	    select
+				count(t.crimid)
+			from
+	    		uv_flow uf,
+	    		TBXF_SENTENCEALTERATION t,
+	    		TBPRISONER_BASE_CRIME tb,
+	    		TBCOURT_CASEFULLCOURT tc,
+	    		TBSYS_ORGINFO tr
+	    	
+	      where tc.text1 = #{userid}
+	      	and uf.applyid = t.crimid(+)
+			and uf.applyid = tb.crimid
+			and uf.flowdraftid = tc.int1
+			and uf.flowdefid=#{flowdefid}
+	    	and tr.orgid=#{departid}
+	    	and uf.state in (-1,0,2,4,1,-2)
+	    	and uf.departid=#{departid}
+		<if test="jailid!=null and jailid!=''">
+				and uf.orgid=#{jailid}
+		</if>
+	    <if test="casenums!=null and casenums!=''">
+			and uf.text6 in (${casenums})
+   		</if>
+	    <if test="key!=null and key!=''">  
+	        and t.name like concat(concat('%', #{key}), '%')
+	    </if>
+  </select>
+  <select id="getCourtCaseGuiDangListCount" parameterType="Map" resultType="int">
+  		select count(1) from (
+			    select
+			    	uf.*,t.crimid,t.jailname,t.jailid,t.name, uf.nodeid as lastnodeid, getage(t.BRITHDAY) as age, tb.causeaction,
+			    	'(' || substr(uf.text6,1,4) || ')' || tr.shortname ||uf.casetype||'第' ||substr(uf.text6,5) || '号' as caseno,
+			    	decode(state,1,'通过',decode(state,3,'未通过',decode(state,4,'退回复议','审批中'))) process 
+			    	from
+			    		uv_flow uf,
+			    		TBXF_SENTENCEALTERATION t,
+			    		TBPRISONER_BASE_CRIME tb,
+			    		TBCOURT_CASEFULLCOURT tc,
+			    		TBSYS_ORGINFO tr
+			      where tc.text1 = #{userid}
+			        and uf.applyid = t.crimid(+)
+					and uf.applyid = tb.crimid
+					and uf.flowdraftid = tc.int1
+					and uf.flowdefid=#{flowdefid}
+			    	and tr.orgid=#{departid}
+			    	and uf.state in (-2,-1,0,1,2,3,4)
+			    	and uf.departid=#{departid}
+				<if test="jailid!=null and jailid!=''">
+						and uf.orgid=#{jailid}
+				</if>
+			    <if test="casenums!=null and casenums!=''">
+					and uf.text6 in (${casenums})
+	    		</if>
+			    <if test="key!=null and key!=''">  
+			        and (t.name like concat(concat('%', #{key}), '%') or substr(uf.text6, 5)=#{key})
+			    </if>
+			   
+		  )
+  </select>
+  <!-- 
+  <select id="countCourtCaseHandleList" parameterType="Map" resultType="int">
+	    select  count(t.crimid)
+		from TBXF_SENTENCEALTERATION t, uv_flow fff
+		where t.crimid = fff.applyid
+			and fff.FLOWDEFID = #{flowdefid}
+			and t.JAILID in (select  too.dorgid from TBFLOW_ORG_ORG too where too.orgid = #{orgid})
+		 <if test="suid!=null and suid!=''">
+				and 
+				(
+					(fff.nodeid = '0' and fff.state in (0,2,-1))
+					or 
+					(fff.state = 0 and fff.opid = #{suid})
+				)
+    	 </if>
+		<if test="jailid!=null and jailid!=''">
+			and jailid = #{jailid}
+	    </if>
+	    <if test="casenums!=null and casenums!=''">
+					and fff.text6 in (${casenums})
+	    </if>
+		<if test="key!=null and key!=''">
+			and (crimid like concat(concat('%', #{key}), '%') 
+			or name like concat(concat('%', #{key}), '%') 
+	    </if>
+  </select>
+   -->
+   
+  <!-- 根据条件查询表中记录总数 -->
+    <select id="countCollegialPanelListData" parameterType="Map" resultType="int">
+		select  count(t.crimid)
+		from TBXF_SENTENCEALTERATION t, uv_flow fff
+		where t.crimid = fff.applyid
+			and fff.flowid is null
+			and fff.FLOWDEFID = #{flowdefid}
+			and t.JAILID in (select  too.dorgid from TBFLOW_ORG_ORG too where too.orgid = #{orgid})
+			and not exists (select 1 from TBCOURT_CASEFULLCOURT tct where tct.int1=fff.flowdraftid)
+		<if test="casetype!=null and casetype!=''">
+				and fff.text16=#{casetype}
+    	 </if>
+		 <if test="suid!=null and suid!=''">
+				and 
+				(
+					(fff.nodeid = '0' and fff.state in (0,2,-1,-2))
+					or 
+					(fff.state in(0,-2) and fff.opid = #{suid})
+				)
+    	 </if>
+		<if test="jailid!=null and jailid!=''">
+			and jailid = #{jailid}
+	    </if>
+	    <if test="casenums!=null and casenums!=''">
+					and fff.text6 in (${casenums})
+	    </if>
+		<if test="key!=null and key!=''">
+			and (crimid like concat(concat('%', #{key}), '%') 
+			or name like concat(concat('%', #{key}), '%') 
+	    </if>
+  	</select>
+  	
+  	<select id="getCollegialPanelListData" resultType="Map" parameterType="java.lang.String" >
+	select * from
+	( select a.*, rownum rn
+	from
+	 (select * from
+		(select  t.JAILNAME, '('||substr(fff.text6,0,4)||')'||tr.shortname||fff.casetype||'第'||substr(fff.text6,5)||'号' as caseno,
+			t.crimid,t.name, t.JAILINFO,t.jailid,t.COURTCHANGETO,substr(fff.text6,0,4) as anjiannian,substr(fff.text6,5) as anjianhao,
+			fff.flowdraftid, fff.flowid, fff.text6 as casenum,fff.nodeid as lastnodeid,fff.liandate
+		from TBXF_SENTENCEALTERATION t, uv_flow fff,TBSYS_ORGINFO tr
+		where t.crimid = fff.applyid
+			and fff.FLOWDEFID = #{flowdefid}
+			and fff.flowid is null
+			and tr.orgid = #{departid}
+			and t.JAILID in (select  too.dorgid from TBFLOW_ORG_ORG too where too.orgid = #{orgid})
+			and not exists (select 1 from TBCOURT_CASEFULLCOURT tct where tct.int1=fff.flowdraftid)
+		 <if test="casetype!=null and casetype!=''">
+				and fff.text16=#{casetype}
+    	 </if>
+		 <if test="suid!=null and suid!=''">
+				and 
+				(
+					(fff.nodeid = '0' and fff.state in (0,2,-1,-2))
+					or 
+					(fff.state in(0,-2) and fff.opid = #{suid})
+				)
+    	 </if>
+		<if test="jailid!=null and jailid!=''">
+			and jailid = #{jailid}
+	    </if>
+	    <if test="casenums!=null and casenums!=''">
+					and fff.text6 in (${casenums})
+	    </if>
+		<if test="key!=null and key!=''">
+			and (crimid like concat(concat('%', #{key}), '%') 
+			or name like concat(concat('%', #{key}), '%') 
+	    </if>
+	)
+	<if test="sortField!=null and sortField!=''">
+		<if test="sortField = 'caseno'" > 
+    		order by to_number(anjiannian) ${sortOrder}, to_number(anjianhao) ${sortOrder}
+    	</if>
+    	<if test="sortField != 'caseno'" > 
+     		order by ${sortField}  ${sortOrder}
+     	</if>
+    </if>
+	) a
+	<if test="end!=null and end!=''">
+		where rownum &lt;= #{end}
+   	</if>
+	)
+	<if test="start!=null and start!=''">
+		where rn &gt;= #{start}
+   	</if>
+  </select>
+  
+  
+  <!-- 根据条件查询表中记录总数 -->
+    <select id="countChangeCollegialPanelListData" parameterType="Map" resultType="int">
+		select  count(t.crimid)
+		from TBXF_SENTENCEALTERATION t, uv_flow fff
+		where t.crimid = fff.applyid
+			and fff.flowid is null
+			and fff.FLOWDEFID = #{flowdefid}
+			and t.JAILID in (select  too.dorgid from TBFLOW_ORG_ORG too where too.orgid = #{orgid})
+			and exists (select 1 from TBCOURT_CASEFULLCOURT tct where tct.int1=fff.flowdraftid)
+			and fff.state in (-1,0,2,4,-2)
+		<if test="casetype!=null and casetype!=''">
+				and fff.text16=#{casetype}
+    	 </if>
+		<if test="jailid!=null and jailid!=''">
+			and jailid = #{jailid}
+	    </if>
+	    <if test="casenums!=null and casenums!=''">
+					and fff.text6 in (${casenums})
+	    </if>
+		<if test="key!=null and key!=''">
+			and (crimid like concat(concat('%', #{key}), '%') 
+			or name like concat(concat('%', #{key}), '%') 
+	    </if>
+  	</select>
+  	
+  	<select id="getChangeCollegialPanelListData" resultType="Map" parameterType="java.lang.String" >
+	select * from
+	( select a.*, rownum rn
+	from
+	 (select * from
+		(select  t.JAILNAME, '('||substr(fff.text6,0,4)||')'||tr.shortname||fff.casetype||'第'||substr(fff.text6,5)||'号' as caseno,
+			substr(fff.text6,0,4) as anjiannian,substr(fff.text6,5) as anjianhao,
+			t.crimid,t.name, t.JAILINFO,t.jailid,t.COURTCHANGETO,info.name as chengbanren,
+			fff.flowdraftid, fff.flowid, fff.text6 as casenum,fff.nodeid as lastnodeid,fff.liandate
+		from TBXF_SENTENCEALTERATION t, uv_flow fff,TBSYS_ORGINFO tr,TBCOURT_CASEFULLCOURT court,
+                               tbsys_userinfo info 
+		where t.crimid = fff.applyid
+			and fff.FLOWDEFID = #{flowdefid}
+			and fff.flowid is null
+			and tr.orgid = #{departid}
+			and t.crimid=court.crimid and info.userid=court.text1 
+			and t.JAILID in (select  too.dorgid from TBFLOW_ORG_ORG too where too.orgid = #{orgid})
+			and exists (select 1 from TBCOURT_CASEFULLCOURT tct where tct.int1=fff.flowdraftid)
+			and fff.state in (-1,0,2,4,-2)
+		<if test="casetype!=null and casetype!=''">
+				and fff.text16=#{casetype}
+    	 </if>
+		<if test="jailid!=null and jailid!=''">
+			and jailid = #{jailid}
+	    </if>
+	    <if test="casenums!=null and casenums!=''">
+					and fff.text6 in (${casenums})
+	    </if>
+		<if test="key!=null and key!=''">
+			and (crimid like concat(concat('%', #{key}), '%') 
+			or name like concat(concat('%', #{key}), '%') 
+	    </if>
+	)
+	<if test="sortField!=null and sortField!=''">
+		<if test="sortField = 'caseno'" > 
+    		order by to_number(anjiannian) ${sortOrder}, to_number(anjianhao) ${sortOrder}
+    	</if>
+    	<if test="sortField != 'caseno'" > 
+     		order by ${sortField}  ${sortOrder}
+     	</if>
+    </if>
+	) a
+	<if test="end!=null and end!=''">
+		where rownum &lt;= #{end}
+   	</if>
+	)
+	<if test="start!=null and start!=''">
+		where rn &gt;= #{start}
+   	</if>
+  </select>
+  	
+  <select id="getCourtCaseShengPiList" parameterType="Map" resultType="Map">
+	select * from
+    ( select a.*, rownum rn
+    from
+    (
+    	select * from (
+		    select 
+		    	uf.*,t.crimid,t.jailinfo,t.jailname,t.jailid,t.name, uf.nodeid as lastnodeid, getage(t.brithday) as age, tb.causeaction,
+		    	'(' || substr(uf.text6,1,4) || ')' || tr.shortname || uf.casetype||'第' ||substr(uf.text6,5) || '号' as caseno,
+		    	substr(uf.text6,0,4) as anjiannian,substr(uf.text6,5) as anjianhao
+		    	from
+		    		uv_flow uf,
+		    		TBXF_SENTENCEALTERATION t,
+		    		TBPRISONER_BASE_CRIME tb,
+		    		TBSYS_ORGINFO tr
+		    	where uf.examineid=#{userid}
+		    	and uf.departid=#{departid}
+		    	and uf.applyid = t.crimid(+)
+		    	and uf.applyid = tb.crimid
+		    	and uf.flowid is not null
+		    	and uf.state in (-1,0)
+		    	and tr.orgid = #{departid}
+		    	and uf.orgid in
+			    (
+			    	select dorgid from  tbflow_org_org where orgid = #{orgid} 
+			    )
+			    and uf.FLOWDRAFTID not in(select tf.FLOWDRAFTID from TBFLOW  tf where tf.FLOWDRAFTID=uf.FLOWDRAFTID and tf.NODEID='N0001' and tf.EXAMINEID=#{userid} and tf.EXAMINEID=tf.opid)
+			<if test="jailid!=null and jailid!=''">
+					and uf.orgid=#{jailid}
+			</if>
+			<if test="flowdefid!=null and flowdefid!=''"> 
+					and flowdefid=#{flowdefid}
+			</if>
+			<if test="state!=null and state!=''"> 
+					and state in (${state})
+			</if>
+		    <if test="casenums!=null and casenums!=''">
+				and uf.text6 in (${casenums})
+    		</if>
+		    <if test="key!=null and key!=''">  
+		        and t.name like concat(concat('%', #{key}), '%')
+		    </if>
+		    order by to_number(anjiannian) asc, to_number(anjianhao) asc
+	   )
+   <if test="sortField!=null and sortField!=''">
+		<if test="sortField = 'caseno'" > 
+    		order by to_number(anjiannian) ${sortOrder}, to_number(anjianhao) ${sortOrder}
+    	</if>
+    	<if test="sortField != 'caseno'" > 
+     		order by ${sortField}  ${sortOrder}
+     	</if>
+    </if>
+    ) a 
+    <if test="start!=null and start!=''">
+   		where rownum &lt;= #{end}
+   	</if> 
+    )
+   	<if test="start!=null and start!=''">
+   		where  rn &gt;= #{start}
+   	</if>
+  </select>
+  
+  
+  <select id="countCourtCaseShengPiList" parameterType="Map" resultType="int">
+	select 
+	    	count(uf.applyid)
+	    	from
+	    			uv_flow uf,
+		    		TBXF_SENTENCEALTERATION t,
+		    		TBPRISONER_BASE_CRIME tb,
+		    		TBSYS_ORGINFO tr
+	    	where uf.examineid=#{userid}
+		    	and uf.departid=#{departid}
+		    	and uf.applyid = t.crimid(+)
+		    	and uf.applyid = tb.crimid
+		    	and uf.flowid is not null
+		    	and uf.state in (-1,0)
+		    	and tr.orgid = #{departid}
+		    	and uf.orgid in
+			    (
+			    	select dorgid from  tbflow_org_org where orgid = #{orgid} 
+			    )
+			      and uf.FLOWDRAFTID not in(select tf.FLOWDRAFTID from TBFLOW  tf where tf.FLOWDRAFTID=uf.FLOWDRAFTID and tf.NODEID='N0001' and tf.EXAMINEID=#{userid} and tf.EXAMINEID=tf.opid)
+			<if test="jailid!=null and jailid!=''">
+					and uf.orgid=#{jailid}
+			</if>
+			<if test="flowdefid!=null and flowdefid!=''"> 
+					and flowdefid=#{flowdefid}
+			</if>
+			<if test="state!=null and state!=''"> 
+					and state in (${state})
+			</if>
+		    <if test="casenums!=null and casenums!=''">
+				and uf.text6 in (${casenums})
+    		</if>
+		    <if test="key!=null and key!=''">  
+		        and t.name like concat(concat('%', #{key}), '%')
+		    </if>
+  </select>
+  
+  <select id="getCriminalForCourtList" parameterType="Map" resultType="Map">
+		select * from
+	    ( select a.*, rownum rn
+	    from
+	    (
+	    	select * from (
+			    select
+			    	uf.*,t.crimid,t.jailname,t.jailid,t.name, uf.nodeid as lastnodeid, 
+			    	'第' ||substr(uf.text6,5) || '号' as caseno,
+			    	substr(uf.text6,5) as anjianhao,substr(uf.text6,0,4) as anjiannian
+			    	from
+			    		uv_flow uf,
+			    		TBXF_SENTENCEALTERATION t,
+			    		TBCOURT_CASEFULLCOURT tc
+			    	
+			      where (tc.secretary = #{userid} or tc.text1 = #{userid})
+			        and uf.applyid = t.crimid
+					and uf.flowdraftid = tc.int1
+					and uf.flowdefid=#{flowdefid}
+			    	and uf.state in (-1,0,2,4,-2)
+			    	and uf.departid=#{departid}
+				<if test="jailid!=null and jailid!=''">
+						and uf.orgid=#{jailid}
+				</if>
+				<if test="nowpunishmentyear!=null and nowpunishmentyear!=''">
+						and t.nowpunishmentyear=#{nowpunishmentyear}
+				</if>
+				<if test="nowpunishmenttype!=null and nowpunishmenttype=='1'">
+						and t.nowpunishmentyear not in('9996','9995')
+				</if>
+			    <if test="casenums!=null and casenums!=''">
+					and uf.text6 in (${casenums})
+	    		</if>
+			    <if test="key!=null and key!=''">  
+			        and t.name like concat(concat('%', #{key}), '%')
+			    </if>
+		  )
+	    <if test="sortField!=null and sortField!=''" > 
+	     	<if test="sortField = 'caseno'" > 
+	    		order by to_number(anjiannian) ${sortOrder}, to_number(anjianhao) ${sortOrder}
+	    	</if>
+	    	<if test="sortField != 'caseno'" > 
+	     		order by ${sortField}  ${sortOrder}
+	     	</if>
+	    </if>
+	    ) a 
+	    <if test="start!=null and start!=''">
+	   		where rownum &lt;= #{end}
+	   	</if> 
+	    )
+	   	<if test="start!=null and start!=''">
+	   		where  rn &gt;= #{start}
+	   	</if>
+  </select>
+  
+  <select id="countCriminalForCourt" parameterType="Map" resultType="int">
+	    select
+			    	count(1)
+			    	from
+			    		uv_flow uf,
+			    		TBXF_SENTENCEALTERATION t,
+			    		TBCOURT_CASEFULLCOURT tc
+			    	
+			      where (tc.secretary = #{userid} or tc.text1 = #{userid})
+			        and uf.applyid = t.crimid
+					and uf.flowdraftid = tc.int1
+					and uf.flowdefid=#{flowdefid}
+			    	and uf.state in (-1,0,2,4,-2)
+			    	and uf.departid=#{departid}
+				<if test="jailid!=null and jailid!=''">
+						and uf.orgid=#{jailid}
+				</if>
+				<if test="nowpunishmentyear!=null and nowpunishmentyear!=''">
+						and t.nowpunishmentyear=#{nowpunishmentyear}
+				</if>
+				<if test="nowpunishmenttype!=null and nowpunishmenttype=='1'">
+						and t.nowpunishmentyear not in('9996','9995')
+				</if>
+			    <if test="casenums!=null and casenums!=''">
+					and uf.text6 in (${casenums})
+	    		</if>
+			    <if test="key!=null and key!=''">  
+			        and t.name like concat(concat('%', #{key}), '%')
+			    </if>
+  </select>
+  
+   <select id="getCourtCaseState" parameterType="Map" resultType="String">
+		select
+	    	(case when uf.nodeid='0' or (uf.nodeid='N0001' and (uf.state=0 or uf.state='-2')) then '1'
+	    	else '0'
+	    	end) as sate
+	    from
+	    	uv_flow uf
+	    where uf.flowdraftid=#{flowdraftid}
+  </select>
+  
+  <!--  法院案件办理列表数据 -->
+  <select id="getAllDocumentIdByCasenums" parameterType="Map" resultType="int">
+	    select otherid from
+		 (
+		 	select
+		    	tbo.otherid, (case when substr(tof.tempid,1,${length})=#{tempid} then 1 else 0 end) flag
+		    from
+	    		TBFLOW_BASE tb,
+	    		TBFLOW_OTHER_FLOW tof,
+	    		TBFLOW_BASE_OTHER tbo
+		    where tb.flowdraftid=tof.flowdraftid
+				and tof.otherid=tbo.otherid
+		    	and tb.departid=#{departid}
+		    	and tb.text6 in (${casenums})
+		    order by tbo.otherid
+	    )
+	    where flag=1
+  </select>
+  
+  <!--  法院案件检查列表数据 -->
+  <select id="getCourtCaseCheckDataList" parameterType="Map" resultType="Map">
+		select * from
+	    ( select a.*, rownum rn
+	    from
+	    (
+	    	select * from (
+			    select
+			    	uf.*,t.crimid,t.jailname,t.jailid,t.name, uf.nodeid as lastnodeid, getage(t.BRITHDAY) as age, tb.causeaction,
+			    	'(' || substr(uf.text6,1,4) || ')' || tr.shortname ||uf.casetype||'第' ||substr(uf.text6,5) || '号' as parolenumber,
+			    	substr(uf.text6,5) as anjianhao,substr(uf.text6,0,4) as anjiannian
+			    	from
+			    		uv_flow uf,
+			    		TBXF_SENTENCEALTERATION t,
+			    		TBPRISONER_BASE_CRIME tb,
+			    		TBSYS_ORGINFO tr
+			    	
+			      where uf.applyid = t.crimid
+					and uf.applyid = tb.crimid
+					and uf.flowdefid=#{flowdefid}
+			    	and tr.orgid=#{departid}
+			    	and uf.departid=#{departid}
+			    <if test="casenums!=null and casenums!=''">
+					and uf.text6 in (${casenums})
+	    		</if>
+			    <if test="key!=null and key!=''">  
+			        and t.name like concat(concat('%', #{key}), '%')
+			    </if>
+			    <if test="jianxingfudu!=null and jianxingfudu!=''">  
+			        and (${jianxingfudu})
+			    </if>
+			    <if test="yuanpanxingqi!=null and yuanpanxingqi!=''">  
+			        and (${yuanpanxingqi})
+			    </if>
+			    <if test="anfanleibie!=null and anfanleibie!=''">  
+			        and (
+			        	${anfanleibie}
+			        )
+			    </if>
+			    <if test="percentCondition!=null and percentCondition!=''">  
+			        and uf.flowdraftid in (${percentCondition})
+			    </if>
+		  )
+	   			<if test="sortField!=null and sortField!=''" > 
+			    	<if test="sortField='parolenumber'">
+			    		order by to_number(anjiannian) ${sortOrder}, to_number(anjianhao) ${sortOrder}
+			    	</if>
+			    	<if test="sortField!='parolenumber'">
+			    		order by ${sortField}  ${sortOrder}
+			    	</if>
+	    		</if>
+	    ) a 
+	    <if test="start!=null and start!=''">
+	   		where rownum &lt;= #{end}
+	   	</if> 
+	    )
+	   	<if test="start!=null and start!=''">
+	   		where  rn &gt;= #{start}
+	   	</if>
+  </select>
+  
+  <select id="countCourtCaseCheckDataList" parameterType="Map" resultType="int">
+	    select
+	    	count(uf.applyid)
+	    	from
+	    		uv_flow uf,
+	    		TBXF_SENTENCEALTERATION t,
+	    		TBPRISONER_BASE_CRIME tb,
+	    		TBSYS_ORGINFO tr
+	    	
+	      where uf.applyid = t.crimid
+			and uf.applyid = tb.crimid
+			and uf.flowdefid=#{flowdefid}
+	    	and tr.orgid=#{departid}
+	    	and uf.departid=#{departid}
+	    <if test="casenums!=null and casenums!=''">
+			and uf.text6 in (${casenums})
+   		</if>
+	    <if test="key!=null and key!=''">  
+	        and t.name like concat(concat('%', #{key}), '%')
+	    </if>
+	    <if test="jianxingfudu!=null and jianxingfudu!=''">  
+	        and (${jianxingfudu})
+	    </if>
+	    <if test="yuanpanxingqi!=null and yuanpanxingqi!=''">  
+	        and (${yuanpanxingqi})
+	    </if>
+	    <if test="anfanleibie!=null and anfanleibie!=''">  
+	        and (
+	        	${anfanleibie}
+	        )
+	    </if>
+	    <if test="percentCondition!=null and percentCondition!=''">  
+			and uf.flowdraftid in (${percentCondition})
+		</if>
+  </select>
+  
+  <!--  法院案件报备列表数据 -->
+  <select id="getCourtCaseBaoBeiDataList" parameterType="Map" resultType="Map">
+		select * from
+	    ( select a.*, rownum rn
+	    from
+	    (
+	    	select * from (
+			    select
+			    	uf.*,t.crimid,t.jailname,t.jailid,t.name, uf.nodeid as lastnodeid, getage(t.BRITHDAY) as age, tb.causeaction,
+			    	'(' || substr(uf.text6,1,4) || ')' || tr.shortname ||uf.casetype||'第' ||substr(uf.text6,5) || '号' as parolenumber,
+			    	substr(uf.text6,5) as anjianhao,substr(uf.text6,0,4) as anjiannian
+			    	from
+			    		uv_flow uf,
+			    		TBXF_SENTENCEALTERATION t,
+			    		TBPRISONER_BASE_CRIME tb,
+			    		TBSYS_ORGINFO tr
+			    	
+			      where uf.applyid = t.crimid
+					and uf.applyid = tb.crimid
+					and uf.flowdefid=#{flowdefid}
+			    	and tr.orgid=#{departid}
+			    	and uf.departid=#{departid}
+			    	and uf.state in (-1,0,2,-2)
+			    <if test="casenums!=null and casenums!=''">
+					and uf.text6 in (${casenums})
+	    		</if>
+			    <if test="isreport!=null and isreport!='' and isreport ==1">
+					and uf.isreport = '1'
+	    		</if>
+	    		<if test="isreport!=null and isreport!='' and isreport == 0">
+					and uf.isreport is null
+	    		</if>
+			    <if test="key!=null and key!=''">  
+			        and t.name like concat(concat('%', #{key}), '%')
+			    </if>
+			     <if test="anfanleibie!=null and anfanleibie!=''">  
+			        and (
+			        	${anfanleibie}
+			        )
+			    </if>
+		  )
+	    <if test="sortField!=null and sortField!=''" > 
+	     	<if test="sortField!=null and sortField!=''" > 
+			    	<if test="sortField='parolenumber'">
+			    		order by to_number(anjiannian) ${sortOrder}, to_number(anjianhao) ${sortOrder}
+			    	</if>
+			    	<if test="sortField!='parolenumber'">
+			    		order by ${sortField}  ${sortOrder}
+			    	</if>
+    		</if>
+	    </if>
+	    ) a 
+	    <if test="start!=null and start!=''">
+	   		where rownum &lt;= #{end}
+	   	</if> 
+	    )
+	   	<if test="start!=null and start!=''">
+	   		where  rn &gt;= #{start}
+	   	</if>
+  </select>
+  
+  <!--  法院案件报备列表数据 -->
+  <select id="countCourtCaseBaoBeiDataList" parameterType="Map" resultType="int">
+	    select
+	    	count(uf.applyid)
+	    	from
+	    		uv_flow uf,
+	    		TBXF_SENTENCEALTERATION t,
+	    		TBPRISONER_BASE_CRIME tb,
+	    		TBSYS_ORGINFO tr
+	    	
+	      where uf.applyid = t.crimid
+			and uf.applyid = tb.crimid
+			and uf.flowdefid=#{flowdefid}
+	    	and tr.orgid=#{departid}
+	    	and uf.departid=#{departid}
+	    	and uf.state in (-1,0,2,-2)
+	    <if test="casenums!=null and casenums!=''">
+			and uf.text6 in (${casenums})
+   		</if>
+   		<if test="isreport!=null and isreport!='' and isreport=='1'">
+			and uf.isreport = '1'
+   		</if>
+   		<if test="isreport!=null and isreport!='' and isreport=='0'">
+			and uf.isreport != '1'
+   		</if>
+	    <if test="key!=null and key!=''">  
+	        and t.name like concat(concat('%', #{key}), '%')
+	    </if>
+	    <if test="anfanleibie!=null and anfanleibie!=''">  
+	        and (
+	        	${anfanleibie}
+	        )
+		</if>
+  </select>
+  
+   <!--  法院案件检查列表数据 -->
+  <select id="getCourtCasePercentCheckData" parameterType="Map" resultType="Map">
+	    select
+	    	uf.flowdraftid
+	    	from
+	    		uv_flow uf,
+	    		TBXF_SENTENCEALTERATION t,
+	    		TBPRISONER_BASE_CRIME tb,
+	    		TBSYS_ORGINFO tr
+	    	
+	      where uf.applyid = t.crimid
+			and uf.applyid = tb.crimid
+			and uf.flowdefid=#{flowdefid}
+	    	and tr.orgid=#{departid}
+	    	and uf.departid=#{departid}
+	    <if test="casenums!=null and casenums!=''">
+			and uf.text6 in (${casenums})
+   		</if>
+	    <if test="key!=null and key!=''">  
+	        and t.name like concat(concat('%', #{key}), '%')
+	    </if>
+	    <if test="jianxingfudu!=null and jianxingfudu!=''">  
+	        and (${jianxingfudu})
+	    </if>
+	    <if test="yuanpanxingqi!=null and yuanpanxingqi!=''">  
+	        and (${yuanpanxingqi})
+	    </if>
+	    <if test="anfanleibie!=null and anfanleibie!=''">  
+	        and (
+	        	${anfanleibie}
+	        )
+	    </if>
+  </select>
+  <select id="getCommenttextByApplyid" resultType="String">
+  	SELECT commenttext
+  	FROM (SELECT *
+          FROM UV_FLOW T
+         WHERE APPLYID = #{0}
+           AND FLOWDEFID = #{1}
+         ORDER BY T.APPLYDATETIME DESC)
+ 	WHERE ROWNUM = 1
+  </select>
+  <select id="getFlowByFlowdraftid" parameterType="String" resultType="com.sinog2c.model.flow.UvFlow">
+  	select * from UV_FLOW where flowdraftid = #{flowdraftid}
+  </select>
+  <select id="getuvflowByMap" parameterType="Map" resultType="com.sinog2c.model.flow.UvFlow">
+  		select substr(t.text6,0,4) as conent,substr(t.text6,5) as endsummry,t.text24 as opname from uv_flow t where t.flowdraftid=#{flowdraftid} 
+  </select>
+  <select id="getShujyData" parameterType="Map" resultType="Map">
+  		select * from
+	    ( select a.*, rownum rn
+	    from
+	    (
+	    	select * from (
+			    select
+			    	uf.*,t.crimid,t.jailname,t.jailid,t.name, uf.nodeid as lastnodeid, getage(t.BRITHDAY) as age, tb.causeaction,
+			    	'(' || substr(uf.text6,1,4) || ')' || tr.shortname ||uf.casetype||'第' ||substr(uf.text6,5) || '号' as caseno,
+			    	F_GETCOURTPROCESS (uf.NODEID, uf.STATE, tc.text1, tc.CHIEFJUSTICE, uf.TEXT23) as processid,
+			    	(select tbc.name from TBSYS_CODE tbc where tbc.CODETYPE='GK053' 
+			    	and tbc.codeid = F_GETCOURTPROCESS (uf.NODEID, uf.STATE, tc.text1, tc.CHIEFJUSTICE, uf.TEXT23)) as process,
+			    	bg.qianzhangjincheng as qianzhangjincheng,substr(uf.text6,5) as anjianhao
+			    	from
+			    		uv_flow uf,
+			    		TBXF_SENTENCEALTERATION t,
+			    		TBPRISONER_BASE_CRIME tb,
+			    		TBCOURT_CASEFULLCOURT tc,
+			    		TBSYS_ORGINFO tr,
+			    		UV_COURT_BIGDATA bg
+			      where tc.SECRETARY = #{userid}
+			        and uf.applyid = t.crimid(+)
+					and uf.applyid = tb.crimid
+					and uf.flowdraftid = tc.int1
+					and uf.flowdefid=#{flowdefid}
+			    	and tr.orgid=#{departid}
+			    	and uf.state in (-1,0,2,4)
+			    	and uf.departid=#{departid}
+			    	and uf.flowdraftid = bg.flowdraftid
+			    	and bg.doctype='XFZX_FYLAB'
+				<if test="jailid!=null and jailid!=''">
+						and uf.orgid=#{jailid}
+				</if>
+			    <if test="casenums!=null and casenums!=''">
+					and uf.text6 in (${casenums})
+	    		</if>
+			    <if test="key!=null and key!=''">  
+			        and t.name like concat(concat('%', #{key}), '%')
+			    </if>
+			    order by uf.text6
+		  )
+	    <if test="sortField!=null and sortField!=''" > 
+	    	<if test="sortField = 'caseno'" > 
+	    		order by to_number(text6) ${sortOrder}
+	    	</if>
+	    	<if test="sortField != 'caseno'" > 
+	     		order by ${sortField}  ${sortOrder}
+	     	</if>
+	    </if>
+	    ) a 
+	    <if test="start!=null and start!=''">
+	   		where rownum &lt;= #{end}
+	   	</if> 
+	    )
+	   	<if test="start!=null and start!=''">
+	   		where  rn &gt;= #{start}
+	   	</if>
+  </select>
+  <select id="getShujyDataCount" parameterType="Map" resultType="int">
+  	 select
+			count(t.crimid)
+			from
+	    		uv_flow uf,
+	    		TBXF_SENTENCEALTERATION t,
+	    		TBPRISONER_BASE_CRIME tb,
+	    		TBCOURT_CASEFULLCOURT tc,
+	    		TBSYS_ORGINFO tr
+	    	
+	      where tc.SECRETARY = #{userid}
+	      	and uf.applyid = t.crimid(+)
+			and uf.applyid = tb.crimid
+			and uf.flowdraftid = tc.int1
+			and uf.flowdefid=#{flowdefid}
+	    	and tr.orgid=#{departid}
+	    	and uf.state in (-1,0,2,4)
+	    	and uf.departid=#{departid}
+		<if test="jailid!=null and jailid!=''">
+				and uf.orgid=#{jailid}
+		</if>
+	    <if test="casenums!=null and casenums!=''">
+			and uf.text6 in (${casenums})
+   		</if>
+	    <if test="key!=null and key!=''">  
+	        and t.name like concat(concat('%', #{key}), '%')
+	    </if>
+  </select>
+  
+  
+  <!--法院查找流程信息 -->
+  <select id="findByFlowdefidForCourt" parameterType="Map" resultType="com.sinog2c.model.flow.UvFlow">
+	select * from
+    ( select a.*, rownum rn
+    from
+    (
+    		select * from (
+				    select uf.* ,
+				    				(case 
+				    						<foreach collection="list" index="index" item="item">  
+										      	when tr.porgid=#{item.provinceid} and uf.nodeid=#{item.nodeid} and uf.flowdefid=#{item.flowdefid} and uf.state = -1
+								    	    	then (case when uf.optime+#{item.days} &lt;= sysdate  then 1 else 0 end)
+										   </foreach>
+								    	else 1
+								    	end
+								     ) as wardenOperFlag
+				    from uv_flow uf, TBSYS_ORGINFO tr
+				    
+				     where 1=1  and tr.orgid = #{departid}
+					    AND uf.orgid in 
+					    (
+					    	select dorgid from  tbflow_org_org where orgid = #{orgid} 
+					    )
+					    and uf.flowid is not null 
+					 and uf.state IN (-1, 0)
+                     and uf.examineid =  #{suid} 
+                       and uf.FLOWDRAFTID not in(select tf.FLOWDRAFTID from TBFLOW  tf where tf.FLOWDRAFTID=uf.FLOWDRAFTID and tf.NODEID='N0001' and tf.EXAMINEID=#{suid} and tf.EXAMINEID=tf.opid)
+				    <if test="applyid!=null and applyid!=''"> 
+				    	and uf.applyid=#{applyid}
+				    </if>
+				    <if test="flowdefid!=null and flowdefid!=''"> 
+				    	and uf.flowdefid=#{flowdefid}
+				    </if>
+				    <if test="isarch!=null and isarch!=''"> 
+				    	and uf.flowdefid not in ('arch_zfdajysp','arch_zfdajdsp')
+				    </if>
+				    <if test="key!=null and key!=''">  
+				        and uf.conent like concat(concat('%', #{key}), '%')
+				    </if>
+		) where wardenOperFlag = 1
+	    <if test="sortField!=null and sortField!=''" > 
+	     	order by ${sortField}  ${sortOrder}
+	    </if>
+    ) a 
+    <if test="start!=null and start!=''">
+   		where rownum &lt;= #{end}
+   	</if> 
+    )
+   	<if test="start!=null and start!=''">
+   		where  rn &gt;= #{start}
+   	</if>
+  </select>
+   <!--法院查询表中记录总数 -->
+  <select id="countAllByConditionForCourt" parameterType="Map" resultType="int">
+  		select count(*) from (
+		    select uf.* ,
+		    				(case 
+		    						<foreach collection="list" index="index" item="item">  
+								      	when tr.porgid=#{item.provinceid} and uf.nodeid=#{item.nodeid} and uf.flowdefid=#{item.flowdefid} and uf.state = -1
+						    	    	then (case when uf.optime + #{item.days} &lt;= sysdate  then 1 else 0 end)
+								   </foreach>
+						    	else 1
+						    	end
+						     ) as wardenOperFlag
+		    from uv_flow uf, TBSYS_ORGINFO tr
+		    
+		     where 1=1  and tr.orgid = #{departid}
+			     AND uf.orgid in 
+			    (
+			    	select dorgid from  tbflow_org_org where orgid = #{orgid} 
+			    )
+			    and uf.flowid is not null 
+			 and uf.state IN (-1, 0)
+             and uf.examineid =  #{suid}   
+               and uf.FLOWDRAFTID not in(select tf.FLOWDRAFTID from TBFLOW  tf where tf.FLOWDRAFTID=uf.FLOWDRAFTID and tf.NODEID='N0001' and tf.EXAMINEID=#{suid} and tf.EXAMINEID=tf.opid)
+		    <if test="applyid!=null and applyid!=''"> 
+		    	and uf.applyid=#{applyid}
+		    </if>
+		    <if test="flowdefid!=null and flowdefid!=''"> 
+		    	and uf.flowdefid=#{flowdefid}
+		    </if>
+		    <if test="isarch!=null and isarch!=''"> 
+		    	and uf.flowdefid not in ('arch_zfdajysp','arch_zfdajdsp')
+		    </if>
+		    <if test="key!=null and key!=''">  
+		        and uf.conent like concat(concat('%', #{key}), '%')
+		    </if>
+		) where wardenOperFlag = 1
+	   
+  </select>
+  
+  <!-- 把立案的罪犯在押 状态修改为保外 -->
+  <update id="updateCriminalDetainStatus">
+      update tbprisoner_base_crime cr set cr.detainstatus=#{detainstatus} where cr.crimid  in (#{crimids}) 
+  </update>
+  <!-- 把立案的罪犯在押 状态修改为保外 -->
+  <update id="updateSenStatusDetainStatus">
+      update tbxf_sentencealteration cr set cr.status=#{status} where cr.crimid  in (#{crimids}) 
+  </update>
+  
+  
+   <select id="getBaseDocByCondition" parameterType="Map" resultType="Map">
+		select * from
+    		(select a.*, rownum rn
+    			from
+    			(
+		    			select
+		    				tb.applyid,
+					    	tb.applyname,
+					    	tb.flowdraftid,
+					    	tb.state,
+					    	tb.conent, 
+					    	tb.optime,
+					    	tb.opname,
+					    	tb.text8,
+					    	tb.flowdefid,
+					    	td.resid as menuid,
+					    	tog.name as orgname
+		    			from 
+				    		tbflow_base tb,
+				    		TBPRISONER_BASE_CRIME tbc,
+				    		TBPRISONER_BASEINFO tbi,
+				    		(select distinct snodeid ,resid,flowdefid as Tflowdefid from TBFLOW_DELIVER 
+				    			where departid=#{departid} and resid is not null
+				    		) td,
+				    		TBSYS_ORGINFO tog
+			    	 	where 1=1
+			    	 	and tb.applyid=tbc.crimid
+			    	 	and tb.applyid=tbi.crimid
+			    	 	and tb.flowdefid=td.Tflowdefid
+			    	 	and tb.currnodeid=td.snodeid
+			    	 	and tbc.orgid=tog.orgid
+			    	 	and exists (select 'x' from tbflow_org_org where orgid = #{orgid} and (dorgid=tbc.orgid2 or dorgid=tbc.orgid1 or dorgid=tbc.orgid))
+					    <if test="connsql!=null and connsql!=''"> 
+							and  (
+									(
+										(${connsql}) and tb.state in (-1,2)
+										<if test="flowdefid!=null and flowdefid!=''"> 
+									    	and tb.flowdefid=#{flowdefid}
+									    </if>
+									 )
+									 <if test="userid!=null and userid!=''"> 
+					   	 				or (tb.state IN (0, -2) and tb.opid = #{userid})
+					   				 </if>  
+								)
+						</if>  
+					    <if test="applyid!=null and applyid!=''"> 
+					    	and tb.applyid=#{applyid}
+					    </if>
+					    <if test="flowdefid!=null and flowdefid!=''"> 
+					    	and tb.flowdefid=#{flowdefid}
+					    </if>
+					    <if test="isfjquser!=null and isfjquser!=''"> 
+ 							and tb.FJQUSER=#{userid}
+					    </if>
+					    <if test="notinnodeid!=null and notinnodeid!=''"> 
+					    	and tb.currnodeid not in (${notinnodeid})
+					    </if>
+					    <if test="key!=null and key!=''">  
+					        and (tbi.crimid like '%'||#{key}||'%' or tbi.name like '%'||#{key}||'%' or tbi.namepinyinshort like '%'||UPPER(#{key})||'%')
+					    </if>
+			    	    <if test="jianqu!=null and jianqu!=''">
+							and (tbc.orgid2 = #{jianqu} or tbc.orgid1 = #{jianqu})
+			    	    </if>
+			    <if test="sortField!=null and sortField!=''" > 
+			     	order by ${sortField}  ${sortOrder}
+			    </if>
+			) a 
+		    <if test="start!=null and start!=''">
+		   		where rownum &lt;= #{end}
+		   	</if> 
+    	)
+	   	<if test="start!=null and start!=''">
+	   		where  rn &gt;= #{start}
+	   	</if>
+  </select>
+  
+  
+  <select id="countBaseDocByCondition" parameterType="Map" resultType="int">
+		select
+			count(tb.applyid)
+		from 
+			tbflow_base tb,
+			TBPRISONER_BASE_CRIME tbc,
+			TBPRISONER_BASEINFO tbi,
+			(select distinct snodeid ,resid,flowdefid as Tflowdefid from TBFLOW_DELIVER 
+				where departid=#{departid} and resid is not null
+			) td,
+			TBSYS_ORGINFO tog
+		where 1=1
+		and tb.applyid=tbc.crimid
+		and tb.applyid=tbi.crimid
+		and tb.flowdefid=td.Tflowdefid
+		and tb.currnodeid=td.snodeid
+		and tbc.orgid=tog.orgid
+		and exists (select 'x' from tbflow_org_org where orgid = #{orgid} and (dorgid=tbc.orgid2 or dorgid=tbc.orgid1 or dorgid=tbc.orgid))
+		<if test="connsql!=null and connsql!=''"> 
+			and  (
+					(
+						(${connsql}) and tb.state in (-1,2)
+						<if test="flowdefid!=null and flowdefid!=''"> 
+							and tb.flowdefid=#{flowdefid}
+						</if>
+					 )
+					 <if test="userid!=null and userid!=''"> 
+						or (tb.state IN (0, -2) and tb.opid = #{userid})
+					 </if>  
+				)
+		</if>  
+		<if test="applyid!=null and applyid!=''"> 
+			and tb.applyid=#{applyid}
+		</if>
+		<if test="flowdefid!=null and flowdefid!=''"> 
+			and tb.flowdefid=#{flowdefid}
+		</if>
+		<if test="isfjquser!=null and isfjquser!=''"> 
+			and tb.FJQUSER=#{userid}
+		</if>
+		<if test="notinnodeid!=null and notinnodeid!=''"> 
+			and tb.currnodeid not in (${notinnodeid})
+		</if>
+		<if test="key!=null and key!=''">  
+			and (tbi.crimid like '%'||#{key}||'%' or tbi.name like '%'||#{key}||'%' or tbi.namepinyinshort like '%'||UPPER(#{key})||'%')
+		</if>
+		<if test="jianqu!=null and jianqu!=''">
+			and (tbc.orgid2 = #{jianqu} or tbc.orgid1 = #{jianqu})
+		</if>
+  </select>
+  <!-- 月考核考勤审批流程 -->
+  <select id="getMonthApproval" parameterType="Map" resultType="Map">
+  		select * from (select a.* ,rownum rn from (select decode(t.nodeid,'N0004','考核办主任办理中','N0002','监区长办理中','N0003','考核办办理中','1','审批通过')
+  		 as  jincheng,t.* from uv_flow  t where t.orgid in (select dorgid from tbflow_org_org where 
+  		 orgid=#{departid}) and t.flowdefid=#{flowdefid} order by applydatetime desc)a where rownum&lt;=${pageSizeStr})where rn&gt;=${pageIndexStr}
+  </select>
+  <select id="getMonthApprovalCount" parameterType="Map" resultType="int">
+  		select count(1) from uv_flow t where t.orgid in (select dorgid from tbflow_org_org where orgid=#{departid}) and t.flowdefid=#{flowdefid}
+  </select>
+  <select id="getJianChaYuanopinions" parameterType="Map" resultType="com.sinog2c.model.flow.UvFlow">
+  		select t.fuyiflag as conent,t.flowdraftid,t.orgid,t.commenttext from uv_flow t where t.applyid=#{crimid} and t.flowdraftid=#{flowdraftid}
+  </select>
+  <select id="getJianChaYuanopinionsData" parameterType="Map" resultType="Map">
+		select * from (select a.*,rownum as rn  from (select t.text6 as anhao,c.causeaction ,t.applyid,t.applyname,t.commenttext,t.fuyiflag from TBPRISONER_BASE_CRIME c, uv_flow t where t.nodeid in ('N0003', 'N0004', 'N0005') and  t.flowdefid = #{flowdefid}
+   			and t.orgid in (select dorgid from tbflow_org_org where orgid=#{departId}) and t.applyid=c.crimid) a where rownum &lt;=${end}) where rn&gt;=${start}
+  </select>
+  <select id="getJianChaYuanopinionsDataCount" parameterType="Map" resultType="int">
+ 		select count(1) from (select * from  uv_flow t where t.nodeid in ('N0003', 'N0004', 'N0005') and  t.flowdefid = #{flowdefid}
+  	 		and t.orgid in (select dorgid from tbflow_org_org where orgid=#{departId}))
+  </select>
+  
+  <select id="getDoneCaseType" parameterType="Map" resultType="Map">
+ 		select distinct tb.flowdefid as id, td.remark as text
+		from TBFLOW_BASE tb,
+		    (select distinct flowdefid,remark from tbflow_deliver where departid=#{departid} and (snodeid='0' or dnodeid='1')) td,
+		    (select distinct t.flowdraftid from tbflow t where t.opid=#{userid}) fw
+		where 1=1 and tb.flowdraftid=fw.flowdraftid and tb.flowdefid=td.flowdefid
+  </select>
+
+  <select id="getTodoListInfo" parameterType="Map" resultType="Map">
+      select 
+	    case when tb.flowdefid='arch_zfdajdsp' then trunc(count(tb.flowdraftid)/2)
+	      else count(tb.flowdraftid) end as nums,
+	      res.presid resid,
+	      td.remark todoinfo
+	  from 
+	      tbflow_base tb,
+	      (select distinct snodeid ,resid,flowdefid as Tflowdefid,remark from TBFLOW_DELIVER 
+	          where departid=#{departid} and resid is not null
+	       ) td,
+	       TBSYS_RESOURCES res
+	   where (tb.state=-2 or tb.state=-1 or tb.state=0 or tb.state=2)
+	      
+	      and tb.currnodeid !='0'
+	    and (${connsql})
+	      and tb.flowdefid=td.Tflowdefid
+	      and tb.currnodeid=td.snodeid
+	      and td.resid=res.resid
+	    
+	     <if test="orgfilter!=null and orgfilter!=''">
+	        and exists (
+	               select 'x' 
+	               from tbflow_org_org og
+	               where og.orgid = #{orgid} 
+	                and (og.dorgid=tb.orgid) 
+	               )
+	      </if> 
+	      <if test="departfilter!=null and departfilter!=''">
+	        and exists (
+	               select 'x' 
+	               from tbflow_org_org og
+	               where og.orgid = #{orgid} 
+	                 and (og.dorgid=tb.departid)
+	               )
+	      </if>
+	          
+	      <if test="isfjq!=null and isfjq!=''">
+	    and (tb.fjquser=#{userid} or fjquser is null)
+	  </if>
+	  
+	group by tb.flowdefid,res.presid,td.remark
+  </select>
+  
+  
+  <update id="updateFjqUser"  parameterType="Map">
+      update TBFLOW_BASE tb set tb.FJQUSER=#{userid} where tb.flowdraftid=#{flowdraftid}
+  </update>
+  
+   <select id="getSuggestJZ" parameterType="String" resultType="String">
+  		select jzyj from uv_bwjy_case_sj where APPLYID=#{crimid}
+   </select>
+   
+   <select id="searchChuJianDateByFlowdraftID" parameterType="Map" resultType="Map">	
+		SELECT 
+		       CASE
+		          WHEN B.LIJIANRIQI IS NOT NULL THEN b.lijianriqi
+		          WHEN b.xianxingqizhiri IS NOT NULL THEN b.xianxingqizhiri
+		          ELSE b.yuanpanxingqizhiri
+		       END
+		          AS lijianriqi
+		  FROM TBFLOW_BASE a, CRIMINAL_BASEINFO_UV b
+		 WHERE A.APPLYID = b.crimid
+		 AND A.FLOWDRAFTID =#{flowdraftid}
+   </select>
+   <select id="searchStateByFlowdraftid" parameterType="Map" resultType="Map">
+		select nodeid,state from UV_FLOW where 1=1 
+		and flowdraftid=#{flowdraftid}
+  </select>
+  
+   <select id="getUvFlowDataByParam" parameterType="Map" resultType="com.sinog2c.model.flow.UvFlow">
+		select * from (
+			select tb.*
+			from uv_flow tb,
+					tbflow_other_flow tof
+			where tb.flowdefid= #{flowdefid}
+			    and tb.flowdraftid=tof.flowdraftid
+			    and tof.text1 = #{kaohekaoqinriqi}
+			    and tof.text3= #{orgid}
+			order by tb.optime desc
+		) where rownum = 1
+  </select>
+  
+  <select id="isLookTab" resultType="map">
+        select * from tbprisoner_base_crime where crimid=#{crimid}
+  </select>
+  
+  
+  
+  <!-- 
+  		select nodeid
+	      from CRIMINAL_INFLOW_UV
+		  where flowdefid=#{flowdefid,jdbcType=VARCHAR} 
+		    and applyid = #{crimid,jdbcType=VARCHAR} 
+		    and state in ('3','1','-1')
+   -->
+  <select id="submitBaseInfo" resultType="Map">
+     select * from (
+	      select tb.applyid,tb.applyname,tb.currnodeid
+	      from tbflow_base tb
+		  where tb.flowdefid=#{flowdefid,jdbcType=VARCHAR} 
+		    and tb.applyid = #{crimid,jdbcType=VARCHAR}
+		  order by tb.optime desc
+	 ) where rownum = 1
+  </select>
+  
+  <select id="isDealJxjsCase" resultType="Map">
+     select nodeid
+     from CRIMINAL_INFLOW_UV
+     where flowdefid=#{flowdefid,jdbcType=VARCHAR}
+       and applyid = #{crimid,jdbcType=VARCHAR} 
+       and state in ('3','1','-1')
+  </select>
+  
+  
+  
+  
+  <!--  
+  		select a1.da1||','||a2.da2||','||a3.da3||'!' as nodeid,
+       		 a1.count1,
+       		 a2.count2
+       from 
+			(select '共'||count(*)||'份刑罚变动' as da1,1 remark,count(*) as count1  from  TBDATA_SENTCHAGE where crimid=#{crimid}) a1,
+			(select '提交'||count(*)||'份' as da2,1 remark,count(*) as count2 from  TBDATA_SENTCHAGE where crimid=#{crimid} and isthrough=1) a2 ,
+			(select '剩余'||count(*)||'份'  as da3,1 remark from  TBDATA_SENTCHAGE where crimid=#{crimid} and decode(isthrough,null,0,'',0,isthrough)!=1) a3
+	  where a1.remark=a2.remark
+		and a1.remark = a3.remark
+  -->
+  <select id="submitSentchange" resultType="map">
+       select count(crimid) as xf_data
+       from  TBDATA_SENTCHAGE 
+       where crimid=#{crimid} 
+         and decode(isthrough,null,0,'',0,isthrough) != 1
+  </select>
+  
+  <select id="isRepeatCaseNum" parameterType="Map" resultType="int">
+	select count(*)
+	  from tbflow_base t
+	 where 1 = 1
+	   and t.text6 = #{text6}
+	   and t.flowdefid = #{flowdefid}
+  	 <if test="repeatCaseNum != null and repeatCaseNum != ''">
+  		 and t.text7 = #{casetype}
+  	 </if>
+  	 <if test="prisonid != null and prisonid != ''">
+  		 and t.departid = #{prisonid}
+  	 </if>
+  </select>
+  <select id="baoWaiCheHui" parameterType="String">
+  		<![CDATA[   
+		   {call FLOW_CALLBACK_BAOWAI(#{crimid})}   
+		]]> 
+  </select>
+  <!-- 把 tbflow表中根据flowdraftid 取最后一条，更改其nodeid和状态-->
+   <update id="baoWaiCheHui1" parameterType="String">
+		UPDATE tbflow
+		   SET nodeid = '0',state='2'
+		 WHERE flowdraftid = #{flowdraftid}
+		       AND orderby = (SELECT MAX (orderby)
+		                        FROM tbflow
+		                       WHERE flowdraftid = #{flowdraftid})
+  </update>
+  
+  <select id="getUvFlowDataByParam2" parameterType="Map" resultType="com.sinog2c.model.flow.UvFlow">
+		select * from (
+			select tb.*
+			from uv_flow tb,
+					tbflow_other_flow tof
+			where tb.flowdefid= #{flowdefid}
+			    and tb.flowdraftid=tof.flowdraftid
+			    and tof.text1 = #{tongjiriqi}
+			    and tof.text3= #{orgid}
+			order by tb.optime desc
+		) where rownum = 1
+  </select>
+</mapper>

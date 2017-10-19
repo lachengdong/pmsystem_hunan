@@ -1,0 +1,325 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.sinog2c.dao.api.oa.OaLeaveMapper" >
+  <resultMap id="BaseResultMap" type="com.sinog2c.model.oa.OaLeave" >
+    <result column="UUID" property="uuid" jdbcType="VARCHAR" />
+    <result column="PROPOSERID" property="proposerid" jdbcType="VARCHAR" />
+    <result column="DEPARTMENT" property="department" jdbcType="VARCHAR" />
+    <result column="LEAVETYPE" property="leavetype" jdbcType="DECIMAL" />
+    <result column="LEAVEWAY" property="leaveway" jdbcType="DECIMAL" />
+     <result column="ZJLDSIGN" property="zjldsign" jdbcType="VARCHAR" />
+    <result column="REASON" property="reason" jdbcType="VARCHAR" />
+    <result column="PRODATE" property="prodate" jdbcType="VARCHAR" />
+    <result column="LEAVEDATE1" property="leavedate1" jdbcType="VARCHAR" />
+    <result column="LEAVEDATE2" property="leavedate2" jdbcType="VARCHAR" />
+    <result column="LEAVETIME1" property="leavetime1" jdbcType="VARCHAR" />
+    <result column="LEAVETIME2" property="leavetime2" jdbcType="VARCHAR" />
+    <result column="DAYS" property="days" jdbcType="VARCHAR" />
+    <result column="HOURS" property="hours" jdbcType="VARCHAR" />
+    <result column="DEPMANAPPROVERID" property="depmanapproverid" jdbcType="VARCHAR" />
+    <result column="DEPMANADVICE" property="depmanadvice" jdbcType="VARCHAR" />
+    <result column="DEPMANDATE" property="depmandate" jdbcType="VARCHAR" />
+    <result column="PERSONNELAPPROVERID" property="personnelapproverid" jdbcType="VARCHAR" />
+    <result column="PERSONNELADVICE" property="personneladvice" jdbcType="VARCHAR" />
+    <result column="PERSONNELDATE" property="personneldate" jdbcType="VARCHAR" />
+    <result column="PARTMANAPPROVERID" property="partmanapproverid" jdbcType="VARCHAR" />
+    <result column="PARTMANADVICE" property="partmanadvice" jdbcType="VARCHAR" />
+    <result column="PARTMANDATE" property="partmandate" jdbcType="VARCHAR" />
+    <result column="GENMANAPPROVERID" property="genmanapproverid" jdbcType="VARCHAR" />
+    <result column="GENMANADVICE" property="genmanadvice" jdbcType="VARCHAR" />
+    <result column="GENMANDATE" property="genmandate" jdbcType="VARCHAR" />
+    <result column="TEXT1" property="text1" jdbcType="VARCHAR" />
+    <result column="TEXT2" property="text2" jdbcType="VARCHAR" />
+    <result column="TEXT3" property="text3" jdbcType="VARCHAR" />
+    <result column="TEXT4" property="text4" jdbcType="VARCHAR" />
+    <result column="TEXT5" property="text5" jdbcType="VARCHAR" />
+    <result column="TEXT6" property="text6" jdbcType="VARCHAR" />
+    <result column="INT1" property="int1" jdbcType="DECIMAL" />
+    <result column="INT2" property="int2" jdbcType="DECIMAL" />
+    <result column="OPTIME" property="optime" jdbcType="DATE" />
+    <result column="OPID" property="opid" jdbcType="VARCHAR" />
+  </resultMap>
+  <insert id="insert" parameterType="com.sinog2c.model.oa.OaLeave" >
+    insert into OA_LEAVE (UUID, PROPOSERID, DEPARTMENT, 
+      LEAVETYPE, LEAVEWAY, ZJLDSIGN,REASON, 
+      PRODATE, LEAVEDATE1, LEAVEDATE2, 
+      LEAVETIME1,LEAVETIME2,DAYS,HOURS,
+      DEPMANAPPROVERID, DEPMANADVICE, DEPMANDATE, 
+      PERSONNELAPPROVERID, PERSONNELADVICE, PERSONNELDATE, 
+      PARTMANAPPROVERID, PARTMANADVICE, PARTMANDATE, 
+      GENMANAPPROVERID, GENMANADVICE, GENMANDATE, 
+      TEXT1, TEXT2, TEXT3, 
+      TEXT4, TEXT5, TEXT6, 
+      INT1, INT2, OPTIME, OPID
+      )
+    values (#{uuid,jdbcType=VARCHAR}, #{proposerid,jdbcType=VARCHAR}, #{department,jdbcType=VARCHAR}, 
+      #{leavetype,jdbcType=DECIMAL}, #{leaveway,jdbcType=DECIMAL}, #{zjldsign,jdbcType=VARCHAR}, #{reason,jdbcType=VARCHAR}, 
+      #{prodate,jdbcType=VARCHAR}, #{leavedate1,jdbcType=VARCHAR}, #{leavedate2,jdbcType=VARCHAR},
+      #{leavetime1,jdbcType=VARCHAR}, #{leavetime2,jdbcType=VARCHAR},
+       #{days,jdbcType=VARCHAR}, #{hours,jdbcType=VARCHAR},  
+      #{depmanapproverid,jdbcType=VARCHAR}, #{depmanadvice,jdbcType=VARCHAR}, #{depmandate,jdbcType=VARCHAR}, 
+      #{personnelapproverid,jdbcType=VARCHAR}, #{personneladvice,jdbcType=VARCHAR}, #{personneldate,jdbcType=VARCHAR}, 
+      #{partmanapproverid,jdbcType=VARCHAR}, #{partmanadvice,jdbcType=VARCHAR}, #{partmandate,jdbcType=VARCHAR}, 
+      #{genmanapproverid,jdbcType=VARCHAR}, #{genmanadvice,jdbcType=VARCHAR}, #{genmandate,jdbcType=VARCHAR}, 
+      #{text1,jdbcType=VARCHAR}, #{text2,jdbcType=VARCHAR}, #{text3,jdbcType=VARCHAR}, 
+      #{text4,jdbcType=VARCHAR}, #{text5,jdbcType=VARCHAR}, #{text6,jdbcType=VARCHAR}, 
+      #{int1,jdbcType=DECIMAL}, #{int2,jdbcType=DECIMAL}, #{optime,jdbcType=DATE}, #{opid,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.sinog2c.model.oa.OaLeave" >
+    insert into OA_LEAVE
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="uuid != null" >
+        UUID,
+      </if>
+      <if test="proposerid != null" >
+        PROPOSERID,
+      </if>
+      <if test="department != null" >
+        DEPARTMENT,
+      </if>
+      <if test="leavetype != null" >
+        LEAVETYPE,
+      </if>
+      <if test="leaveway != null" >
+        LEAVEWAY,
+      </if>
+      <if test="zjldsign != null" >
+        ZJLDSIGN,
+      </if>
+       <if test="reason != null" >
+        REASON,
+      </if>
+      <if test="prodate != null" >
+        PRODATE,
+      </if>
+      <if test="leavedate1 != null" >
+        LEAVEDATE1,
+      </if>
+      <if test="leavedate2 != null" >
+        LEAVEDATE2,
+      </if>
+        <if test="leavetime1 != null" >
+        leavetime1,
+      </if>
+        <if test="leavetime2 != null" >
+        LEAVETIME2,
+      </if>
+        <if test="days != null" >
+        DAYS,
+      </if>
+        <if test="hours != null" >
+        HOURS,
+      </if>
+      <if test="depmanapproverid != null" >
+        DEPMANAPPROVERID,
+      </if>
+      <if test="depmanadvice != null" >
+        DEPMANADVICE,
+      </if>
+      <if test="depmandate != null" >
+        DEPMANDATE,
+      </if>
+      <if test="personnelapproverid != null" >
+        PERSONNELAPPROVERID,
+      </if>
+      <if test="personneladvice != null" >
+        PERSONNELADVICE,
+      </if>
+      <if test="personneldate != null" >
+        PERSONNELDATE,
+      </if>
+      <if test="partmanapproverid != null" >
+        PARTMANAPPROVERID,
+      </if>
+      <if test="partmanadvice != null" >
+        PARTMANADVICE,
+      </if>
+      <if test="partmandate != null" >
+        PARTMANDATE,
+      </if>
+      <if test="genmanapproverid != null" >
+        GENMANAPPROVERID,
+      </if>
+      <if test="genmanadvice != null" >
+        GENMANADVICE,
+      </if>
+      <if test="genmandate != null" >
+        GENMANDATE,
+      </if>
+      <if test="text1 != null" >
+        TEXT1,
+      </if>
+      <if test="text2 != null" >
+        TEXT2,
+      </if>
+      <if test="text3 != null" >
+        TEXT3,
+      </if>
+      <if test="text4 != null" >
+        TEXT4,
+      </if>
+      <if test="text5 != null" >
+        TEXT5,
+      </if>
+      <if test="text6 != null" >
+        TEXT6,
+      </if>
+      <if test="int1 != null" >
+        INT1,
+      </if>
+      <if test="int2 != null" >
+        INT2,
+      </if>
+      <if test="optime != null" >
+        OPTIME,
+      </if>
+      <if test="opid != null" >
+        OPID,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="uuid != null" >
+        #{uuid,jdbcType=VARCHAR},
+      </if>
+      <if test="proposerid != null" >
+        #{proposerid,jdbcType=VARCHAR},
+      </if>
+      <if test="department != null" >
+        #{department,jdbcType=VARCHAR},
+      </if>
+      <if test="leavetype != null" >
+        #{leavetype,jdbcType=DECIMAL},
+      </if>
+      <if test="leaveway != null" >
+        #{leaveway,jdbcType=DECIMAL},
+      </if>
+      <if test="zjldsign != null" >
+        #{zjldsign,jdbcType=VARCHAR},
+      </if>
+       <if test="reason != null" >
+        #{reason,jdbcType=VARCHAR},
+      </if>
+      <if test="prodate != null" >
+        #{prodate,jdbcType=VARCHAR},
+      </if>
+      <if test="leavedate1 != null" >
+        #{leavedate1,jdbcType=DATE},
+      </if>
+      <if test="leavedate2 != null" >
+        #{leavedate2,jdbcType=DATE},
+      </if>
+       <if test="leavetime1 != null" >
+        #{leavetime1,jdbcType=DATE},
+      </if>
+      <if test="leavetime2 != null" >
+        #{leavetime2,jdbcType=DATE},
+      </if>
+       <if test="days != null" >
+        #{days,jdbcType=DATE},
+      </if>
+      <if test="hours != null" >
+        #{hours,jdbcType=DATE},
+      </if>
+      <if test="depmanapproverid != null" >
+        #{depmanapproverid,jdbcType=VARCHAR},
+      </if>
+      <if test="depmanadvice != null" >
+        #{depmanadvice,jdbcType=VARCHAR},
+      </if>
+      <if test="depmandate != null" >
+        #{depmandate,jdbcType=VARCHAR},
+      </if>
+      <if test="personnelapproverid != null" >
+        #{personnelapproverid,jdbcType=VARCHAR},
+      </if>
+      <if test="personneladvice != null" >
+        #{personneladvice,jdbcType=VARCHAR},
+      </if>
+      <if test="personneldate != null" >
+        #{personneldate,jdbcType=VARCHAR},
+      </if>
+      <if test="partmanapproverid != null" >
+        #{partmanapproverid,jdbcType=VARCHAR},
+      </if>
+      <if test="partmanadvice != null" >
+        #{partmanadvice,jdbcType=VARCHAR},
+      </if>
+      <if test="partmandate != null" >
+        #{partmandate,jdbcType=VARCHAR},
+      </if>
+      <if test="genmanapproverid != null" >
+        #{genmanapproverid,jdbcType=VARCHAR},
+      </if>
+      <if test="genmanadvice != null" >
+        #{genmanadvice,jdbcType=VARCHAR},
+      </if>
+      <if test="genmandate != null" >
+        #{genmandate,jdbcType=VARCHAR},
+      </if>
+      <if test="text1 != null" >
+        #{text1,jdbcType=VARCHAR},
+      </if>
+      <if test="text2 != null" >
+        #{text2,jdbcType=VARCHAR},
+      </if>
+      <if test="text3 != null" >
+        #{text3,jdbcType=VARCHAR},
+      </if>
+      <if test="text4 != null" >
+        #{text4,jdbcType=VARCHAR},
+      </if>
+      <if test="text5 != null" >
+        #{text5,jdbcType=VARCHAR},
+      </if>
+      <if test="text6 != null" >
+        #{text6,jdbcType=VARCHAR},
+      </if>
+      <if test="int1 != null" >
+        #{int1,jdbcType=DECIMAL},
+      </if>
+      <if test="int2 != null" >
+        #{int2,jdbcType=DECIMAL},
+      </if>
+      <if test="optime != null" >
+        #{optime,jdbcType=DATE},
+      </if>
+      <if test="opid != null" >
+        #{opid,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="getLeaveListbyUserid" resultType="com.sinog2c.model.oa.OaLeave" parameterType="String">
+		${sql}
+	</select>
+  <select id="getCountLeaveListbyUserid" parameterType="int">
+		${sql}
+	</select>
+  <select id="getCountLeaveByCondition" resultType="int">
+		select count(*) from OA_LEAVE l ,TBSYS_USERINFO u
+		where 1=1 AND L.PROPOSERID = U.USERID
+		<if test="key != null and key!=''">
+			And u.name like '%'||#{key}||'%'
+		
+		</if>
+   </select>
+   	<select id="getLeaveListByCondition" resultMap="BaseResultMap">
+		SELECT * FROM
+            ( SELECT A.*, ROWNUM RN
+                FROM
+			   	 (
+                    SELECT L.*,U.NAME FROM OA_LEAVE L ,TBSYS_USERINFO U
+                    where  L.PROPOSERID = U.USERID
+					<if test="key != null and key!=''">
+						And u.name like '%'||#{key}||'%'
+					</if>		
+				) A
+			WHERE ROWNUM &lt;= #{end,jdbcType=DECIMAL}
+			)
+		WHERE RN &gt;=#{start,jdbcType=DECIMAL}
+	</select>
+	<select id="getLeaveListById" resultMap="BaseResultMap">
+		SELECT * FROM OA_LEAVE WHERE UUID =#{uuid}
+            
+	</select>
+</mapper>

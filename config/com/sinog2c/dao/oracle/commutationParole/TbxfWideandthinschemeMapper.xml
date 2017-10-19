@@ -1,0 +1,303 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.sinog2c.dao.api.commutationParole.TbxfWideandthinschemeMapper" >
+  <resultMap id="BaseResultMap" type="com.sinog2c.model.commutationParole.TbxfWideandthinscheme" >
+    <id column="LSSID" property="lssid" jdbcType="DECIMAL" />
+    <result column="PUNID" property="punid" jdbcType="DECIMAL" />
+    <result column="SCHEMETYPE" property="schemetype" jdbcType="DECIMAL" />
+    <result column="LSSEXECUTIONSENTENCES" property="lssexecutionsentences" jdbcType="DECIMAL" />
+    <result column="LSSEXECUTIONSENTENCEE" property="lssexecutionsentencee" jdbcType="DECIMAL" />
+    <result column="LSSINTERVALPERIOD" property="lssintervalperiod" jdbcType="DECIMAL" />
+    <result column="LSSENDINTERVALPERIOD" property="lssendintervalperiod" jdbcType="DECIMAL" />
+    <result column="LSSSTARTPERIOD" property="lssstartperiod" jdbcType="DECIMAL" />
+    <result column="LSSENDPERIOD" property="lssendperiod" jdbcType="DECIMAL" />
+    <result column="RANGESTART" property="rangestart" jdbcType="DECIMAL" />
+    <result column="RANGEEND" property="rangeend" jdbcType="DECIMAL" />
+    <result column="EXECUTESENTENCELIMIT" property="executesentencelimit" jdbcType="DECIMAL" />
+    <result column="INT1" property="int1" jdbcType="DECIMAL" />
+    <result column="INT2" property="int2" jdbcType="DECIMAL" />
+    <result column="TEXT1" property="text1" jdbcType="VARCHAR" />
+    <result column="TEXT2" property="text2" jdbcType="VARCHAR" />
+    <result column="OPTIME" property="optime" jdbcType="DATE" />
+    <result column="OPID" property="opid" jdbcType="VARCHAR" />
+    <result column="REMARK" property="remark" jdbcType="VARCHAR" />
+    <result column="CRIMINALTYPE" property="criminaltype" jdbcType="DECIMAL" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    LSSID, PUNID, SCHEMETYPE, LSSEXECUTIONSENTENCES, LSSEXECUTIONSENTENCEE, LSSINTERVALPERIOD, 
+    LSSENDINTERVALPERIOD, LSSSTARTPERIOD, LSSENDPERIOD, RANGESTART, RANGEEND, EXECUTESENTENCELIMIT, 
+    INT1, INT2, TEXT1, TEXT2, OPTIME, OPID, REMARK, CRIMINALTYPE
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from TBXF_WIDEANDTHINSCHEME
+    where LSSID = #{lssid,jdbcType=DECIMAL}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from TBXF_WIDEANDTHINSCHEME
+    where LSSID = #{lssid,jdbcType=DECIMAL}
+  </delete>
+  <insert id="insert" parameterType="com.sinog2c.model.commutationParole.TbxfWideandthinscheme" >
+  	<selectKey keyProperty="lssid" resultType="int" order="BEFORE">
+		select SEQ_BASE_DOC_ID.nextval as lssid from dual
+  	</selectKey>
+    insert into TBXF_WIDEANDTHINSCHEME (LSSID, PUNID, SCHEMETYPE, 
+      LSSEXECUTIONSENTENCES, LSSEXECUTIONSENTENCEE, 
+      LSSINTERVALPERIOD, LSSENDINTERVALPERIOD, 
+      LSSSTARTPERIOD, LSSENDPERIOD, RANGESTART, 
+      RANGEEND, EXECUTESENTENCELIMIT, INT1, 
+      INT2, TEXT1, TEXT2, 
+      OPTIME, OPID, REMARK, 
+      CRIMINALTYPE)
+    values (#{lssid,jdbcType=DECIMAL}, #{punid,jdbcType=DECIMAL}, #{schemetype,jdbcType=DECIMAL}, 
+      #{lssexecutionsentences,jdbcType=DECIMAL}, #{lssexecutionsentencee,jdbcType=DECIMAL}, 
+      #{lssintervalperiod,jdbcType=DECIMAL}, #{lssendintervalperiod,jdbcType=DECIMAL}, 
+      #{lssstartperiod,jdbcType=DECIMAL}, #{lssendperiod,jdbcType=DECIMAL}, #{rangestart,jdbcType=DECIMAL}, 
+      #{rangeend,jdbcType=DECIMAL}, #{executesentencelimit,jdbcType=DECIMAL}, #{int1,jdbcType=DECIMAL}, 
+      #{int2,jdbcType=DECIMAL}, #{text1,jdbcType=VARCHAR}, #{text2,jdbcType=VARCHAR}, 
+      #{optime,jdbcType=DATE}, #{opid,jdbcType=VARCHAR}, #{remark,jdbcType=VARCHAR}, 
+      #{criminaltype,jdbcType=DECIMAL})
+  </insert>
+  <insert id="insertSelective" parameterType="com.sinog2c.model.commutationParole.TbxfWideandthinscheme" >
+    insert into TBXF_WIDEANDTHINSCHEME
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="lssid != null" >
+        LSSID,
+      </if>
+      <if test="punid != null" >
+        PUNID,
+      </if>
+      <if test="schemetype != null" >
+        SCHEMETYPE,
+      </if>
+      <if test="lssexecutionsentences != null" >
+        LSSEXECUTIONSENTENCES,
+      </if>
+      <if test="lssexecutionsentencee != null" >
+        LSSEXECUTIONSENTENCEE,
+      </if>
+      <if test="lssintervalperiod != null" >
+        LSSINTERVALPERIOD,
+      </if>
+      <if test="lssendintervalperiod != null" >
+        LSSENDINTERVALPERIOD,
+      </if>
+      <if test="lssstartperiod != null" >
+        LSSSTARTPERIOD,
+      </if>
+      <if test="lssendperiod != null" >
+        LSSENDPERIOD,
+      </if>
+      <if test="rangestart != null" >
+        RANGESTART,
+      </if>
+      <if test="rangeend != null" >
+        RANGEEND,
+      </if>
+      <if test="executesentencelimit != null" >
+        EXECUTESENTENCELIMIT,
+      </if>
+      <if test="int1 != null" >
+        INT1,
+      </if>
+      <if test="int2 != null" >
+        INT2,
+      </if>
+      <if test="text1 != null" >
+        TEXT1,
+      </if>
+      <if test="text2 != null" >
+        TEXT2,
+      </if>
+      <if test="optime != null" >
+        OPTIME,
+      </if>
+      <if test="opid != null" >
+        OPID,
+      </if>
+      <if test="remark != null" >
+        REMARK,
+      </if>
+      <if test="criminaltype != null" >
+        CRIMINALTYPE,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="lssid != null" >
+        #{lssid,jdbcType=DECIMAL},
+      </if>
+      <if test="punid != null" >
+        #{punid,jdbcType=DECIMAL},
+      </if>
+      <if test="schemetype != null" >
+        #{schemetype,jdbcType=DECIMAL},
+      </if>
+      <if test="lssexecutionsentences != null" >
+        #{lssexecutionsentences,jdbcType=DECIMAL},
+      </if>
+      <if test="lssexecutionsentencee != null" >
+        #{lssexecutionsentencee,jdbcType=DECIMAL},
+      </if>
+      <if test="lssintervalperiod != null" >
+        #{lssintervalperiod,jdbcType=DECIMAL},
+      </if>
+      <if test="lssendintervalperiod != null" >
+        #{lssendintervalperiod,jdbcType=DECIMAL},
+      </if>
+      <if test="lssstartperiod != null" >
+        #{lssstartperiod,jdbcType=DECIMAL},
+      </if>
+      <if test="lssendperiod != null" >
+        #{lssendperiod,jdbcType=DECIMAL},
+      </if>
+      <if test="rangestart != null" >
+        #{rangestart,jdbcType=DECIMAL},
+      </if>
+      <if test="rangeend != null" >
+        #{rangeend,jdbcType=DECIMAL},
+      </if>
+      <if test="executesentencelimit != null" >
+        #{executesentencelimit,jdbcType=DECIMAL},
+      </if>
+      <if test="int1 != null" >
+        #{int1,jdbcType=DECIMAL},
+      </if>
+      <if test="int2 != null" >
+        #{int2,jdbcType=DECIMAL},
+      </if>
+      <if test="text1 != null" >
+        #{text1,jdbcType=VARCHAR},
+      </if>
+      <if test="text2 != null" >
+        #{text2,jdbcType=VARCHAR},
+      </if>
+      <if test="optime != null" >
+        #{optime,jdbcType=DATE},
+      </if>
+      <if test="opid != null" >
+        #{opid,jdbcType=VARCHAR},
+      </if>
+      <if test="remark != null" >
+        #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="criminaltype != null" >
+        #{criminaltype,jdbcType=DECIMAL},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.sinog2c.model.commutationParole.TbxfWideandthinscheme" >
+    update TBXF_WIDEANDTHINSCHEME
+    <set >
+      <if test="punid != null" >
+        PUNID = #{punid,jdbcType=DECIMAL},
+      </if>
+      <if test="schemetype != null" >
+        SCHEMETYPE = #{schemetype,jdbcType=DECIMAL},
+      </if>
+      <if test="lssexecutionsentences != null" >
+        LSSEXECUTIONSENTENCES = #{lssexecutionsentences,jdbcType=DECIMAL},
+      </if>
+      <if test="lssexecutionsentencee != null" >
+        LSSEXECUTIONSENTENCEE = #{lssexecutionsentencee,jdbcType=DECIMAL},
+      </if>
+      <if test="lssintervalperiod != null" >
+        LSSINTERVALPERIOD = #{lssintervalperiod,jdbcType=DECIMAL},
+      </if>
+      <if test="lssendintervalperiod != null" >
+        LSSENDINTERVALPERIOD = #{lssendintervalperiod,jdbcType=DECIMAL},
+      </if>
+      <if test="lssstartperiod != null" >
+        LSSSTARTPERIOD = #{lssstartperiod,jdbcType=DECIMAL},
+      </if>
+      <if test="lssendperiod != null" >
+        LSSENDPERIOD = #{lssendperiod,jdbcType=DECIMAL},
+      </if>
+      <if test="rangestart != null" >
+        RANGESTART = #{rangestart,jdbcType=DECIMAL},
+      </if>
+      <if test="rangeend != null" >
+        RANGEEND = #{rangeend,jdbcType=DECIMAL},
+      </if>
+      <if test="executesentencelimit != null" >
+        EXECUTESENTENCELIMIT = #{executesentencelimit,jdbcType=DECIMAL},
+      </if>
+      <if test="int1 != null" >
+        INT1 = #{int1,jdbcType=DECIMAL},
+      </if>
+      <if test="int2 != null" >
+        INT2 = #{int2,jdbcType=DECIMAL},
+      </if>
+      <if test="text1 != null" >
+        TEXT1 = #{text1,jdbcType=VARCHAR},
+      </if>
+      <if test="text2 != null" >
+        TEXT2 = #{text2,jdbcType=VARCHAR},
+      </if>
+      <if test="optime != null" >
+        OPTIME = #{optime,jdbcType=DATE},
+      </if>
+      <if test="opid != null" >
+        OPID = #{opid,jdbcType=VARCHAR},
+      </if>
+      <if test="remark != null" >
+        REMARK = #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="criminaltype != null" >
+        CRIMINALTYPE = #{criminaltype,jdbcType=DECIMAL},
+      </if>
+    </set>
+    where LSSID = #{lssid,jdbcType=DECIMAL}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.sinog2c.model.commutationParole.TbxfWideandthinscheme" >
+    update TBXF_WIDEANDTHINSCHEME
+    set PUNID = #{punid,jdbcType=DECIMAL},
+      SCHEMETYPE = #{schemetype,jdbcType=DECIMAL},
+      LSSEXECUTIONSENTENCES = #{lssexecutionsentences,jdbcType=DECIMAL},
+      LSSEXECUTIONSENTENCEE = #{lssexecutionsentencee,jdbcType=DECIMAL},
+      LSSINTERVALPERIOD = #{lssintervalperiod,jdbcType=DECIMAL},
+      LSSENDINTERVALPERIOD = #{lssendintervalperiod,jdbcType=DECIMAL},
+      LSSSTARTPERIOD = #{lssstartperiod,jdbcType=DECIMAL},
+      LSSENDPERIOD = #{lssendperiod,jdbcType=DECIMAL},
+      RANGESTART = #{rangestart,jdbcType=DECIMAL},
+      RANGEEND = #{rangeend,jdbcType=DECIMAL},
+      EXECUTESENTENCELIMIT = #{executesentencelimit,jdbcType=DECIMAL},
+      INT1 = #{int1,jdbcType=DECIMAL},
+      INT2 = #{int2,jdbcType=DECIMAL},
+      TEXT1 = #{text1,jdbcType=VARCHAR},
+      TEXT2 = #{text2,jdbcType=VARCHAR},
+      OPTIME = #{optime,jdbcType=DATE},
+      OPID = #{opid,jdbcType=VARCHAR},
+      REMARK = #{remark,jdbcType=VARCHAR},
+      CRIMINALTYPE = #{criminaltype,jdbcType=DECIMAL}
+    where LSSID = #{lssid,jdbcType=DECIMAL}
+  </update>
+  <select id="ajaxByWideandthins" resultType="java.util.Map">
+  	select w.lssid id ,w.schemetype pid,c.name||decode(w.remark,null,'','（'||w.remark||'）')  name from  TBXF_WIDEANDTHINSCHEME w,TBXF_CRIMETYPES c
+	where w.CRIMINALTYPE = c.typeid and w.punid = 0
+	union 
+	select 0 id,-1 pid, '从宽' name from dual
+	union 
+	select 1 id,-1 pid, '从严' name  from dual
+  </select>
+  <insert id="insertByPkstr">
+  	<selectKey keyProperty="lssids" resultType="int" order="BEFORE">
+		select SEQ_BASE_DOC_ID.nextval as lssids from dual
+  	</selectKey>
+  	insert into TBXF_WIDEANDTHINSCHEME 
+  	select ${lssids} lssid, ${punid} punid, schemetype, 
+   	criminaltype, lssexecutionsentences, lssexecutionsentencee, 
+    lssintervalperiod, lssendintervalperiod, lssstartperiod, 
+    lssendperiod, rangestart, rangeend, 
+    executesentencelimit, int1, int2, 
+    text1, text2, optime, 
+    opid, remark from TBXF_WIDEANDTHINSCHEME where lssid in (${toid})
+  </insert>
+  <delete id="deleteByPkstr" >
+  	delete from TBXF_WIDEANDTHINSCHEME where 
+ 	punid != 0
+  	and lssid in (
+  		select lssid from TBXF_WIDEANDTHINSCHEME where punid in (${punid})
+  	)
+  </delete>
+</mapper>

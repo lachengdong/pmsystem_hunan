@@ -1,0 +1,161 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.sinog2c.dao.api.system.TbsysQueryplanMapper" >
+  <resultMap id="BaseResultMap" type="com.sinog2c.model.system.TbsysQueryplan" >
+    <id column="PLANID" property="planid" jdbcType="DECIMAL" />
+    <result column="PPLANID" property="pplanid" jdbcType="DECIMAL" />
+    <result column="NAME" property="name" jdbcType="VARCHAR" />
+    <result column="RESID" property="resid" jdbcType="VARCHAR" />
+    <result column="DELFLAG" property="delflag" jdbcType="VARCHAR" />
+    <result column="DATARELATION" property="datarelation" jdbcType="VARCHAR" />
+    <result column="OPTIME" property="optime" jdbcType="TIMESTAMP" />
+    <result column="OPID" property="opid" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    PLANID, PPLANID, NAME, RESID, DELFLAG, DATARELATION, OPTIME, OPID
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from TBSYS_QUERYPLAN
+    where PLANID = #{planid,jdbcType=DECIMAL}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from TBSYS_QUERYPLAN
+    where PLANID = #{planid,jdbcType=DECIMAL}
+  </delete>
+  <insert id="insert" parameterType="com.sinog2c.model.system.TbsysQueryplan" >
+    insert into TBSYS_QUERYPLAN (PLANID, PPLANID, NAME, 
+      RESID, DELFLAG, DATARELATION, 
+      OPTIME, OPID)
+    values (#{planid,jdbcType=DECIMAL}, #{pplanid,jdbcType=DECIMAL}, #{name,jdbcType=VARCHAR}, 
+      #{resid,jdbcType=VARCHAR}, #{delflag,jdbcType=VARCHAR}, #{DATARELATION,jdbcType=VARCHAR}, 
+      #{optime,jdbcType=TIMESTAMP}, #{opid,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.sinog2c.model.system.TbsysQueryplan" >
+    insert into TBSYS_QUERYPLAN
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="planid != null" >
+        PLANID,
+      </if>
+      <if test="pplanid != null" >
+        PPLANID,
+      </if>
+      <if test="name != null" >
+        NAME,
+      </if>
+      <if test="resid != null" >
+        RESID,
+      </if>
+      <if test="delflag != null" >
+        DELFLAG,
+      </if>
+      <if test="datarelation != null" >
+        DATARELATION,
+      </if>
+      <if test="optime != null" >
+        OPTIME,
+      </if>
+      <if test="opid != null" >
+        OPID,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="planid != null" >
+        #{planid,jdbcType=DECIMAL},
+      </if>
+      <if test="pplanid != null" >
+        #{pplanid,jdbcType=DECIMAL},
+      </if>
+      <if test="name != null" >
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="resid != null" >
+        #{resid,jdbcType=VARCHAR},
+      </if>
+      <if test="delflag != null" >
+        #{delflag,jdbcType=VARCHAR},
+      </if>
+      <if test="datarelation != null" >
+        #{DATARELATION,jdbcType=VARCHAR},
+      </if>
+      <if test="optime != null" >
+        #{optime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="opid != null" >
+        #{opid,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.sinog2c.model.system.TbsysQueryplan" >
+    update TBSYS_QUERYPLAN
+    <set >
+      <if test="pplanid != null" >
+        PPLANID = #{pplanid,jdbcType=DECIMAL},
+      </if>
+      <if test="name != null" >
+        NAME = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="resid != null" >
+        RESID = #{resid,jdbcType=VARCHAR},
+      </if>
+      <if test="delflag != null" >
+        DELFLAG = #{delflag,jdbcType=VARCHAR},
+      </if>
+      <if test="datarelation != null" >
+        DATARELATION = #{datarelation,jdbcType=VARCHAR},
+      </if>
+      <if test="optime != null" >
+        OPTIME = #{optime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="opid != null" >
+        OPID = #{opid,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where PLANID = #{planid,jdbcType=DECIMAL}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.sinog2c.model.system.TbsysQueryplan" >
+    update TBSYS_QUERYPLAN
+    set PPLANID = #{pplanid,jdbcType=DECIMAL},
+      NAME = #{name,jdbcType=VARCHAR},
+      RESID = #{resid,jdbcType=VARCHAR},
+      DELFLAG = #{delflag,jdbcType=VARCHAR},
+      DATARELATION = #{datarelation,jdbcType=VARCHAR},
+      OPTIME = #{optime,jdbcType=TIMESTAMP},
+      OPID = #{opid,jdbcType=VARCHAR}
+    where PLANID = #{planid,jdbcType=DECIMAL}
+  </update>
+  <!-- 新增查询方案信息 -->		
+  <insert id="saveQueryScheme" parameterType="com.sinog2c.model.system.TbsysQueryplan" >			
+		<selectKey resultType="int" order="BEFORE" keyProperty="planid">	
+			select SEQ_TBSYS_QUERYPLAN.nextval as planid from dual
+		</selectKey>	
+		insert into TBSYS_QUERYPLAN(planid,pplanid,name,resid,delflag,datarelation,optime,opid,reportortemp) 
+		values(#{planid},#{pplanid},#{name},#{resid},#{delflag},#{datarelation},sysdate,#{opid},#{reportortemp})	
+ </insert>	
+ <!-- 获得查询方案信息列表 -->		
+  <select id="selectAll"  resultType="java.util.HashMap">
+  	select * from TBSYS_QUERYPLAN where DELFLAG = 0
+  	  <if test="key!=null and key!=''">  
+        and name like concat(concat('%', #{key}), '%')
+      </if>
+  </select>
+  <!-- 删除查询方案信息 -->	
+  <update id="delQueryScheme" parameterType="com.sinog2c.model.system.TbsysQueryplan" >
+      update TBSYS_QUERYPLAN
+      set DELFLAG = #{delflag}, OPTIME = sysdate , OPID = #{opid}
+      where PLANID = #{planid}
+  </update>
+   <!-- 修改查询方案SQL -->	
+ <update id="updateQueryScheme" parameterType="com.sinog2c.model.system.TbsysQueryplan" >
+   update TBSYS_QUERYPLAN
+   set PPLANID = #{pplanid}, NAME = #{name}, RESID = #{resid} , OPTIME = sysdate , OPID = #{opid},DATARELATION= #{datarelation},REPORTORTEMP=#{reportortemp}   
+   where PLANID = #{planid}
+ </update>
+ 
+ <select id="ajaxScreeningShecmeAll"  resultType="java.util.HashMap">
+	select planid as id,pplanid as pid, name as text from TBSYS_QUERYPLAN 
+	  start with planid = 6 
+	  connect by prior planid = pplanid
+ </select>
+</mapper>

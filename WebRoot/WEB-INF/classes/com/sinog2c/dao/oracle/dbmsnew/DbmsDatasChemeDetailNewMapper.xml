@@ -1,0 +1,354 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.sinog2c.dao.api.dbmsnew.DbmsDatasChemeDetailNewMapper" >
+  <resultMap id="BaseResultMap" type="com.sinog2c.model.dbmsnew.DbmsDatasChemeDetailNew" >
+    <id column="DDCID" property="ddcid" jdbcType="VARCHAR" />
+    <id column="DCDID" property="dcdid" jdbcType="VARCHAR" />
+    <result column="DDTID" property="ddtid" jdbcType="VARCHAR" />
+    <result column="DCDFROMCOLUMNS" property="dcdfromcolumns" jdbcType="VARCHAR" />
+    <result column="DCDFROMCOLUMNSSCRIBE" property="dcdfromcolumnsscribe" jdbcType="VARCHAR" />
+    <result column="DCDFROMCLOUMNSTYPE" property="dcdfromcloumnstype" jdbcType="VARCHAR" />
+    <result column="DCDFROMCLOUMNSSIZE" property="dcdfromcloumnssize" jdbcType="DECIMAL" />
+    <result column="DCDFROMCLOUMNSDEFAULTVALUE" property="dcdfromcloumnsdefaultvalue" jdbcType="VARCHAR" />
+    <result column="DCDTOTABLEID" property="dcdtotableid" jdbcType="VARCHAR" />
+    <result column="DCDTOCOLUMNS" property="dcdtocolumns" jdbcType="VARCHAR" />
+    <result column="DCDTOCOLUMNSSCRIBE" property="dcdtocolumnsscribe" jdbcType="VARCHAR" />
+    <result column="DCDTOCOLUMNSTYPE" property="dcdtocolumnstype" jdbcType="VARCHAR" />
+    <result column="DCDTOCOLUMNSSIZE" property="dcdtocolumnssize" jdbcType="DECIMAL" />
+    <result column="DCDTOCOLUMNSPOINT" property="dcdtocolumnspoint" jdbcType="DECIMAL" />
+    <result column="DCDFROMCOLUMNSPOINT" property="dcdfromcolumnspoint" jdbcType="DECIMAL" />
+    <result column="DCDIFPKEY" property="dcdifpkey" jdbcType="VARCHAR" />
+    <result column="DCDORDER" property="dcdorder" jdbcType="FLOAT" />
+    <result column="DCDPKGENERATOR" property="dcdpkgenerator" jdbcType="VARCHAR" />
+    <result column="DCDCODETYPE" property="dcdcodetype" jdbcType="VARCHAR" />
+    <result column="UPDATEMENDER" property="updatemender" jdbcType="VARCHAR" />
+    <result column="UPDATETIME" property="updatetime" jdbcType="TIMESTAMP" />
+    <result column="DCDTOCLOUMNSDEFAULTVALUE" property="dcdtocloumnsdefaultvalue" jdbcType="VARCHAR" />
+    <result column="CREATETIME" property="createtime" jdbcType="TIMESTAMP" />
+    <result column="CREATEMENDER" property="createmender" jdbcType="VARCHAR" />
+    <result column="DELFLG" property="delflg" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    DDCID, DCDID, DDTID, DCDFROMCOLUMNS, DCDFROMCOLUMNSSCRIBE, DCDFROMCLOUMNSTYPE, DCDFROMCLOUMNSSIZE, 
+    DCDFROMCLOUMNSDEFAULTVALUE, DCDTOTABLEID, DCDTOCOLUMNS, DCDTOCOLUMNSSCRIBE, DCDTOCOLUMNSTYPE, 
+    DCDTOCOLUMNSSIZE, DCDTOCOLUMNSPOINT, DCDFROMCOLUMNSPOINT, DCDIFPKEY, DCDORDER, DCDPKGENERATOR, 
+    DCDCODETYPE, UPDATEMENDER, UPDATETIME, DCDTOCLOUMNSDEFAULTVALUE, CREATETIME, CREATEMENDER, 
+    DELFLG
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="com.sinog2c.model.dbmsnew.DbmsDatasChemeDetailNewKey" >
+    select 
+    <include refid="Base_Column_List" />
+    from DBMS_DATAS_CHEME_DETAIL_NEW
+    where DDCID = #{ddcid,jdbcType=VARCHAR}
+      and DCDID = #{dcdid,jdbcType=VARCHAR}
+  </select>
+  
+  <select id="listByCondition" resultMap="BaseResultMap" parameterType="Map" >    <!-- 查询表中的信息 -->
+ 		SELECT 
+ 		<include refid="Base_Column_List" />
+ 		FROM DBMS_DATAS_CHEME_DETAIL_NEW
+	 	where 1=1 
+		 <if test="ddcid !=null and ddcid !=''">  
+	        and DDCID = #{ddcid}
+	     </if>
+		 <if test="sortField!=null and sortField!='' and sortOrder!=null and sortOrder!=''">  
+ 		  order by  ${sortField} ${sortOrder}
+	     </if>
+  </select>
+  
+  <delete id="deleteByPrimaryKey" parameterType="com.sinog2c.model.dbmsnew.DbmsDatasChemeDetailNewKey" >
+    delete from DBMS_DATAS_CHEME_DETAIL_NEW
+    where DDCID = #{ddcid,jdbcType=VARCHAR}
+      and DCDID = #{dcdid,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.sinog2c.model.dbmsnew.DbmsDatasChemeDetailNew" >
+    insert into DBMS_DATAS_CHEME_DETAIL_NEW (DDCID, DCDID, DDTID, 
+      DCDFROMCOLUMNS, DCDFROMCOLUMNSSCRIBE, DCDFROMCLOUMNSTYPE, 
+      DCDFROMCLOUMNSSIZE, DCDFROMCLOUMNSDEFAULTVALUE, 
+      DCDTOTABLEID, DCDTOCOLUMNS, DCDTOCOLUMNSSCRIBE, 
+      DCDTOCOLUMNSTYPE, DCDTOCOLUMNSSIZE, DCDTOCOLUMNSPOINT, 
+      DCDFROMCOLUMNSPOINT, DCDIFPKEY, DCDORDER, 
+      DCDPKGENERATOR, DCDCODETYPE, UPDATEMENDER, 
+      UPDATETIME, DCDTOCLOUMNSDEFAULTVALUE, CREATETIME, 
+      CREATEMENDER, DELFLG)
+    values (#{ddcid,jdbcType=VARCHAR}, #{dcdid,jdbcType=VARCHAR}, #{ddtid,jdbcType=VARCHAR}, 
+      #{dcdfromcolumns,jdbcType=VARCHAR}, #{dcdfromcolumnsscribe,jdbcType=VARCHAR}, #{dcdfromcloumnstype,jdbcType=VARCHAR}, 
+      #{dcdfromcloumnssize,jdbcType=DECIMAL}, #{dcdfromcloumnsdefaultvalue,jdbcType=VARCHAR}, 
+      #{dcdtotableid,jdbcType=VARCHAR}, #{dcdtocolumns,jdbcType=VARCHAR}, #{dcdtocolumnsscribe,jdbcType=VARCHAR}, 
+      #{dcdtocolumnstype,jdbcType=VARCHAR}, #{dcdtocolumnssize,jdbcType=DECIMAL}, #{dcdtocolumnspoint,jdbcType=DECIMAL}, 
+      #{dcdfromcolumnspoint,jdbcType=DECIMAL}, #{dcdifpkey,jdbcType=VARCHAR}, #{dcdorder,jdbcType=FLOAT}, 
+      #{dcdpkgenerator,jdbcType=VARCHAR}, #{dcdcodetype,jdbcType=VARCHAR}, #{updatemender,jdbcType=VARCHAR}, 
+      #{updatetime,jdbcType=TIMESTAMP}, #{dcdtocloumnsdefaultvalue,jdbcType=VARCHAR}, #{createtime,jdbcType=TIMESTAMP}, 
+      #{createmender,jdbcType=VARCHAR}, #{delflg,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.sinog2c.model.dbmsnew.DbmsDatasChemeDetailNew" >
+    insert into DBMS_DATAS_CHEME_DETAIL_NEW
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="ddcid != null" >
+        DDCID,
+      </if>
+      <if test="dcdid != null" >
+        DCDID,
+      </if>
+      <if test="ddtid != null" >
+        DDTID,
+      </if>
+      <if test="dcdfromcolumns != null" >
+        DCDFROMCOLUMNS,
+      </if>
+      <if test="dcdfromcolumnsscribe != null" >
+        DCDFROMCOLUMNSSCRIBE,
+      </if>
+      <if test="dcdfromcloumnstype != null" >
+        DCDFROMCLOUMNSTYPE,
+      </if>
+      <if test="dcdfromcloumnssize != null" >
+        DCDFROMCLOUMNSSIZE,
+      </if>
+      <if test="dcdfromcloumnsdefaultvalue != null" >
+        DCDFROMCLOUMNSDEFAULTVALUE,
+      </if>
+      <if test="dcdtotableid != null" >
+        DCDTOTABLEID,
+      </if>
+      <if test="dcdtocolumns != null" >
+        DCDTOCOLUMNS,
+      </if>
+      <if test="dcdtocolumnsscribe != null" >
+        DCDTOCOLUMNSSCRIBE,
+      </if>
+      <if test="dcdtocolumnstype != null" >
+        DCDTOCOLUMNSTYPE,
+      </if>
+      <if test="dcdtocolumnssize != null" >
+        DCDTOCOLUMNSSIZE,
+      </if>
+      <if test="dcdtocolumnspoint != null" >
+        DCDTOCOLUMNSPOINT,
+      </if>
+      <if test="dcdfromcolumnspoint != null" >
+        DCDFROMCOLUMNSPOINT,
+      </if>
+      <if test="dcdifpkey != null" >
+        DCDIFPKEY,
+      </if>
+      <if test="dcdorder != null" >
+        DCDORDER,
+      </if>
+      <if test="dcdpkgenerator != null" >
+        DCDPKGENERATOR,
+      </if>
+      <if test="dcdcodetype != null" >
+        DCDCODETYPE,
+      </if>
+      <if test="updatemender != null" >
+        UPDATEMENDER,
+      </if>
+      <if test="updatetime != null" >
+        UPDATETIME,
+      </if>
+      <if test="dcdtocloumnsdefaultvalue != null" >
+        DCDTOCLOUMNSDEFAULTVALUE,
+      </if>
+      <if test="createtime != null" >
+        CREATETIME,
+      </if>
+      <if test="createmender != null" >
+        CREATEMENDER,
+      </if>
+      <if test="delflg != null" >
+        DELFLG,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="ddcid != null" >
+        #{ddcid,jdbcType=VARCHAR},
+      </if>
+      <if test="dcdid != null" >
+        #{dcdid,jdbcType=VARCHAR},
+      </if>
+      <if test="ddtid != null" >
+        #{ddtid,jdbcType=VARCHAR},
+      </if>
+      <if test="dcdfromcolumns != null" >
+        #{dcdfromcolumns,jdbcType=VARCHAR},
+      </if>
+      <if test="dcdfromcolumnsscribe != null" >
+        #{dcdfromcolumnsscribe,jdbcType=VARCHAR},
+      </if>
+      <if test="dcdfromcloumnstype != null" >
+        #{dcdfromcloumnstype,jdbcType=VARCHAR},
+      </if>
+      <if test="dcdfromcloumnssize != null" >
+        #{dcdfromcloumnssize,jdbcType=DECIMAL},
+      </if>
+      <if test="dcdfromcloumnsdefaultvalue != null" >
+        #{dcdfromcloumnsdefaultvalue,jdbcType=VARCHAR},
+      </if>
+      <if test="dcdtotableid != null" >
+        #{dcdtotableid,jdbcType=VARCHAR},
+      </if>
+      <if test="dcdtocolumns != null" >
+        #{dcdtocolumns,jdbcType=VARCHAR},
+      </if>
+      <if test="dcdtocolumnsscribe != null" >
+        #{dcdtocolumnsscribe,jdbcType=VARCHAR},
+      </if>
+      <if test="dcdtocolumnstype != null" >
+        #{dcdtocolumnstype,jdbcType=VARCHAR},
+      </if>
+      <if test="dcdtocolumnssize != null" >
+        #{dcdtocolumnssize,jdbcType=DECIMAL},
+      </if>
+      <if test="dcdtocolumnspoint != null" >
+        #{dcdtocolumnspoint,jdbcType=DECIMAL},
+      </if>
+      <if test="dcdfromcolumnspoint != null" >
+        #{dcdfromcolumnspoint,jdbcType=DECIMAL},
+      </if>
+      <if test="dcdifpkey != null" >
+        #{dcdifpkey,jdbcType=VARCHAR},
+      </if>
+      <if test="dcdorder != null" >
+        #{dcdorder,jdbcType=FLOAT},
+      </if>
+      <if test="dcdpkgenerator != null" >
+        #{dcdpkgenerator,jdbcType=VARCHAR},
+      </if>
+      <if test="dcdcodetype != null" >
+        #{dcdcodetype,jdbcType=VARCHAR},
+      </if>
+      <if test="updatemender != null" >
+        #{updatemender,jdbcType=VARCHAR},
+      </if>
+      <if test="updatetime != null" >
+        #{updatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="dcdtocloumnsdefaultvalue != null" >
+        #{dcdtocloumnsdefaultvalue,jdbcType=VARCHAR},
+      </if>
+      <if test="createtime != null" >
+        #{createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createmender != null" >
+        #{createmender,jdbcType=VARCHAR},
+      </if>
+      <if test="delflg != null" >
+        #{delflg,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.sinog2c.model.dbmsnew.DbmsDatasChemeDetailNew" >
+    update DBMS_DATAS_CHEME_DETAIL_NEW
+    <set >
+      <if test="ddtid != null" >
+        DDTID = #{ddtid,jdbcType=VARCHAR},
+      </if>
+      <if test="dcdfromcolumns != null" >
+        DCDFROMCOLUMNS = #{dcdfromcolumns,jdbcType=VARCHAR},
+      </if>
+      <if test="dcdfromcolumnsscribe != null" >
+        DCDFROMCOLUMNSSCRIBE = #{dcdfromcolumnsscribe,jdbcType=VARCHAR},
+      </if>
+      <if test="dcdfromcloumnstype != null" >
+        DCDFROMCLOUMNSTYPE = #{dcdfromcloumnstype,jdbcType=VARCHAR},
+      </if>
+      <if test="dcdfromcloumnssize != null" >
+        DCDFROMCLOUMNSSIZE = #{dcdfromcloumnssize,jdbcType=DECIMAL},
+      </if>
+      <if test="dcdfromcloumnsdefaultvalue != null" >
+        DCDFROMCLOUMNSDEFAULTVALUE = #{dcdfromcloumnsdefaultvalue,jdbcType=VARCHAR},
+      </if>
+      <if test="dcdtotableid != null" >
+        DCDTOTABLEID = #{dcdtotableid,jdbcType=VARCHAR},
+      </if>
+      <if test="dcdtocolumns != null" >
+        DCDTOCOLUMNS = #{dcdtocolumns,jdbcType=VARCHAR},
+      </if>
+      <if test="dcdtocolumnsscribe != null" >
+        DCDTOCOLUMNSSCRIBE = #{dcdtocolumnsscribe,jdbcType=VARCHAR},
+      </if>
+      <if test="dcdtocolumnstype != null" >
+        DCDTOCOLUMNSTYPE = #{dcdtocolumnstype,jdbcType=VARCHAR},
+      </if>
+      <if test="dcdtocolumnssize != null" >
+        DCDTOCOLUMNSSIZE = #{dcdtocolumnssize,jdbcType=DECIMAL},
+      </if>
+      <if test="dcdtocolumnspoint != null" >
+        DCDTOCOLUMNSPOINT = #{dcdtocolumnspoint,jdbcType=DECIMAL},
+      </if>
+      <if test="dcdfromcolumnspoint != null" >
+        DCDFROMCOLUMNSPOINT = #{dcdfromcolumnspoint,jdbcType=DECIMAL},
+      </if>
+      <if test="dcdifpkey != null" >
+        DCDIFPKEY = #{dcdifpkey,jdbcType=VARCHAR},
+      </if>
+      <if test="dcdorder != null" >
+        DCDORDER = #{dcdorder,jdbcType=FLOAT},
+      </if>
+      <if test="dcdpkgenerator != null" >
+        DCDPKGENERATOR = #{dcdpkgenerator,jdbcType=VARCHAR},
+      </if>
+      <if test="dcdcodetype != null" >
+        DCDCODETYPE = #{dcdcodetype,jdbcType=VARCHAR},
+      </if>
+      <if test="updatemender != null" >
+        UPDATEMENDER = #{updatemender,jdbcType=VARCHAR},
+      </if>
+      <if test="updatetime != null" >
+        UPDATETIME = #{updatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="dcdtocloumnsdefaultvalue != null" >
+        DCDTOCLOUMNSDEFAULTVALUE = #{dcdtocloumnsdefaultvalue,jdbcType=VARCHAR},
+      </if>
+      <if test="createtime != null" >
+        CREATETIME = #{createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createmender != null" >
+        CREATEMENDER = #{createmender,jdbcType=VARCHAR},
+      </if>
+      <if test="delflg != null" >
+        DELFLG = #{delflg,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where DDCID = #{ddcid,jdbcType=VARCHAR}
+      and DCDID = #{dcdid,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.sinog2c.model.dbmsnew.DbmsDatasChemeDetailNew" >
+    update DBMS_DATAS_CHEME_DETAIL_NEW
+    set DDTID = #{ddtid,jdbcType=VARCHAR},
+      DCDFROMCOLUMNS = #{dcdfromcolumns,jdbcType=VARCHAR},
+      DCDFROMCOLUMNSSCRIBE = #{dcdfromcolumnsscribe,jdbcType=VARCHAR},
+      DCDFROMCLOUMNSTYPE = #{dcdfromcloumnstype,jdbcType=VARCHAR},
+      DCDFROMCLOUMNSSIZE = #{dcdfromcloumnssize,jdbcType=DECIMAL},
+      DCDFROMCLOUMNSDEFAULTVALUE = #{dcdfromcloumnsdefaultvalue,jdbcType=VARCHAR},
+      DCDTOTABLEID = #{dcdtotableid,jdbcType=VARCHAR},
+      DCDTOCOLUMNS = #{dcdtocolumns,jdbcType=VARCHAR},
+      DCDTOCOLUMNSSCRIBE = #{dcdtocolumnsscribe,jdbcType=VARCHAR},
+      DCDTOCOLUMNSTYPE = #{dcdtocolumnstype,jdbcType=VARCHAR},
+      DCDTOCOLUMNSSIZE = #{dcdtocolumnssize,jdbcType=DECIMAL},
+      DCDTOCOLUMNSPOINT = #{dcdtocolumnspoint,jdbcType=DECIMAL},
+      DCDFROMCOLUMNSPOINT = #{dcdfromcolumnspoint,jdbcType=DECIMAL},
+      DCDIFPKEY = #{dcdifpkey,jdbcType=VARCHAR},
+      DCDORDER = #{dcdorder,jdbcType=FLOAT},
+      DCDPKGENERATOR = #{dcdpkgenerator,jdbcType=VARCHAR},
+      DCDCODETYPE = #{dcdcodetype,jdbcType=VARCHAR},
+      UPDATEMENDER = #{updatemender,jdbcType=VARCHAR},
+      UPDATETIME = #{updatetime,jdbcType=TIMESTAMP},
+      DCDTOCLOUMNSDEFAULTVALUE = #{dcdtocloumnsdefaultvalue,jdbcType=VARCHAR},
+      CREATETIME = #{createtime,jdbcType=TIMESTAMP},
+      CREATEMENDER = #{createmender,jdbcType=VARCHAR},
+      DELFLG = #{delflg,jdbcType=VARCHAR}
+    where DDCID = #{ddcid,jdbcType=VARCHAR}
+      and DCDID = #{dcdid,jdbcType=VARCHAR}
+  </update>
+  <select id="getcolumnByddcid" resultMap="BaseResultMap" parameterType="Object" >
+	select distinct case when instr(upper(c.dcdfromcolumns),' AS ',1,1)>0 then trim(substr(c.dcdfromcolumns,0,instr(upper(c.dcdfromcolumns),' AS ',1,1)-1)) else c.dcdfromcolumns end as dcdfromcolumns, c.dcdfromcolumnsscribe
+	  from DBMS_DATAS_CHEME_DETAIL_NEW c
+	 where c.ddtid = (select b.ddtid
+	                    from dbms_datas_table_new b
+	                   where b.ddcid = #{ddcid,jdbcType=VARCHAR}
+	                     and b.ddtismaintable = '0')
+	      and c.dcdfromcolumns is not null order by c.dcdfromcolumnsscribe desc
+  </select>  
+</mapper>

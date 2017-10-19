@@ -1,0 +1,251 @@
+﻿@charset "utf-8";
+/* CSS Document */
+/*.dis {
+	DISPLAY: block;
+}
+.undis {
+	DISPLAY: none;
+}*/
+.aligns{
+	text-align:center;	
+}
+#cntR {
+	WIDTH: 1260px;
+	margin:0 auto;
+	padding:10px 30px;
+}
+#NewsTop {
+	CLEAR: both;
+	MARGIN-BOTTOM: 16px;
+	position:relative;
+}
+#NewsTop P {
+	FLOAT: left;
+}
+#NewsTop P.topTit {
+	FONT-WEIGHT: bold;
+}
+#NewsTop P.topC0 {
+	WIDTH: 120px;
+	CURSOR: pointer;
+	height:44px;
+	line-height:44px;
+	text-align:center;
+}
+#NewsTop P.topC1 {
+	border-bottom:2px solid #1167e2;
+	WIDTH: 200px;
+	COLOR: #red;
+	height:44px;
+	line-height:44px;
+	text-align:center;
+	cursor: pointer;
+	font-weight:bold;
+}
+#NewsTop #NewsTop_tit {
+	BORDER-BOTTOM:#CCC 3px solid;
+	font-size: 30px;
+    height: 55px;
+}
+#NewsTop #NewsTop_tit p{
+	padding:0px;
+	width:230px;
+	line-height:55px;
+    height: 55px;
+	text-align:center;
+	cursor: pointer;
+}
+
+#NewsTop #NewsTop_tit p.hover2{
+	padding:0px;
+	width:230px;
+	border-bottom:2px solid #1167e2;
+	font-weight:bold;
+	line-height:55px;
+    height: 55px;
+	text-align:center;
+	cursor: pointer;
+}
+#NewsTop #NewsTop_tit p.hover1{
+	padding:0px;
+	width:230px;
+	border-bottom:2px solid #1167e2;
+	font-weight:bold;
+	line-height:55px;
+    height: 55px;
+	text-align:center;
+	cursor: pointer;
+}
+#NewsTop #NewsTop_cnt {
+	PADDING-TOP: 13px;
+	TEXT-ALIGN: left;
+}
+#NewsTop #NewsTop_cnt A {
+	TEXT-DECORATION: none;
+}
+#NewsTop #NewsTop_cnt A:hover {
+	TEXT-DECORATION: none;
+}
+/*hjxz*/
+.hjxz_con{
+	font-size:28px;
+	color:#000;	
+	padding-left:15px;
+	width:1220px;
+	font-family:"宋体";	
+	height:665px;
+	overflow:hidden;	
+}
+.hjxz_con p{
+	line-height:30px;
+	text-align: justify;
+}
+/*xwgk*/
+.xwgk_con{
+	font-size:30px;
+	color:#000;	
+	width:1260px;
+	font-family:"宋体";	
+	height:675px;
+	overflow:hidden;
+}
+.jxjs_list li{
+	height:45px;
+	line-height:45px;
+	border-bottom:1px dashed #a7a6a5;
+	color:#000
+}
+.jxjs_list li a .span1{
+	color: #000;
+    display: block;
+    float: left;
+    font-size: 18px;
+    height: 25px;
+    width: 24px;
+    line-height: 25px;
+    text-align: center;
+    margin-top: 10px;
+	background:#C1C2C4;
+}
+.jxjs_list li a:hover .span1{
+	background:#f0fcdf;
+	color: #000;
+    display: block;
+    float: left;
+    font-size: 18px;
+    height: 25px;
+    width: 24px;
+    line-height: 25px;
+    text-align: center;
+    margin-top: 10px;
+}
+.jxjs_list li a .span2{
+	color:#000;
+	font-size:28px;	
+	display:block;
+	float:left;
+	width:1223px;
+	margin-left:10px;
+}
+.jxjs_list li a:hover .span2{
+	background:#f0fcdf;
+	width:1223px;
+	display:block;
+	height:43px;
+	float:left;
+	margin-left:10px;
+	color:#000;
+}
+/*jspj*/
+.jspj_con{
+	font-size:16px;
+	color:#000;	
+	font-family:"宋体";	
+	overflow:hidden;
+	padding:100px 35px 0;	
+}
+.pj_rwtp{
+	background:url(../../../images/ywgk/images_family/rwtp.png) no-repeat;
+	width:214px;
+	height:315px;
+	float:left;	
+	margin-top: 270px;
+	margin-left:90px;
+}
+.jspj_contj{
+	width:780px;
+	float:left;
+}
+.jspj_tijiao{
+	margin:0 auto;
+	display:block;
+	width:82px;
+	text-align:center;
+	height:35px;
+	line-height:35px;
+	border:1px solid #8b8487;
+	background:url(../../../images/ywgk/images_family/back.jpg) repeat-x;
+	margin-top:30px;
+}
+.service_content{
+	width:783px;
+	height:505px;
+	overflow-y:auto;
+	scrollbar-face-color: #e2eb6d;
+	scrollbar-arrow-color: #e2eb6d;
+	scrollbar-3dlight-color: #e2eb6d;
+	scrollbar-highlight-color: #e2eb6d;
+	scrollbar-shadow-color: #e2eb6d;
+	scrollbar-darkshadow-color: #e2eb6d;
+	scrollbar-track-color: #e2eb6d;
+	scrollbar-base-color:#e2eb6d; 
+	Cursor:url(mouse.cur);
+	background:#e2eb6d;	
+}
+.service_content2{
+	width:775px;
+	height:450px;
+	background:#e2eb6d;	
+	padding:10px;
+}
+.ser_cons{
+	background:url(../../../images/ywgk/images_family/jspj_bjz.png) no-repeat;
+	width:184px;
+	height:78px;
+	text-align:center;	
+	display:block;
+	float:left;
+	font-size:16px;
+	color:#000;
+	margin-left:6px;
+	margin-bottom:5px;
+	line-height:25px;
+}
+.grxx_wrap {
+	height:75px;
+	display:table;
+	float:left;
+}          
+.grxx_contents {
+	vertical-align:middle;
+	display:table-cell;
+	width:180px;
+}  
+.ser_cons2{
+	background:url(../../../images/ywgk/images_family/jspj_bjh.png) no-repeat;
+	width:184px;
+	height:78px;
+	text-align:center;	
+	display:block;
+	float:left;
+	font-size:16px;
+	color:#000;
+	margin-left:6px;
+	margin-bottom:5px;
+	overflow:hidden;
+}
+
+.jspj_pages{
+	margin-top:10px;
+	float:right;	
+}

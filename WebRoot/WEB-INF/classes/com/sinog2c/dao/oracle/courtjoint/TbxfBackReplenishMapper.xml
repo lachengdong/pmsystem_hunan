@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.sinog2c.dao.api.courtjoint.TbxfBackReplenishMapper">
+  <resultMap id="BaseResultMap" type="com.sinog2c.model.courtjoint.TbxfBackReplenish">
+    <result column="CRIMID" jdbcType="VARCHAR" property="crimid" />
+    <result column="CASENUM" jdbcType="VARCHAR" property="casenum" />
+    <result column="COURTYEAR" jdbcType="VARCHAR" property="courtyear" />
+    <result column="COURTSHORT" jdbcType="VARCHAR" property="courtshort" />
+    <result column="BATCHID" jdbcType="VARCHAR" property="batchid" />
+    <result column="LIANEXAMINEPERSON" jdbcType="VARCHAR" property="lianexamineperson" />
+    <result column="LIANEXAMINEDATE" jdbcType="VARCHAR" property="lianexaminedate" />
+    <result column="LIANEXAMINEOPINION" jdbcType="VARCHAR" property="lianexamineopinion" />
+    <result column="LIANEXAMINEREMARK" jdbcType="VARCHAR" property="lianexamineremark" />
+  </resultMap>
+  <insert id="insert" parameterType="com.sinog2c.model.courtjoint.TbxfBackReplenish">
+    insert into TBXF_BACKREPLENISH (CRIMID, CASENUM, COURTYEAR, 
+      COURTSHORT, BATCHID, LIANEXAMINEPERSON, 
+      LIANEXAMINEDATE, LIANEXAMINEOPINION, LIANEXAMINEREMARK
+      )
+    values (#{crimid,jdbcType=VARCHAR}, #{casenum,jdbcType=VARCHAR}, #{courtyear,jdbcType=VARCHAR}, 
+      #{courtshort,jdbcType=VARCHAR}, #{batchid,jdbcType=VARCHAR}, #{lianexamineperson,jdbcType=VARCHAR}, 
+      #{lianexaminedate,jdbcType=VARCHAR}, #{lianexamineopinion,jdbcType=VARCHAR}, #{lianexamineremark,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.sinog2c.model.courtjoint.TbxfBackReplenish">
+    insert into TBXF_BACKREPLENISH
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="crimid != null">
+        CRIMID,
+      </if>
+      <if test="casenum != null">
+        CASENUM,
+      </if>
+      <if test="courtyear != null">
+        COURTYEAR,
+      </if>
+      <if test="courtshort != null">
+        COURTSHORT,
+      </if>
+      <if test="batchid != null">
+        BATCHID,
+      </if>
+      <if test="lianexamineperson != null">
+        LIANEXAMINEPERSON,
+      </if>
+      <if test="lianexaminedate != null">
+        LIANEXAMINEDATE,
+      </if>
+      <if test="lianexamineopinion != null">
+        LIANEXAMINEOPINION,
+      </if>
+      <if test="lianexamineremark != null">
+        LIANEXAMINEREMARK,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="crimid != null">
+        #{crimid,jdbcType=VARCHAR},
+      </if>
+      <if test="casenum != null">
+        #{casenum,jdbcType=VARCHAR},
+      </if>
+      <if test="courtyear != null">
+        #{courtyear,jdbcType=VARCHAR},
+      </if>
+      <if test="courtshort != null">
+        #{courtshort,jdbcType=VARCHAR},
+      </if>
+      <if test="batchid != null">
+        #{batchid,jdbcType=VARCHAR},
+      </if>
+      <if test="lianexamineperson != null">
+        #{lianexamineperson,jdbcType=VARCHAR},
+      </if>
+      <if test="lianexaminedate != null">
+        #{lianexaminedate,jdbcType=VARCHAR},
+      </if>
+      <if test="lianexamineopinion != null">
+        #{lianexamineopinion,jdbcType=VARCHAR},
+      </if>
+      <if test="lianexamineremark != null">
+        #{lianexamineremark,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  
+  
+   <insert id="insertMap" parameterType="Map">
+    insert into TBXF_BACKREPLENISH (CRIMID, CASENUM, COURTYEAR, 
+      COURTSHORT, BATCHID, LIANEXAMINEPERSON, 
+      LIANEXAMINEDATE, LIANEXAMINEOPINION, LIANEXAMINEREMARK
+      )
+    values (#{ZFBH,jdbcType=VARCHAR},#{AJBH,jdbcType=VARCHAR},#{COURTYEAR,jdbcType=VARCHAR},#{COURTSHORT,jdbcType=VARCHAR},
+    #{PC,jdbcType=VARCHAR},#{LASCR,jdbcType=VARCHAR},<!-- to_date(#{LASCRQ,jdbcType=DATE},'yyyy/MM/dd') -->#{LASCRQ,jdbcType=VARCHAR},#{LASCYJ,jdbcType=VARCHAR},#{LASCBZ,jdbcType=VARCHAR}
+)
+  </insert>
+  
+  <select id="countByCrimidAndBatchid" parameterType="Map" resultType="int">
+  	select count(1) from TBXF_BACKREPLENISH where  batchid = #{batchid,jdbcType=VARCHAR}
+  </select>
+  
+  <select id="findByCrimidAndBatchid" parameterType="Map" resultType="Map">
+  select * from
+		(
+			select a.*, rownum rn from
+		(
+  			select tb.CRIMID ,'(' ||tb.courtyear||')'||tb.courtshort as CASENUMBER,
+			tb.LIANEXAMINEPERSON ,
+			tb.LIANEXAMINEDATE as LIANEXAMINEDATE,
+			case tb.LIANEXAMINEOPINION when '1' then '立案' when '2' then '退回' when '3' then '销案' end  as LIANEXAMINEOPINION,
+			tb.LIANEXAMINEREMARK as LIANEXAMINEREMARK,
+			tba.name  as CRIMNAME
+		 from TBXF_BACKREPLENISH tb ,tbprisoner_baseinfo tba
+		 where tba.crimid = tb.crimid and batchid = #{batchid,jdbcType=VARCHAR}
+		 <if test="crimname!=null and crimname!=''">
+			and tba.name like '%'||#{crimname,jdbcType=VARCHAR}||'%'
+		</if>
+  		) a
+		<if test="end!=null and end!=''">
+			where rownum &lt;= #{end}
+		</if>
+		)
+		<if test="start!=null and start!=''">
+			where rn &gt;= #{start}
+		</if>
+		
+  </select>
+</mapper>

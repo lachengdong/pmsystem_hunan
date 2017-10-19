@@ -1,0 +1,252 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.sinog2c.dao.api.khjc.KhjcCriminalScoreSdMapper" >
+  <resultMap id="BaseResultMap" type="com.sinog2c.model.khjc.KhjcCriminalScoreSd" >
+    <id column="ID" property="id" jdbcType="VARCHAR" />
+    <result column="CRIMID" property="crimid" jdbcType="VARCHAR" />
+    <result column="FENJIANQU" property="fenjianqu" jdbcType="VARCHAR" />
+    <result column="JIANQU" property="jianqu" jdbcType="VARCHAR" />
+    <result column="JIANYU" property="jianyu" jdbcType="VARCHAR" />
+    <result column="JIANGCHENGLEIXING" property="jiangchengleixing" jdbcType="VARCHAR" />
+    <result column="JIANGCHENGLEIBIE" property="jiangchengleibie" jdbcType="VARCHAR" />
+    <result column="FENSHU" property="fenshu" jdbcType="VARCHAR" />
+    <result column="FILLTIME" property="filltime" jdbcType="DATE" />
+    <result column="CASHTIME" property="cashtime" jdbcType="DATE" />
+    <result column="CREATETIME" property="createtime" jdbcType="DATE" />
+    <result column="CREATEMENDER" property="createmender" jdbcType="VARCHAR" />
+    <result column="STATE" property="state" jdbcType="VARCHAR" />
+    <result column="NAME" property="name" jdbcType="VARCHAR" />
+    <result column="DELFLAG" property="delflag" jdbcType="VARCHAR" />
+    <result column="APPROVEID" property="approveid" jdbcType="VARCHAR" />
+    <result column="UPDATETIME" property="updatetime" jdbcType="DATE" />
+    <result column="UPDATEMENDER" property="updatemender" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    ID, CRIMID, FENJIANQU, JIANQU, JIANYU, JIANGCHENGLEIXING, JIANGCHENGLEIBIE, FENSHU, 
+    FILLTIME, CASHTIME, CREATETIME, CREATEMENDER, STATE, NAME, DELFLAG, APPROVEID, UPDATETIME, 
+    UPDATEMENDER
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from KHJC_CRIMINAL_SCORE_SD
+    where ID = #{id,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from KHJC_CRIMINAL_SCORE_SD
+    where ID = #{id,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.sinog2c.model.khjc.KhjcCriminalScoreSd" >
+    insert into KHJC_CRIMINAL_SCORE_SD (ID, CRIMID, FENJIANQU, 
+      JIANQU, JIANYU, JIANGCHENGLEIXING, 
+      JIANGCHENGLEIBIE, FENSHU, FILLTIME, 
+      CASHTIME, CREATETIME, CREATEMENDER, 
+      STATE, NAME, DELFLAG, 
+      APPROVEID, UPDATETIME, UPDATEMENDER
+      )
+    values (#{id,jdbcType=VARCHAR}, #{crimid,jdbcType=VARCHAR}, #{fenjianqu,jdbcType=VARCHAR}, 
+      #{jianqu,jdbcType=VARCHAR}, #{jianyu,jdbcType=VARCHAR}, #{jiangchengleixing,jdbcType=VARCHAR}, 
+      #{jiangchengleibie,jdbcType=VARCHAR}, #{fenshu,jdbcType=VARCHAR}, #{filltime,jdbcType=DATE}, 
+      #{cashtime,jdbcType=DATE}, #{createtime,jdbcType=DATE}, #{createmender,jdbcType=VARCHAR}, 
+      #{state,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR}, #{delflag,jdbcType=VARCHAR}, 
+      #{approveid,jdbcType=VARCHAR}, #{updatetime,jdbcType=DATE}, #{updatemender,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.sinog2c.model.khjc.KhjcCriminalScoreSd" >
+    insert into KHJC_CRIMINAL_SCORE_SD
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        ID,
+      </if>
+      <if test="crimid != null" >
+        CRIMID,
+      </if>
+      <if test="fenjianqu != null" >
+        FENJIANQU,
+      </if>
+      <if test="jianqu != null" >
+        JIANQU,
+      </if>
+      <if test="jianyu != null" >
+        JIANYU,
+      </if>
+      <if test="jiangchengleixing != null" >
+        JIANGCHENGLEIXING,
+      </if>
+      <if test="jiangchengleibie != null" >
+        JIANGCHENGLEIBIE,
+      </if>
+      <if test="fenshu != null" >
+        FENSHU,
+      </if>
+      <if test="filltime != null" >
+        FILLTIME,
+      </if>
+      <if test="cashtime != null" >
+        CASHTIME,
+      </if>
+      <if test="createtime != null" >
+        CREATETIME,
+      </if>
+      <if test="createmender != null" >
+        CREATEMENDER,
+      </if>
+      <if test="state != null" >
+        STATE,
+      </if>
+      <if test="name != null" >
+        NAME,
+      </if>
+      <if test="delflag != null" >
+        DELFLAG,
+      </if>
+      <if test="approveid != null" >
+        APPROVEID,
+      </if>
+      <if test="updatetime != null" >
+        UPDATETIME,
+      </if>
+      <if test="updatemender != null" >
+        UPDATEMENDER,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=VARCHAR},
+      </if>
+      <if test="crimid != null" >
+        #{crimid,jdbcType=VARCHAR},
+      </if>
+      <if test="fenjianqu != null" >
+        #{fenjianqu,jdbcType=VARCHAR},
+      </if>
+      <if test="jianqu != null" >
+        #{jianqu,jdbcType=VARCHAR},
+      </if>
+      <if test="jianyu != null" >
+        #{jianyu,jdbcType=VARCHAR},
+      </if>
+      <if test="jiangchengleixing != null" >
+        #{jiangchengleixing,jdbcType=VARCHAR},
+      </if>
+      <if test="jiangchengleibie != null" >
+        #{jiangchengleibie,jdbcType=VARCHAR},
+      </if>
+      <if test="fenshu != null" >
+        #{fenshu,jdbcType=VARCHAR},
+      </if>
+      <if test="filltime != null" >
+        #{filltime,jdbcType=DATE},
+      </if>
+      <if test="cashtime != null" >
+        #{cashtime,jdbcType=DATE},
+      </if>
+      <if test="createtime != null" >
+        #{createtime,jdbcType=DATE},
+      </if>
+      <if test="createmender != null" >
+        #{createmender,jdbcType=VARCHAR},
+      </if>
+      <if test="state != null" >
+        #{state,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null" >
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="delflag != null" >
+        #{delflag,jdbcType=VARCHAR},
+      </if>
+      <if test="approveid != null" >
+        #{approveid,jdbcType=VARCHAR},
+      </if>
+      <if test="updatetime != null" >
+        #{updatetime,jdbcType=DATE},
+      </if>
+      <if test="updatemender != null" >
+        #{updatemender,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.sinog2c.model.khjc.KhjcCriminalScoreSd" >
+    update KHJC_CRIMINAL_SCORE_SD
+    <set >
+      <if test="crimid != null" >
+        CRIMID = #{crimid,jdbcType=VARCHAR},
+      </if>
+      <if test="fenjianqu != null" >
+        FENJIANQU = #{fenjianqu,jdbcType=VARCHAR},
+      </if>
+      <if test="jianqu != null" >
+        JIANQU = #{jianqu,jdbcType=VARCHAR},
+      </if>
+      <if test="jianyu != null" >
+        JIANYU = #{jianyu,jdbcType=VARCHAR},
+      </if>
+      <if test="jiangchengleixing != null" >
+        JIANGCHENGLEIXING = #{jiangchengleixing,jdbcType=VARCHAR},
+      </if>
+      <if test="jiangchengleibie != null" >
+        JIANGCHENGLEIBIE = #{jiangchengleibie,jdbcType=VARCHAR},
+      </if>
+      <if test="fenshu != null" >
+        FENSHU = #{fenshu,jdbcType=VARCHAR},
+      </if>
+      <if test="filltime != null" >
+        FILLTIME = #{filltime,jdbcType=DATE},
+      </if>
+      <if test="cashtime != null" >
+        CASHTIME = #{cashtime,jdbcType=DATE},
+      </if>
+      <if test="createtime != null" >
+        CREATETIME = #{createtime,jdbcType=DATE},
+      </if>
+      <if test="createmender != null" >
+        CREATEMENDER = #{createmender,jdbcType=VARCHAR},
+      </if>
+      <if test="state != null" >
+        STATE = #{state,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null" >
+        NAME = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="delflag != null" >
+        DELFLAG = #{delflag,jdbcType=VARCHAR},
+      </if>
+      <if test="approveid != null" >
+        APPROVEID = #{approveid,jdbcType=VARCHAR},
+      </if>
+      <if test="updatetime != null" >
+        UPDATETIME = #{updatetime,jdbcType=DATE},
+      </if>
+      <if test="updatemender != null" >
+        UPDATEMENDER = #{updatemender,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where ID = #{id,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.sinog2c.model.khjc.KhjcCriminalScoreSd" >
+    update KHJC_CRIMINAL_SCORE_SD
+    set CRIMID = #{crimid,jdbcType=VARCHAR},
+      FENJIANQU = #{fenjianqu,jdbcType=VARCHAR},
+      JIANQU = #{jianqu,jdbcType=VARCHAR},
+      JIANYU = #{jianyu,jdbcType=VARCHAR},
+      JIANGCHENGLEIXING = #{jiangchengleixing,jdbcType=VARCHAR},
+      JIANGCHENGLEIBIE = #{jiangchengleibie,jdbcType=VARCHAR},
+      FENSHU = #{fenshu,jdbcType=VARCHAR},
+      FILLTIME = #{filltime,jdbcType=DATE},
+      CASHTIME = #{cashtime,jdbcType=DATE},
+      CREATETIME = #{createtime,jdbcType=DATE},
+      CREATEMENDER = #{createmender,jdbcType=VARCHAR},
+      STATE = #{state,jdbcType=VARCHAR},
+      NAME = #{name,jdbcType=VARCHAR},
+      DELFLAG = #{delflag,jdbcType=VARCHAR},
+      APPROVEID = #{approveid,jdbcType=VARCHAR},
+      UPDATETIME = #{updatetime,jdbcType=DATE},
+      UPDATEMENDER = #{updatemender,jdbcType=VARCHAR}
+    where ID = #{id,jdbcType=VARCHAR}
+  </update>
+  
+   <select id="getSeq" resultType="java.util.HashMap">
+	    <if test="sql!=null and sql!=''">${sql}</if> 
+    </select>
+</mapper>

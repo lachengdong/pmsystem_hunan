@@ -1,0 +1,539 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.sinog2c.dao.api.system.TbsysCodeMapper" >
+  <resultMap id="BaseResultMap" type="com.sinog2c.model.system.TbsysCode" >
+    <id column="NOID" property="noid" jdbcType="DECIMAL" />
+    <result column="CODETYPE" property="codetype" jdbcType="VARCHAR" />
+    <result column="CODEID" property="codeid" jdbcType="VARCHAR" />
+    <result column="PCODEID" property="pcodeid" jdbcType="VARCHAR" />
+    <result column="NAME" property="name" jdbcType="VARCHAR" />
+    <result column="SN" property="sn" jdbcType="DECIMAL" />
+    <result column="SCEARCH" property="scearch" jdbcType="VARCHAR" />
+    <result column="REMARK" property="remark" jdbcType="VARCHAR" />
+    <result column="DELFLAG" property="delflag" jdbcType="VARCHAR" />
+    <result column="ORGID" property="orgid" jdbcType="VARCHAR" />
+    <result column="OPTIME" property="optime" jdbcType="TIMESTAMP" />
+    <result column="OPID" property="opid" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    NOID, CODETYPE, CODEID, PCODEID, NAME, SN, SCEARCH, REMARK, DELFLAG, ORGID, OPTIME, 
+    OPID
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from TBSYS_CODE
+    where NOID = #{noid,jdbcType=DECIMAL}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from TBSYS_CODE
+    where NOID = #{noid,jdbcType=DECIMAL}
+  </delete>
+  <insert id="insert" parameterType="com.sinog2c.model.system.TbsysCode" >
+    insert into TBSYS_CODE (NOID, CODETYPE, CODEID, 
+      PCODEID, NAME, SN, 
+      SCEARCH, REMARK, DELFLAG, 
+      ORGID, OPTIME, OPID)
+    values (#{noid,jdbcType=DECIMAL}, #{codetype,jdbcType=VARCHAR}, #{codeid,jdbcType=VARCHAR}, 
+      #{pcodeid,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR}, #{sn,jdbcType=DECIMAL}, 
+      #{scearch,jdbcType=VARCHAR}, #{remark,jdbcType=VARCHAR}, #{delflag,jdbcType=VARCHAR}, 
+      #{orgid,jdbcType=VARCHAR}, #{optime,jdbcType=TIMESTAMP}, #{opid,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.sinog2c.model.system.TbsysCode" >
+    insert into TBSYS_CODE
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="noid != null" >
+        NOID,
+      </if>
+      <if test="codetype != null" >
+        CODETYPE,
+      </if>
+      <if test="codeid != null" >
+        CODEID,
+      </if>
+      <if test="pcodeid != null" >
+        PCODEID,
+      </if>
+      <if test="name != null" >
+        NAME,
+      </if>
+      <if test="sn != null" >
+        SN,
+      </if>
+      <if test="scearch != null" >
+        SCEARCH,
+      </if>
+      <if test="remark != null" >
+        REMARK,
+      </if>
+      <if test="delflag != null" >
+        DELFLAG,
+      </if>
+      <if test="orgid != null" >
+        ORGID,
+      </if>
+      <if test="optime != null" >
+        OPTIME,
+      </if>
+      <if test="opid != null" >
+        OPID,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="noid != null" >
+        #{noid,jdbcType=DECIMAL},
+      </if>
+      <if test="codetype != null" >
+        #{codetype,jdbcType=VARCHAR},
+      </if>
+      <if test="codeid != null" >
+        #{codeid,jdbcType=VARCHAR},
+      </if>
+      <if test="pcodeid != null" >
+        #{pcodeid,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null" >
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="sn != null" >
+        #{sn,jdbcType=DECIMAL},
+      </if>
+      <if test="scearch != null" >
+        #{scearch,jdbcType=VARCHAR},
+      </if>
+      <if test="remark != null" >
+        #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="delflag != null" >
+        #{delflag,jdbcType=VARCHAR},
+      </if>
+      <if test="orgid != null" >
+        #{orgid,jdbcType=VARCHAR},
+      </if>
+      <if test="optime != null" >
+        #{optime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="opid != null" >
+        #{opid,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.sinog2c.model.system.TbsysCode" >
+    update TBSYS_CODE
+    <set >
+      <if test="codetype != null" >
+        CODETYPE = #{codetype,jdbcType=VARCHAR},
+      </if>
+      <if test="codeid != null" >
+        CODEID = #{codeid,jdbcType=VARCHAR},
+      </if>
+      <if test="pcodeid != null" >
+        PCODEID = #{pcodeid,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null" >
+        NAME = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="sn != null" >
+        SN = #{sn,jdbcType=DECIMAL},
+      </if>
+      <if test="scearch != null" >
+        SCEARCH = #{scearch,jdbcType=VARCHAR},
+      </if>
+      <if test="remark != null" >
+        REMARK = #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="delflag != null" >
+        DELFLAG = #{delflag,jdbcType=VARCHAR},
+      </if>
+      <if test="orgid != null" >
+        ORGID = #{orgid,jdbcType=VARCHAR},
+      </if>
+      <if test="optime != null" >
+        OPTIME = #{optime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="opid != null" >
+        OPID = #{opid,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where NOID = #{noid,jdbcType=DECIMAL}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.sinog2c.model.system.TbsysCode" >
+    update TBSYS_CODE
+    set CODETYPE = #{codetype,jdbcType=VARCHAR},
+      CODEID = #{codeid,jdbcType=VARCHAR},
+      PCODEID = #{pcodeid,jdbcType=VARCHAR},
+      NAME = #{name,jdbcType=VARCHAR},
+      SN = #{sn,jdbcType=DECIMAL},
+      SCEARCH = #{scearch,jdbcType=VARCHAR},
+      REMARK = #{remark,jdbcType=VARCHAR},
+      DELFLAG = #{delflag,jdbcType=VARCHAR},
+      ORGID = #{orgid,jdbcType=VARCHAR},
+      OPTIME = #{optime,jdbcType=TIMESTAMP},
+      OPID = #{opid,jdbcType=VARCHAR}
+    where NOID = #{noid,jdbcType=DECIMAL}
+  </update>
+  <!-- 很显然 这个地方是有问题的 应该通过codetype进行取值 -->
+  <select id="selectValueByCodeType" resultType="com.sinog2c.model.system.TbsysCode" parameterType="String" >
+    select  * from TBSYS_CODE   where pcodeid = #{pcodeid} order by sn
+  </select>
+  <select id="selectValueByCodeType1" resultType="com.sinog2c.model.system.TbsysCode" parameterType="String" >
+    select  name codeid,name from TBSYS_CODE   where pcodeid = #{pcodeid} order by sn
+  </select>
+  <select id="getCodeByCodeType" resultType="com.sinog2c.model.system.TbsysCode" parameterType="String" >
+    select  * from TBSYS_CODE   where pcodeid = #{pcodeid} 
+    <if test="scearch != null and scearch != '' ">
+        	 and scearch = #{scearch}
+    </if>
+    order by sn
+  </select>
+  
+  <select id="getCodesByMap" resultType="com.sinog2c.model.system.TbsysCode" parameterType="Map" >
+    select  * from TBSYS_CODE   where 1=1
+    <if test="pcodeid != null and pcodeid != '' ">
+    	and pcodeid = #{pcodeid} 
+    </if>
+    <if test="codetype != null and codetype != '' ">
+    	and codetype = #{codetype} 
+    </if>
+    <if test="scearch != null and scearch != '' ">
+        	 and scearch = #{scearch}
+    </if>
+    <if test="codeids != null and codeids != '' ">
+        	 and codeid in (${codeids})
+    </if>
+    <if test="orgid != null and orgid != '' ">
+        	 and orgid = #{orgid} 
+    </if>
+    order by sn
+  </select>
+  
+  
+  
+  
+  
+   <select id="getCaseTypeMap"  resultType="java.util.HashMap">
+   
+   select * from tbsys_code   where 1=1 
+ 
+    <if test="pcodeid != null and pcodeid != '' ">
+    	and pcodeid = #{pcodeid} 
+    </if>
+    <if test="codetype != null and codetype != '' ">
+    	and codetype = #{codetype} 
+    </if>
+    <if test="scearch != null and scearch != '' ">
+        	 and scearch = #{scearch}
+    </if>
+ 
+     start with codeid='GK8888' connect by prior   codeid=pcodeid 
+     
+     order by sn
+  </select>
+  
+  
+  
+  
+  
+  
+  <select id="selectValueByCodeTypeAndCodeid" resultType="com.sinog2c.model.system.TbsysCode" parameterType="Map" >
+    select  * from TBSYS_CODE   where  codetype = #{codetype} and codeid = #{codeid} order by sn
+  </select>
+  <select id="selectValueByMap" resultType="Map" parameterType="Map" >
+    select  * from TBSYS_CODE   where codetype = #{codetype} order by sn
+  </select>
+  
+   <select id="getCodeValueByCodeTypeAndCodeId" resultType="String" parameterType="Map" >
+    select  name from TBSYS_CODE   where codetype = #{codetype} and codeid = #{codeid}
+  </select>
+  <select id="getCodeValueByStrings" resultType="String" parameterType="String" >
+    select  name from TBSYS_CODE   where codetype = #{codetype} and codeid = #{codeid}
+  </select>
+  
+    
+  <!-- 根据codeType查询表中的所有信息 -->
+  <select id="listByCodetype" resultMap="BaseResultMap" parameterType="String" >
+	    select * from  TBSYS_CODE  where 1=1
+		    and  CODETYPE=#{codetype}
+		    order by NOID asc
+  </select>  
+  
+  <!-- 根据条件查询表中的所有信息 -->
+  <select id="listByMap" resultType="Map" parameterType="Map" >
+	    select * from  TBSYS_CODE  where 1=1
+		    and  CODETYPE=#{codetype}
+		    <if test="codeids != null" >
+        	 and codeid in (${codeids})
+      		</if>
+      		<if test="orgid != null" >
+		    and orgid=#{orgid}
+		    </if>
+		    order by NOID asc
+  </select>  
+  
+  <!-- 根据条件查询表中的所有信息 -->
+  <select id="getDataByMap" resultType="Map" parameterType="Map" >
+	    select * from  TBSYS_CODE  where 1=1
+		    and  CODETYPE=#{codetype}
+        	 and codeid = #{codeid}
+  </select>  
+
+  <select id="countAll" resultType="int">  <!-- 查询表中记录总数 -->
+		select count(*) c from TBSYS_CODE
+  </select>
+
+  <select id="listAll" resultMap="BaseResultMap">    <!-- 分页查询表中的所有信息 -->
+ 		SELECT * FROM TBSYS_CODE
+		 order by 
+		 <if test="sortField!=null and sortField!='' and sortOrder!=null and sortOrder!=''">  
+ 		  ${sortField} ${sortOrder},
+	     </if>
+	     NOID asc
+  </select>
+
+  <select id="countByCondition" resultType="int" parameterType="Map" >  <!-- 根据条件查询表中记录数 -->
+		select count(*) c from TBSYS_CODE
+	 	where 1=1 
+			 <if test="codeid !=null and codeid !=''">  
+		        and CODEID = #{codeid}
+		     </if>
+			 <if test="pcodeid !=null and pcodeid !=''">  
+		        and PCODEID = #{pcodeid}
+		     </if>
+			 <if test="codetype !=null and codetype !=''">  
+		        and CODETYPE like CONCAT(CONCAT('%', #{codetype}), '%')
+		     </if>
+			 <if test="name !=null and name !=''">  
+		        and NAME like CONCAT(CONCAT('%', #{name}), '%')
+		     </if>
+			 <if test="remark !=null and remark !=''">  
+		        and REMARK like CONCAT(CONCAT('%', #{remark}), '%')
+		     </if>
+  </select>
+
+  <select id="listByCondition" resultMap="BaseResultMap" parameterType="Map" >    <!-- 分页查询表中的信息 -->
+	 SELECT * FROM 
+	 	( SELECT A.*, ROWNUM RN 
+		 	FROM 
+		 	(
+		 		SELECT * FROM TBSYS_CODE
+			 	where 1=1 
+				 <if test="codeid !=null and codeid !=''">  
+			        and CODEID = #{codeid}
+			     </if>
+				 <if test="pcodeid !=null and pcodeid !=''">  
+			        and PCODEID = #{pcodeid}
+			     </if>
+				 <if test="codetype !=null and codetype !=''">  
+			        and CODETYPE like CONCAT(CONCAT('%', #{codetype}), '%')
+			     </if>
+				 <if test="name !=null and name !=''">  
+			        and NAME like CONCAT(CONCAT('%', #{name}), '%')
+			     </if>
+				 <if test="remark !=null and remark !=''">  
+			        and REMARK like CONCAT(CONCAT('%', #{remark}), '%')
+			     </if>
+				 <if test="scearch !=null and scearch !=''">  
+			        and SCEARCH like CONCAT(CONCAT('%', #{scearch}), '%')
+			     </if>
+		     
+		     	 order by 
+				 <if test="sortField!=null and sortField!='' and sortOrder!=null and sortOrder!=''">  
+		 		  ${sortField} ${sortOrder},
+			     </if>
+			     SN,NOID asc
+		 	) A 
+		 	<if test="end !=null and end !=''">  
+		 		WHERE ROWNUM &lt;= #{end,jdbcType=DECIMAL}
+	        </if>
+	 	) 
+	 	<if test="start !=null and start !=''">  
+	 		WHERE RN &gt;= #{start,jdbcType=DECIMAL}
+        </if>
+  </select>
+  
+  <insert id="insertByMap" parameterType="map" >
+  	<!-- 先查询出主键,再执行插入; 其实不用这么麻烦,直接在SQL语句中指定SEQ即可 -->
+    <selectKey resultType="int" keyProperty="noid" order="BEFORE">
+   		select SEQ_SYS_CODE_NOID.NEXTVAL  from dual
+    </selectKey>
+    insert into TBSYS_CODE
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="noid != null" >
+        NOID,
+      </if>
+      <if test="codetype != null" >
+        CODETYPE,
+      </if>
+      <if test="codeid != null" >
+        CODEID,
+      </if>
+      <if test="pcodeid != null" >
+        PCODEID,
+      </if>
+      <if test="name != null" >
+        NAME,
+      </if>
+      <if test="sn != null" >
+        SN,
+      </if>
+      <if test="scearch != null" >
+        SCEARCH,
+      </if>
+      <if test="remark != null" >
+        REMARK,
+      </if>
+      <if test="delflag != null" >
+        DELFLAG,
+      </if>
+      <if test="orgid != null" >
+        ORGID,
+      </if>
+      <if test="optime != null" >
+        OPTIME,
+      </if>
+      <if test="opid != null" >
+        OPID,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="noid != null" >
+        #{noid,jdbcType=DECIMAL},
+      </if>
+      <if test="codetype != null" >
+        #{codetype,jdbcType=VARCHAR},
+      </if>
+      <if test="codeid != null" >
+        #{codeid,jdbcType=VARCHAR},
+      </if>
+      <if test="pcodeid != null" >
+        #{pcodeid,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null" >
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="sn != null" >
+        #{sn,jdbcType=DECIMAL},
+      </if>
+      <if test="scearch != null" >
+        #{scearch,jdbcType=VARCHAR},
+      </if>
+      <if test="remark != null" >
+        #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="delflag != null" >
+        #{delflag,jdbcType=VARCHAR},
+      </if>
+      <if test="orgid != null" >
+        #{orgid,jdbcType=VARCHAR},
+      </if>
+      <if test="optime != null" >
+        #{optime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="opid != null" >
+        #{opid,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  
+  <update id="updateByMap" parameterType="Map" >
+    update TBSYS_CODE
+    <set >
+      <if test="codetype != null" >
+        CODETYPE = #{codetype,jdbcType=VARCHAR},
+      </if>
+      <if test="codeid != null" >
+        CODEID = #{codeid,jdbcType=VARCHAR},
+      </if>
+      <if test="pcodeid != null" >
+        PCODEID = #{pcodeid,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null" >
+        NAME = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="sn != null" >
+        SN = #{sn,jdbcType=DECIMAL},
+      </if>
+      <if test="scearch != null" >
+        SCEARCH = #{scearch,jdbcType=VARCHAR},
+      </if>
+      <if test="remark != null" >
+        REMARK = #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="delflag != null" >
+        DELFLAG = #{delflag,jdbcType=VARCHAR},
+      </if>
+      <if test="orgid != null" >
+        ORGID = #{orgid,jdbcType=VARCHAR},
+      </if>
+      <if test="optime != null" >
+        OPTIME = #{optime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="opid != null" >
+        OPID = #{opid,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where NOID = #{noid,jdbcType=DECIMAL}
+  </update>
+<select id="getAnJianName" resultMap="BaseResultMap" parameterType="Map" >
+	    select 
+	     <include refid="Base_Column_List" />
+	    from TBSYS_CODE 
+	    where 1=1
+	    <if test="codeid != null" >
+	    AND CODEID = #{codeid,jdbcType=VARCHAR}
+	    </if>
+	    <if test="pcodeid != null" > 
+	     AND PCODEID = #{pcodeid,jdbcType=VARCHAR}
+	     </if>
+   </select>
+   
+   <select id="getCodeByCodeTypeMapper" resultType="map">
+        select  * from TBSYS_CODE   where 1=1 
+         <if test="codetype != null and codetype != ''">
+        and codetype = #{codetype}
+        and codeid != #{codetype}
+        </if>
+        <if test="codeid != null and codeid != ''">
+            and codeid = #{codeid}
+        </if>
+        <if test="pcodeid != null and pcodeid != ''">
+            and pcodeid = #{pcodeid}
+        </if>
+        <if test="orgid != null and orgid != ''">
+            and orgid = #{orgid}
+        </if>
+         order by sn
+  </select>
+  
+  <select id="getCodeByCodeMapper" resultType="map">
+        select  * from TBSYS_CODE   where codetype = #{codetype}
+        <if test="codeid != null and codeid != ''">
+            and codeid = #{codeid}
+        </if>
+        <if test="pcodeid != null and pcodeid != ''">
+            and pcodeid = #{pcodeid}
+        </if>
+        <if test="orgid != null and orgid != ''">
+            and orgid = #{orgid}
+        </if>
+        <if test="scearch != null and scearch != ''">
+            and scearch = #{scearch}
+        </if>
+         order by sn
+  </select>
+  <select id="getAllSFSelectImpl" resultType="map">
+       <if test="pcodeid != null and pcodeid != ''">
+            select * from TBSYS_CODE where pcodeid=#{pcodeid} and codetype =#{codetype}
+       </if>
+       <if test="pcodeid ==null or pcodeid == ''">
+            select * from TBSYS_CODE where pcodeid='GB002' and opid != 'GB001'
+       </if>
+  </select>
+  
+  <select id="getSJCodeidByXjCodeid" resultType="map">
+       select * from TBSYS_CODE where codeid=#{codeid} and codetype ='GB002'
+  </select>
+  <select id="getSanLeiType" resultType="map">
+       select * from tbsys_code where codetype='SL001'
+  </select>
+</mapper>

@@ -1,0 +1,900 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.sinog2c.dao.api.province.EchartsStatisticCaseInfoMapper">
+
+	<select id="getOrganiztionsByCityName"  resultType="com.sinog2c.model.system.SystemOrganization">
+		select * from tbsys_orginfo t where   t.porgid=substr(#{0},1,4) and t.city=#{1}
+	</select>
+	
+	<select id="getOrganiztionsByPageList" parameterType="Map" resultType="com.sinog2c.model.system.SystemOrganization">
+		select *
+				  from (select a.*, rownum rn
+				          from (select *
+				                  from tbsys_orginfo t
+				                 where t.porgid = substr(#{provinceCode}, 1, 4)
+				                 	<if test="key!=null and key!=''">
+				                 		and (t.orgid like concat(concat('%',#{key}),'%') or t.name like concat(concat('%',#{key}),'%')) 
+				                 	</if>
+				                   and t.city = #{cityName}
+				                   and rownum &lt;= #{end}
+				                 order by t.orgid) a)
+				 where rn &gt;= #{start}
+	</select>
+	
+	<select id="getOrganiztionsByPageCount" parameterType="Map" resultType="int">
+		select count(*)
+			  from tbsys_orginfo t
+			 where t.porgid = substr(#{provinceCode}, 1, 4)
+			 	    	<if test="key!=null and key!=''">
+	                 		and (t.orgid like concat(concat('%',#{key}),'%') or t.name like concat(concat('%',#{key}),'%')) 
+	                 	</if>
+			   and t.city = #{cityName}
+	</select>
+	
+	<select id="getCaseCountByCityName" parameterType="Map"  resultType="int">
+			select count(*)
+			  from tbsys_orginfo org, tbprisoner_base_crime tbc
+			 where tbc.orgid = tbc.orgid
+			   and org.porgid = substr(#{provinceCode}, 1, 4)
+			   and org.city = #{cityName}
+			   	<if test="jylx!=null and jylx!=''">
+						and tbc.detainstatus like concat(concat('%',#{jylx}),'%')
+				</if>
+			    
+			    <if test="queryStartDate!=null and queryStartDate!=''">
+			       	and to_char(tbc.inprisondate,'yyyy-mm-dd')&gt;=#{queryStartDate}
+			    </if>
+			    
+			    <if test="queryEndDate!=null and queryEndDate!=''">
+			       and to_char(tbc.inprisondate,'yyyy-mm-dd')&lt;=#{queryEndDate}
+			    </if>
+	</select>
+	
+	<select id="getSanLeiCaseCount" parameterType="Map" resultType="int">
+			select count(*) from tbprisoner_base_crime tbc ,tbprisoner_baseinfo tb
+		where tbc.crimid=tb.crimid
+		<if test="jylx!=null and jylx!=''">
+			and tbc.detainstatus like concat(concat('%',#{jylx}),'%')
+		</if>
+		<if test="provinceCode!=null and provinceCode!=''">
+			and substr(tbc.orgid,1,2)=substr(#{provinceCode},1,2)
+		</if>
+		
+			<if test="queryStartDate!=null and queryStartDate!=''">
+				 and to_char(tbc.inprisondate,'yyyy-mm-dd')&gt;=#{queryStartDate}
+			</if>
+			
+			<if test="queryEndDate!=null and queryEndDate!=''">
+				 and to_char(tbc.inprisondate,'yyyy-mm-dd')&lt;=#{queryEndDate}
+			</if>
+			
+			<if test="sanLeiType!=null and sanLeiType=='jinRong'">
+				and tbc.undermine='1'
+			</if>
+			
+			<if test="sanLeiType!=null and sanLeiType=='zhiWu'">
+				 and tbc.postcrime='1'
+			</if>
+			
+			<if test="sanLeiType!=null and sanLeiType=='sheHei'">
+				 and tbc.underworld='1'
+			</if>
+			 <if test="key!=null and key!=''">
+		   		and ( tb.crimid like concat(concat('%',#{key}),'%')  or  tb.name like concat(concat('%',#{key}),'%'))
+		   </if>
+	</select>
+	
+	<select id="getJailSanLeiCaseCount" parameterType="Map" resultType="int">
+		select count(*) from tbprisoner_base_crime tbc ,tbprisoner_baseinfo tb
+		where tbc.crimid=tb.crimid
+		<if test="jylx!=null and jylx!=''">
+			and tbc.detainstatus like concat(concat('%',#{jylx}),'%')
+		</if>
+		<if test="jailOrgid!=null and jailOrgid!=''">
+			and tbc.orgid=#{jailOrgid}
+		</if>
+		
+			<if test="queryStartDate!=null and queryStartDate!=''">
+				 and to_char(tbc.inprisondate,'yyyy-mm-dd')&gt;=#{queryStartDate}
+			</if>
+			
+			<if test="queryEndDate!=null and queryEndDate!=''">
+				 and to_char(tbc.inprisondate,'yyyy-mm-dd')&lt;=#{queryEndDate}
+			</if>
+			
+			<if test="sanLeiType!=null and sanLeiType=='jinRong'">
+				and tbc.undermine='1'
+			</if>
+			
+			<if test="sanLeiType!=null and sanLeiType=='zhiWu'">
+				 and tbc.postcrime='1'
+			</if>
+			
+			<if test="sanLeiType!=null and sanLeiType=='sheHei'">
+				 and tbc.underworld='1'
+			</if>
+			 <if test="key!=null and key!=''">
+		   		and ( tb.crimid like concat(concat('%',#{key}),'%')  or  tb.name like concat(concat('%',#{key}),'%'))
+		   </if>
+	</select>
+	
+	<select id="getAYCount" parameterType="Map" resultType="int">
+		select count(*) from tbprisoner_base_crime tbc ,tbprisoner_baseinfo tb
+		where tbc.crimid=tb.crimid
+			<if test="jylx!=null and jylx!=''">
+				and tbc.detainstatus like concat(concat('%',#{jylx}),'%')
+			</if>
+					<if test="provinceCode!=null and provinceCode!=''">
+						and substr(tbc.orgid,0,2)=substr(#{provinceCode},0,2)
+					</if>
+					<if test="queryStartDate!=null and queryStartDate!=''">
+						 and to_char(tbc.inprisondate,'yyyy-mm-dd')&gt;=#{queryStartDate}
+					</if>
+					
+					<if test="queryEndDate!=null and queryEndDate!=''">
+						 and to_char(tbc.inprisondate,'yyyy-mm-dd')&lt;=#{queryEndDate}
+					</if>
+					
+					<if test="anyou!=null and anyou=='shaRen'">
+						and tbc.causeaction like '%故意杀人%'
+					</if>
+					
+					<if test="anyou!=null and anyou=='zhaPian'">
+						and tbc.causeaction like '%诈骗%'
+					</if>
+					
+					<if test="anyou!=null and anyou=='daoQie'">
+						and tbc.causeaction like '%盗窃%'
+					</if>
+					
+					<if test="anyou!=null and anyou=='fangHuo'">
+						and tbc.causeaction like '%放火%'
+					</if>
+					
+					<if test="anyou!=null and anyou=='qiangJie'">
+						and tbc.causeaction like '%抢劫%'
+					</if>
+					
+					<if test="anyou!=null and anyou=='qiangJian'">
+						and tbc.causeaction like '%强奸%'
+					</if>
+					
+					<if test="anyou!=null and anyou=='fanMaiDuPin'">
+						and tbc.causeaction like '%贩卖毒品%'
+					</if>
+					
+					<if test="anyou!=null and anyou=='guaiMaiRenKou'">
+						and tbc.causeaction like '%拐卖人口%'
+					</if>
+					
+					<if test="anyou!=null and anyou=='feiFaMaiMaiQiangZhi'">
+						and tbc.causeaction like '%非法买卖枪支%'
+					</if>
+					
+					<if test="anyou!=null and anyou=='kaiSheDuChang'">
+						and tbc.causeaction like '%开设赌场%'
+					</if>
+					
+					<if test="anyou!=null and anyou=='bangJia'">
+						and tbc.causeaction like '%绑架%'
+					</if>
+					
+					<if test="anyou!=null and anyou=='zuZhiMaiYin'">
+						and tbc.causeaction like '%组织卖淫%'
+					</if>
+					
+					<if test="anyou!=null and anyou=='shouHui'">
+						and tbc.causeaction like '%受贿%'
+					</if>
+					<if test="key!=null and key!=''">
+				   		and ( tb.crimid like concat(concat('%',#{key}),'%')  or  tb.name like concat(concat('%',#{key}),'%'))
+				   </if>
+	</select>
+	
+	<select id="getJailAYCount" parameterType="Map" resultType="int">
+		select count(*) from tbprisoner_base_crime tbc ,tbprisoner_baseinfo tb
+		where tbc.crimid=tb.crimid
+			<if test="jylx!=null and jylx!=''">
+				and tbc.detainstatus like concat(concat('%',#{jylx}),'%')
+			</if>
+					<if test="jailOrgid!=null and jailOrgid!=''">
+						and tbc.orgid=#{jailOrgid}
+					</if>
+					<if test="queryStartDate!=null and queryStartDate!=''">
+						 and to_char(tbc.inprisondate,'yyyy-mm-dd')&gt;=#{queryStartDate}
+					</if>
+					
+					<if test="queryEndDate!=null and queryEndDate!=''">
+						 and to_char(tbc.inprisondate,'yyyy-mm-dd')&lt;=#{queryEndDate}
+					</if>
+					
+					<if test="anyou!=null and anyou=='shaRen'">
+						and tbc.causeaction like '%故意杀人%'
+					</if>
+					
+					<if test="anyou!=null and anyou=='zhaPian'">
+						and tbc.causeaction like '%诈骗%'
+					</if>
+					
+					<if test="anyou!=null and anyou=='daoQie'">
+						and tbc.causeaction like '%盗窃%'
+					</if>
+					
+					<if test="anyou!=null and anyou=='fangHuo'">
+						and tbc.causeaction like '%放火%'
+					</if>
+					
+					<if test="anyou!=null and anyou=='qiangJie'">
+						and tbc.causeaction like '%抢劫%'
+					</if>
+					
+					<if test="anyou!=null and anyou=='qiangJian'">
+						and tbc.causeaction like '%强奸%'
+					</if>
+					
+					<if test="anyou!=null and anyou=='fanMaiDuPin'">
+						and tbc.causeaction like '%贩卖毒品%'
+					</if>
+					
+					<if test="anyou!=null and anyou=='guaiMaiRenKou'">
+						and tbc.causeaction like '%拐卖人口%'
+					</if>
+					
+					<if test="anyou!=null and anyou=='feiFaMaiMaiQiangZhi'">
+						and tbc.causeaction like '%非法买卖枪支%'
+					</if>
+					
+					<if test="anyou!=null and anyou=='kaiSheDuChang'">
+						and tbc.causeaction like '%开设赌场%'
+					</if>
+					
+					<if test="anyou!=null and anyou=='bangJia'">
+						and tbc.causeaction like '%绑架%'
+					</if>
+					
+					<if test="anyou!=null and anyou=='zuZhiMaiYin'">
+						and tbc.causeaction like '%组织卖淫%'
+					</if>
+					
+					<if test="anyou!=null and anyou=='shouHui'">
+						and tbc.causeaction like '%受贿%'
+					</if>
+					<if test="key!=null and key!=''">
+				   		and ( tb.crimid like concat(concat('%',#{key}),'%')  or  tb.name like concat(concat('%',#{key}),'%'))
+				   </if>
+	</select>
+	
+	<select id="getCaseTypeCount" parameterType="Map" resultType="int">
+			select count(*) from tbprisoner_base_crime tbc  ,tbprisoner_baseinfo tb
+			where tbc.crimid=tb.crimid
+			<if test="jylx!=null and jylx!=''">
+				and tbc.detainstatus like concat(concat('%',#{jylx}),'%')
+			</if>
+			<if test="provinceCode!=null and provinceCode!=''">
+				and substr(tbc.orgid,0,2)=substr(#{provinceCode},0,2)
+			</if>
+			
+			<if test="queryStartDate!=null and queryStartDate!=''">
+				 and to_char(tbc.inprisondate,'yyyy-mm-dd')&gt;=#{queryStartDate}
+			</if>
+			
+			<if test="queryEndDate!=null and queryEndDate!=''">
+				 and to_char(tbc.inprisondate,'yyyy-mm-dd')&lt;=#{queryEndDate}
+			</if>
+			<if test="caseType!=null and caseType=='YB'">
+				 and tbc.criminaltype like '%一般刑事犯%'
+			</if>
+			
+			<if test="caseType!=null and caseType=='ZD'">
+				 and tbc.criminaltype like '%重大刑事犯%'
+			</if>
+			   <if test="key!=null and key!=''">
+		   		and ( tb.crimid like concat(concat('%',#{key}),'%')  or  tb.name like concat(concat('%',#{key}),'%'))
+		   </if>
+	</select>
+	
+	<select id="getJailCaseTypeCount" parameterType="Map" resultType="int">
+			select count(*) from tbprisoner_base_crime tbc  ,tbprisoner_baseinfo tb
+			where tbc.crimid=tb.crimid
+			<if test="jylx!=null and jylx!=''">
+				and tbc.detainstatus like concat(concat('%',#{jylx}),'%')
+			</if>
+			<if test="jailOrgid!=null and jailOrgid!=''">
+				and tbc.orgid=#{jailOrgid}
+			</if>
+			
+			<if test="queryStartDate!=null and queryStartDate!=''">
+				 and to_char(tbc.inprisondate,'yyyy-mm-dd')&gt;=#{queryStartDate}
+			</if>
+			
+			<if test="queryEndDate!=null and queryEndDate!=''">
+				 and to_char(tbc.inprisondate,'yyyy-mm-dd')&lt;=#{queryEndDate}
+			</if>
+			<if test="caseType!=null and caseType=='YB'">
+				 and tbc.criminaltype like '%一般刑事犯%'
+			</if>
+			
+			<if test="caseType!=null and caseType=='ZD'">
+				 and tbc.criminaltype like '%重大刑事犯%'
+			</if>
+			   <if test="key!=null and key!=''">
+		   		and ( tb.crimid like concat(concat('%',#{key}),'%')  or  tb.name like concat(concat('%',#{key}),'%'))
+		   </if>
+	</select>
+	
+	<select id="getJXJSCount" parameterType="Map" resultType="int">
+			select count(*)
+				  from tbprisoner_base_crime tbc, tbflow_base tb 
+				 where tbc.crimid=tb.applyid
+			<if test="jylx!=null and jylx!=''">
+				and tbc.detainstatus like concat(concat('%',#{jylx}),'%')
+			</if>
+			<if test="provinceCode!=null and provinceCode!=''">
+				and substr(tbc.orgid,0,2)=substr(#{provinceCode},0,2)
+			</if>
+			
+			<if test="queryStartDate!=null and queryStartDate!=''">
+				 and to_char(tbc.inprisondate,'yyyy-mm-dd')&gt;=#{queryStartDate}
+			</if>
+			
+			<if test="queryEndDate!=null and queryEndDate!=''">
+				 and to_char(tbc.inprisondate,'yyyy-mm-dd')&lt;=#{queryEndDate}
+			</if>
+			
+			<if test="jxjstaType!=null and jxjstaType=='jx'">
+					and tb.int1=0 and tb.flowdefid='other_zfjyjxjssp'
+			</if>
+			<if test="jxjstaType!=null and jxjstaType=='js'">
+				and tb.int1=1 and tb.flowdefid='other_zfjyjxjssp'
+			</if>
+			
+			<if test="jxjstaType!=null and jxjstaType=='bw'">
+				and tb.int1=2 and tb.flowdefid='other_jybwjycbsp'
+			</if>
+			   <if test="key!=null and key!=''">
+		   		and ( tb.applyid like concat(concat('%',#{key}),'%')  or  tb.applyname like concat(concat('%',#{key}),'%'))
+		   </if>
+	</select>
+	
+	<select id="getJailJXJSCount" parameterType="Map" resultType="int">
+					select count(*)
+				  from tbprisoner_base_crime tbc, tbflow_base tb 
+				 where tbc.crimid=tb.applyid
+			<if test="jylx!=null and jylx!=''">
+				and tbc.detainstatus like concat(concat('%',#{jylx}),'%')
+			</if>
+			<if test="jailOrgid!=null and jailOrgid!=''">
+				and tbc.orgid=#{jailOrgid}
+			</if>
+			
+			<if test="queryStartDate!=null and queryStartDate!=''">
+				 and to_char(tbc.inprisondate,'yyyy-mm-dd')&gt;=#{queryStartDate}
+			</if>
+			
+			<if test="queryEndDate!=null and queryEndDate!=''">
+				 and to_char(tbc.inprisondate,'yyyy-mm-dd')&lt;=#{queryEndDate}
+			</if>
+			
+			<if test="jxjstaType!=null and jxjstaType=='jx'">
+					and tb.int1=0 and tb.flowdefid='other_zfjyjxjssp'
+			</if>
+			<if test="jxjstaType!=null and jxjstaType=='js'">
+				and tb.int1=1 and tb.flowdefid='other_zfjyjxjssp'
+			</if>
+			
+			<if test="jxjstaType!=null and jxjstaType=='bw'">
+				and tb.int1=2 and tb.flowdefid='other_jybwjycbsp'
+			</if>
+			   <if test="key!=null and key!=''">
+		   		and ( tb.applyid like concat(concat('%',#{key}),'%')  or  tb.applyname like concat(concat('%',#{key}),'%'))
+		   </if>
+	</select>
+	
+	<select id="getSanLeiCaseList" parameterType="Map" resultType="Map">
+		select * from (
+				 select a.*,rownum rn from (
+							select tbc.crimid crimid,
+							   tbc.crimid as applyid,
+						       tb.name,
+						       tb.gender,
+						       getage(tb.birthday) age,
+						       tbc.causeaction,
+						       tbc.detainprison jailname,
+						       f_formatdate(tbc.inprisondate) inprisondate,
+					            F_FORMATYMD(tbc.punishmentyear,
+					                     tbc.punishmentmonth,
+					                     tbc.punishmentday) yuanpan
+						
+						  from tbprisoner_base_crime tbc, tbprisoner_baseinfo tb
+						 where tbc.crimid = tb.crimid(+)
+						
+					<if test="jylx!=null and jylx!=''">
+						and tbc.detainstatus like concat(concat('%',#{jylx}),'%')
+					</if>
+					<if test="provinceCode!=null and provinceCode!=''">
+						and substr(tbc.orgid,0,2)=substr(#{provinceCode},0,2)
+					</if>
+					
+						<if test="queryStartDate!=null and queryStartDate!=''">
+							 and to_char(tbc.inprisondate,'yyyy-mm-dd')&gt;=#{queryStartDate}
+						</if>
+						
+						<if test="queryEndDate!=null and queryEndDate!=''">
+							 and to_char(tbc.inprisondate,'yyyy-mm-dd')&lt;=#{queryEndDate}
+						</if>
+						
+						<if test="sanLeiType!=null and sanLeiType=='jinRong'">
+							and tbc.undermine='1'
+						</if>
+						
+						<if test="sanLeiType!=null and sanLeiType=='zhiWu'">
+							 and tbc.postcrime='1'
+						</if>
+						
+						<if test="sanLeiType!=null and sanLeiType=='sheHei'">
+							 and tbc.underworld='1'
+						</if>
+						<if test="key!=null and key!=''">
+				   		and ( tb.crimid like concat(concat('%',#{key}),'%')  or  tb.name like concat(concat('%',#{key}),'%'))
+				   		</if>
+						and  rownum&lt;=#{end}
+					 <if test="sortField!=null and sortField!='' and sortOrder!=null and sortOrder!=''">  
+		 		     	order by  ${sortField} ${sortOrder}
+			     	</if>
+				)a 
+			) where  rn&gt;=#{start}
+						
+	</select>
+	
+	<select id="getJailSanLeiCaseList" parameterType="Map" resultType="Map">
+				select * from (
+				 select a.*,rownum rn from (
+							select tbc.crimid crimid,
+							   tbc.crimid as applyid,
+						       tb.name,
+						       tb.gender,
+						       getage(tb.birthday) age,
+						       tbc.causeaction,
+						       tbc.detainprison jailname,
+						       f_formatdate(tbc.inprisondate) inprisondate,
+					            F_FORMATYMD(tbc.punishmentyear,
+					                     tbc.punishmentmonth,
+					                     tbc.punishmentday) yuanpan
+						
+						  from tbprisoner_base_crime tbc, tbprisoner_baseinfo tb
+						 where tbc.crimid = tb.crimid(+)
+						
+					<if test="jylx!=null and jylx!=''">
+						and tbc.detainstatus like concat(concat('%',#{jylx}),'%')
+					</if>
+					<if test="jailOrgid!=null and jailOrgid!=''">
+						and tbc.orgid=#{jailOrgid}
+					</if>
+					
+						<if test="queryStartDate!=null and queryStartDate!=''">
+							 and to_char(tbc.inprisondate,'yyyy-mm-dd')&gt;=#{queryStartDate}
+						</if>
+						
+						<if test="queryEndDate!=null and queryEndDate!=''">
+							 and to_char(tbc.inprisondate,'yyyy-mm-dd')&lt;=#{queryEndDate}
+						</if>
+						
+						<if test="sanLeiType!=null and sanLeiType=='jinRong'">
+							and tbc.undermine='1'
+						</if>
+						
+						<if test="sanLeiType!=null and sanLeiType=='zhiWu'">
+							 and tbc.postcrime='1'
+						</if>
+						
+						<if test="sanLeiType!=null and sanLeiType=='sheHei'">
+							 and tbc.underworld='1'
+						</if>
+						<if test="key!=null and key!=''">
+				   		and ( tb.crimid like concat(concat('%',#{key}),'%')  or  tb.name like concat(concat('%',#{key}),'%'))
+				   		</if>
+						and  rownum&lt;=#{end}
+					 <if test="sortField!=null and sortField!='' and sortOrder!=null and sortOrder!=''">  
+		 		     	order by  ${sortField} ${sortOrder}
+			     	</if>
+				)a 
+			) where  rn&gt;=#{start}
+		
+	</select>
+	
+	<select id="getAYCaseList"  parameterType="Map" resultType="Map"> 
+			select * from (
+					 select a.*,rownum rn from (
+											select tbc.crimid crimid,
+											       tbc.crimid applyid,
+												       tb.name,
+												       tb.gender,
+												       getage(tb.birthday) age,
+												       tbc.causeaction,
+												       tbc.detainprison jailname,
+												       f_formatdate(tbc.inprisondate) inprisondate,
+											            F_FORMATYMD(tbc.punishmentyear,
+											                     tbc.punishmentmonth,
+											                     tbc.punishmentday) yuanpan
+												
+												  from tbprisoner_base_crime tbc, tbprisoner_baseinfo tb
+												 where tbc.crimid = tb.crimid(+)
+												
+														<if test="jylx!=null and jylx!=''">
+															and tbc.detainstatus like concat(concat('%',#{jylx}),'%')
+														</if>
+														<if test="provinceCode!=null and provinceCode!=''">
+															and substr(tbc.orgid,0,2)=substr(#{provinceCode},0,2)
+														</if>
+														<if test="queryStartDate!=null and queryStartDate!=''">
+															 and to_char(tbc.inprisondate,'yyyy-mm-dd')&gt;=#{queryStartDate}
+														</if>
+														
+														<if test="queryEndDate!=null and queryEndDate!=''">
+															 and to_char(tbc.inprisondate,'yyyy-mm-dd')&lt;=#{queryEndDate}
+														</if>
+														
+														<if test="anyou!=null and anyou=='shaRen'">
+															and tbc.causeaction like '%故意杀人%'
+														</if>
+														
+														<if test="anyou!=null and anyou=='zhaPian'">
+															and tbc.causeaction like '%诈骗%'
+														</if>
+														
+														<if test="anyou!=null and anyou=='daoQie'">
+															and tbc.causeaction like '%盗窃%'
+														</if>
+														
+														<if test="anyou!=null and anyou=='fangHuo'">
+															and tbc.causeaction like '%放火%'
+														</if>
+														
+														<if test="anyou!=null and anyou=='qiangJie'">
+															and tbc.causeaction like '%抢劫%'
+														</if>
+														
+														<if test="anyou!=null and anyou=='qiangJian'">
+															and tbc.causeaction like '%强奸%'
+														</if>
+														
+														<if test="anyou!=null and anyou=='fanMaiDuPin'">
+															and tbc.causeaction like '%贩卖毒品%'
+														</if>
+														
+														<if test="anyou!=null and anyou=='guaiMaiRenKou'">
+															and tbc.causeaction like '%拐卖人口%'
+														</if>
+														
+														<if test="anyou!=null and anyou=='feiFaMaiMaiQiangZhi'">
+															and tbc.causeaction like '%非法买卖枪支%'
+														</if>
+														
+														<if test="anyou!=null and anyou=='kaiSheDuChang'">
+															and tbc.causeaction like '%开设赌场%'
+														</if>
+														
+														<if test="anyou!=null and anyou=='bangJia'">
+															and tbc.causeaction like '%绑架%'
+														</if>
+														
+														<if test="anyou!=null and anyou=='zuZhiMaiYin'">
+															and tbc.causeaction like '%组织卖淫%'
+														</if>
+														
+														<if test="anyou!=null and anyou=='shouHui'">
+															and tbc.causeaction like '%受贿%'
+														</if>
+														<if test="key!=null and key!=''">
+												   			and ( tb.crimid like concat(concat('%',#{key}),'%')  or  tb.name like concat(concat('%',#{key}),'%'))
+												   		</if>
+														
+					                                   and rownum&lt;=#{end}
+					                                  <if test="sortField!=null and sortField!='' and sortOrder!=null and sortOrder!=''">  
+		 		     									order by  ${sortField} ${sortOrder}
+			     									</if>
+					 )a 
+				) where   rn&gt;=#{start}
+					
+	</select>
+	
+	<select id="getJailAYCaseList" parameterType="Map" resultType="Map">
+					select * from (
+					 select a.*,rownum rn from (
+											select tbc.crimid crimid,
+											       tbc.crimid applyid,
+												       tb.name,
+												       tb.gender,
+												       getage(tb.birthday) age,
+												       tbc.causeaction,
+												       tbc.detainprison jailname,
+												       f_formatdate(tbc.inprisondate) inprisondate,
+											            F_FORMATYMD(tbc.punishmentyear,
+											                     tbc.punishmentmonth,
+											                     tbc.punishmentday) yuanpan
+												
+												  from tbprisoner_base_crime tbc, tbprisoner_baseinfo tb
+												 where tbc.crimid = tb.crimid(+)
+												
+														<if test="jylx!=null and jylx!=''">
+															and tbc.detainstatus like concat(concat('%',#{jylx}),'%')
+														</if>
+														<if test="jailOrgid!=null and jailOrgid!=''">
+															and tbc.orgid=#{jailOrgid}
+														</if>
+														<if test="queryStartDate!=null and queryStartDate!=''">
+															 and to_char(tbc.inprisondate,'yyyy-mm-dd')&gt;=#{queryStartDate}
+														</if>
+														
+														<if test="queryEndDate!=null and queryEndDate!=''">
+															 and to_char(tbc.inprisondate,'yyyy-mm-dd')&lt;=#{queryEndDate}
+														</if>
+														
+														<if test="anyou!=null and anyou=='shaRen'">
+															and tbc.causeaction like '%故意杀人%'
+														</if>
+														
+														<if test="anyou!=null and anyou=='zhaPian'">
+															and tbc.causeaction like '%诈骗%'
+														</if>
+														
+														<if test="anyou!=null and anyou=='daoQie'">
+															and tbc.causeaction like '%盗窃%'
+														</if>
+														
+														<if test="anyou!=null and anyou=='fangHuo'">
+															and tbc.causeaction like '%放火%'
+														</if>
+														
+														<if test="anyou!=null and anyou=='qiangJie'">
+															and tbc.causeaction like '%抢劫%'
+														</if>
+														
+														<if test="anyou!=null and anyou=='qiangJian'">
+															and tbc.causeaction like '%强奸%'
+														</if>
+														
+														<if test="anyou!=null and anyou=='fanMaiDuPin'">
+															and tbc.causeaction like '%贩卖毒品%'
+														</if>
+														
+														<if test="anyou!=null and anyou=='guaiMaiRenKou'">
+															and tbc.causeaction like '%拐卖人口%'
+														</if>
+														
+														<if test="anyou!=null and anyou=='feiFaMaiMaiQiangZhi'">
+															and tbc.causeaction like '%非法买卖枪支%'
+														</if>
+														
+														<if test="anyou!=null and anyou=='kaiSheDuChang'">
+															and tbc.causeaction like '%开设赌场%'
+														</if>
+														
+														<if test="anyou!=null and anyou=='bangJia'">
+															and tbc.causeaction like '%绑架%'
+														</if>
+														
+														<if test="anyou!=null and anyou=='zuZhiMaiYin'">
+															and tbc.causeaction like '%组织卖淫%'
+														</if>
+														
+														<if test="anyou!=null and anyou=='shouHui'">
+															and tbc.causeaction like '%受贿%'
+														</if>
+														<if test="key!=null and key!=''">
+												   			and ( tb.crimid like concat(concat('%',#{key}),'%')  or  tb.name like concat(concat('%',#{key}),'%'))
+												   		</if>
+														
+					                                   and rownum&lt;=#{end}
+					                                  <if test="sortField!=null and sortField!='' and sortOrder!=null and sortOrder!=''">  
+		 		     									order by  ${sortField} ${sortOrder}
+			     									</if>
+					 )a 
+				) where   rn&gt;=#{start}
+	</select>
+	
+	<select id="getCaseTypeList" parameterType="Map" resultType="Map">
+		select * from (
+					 select a.*,rownum rn from (
+							select tbc.crimid crimid,
+							       tbc.crimid applyid,
+								       tb.name,
+								       tb.gender,
+								       getage(tb.birthday) age,
+								       tbc.causeaction,
+								       tbc.detainprison jailname,
+								       f_formatdate(tbc.inprisondate) inprisondate,
+							            F_FORMATYMD(tbc.punishmentyear,
+							                     tbc.punishmentmonth,
+							                     tbc.punishmentday) yuanpan
+								
+								  from tbprisoner_base_crime tbc, tbprisoner_baseinfo tb
+								 where tbc.crimid = tb.crimid(+)
+								
+								<if test="jylx!=null and jylx!=''">
+									and tbc.detainstatus like concat(concat('%',#{jylx}),'%')
+								</if>
+								<if test="provinceCode!=null and provinceCode!=''">
+									and substr(tbc.orgid,0,2)=substr(#{provinceCode},0,2)
+								</if>
+								
+								<if test="queryStartDate!=null and queryStartDate!=''">
+									 and to_char(tbc.inprisondate,'yyyy-mm-dd')&gt;=#{queryStartDate}
+								</if>
+								
+								<if test="queryEndDate!=null and queryEndDate!=''">
+									 and to_char(tbc.inprisondate,'yyyy-mm-dd')&lt;=#{queryEndDate}
+								</if>
+								<if test="caseType!=null and caseType=='YB'">
+									 and tbc.criminaltype like '%一般刑事犯%'
+								</if>
+								
+								<if test="caseType!=null and caseType=='ZD'">
+									 and tbc.criminaltype like '%重大刑事犯%'
+								</if>
+								<if test="key!=null and key!=''">
+						   			and ( tb.crimid like concat(concat('%',#{key}),'%')  or  tb.name like concat(concat('%',#{key}),'%'))
+						   		</if>
+								 and rownum&lt;=#{end}
+								 <if test="sortField!=null and sortField!='' and sortOrder!=null and sortOrder!=''">  
+		 		     				order by  ${sortField} ${sortOrder}
+			     				</if>
+						)a 
+					) where rn&gt;=#{start}
+	</select>
+	
+	<select id="getJailCaseTypeList" parameterType="Map" resultType="Map">
+				select * from (
+					 select a.*,rownum rn from (
+							select tbc.crimid crimid,
+							       tbc.crimid applyid,
+								       tb.name,
+								       tb.gender,
+								       getage(tb.birthday) age,
+								       tbc.causeaction,
+								       tbc.detainprison jailname,
+								       f_formatdate(tbc.inprisondate) inprisondate,
+							            F_FORMATYMD(tbc.punishmentyear,
+							                     tbc.punishmentmonth,
+							                     tbc.punishmentday) yuanpan
+								
+								  from tbprisoner_base_crime tbc, tbprisoner_baseinfo tb
+								 where tbc.crimid = tb.crimid(+)
+								
+								<if test="jylx!=null and jylx!=''">
+									and tbc.detainstatus like concat(concat('%',#{jylx}),'%')
+								</if>
+								<if test="jailOrgid!=null and jailOrgid!=''">
+									and tbc.orgid=#{jailOrgid}
+								</if>
+								
+								<if test="queryStartDate!=null and queryStartDate!=''">
+									 and to_char(tbc.inprisondate,'yyyy-mm-dd')&gt;=#{queryStartDate}
+								</if>
+								
+								<if test="queryEndDate!=null and queryEndDate!=''">
+									 and to_char(tbc.inprisondate,'yyyy-mm-dd')&lt;=#{queryEndDate}
+								</if>
+								<if test="caseType!=null and caseType=='YB'">
+									 and tbc.criminaltype like '%一般刑事犯%'
+								</if>
+								
+								<if test="caseType!=null and caseType=='ZD'">
+									 and tbc.criminaltype like '%重大刑事犯%'
+								</if>
+								<if test="key!=null and key!=''">
+						   			and ( tb.crimid like concat(concat('%',#{key}),'%')  or  tb.name like concat(concat('%',#{key}),'%'))
+						   		</if>
+								 and rownum&lt;=#{end}
+								 <if test="sortField!=null and sortField!='' and sortOrder!=null and sortOrder!=''">  
+		 		     				order by  ${sortField} ${sortOrder}
+			     				</if>
+						)a 
+					) where rn&gt;=#{start}
+	</select>
+	
+	<select id="getJXJSList" parameterType="Map" resultType="Map">
+				select * from (
+							 select a.*,rownum rn from (
+												select tbc.crimid crimid,
+													       tbi.name,
+													       tbi.gender,
+													       getage(tbi.birthday) age,
+													       tbc.causeaction,
+													       tbc.detainprison jailname,
+													       f_formatdate(tbc.inprisondate) inprisondate,
+													            F_FORMATYMD(tbc.punishmentyear,
+													                     tbc.punishmentmonth,
+													                     tbc.punishmentday) yuanpan
+														  from tbprisoner_base_crime tbc, tbflow_base tb , tbprisoner_baseinfo tbi
+														 where tbc.crimid=tb.applyid
+														 and tbc.crimid = tbi.crimid(+)
+													<if test="jylx!=null and jylx!=''">
+														and tbc.detainstatus like concat(concat('%',#{jylx}),'%')
+													</if>
+													<if test="provinceCode!=null and provinceCode!=''">
+														and substr(tbc.orgid,0,2)=substr(#{provinceCode},0,2)
+													</if>
+													
+													<if test="queryStartDate!=null and queryStartDate!=''">
+														 and to_char(tbc.inprisondate,'yyyy-mm-dd')&gt;=#{queryStartDate}
+													</if>
+													
+													<if test="queryEndDate!=null and queryEndDate!=''">
+														 and to_char(tbc.inprisondate,'yyyy-mm-dd')&lt;=#{queryEndDate}
+													</if>
+													
+													<if test="jxjstaType!=null and jxjstaType=='jx'">
+															and tb.int1=0 and tb.flowdefid='other_zfjyjxjssp'
+													</if>
+													<if test="jxjstaType!=null and jxjstaType=='js'">
+														and tb.int1=1 and tb.flowdefid='other_zfjyjxjssp'
+													</if>
+													
+													<if test="jxjstaType!=null and jxjstaType=='bw'">
+														and tb.int1=2 and tb.flowdefid='other_jybwjycbsp'
+													</if>
+																								<if test="key!=null and key!=''">
+											   			and ( tbi.crimid like concat(concat('%',#{key}),'%')  or  tbi.name like concat(concat('%',#{key}),'%'))
+											   		</if>
+													and rownum&lt;=#{end}
+												 <if test="sortField!=null and sortField!='' and sortOrder!=null and sortOrder!=''">  
+	 		     									order by  ${sortField} ${sortOrder}
+		     									</if>
+							 )a 
+					) where rn&gt;=#{start}
+	</select>
+	
+	<select id="getJailJXJSList" parameterType="Map"  resultType="Map">
+						select * from (
+							 select a.*,rownum rn from (
+												select tbc.crimid crimid,
+													       tbi.name,
+													       tbi.gender,
+													       getage(tbi.birthday) age,
+													       tbc.causeaction,
+													       tbc.detainprison jailname,
+													       f_formatdate(tbc.inprisondate) inprisondate,
+													            F_FORMATYMD(tbc.punishmentyear,
+													                     tbc.punishmentmonth,
+													                     tbc.punishmentday) yuanpan
+														  from tbprisoner_base_crime tbc, tbflow_base tb , tbprisoner_baseinfo tbi
+														 where tbc.crimid=tb.applyid
+														 and tbc.crimid = tbi.crimid(+)
+													<if test="jylx!=null and jylx!=''">
+														and tbc.detainstatus like concat(concat('%',#{jylx}),'%')
+													</if>
+													<if test="jailOrgid!=null and jailOrgid!=''">
+														and tbc.orgid=#{jailOrgid}
+													</if>
+													
+													<if test="queryStartDate!=null and queryStartDate!=''">
+														 and to_char(tbc.inprisondate,'yyyy-mm-dd')&gt;=#{queryStartDate}
+													</if>
+													
+													<if test="queryEndDate!=null and queryEndDate!=''">
+														 and to_char(tbc.inprisondate,'yyyy-mm-dd')&lt;=#{queryEndDate}
+													</if>
+													
+													<if test="jxjstaType!=null and jxjstaType=='jx'">
+															and tb.int1=0 and tb.flowdefid='other_zfjyjxjssp'
+													</if>
+													<if test="jxjstaType!=null and jxjstaType=='js'">
+														and tb.int1=1 and tb.flowdefid='other_zfjyjxjssp'
+													</if>
+													
+													<if test="jxjstaType!=null and jxjstaType=='bw'">
+														and tb.int1=2 and tb.flowdefid='other_jybwjycbsp'
+													</if>
+													<if test="key!=null and key!=''">
+											   			and ( tbi.crimid like concat(concat('%',#{key}),'%')  or  tbi.name like concat(concat('%',#{key}),'%'))
+											   		</if>
+													and rownum&lt;=#{end}
+												 <if test="sortField!=null and sortField!='' and sortOrder!=null and sortOrder!=''">  
+	 		     									order by  ${sortField} ${sortOrder}
+		     									</if>
+							 )a 
+					) where rn&gt;=#{start}
+	</select>
+	
+</mapper>

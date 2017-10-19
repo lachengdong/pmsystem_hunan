@@ -1,0 +1,4923 @@
+<?xml version="1.0" encoding="UTF-8" ?> 
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper
+	namespace="com.sinog2c.dao.api.commutationParole.TbxfSentenceAlterationMapper">
+	<resultMap id="BaseResultMap"
+		type="com.sinog2c.model.commutationParole.TbxfSentenceAlteration">
+		<id column="CRIMID" property="crimid" jdbcType="VARCHAR" />
+		<result column="JAILID" property="jailid" jdbcType="VARCHAR" />
+		<result column="JAILNAME" property="jailname" jdbcType="VARCHAR" />
+		<result column="AREANAME" property="areaname" jdbcType="VARCHAR" />
+		<result column="AREAID" property="areaid" jdbcType="VARCHAR" />
+		<result column="BRANCHAREANAME" property="branchareaname"
+			jdbcType="VARCHAR" />
+		<result column="CASENO" property="caseno" jdbcType="DECIMAL" />
+		<result column="NAME" property="name" jdbcType="VARCHAR" />
+		<result column="GENDER" property="gender" jdbcType="VARCHAR" />
+		<result column="BRITHDAY" property="brithday" jdbcType="DATE" />
+		<result column="TYPEID" property="typeid" jdbcType="DECIMAL" />
+		<result column="ISMINOR" property="isminor" jdbcType="DECIMAL" />
+		<result column="ISOLD" property="isold" jdbcType="DECIMAL" />
+		<result column="ISILL" property="isill" jdbcType="DECIMAL" />
+		<result column="ISDISABILITY" property="isdisability" jdbcType="DECIMAL" />
+		<result column="CHANGETYPE" property="changetype" jdbcType="VARCHAR" />
+		<result column="COURTNAME" property="courtname" jdbcType="VARCHAR" />
+		<result column="COURTTITLE" property="courttitle" jdbcType="VARCHAR" />
+		<result column="COURTYEAR" property="courtyear" jdbcType="DECIMAL" />
+		<result column="COURTSHORT" property="courtshort" jdbcType="VARCHAR" />
+		<result column="COURTSN" property="courtsn" jdbcType="DECIMAL" />
+		<result column="COURTSANCTION" property="courtsanction"
+			jdbcType="DATE" />
+		<result column="COURTCHANGEYEAR" property="courtchangeyear"
+			jdbcType="VARCHAR" />
+		<result column="COURTCHANGEMONTH" property="courtchangemonth"
+			jdbcType="VARCHAR" />
+		<result column="COURTCHANGEDAY" property="courtchangeday"
+			jdbcType="VARCHAR" />
+		<result column="COURTCHANGEFROM" property="courtchangefrom"
+			jdbcType="DATE" />
+		<result column="COURTCHANGETO" property="courtchangeto"
+			jdbcType="DATE" />
+		<result column="COURTSTATUS" property="courtstatus" jdbcType="DECIMAL" />
+		<result column="CRIMCLASS" property="crimclass" jdbcType="VARCHAR" />
+		<result column="ISDEPORTATION" property="isdeportation"
+			jdbcType="DECIMAL" />
+		<result column="PUNISHMENTYEAR" property="punishmentyear"
+			jdbcType="VARCHAR" />
+		<result column="PUNISHMENTMONTH" property="punishmentmonth"
+			jdbcType="VARCHAR" />
+		<result column="PUNISHMENTDAY" property="punishmentday"
+			jdbcType="VARCHAR" />
+		<result column="ISLIMIT" property="islimit" jdbcType="DECIMAL" />
+		<result column="ISPAROLE" property="isparole" jdbcType="DECIMAL" />
+		<result column="STAYEXECUTION" property="stayexecution"
+			jdbcType="DATE" />
+		<result column="NOPERIOD" property="noperiod" jdbcType="DATE" />
+		<result column="EXNOPERIOD" property="exnoperiod" jdbcType="VARCHAR" />
+		<result column="SENTENCESTART" property="sentencestart"
+			jdbcType="DATE" />
+		<result column="DELIVERY" property="delivery" jdbcType="DATE" />
+		<result column="NOWPUNISHMENTYEAR" property="nowpunishmentyear"
+			jdbcType="VARCHAR" />
+		<result column="NOWPUNISHMENTMONTH" property="nowpunishmentmonth"
+			jdbcType="VARCHAR" />
+		<result column="NOWPUNISHMENTDAY" property="nowpunishmentday"
+			jdbcType="VARCHAR" />
+		<result column="INPERSION" property="inpersion" jdbcType="DATE" />
+		<result column="FRISTSUBMIT" property="fristsubmit" jdbcType="DATE" />
+		<result column="COMMUTATIONDATE" property="commutationdate"
+			jdbcType="DATE" />
+		<result column="PREDATE" property="predate" jdbcType="DATE" />
+		<result column="THISDATE" property="thisdate" jdbcType="DATE" />
+		<result column="INTERVALYEAR" property="intervalyear" jdbcType="VARCHAR" />
+		<result column="INTERVALMONTH" property="intervalmonth"
+			jdbcType="VARCHAR" />
+		<result column="INTERVALDAY" property="intervalday" jdbcType="VARCHAR" />
+		<result column="FINE" property="fine" jdbcType="DECIMAL" />
+		<result column="THISFINE" property="thisfine" jdbcType="DECIMAL" />
+		<result column="SUMFINE" property="sumfine" jdbcType="DECIMAL" />
+		<result column="RECOVERED" property="recovered" jdbcType="DECIMAL" />
+		<result column="SUMRECOVERED" property="sumrecovered" jdbcType="DECIMAL" />
+		<result column="THISRECOVERED" property="thisrecovered"
+			jdbcType="DECIMAL" />
+		<result column="EXPROPRIATION" property="expropriation"
+			jdbcType="DECIMAL" />
+		<result column="SUMEXPROPRIATION" property="sumexpropriation"
+			jdbcType="DECIMAL" />
+		<result column="THISEXPROPRIATION" property="thisexpropriation"
+			jdbcType="DECIMAL" />
+		<result column="EXPROPRIATIONINFO" property="expropriationinfo"
+			jdbcType="VARCHAR" />
+		<result column="CIVILJUDGMENT" property="civiljudgment"
+			jdbcType="VARCHAR" />
+		<result column="CIVIL" property="civil" jdbcType="DECIMAL" />
+		<result column="SUMCIVIL" property="sumcivil" jdbcType="DECIMAL" />
+		<result column="THISCIVIL" property="thiscivil" jdbcType="DECIMAL" />
+		<result column="INCOME" property="income" jdbcType="DECIMAL" />
+		<result column="PAY" property="pay" jdbcType="DECIMAL" />
+		<result column="OVERPLUS" property="overplus" jdbcType="DECIMAL" />
+		<result column="REWARDSTART" property="rewardstart" jdbcType="DATE" />
+		<result column="REWARDEND" property="rewardend" jdbcType="DATE" />
+		<result column="JAILREPORT" property="jailreport" jdbcType="DATE" />
+		<result column="EXECDATE" property="execdate" jdbcType="DATE" />
+		<result column="JAILINFO" property="jailinfo" jdbcType="VARCHAR" />
+		<result column="ADMINISTRATION" property="administration"
+			jdbcType="VARCHAR" />
+		<result column="PROSECUTOR" property="prosecutor" jdbcType="VARCHAR" />
+		<result column="REWARDINFO" property="rewardinfo" jdbcType="VARCHAR" />
+		<result column="PUNISHINFO" property="punishinfo" jdbcType="VARCHAR" />
+		<result column="SENTENCECHAGEINFO" property="sentencechageinfo"
+			jdbcType="VARCHAR" />
+		<result column="LENIENCY" property="leniency" jdbcType="VARCHAR" />
+		<result column="BRANCHTO" property="branchto" jdbcType="VARCHAR" />
+		<result column="AREATO" property="areato" jdbcType="VARCHAR" />
+		<result column="OFFICESTO" property="officesto" jdbcType="VARCHAR" />
+		<result column="REVIEW" property="review" jdbcType="VARCHAR" />
+		<result column="JAILTO" property="jailto" jdbcType="VARCHAR" />
+		<result column="CRIMETIME" property="crimetime" jdbcType="DATE" />
+		<result column="DETAINDATE" property="detaindate" jdbcType="DATE" />
+		<result column="ORIGINALYEAR" property="originalyear" jdbcType="VARCHAR" />
+		<result column="ORIGINALMONTH" property="originalmonth"
+			jdbcType="VARCHAR" />
+		<result column="ORIGINALDAY" property="originalday" jdbcType="VARCHAR" />
+		<result column="BATCHID" property="batchid" jdbcType="DECIMAL" />
+		<result column="STATUS" property="status" jdbcType="DECIMAL" />
+		<result column="ISFILTER" property="isfilter" jdbcType="DECIMAL" />
+		<result column="REMARK" property="remark" jdbcType="VARCHAR" />
+		<result column="OPID" property="opid" jdbcType="VARCHAR" />
+		<result column="OPTIME" property="optime" jdbcType="DATE" />
+	</resultMap>
+	<sql id="Base_Column_List">
+		CRIMID, JAILID, JAILNAME, AREANAME, AREAID, BRANCHAREANAME, CASENO, NAME,
+		GENDER,
+		BRITHDAY, TYPEID, ISMINOR, ISOLD, ISILL, ISDISABILITY, CHANGETYPE, COURTNAME,
+		COURTTITLE,
+		COURTYEAR, COURTSHORT, COURTSN, COURTSANCTION, COURTCHANGEYEAR,
+		COURTCHANGEMONTH,
+		COURTCHANGEDAY, COURTCHANGEFROM, COURTCHANGETO, COURTSTATUS, CRIMCLASS,
+		ISDEPORTATION,
+		PUNISHMENTYEAR, PUNISHMENTMONTH, PUNISHMENTDAY, ISLIMIT, ISPAROLE, STAYEXECUTION,
+		NOPERIOD, EXNOPERIOD, SENTENCESTART, DELIVERY, NOWPUNISHMENTYEAR,
+		NOWPUNISHMENTMONTH,
+		NOWPUNISHMENTDAY, INPERSION, FRISTSUBMIT, COMMUTATIONDATE, PREDATE, THISDATE,
+		INTERVALYEAR,
+		INTERVALMONTH, INTERVALDAY, FINE, THISFINE, SUMFINE, RECOVERED, SUMRECOVERED,
+		THISRECOVERED,
+		EXPROPRIATION, SUMEXPROPRIATION, THISEXPROPRIATION, EXPROPRIATIONINFO,
+		CIVILJUDGMENT,
+		CIVIL, SUMCIVIL, THISCIVIL, INCOME, PAY, OVERPLUS, REWARDSTART, REWARDEND,
+		JAILREPORT,
+		EXECDATE, JAILINFO, ADMINISTRATION, PROSECUTOR, REWARDINFO, PUNISHINFO,
+		SENTENCECHAGEINFO,
+		LENIENCY, BRANCHTO, AREATO, OFFICESTO, REVIEW, JAILTO, CRIMETIME, DETAINDATE,
+		ORIGINALYEAR,
+		ORIGINALMONTH, ORIGINALDAY, BATCHID, STATUS, ISFILTER, REMARK, OPID, OPTIME
+	</sql>
+	<select id="selectByPrimaryKey" resultMap="BaseResultMap"
+		parameterType="java.lang.String">
+		select ts.batchid,tb.name
+		<!--  <include refid="Base_Column_List" /> -->
+		from TBXF_SCREENING ts,TBPRISONER_BASEINFO tb
+		where ts.CRIMID = #{crimid,jdbcType=VARCHAR}
+		  and ts.CRIMID = tb.CRIMID
+	</select>
+	<delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+		delete from TBXF_SENTENCEALTERATION
+		where CRIMID = #{crimid,jdbcType=VARCHAR}
+	</delete>
+	<insert id="insert"
+		parameterType="com.sinog2c.model.commutationParole.TbxfSentenceAlteration">
+		insert into TBXF_SENTENCEALTERATION (CRIMID, JAILID, JAILNAME,
+		AREANAME, AREAID, BRANCHAREANAME,
+		CASENO, NAME, GENDER,
+		BRITHDAY, TYPEID, ISMINOR,
+		ISOLD, ISILL, ISDISABILITY,
+		CHANGETYPE, COURTNAME, COURTTITLE,
+		COURTYEAR, COURTSHORT, COURTSN,
+		COURTSANCTION, COURTCHANGEYEAR, COURTCHANGEMONTH,
+		COURTCHANGEDAY, COURTCHANGEFROM, COURTCHANGETO,
+		COURTSTATUS, CRIMCLASS, ISDEPORTATION,
+		PUNISHMENTYEAR, PUNISHMENTMONTH, PUNISHMENTDAY,
+		ISLIMIT, ISPAROLE, STAYEXECUTION,
+		NOPERIOD, EXNOPERIOD, SENTENCESTART,
+		DELIVERY, NOWPUNISHMENTYEAR, NOWPUNISHMENTMONTH,
+		NOWPUNISHMENTDAY, INPERSION, FRISTSUBMIT,
+		COMMUTATIONDATE, PREDATE, THISDATE,
+		INTERVALYEAR, INTERVALMONTH, INTERVALDAY,
+		FINE, THISFINE, SUMFINE,
+		RECOVERED, SUMRECOVERED, THISRECOVERED,
+		EXPROPRIATION, SUMEXPROPRIATION, THISEXPROPRIATION,
+		EXPROPRIATIONINFO, CIVILJUDGMENT, CIVIL,
+		SUMCIVIL, THISCIVIL, INCOME,
+		PAY, OVERPLUS, REWARDSTART,
+		REWARDEND, JAILREPORT, EXECDATE,
+		JAILINFO, ADMINISTRATION, PROSECUTOR,
+		REWARDINFO, PUNISHINFO, SENTENCECHAGEINFO,
+		LENIENCY, BRANCHTO, AREATO,
+		OFFICESTO, REVIEW, JAILTO,
+		CRIMETIME, DETAINDATE, ORIGINALYEAR,
+		ORIGINALMONTH, ORIGINALDAY, BATCHID,
+		STATUS, ISFILTER, REMARK,
+		OPID, OPTIME)
+		values (#{crimid,jdbcType=VARCHAR}, #{jailid,jdbcType=VARCHAR},
+		#{jailname,jdbcType=VARCHAR},
+		#{areaname,jdbcType=VARCHAR}, #{areaid,jdbcType=VARCHAR}, #{branchareaname,jdbcType=VARCHAR},
+		#{caseno,jdbcType=DECIMAL}, #{name,jdbcType=VARCHAR},
+		#{gender,jdbcType=VARCHAR},
+		#{brithday,jdbcType=DATE}, #{typeid,jdbcType=DECIMAL}, #{isminor,jdbcType=DECIMAL},
+		#{isold,jdbcType=DECIMAL}, #{isill,jdbcType=DECIMAL},
+		#{isdisability,jdbcType=DECIMAL},
+		#{changetype,jdbcType=VARCHAR}, #{courtname,jdbcType=VARCHAR}, #{courttitle,jdbcType=VARCHAR},
+		#{courtyear,jdbcType=DECIMAL}, #{courtshort,jdbcType=VARCHAR},
+		#{courtsn,jdbcType=DECIMAL},
+		#{courtsanction,jdbcType=DATE}, #{courtchangeyear,jdbcType=VARCHAR},
+		#{courtchangemonth,jdbcType=VARCHAR},
+		#{courtchangeday,jdbcType=VARCHAR}, #{courtchangefrom,jdbcType=DATE},
+		#{courtchangeto,jdbcType=DATE},
+		#{courtstatus,jdbcType=DECIMAL}, #{crimclass,jdbcType=VARCHAR}, #{isdeportation,jdbcType=DECIMAL},
+		#{punishmentyear,jdbcType=VARCHAR},
+		#{punishmentmonth,jdbcType=VARCHAR},
+		#{punishmentday,jdbcType=VARCHAR},
+		#{islimit,jdbcType=DECIMAL}, #{isparole,jdbcType=DECIMAL}, #{stayexecution,jdbcType=DATE},
+		#{noperiod,jdbcType=DATE}, #{exnoperiod,jdbcType=VARCHAR},
+		#{sentencestart,jdbcType=DATE},
+		#{delivery,jdbcType=DATE}, #{nowpunishmentyear,jdbcType=VARCHAR},
+		#{nowpunishmentmonth,jdbcType=VARCHAR},
+		#{nowpunishmentday,jdbcType=VARCHAR}, #{inpersion,jdbcType=DATE},
+		#{fristsubmit,jdbcType=DATE},
+		#{commutationdate,jdbcType=DATE}, #{predate,jdbcType=DATE}, #{thisdate,jdbcType=DATE},
+		#{intervalyear,jdbcType=VARCHAR}, #{intervalmonth,jdbcType=VARCHAR},
+		#{intervalday,jdbcType=VARCHAR},
+		#{fine,jdbcType=DECIMAL}, #{thisfine,jdbcType=DECIMAL}, #{sumfine,jdbcType=DECIMAL},
+		#{recovered,jdbcType=DECIMAL}, #{sumrecovered,jdbcType=DECIMAL},
+		#{thisrecovered,jdbcType=DECIMAL},
+		#{expropriation,jdbcType=DECIMAL}, #{sumexpropriation,jdbcType=DECIMAL},
+		#{thisexpropriation,jdbcType=DECIMAL},
+		#{expropriationinfo,jdbcType=VARCHAR},
+		#{civiljudgment,jdbcType=VARCHAR}, #{civil,jdbcType=DECIMAL},
+		#{sumcivil,jdbcType=DECIMAL}, #{thiscivil,jdbcType=DECIMAL},
+		#{income,jdbcType=DECIMAL},
+		#{pay,jdbcType=DECIMAL}, #{overplus,jdbcType=DECIMAL}, #{rewardstart,jdbcType=DATE},
+		#{rewardend,jdbcType=DATE}, #{jailreport,jdbcType=DATE},
+		#{execdate,jdbcType=DATE},
+		#{jailinfo,jdbcType=VARCHAR}, #{administration,jdbcType=VARCHAR}, #{prosecutor,jdbcType=VARCHAR},
+		#{rewardinfo,jdbcType=VARCHAR}, #{punishinfo,jdbcType=VARCHAR},
+		#{sentencechageinfo,jdbcType=VARCHAR},
+		#{leniency,jdbcType=VARCHAR}, #{branchto,jdbcType=VARCHAR}, #{areato,jdbcType=VARCHAR},
+		#{officesto,jdbcType=VARCHAR}, #{review,jdbcType=VARCHAR},
+		#{jailto,jdbcType=VARCHAR},
+		#{crimetime,jdbcType=DATE}, #{detaindate,jdbcType=DATE}, #{originalyear,jdbcType=VARCHAR},
+		#{originalmonth,jdbcType=VARCHAR}, #{originalday,jdbcType=VARCHAR},
+		#{batchid,jdbcType=DECIMAL},
+		#{status,jdbcType=DECIMAL}, #{isfilter,jdbcType=DECIMAL}, #{remark,jdbcType=VARCHAR},
+		#{opid,jdbcType=VARCHAR}, #{optime,jdbcType=DATE})
+	</insert>
+	<insert id="insertSelective"
+		parameterType="com.sinog2c.model.commutationParole.TbxfSentenceAlteration">
+		insert into TBXF_SENTENCEALTERATION
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="crimid != null">
+				CRIMID,
+			</if>
+			<if test="jailid != null">
+				JAILID,
+			</if>
+			<if test="jailname != null">
+				JAILNAME,
+			</if>
+			<if test="areaname != null">
+				AREANAME,
+			</if>
+			<if test="areaid != null">
+				AREAID,
+			</if>
+			<if test="branchareaname != null">
+				BRANCHAREANAME,
+			</if>
+			<if test="caseno != null">
+				CASENO,
+			</if>
+			<if test="name != null">
+				NAME,
+			</if>
+			<if test="gender != null">
+				GENDER,
+			</if>
+			<if test="brithday != null">
+				BRITHDAY,
+			</if>
+			<if test="typeid != null">
+				TYPEID,
+			</if>
+			<if test="isminor != null">
+				ISMINOR,
+			</if>
+			<if test="isold != null">
+				ISOLD,
+			</if>
+			<if test="isill != null">
+				ISILL,
+			</if>
+			<if test="isdisability != null">
+				ISDISABILITY,
+			</if>
+			<if test="changetype != null">
+				CHANGETYPE,
+			</if>
+			<if test="courtname != null">
+				COURTNAME,
+			</if>
+			<if test="courttitle != null">
+				COURTTITLE,
+			</if>
+			<if test="courtyear != null">
+				COURTYEAR,
+			</if>
+			<if test="courtshort != null">
+				COURTSHORT,
+			</if>
+			<if test="courtsn != null">
+				COURTSN,
+			</if>
+			<if test="courtsanction != null">
+				COURTSANCTION,
+			</if>
+			<if test="courtchangeyear != null">
+				COURTCHANGEYEAR,
+			</if>
+			<if test="courtchangemonth != null">
+				COURTCHANGEMONTH,
+			</if>
+			<if test="courtchangeday != null">
+				COURTCHANGEDAY,
+			</if>
+			<if test="courtchangefrom != null">
+				COURTCHANGEFROM,
+			</if>
+			<if test="courtchangeto != null">
+				COURTCHANGETO,
+			</if>
+			<if test="courtstatus != null">
+				COURTSTATUS,
+			</if>
+			<if test="crimclass != null">
+				CRIMCLASS,
+			</if>
+			<if test="isdeportation != null">
+				ISDEPORTATION,
+			</if>
+			<if test="punishmentyear != null">
+				PUNISHMENTYEAR,
+			</if>
+			<if test="punishmentmonth != null">
+				PUNISHMENTMONTH,
+			</if>
+			<if test="punishmentday != null">
+				PUNISHMENTDAY,
+			</if>
+			<if test="islimit != null">
+				ISLIMIT,
+			</if>
+			<if test="isparole != null">
+				ISPAROLE,
+			</if>
+			<if test="stayexecution != null">
+				STAYEXECUTION,
+			</if>
+			<if test="noperiod != null">
+				NOPERIOD,
+			</if>
+			<if test="exnoperiod != null">
+				EXNOPERIOD,
+			</if>
+			<if test="sentencestart != null">
+				SENTENCESTART,
+			</if>
+			<if test="delivery != null">
+				DELIVERY,
+			</if>
+			<if test="nowpunishmentyear != null">
+				NOWPUNISHMENTYEAR,
+			</if>
+			<if test="nowpunishmentmonth != null">
+				NOWPUNISHMENTMONTH,
+			</if>
+			<if test="nowpunishmentday != null">
+				NOWPUNISHMENTDAY,
+			</if>
+			<if test="inpersion != null">
+				INPERSION,
+			</if>
+			<if test="fristsubmit != null">
+				FRISTSUBMIT,
+			</if>
+			<if test="commutationdate != null">
+				COMMUTATIONDATE,
+			</if>
+			<if test="predate != null">
+				PREDATE,
+			</if>
+			<if test="thisdate != null">
+				THISDATE,
+			</if>
+			<if test="intervalyear != null">
+				INTERVALYEAR,
+			</if>
+			<if test="intervalmonth != null">
+				INTERVALMONTH,
+			</if>
+			<if test="intervalday != null">
+				INTERVALDAY,
+			</if>
+			<if test="fine != null">
+				FINE,
+			</if>
+			<if test="thisfine != null">
+				THISFINE,
+			</if>
+			<if test="sumfine != null">
+				SUMFINE,
+			</if>
+			<if test="recovered != null">
+				RECOVERED,
+			</if>
+			<if test="sumrecovered != null">
+				SUMRECOVERED,
+			</if>
+			<if test="thisrecovered != null">
+				THISRECOVERED,
+			</if>
+			<if test="expropriation != null">
+				EXPROPRIATION,
+			</if>
+			<if test="sumexpropriation != null">
+				SUMEXPROPRIATION,
+			</if>
+			<if test="thisexpropriation != null">
+				THISEXPROPRIATION,
+			</if>
+			<if test="expropriationinfo != null">
+				EXPROPRIATIONINFO,
+			</if>
+			<if test="civiljudgment != null">
+				CIVILJUDGMENT,
+			</if>
+			<if test="civil != null">
+				CIVIL,
+			</if>
+			<if test="sumcivil != null">
+				SUMCIVIL,
+			</if>
+			<if test="thiscivil != null">
+				THISCIVIL,
+			</if>
+			<if test="income != null">
+				INCOME,
+			</if>
+			<if test="pay != null">
+				PAY,
+			</if>
+			<if test="overplus != null">
+				OVERPLUS,
+			</if>
+			<if test="rewardstart != null">
+				REWARDSTART,
+			</if>
+			<if test="rewardend != null">
+				REWARDEND,
+			</if>
+			<if test="jailreport != null">
+				JAILREPORT,
+			</if>
+			<if test="execdate != null">
+				EXECDATE,
+			</if>
+			<if test="jailinfo != null">
+				JAILINFO,
+			</if>
+			<if test="administration != null">
+				ADMINISTRATION,
+			</if>
+			<if test="prosecutor != null">
+				PROSECUTOR,
+			</if>
+			<if test="rewardinfo != null">
+				REWARDINFO,
+			</if>
+			<if test="punishinfo != null">
+				PUNISHINFO,
+			</if>
+			<if test="sentencechageinfo != null">
+				SENTENCECHAGEINFO,
+			</if>
+			<if test="leniency != null">
+				LENIENCY,
+			</if>
+			<if test="branchto != null">
+				BRANCHTO,
+			</if>
+			<if test="areato != null">
+				AREATO,
+			</if>
+			<if test="officesto != null">
+				OFFICESTO,
+			</if>
+			<if test="review != null">
+				REVIEW,
+			</if>
+			<if test="jailto != null">
+				JAILTO,
+			</if>
+			<if test="crimetime != null">
+				CRIMETIME,
+			</if>
+			<if test="detaindate != null">
+				DETAINDATE,
+			</if>
+			<if test="originalyear != null">
+				ORIGINALYEAR,
+			</if>
+			<if test="originalmonth != null">
+				ORIGINALMONTH,
+			</if>
+			<if test="originalday != null">
+				ORIGINALDAY,
+			</if>
+			<if test="batchid != null">
+				BATCHID,
+			</if>
+			<if test="status != null">
+				STATUS,
+			</if>
+			<if test="isfilter != null">
+				ISFILTER,
+			</if>
+			<if test="remark != null">
+				REMARK,
+			</if>
+			<if test="opid != null">
+				OPID,
+			</if>
+			<if test="optime != null">
+				OPTIME,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="crimid != null">
+				#{crimid,jdbcType=VARCHAR},
+			</if>
+			<if test="jailid != null">
+				#{jailid,jdbcType=VARCHAR},
+			</if>
+			<if test="jailname != null">
+				#{jailname,jdbcType=VARCHAR},
+			</if>
+			<if test="areaname != null">
+				#{areaname,jdbcType=VARCHAR},
+			</if>
+			<if test="areaid != null">
+				#{areaid,jdbcType=VARCHAR},
+			</if>
+			<if test="branchareaname != null">
+				#{branchareaname,jdbcType=VARCHAR},
+			</if>
+			<if test="caseno != null">
+				#{caseno,jdbcType=DECIMAL},
+			</if>
+			<if test="name != null">
+				#{name,jdbcType=VARCHAR},
+			</if>
+			<if test="gender != null">
+				#{gender,jdbcType=VARCHAR},
+			</if>
+			<if test="brithday != null">
+				#{brithday,jdbcType=DATE},
+			</if>
+			<if test="typeid != null">
+				#{typeid,jdbcType=DECIMAL},
+			</if>
+			<if test="isminor != null">
+				#{isminor,jdbcType=DECIMAL},
+			</if>
+			<if test="isold != null">
+				#{isold,jdbcType=DECIMAL},
+			</if>
+			<if test="isill != null">
+				#{isill,jdbcType=DECIMAL},
+			</if>
+			<if test="isdisability != null">
+				#{isdisability,jdbcType=DECIMAL},
+			</if>
+			<if test="changetype != null">
+				#{changetype,jdbcType=VARCHAR},
+			</if>
+			<if test="courtname != null">
+				#{courtname,jdbcType=VARCHAR},
+			</if>
+			<if test="courttitle != null">
+				#{courttitle,jdbcType=VARCHAR},
+			</if>
+			<if test="courtyear != null">
+				#{courtyear,jdbcType=DECIMAL},
+			</if>
+			<if test="courtshort != null">
+				#{courtshort,jdbcType=VARCHAR},
+			</if>
+			<if test="courtsn != null">
+				#{courtsn,jdbcType=DECIMAL},
+			</if>
+			<if test="courtsanction != null">
+				#{courtsanction,jdbcType=DATE},
+			</if>
+			<if test="courtchangeyear != null">
+				#{courtchangeyear,jdbcType=VARCHAR},
+			</if>
+			<if test="courtchangemonth != null">
+				#{courtchangemonth,jdbcType=VARCHAR},
+			</if>
+			<if test="courtchangeday != null">
+				#{courtchangeday,jdbcType=VARCHAR},
+			</if>
+			<if test="courtchangefrom != null">
+				#{courtchangefrom,jdbcType=DATE},
+			</if>
+			<if test="courtchangeto != null">
+				#{courtchangeto,jdbcType=DATE},
+			</if>
+			<if test="courtstatus != null">
+				#{courtstatus,jdbcType=DECIMAL},
+			</if>
+			<if test="crimclass != null">
+				#{crimclass,jdbcType=VARCHAR},
+			</if>
+			<if test="isdeportation != null">
+				#{isdeportation,jdbcType=DECIMAL},
+			</if>
+			<if test="punishmentyear != null">
+				#{punishmentyear,jdbcType=VARCHAR},
+			</if>
+			<if test="punishmentmonth != null">
+				#{punishmentmonth,jdbcType=VARCHAR},
+			</if>
+			<if test="punishmentday != null">
+				#{punishmentday,jdbcType=VARCHAR},
+			</if>
+			<if test="islimit != null">
+				#{islimit,jdbcType=DECIMAL},
+			</if>
+			<if test="isparole != null">
+				#{isparole,jdbcType=DECIMAL},
+			</if>
+			<if test="stayexecution != null">
+				#{stayexecution,jdbcType=DATE},
+			</if>
+			<if test="noperiod != null">
+				#{noperiod,jdbcType=DATE},
+			</if>
+			<if test="exnoperiod != null">
+				#{exnoperiod,jdbcType=VARCHAR},
+			</if>
+			<if test="sentencestart != null">
+				#{sentencestart,jdbcType=DATE},
+			</if>
+			<if test="delivery != null">
+				#{delivery,jdbcType=DATE},
+			</if>
+			<if test="nowpunishmentyear != null">
+				#{nowpunishmentyear,jdbcType=VARCHAR},
+			</if>
+			<if test="nowpunishmentmonth != null">
+				#{nowpunishmentmonth,jdbcType=VARCHAR},
+			</if>
+			<if test="nowpunishmentday != null">
+				#{nowpunishmentday,jdbcType=VARCHAR},
+			</if>
+			<if test="inpersion != null">
+				#{inpersion,jdbcType=DATE},
+			</if>
+			<if test="fristsubmit != null">
+				#{fristsubmit,jdbcType=DATE},
+			</if>
+			<if test="commutationdate != null">
+				#{commutationdate,jdbcType=DATE},
+			</if>
+			<if test="predate != null">
+				#{predate,jdbcType=DATE},
+			</if>
+			<if test="thisdate != null">
+				#{thisdate,jdbcType=DATE},
+			</if>
+			<if test="intervalyear != null">
+				#{intervalyear,jdbcType=VARCHAR},
+			</if>
+			<if test="intervalmonth != null">
+				#{intervalmonth,jdbcType=VARCHAR},
+			</if>
+			<if test="intervalday != null">
+				#{intervalday,jdbcType=VARCHAR},
+			</if>
+			<if test="fine != null">
+				#{fine,jdbcType=DECIMAL},
+			</if>
+			<if test="thisfine != null">
+				#{thisfine,jdbcType=DECIMAL},
+			</if>
+			<if test="sumfine != null">
+				#{sumfine,jdbcType=DECIMAL},
+			</if>
+			<if test="recovered != null">
+				#{recovered,jdbcType=DECIMAL},
+			</if>
+			<if test="sumrecovered != null">
+				#{sumrecovered,jdbcType=DECIMAL},
+			</if>
+			<if test="thisrecovered != null">
+				#{thisrecovered,jdbcType=DECIMAL},
+			</if>
+			<if test="expropriation != null">
+				#{expropriation,jdbcType=DECIMAL},
+			</if>
+			<if test="sumexpropriation != null">
+				#{sumexpropriation,jdbcType=DECIMAL},
+			</if>
+			<if test="thisexpropriation != null">
+				#{thisexpropriation,jdbcType=DECIMAL},
+			</if>
+			<if test="expropriationinfo != null">
+				#{expropriationinfo,jdbcType=VARCHAR},
+			</if>
+			<if test="civiljudgment != null">
+				#{civiljudgment,jdbcType=VARCHAR},
+			</if>
+			<if test="civil != null">
+				#{civil,jdbcType=DECIMAL},
+			</if>
+			<if test="sumcivil != null">
+				#{sumcivil,jdbcType=DECIMAL},
+			</if>
+			<if test="thiscivil != null">
+				#{thiscivil,jdbcType=DECIMAL},
+			</if>
+			<if test="income != null">
+				#{income,jdbcType=DECIMAL},
+			</if>
+			<if test="pay != null">
+				#{pay,jdbcType=DECIMAL},
+			</if>
+			<if test="overplus != null">
+				#{overplus,jdbcType=DECIMAL},
+			</if>
+			<if test="rewardstart != null">
+				#{rewardstart,jdbcType=DATE},
+			</if>
+			<if test="rewardend != null">
+				#{rewardend,jdbcType=DATE},
+			</if>
+			<if test="jailreport != null">
+				#{jailreport,jdbcType=DATE},
+			</if>
+			<if test="execdate != null">
+				#{execdate,jdbcType=DATE},
+			</if>
+			<if test="jailinfo != null">
+				#{jailinfo,jdbcType=VARCHAR},
+			</if>
+			<if test="administration != null">
+				#{administration,jdbcType=VARCHAR},
+			</if>
+			<if test="prosecutor != null">
+				#{prosecutor,jdbcType=VARCHAR},
+			</if>
+			<if test="rewardinfo != null">
+				#{rewardinfo,jdbcType=VARCHAR},
+			</if>
+			<if test="punishinfo != null">
+				#{punishinfo,jdbcType=VARCHAR},
+			</if>
+			<if test="sentencechageinfo != null">
+				#{sentencechageinfo,jdbcType=VARCHAR},
+			</if>
+			<if test="leniency != null">
+				#{leniency,jdbcType=VARCHAR},
+			</if>
+			<if test="branchto != null">
+				#{branchto,jdbcType=VARCHAR},
+			</if>
+			<if test="areato != null">
+				#{areato,jdbcType=VARCHAR},
+			</if>
+			<if test="officesto != null">
+				#{officesto,jdbcType=VARCHAR},
+			</if>
+			<if test="review != null">
+				#{review,jdbcType=VARCHAR},
+			</if>
+			<if test="jailto != null">
+				#{jailto,jdbcType=VARCHAR},
+			</if>
+			<if test="crimetime != null">
+				#{crimetime,jdbcType=DATE},
+			</if>
+			<if test="detaindate != null">
+				#{detaindate,jdbcType=DATE},
+			</if>
+			<if test="originalyear != null">
+				#{originalyear,jdbcType=VARCHAR},
+			</if>
+			<if test="originalmonth != null">
+				#{originalmonth,jdbcType=VARCHAR},
+			</if>
+			<if test="originalday != null">
+				#{originalday,jdbcType=VARCHAR},
+			</if>
+			<if test="batchid != null">
+				#{batchid,jdbcType=DECIMAL},
+			</if>
+			<if test="status != null">
+				#{status,jdbcType=DECIMAL},
+			</if>
+			<if test="isfilter != null">
+				#{isfilter,jdbcType=DECIMAL},
+			</if>
+			<if test="remark != null">
+				#{remark,jdbcType=VARCHAR},
+			</if>
+			<if test="opid != null">
+				#{opid,jdbcType=VARCHAR},
+			</if>
+			<if test="optime != null">
+				#{optime,jdbcType=DATE},
+			</if>
+		</trim>
+	</insert>
+	<update id="autoUpdateSentenceChangeJailto" parameterType="String">
+		update TBXF_SENTENCEALTERATION set JAILTO =#{jailto} where CRIMID =
+		#{crimid}
+	</update>
+
+	<update id="updateSentenceAlterationRewardstart" parameterType="Map">
+		update TBXF_SENTENCEALTERATION set REWARDSTART =#{rewardstart} where
+		CRIMID = #{crimid}
+	</update>
+
+	<update id="updateByPrimaryKeySelective"
+		parameterType="com.sinog2c.model.commutationParole.TbxfSentenceAlteration">
+		update TBXF_SENTENCEALTERATION
+		<set>
+			<if test="jailid != null">
+				JAILID = #{jailid,jdbcType=VARCHAR},
+			</if>
+			<if test="jailname != null">
+				JAILNAME = #{jailname,jdbcType=VARCHAR},
+			</if>
+			<if test="areaname != null">
+				AREANAME = #{areaname,jdbcType=VARCHAR},
+			</if>
+			<if test="areaid != null">
+				AREAID = #{areaid,jdbcType=VARCHAR},
+			</if>
+			<if test="branchareaname != null">
+				BRANCHAREANAME = #{branchareaname,jdbcType=VARCHAR},
+			</if>
+			<if test="caseno != null">
+				CASENO = #{caseno,jdbcType=DECIMAL},
+			</if>
+			<if test="name != null">
+				NAME = #{name,jdbcType=VARCHAR},
+			</if>
+			<if test="gender != null">
+				GENDER = #{gender,jdbcType=VARCHAR},
+			</if>
+			<if test="brithday != null">
+				BRITHDAY = #{brithday,jdbcType=DATE},
+			</if>
+			<if test="typeid != null">
+				TYPEID = #{typeid,jdbcType=DECIMAL},
+			</if>
+			<if test="isminor != null">
+				ISMINOR = #{isminor,jdbcType=DECIMAL},
+			</if>
+			<if test="isold != null">
+				ISOLD = #{isold,jdbcType=DECIMAL},
+			</if>
+			<if test="isill != null">
+				ISILL = #{isill,jdbcType=DECIMAL},
+			</if>
+			<if test="isdisability != null">
+				ISDISABILITY = #{isdisability,jdbcType=DECIMAL},
+			</if>
+			<if test="changetype != null">
+				CHANGETYPE = #{changetype,jdbcType=VARCHAR},
+			</if>
+			<if test="courtname != null">
+				COURTNAME = #{courtname,jdbcType=VARCHAR},
+			</if>
+			<if test="courttitle != null">
+				COURTTITLE = #{courttitle,jdbcType=VARCHAR},
+			</if>
+			<if test="courtyear != null">
+				COURTYEAR = #{courtyear,jdbcType=DECIMAL},
+			</if>
+			<if test="courtshort != null">
+				COURTSHORT = #{courtshort,jdbcType=VARCHAR},
+			</if>
+			<if test="courtsn != null">
+				COURTSN = #{courtsn,jdbcType=DECIMAL},
+			</if>
+			<if test="courtsanction != null">
+				COURTSANCTION = #{courtsanction,jdbcType=DATE},
+			</if>
+			<if test="courtchangeyear != null">
+				COURTCHANGEYEAR = #{courtchangeyear,jdbcType=VARCHAR},
+			</if>
+			<if test="courtchangemonth != null">
+				COURTCHANGEMONTH = #{courtchangemonth,jdbcType=VARCHAR},
+			</if>
+			<if test="courtchangeday != null">
+				COURTCHANGEDAY = #{courtchangeday,jdbcType=VARCHAR},
+			</if>
+			<if test="courtchangefrom != null">
+				COURTCHANGEFROM = #{courtchangefrom,jdbcType=DATE},
+			</if>
+			<if test="courtchangeto != null">
+				COURTCHANGETO = #{courtchangeto,jdbcType=DATE},
+			</if>
+			<if test="courtstatus != null">
+				COURTSTATUS = #{courtstatus,jdbcType=DECIMAL},
+			</if>
+			<if test="crimclass != null">
+				CRIMCLASS = #{crimclass,jdbcType=VARCHAR},
+			</if>
+			<if test="isdeportation != null">
+				ISDEPORTATION = #{isdeportation,jdbcType=DECIMAL},
+			</if>
+			<if test="punishmentyear != null">
+				PUNISHMENTYEAR = #{punishmentyear,jdbcType=VARCHAR},
+			</if>
+			<if test="punishmentmonth != null">
+				PUNISHMENTMONTH = #{punishmentmonth,jdbcType=VARCHAR},
+			</if>
+			<if test="punishmentday != null">
+				PUNISHMENTDAY = #{punishmentday,jdbcType=VARCHAR},
+			</if>
+			<if test="islimit != null">
+				ISLIMIT = #{islimit,jdbcType=DECIMAL},
+			</if>
+			<if test="isparole != null">
+				ISPAROLE = #{isparole,jdbcType=DECIMAL},
+			</if>
+			<if test="stayexecution != null">
+				STAYEXECUTION = #{stayexecution,jdbcType=DATE},
+			</if>
+			<if test="noperiod != null">
+				NOPERIOD = #{noperiod,jdbcType=DATE},
+			</if>
+			<if test="exnoperiod != null">
+				EXNOPERIOD = #{exnoperiod,jdbcType=VARCHAR},
+			</if>
+			<if test="sentencestart != null">
+				SENTENCESTART = #{sentencestart,jdbcType=DATE},
+			</if>
+			<if test="delivery != null">
+				DELIVERY = #{delivery,jdbcType=DATE},
+			</if>
+			<if test="nowpunishmentyear != null">
+				NOWPUNISHMENTYEAR = #{nowpunishmentyear,jdbcType=VARCHAR},
+			</if>
+			<if test="nowpunishmentmonth != null">
+				NOWPUNISHMENTMONTH = #{nowpunishmentmonth,jdbcType=VARCHAR},
+			</if>
+			<if test="nowpunishmentday != null">
+				NOWPUNISHMENTDAY = #{nowpunishmentday,jdbcType=VARCHAR},
+			</if>
+			<if test="inpersion != null">
+				INPERSION = #{inpersion,jdbcType=DATE},
+			</if>
+			<if test="fristsubmit != null">
+				FRISTSUBMIT = #{fristsubmit,jdbcType=DATE},
+			</if>
+			<if test="commutationdate != null">
+				COMMUTATIONDATE = #{commutationdate,jdbcType=DATE},
+			</if>
+			<if test="predate != null">
+				PREDATE = #{predate,jdbcType=DATE},
+			</if>
+			<if test="thisdate != null">
+				THISDATE = #{thisdate,jdbcType=DATE},
+			</if>
+			<if test="intervalyear != null">
+				INTERVALYEAR = #{intervalyear,jdbcType=VARCHAR},
+			</if>
+			<if test="intervalmonth != null">
+				INTERVALMONTH = #{intervalmonth,jdbcType=VARCHAR},
+			</if>
+			<if test="intervalday != null">
+				INTERVALDAY = #{intervalday,jdbcType=VARCHAR},
+			</if>
+			<if test="fine != null">
+				FINE = #{fine,jdbcType=DECIMAL},
+			</if>
+			<if test="thisfine != null">
+				THISFINE = #{thisfine,jdbcType=DECIMAL},
+			</if>
+			<if test="sumfine != null">
+				SUMFINE = #{sumfine,jdbcType=DECIMAL},
+			</if>
+			<if test="recovered != null">
+				RECOVERED = #{recovered,jdbcType=DECIMAL},
+			</if>
+			<if test="sumrecovered != null">
+				SUMRECOVERED = #{sumrecovered,jdbcType=DECIMAL},
+			</if>
+			<if test="thisrecovered != null">
+				THISRECOVERED = #{thisrecovered,jdbcType=DECIMAL},
+			</if>
+			<if test="expropriation != null">
+				EXPROPRIATION = #{expropriation,jdbcType=DECIMAL},
+			</if>
+			<if test="sumexpropriation != null">
+				SUMEXPROPRIATION = #{sumexpropriation,jdbcType=DECIMAL},
+			</if>
+			<if test="thisexpropriation != null">
+				THISEXPROPRIATION = #{thisexpropriation,jdbcType=DECIMAL},
+			</if>
+			<if test="expropriationinfo != null">
+				EXPROPRIATIONINFO = #{expropriationinfo,jdbcType=VARCHAR},
+			</if>
+			<if test="civiljudgment != null">
+				CIVILJUDGMENT = #{civiljudgment,jdbcType=VARCHAR},
+			</if>
+			<if test="civil != null">
+				CIVIL = #{civil,jdbcType=DECIMAL},
+			</if>
+			<if test="sumcivil != null">
+				SUMCIVIL = #{sumcivil,jdbcType=DECIMAL},
+			</if>
+			<if test="thiscivil != null">
+				THISCIVIL = #{thiscivil,jdbcType=DECIMAL},
+			</if>
+			<if test="income != null">
+				INCOME = #{income,jdbcType=DECIMAL},
+			</if>
+			<if test="pay != null">
+				PAY = #{pay,jdbcType=DECIMAL},
+			</if>
+			<if test="overplus != null">
+				OVERPLUS = #{overplus,jdbcType=DECIMAL},
+			</if>
+			<if test="rewardstart != null">
+				REWARDSTART = #{rewardstart,jdbcType=DATE},
+			</if>
+			<if test="rewardend != null">
+				REWARDEND = #{rewardend,jdbcType=DATE},
+			</if>
+			<if test="jailreport != null">
+				JAILREPORT = #{jailreport,jdbcType=DATE},
+			</if>
+			<if test="execdate != null">
+				EXECDATE = #{execdate,jdbcType=DATE},
+			</if>
+			<if test="jailinfo != null">
+				JAILINFO = #{jailinfo,jdbcType=VARCHAR},
+			</if>
+			<if test="administration != null">
+				ADMINISTRATION = #{administration,jdbcType=VARCHAR},
+			</if>
+			<if test="prosecutor != null">
+				PROSECUTOR = #{prosecutor,jdbcType=VARCHAR},
+			</if>
+			<if test="rewardinfo != null">
+				REWARDINFO = #{rewardinfo,jdbcType=VARCHAR},
+			</if>
+			<if test="punishinfo != null">
+				PUNISHINFO = #{punishinfo,jdbcType=VARCHAR},
+			</if>
+			<if test="sentencechageinfo != null">
+				SENTENCECHAGEINFO = #{sentencechageinfo,jdbcType=VARCHAR},
+			</if>
+			<if test="leniency != null">
+				LENIENCY = #{leniency,jdbcType=VARCHAR},
+			</if>
+			<if test="branchto != null">
+				BRANCHTO = #{branchto,jdbcType=VARCHAR},
+			</if>
+			<if test="areato != null">
+				AREATO = #{areato,jdbcType=VARCHAR},
+			</if>
+			<if test="officesto != null">
+				OFFICESTO = #{officesto,jdbcType=VARCHAR},
+			</if>
+			<if test="review != null">
+				REVIEW = #{review,jdbcType=VARCHAR},
+			</if>
+			<if test="jailto != null">
+				JAILTO = #{jailto,jdbcType=VARCHAR},
+			</if>
+			<if test="crimetime != null">
+				CRIMETIME = #{crimetime,jdbcType=DATE},
+			</if>
+			<if test="detaindate != null">
+				DETAINDATE = #{detaindate,jdbcType=DATE},
+			</if>
+			<if test="originalyear != null">
+				ORIGINALYEAR = #{originalyear,jdbcType=VARCHAR},
+			</if>
+			<if test="originalmonth != null">
+				ORIGINALMONTH = #{originalmonth,jdbcType=VARCHAR},
+			</if>
+			<if test="originalday != null">
+				ORIGINALDAY = #{originalday,jdbcType=VARCHAR},
+			</if>
+			<if test="batchid != null">
+				BATCHID = #{batchid,jdbcType=DECIMAL},
+			</if>
+			<if test="status != null">
+				STATUS = #{status,jdbcType=DECIMAL},
+			</if>
+			<if test="isfilter != null">
+				ISFILTER = #{isfilter,jdbcType=DECIMAL},
+			</if>
+			<if test="remark != null">
+				REMARK = #{remark,jdbcType=VARCHAR},
+			</if>
+			<if test="opid != null">
+				OPID = #{opid,jdbcType=VARCHAR},
+			</if>
+			<if test="optime != null">
+				OPTIME = #{optime,jdbcType=DATE},
+			</if>
+		</set>
+		where CRIMID = #{crimid,jdbcType=VARCHAR}
+	</update>
+
+	<update id="updateByPrimaryKey"
+		parameterType="com.sinog2c.model.commutationParole.TbxfSentenceAlteration">
+		update TBXF_SENTENCEALTERATION
+		set JAILID = #{jailid,jdbcType=VARCHAR},
+		JAILNAME = #{jailname,jdbcType=VARCHAR},
+		AREANAME = #{areaname,jdbcType=VARCHAR},
+		AREAID = #{areaid,jdbcType=VARCHAR},
+		BRANCHAREANAME = #{branchareaname,jdbcType=VARCHAR},
+		CASENO = #{caseno,jdbcType=DECIMAL},
+		NAME = #{name,jdbcType=VARCHAR},
+		GENDER = #{gender,jdbcType=VARCHAR},
+		BRITHDAY = #{brithday,jdbcType=DATE},
+		TYPEID = #{typeid,jdbcType=DECIMAL},
+		ISMINOR = #{isminor,jdbcType=DECIMAL},
+		ISOLD = #{isold,jdbcType=DECIMAL},
+		ISILL = #{isill,jdbcType=DECIMAL},
+		ISDISABILITY = #{isdisability,jdbcType=DECIMAL},
+		CHANGETYPE = #{changetype,jdbcType=VARCHAR},
+		COURTNAME = #{courtname,jdbcType=VARCHAR},
+		COURTTITLE = #{courttitle,jdbcType=VARCHAR},
+		COURTYEAR = #{courtyear,jdbcType=DECIMAL},
+		COURTSHORT = #{courtshort,jdbcType=VARCHAR},
+		COURTSN = #{courtsn,jdbcType=DECIMAL},
+		COURTSANCTION = #{courtsanction,jdbcType=DATE},
+		COURTCHANGEYEAR = #{courtchangeyear,jdbcType=VARCHAR},
+		COURTCHANGEMONTH = #{courtchangemonth,jdbcType=VARCHAR},
+		COURTCHANGEDAY = #{courtchangeday,jdbcType=VARCHAR},
+		COURTCHANGEFROM = #{courtchangefrom,jdbcType=DATE},
+		COURTCHANGETO = #{courtchangeto,jdbcType=DATE},
+		COURTSTATUS = #{courtstatus,jdbcType=DECIMAL},
+		CRIMCLASS = #{crimclass,jdbcType=VARCHAR},
+		ISDEPORTATION = #{isdeportation,jdbcType=DECIMAL},
+		PUNISHMENTYEAR = #{punishmentyear,jdbcType=VARCHAR},
+		PUNISHMENTMONTH = #{punishmentmonth,jdbcType=VARCHAR},
+		PUNISHMENTDAY = #{punishmentday,jdbcType=VARCHAR},
+		ISLIMIT = #{islimit,jdbcType=DECIMAL},
+		ISPAROLE = #{isparole,jdbcType=DECIMAL},
+		STAYEXECUTION = #{stayexecution,jdbcType=DATE},
+		NOPERIOD = #{noperiod,jdbcType=DATE},
+		EXNOPERIOD = #{exnoperiod,jdbcType=VARCHAR},
+		SENTENCESTART = #{sentencestart,jdbcType=DATE},
+		DELIVERY = #{delivery,jdbcType=DATE},
+		NOWPUNISHMENTYEAR = #{nowpunishmentyear,jdbcType=VARCHAR},
+		NOWPUNISHMENTMONTH = #{nowpunishmentmonth,jdbcType=VARCHAR},
+		NOWPUNISHMENTDAY = #{nowpunishmentday,jdbcType=VARCHAR},
+		INPERSION = #{inpersion,jdbcType=DATE},
+		FRISTSUBMIT = #{fristsubmit,jdbcType=DATE},
+		COMMUTATIONDATE = #{commutationdate,jdbcType=DATE},
+		PREDATE = #{predate,jdbcType=DATE},
+		THISDATE = #{thisdate,jdbcType=DATE},
+		INTERVALYEAR = #{intervalyear,jdbcType=VARCHAR},
+		INTERVALMONTH = #{intervalmonth,jdbcType=VARCHAR},
+		INTERVALDAY = #{intervalday,jdbcType=VARCHAR},
+		FINE = #{fine,jdbcType=DECIMAL},
+		THISFINE = #{thisfine,jdbcType=DECIMAL},
+		SUMFINE = #{sumfine,jdbcType=DECIMAL},
+		RECOVERED = #{recovered,jdbcType=DECIMAL},
+		SUMRECOVERED = #{sumrecovered,jdbcType=DECIMAL},
+		THISRECOVERED = #{thisrecovered,jdbcType=DECIMAL},
+		EXPROPRIATION = #{expropriation,jdbcType=DECIMAL},
+		SUMEXPROPRIATION = #{sumexpropriation,jdbcType=DECIMAL},
+		THISEXPROPRIATION = #{thisexpropriation,jdbcType=DECIMAL},
+		EXPROPRIATIONINFO = #{expropriationinfo,jdbcType=VARCHAR},
+		CIVILJUDGMENT = #{civiljudgment,jdbcType=VARCHAR},
+		CIVIL = #{civil,jdbcType=DECIMAL},
+		SUMCIVIL = #{sumcivil,jdbcType=DECIMAL},
+		THISCIVIL = #{thiscivil,jdbcType=DECIMAL},
+		INCOME = #{income,jdbcType=DECIMAL},
+		PAY = #{pay,jdbcType=DECIMAL},
+		OVERPLUS = #{overplus,jdbcType=DECIMAL},
+		REWARDSTART = #{rewardstart,jdbcType=DATE},
+		REWARDEND = #{rewardend,jdbcType=DATE},
+		JAILREPORT = #{jailreport,jdbcType=DATE},
+		EXECDATE = #{execdate,jdbcType=DATE},
+		JAILINFO = #{jailinfo,jdbcType=VARCHAR},
+		ADMINISTRATION = #{administration,jdbcType=VARCHAR},
+		PROSECUTOR = #{prosecutor,jdbcType=VARCHAR},
+		REWARDINFO = #{rewardinfo,jdbcType=VARCHAR},
+		PUNISHINFO = #{punishinfo,jdbcType=VARCHAR},
+		SENTENCECHAGEINFO = #{sentencechageinfo,jdbcType=VARCHAR},
+		LENIENCY = #{leniency,jdbcType=VARCHAR},
+		BRANCHTO = #{branchto,jdbcType=VARCHAR},
+		AREATO = #{areato,jdbcType=VARCHAR},
+		OFFICESTO = #{officesto,jdbcType=VARCHAR},
+		REVIEW = #{review,jdbcType=VARCHAR},
+		JAILTO = #{jailto,jdbcType=VARCHAR},
+		CRIMETIME = #{crimetime,jdbcType=DATE},
+		DETAINDATE = #{detaindate,jdbcType=DATE},
+		ORIGINALYEAR = #{originalyear,jdbcType=VARCHAR},
+		ORIGINALMONTH = #{originalmonth,jdbcType=VARCHAR},
+		ORIGINALDAY = #{originalday,jdbcType=VARCHAR},
+		BATCHID = #{batchid,jdbcType=DECIMAL},
+		STATUS = #{status,jdbcType=DECIMAL},
+		ISFILTER = #{isfilter,jdbcType=DECIMAL},
+		REMARK = #{remark,jdbcType=VARCHAR},
+		OPID = #{opid,jdbcType=VARCHAR},
+		OPTIME = #{optime,jdbcType=DATE}
+		where CRIMID = #{crimid,jdbcType=VARCHAR}
+	</update>
+	<select id="sentenceAlterationList" parameterType="String"
+		resultType="com.sinog2c.model.commutationParole.TbxfSentenceAlteration">
+		select t.*,
+		ceil(months_between(h.EXAMINEEND, i.sentencestime)) as executesentencemonths
+		from tbxf_sentencealteration t,
+		(select *
+		from (select rownum as xuhao, f.*
+		from (select *
+		from tbxf_commuteparole_batch e
+		where e.departid = #{departid}
+		order by e.curyear desc, e.batch desc) f) g
+		where g.xuhao = 1) h,
+		TBPRISONER_BASE_CRIME i
+		where t.jailid = h.departid
+		and t.crimid = i.crimid
+		and t.isfilter = 1
+	</select>
+	<select id="getSentenceinfoList" parameterType="Map"
+		resultType="com.sinog2c.model.commutationParole.TbxfSentenceAlteration">
+		select * from (
+		select rownum as rn,j.* from (
+		select t.crimid,t.batchid,t.isill,t.isdisability,t.typeid,t.brithday,
+		t.crimetime crimetime,
+		t.gender,t.originalyear,t.originalmonth,
+		t.predate,t.punishmentyear,t.punishmentmonth,${examineend} as
+		commutationdate,t.jailid,${execdate} as execdate,
+		t.detaindate,t.inpersion,t.crimclass,t.intervalyear,t.intervalmonth,t.intervalday,t.islimit,${judgedate}
+		as sentencestart,
+		trunc(months_between(${examineendmonths}, ${sentencestimemonths}),2) as executesentencemonths,
+		ceil(months_between(h.EXAMINEEND,l.courtsanction)) inprisonmonths,
+		ceil(months_between(h.EXAMINEEND,m.courtsanction)) yusinmonths,
+		t.nowpunishmentyear,t.nowpunishmentmonth,t.nowpunishmentday,COURTCHANGETO,COURTCHANGEFROM,
+		case when t.punishmentyear &lt;= '9990' and t.periodfirstsubmit is null
+		then 1 else 0 end as firstcommutation
+		from tbxf_sentencealteration t,TBXF_SCREENING a,
+		(select *
+		from (select rownum as xuhao, f.*
+		from (select *
+		from tbxf_commuteparole_batch e
+		where e.departid = #{departid}
+		order by e.curyear desc, e.batch desc) f) g
+		where g.xuhao = 1) h,
+		TBPRISONER_BASE_CRIME i,
+		<!-- (select F_ISDATE(t.courtsanction,'yyyy-MM-dd') as predate,t.crimid 
+			from tbdata_sentchage t where t.category='7' and t.courtchange>100000) j, -->
+		(select k.crimid,to_date(max(k.courtsanction),'yyyy-MM-dd')
+		courtsanction from tbdata_sentchage k where k.category='4' group by
+		k.crimid) l,
+		(select k.crimid,to_date(max(k.courtsanction),'yyyy-MM-dd') courtsanction
+		from tbdata_sentchage k where k.category='6' group by k.crimid) m
+		where t.jailid = h.departid
+		and t.crimid = i.crimid
+		and t.crimid = a.crimid
+		and a.ISDECLARE != 2
+		and t.crimid = l.crimid(+)
+		and t.crimid = m.crimid(+)
+		<!--and t.crimid = j.crimid(+) and t.predate = j.predate(+) -->
+		<if test="orgid!=null and orgid!=''">
+			and i.orgid2 in (SELECT DISTINCT b.dorgid
+			  FROM (    SELECT *
+			              FROM tbsys_orginfo
+			        START WITH orgid = #{orgid}
+			        CONNECT BY PRIOR orgid = porgid) a,
+			       TBFLOW_ORG_ORG b
+			 WHERE a.orgid = b.orgid)
+		</if>
+		and t.isfilter = 1) j)
+		<if test="end!=null and end!=''">
+			where rn &lt;= #{end}
+		</if>
+		<if test="start!=null and start!=''">
+			and rn &gt;= #{start}
+		</if>
+	</select>
+	<select id="getSentenceinfoCount" parameterType="Map"
+		resultType="int">
+		select count(*) from (
+		select
+		t.crimid,t.batchid,t.isill,t.isdisability,t.typeid,t.brithday,t.crimetime,t.gender,t.originalyear,t.originalmonth,
+		t.predate,t.punishmentyear,t.punishmentmonth,t.commutationdate,
+		t.detaindate,t.inpersion,t.crimclass,t.intervalyear,t.intervalmonth,t.islimit,
+		ceil(months_between(h.EXAMINEEND, i.sentencestime)) as
+		executesentencemonths,rownum
+		from tbxf_sentencealteration t,TBXF_SCREENING a,
+		(select *
+		from (select rownum as xuhao, f.*
+		from (select *
+		from tbxf_commuteparole_batch e
+		where e.departid = #{departid}
+		order by e.curyear desc, e.batch desc) f) g
+		where g.xuhao = 1) h,
+		TBPRISONER_BASE_CRIME i
+		where t.jailid = h.departid
+		and t.crimid = i.crimid
+		and t.crimid = a.crimid
+		and a.ISDECLARE != 2
+		<if test="orgid!=null and orgid!=''">
+			and i.orgid2 in (SELECT DISTINCT b.dorgid
+			  FROM (    SELECT *
+			              FROM tbsys_orginfo
+			        START WITH orgid = #{orgid}
+			        CONNECT BY PRIOR orgid = porgid) a,
+			       TBFLOW_ORG_ORG b
+			 WHERE a.orgid = b.orgid)
+		</if>
+		and t.isfilter = 1)
+	</select>
+	<select id="sentenceAlterationListByJailid" parameterType="String"
+		resultType="com.sinog2c.model.commutationParole.TbxfSentenceAlteration">
+		select * from TBXF_SENTENCEALTERATION where JAILID = #{departid}
+	</select>
+	
+	<!-- zyy -->
+	<select id="getCount" parameterType="java.util.HashMap" resultType="int">
+		
+			select count(ts.CRIMID)
+			from TBXF_SCREENING ts,
+				TBPRISONER_BASE_CRIME tbc,
+				tbxf_commuteparole_batch tcb,
+				TBPRISONER_BASEINFO B,
+                (SELECT * FROM TBDATA_SENTCHAGE A
+                	WHERE A.CATEGORY = '1' AND A.COURTSANCTION = (SELECT MIN (COURTSANCTION)
+                    	FROM TBDATA_SENTCHAGE B WHERE B.CATEGORY = '1' AND B.CRIMID = A.CRIMID)) J, --原判
+				
+				(	select distinct b.applyid,b.state from tbflow_base b
+					where flowdefid = 'other_zfjyjxjssp' and b.state = '3'
+					   and not exists(
+					   				select 'x' from tbflow_base auv 
+					   					where auv.flowdefid =b.flowdefid 
+					   						and auv.applyid = b.applyid
+					   						and b.optime &lt; auv.optime
+									)
+				) uf
+
+			where ts.crimid = b.crimid
+				and ts.crimid = tbc.crimid
+				and ts.batchid = tcb.batchid
+				and ts.crimid = J.crimid
+				and ts.crimid = uf.applyid(+)
+				<if test="cstatus!=null and cstatus!=''">
+					and ts.cstatus = #{cstatus}
+				</if>
+				<if test="schemeCondition!=null and schemeCondition!=''">
+					and ts.crimid in( ${schemeCondition} )
+				</if>
+				<if test="apply!=null and apply!=''">
+					and ts.isdeclare = #{apply}
+				</if>
+				<if test="apply==null or apply==''">
+					AND (TS.ISDECLARE = #{apply} OR (TS.ISDECLARE = 2 AND uf.state= 3))
+				</if>
+				<if test="crimtype!=null and crimtype!=''  and crimtype==2">
+					and (tbc.sanremark is not null or tbc.Sanclassstatus='0')
+				</if>
+				<if test="crimtype!=null and crimtype!=''  and crimtype==1">
+					and (tbc.sanremark is null and (tbc.Sanclassstatus!='0' or tbc.Sanclassstatus is null))
+				</if>
+				<if test="status!=null and status!=''  and status==1">
+                    and tbc.DETAINSTATUS='在押'		
+                </if>
+                <if test="status!=null and status!=''  and status==2">
+                    and tbc.DETAINSTATUS='释放'		
+                </if>
+				and tbc.orgid2 IN (SELECT aa.dorgid FROM TBFLOW_ORG_ORG aa WHERE aa.orgid = #{orgid})
+				<trim prefix="" suffix="" suffixOverrides=",">
+					<if test="key!=null and key!=''"> 
+						and (
+							B.crimid like '%'||#{key}||'%' 
+							or B.name like '%'||#{key}||'%' 
+							or b.NAMEPINYINSHORT like concat(UPPER(#{key}),'%')
+						)
+					</if>
+				</trim>
+					
+	</select>
+	
+	<!-- 注释：资格筛查F_FORMATYMD(jianggeqi间隔期)和监区立案 间隔期 去的字段和计算方式不同，修改为相同 -->
+	<select id="getSentenceAlterationList" parameterType="java.util.HashMap" resultType="java.util.HashMap">
+		SELECT *
+		  FROM (  SELECT a.*, ROWNUM rn
+		            FROM (  
+		            	SELECT ts.CRIMID,
+                           B.NAME,
+                           tbc.aliasno,
+                           to_char(tbc.inprisondate,'yyyy-MM-dd') as inprisondate,
+                           tbc.pedigreenum,
+                           J.expropriationinfo,  
+                           tbc.ORGID,
+
+                           getage (TO_CHAR(B.BIRTHDAY)) AS crimage,
+                           B.BIRTHDAY as BRITHDAY,
+                           F_FORMATYMD_SD (J.SENTENCE) AS original,
+						   
+						   sen.EXECDATE as execdate,
+						   sen.COURTCHANGETO as xianxingqizhiristr,
+						   F_FORMATYMD(sen.INTERVALYEAR,sen.INTERVALMONTH,sen.INTERVALDAY) as JIANGGEQI,
+						   
+						   tbc.SENTENCESTIME as SENTENCESTIME,
+						   (case when ctim.commutenum is not null and ctim.commutenum > 0 then sen.PREDATE end) as PREDATE,
+						   
+						   
+						   (case when ctim.commutenum is not null and ctim.commutenum > 0 
+						   	then F_FORMATYMD(sen.PUNISHMENTYEAR,sen.PUNISHMENTMONTH,sen.PUNISHMENTDAY) 
+						   	end) as punishment,
+						   	
+						   F_FORMATYMD(sen.NOWPUNISHMENTYEAR,sen.NOWPUNISHMENTMONTH,sen.NOWPUNISHMENTDAY) as nowpunishmentyear,		  
+							  
+                           to_char(tbc.SENTENCEETIME,'yyyy-MM-dd') as  SENTENCEETIME,
+						   
+                           ts.int1
+					from TBXF_SCREENING ts,
+							TBPRISONER_BASE_CRIME tbc,
+							tbxf_commuteparole_batch tcb,
+							TBPRISONER_BASEINFO B,
+							TBXF_SENTENCEALTERATION sen,
+			                (SELECT * FROM TBDATA_SENTCHAGE A
+			                	WHERE A.CATEGORY = '1' AND A.COURTSANCTION = (SELECT MIN (COURTSANCTION)
+			                    	FROM TBDATA_SENTCHAGE B WHERE B.CATEGORY = '1' AND B.CRIMID = A.CRIMID)) J, --原判
+											
+							(	select distinct b.applyid,b.state from tbflow_base b
+								where flowdefid = 'other_zfjyjxjssp' and b.state = '3'
+								   and not exists(
+								   				select 'x' from tbflow_base auv 
+								   					where auv.flowdefid =b.flowdefid 
+								   						and auv.applyid = b.applyid
+								   						and b.optime &lt; auv.optime
+												)
+							) uf,
+							
+							uv_commute_sentchage_times ctim
+							
+					where ts.crimid = b.crimid
+							and ts.crimid = tbc.crimid
+							and ts.crimid = sen.crimid
+							and ts.batchid = tcb.batchid
+							and ts.crimid = J.crimid
+							and ts.crimid = uf.applyid(+)
+							and ts.crimid = ctim.crimid(+)
+							<if test="cstatus!=null and cstatus!=''">
+								and ts.cstatus = ${cstatus}
+							</if>
+							<if test="schemeCondition!=null and schemeCondition!=''">
+								and ts.crimid in( ${schemeCondition} )
+							</if>
+							
+							<if test="apply!=null and apply!=''">
+								and ts.isdeclare = ${apply}
+							</if>
+							<if test="apply==null or apply==''">
+								AND (TS.ISDECLARE = ${apply} OR (TS.ISDECLARE = 2 AND uf.state= 3))
+							</if>
+							<if test="crimtype!=null and crimtype!=''  and crimtype==2">
+								and (tbc.sanremark is not null or tbc.Sanclassstatus='0')
+							</if>
+							<if test="crimtype!=null and crimtype!=''  and crimtype==1">
+								and (tbc.sanremark is null and (tbc.Sanclassstatus!='0' or tbc.Sanclassstatus is null))
+							</if>
+							<if test="status!=null and status!=''  and status==1">
+			                    and tbc.DETAINSTATUS='在押'		
+			                </if>
+			                <if test="status!=null and status!=''  and status==2">
+			                    and tbc.DETAINSTATUS='释放'		
+			                </if>
+							and tbc.orgid2 IN (SELECT aa.dorgid FROM TBFLOW_ORG_ORG aa WHERE aa.orgid = #{orgid})
+							<trim prefix="" suffix="" suffixOverrides=",">
+								<if test="key!=null and key!=''"> 
+									and (
+										b.crimid like '%'||#{key}||'%' 
+										or b.name like '%'||#{key}||'%' 
+										or b.NAMEPINYINSHORT like concat(UPPER(#{key}),'%')
+									)
+								</if>
+							</trim>
+							order by ts.crimid
+			) a
+			<if test="end!=null and end!=''">
+				where rownum &lt;= #{end}
+			</if>
+			
+		)
+		<if test="start!=null and start!=''">
+			where rn &gt;= #{start}
+		</if>
+	</select>
+	
+	
+	<!-- 批量归档 犯人基本数据信息 -->
+	<select id="getGuidangCrimeBaseInfo" parameterType="Map"
+		resultType="java.util.HashMap">
+		select * from (
+		select x.*, rownum rn from
+		(
+		select m.*,n.state,to_char(n.endtime,'yyyy-mm-dd HH:MM:ss') as optime from
+		(
+		SELECT substr(a.text6,5) as anjuanhao,
+		a.text6 as parolecaseno,
+		substr(a.text6,0,4) as niandu,
+		a.text24 as jianyushortname,
+		a.flowdraftid,
+		a.casetype,
+		a.flowdefid,
+		substr(a.casetype,0,1) as zi,
+		b.crimid,
+		b.aliasno,
+		b.orgid as jailid,
+		b.orgid as areaid,
+		a.applyname as cname,
+		bbb.namepinyinshort,
+		a.applydatetime AS ctime,
+		a.opname as jingbanren,
+		CASE a.int1
+		WHEN 0 THEN '减刑'
+		WHEN 1 THEN '假释'
+		WHEN 2 THEN '保外就医'
+		ELSE case when flowdefid='other_jybwjycbsp' or flowdefid='other_sjjxjssp'
+		then '保外就医' else '其他' end
+		END as anjuan,
+		b.detainprison AS jiany,
+		b.orgname1 AS jqu,
+		b.orgname2 AS fjq,
+		b.CAUSEACTION as zming,
+		tsa.NOWPUNISHMENTYEAR,
+		F_FORMATYMD(tsa.ORIGINALYEAR, tsa.ORIGINALMONTH, tsa.ORIGINALDAY, 0) AS xq,
+		F_LOSEPOWER(tsa.LOSEPOWERYEAR, tsa.LOSEPOWERMONTH, tsa.LOSEPOWEREDAY)
+		AS fjx
+		FROM uv_flow a, TBPRISONER_BASE_CRIME b,TBXF_SENTENCEALTERATION
+		tsa,tbprisoner_baseinfo bbb
+		WHERE a.applyid = b.CRIMID and a.flowdefid = #{flowdefid} and b.CRIMID =
+		tsa.CRIMID and b.CRIMID = bbb.CRIMID
+		<if test="unitlevel==null or unitlevel==''">
+			and a.nodeid = '1' and a.state = '1'
+		</if>
+		<if test="unitlevel!=null and unitlevel!=''">
+			and (a.nodeid = '1' or a.nodeid = '-1')
+		</if>
+		<if test="departid!=null and departid!=''">
+			and (b.orgid1 in (select ff.dorgid from TBFLOW_ORG_ORG ff where
+			ff.orgid=#{departid})
+			or b.orgid in (select ff.dorgid from TBFLOW_ORG_ORG ff where
+			ff.orgid=#{departid}))
+		</if>
+		) m left join TBFLOW_ARCHIVES_EXIST n on m.flowdraftid = n.flowdraftid
+		where 1=1 and not exists(
+		select 'X' from TBFLOW_ARCHIVES_EXIST e
+		where m.flowdraftid = e.flowdraftid
+		and e.state =1
+		)
+		<if test="crimid!=null and crimid!=''">
+			and m.crimid = #{crimid}
+		</if>
+		<if test="areaid!=null and areaid!=''">
+			and m.areaid = #{areaid}
+		</if>
+		<if test="key!=null and key!=''">
+			and
+			(
+			m.cname like concat(concat('%', #{key}), '%')
+			or
+			m.crimid like concat(concat('%', #{key}), '%')
+			or m.namepinyinshort like concat(UPPER(#{key}),'%')
+			)
+		</if>
+		<if test="sortField!=null and sortField!=''">
+			order by ${sortField} ${sortOrder}
+		</if>
+		) x
+		<if test="end!=null and end!=''">
+			where rownum &lt;= #{end}
+		</if>
+		)
+		<if test="start!=null and start!=''">
+			where rn &gt;= #{start}
+		</if>
+	</select>
+	<!-- 批量归档 犯人基本数据信息总数 -->
+	<select id="countByGuidangCrimeBaseInfo" parameterType="Map"
+		resultType="int">
+		select count(*) c from (
+		select m.*,n.state,to_char(n.endtime,'yyyy-mm-dd HH:MM:ss') as optime from
+		(
+		SELECT substr(a.text6,5) as anjuanhao,
+		a.text6 as parolecaseno,
+		a.flowdraftid,
+		a.casetype,
+		b.crimid,
+		bbb.namepinyinshort,
+		b.orgid as jailid,
+		b.orgid as areaid,
+		a.applyname as cname,
+		a.applydatetime AS ctime,
+		a.opname as jingbanren,
+		CASE a.int1
+		WHEN 0 THEN '减刑'
+		WHEN 1 THEN '假释'
+		ELSE case when flowdefid='other_jybwjycbsp' or flowdefid='other_sjjxjssp'
+		then '保外就医' else '其他' end
+		END as anjuan,
+		'其他' as anjuan1,
+		b.detainprison AS jiany,
+		b.orgname1 AS jqu,
+		b.orgname2 AS fjq,
+		b.CAUSEACTION as zming,
+		F_FORMATYMD(tsa.ORIGINALYEAR, tsa.ORIGINALMONTH, tsa.ORIGINALDAY, 0) AS xq,
+		F_FORMATYMD(tsa.LOSEPOWERYEAR, tsa.LOSEPOWERMONTH, tsa.LOSEPOWEREDAY,
+		0) AS fjx
+		FROM uv_flow a, TBPRISONER_BASE_CRIME b,TBXF_SENTENCEALTERATION
+		tsa,tbprisoner_baseinfo bbb
+		WHERE a.applyid = b.CRIMID and a.flowdefid = #{flowdefid} and b.CRIMID =
+		tsa.CRIMID and b.CRIMID = bbb.CRIMID
+		<if test="unitlevel==null or unitlevel==''">
+			and a.nodeid = '1' and a.state = '1'
+		</if>
+		<if test="unitlevel!=null and unitlevel!=''">
+			and (a.nodeid = '1' or a.nodeid = '-1')
+		</if>
+		<if test="departid!=null and departid!=''">
+			and (b.orgid1 in (select ff.dorgid from TBFLOW_ORG_ORG ff where
+			ff.orgid=#{departid})
+			or b.orgid in (select ff.dorgid from TBFLOW_ORG_ORG ff where
+			ff.orgid=#{departid}))
+		</if>
+		) m left join TBFLOW_ARCHIVES_EXIST n on m.flowdraftid = n.flowdraftid
+		where 1=1 and not exists(
+		select 'X' from TBFLOW_ARCHIVES_EXIST e
+		where m.flowdraftid = e.flowdraftid
+		and e.state =1
+		)
+		<if test="crimid!=null and crimid!=''">
+			and m.crimid = #{crimid}
+		</if>
+		<if test="areaid!=null and areaid!=''">
+			and m.areaid = #{areaid}
+		</if>
+		<if test="key!=null and key!=''">
+			and
+			(
+			m.cname like concat(concat('%', #{key}), '%')
+			or
+			m.crimid like concat(concat('%', #{key}), '%')
+			or m.namepinyinshort like concat(UPPER(#{key}),'%')
+			)
+		</if>
+		) x
+	</select>
+	<select id="selectTbxfs" resultType="Map" parameterType="java.lang.String">
+		select * from
+		( select a.*, rownum rn
+		from
+		(select t.*,'(' || courtyear || ')' || COURTSHORT || '第' ||COURTSN || '号' as
+		ANJIANHAO,decode(PUNISHMENTYEAR,
+		'9995',
+		'无期',
+		'9996',
+		'死缓',
+		decode(PUNISHMENTYEAR,
+		'0',
+		'',
+		null,
+		'',
+		PUNISHMENTYEAR || '年') ||
+		decode(PUNISHMENTMONTH,
+		'0',
+		decode(PUNISHMENTDAY, '0', '', null, '','零'),
+		null,
+		decode(PUNISHMENTDAY, '0', '', null, '','零'),
+		PUNISHMENTMONTH || '个月') ||
+		decode(PUNISHMENTDAY, '0', '', null, '', PUNISHMENTDAY || '天')) as shengyuxingqi,
+		decode(INTERVALYEAR, '0', '', null, '', INTERVALYEAR || '年') ||
+		decode(INTERVALMONTH,
+		'0',
+		decode(INTERVALDAY, '0', '', null, '', '零'),
+		null,
+		decode(INTERVALDAY, '0', '', null, '', '零'),
+		INTERVALMONTH || '个月') ||
+		decode(INTERVALDAY, '0', '', null, '', INTERVALDAY || '天') as JIANGGEQI
+		from TBXF_SENTENCEALTERATION t
+		where crimid in
+		(select crimid
+		from tbprisoner_baseinfo
+		where DEPARTID in (select a.orgid
+		From tbsys_orginfo a
+		Start With a.orgid = #{orgid}
+		Connect By Prior a.orgid = a.porgid))
+		<if test="key!=null and key!=''">
+			and (crimid like concat(concat('%', #{key}), '%')
+			or name like concat(concat('%', #{key}), '%')
+			or namepinyinshort like concat(#{key},'%')
+			or courtsn like concat(concat('%', #{key}),'%'))
+		</if>
+		<if test="sortField!=null and sortField!=''">
+			order by ${sortField} ${sortOrder}
+		</if>
+		) a
+		<if test="end!=null and end!=''">
+			where rownum &lt;= #{end}
+		</if>
+		)
+		<if test="start!=null and start!=''">
+			where rn &gt;= #{start}
+		</if>
+	</select>
+
+	<!-- 根据条件查询表中记录总数 -->
+	<select id="allCount" parameterType="Map" resultType="int">
+		select count(*)
+		from TBXF_SENTENCEALTERATION
+		where crimid in
+		(select crimid
+		from tbprisoner_baseinfo
+		where DEPARTID in (select a.orgid
+		From tbsys_orginfo a
+		Start With a.orgid = #{orgid}
+		Connect By Prior a.orgid = a.porgid))
+		<if test="key!=null and key!=''">
+			and (crimid like concat(concat('%', #{key}), '%') or name like
+			concat(concat('%', #{key}), '%')
+			or namepinyinshort like concat(#{key},'%'))
+		</if>
+	</select>
+
+	<select id="selectTbxfByCrimid" resultType="Map" parameterType="java.lang.String">
+		select a.*,decode(tm.crimid,null,'0','1') as forfeituretype from
+		TBXF_SENTENCEALTERATION a,(select t.crimid from TBXF_CRIMETYPESMAPPING
+		t where t.typeid='10018') tm
+		where a.crimid=#{crimid} and a.crimid=tm.crimid(+)
+	</select>
+
+	<!-- 根据条件查询表中记录总数 -->
+	<select id="provinceLiAnCount" parameterType="Map" resultType="int">
+		select count(ts.crimid)
+		from TBXF_SENTENCEALTERATION ts,TBPRISONER_BASE_CRIME B
+		where ts.changetype in ('狱内减刑','假释')
+		AND TS.CRIMID = B.CRIMID
+		and (
+		ts.NOWPUNISHMENTYEAR in('9995','9996')
+		or ts.reportaudit = 1
+		or (ts.NOWPUNISHMENTYEAR is null and ts.ORIGINALYEAR in('9995','9996'))
+		OR (B.IMPORTANTCRIMINAL='1' or B.QITAREPORT ='1' or (B.CASENATURE is
+		not null))
+		)
+		and ts.JAILTO = 1
+		and ts.crimid not in
+		(
+		select distinct(tb.applyid) from tbflow tf,tbflow_base tb where
+		tf.flowdraftid=tb.flowdraftid
+		and tb.flowdefid= #{flowdefid}
+		and tf.state in (-2,-1,0,1,2)
+		)
+		and ts.JAILID in (select too.dorgid from TBFLOW_ORG_ORG too where
+		too.orgid = #{orgid})
+		<if test="jailid!=null and jailid!=''">
+			and ts.jailid = #{jailid}
+		</if>
+		<if test="changetype!=null and changetype!=''">
+			and changetype = #{changetype}
+		</if>
+		<if test="key!=null and key!=''">
+			and (crimid like concat(concat('%', #{key}), '%')
+			or name like concat(concat('%', #{key}), '%')
+		</if>
+	</select>
+
+
+	<select id="provinceLiAnList" resultType="Map" parameterType="java.lang.String">
+		select * from
+		( select a.*, rownum rn
+		from
+		(select * from
+		(select t.JAILNAME,t.changetype,
+		t.COURTCHANGETO,SENTENCESTIME,SENTENCEETIME,CAUSEACTION,F_FORMATYMD(ORIGINALYEAR,ORIGINALMONTH,ORIGINALDAY,0) as ORIGINALYEAR,decode(CRIMCLASS,'1','△','')||decode(REPORTAUDIT,'1','☆','') as CRIMCLASS,		 
+		'('||to_char(nvl(t.JAILREPORT,sysdate),'yyyy')||')'||f.SHORTNAME
+		||DECODE (t.changetype, '狱内减刑', '减字','假释', '假字','')
+		||'第'||t.CASENO||'号' as caseno,t.crimid,t.name, t.JAILINFO,t.jailid,
+		F_FORMATYMD(T.PUNISHMENTYEAR,T.PUNISHMENTMONTH,T.PUNISHMENTDAY) as
+		shengyuxingqi,
+		decode(T.INTERVALYEAR, '0', '', null, '', T.INTERVALYEAR || '年') ||
+		decode(T.INTERVALMONTH,'0',
+		decode(T.INTERVALDAY, '0', '', null, '', '零'),null,
+		decode(T.INTERVALDAY, '0', '', null, '', '零'),T.INTERVALMONTH || '个月') ||
+		decode(T.INTERVALDAY, '0', '', null, '', T.INTERVALDAY || '天') as
+		JIANGGEQI
+
+		from TBXF_SENTENCEALTERATION t,TBSYS_ORGINFO f,TBPRISONER_BASE_CRIME B
+		where t.changetype in ('狱内减刑','假释')
+		and t.JAILID = f.orgid
+		AND T.CRIMID = B.CRIMID
+		and t.JAILTO = 1
+		and (
+		t.NOWPUNISHMENTYEAR in('9995','9996')
+		or t.reportaudit = 1
+		or (t.NOWPUNISHMENTYEAR is null and t.ORIGINALYEAR in('9995','9996'))
+		OR (B.IMPORTANTCRIMINAL='1' or B.QITAREPORT ='1' or (B.CASENATURE is not
+		null)) <!-- 这行代码这样写对吗?不是还有一个重要罪犯审批吗？ YangZR -->
+		)
+		and t.crimid not in
+		(
+		select distinct(tb.applyid) from tbflow tf,tbflow_base tb where
+		tf.flowdraftid=tb.flowdraftid
+		and tb.flowdefid= #{flowdefid}
+		and tf.state in (-2,-1,0,1,2)
+		)
+		and t.JAILID in (select too.dorgid from TBFLOW_ORG_ORG too where
+		too.orgid = #{orgid})
+		<if test="jailid!=null and jailid!=''">
+			and jailid = #{jailid}
+		</if>
+		<if test="changetype!=null and changetype!=''">
+			and changetype = #{changetype}
+		</if>
+		<if test="key!=null and key!=''">
+			and (crimid like concat(concat('%', #{key}), '%')
+			or name like concat(concat('%', #{key}), '%')
+		</if>
+		)
+		<if test="sortField!=null and sortField!=''">
+			order by ${sortField} ${sortOrder}
+		</if>
+		) a
+		<if test="end!=null and end!=''">
+			where rownum &lt;= #{end}
+		</if>
+		)
+		<if test="start!=null and start!=''">
+			where rn &gt;= #{start}
+		</if>
+	</select>
+
+	<!-- 根据条件查询表中记录总数 -->
+	<select id="countOfficeShenHeList" parameterType="Map"
+		resultType="int">
+		select count(t.crimid)
+		from TBXF_SENTENCEALTERATION t, uv_flow fff
+		where t.crimid = fff.applyid
+		and fff.FLOWDEFID = #{flowdefid}
+		and t.JAILID in (select too.dorgid from TBFLOW_ORG_ORG too where
+		too.orgid = #{orgid})
+		<if test="suid!=null and suid!=''">
+			and
+			(
+			(fff.nodeid = '0' and fff.state in (-2,0,2,-1))
+			or
+			(fff.state = 0 and fff.opid = #{suid})
+			)
+		</if>
+		<if test="jailid!=null and jailid!=''">
+			and jailid = #{jailid}
+		</if>
+		<if test="casenums!=null and casenums!=''">
+			and fff.text6 in (${casenums})
+		</if>
+		<if test="year!=null and year!=''">
+			and substr(fff.text6,0,4) = ${year}
+		</if>
+		<if test="year!=null and year!=''">
+			and substr(fff.text6,0,4)=#{year}
+		</if>
+		<if test="key!=null and key!=''">
+			and (crimid like concat(concat('%', #{key}), '%')
+			or name like concat(concat('%', #{key}), '%')
+		</if>
+		<if test="casetype!=null and casetype!=''">
+			and fff.casetype = #{casetype}
+		</if>
+	</select>
+
+
+	<select id="officeShenHeList" resultType="Map" parameterType="java.lang.String">
+		select * from
+		( select a.*, rownum rn
+		from
+		(select * from
+		(select t.JAILNAME,t.crimid,t.name,
+		t.JAILINFO,t.jailid,t.COURTCHANGETO,SENTENCESTIME,SENTENCEETIME,CAUSEACTION,tbc.orgname1,F_FORMATYMD(ORIGINALYEAR,ORIGINALMONTH,ORIGINALDAY,0) as ORIGINALYEAR,decode(CRIMCLASS,'1','△','')||decode(REPORTAUDIT,'1','☆','') as CRIMCLASS,
+		'('||substr(fff.text6,0,4)||')'||tr.shortname||fff.casetype||'第'||substr(fff.text6,5)||'号'
+		as caseno,
+		fff.flowdraftid, fff.flowid, fff.text6 as casenum,fff.nodeid as lastnodeid
+		from
+		TBXF_SENTENCEALTERATION t, TBPRISONER_BASE_CRIME tbc, uv_flow fff,TBSYS_ORGINFO tr
+		where t.crimid
+		= fff.applyid
+		and t.crimid = tbc.crimid
+		and fff.FLOWDEFID = #{flowdefid}
+		and tr.orgid = #{departid}
+		and t.JAILID in (select too.dorgid from TBFLOW_ORG_ORG too where
+		too.orgid = #{orgid})
+		<if test="suid!=null and suid!=''">
+			and
+			(
+			(fff.nodeid = '0' and fff.state in (-2,0,2,-1))
+			or
+			(fff.state = 0 and fff.opid = #{suid})
+			)
+		</if>
+		<if test="jailid!=null and jailid!=''">
+			and jailid = #{jailid}
+		</if>
+		<if test="casenums!=null and casenums!=''">
+			and fff.text6 in (${casenums})
+		</if>
+		<if test="year!=null and year!=''">
+			and substr(fff.text6,0,4) = ${year}
+		</if>
+		<if test="year!=null and year!=''">
+			and substr(fff.text6,0,4)=#{year}
+		</if>
+		<if test="key!=null and key!=''">
+			and (crimid like concat(concat('%', #{key}), '%')
+			or name like concat(concat('%', #{key}), '%')
+		</if>
+		<if test="casetype!=null and casetype!=''">
+			and fff.casetype = #{casetype}
+		</if>
+		)
+		<if test="sortField!=null and sortField!=''">
+			order by ${sortField} ${sortOrder}
+		</if>
+		) a
+		<if test="end!=null and end!=''">
+			where rownum &lt;= #{end}
+		</if>
+		)
+		<if test="start!=null and start!=''">
+			where rn &gt;= #{start}
+		</if>
+	</select>
+
+	<select id="getJailList" parameterType="map" resultType="Map">
+		select tof.orgid as jailid,tof.name jailname from TBSYS_ORGINFO tof
+		where tof.porgid= #{orgid}
+	</select>
+
+	<!-- 获取法院所管辖的监狱 -->
+	<select id="getJailListUnderCourt" parameterType="map"
+		resultType="Map">
+		select tof.orgid as jailid,tof.name jailname from TBSYS_ORGINFO tof
+		where (tof.INTERMEDIATECOURT= #{departid} or tof.HIGHCOURT= #{departid})
+		and
+		tof.UNITLEVEL='3'
+		and tof.orgid in(
+		select distinct s.jailid from TBXF_SENTENCEALTERATION s where s.JAILTO='1'
+		)
+	</select>
+
+	<select id="getSuggestDocumentInfoOfCrim" parameterType="map"
+		resultType="Map">
+		select
+		tb.NATION,
+		tb.REGISTERADDRESS,
+		tbc.JUDGMENTNAME,
+		tbc.MAINCASE,
+		tbc.JUDGMENTSHORT,
+		tbc.JUDGEDATE,
+		DECODE(tbc.CASEYEAR,NULL,NULL,'('||tbc.CASEYEAR||')'||tbc.CASEORGSHORT||tbc.CASENO)
+		AS CASENO,
+		tbc.CASETYPE,
+		tbc.SENTENCESTIME,
+		tbc.SENTENCEETIME,
+		tbc.INPRISONDATE,
+		tbc.PUNISHMENTTYPE,
+		(case tbc.punishmenttype when '有期徒刑' then '1' when '无期徒刑' then '2' when
+		'死刑，缓期二年执行' then '3' else tbc.punishmenttype end) CODEPUNISHMENTTYPE,
+		tbc.PUNISHMENTYEAR,
+		tbc.PUNISHMENTMONTH,
+		tbc.PUNISHMENTDAY,
+		tbc.LOSEPOWERYEAR,
+		tbc.LOSEPOWERMONTH,
+		tbc.LOSEPOWEREDAY,
+		tbc.FORFEIT,
+		tst.NAME,
+		tst.GENDER,
+		tst.BRITHDAY,
+		tst.SENTENCECHAGEINFO
+		from TBPRISONER_BASEINFO tb, TBPRISONER_BASE_CRIME
+		tbc,TBXF_SENTENCEALTERATION tst
+		where tb.crimid = tbc.crimid and tb.crimid = tst.crimid and tb.crimid =
+		#{crimid}
+	</select>
+
+	<select id="selectTbxfMapBySql" parameterType="map" resultType="Map">
+		${sql}
+	</select>
+
+	<!-- 省局案件查看 -->
+	<select id="getSJCaseList" parameterType="map" resultType="Map">
+		SELECT *
+		FROM (SELECT a.*, ROWNUM rn
+		FROM ( SELECT t.*, substr(text6,0,4) as nianhao,
+		'('
+		|| substr(text6,0,4)
+		|| ')'
+		|| COURTSHORT
+		|| '第'
+		|| substr(text6,5)
+		|| '号'
+		AS ANJIANHAO,
+		DECODE (PUNISHMENTYEAR,
+		'9995', '9995',
+		'9996', '9996',
+		'1')
+		AS xingzhong,
+		uf.nodeid,
+		uf.text6,
+		DECODE (
+		uf.flowdefid,
+		'other_sjjxjssp', DECODE (
+		uf.nodeid,
+		'0', '省局经办中',
+		'N0002', '处室审查中',
+		'N0003', '局长审批中',
+		'1', '已通过',
+		'-1', '未通过'),
+		DECODE (uf.nodeid,
+		'0', '经办人审批中',
+		'N0001', '分监区审批中',
+		'N0002', '监区审批中',
+		'N0003', '评审会审批中',
+		'N0004', '监狱长审批中',
+		'1', '已通过',
+		'-1', '未通过'))
+		AS jincheng,
+		uf.departid,
+		uf.flowid,
+		uf.flowdefid,
+		uf.flowdraftid
+		FROM TBXF_SENTENCEALTERATION t, uv_flow uf
+		WHERE t.crimid = uf.applyid
+		<if test="anjiantype!=null and anjiantype!='' ">
+			and uf.int1 = #{anjiantype}
+		</if>
+		<if test="lianstarttime!=null ">
+			and uf.applydatetime &gt;= #{lianstarttime}
+		</if>
+		<if test="lianendtime!=null ">
+			and uf.applydatetime &lt;= #{lianendtime}
+		</if>
+		<if test="caseid!=null and caseid!='' ">
+			and uf.nodeid = #{caseid}
+		</if>
+		<choose>
+			<when test="flowdefid != null">
+				AND uf.flowdefid = #{flowdefid}
+			</when>
+			<otherwise>
+				AND ( uf.flowdefid = 'other_sjjxjssp'
+				OR uf.flowdefid = 'other_zfjyjxjssp')
+			</otherwise>
+		</choose>
+		<if test="key!=null and key != '' ">
+			and (t.crimid like '%'||#{key}||'%' or t.name like '%'||#{key}||'%' or
+			t.caseno like '%'||#{key}||'%')
+		</if>
+		<if test="caidingstarttime!=null ">
+			and t.courtsanction &gt;= #{caidingstarttime}
+		</if>
+		<if test="caidingendtime!=null ">
+			and t.courtsanction &lt;= #{caidingendtime}
+		</if>
+		<if test="birthstarttime!=null ">
+			and t.brithday &gt;= #{birthstarttime}
+		</if>
+		<if test="birthendtime!=null ">
+			and t.brithday &lt;= #{birthendtime}
+		</if>
+		AND t.crimid IN
+		(SELECT crimid
+		FROM tbprisoner_baseinfo
+		WHERE DEPARTID IN
+		( SELECT a.orgid
+		FROM tbsys_orginfo a
+		<choose>
+			<when test="depid != null">
+				where a.orgid = #{depid,jdbcType=VARCHAR}
+			</when>
+			<otherwise>
+				START WITH a.orgid = #{orgid,jdbcType=VARCHAR}
+				CONNECT BY PRIOR a.orgid = a.porgid
+			</otherwise>
+		</choose>
+		))
+		ORDER BY courtyear ASC) a
+		WHERE ROWNUM &lt;= #{end})
+		WHERE rn &gt;= #{start}
+		<if test="punishmenttype != null and punishmenttype != '' ">
+			and xingzhong = #{punishmenttype}
+		</if>
+	</select>
+	<!-- 省局案件记录数 -->
+	<select id="getSJCaseCount" parameterType="map" resultType="int">
+		SELECT count(*)
+		FROM (SELECT a.*, ROWNUM rn
+		FROM ( SELECT t.*, substr(text6,0,4) as nianhao,
+		'('
+		|| substr(text6,0,4)
+		|| ')'
+		|| COURTSHORT
+		|| '第'
+		|| substr(text6,5)
+		|| '号'
+		AS ANJIANHAO,
+		DECODE (PUNISHMENTYEAR,
+		'9995', '9995',
+		'9996', '9996',
+		'1')
+		AS xingzhong,
+		uf.nodeid,
+		uf.text6,
+		DECODE (
+		uf.flowdefid,
+		'other_sjjxjssp', DECODE (
+		uf.nodeid,
+		'0', '省局经办中',
+		'N0002', '处室审查中',
+		'N0003', '局长审批中',
+		'1', '已通过',
+		'-1', '未通过'),
+		DECODE (uf.nodeid,
+		'0', '经办人审批中',
+		'N0002', '监区审批中',
+		'N0003', '评审会审批中',
+		'N0004', '监狱长审批中',
+		'1', '已通过',
+		'-1', '未通过'))
+		AS jincheng,
+		uf.departid
+		FROM TBXF_SENTENCEALTERATION t, uv_flow uf
+		WHERE t.crimid = uf.applyid
+		<if test="anjiantype!=null and anjiantype!='' ">
+			and uf.int1 = #{anjiantype}
+		</if>
+		<if test="lianstarttime!=null ">
+			and uf.applydatetime &gt;= #{lianstarttime}
+		</if>
+		<if test="lianendtime!=null ">
+			and uf.applydatetime &lt;= #{lianendtime}
+		</if>
+		<if test="caseid!=null and caseid!='' ">
+			and uf.nodeid = #{caseid}
+		</if>
+		<choose>
+			<when test="flowdefid != null and flowdefid != '' ">
+				AND uf.flowdefid = #{flowdefid}
+			</when>
+			<otherwise>
+				AND (uf.flowdefid = 'other_sjjxjssp'
+				OR uf.flowdefid = 'other_zfjyjxjssp')
+			</otherwise>
+		</choose>
+		<if test="key!=null and key != '' ">
+			and (t.crimid like '%'||#{key}||'%' or t.name like '%'||#{key}||'%' or
+			t.caseno like '%'||#{key}||'%')
+		</if>
+		<if test="caidingstarttime!=null ">
+			and t.courtsanction &gt;= #{caidingstarttime}
+		</if>
+		<if test="caidingendtime!=null ">
+			and t.courtsanction &lt;= #{caidingendtime}
+		</if>
+		<if test="birthstarttime!=null ">
+			and t.brithday &gt;= #{birthstarttime}
+		</if>
+		<if test="birthendtime!=null ">
+			and t.brithday &lt;= #{birthendtime}
+		</if>
+		AND t.crimid IN
+		(SELECT crimid
+		FROM tbprisoner_baseinfo
+		WHERE DEPARTID IN
+		( SELECT a.orgid
+		FROM tbsys_orginfo a
+		<choose>
+			<when test="depid != null">
+				where a.orgid = #{depid,jdbcType=VARCHAR}
+			</when>
+			<otherwise>
+				START WITH a.orgid = #{orgid,jdbcType=VARCHAR}
+				CONNECT BY PRIOR a.orgid = a.porgid
+			</otherwise>
+		</choose>
+		))
+		ORDER BY courtyear ASC) a)
+		<if test="punishmenttype != null and punishmenttype != '' ">
+			WHERE xingzhong = #{punishmenttype}
+		</if>
+	</select>
+	
+	
+	<!--减刑假释 案件查看 (刑期变动表+tbflowBase )-->
+	<select id="selectTbxfs2" resultType="Map" parameterType="Map">
+		SELECT * FROM
+		  (
+		    SELECT A.*,ROWNUM RN
+		    FROM
+		    (
+		      SELECT
+		        tb.*,
+		        tbc.orgname2 as areaname,
+		        substr(tb.text6,5) as casenumber,
+		        '('||SUBSTR(tb.text6, 0,4)||')'||og.shortname||tb.text7||'第'||SUBSTR(tb.text6, 5)||'号' as anjianhao,
+		        SUBSTR(tb.text6, 0,4) curyear,
+		        
+		        case when tb.currnodeid = '-1' then '未通过'
+		           when tb.currnodeid = '1' then '已通过'
+		           else tb.flowstatus
+		        end as casestate
+		
+		      FROM 
+		        tbflow_base tb,
+		        tbprisoner_baseinfo tbi,
+		        Tbprisoner_Base_Crime tbc,
+		        TBXF_SENTENCEALTERATION sen,
+		        TBSYS_ORGINFO og                             
+		      WHERE tb.FLOWDEFID = #{flowdefid}
+		        and tb.applyid=tbi.crimid
+		        and tb.applyid=tbc.crimid
+		        and tb.applyid=sen.crimid
+		        and tb.departid = og.orgid
+		        AND EXISTS (
+		        SELECT 'x' FROM tbflow_org_org org WHERE org.orgid=#{orgid} and org.dorgid=tbc.orgid2
+		        )
+		      <if test="anhao != null and anhao != ''">
+		        and tb.text6 in (
+		         select text6 
+		         from (
+		          select 
+		             count(tt.flowdraftid) as case_count,tt.text6
+		          from tbflow_base tt 
+		          where tt.flowdefid='other_zfjyjxjssp' and tt.departid=#{departid}
+		          group by tt.text6
+		         ) where case_count > 1
+		        )
+		      </if>
+		      <if test="jianqu != null and jianqu != ''">
+		        and (tbc.orgid2 = #{jianqu} or tbc.orgid1 = #{jianqu})
+		      </if>  
+		      
+		      <if test="key!=null and key!=''">
+		        and (tbi.crimid like '%'||#{key}||'%' 
+		             or tbi.name like '%'||#{key}||'%'
+		           or tbi.NAMEPINYINSHORT like '%'||UPPER(#{key})||'%'
+		        )
+		      </if>
+		      
+		      <if test="batch != null and batch != ''">
+		        and tb.int6 = #{batch}
+		      </if>
+		      
+		      <if test="caseyear != null and caseyear != ''">
+		        and SUBSTR(tb.text6, 0,4) = #{caseyear}
+		      </if>
+		
+		      <if test="casetype != null and casetype != ''">
+		        AND tb.text7 = #{casetype}
+		      </if>
+		
+		
+		      <if test="casenums!=null and casenums!=''">
+		        and tb.text6 in (${casenums})
+		      </if>
+		      
+		      
+		      <!-- 1:有期  2：无期 3：死缓 -->
+		      <if test="xingqileixing != null and xingqileixing == 1 ">
+		        and to_number(nvl(sen.NOWPUNISHMENTYEAR,'0')) &lt; 9995
+		      </if>
+		      <if test="xingqileixing != null and xingqileixing == 2 ">
+		        and to_number(nvl(sen.NOWPUNISHMENTYEAR,'0')) = 9995
+		      </if>
+		      <if test="xingqileixing != null and xingqileixing == 3 ">
+		        and to_number(nvl(sen.NOWPUNISHMENTYEAR,'0')) = 9996
+		      </if>
+		      
+		      
+		      <!-- 0:三类罪犯  1：重要罪犯  2：普通罪犯 3：老病残犯  -->
+		      <if test="crimetype != null and crimetype == 0 ">
+		        AND F_ISSANLEIBYCRIMID_SD(tb.applyid) &gt; 0
+		      </if>
+		      <if test="crimetype != null and crimetype == 1 ">
+		        AND F_ISZHONGYAOBYCRIMID_SD(tb.applyid) &gt; 0
+		      </if>
+		      <if test="crimetype != null and crimetype == 3 ">
+		        AND F_ISLAOBINGCANBYCRIMID_SD(tb.applyid) &gt; 0
+		      </if>
+		      <if test="crimetype != null and crimetype == 2 ">
+		        AND F_ISPUTONGBYCRIMID_SD(tb.applyid) &gt; 0
+		      </if>
+		      
+		      <!-- 流程结点过滤-->
+		      <if test="nodeid !=null and nodeid !=''">
+		        and tb.currnodeid=#{nodeid}
+		      </if>
+		      
+		      <if test="sortField = null or sortField = '' ">
+		        order by to_number(tb.text6) asc
+		      </if>
+		      
+		      <if test="sortField != null and sortField != '' and sortOrder != null and sortOrder !=''">
+		        order by ${sortField} ${sortOrder}
+		      </if>
+		    ) A
+		    WHERE ROWNUM &lt;= #{end}
+		  )
+		WHERE RN &gt;= #{start}
+		
+	</select>
+
+
+	<select id="selectTbxfs2Count" resultType="int" parameterType="Map">
+		  SELECT
+			count(tb.flowdraftid)
+		  FROM 
+			tbflow_base tb,
+			tbprisoner_baseinfo tbi,
+			Tbprisoner_Base_Crime tbc,
+			TBXF_SENTENCEALTERATION sen,
+			TBSYS_ORGINFO og                             
+		  WHERE tb.FLOWDEFID = #{flowdefid}
+			and tb.applyid=tbi.crimid
+			and tb.applyid=tbc.crimid
+			and tb.applyid=sen.crimid
+			and tb.departid = og.orgid
+			AND EXISTS (
+			SELECT 'x' FROM tbflow_org_org org WHERE org.orgid=#{orgid} and org.dorgid=tbc.orgid2
+			)
+		  <if test="anhao != null and anhao != ''">
+			and tb.text6 in (
+			 select text6 
+			 from (
+			  select 
+				 count(tt.flowdraftid) as case_count,tt.text6
+			  from tbflow_base tt 
+			  where tt.flowdefid='other_zfjyjxjssp' and tt.departid=#{departid}
+			  group by tt.text6
+			 ) where case_count > 1
+			)
+		  </if>
+		  <if test="jianqu != null and jianqu != ''">
+			and (tbc.orgid2 = #{jianqu} or tbc.orgid1 = #{jianqu})
+		  </if>  
+		  
+		  <if test="key!=null and key!=''">
+			and (tbi.crimid like '%'||#{key}||'%' 
+				 or tbi.name like '%'||#{key}||'%'
+			   or tbi.NAMEPINYINSHORT like '%'||UPPER(#{key})||'%'
+			)
+		  </if>
+		  
+		  <if test="batch != null and batch != ''">
+			and tb.int6 = #{batch}
+		  </if>
+		  
+		  <if test="caseyear != null and caseyear != ''">
+			and SUBSTR(tb.text6, 0,4) = #{caseyear}
+		  </if>
+		
+		  <if test="casetype != null and casetype != ''">
+			AND tb.text7 = #{casetype}
+		  </if>
+		
+		
+		  <if test="casenums!=null and casenums!=''">
+			and tb.text6 in (${casenums})
+		  </if>
+		  
+		  
+		  <!-- 1:有期  2：无期 3：死缓 -->
+		  <if test="xingqileixing != null and xingqileixing == 1 ">
+			and to_number(nvl(sen.NOWPUNISHMENTYEAR,'0')) &lt; 9995
+		  </if>
+		  <if test="xingqileixing != null and xingqileixing == 2 ">
+			and to_number(nvl(sen.NOWPUNISHMENTYEAR,'0')) = 9995
+		  </if>
+		  <if test="xingqileixing != null and xingqileixing == 3 ">
+			and to_number(nvl(sen.NOWPUNISHMENTYEAR,'0')) = 9996
+		  </if>
+		  
+		  
+		  <!-- 0:三类罪犯  1：重要罪犯  2：普通罪犯 3：老病残犯  -->
+		  <if test="crimetype != null and crimetype == 0 ">
+			AND F_ISSANLEIBYCRIMID_SD(tb.applyid) &gt; 0
+		  </if>
+		  <if test="crimetype != null and crimetype == 1 ">
+			AND F_ISZHONGYAOBYCRIMID_SD(tb.applyid) &gt; 0
+		  </if>
+		  <if test="crimetype != null and crimetype == 3 ">
+			AND F_ISLAOBINGCANBYCRIMID_SD(tb.applyid) &gt; 0
+		  </if>
+		  <if test="crimetype != null and crimetype == 2 ">
+			AND F_ISPUTONGBYCRIMID_SD(tb.applyid) &gt; 0
+		  </if>
+		  
+		  <!-- 流程结点过滤-->
+		  <if test="nodeid !=null and nodeid !=''">
+			and tb.currnodeid=#{nodeid}
+		  </if>
+	</select>
+
+
+	<!-- 保外就医 案件查看 -->
+	<select id="getByjyCaseList" parameterType="map" resultType="Map">
+		SELECT *
+		FROM (SELECT a.*, ROWNUM rn
+		FROM (
+		SELECT t.*, substr(uf.text6,0,4) as nianhao,
+		'('
+		|| courtyear
+		|| ')'
+		|| COURTSHORT
+		|| '第'
+		|| COURTSN
+		|| '号'
+		AS ANJIANHAO,
+		uf.nodeid,
+		uf.flowdefid,
+		uf.FLOWDRAFTID,
+		uf.text6,
+		DECODE (uf.nodeid,
+		'0', '立案审批中',
+		'N0002', DECODE(uf.flowdefid
+		,'other_jybwjycbsp',decode(uf.state,0,'立案审批中','科室审批中'),decode(uf.state,0,'立案审批中','评审会审批中')),
+		'N0003', decode(uf.state,0,DECODE(uf.flowdefid
+		,'other_jybwjycbsp','立案审批中','评审会审批中'),'监狱审批中'),
+		'1', decode(uf.state,0,'监狱审批中','已通过'),
+		'-1', '未通过')
+		AS jincheng
+		FROM TBXF_SENTENCEALTERATION t, uv_flow uf
+		WHERE t.crimid = uf.applyid
+		<!-- AND (uf.flowdefid = 'other_jybwjycbsp' or uf.flowdefid = 'other_jybwjyxbsp' 
+			) -->
+		<choose>
+			<when test="flowdefid != null and flowdefid != '' ">
+				AND uf.flowdefid = #{flowdefid}
+			</when>
+			<otherwise>
+				AND (uf.flowdefid = 'other_jybwjycbsp'
+				OR uf.flowdefid = 'other_jybwjyxbsp')
+			</otherwise>
+		</choose>
+		<if test="key !=null and key !=''">
+			and (crimid like concat(concat('%', #{key}), '%')
+			or name like concat(concat('%', #{key}), '%') )
+		</if>
+		AND exists
+		(SELECT 1
+		FROM tbprisoner_base_crime crime WHERE
+		orgid1 IN
+		(
+		SELECT dORGID FROM TBFLOW_ORG_ORG where ORGID = #{orgid}
+		)
+		AND t.crimid = crime.crimid
+		)
+		ORDER BY COURTYEAR ASC
+		) a
+		<if test="end!=null and end!=''">
+			where rownum &lt;= #{end}
+		</if>
+		<if test="nodeid !=null and nodeid !=''">
+			AND a.jincheng = #{nodeid}
+		</if>
+		)
+		<if test="start!=null and start!=''">
+			where rn &gt;= #{start}
+		</if>
+
+	</select>
+	<!-- 保外就医 案件查看记录数 -->
+	<select id="getByjyCaseCount" parameterType="Map" resultType="int">
+		SELECT count(*) FROM TBXF_SENTENCEALTERATION t, uv_flow uf
+		WHERE t.crimid = uf.applyid
+		<!-- AND (uf.flowdefid = 'other_jybwjycbsp' or uf.flowdefid = 'other_jybwjyxbsp' 
+			) -->
+		<choose>
+			<when test="flowdefid != null and flowdefid != '' ">
+				AND uf.flowdefid = #{flowdefid}
+			</when>
+			<otherwise>
+				AND (uf.flowdefid = 'other_jybwjycbsp'
+				OR uf.flowdefid = 'other_jybwjyxbsp')
+			</otherwise>
+		</choose>
+		<if test="nodeid !=null and nodeid !=''">
+			AND uf.nodeid = #{nodeid}
+		</if>
+		<if test="key !=null and key !=''">
+			and (crimid like concat(concat('%', #{key}), '%')
+			or name like concat(concat('%', #{key}), '%') )
+		</if>
+		AND exists
+		(SELECT 1
+		FROM tbprisoner_base_crime crime WHERE
+		orgid1 IN
+		(
+		SELECT dORGID FROM TBFLOW_ORG_ORG where ORGID = #{orgid}
+		)
+		AND t.crimid = crime.crimid
+		)
+		ORDER BY COURTYEAR ASC
+	</select>
+	<select id="autoUpdateSentenceChangeData">
+		<![CDATA[   
+		   {call P_UPDATESENTENCECHANGEDATA}   
+		]]>
+	</select>
+
+	<select id="isLiGongExecute" resultType="Map" parameterType="Map">
+
+		select
+		( case when sc2.value='1' then '1'
+		when sc2.value='0' and org.unitlevel='3' then '1'
+		else '0' end
+		) status
+		from TBSYS_CONFIG sc1,TBSYS_CONFIG sc2,TBSYS_ORGINFO org
+		where
+		sc1.name='curdepart'
+		and sc2.name='centerdeployment'
+		and sc1.value=org.orgid
+		and rownum=1
+
+	</select>
+
+	<select id="getLiGongData" resultType="Map" parameterType="Map">
+		select
+		applyid as crimid,
+		flowdefid,
+		flowdraftid,
+		text2 ruleids,
+		text3 scorestypes,
+		text4 scores,
+		text5 crimids,
+		applydatetime,
+		commenttext,
+		opid,
+		departid,
+		(case when fyfenandate='1' then '3'
+		when fyfenandate='2' then '4'
+		end) as jclb
+
+		from uv_flow
+		where nodeid = '1'
+		and state = 1
+		and nvl(text25, '0') != '1'
+		and flowdefid='other_zfzdlgsp'
+	</select>
+
+
+	<update id="updateLiGongData" parameterType="java.util.List">
+		begin
+		<foreach collection="list" item="item" index="index"
+			separator=";">
+			insert into ZPUBLIC_YZJC (id, bh, pzrq, jclb)
+			values(
+			TO_CHAR(S_CREATE_FLOWDRAFTID.NEXTVAL)||f_getcurrenttime,
+			#{item.crimid},
+			to_char(#{item.applydatetime},'YYYYMMDD'),
+			#{item.jclb}
+			)
+		</foreach>
+		;end;
+	</update>
+
+
+	<update id="updateHaseDealStatus" parameterType="java.util.List">
+		begin
+		<foreach collection="list" item="item" index="index"
+			separator=";">
+			update TBFLOW_BASE set text25 = '1'
+			where flowdraftid = #{item.flowdraftid}
+			and flowdefid = #{item.flowdefid}
+		</foreach>
+		;end;
+	</update>
+
+	<select id="findSuggestionHandleList" resultType="Map"
+		parameterType="Map">
+		select * from
+		(
+		select a.*, rownum rn from
+		(
+		select * from (
+		select
+		'('|| substr(aa1.text6,1,4) || ')'||aa3.JAILNAME||(case when aa1.int1=0
+		then '减字' when aa1.int1=1 then '假字' when aa1.int1=2 then '保字' else ''
+		end)||'第'||substr(aa1.text6,5) || '号' as ANJIANHAO,
+		aa1.applyid as crimid,aa1.applyname name,aa1.commenttext,
+		aa1.conent,aa1.state,aa1.nodeid,aa1.flowdraftid,aa1.flowdefid
+		from
+		TBXF_SCREENING aa0,
+		TBXF_SENTENCEALTERATION aa3,
+		(
+		select
+		tb.flowdraftid,tb.flowid,tb.flowdefid,tb.applyid,tb.applyname,tb.conent,
+		tb.text6,tb.int1,tb.departid,
+		tf.nodeid,tf.state,tf.commenttext,tf.optime,tf.orgid
+		from tbflow tf,tbflow_base tb
+		where tb.flowdefid=#{flowdefid}
+		and tf.flowdraftid=tb.flowdraftid
+		) aa1,
+		tbprisoner_baseinfo bbb,
+		(
+		select tb.applyid,max(tf.optime) as maxtime
+		from tbflow tf,tbflow_base tb
+		where tb.flowdefid=#{flowdefid}
+		and tf.flowdraftid=tb.flowdraftid
+		group by applyid
+		) aa2
+		where aa0.crimid=aa1.applyid and aa0.crimid=aa3.crimid
+		and aa0.crimid=bbb.crimid
+		and aa1.state in(-2,-1,0,1,2)
+		and aa1.applyid=aa2.applyid and aa1.optime=aa2.maxtime
+		and aa1.orgid in (select too.dorgid from tbflow_org_org too where
+		too.orgid= #{orgid})
+		<trim prefix="" suffix="" suffixOverrides=",">
+			<if test="key!=null and key!=''"> and (aa1.applyid like '%'||#{key}||'%' or aa1.applyname
+				like '%'||#{key}||'%' or bbb.namepinyinshort like
+				concat(UPPER(#{key}),'%'))</if>
+		</trim>
+		<if test="casenums!=null and casenums!=''">
+			and substr(aa1.text6,5) in (${casenums})
+		</if>
+		order by aa1.text6)
+		<trim prefix="" suffix="" suffixOverrides=",">
+			<if test="sortField!=null and sortField!=''">order by ${sortField} ${sortOrder}</if>
+		</trim>
+		) a
+		<if test="end!=null and end!=''">
+			where rownum &lt;= #{end}
+		</if>
+		)
+		<if test="start!=null and start!=''">
+			where rn &gt;= #{start}
+		</if>
+	</select>
+
+	<select id="countSuggestionHandleList" resultType="int"
+		parameterType="Map">
+		select
+		count(aa1.applyid)
+		from
+		TBXF_SCREENING aa0,
+		TBXF_SENTENCEALTERATION aa3,
+		(
+		select
+		tb.flowdraftid,tb.flowid,tb.flowdefid,tb.applyid,tb.applyname,tb.conent,
+		tb.text6,tb.int1,tb.departid,
+		tf.nodeid,tf.state,tf.commenttext,tf.optime,tf.orgid
+		from tbflow tf,tbflow_base tb
+		where tb.flowdefid=#{flowdefid}
+		and tf.flowdraftid=tb.flowdraftid
+		) aa1,
+		tbprisoner_baseinfo bbb,
+		(
+		select tb.applyid,max(tf.optime) as maxtime
+		from tbflow tf,tbflow_base tb
+		where tb.flowdefid=#{flowdefid}
+		and tf.flowdraftid=tb.flowdraftid
+		group by applyid
+		) aa2
+		where aa0.crimid=aa1.applyid and aa0.crimid=aa3.crimid
+		and aa0.crimid=bbb.crimid
+		and aa1.state in(-2,-1,0,1,2)
+		and aa1.applyid=aa2.applyid and aa1.optime=aa2.maxtime
+		and aa1.orgid in (select too.dorgid from tbflow_org_org too where
+		too.orgid= #{orgid})
+		<trim prefix="" suffix="" suffixOverrides=",">
+			<if test="key!=null and key!=''"> and (aa1.applyid like '%'||#{key}||'%' or aa1.applyname
+				like '%'||#{key}||'%' or bbb.namepinyinshort like
+				concat(UPPER(#{key}),'%'))</if>
+		</trim>
+		<if test="casenums!=null and casenums!=''">
+			and substr(aa1.text6,5) in (${casenums})
+		</if>
+	</select>
+
+
+	<!-- 法院减刑立案页面数据 -->
+	<select id="getCourtLiAnList" resultType="Map" parameterType="Map">
+		select * from
+		( select a.*, rownum rn
+		from
+		(select * from
+		(select t.JAILNAME,
+		'('||t.thiscourtyear||')'||tr.shortname||t.CHANGETYPE||'第'||t.CASENO||'号'
+		as caseno,
+		t.crimid,t.name, t.JAILINFO,t.jailid,
+		decode(tc.causeaction,'',decode(tc.charge,'',tc.maincase,tc.charge),tc.causeaction)
+		as causeaction,
+		F_FORMATYMD(t.PUNISHMENTYEAR, t.PUNISHMENTMONTH, t.PUNISHMENTDAY) as shengyuxingqi,
+		decode(t.INTERVALYEAR, '0', '', null, '', t.INTERVALYEAR || '年') ||
+		decode(t.INTERVALMONTH,
+		'0',
+		decode(t.INTERVALDAY, '0', '', null, '', '零'),
+		null,
+		decode(t.INTERVALDAY, '0', '', null, '', '零'),
+		t.INTERVALMONTH || '个月') ||
+		decode(t.INTERVALDAY, '0', '', null, '', t.INTERVALDAY || '天') as jianggeqi
+
+		from TBXF_SENTENCEALTERATION t, TBPRISONER_BASE_CRIME tc, TBSYS_ORGINFO tr
+		where t.JAILTO = #{jailto} and tr.orgid=t.jailid and t.crimid =
+		tc.crimid
+		and t.crimid not in
+		(
+		select distinct(tb.applyid) from tbflow tf,tbflow_base tb where
+		tf.flowdraftid=tb.flowdraftid
+		and tb.flowdefid= #{flowdefid}
+		and tf.state in (-2,-1,0,1,2)
+		)
+		and t.caseno is not null
+		and t.JAILID in (select orgid from
+		tbsys_orginfo t where t.unitlevel='3' and (t.highcourt=#{departid} or
+		t.intermediatecourt=#{departid}))
+		<if test="jailid!=null and jailid!=''">
+			and jailid = #{jailid}
+		</if>
+		<if test="key!=null and key!=''">
+			and (crimid like concat(concat('%', #{key}), '%')
+			or name like concat(concat('%', #{key}), '%')
+		</if>
+		)
+		<if test="sortField!=null and sortField!=''">
+			order by ${sortField} ${sortOrder}
+		</if>
+		) a
+		<if test="end!=null and end!=''">
+			where rownum &lt;= #{end}
+		</if>
+		)
+		<if test="start!=null and start!=''">
+			where rn &gt;= #{start}
+		</if>
+	</select>
+
+
+	<!-- 根据条件查询表中记录总数 -->
+	<select id="countCourtLiAnList" parameterType="Map" resultType="int">
+		select count(ts.crimid)
+		from TBXF_SENTENCEALTERATION ts
+		where ts.JAILTO = #{jailto}
+		and ts.crimid not in
+		(
+		select distinct(tb.applyid) from tbflow tf,tbflow_base tb where
+		tf.flowdraftid=tb.flowdraftid
+		and tb.flowdefid= #{flowdefid}
+		and tf.state in (-2,-1,0,1,2)
+		)
+		and ts.caseno is not null
+		and ts.JAILID in (select too.dorgid from
+		TBFLOW_ORG_ORG too where too.orgid = #{orgid})
+		<if test="jailid!=null and jailid!=''">
+			and ts.jailid = #{jailid}
+		</if>
+		<if test="key!=null and key!=''">
+			and (crimid like concat(concat('%', #{key}), '%')
+			or name like concat(concat('%', #{key}), '%')
+		</if>
+	</select>
+
+	<!-- 法院报备立案页面数据 -->
+	<select id="getCourtReportLiAnList" resultType="Map"
+		parameterType="Map">
+		select * from
+		( select a.*, rownum rn
+		from
+		(select * from
+		(select t.JAILNAME, '('||(case when t.THISDATE is not null then
+		to_char(t.THISDATE,'yyyy') else to_char(sysdate,'yyyy')
+		end)||')'||tr.shortname||t.CHANGETYPE||'第'||t.CASENO||'号' as caseno,
+		t.crimid,t.name, t.JAILINFO,t.jailid, tc.causeaction,
+		F_FORMATYMD(t.PUNISHMENTYEAR, t.PUNISHMENTMONTH, t.PUNISHMENTDAY) as
+		shengyuxingqi,
+		decode(t.INTERVALYEAR, '0', '', null, '', t.INTERVALYEAR || '年') ||
+		decode(t.INTERVALMONTH,
+		'0',
+		decode(t.INTERVALDAY, '0', '', null, '', '零'),
+		null,
+		decode(t.INTERVALDAY, '0', '', null, '', '零'),
+		t.INTERVALMONTH || '个月') ||
+		decode(t.INTERVALDAY, '0', '', null, '', t.INTERVALDAY || '天') as jianggeqi
+
+		from TBXF_SENTENCEALTERATION t, TBPRISONER_BASE_CRIME tc, TBSYS_ORGINFO
+		tr,uv_flow uf
+		where t.JAILTO = #{jailto} and tr.orgid=t.jailid and t.crimid = tc.crimid
+		and uf.flowdefid='other_fyjxjssp' and uf.isreport='1'
+		and
+		t.crimid=uf.applyid
+		and uf.state in(-1,0,2)
+		and t.crimid not in
+		(
+		select distinct(tb.applyid) from tbflow tf,tbflow_base tb where
+		tf.flowdraftid=tb.flowdraftid
+		and tb.flowdefid= #{flowdefid}
+		and tf.state in (-2,-1,0,1,2)
+		)
+		and t.JAILID in (select too.dorgid from TBFLOW_ORG_ORG too where
+		too.orgid = #{orgid})
+		<if test="jailid!=null and jailid!=''">
+			and jailid = #{jailid}
+		</if>
+		<if test="key!=null and key!=''">
+			and (crimid like concat(concat('%', #{key}), '%')
+			or name like concat(concat('%', #{key}), '%')
+		</if>
+		)
+		<if test="sortField!=null and sortField!=''">
+			order by ${sortField} ${sortOrder}
+		</if>
+		) a
+		<if test="end!=null and end!=''">
+			where rownum &lt;= #{end}
+		</if>
+		)
+		<if test="start!=null and start!=''">
+			where rn &gt;= #{start}
+		</if>
+	</select>
+
+	<!-- 法院报备立案页面数据 -->
+	<select id="countCourtReportLiAnList" resultType="int"
+		parameterType="Map">
+		select count(t.crimid)
+		from TBXF_SENTENCEALTERATION t,
+		TBPRISONER_BASE_CRIME tc,
+		TBSYS_ORGINFO tr,
+		uv_flow uf
+		where t.JAILTO = #{jailto} and tr.orgid=t.jailid and t.crimid = tc.crimid
+		and uf.flowdefid='other_fyjxjssp' and uf.isreport='1'
+		and
+		t.crimid=uf.applyid
+		and uf.state in(-1,0,2)
+		and t.crimid not in
+		(
+		select distinct(tb.applyid) from tbflow tf,tbflow_base tb where
+		tf.flowdraftid=tb.flowdraftid
+		and tb.flowdefid= #{flowdefid}
+		and tf.state in (-2,-1,0,1,2)
+		)
+		and t.JAILID in (select too.dorgid from TBFLOW_ORG_ORG too where
+		too.orgid = #{orgid})
+		<if test="jailid!=null and jailid!=''">
+			and jailid = #{jailid}
+		</if>
+		<if test="key!=null and key!=''">
+			and (crimid like concat(concat('%', #{key}), '%')
+			or name like concat(concat('%', #{key}), '%')
+		</if>
+	</select>
+
+	<!-- 法院检查立案页面数据 -->
+	<select id="getCourtCheckLiAnList" resultType="Map"
+		parameterType="Map">
+		select * from
+		( select a.*, rownum rn
+		from
+		(select * from
+		(select t.JAILNAME, '('||(case when t.THISDATE is not null then
+		to_char(t.THISDATE,'yyyy') else to_char(sysdate,'yyyy')
+		end)||')'||tr.shortname||t.CHANGETYPE||'第'||t.CASENO||'号' as caseno,
+		t.crimid,t.name, t.JAILINFO,t.jailid, tc.causeaction,
+		F_FORMATYMD(t.PUNISHMENTYEAR, t.PUNISHMENTMONTH, t.PUNISHMENTDAY) as
+		shengyuxingqi,
+		decode(t.INTERVALYEAR, '0', '', null, '', t.INTERVALYEAR || '年') ||
+		decode(t.INTERVALMONTH,
+		'0',
+		decode(t.INTERVALDAY, '0', '', null, '', '零'),
+		null,
+		decode(t.INTERVALDAY, '0', '', null, '', '零'),
+		t.INTERVALMONTH || '个月') ||
+		decode(t.INTERVALDAY, '0', '', null, '', t.INTERVALDAY || '天') as jianggeqi
+
+		from TBXF_SENTENCEALTERATION t, TBPRISONER_BASE_CRIME tc, TBSYS_ORGINFO
+		tr,uv_flow uf
+		where t.JAILTO = #{jailto} and tr.orgid=t.jailid and t.crimid = tc.crimid
+		and uf.flowdefid='other_fyjxjssp' and uf.ischeck='1'
+		and
+		t.crimid=uf.applyid
+		and uf.state in(-1,0,2)
+		and t.crimid not in
+		(
+		select distinct(tb.applyid) from tbflow tf,tbflow_base tb where
+		tf.flowdraftid=tb.flowdraftid
+		and tb.flowdefid= #{flowdefid}
+		and tf.state in (-2,-1,0,1,2)
+		)
+		and t.JAILID in (select too.dorgid from TBFLOW_ORG_ORG too where
+		too.orgid = #{orgid})
+		<if test="jailid!=null and jailid!=''">
+			and jailid = #{jailid}
+		</if>
+		<if test="key!=null and key!=''">
+			and (crimid like concat(concat('%', #{key}), '%')
+			or name like concat(concat('%', #{key}), '%')
+		</if>
+		)
+		<if test="sortField!=null and sortField!=''">
+			order by ${sortField} ${sortOrder}
+		</if>
+		) a
+		<if test="end!=null and end!=''">
+			where rownum &lt;= #{end}
+		</if>
+		)
+		<if test="start!=null and start!=''">
+			where rn &gt;= #{start}
+		</if>
+	</select>
+
+	<!-- 法院检查立案页面数据 -->
+	<select id="countCourtCheckLiAnList" resultType="int"
+		parameterType="Map">
+		select count(t.crimid)
+		from TBXF_SENTENCEALTERATION t,
+		TBPRISONER_BASE_CRIME tc,
+		TBSYS_ORGINFO tr,
+		uv_flow uf
+		where t.JAILTO = #{jailto} and tr.orgid=t.jailid and t.crimid = tc.crimid
+		and uf.flowdefid='other_fyjxjssp' and uf.ischeck='1'
+		and
+		t.crimid=uf.applyid
+		and uf.state in(-1,0,2)
+		and t.crimid not in
+		(
+		select distinct(tb.applyid) from tbflow tf,tbflow_base tb where
+		tf.flowdraftid=tb.flowdraftid
+		and tb.flowdefid= #{flowdefid}
+		and tf.state in (-2,-1,0,1,2)
+		)
+		and t.JAILID in (select too.dorgid from TBFLOW_ORG_ORG too where
+		too.orgid = #{orgid})
+		<if test="jailid!=null and jailid!=''">
+			and jailid = #{jailid}
+		</if>
+		<if test="key!=null and key!=''">
+			and (crimid like concat(concat('%', #{key}), '%')
+			or name like concat(concat('%', #{key}), '%')
+		</if>
+	</select>
+
+	<!-- 批量出监 查询羁押状态为待出监的罪犯 -->
+	<select id="SelectWaitOutPrisonListCount" resultType="int" parameterType="Map">
+		select 
+			     count(ts.crimid)
+		from tbxf_sentencealteration ts,
+				tbprisoner_base_crime tbc,
+				TBPRISONER_BASEINFO tbi
+		where nvl (ts.COURTCHANGETO,tbc.SENTENCEETIME) - sysdate
+						&lt;= (select t.value from TBSYS_CONFIG t where t.departid=#{departid} and
+									t.name='outprisonday' 
+								)
+		and nvl(ts.COURTCHANGETO,tbc.SENTENCEETIME) > sysdate
+		and ts.crimid = tbc.crimid
+		and ts.crimid = tbi.crimid
+		and tbc.DETAINSTATUS != '释放' 
+		and ts.status = 3
+		and exists (select 'x' from tbflow_org_org og where og.orgid=#{orgid} and og.dorgid = tbc.orgid2)
+		<if test="key!=null and key!=''">
+			and to_char(nvl(ts.COURTCHANGETO,tbc.SENTENCEETIME),'yyyy-MM-dd') =#{key}
+		</if>
+		<if test="key2!=null and key2!=''">
+            and (
+                    tbi.name like concat(concat('%', #{key2}), '%') 
+            		or tbi.crimid like concat(concat('%', #{key2}), '%')
+            		or tbi.namepinyinshort like concat(concat('%', UPPER(#{key2})), '%')
+            ) 
+        </if>
+	</select>
+	
+	<!-- 批量出监 查询羁押状态为待出监的罪犯 -->
+	<select id="SelectWaitOutPrisonList" resultType="Map" parameterType="Map">
+		select * from
+		( select a.*, rownum rn
+			from
+				(
+					select nvl(ts.COURTCHANGETO, tbc.SENTENCEETIME) as COURTCHANGETO,
+						     ts.crimid as crimid ,
+						     ts.name as name
+					from tbxf_sentencealteration ts,
+							tbprisoner_base_crime tbc,
+							TBPRISONER_BASEINFO tbi
+					where nvl (ts.COURTCHANGETO,tbc.SENTENCEETIME) - sysdate
+									&lt;= (select t.value from TBSYS_CONFIG t where t.departid=#{departid} and
+												t.name='outprisonday' 
+											)
+					and nvl(ts.COURTCHANGETO,tbc.SENTENCEETIME) > sysdate
+					and ts.crimid = tbc.crimid
+					and ts.crimid = tbi.crimid
+					and tbc.DETAINSTATUS!= '释放' 
+					and ts.status = 3
+					and exists (select 'x' from tbflow_org_org og where og.orgid=#{orgid} and og.dorgid = tbc.orgid2)
+					<if test="key!=null and key!=''">
+						and to_char(nvl(ts.COURTCHANGETO,tbc.SENTENCEETIME),'yyyy-MM-dd') =#{key}
+					</if>
+					<if test="key2!=null and key2!=''">
+			            and (
+			                    tbi.name like concat(concat('%', #{key2}), '%') 
+			            		or tbi.crimid like concat(concat('%', #{key2}), '%')
+			            		or tbi.namepinyinshort like concat(concat('%', UPPER(#{key2})), '%')
+			            ) 
+			        </if>
+					<if test="sortField!=null and sortField!=''">
+						order by ${sortField} ${sortOrder}
+					</if>
+				) a
+				<if test="end!=null and end!=''">
+					where rownum &lt;= #{end}
+				</if>
+		)
+		<if test="start!=null and start!=''">
+			where rn &gt;= #{start}
+		</if>
+	</select>
+	
+	<select id="sentenceAlterationLists" parameterType="String"
+		resultType="com.sinog2c.model.commutationParole.TbxfSentenceAlteration">
+		select * from TBXF_SENTENCEALTERATION where ISFILTER = 1
+		<if test="departid!=null">
+			and JAILID = #{departid}
+		</if>
+		and crimid not in(select text1 from tbuser_notice where
+		opid='sysauto')
+	</select>
+	<select id="departidlist" resultType="java.lang.String">
+		select distinct(t.jailid) from tbxf_sentencealteration t
+	</select>
+	<select id="getAreaidList" resultType="java.util.Map">
+		select userid from tbsys_user_org t where t.orgid in(select dorgid from
+		tbflow_org_org where dorgid=#{dorgid})
+	</select>
+
+
+	<!-- 获取法院立案表中所需要的信息 -->
+	<select id="getCourtCaseBaseInfoOfCrimid" parameterType="Map"
+		resultType="Map">
+		SELECT tb.detainprison,
+		tf.crimid,
+		tf.name,
+		tf.usedname,
+		tf.gender,
+		TO_CHAR (birthday, 'yyyyMMdd') AS birthday,
+		TO_CHAR (birthday, 'yyyyMMdd') AS cbibirthday,
+		tf.nation,
+		tf.grade,
+		(CASE WHEN tf.duty IS NOT NULL THEN tf.duty ELSE tf.vocation END) AS duty,
+		tf.education,
+		tf.origin,
+		tf.addressdetail,
+
+		tb.arrestauthority,
+		TO_CHAR (tb.arrestdate, 'yyyyMMdd') arrestdate,
+		TO_CHAR (tb.detaindate, 'yyyyMMdd') AS detaindate,
+		tb.judgmentname,
+		'(' || tb.caseyear || ')' || tb.caseorgshort || '第' || tb.caseno || '号'
+		AS caseno,
+		TO_CHAR (tb.judgedate, 'yyyyMMdd') AS judgedate,
+		tb.maincase,
+		tb.othercase,
+		tb.punishmenttype,
+		F_FORMATYMD (tb.punishmentyear, tb.punishmentmonth, tb.punishmentday) AS
+		punishmentyear,
+		F_LOSEPOWER (tb.losepoweryear, tb.losepowermonth, tb.losepowereday) AS
+		losepoweryear,
+		tb.firsttrialsum,
+
+		ts.sentencechageinfo,
+		F_FORMATYMD (ts.punishmentyear, ts.punishmentmonth, ts.punishmentday) AS
+		lastpunishmentyear,
+		ts.islimit,
+		TO_CHAR (ts.stayexecution, 'yyyyMMdd') AS stayexecution,
+		TO_CHAR (noperiod, 'yyyyMMdd') AS noperiod,
+		exnoperiod,
+		TO_CHAR (sentencestart, 'yyyyMMdd') AS sentencestart,
+		TO_CHAR (delivery, 'yyyyMMdd') AS delivery,
+		F_FORMATYMD (ts.nowpunishmentyear, ts.nowpunishmentmonth, ts.nowpunishmentday) AS
+		nowpunishmentyear,
+
+		TO_CHAR (tb.inprisondate, 'yyyyMMdd') AS inprisondate,
+		TO_CHAR (ts.fristsubmit, 'yyyyMMdd') AS fristsubmit,
+		TO_CHAR (ts.commutationdate, 'yyyyMMdd') AS commutationdate,
+		TO_CHAR (ts.predate, 'yyyyMMdd') AS predate,
+		TO_CHAR (ts.thisdate, 'yyyyMMdd') AS thisdate,
+		F_FORMATYMD (ts.intervalyear, ts.intervalmonth, ts.intervalday) AS intervalyear,
+		ts.fine,
+		ts.sumfine,
+		ts.thisfine,
+		ts.recovered,
+		ts.sumrecovered,
+		ts.thisrecovered,
+		ts.expropriation,
+		ts.sumexpropriation,
+		ts.thisexpropriation,
+		ts.civil,
+		ts.sumcivil,
+		ts.thiscivil,
+		ts.income,
+		ts.pay,
+		ts.overplus,
+		(CASE WHEN (tb.isminor = '是' or tb.isminor = '1') THEN 1 ELSE 0 END)
+		+ (CASE WHEN (tb.oldprisoner = '是' or tb.oldprisoner = '1') THEN 2 ELSE
+		0 END)
+		+ (CASE WHEN (tb.illprisoner = '是' or tb.illprisoner = '1') THEN 4 ELSE
+		0 END)
+		+ (CASE WHEN (tb.deformityprisoner = '是' or tb.deformityprisoner = '1')
+		THEN 8 ELSE 0 END)
+		+ (CASE WHEN (tb.wideplots = '是' or tb.wideplots = '1') THEN 16 ELSE 0
+		END)
+		AS checkboxckqj,
+		(CASE WHEN isrecidivism = '1' THEN 1 ELSE 0 END)
+		+ (CASE WHEN redrugs = '1' THEN 2 ELSE 0 END)
+		+ (CASE WHEN crimes = '1' THEN 4 ELSE 0 END)
+		+ (CASE WHEN overfourcrimes = '1' THEN 8 ELSE 0 END)
+		+ (CASE WHEN seriousviolations = '1' THEN 16 ELSE 0 END)
+		+ (CASE WHEN combinedpunishment = '1' THEN 32 ELSE 0 END)
+		+ (CASE WHEN majorcriminal = '1' THEN 64 ELSE 0 END)
+		+ (CASE WHEN strictlyplot = '1' THEN 128 ELSE 0 END)
+		AS checkboxcyqj,
+		(CASE WHEN postcrime = '1' THEN 1 ELSE 0 END)
+		+ (CASE WHEN undermine = '1' THEN 2 ELSE 0 END)
+		+ (CASE WHEN underworld = '1' THEN 4 ELSE 0 END)
+		AS checkboxslzf,
+		(CASE WHEN focus = '1' THEN 1 ELSE 0 END)
+		+ (CASE WHEN mediaattention = '1' THEN 2 ELSE 0 END)
+		+ (CASE WHEN takedrugs = '1' THEN 4 ELSE 0 END)
+		+ (CASE WHEN suicide = '1' THEN 8 ELSE 0 END)
+		+ (CASE WHEN escapes = '1' THEN 16 ELSE 0 END)
+		+ (CASE WHEN assaultepolice = '1' THEN 32 ELSE 0 END)
+		+ (CASE WHEN declarationproperty = '1' THEN 64 ELSE 0 END)
+		AS checkboxqtqj,
+		tb.crimeface,
+		'考核期间（'||F_FORMATDATE(ts.REWARDSTART)||'至'||F_FORMATDATE(ts.REWARDEND)||'），共获得奖励：'||ts.rewardinfo
+		|| ts.punishinfo AS rewardinfoandpunishinfo,
+		ts.jailinfo,
+		ts.administration,
+		ts.prosecutor
+		FROM TBPRISONER_BASEINFO tf,
+		TBPRISONER_BASE_CRIME tb,
+		TBXF_SENTENCEALTERATION ts
+		WHERE tf.crimid = tb.crimid AND tf.crimid = ts.crimid and
+		tf.crimid=#{crimid}
+	</select>
+	<update id="batchUpdateNowpunishment" parameterType="java.util.List">
+		begin
+		<foreach collection="list" item="item" index="index"
+			separator=";">
+			update TBXF_SENTENCEALTERATION
+			<set>
+				nowpunishmentyear=#{item.nowpunishmentyear},
+				nowpunishmentmonth=#{item.nowpunishmentmonth},
+				batchid=${item.batchid},
+				nowpunishmentday=#{item.nowpunishmentday}
+			</set>
+			where crimid = #{item.crimid}
+		</foreach>
+		;end;
+	</update>
+	<update id="batchUpdateInterval" parameterType="java.util.List">
+		begin
+		<foreach collection="list" item="item" index="index"
+			separator=";">
+			update TBXF_SENTENCEALTERATION
+			<set>
+				intervalyear=#{item.intervalyear},
+				intervalmonth=#{item.intervalmonth},
+				intervalday=#{item.intervalday}
+			</set>
+			where crimid = #{item.crimid}
+		</foreach>
+		;end;
+	</update>
+	<update id="batchUpdateRewardDate" parameterType="java.util.List">
+		begin
+		<foreach collection="list" item="item" index="index"
+			separator=";">
+			update TBXF_SENTENCEALTERATION
+			<set>
+				REWARDEND = #{item.rewardend,jdbcType=DATE},
+				COMMUTATIONDATE = #{item.remainderpunishment,jdbcType=DATE}
+			</set>
+			where crimid = #{item.crimid}
+		</foreach>
+		;end;
+	</update>
+	<update id="batchUpdateRewardStart" parameterType="String">
+		/*上次裁判日期的上个月的最后一天 * 上海*/
+		UPDATE TBXF_SENTENCEALTERATION a
+		SET REWARDSTART =
+		(SELECT last_day(ADD_MONTHS (TO_DATE (courtsanction, 'yyyy-MM-dd'), -1))
+		rewardstart
+		FROM (SELECT crimid,
+		courtyear,
+		courtsanction,
+		sentence,
+		ROW_NUMBER ()
+		OVER (PARTITION BY crimid
+		ORDER BY courtsanction DESC)
+		rn
+		FROM tbdata_sentchage)
+		WHERE rn = 1
+		AND crimid = a.crimid
+		AND crimid IN
+		(
+		SELECT DISTINCT (crimid) FROM TBDATA_SENTCHAGE WHERE category = '7'
+		and crimid in
+		(
+		select crimid from TBPRISONER_BASEINFO where departid = #{departid}
+		)
+		)
+		)
+		WHERE a.crimid IN
+		(
+		SELECT DISTINCT (crimid) FROM TBDATA_SENTCHAGE WHERE category = '7'
+		and crimid in
+		(
+		select crimid from TBPRISONER_BASEINFO where departid = #{departid}
+		)
+		)
+	</update>
+	<select id="getReportauditByCrimid" parameterType="String"
+		resultType="String">
+		select nvl(reportaudit,0) reportaudit from TBXF_SENTENCEALTERATION where
+		crimid = #{crimid}
+	</select>
+	<select id="getBWCaseDataInfo" resultType="Map">
+		select * from
+		(
+		select aa.*,rownum as rn from
+		(
+		SELECT DECODE(UF.STATE,0,TB.SNODEID,DECODE(UF.NODEID, '1', '1', '-1', '-1',
+		TB.SNODEID)) AS NODEID,
+		DECODE(UF.STATE,0,TB.TEXT3,DECODE(UF.NODEID, '1', '已通过', '-1', '未通过', TB.TEXT3)) AS JINCHENG,
+		SUBSTR(UF.TEXT6, 0, 4) AS NIANHAO,
+		'(' ||SUBSTR (UF.TEXT6, 0,4) || ')' || D.SHORTNAME
+		||UF.casetype||'第'||SUBSTR (UF.TEXT6, 5) || '号' AS ANHAO,
+		to_number(substr(UF.TEXT6,5)) AS ANJIANHAO,
+		t.courtchangeto as courtchangeto3,sentencestime as sentencestime3,sentenceetime as sentenceetime3,causeaction as causeaction3,f_formatymd(originalyear,originalmonth,originalday,0) as originalyear3,decode(crimclass,'1','△','')||decode(reportaudit,'1','☆','') as crimclass3,
+		UF.FLOWDEFID,
+		UF.FLOWDRAFTID,
+		UF.TEXT6,uf.int1 as int1,
+		UF.applydatetime,
+		T.*
+		FROM TBXF_SENTENCEALTERATION T,
+		UV_FLOW UF,
+		tbprisoner_baseinfo bbb,
+		Tbprisoner_Base_Crime ccc,
+		TBSYS_ORGINFO D,
+		TBFLOW_DELIVER TB
+		WHERE T.CRIMID = UF.APPLYID
+		AND UF.DEPARTID = TB.DEPARTID
+		and T.CRIMID = bbb.crimid
+		and T.CRIMID = ccc.crimid 
+		AND UF.FLOWDEFID = TB.FLOWDEFID
+		AND D.ORGID = UF.DEPARTID
+		AND TB.TEXT3 IS NOT NULL
+		AND (
+		(
+		UF.STATE = 0
+		AND (
+		UF.NODEID = TB.DNODEID
+		OR
+		(UF.NODEID = '0' AND UF.NODEID = TB.SNODEID)
+		)
+		AND TB.TEXT3 IS NOT NULL
+		)
+		OR
+		(UF.STATE != 0
+		AND(
+		(
+		(UF.NODEID = '1' OR UF.NODEID = '-1')
+		AND UF.NODEID = TB.DNODEID
+		)
+		OR
+		(UF.NODEID = TB.SNODEID
+		AND TB.dnodeid &lt;&gt; '-1'
+		)
+		)
+		AND TB.TEXT3 IS NOT NULL))
+		<if test="key!=null and key!=''">
+			and (t.name like concat(concat('%', #{key}), '%') or t.crimid like
+			concat(concat('%', #{key}), '%') or bbb.namepinyinshort like
+			concat(UPPER(#{key}),'%'))
+		</if>
+		<if test="flowid!=null and flowid !=''">
+			AND UF.FLOWDEFID = #{flowid}
+		</if>
+		<if test="orgid!=null and orgid!=''">
+			AND UF.ORGID IN (SELECT DORGID FROM TBFLOW_ORG_ORG WHERE ORGID =
+			#{orgid})
+		</if>
+		<if test="orgidsj!=null and orgidsj!=''">
+			AND EXISTS
+			(SELECT 1
+			FROM TBPRISONER_BASEINFO INFO
+			WHERE INFO.DEPARTID IN (SELECT DORGID
+			FROM TBFLOW_ORG_ORG
+			WHERE ORGID = #{orgidsj})
+			AND T.CRIMID = INFO.CRIMID)
+		</if>
+		) aa ,TBPRISONER_BASEINFO tt where 1=1 and aa.crimid=tt.crimid(+)
+		<if test="typeid!=null and typeid!=''">
+			and aa.int1=${typeid}
+		</if>
+		<if test="punishmenttype!=null and punishmenttype!=''">
+			and aa.originalyear=${punishmenttype}
+		</if>
+		<if test="birthstarttime!=null and birthstarttime!=''">
+			and to_char(tt.birthday,'yyyy-mm-dd') &gt;= #{birthstarttime}
+		</if>
+		<if test="birthendtime!=null and birthendtime!=''">
+			and to_char(tt.birthday,'yyyy-mm-dd') &lt; #{birthendtime}
+		</if>
+		<if test="lianstarttime!=null and lianstarttime!=''">
+			and to_char(aa.applydatetime,'yyyy-mm-dd') &gt;=
+			#{lianstarttime}
+		</if>
+		<if test="lianendtime!=null and lianendtime!=''">
+			and to_char(aa.applydatetime,'yyyy-mm-dd') &lt;=
+			#{lianendtime}
+		</if>
+		<if test="caidingstarttime!=null and caidingstarttime!=''">
+			and to_char(aa.COURTSANCTION,'yyyy-mm-dd') &gt;=
+			#{caidingstarttime}
+		</if>
+		<if test="caidingendtime!=null and caidingendtime!=''">
+			and to_char(aa.COURTSANCTION,'yyyy-mm-dd') &lt;=
+			#{caidingendtime}
+		</if>
+		<if test="tempstr!=null and tempstr!=''">
+			and aa.originalyear!=9995 and aa.originalyear!=9996
+		</if>
+		<if test="changetype!=null and changetype!=''">
+			and aa.int1=${changetype}
+		</if>
+		<if test="processid!=null and processid!=''">
+			and aa.nodeid=#{processid}
+		</if>
+		<if test="processid2!=null and processid2!=''">
+			and aa.nodeid=#{processid2}
+		</if>
+		and rownum &lt;=${end}
+		)c where c.rn &gt;=${start}
+		<if test="sortField!=null and sortField!=''">
+			order by ${sortField} ${sortOrder}
+		</if>
+	</select>
+	<select id="getBWCaseDataInfoCount" resultType="int">
+		select count(1) from
+		(
+		select * from
+		(
+		SELECT DECODE(UF.STATE,0,TB.SNODEID,DECODE(UF.NODEID, '1', '1', '-1', '-1',
+		TB.SNODEID)) AS NODEID,
+		DECODE(UF.STATE,0,TB.TEXT3,DECODE(UF.NODEID, '1', '已通过', '-1', '未通过', TB.TEXT3)) AS JINCHENG,
+		SUBSTR(UF.TEXT6, 0, 4) AS NIANHAO,
+		'(' || SUBSTR (UF.TEXT6, 0,4) || ')' || D.SHORTNAME || SUBSTR (UF.TEXT6,
+		5) || '号' AS ANHAO,
+		substr(UF.TEXT6,4) AS ANJIANHAO,
+		UF.FLOWDEFID,
+		UF.FLOWDRAFTID,
+		UF.TEXT6,uf.int1 as int1,
+		UF.applydatetime,
+		T.*
+		FROM TBXF_SENTENCEALTERATION T,
+		UV_FLOW UF,
+		tbprisoner_baseinfo bbb,
+		TBSYS_ORGINFO D,
+		TBFLOW_DELIVER TB
+		WHERE T.CRIMID = UF.APPLYID
+		AND UF.DEPARTID = TB.DEPARTID
+		AND UF.FLOWDEFID = TB.FLOWDEFID
+		and T.CRIMID = bbb.crimid
+		AND D.ORGID = UF.DEPARTID
+		AND TB.TEXT3 IS NOT NULL
+		AND (
+		( UF.STATE = 0
+		AND (
+		UF.NODEID = TB.DNODEID
+		OR
+		(UF.NODEID = '0' AND UF.NODEID = TB.SNODEID)
+		)
+		AND TB.TEXT3 IS NOT NULL
+		)
+		OR
+		( UF.STATE != 0
+		AND(
+		( (UF.NODEID = '1' OR UF.NODEID = '-1')
+		AND UF.NODEID = TB.DNODEID
+		)
+		OR
+		( UF.NODEID = TB.SNODEID
+		AND TB.dnodeid &lt;&gt; '-1'
+		)
+		)
+		AND TB.TEXT3 IS NOT NULL
+		)
+		)
+		<if test="key!=null and key!=''">
+			and (t.name like concat(concat('%', #{key}), '%') or t.crimid like
+			concat(concat('%', #{key}), '%') or bbb.namepinyinshort like
+			concat(UPPER(#{key}),'%'))
+		</if>
+		<if test="flowid!=null and flowid !=''">
+			AND UF.FLOWDEFID = #{flowid}
+		</if>
+		<if test="orgid!=null and orgid!=''">
+			AND UF.ORGID IN (SELECT DORGID FROM TBFLOW_ORG_ORG WHERE ORGID =
+			#{orgid})
+		</if>
+		<if test="orgidsj!=null and orgidsj!=''">
+			AND EXISTS
+			(SELECT 1
+			FROM TBPRISONER_BASEINFO INFO
+			WHERE INFO.DEPARTID IN (SELECT DORGID
+			FROM TBFLOW_ORG_ORG
+			WHERE ORGID = #{orgidsj})
+			AND T.CRIMID = INFO.CRIMID)
+		</if>
+		) aa ,TBPRISONER_BASEINFO tt where 1=1 and aa.crimid=tt.crimid(+)
+		<if test="typeid!=null and typeid!=''">
+			and aa.int1=${typeid}
+		</if>
+		<if test="punishmenttype!=null and punishmenttype!=''">
+			and aa.originalyear=${punishmenttype}
+		</if>
+		<if test="birthstarttime!=null and birthstarttime!=''">
+			and to_char(tt.birthday,'yyyy-mm-dd') &gt;= #{birthstarttime}
+		</if>
+		<if test="birthendtime!=null and birthendtime!=''">
+			and to_char(tt.birthday,'yyyy-mm-dd') &lt; #{birthendtime}
+		</if>
+		<if test="lianstarttime!=null and lianstarttime!=''">
+			and to_char(aa.applydatetime,'yyyy-mm-dd') &gt;=
+			#{lianstarttime}
+		</if>
+		<if test="lianendtime!=null and lianendtime!=''">
+			and to_char(aa.applydatetime,'yyyy-mm-dd') &lt;=
+			#{lianendtime}
+		</if>
+		<if test="caidingstarttime!=null and caidingstarttime!=''">
+			and to_char(aa.COURTSANCTION,'yyyy-mm-dd') &gt;=
+			#{caidingstarttime}
+		</if>
+		<if test="caidingendtime!=null and caidingendtime!=''">
+			and to_char(aa.COURTSANCTION,'yyyy-mm-dd') &lt;=
+			#{caidingendtime}
+		</if>
+		<if test="changetype!=null and changetype!=''">
+			and aa.int1=${changetype}
+		</if>
+		<if test="tempstr!=null and tempstr!=''">
+			and aa.originalyear!=9995 and aa.originalyear!=9996
+		</if>
+		<if test="processid!=null and processid!=''">
+			and aa.nodeid=#{processid}
+		</if>
+		<if test="processid2!=null and processid2!=''">
+			and aa.nodeid=#{processid2}
+		</if>
+		)
+	</select>
+	<!-- 刑罚统计数据信息 -->
+	<select id="getStatisticalPunishment" parameterType="Map"
+		resultType="java.util.HashMap">
+		select a.*,b.*,c.*
+		from
+		Statistical_Punishment_Parole a ,
+		Statistical_Punishment_Release b ,
+		Statistical_Punishment_Other c
+		where a.departid = b.departid and a.departid = c.departid
+		<if test="departid!=null and departid!=''">
+			and a.departid = #{departid}
+		</if>
+		<if test="yeartype!=null and yeartype!=''">
+			and a.yeartype = #{yeartype}
+		</if>
+	</select>
+	<select id="getThreeOfCrimBaseinfo" parameterType="java.lang.String"
+		resultType="java.util.HashMap">
+		select a.crimid text1,
+		a.name text2,
+		a.gender text3,
+		to_char(a.birthday, 'yyyyMMdd') text4,
+		a.nation text5,
+		to_char(b.inprisondate, 'yyyyMMdd') text6,
+		b.maincase text7,
+		case when b.punishmenttype='有期徒刑' then
+		b.punishmenttype||F_FORMATYMD(b.punishmentyear,b.punishmentmonth,b.punishmentday,0)
+		else b.punishmenttype end text8,
+		case when b.losepoweryear='97' then '终身' when b.losepoweryear>0 then
+		b.losepoweryear||'年' end||
+		case when b.losepowermonth>0 then b.losepowermonth||'个月' end text9,
+		case when b.forfeit='没收个人全部财产' then b.forfeit when b.forfeit is not null
+		then replace('罚金'||b.forfeit,'元','')||'元' end text10,
+		b.crimeface text12
+		from tbprisoner_baseinfo a, tbprisoner_base_crime b
+		where a.crimid = b.crimid
+		<if test="crimid!=null and crimid!=''">
+			and a.crimid = #{crimid}
+		</if>
+	</select>
+	<select id="getPunishmentChangeinfo" parameterType="java.lang.String"
+		resultType="Map">
+		select t.crimid,t.category,
+		F_FORMATDATE(to_date(t.courtsanction, 'yyyyMMdd')) || t.courtname ||
+		t.courttitle||'裁定'||case when t.courtchange='9995' then '减为' when t.courtchange>150000 then
+		'减为有期徒刑' else '减刑' end||
+		case when t.courtchange='9995' then '无期徒刑' else
+		replace(replace(replace('start'||F_FORMATYMD(substr(t.courtchange,0,2),substr(t.courtchange,3,2),substr(t.courtchange,5,2)),'年个月','年'),'start年',''),'start','')
+		end bdqk,
+		case when t.courtchangefrom is not null and t.courtchangeto is not null
+		then
+		'('||SUBSTR(t.courtchangefrom,0,4)||'.'||TO_CHAR(TO_NUMBER(SUBSTR(t.courtchangefrom,5,2)))||'.'||TO_CHAR(TO_NUMBER(SUBSTR(t.courtchangefrom,7,2)))||'-'||
+		SUBSTR(t.courtchangeto,0,4)||'.'||TO_CHAR(TO_NUMBER(SUBSTR(t.courtchangeto,5,2)))||'.'||TO_CHAR(TO_NUMBER(SUBSTR(t.courtchangeto,7,2)))||')'
+		end xqqz,
+		t.losepower
+		from tbdata_sentchage t
+		where t.category in('7','1')
+		<if test="crimid!=null and crimid!=''">
+			and t.crimid = #{crimid}
+		</if>
+		order by t.courtsanction asc
+	</select>
+	<select id="getCourtLocalCaseData" resultType="Map">
+		select * from (select aa.*,rownum rs from ( select
+		'('||t.anjiannian||')'||t.anjianleixing||'第'||t.anhao||'号' as
+		anjiannianhao,t.xingming,t.anhao,t.anjiannian,
+		t.xingbie,t.zhixingjiguan,t.yuanpanxingqi,t.zuifanbianhao,t.zuiming,t.anjiannianhao
+		as anjianhao,t.flowdraftid,info.name as chengbanren,t.jincheng from
+		uv_court_jxjs_case t,
+		tbprisoner_base_crime a,tbflow_base flow,TBCOURT_CASEFULLCOURT court, tbsys_userinfo info
+		where t.zuifanbianhao=a.crimid and t.flowdraftid=flow.flowdraftid
+		and t.zuifanbianhao=court.crimid and court.text1=info.userid
+		<if test="orgid!=null">
+			and a.orgid in (${orgid})
+		</if>
+		<if test="jincheng!=null and jincheng!=''">
+			and t.jincheng=#{jincheng}
+		</if>
+		<if test="depid!=null and depid!=''">
+			and t.departid=#{depid}
+		</if>
+		<if test="userid!=null and userid!=''">
+			and t.chengbanren=#{userid}
+		</if>
+		<if test="lianstartdate!=null and lianstartdate!=''">
+			and
+			to_date(flow.text10,'yyyy-mm-dd')&gt;=to_date(#{lianstartdate},'yyyy-mm-dd')
+		</if>
+		<if test="lianenddate!=null and lianenddate!=''">
+			and
+			to_date(flow.text10,'yyyy-mm-dd')&lt;=to_date(#{lianenddate},'yyyy-mm-dd')
+		</if>
+		<if test="cycksql!=null and cycksql!=''">
+			and (${cycksql})
+		</if>
+		<if test="anyousql!=null and anyousql!=''">
+			and (${anyousql})
+		</if>
+		<if test="xingqisql!=null and xingqisql!=''">
+			and (${xingqisql})
+		</if>
+		<if test="cbinamesql!=null and cbinamesql!=''">
+			and (${cbinamesql})
+		</if>
+		<if test="shouanstartdate!=null and shouanstartdate!=''">
+			and to_date(flow.text10,'yyyy-mm-dd')
+			&gt;=to_date(#{shouanstartdate},'yyyy-mm-dd')
+		</if>
+		<if test="shouanenddate!=null and shouanenddate!=''">
+			and to_date(flow.text10,'yyyy-mm-dd')
+			&lt;=to_date(#{shouanenddate},'yyyy-mm-dd')
+		</if>
+		<if test="departid!=null and departid!=''">
+			and flow.departid=#{departid}
+		</if>
+		<if test="key!=null and key!=''">
+			and (t.xingming like '%'||#{key}||'%' or t.anhao=#{key})
+		</if>
+		<if test="type!=null and type!=''">
+			and zuifanbianhao not in( select t.crimid from TBCRIMINAL_FYGUANZHU t)
+		</if>
+		<if test="type2!=null and type2!=''">
+			and zuifanbianhao in( select t.crimid from TBCRIMINAL_FYGUANZHU t)
+		</if>
+		<if test="sortField!=null and sortField!=''">
+			<if test="sortField='anjiannianhao'">
+				order by to_number(t.anjiannian) ${sortOrder}, to_number(t.anhao)
+				${sortOrder}
+			</if>
+			<if test="sortField!='anjiannianhao'">
+				order by ${sortField} ${sortOrder}
+			</if>
+		</if>
+		) aa where rownum&lt;=${end}
+		) where rs&gt;=${start}
+	</select>
+	<select id="getCourtLocalCaseDataCount" parameterType="Map"
+		resultType="int">
+		select count(1) from (
+		select '('||t.anjiannian||')'||t.anjianleixing||'第'||t.anhao||'号' as
+		anjiannianhao,t.xingming,
+		t.xingbie,t.zhixingjiguan,t.yuanpanxingqi,t.zuifanbianhao,t.zuiming
+		from uv_court_jxjs_case t,
+		tbprisoner_base_crime a,tbflow_base flow, TBCOURT_CASEFULLCOURT court, tbsys_userinfo info
+		where t.zuifanbianhao=a.crimid
+		and t.flowdraftid=flow.flowdraftid and t.zuifanbianhao = court.crimid and
+		court.text1 = info.userid
+		<if test="orgid!=null">
+			and a.orgid in (${orgid})
+		</if>
+		<if test="jincheng!=null and jincheng!=''">
+			and t.jincheng=#{jincheng}
+		</if>
+		<if test="depid!=null and depid!=''">
+			and t.departid=#{depid}
+		</if>
+		<if test="userid!=null and userid!=''">
+			and t.chengbanren=#{userid}
+		</if>
+		<if test="lianstartdate!=null and lianstartdate!=''">
+			and
+			to_date(flow.text10,'yyyy-mm-dd')&gt;=to_date(#{lianstartdate},'yyyy-mm-dd')
+		</if>
+		<if test="lianenddate!=null and lianenddate!=''">
+			and
+			to_date(flow.text10,'yyyy-mm-dd')&lt;=to_date(#{lianenddate},'yyyy-mm-dd')
+		</if>
+		<if test="cycksql!=null and cycksql!=''">
+			and (${cycksql})
+		</if>
+		<if test="anyousql!=null and anyousql!=''">
+			and (${anyousql})
+		</if>
+		<if test="xingqisql!=null and xingqisql!=''">
+			and (${xingqisql})
+		</if>
+		<if test="cbinamesql!=null and cbinamesql!=''">
+			and (${cbinamesql})
+		</if>
+		<if test="shouanstartdate!=null and shouanstartdate!=''">
+			and to_date(flow.text10,'yyyy-mm-dd')
+			&gt;=to_date(#{shouanstartdate},'yyyy-mm-dd')
+		</if>
+		<if test="shouanenddate!=null and shouanenddate!=''">
+			and to_date(flow.text10,'yyyy-mm-dd')
+			&lt;=to_date(#{shouanenddate},'yyyy-mm-dd')
+		</if>
+		<if test="departid!=null and departid!=''">
+			and flow.departid=#{departid}
+		</if>
+		<if test="key!=null and key!=''">
+			and (t.xingming like '%'||#{key}||'%' or t.anhao=#{key})
+		</if>
+		<if test="type!=null and type!=''">
+			and zuifanbianhao not in( select t.crimid from TBCRIMINAL_FYGUANZHU t)
+		</if>
+		<if test="type2!=null and type2!=''">
+			and zuifanbianhao in( select t.crimid from TBCRIMINAL_FYGUANZHU t)
+		</if>
+		)
+	</select>
+	<select id="getNowYuXing" parameterType="Map" resultType="java.util.HashMap">
+		select
+		sentencechageinfoshort,punishmentyear,punishmentmonth,punishmentday,rewardinfo,
+		sentencestart,courtchangeto,losepoweryear,losepowermonth,losepowereday,
+		rtrim(case when tsa.isold=1 then '老犯、' end ||case when tsa.isill=1
+		then '病犯、' end
+		||case when tsa.isdisability=1 then '残犯、' end) as crimtype,
+		case when tsa.nowpunishmentyear = '9996' then '死缓'
+		when tsa.nowpunishmentyear = '9995' then '无期徒刑'
+		else getdisoftwodate (remainderpunishment,courtchangeto)
+		end as nowpunishmentyear
+		from tbxf_screening ts,tbxf_sentencealteration
+		tsa,tbxf_commuteparole_batch tcb
+		where ts.crimid=#{crimid} and ts.batchid = tcb.batchid(+) and ts.crimid =
+		tsa.crimid(+)
+	</select>
+	<!-- 获取减刑审核表显示数据 -->
+	<select id="getParoleByCrimid" parameterType="String"
+		resultType="java.util.HashMap">
+		SELECT a.crimid,
+		a.crimid criminalid,
+		substr(B.FILENO,length(B.FILENO)-3,length(B.FILENO)) zfbh,
+		a.name cbiname,
+		nvl(a.usedname,'无') cbitruename,
+		a.VOCATION buqian,
+		a.gender cbigendername,
+		nvl(a.education,'无') caieducation,
+		nvl(a.origin,'无') cbinativenamedetail,
+		a.nation cbination,
+		to_char(a.birthday,'yyyyMMdd') cbibirthday,
+		<!-- 出生日期yyyy.mm.dd -->
+		F_FORMATDATE(a.birthday,1) cbibirthday1,
+		a.familyaddress cbihomeaddress,
+		a.idnumber,
+		a.rewardpunish text35,
+		nvl(a.rewardpunish,'无') qiankelieji,
+		a.crimid || ',' || a.name applyvalue,
+		TO_CHAR (b.inprisondate, 'yyyyMMdd') criofficiallyplacedate,
+		'执行日期' text32,
+		TO_CHAR (b.executiondate, 'yyyyMMdd') zhixingdate,
+		<!-- 执行日期yyyy.mm.dd -->
+		F_FORMATDATE(b.TAKEEFFECTDATE,1) zhixingdate1,
+		<!-- DECODE(B.OLDPRISONER,'老病残',B.ILLPRISONER,1,'老病残',B.DEFORMITYPRISONER,'老病残','一般') 
+			jiankang, -->
+		CASE
+		WHEN B.OLDPRISONER=1 THEN
+		'老犯'
+		WHEN B.ILLPRISONER=1 THEN
+		'病犯'
+		WHEN B.DEFORMITYPRISONER=1 THEN
+		'残犯'
+		ELSE
+		'一般'
+		END jiankang,
+		TO_CHAR(b.judgedate,'yyyyMMdd') judgedate,
+		TO_CHAR(b.detaindate,'yyyyMMdd') text34,
+		b.judgmentname cjicourtname,
+		b.FIRSTJUDGMENTNAME cjicourtname1,
+		b.punishmentyear,
+		b.punishmenttype zhuxing,
+		F_FORMATYMD (b.PUNISHMENTYEAR,
+		b.PUNISHMENTMONTH,
+		b.PUNISHMENTDAY,
+		1)
+		yuanpanxingqi,
+		F_LOSEPOWER (b.LOSEPOWERYEAR, b.LOSEPOWERMONTH, b.LOSEPOWEREDAY) boquan,
+		F_LOSEPOWER (b.LOSEPOWERYEAR, b.LOSEPOWERMONTH, b.LOSEPOWEREDAY)
+		||decode(b.FORFEIT,null,'','\r\n罚金'||b.FORFEIT||'元')
+		||decode(b.FORFEITUREPROPERTY,null,'','\r\n没收财产'||b.FORFEITUREPROPERTY||'元')
+		fujiaxing,
+		replace(decode(b.causeaction,null,'',b.causeaction||'罪'),'罪罪','罪')
+		anyouhuizong,
+		F_GETXINGQI(b.SENTENCESTIME, b.SENTENCEETIME) xingqiqizhi,
+		F_GETXINGQI(b.SENTENCESTIME, b.SENTENCEETIME,1) xingqiqizhi1,
+		TO_CHAR(b.crimedate, 'yyyyMMdd') fanzuishijian,
+		b.forfeit cjimulct,
+		b.payment fajinjiaonaqingkuang,
+		b.compensation cjipeichangjine,
+		b.fulfilcompensation cjmoneydisgorged,
+		b.stolenmoney paymentzk,
+		b.returnloot paymentpc,
+		b.forfeitureproperty cjisequestrateproperty,
+		b.expropriation paymentcc,
+		b.crimeface fanzuishishi,
+		TO_CHAR (SYSDATE, 'yyyyMMdd') text9,
+		TO_CHAR(b.arrestdate,'yyyyMMdd') text38,
+		TO_CHAR(b.sentencestime,'yyyyMMdd') text39,
+		CASE
+		WHEN c.Courtchangeto IS NOT NULL THEN
+		' '
+		||nvl(c.sentencechageinfoshort,'无，')||'服刑期至'||F_FORMATDATE(c.Courtchangeto)||'。'
+		ELSE
+		' ' ||nvl(c.sentencechageinfoshort,'无')
+		END prisonterm1,
+		' ' ||nvl(c.sentencechageinfoshort,'无') prisonterm,
+
+		decode(c.sentencechageinfoshort,null,'',
+		' 历次减刑情况： '
+		|| c.sentencechageinfoshort
+		||'\r'
+		|| F_GETXINGQI (b.sentencestime, c.courtchangeto)
+		)
+		as prisonterm_hebei,
+		c.remuneration zclhq,
+		c.withcash gsk,
+		c.remittance hk,
+		c.income qtsr,
+		c.shopping gwzc,
+		c.pay qtzc,
+		c.overplus balance
+		FROM TBPRISONER_BASEINFO a,
+		TBPRISONER_BASE_CRIME b,
+		TBXF_SENTENCEALTERATION c
+		where a.crimid = b.crimid
+		and a.crimid = c.crimid
+		<if test="crimid!=null and crimid!=''">
+			and a.crimid = #{crimid}
+		</if>
+	</select>
+	
+	
+
+
+	<!--查询 -->
+	<select id="getReferenceList_sx" resultType="map">
+		SELECT TO_NUMBER
+		(c.punishmentyear||'.'||c.punishmentmonth||''||c.punishmentday) AS
+		punishment,c.crimid
+		FROM TBPRISONER_BASE_CRIME c WHERE 1 = 1
+		<!-- 普通犯 -->
+		<if test="punState == 10 and crimidState= 0">
+			and c.
+			AND TO_NUMBER (
+			c.punishmentyear||'.'||c.punishmentmonth||''||c.punishmentday) &lt; 5
+		</if>
+		<if test="state == 20 and crimidState= 0">
+			AND 5 &lt; TO_NUMBER ( c.punishmentyear || '.' || c.punishmentmonth ||
+			'' || c.punishmentday)
+			AND TO_NUMBER ( c.punishmentyear || '.' || c.punishmentmonth || '' ||
+			c.punishmentday) &lt;= 10
+		</if>
+		<if test="state == 30 and crimidState= 0">
+			AND 10 &lt; TO_NUMBER ( c.punishmentyear || '.' || c.punishmentmonth ||
+			'' || c.punishmentday)
+			AND TO_NUMBER ( c.punishmentyear || '.' || c.punishmentmonth || '' ||
+			c.punishmentday) &lt;= 15
+		</if>
+		<if test="state == 40 and crimidState= 0">
+			AND TO_NUMBER (
+			c.punishmentyear||'.'||c.punishmentmonth||''||c.punishmentday) &lt; 5
+		</if>
+		<!-- 三类犯 -->
+		<if test="punState == 11 and crimidState= 1">
+			and c.
+			AND TO_NUMBER (
+			c.punishmentyear||'.'||c.punishmentmonth||''||c.punishmentday) &lt; 5
+		</if>
+		<if test="state == 21 and crimidState= 1">
+			AND 5 &lt; TO_NUMBER ( c.punishmentyear || '.' || c.punishmentmonth ||
+			'' || c.punishmentday)
+			AND TO_NUMBER ( c.punishmentyear || '.' || c.punishmentmonth || '' ||
+			c.punishmentday) &lt;= 10
+		</if>
+		<if test="state == 31 and crimidState= 1">
+			AND 10 &lt; TO_NUMBER ( c.punishmentyear || '.' || c.punishmentmonth ||
+			'' || c.punishmentday)
+			AND TO_NUMBER ( c.punishmentyear || '.' || c.punishmentmonth || '' ||
+			c.punishmentday) &lt;= 15
+		</if>
+		<if test="state == 41 and crimidState= 1">
+			AND TO_NUMBER (
+			c.punishmentyear||'.'||c.punishmentmonth||''||c.punishmentday) &lt; 5
+		</if>
+	</select>
+	<select id="getCommutationaccordByCrimid" parameterType="Map"
+		resultType="java.util.HashMap">
+		SELECT a.crimid,
+       h.batchid,
+          '罪犯：'
+       || a.name
+       || '@罪名：'
+       || b.charge
+       || '@入监时间：'
+       || F_FORMATDATE (b.inprisondate)
+        || '@'
+       || CASE
+             WHEN a.crimetime IS NOT NULL
+             THEN
+                '犯罪时间：' || F_FORMATDATE (a.crimetime) 
+             ELSE
+                ''
+          END || '@'
+       || '原判：'
+       || CASE
+             WHEN a.originalyear = 9995
+             THEN
+                '无期徒刑'
+             WHEN a.originalyear = 9996
+             THEN
+                '死刑,缓期二年执行'
+             ELSE
+                '有期徒刑'
+                || F_FORMATYMD (a.originalyear,
+                                a.originalmonth,
+                                a.originalday,
+                                1)
+                                
+          END
+       || CASE
+             WHEN a.predate IS NULL
+             THEN
+                '，未减过刑'
+             ELSE
+          
+                '@现刑期：'  
+                || CASE
+                      WHEN a.punishmentyear = 9995
+                      THEN
+                         '无期徒刑'
+                      WHEN a.punishmentyear = 9996
+                      THEN
+                         '死刑,缓期二年执行'
+                      ELSE
+                         '有期徒刑'
+                         || F_FORMATYMD (a.punishmentyear,
+                                         a.punishmentmonth,
+                                         a.punishmentday,
+                                         1)
+                   END
+          END
+       || '@执行刑期：'
+       || REPLACE (
+             REPLACE (
+                REPLACE (
+                   'start'
+                   || F_EXCHANGENUM(FLOOR (
+                         CEIL (MONTHS_BETWEEN (h.EXAMINEEND, b.judgedate))
+                         / 12))
+                   || '年'
+                   || F_EXCHANGENUM(MOD (CEIL (MONTHS_BETWEEN (h.EXAMINEEND, b.judgedate)),
+                           12))
+                   || '个月',
+                   '年0个月',
+                   '年'),
+                'start0年',
+                ''),
+             'start',
+             '')
+       ||'@剩余刑期：' 
+       ||case  
+        when a.nowpunishmentyear='9995'
+        then '无期徒刑'
+        when a.nowpunishmentyear='9996'
+       then '死刑,缓期二年执行'
+       else F_FORMATYMD(a.nowpunishmentyear,a.nowpunishmentmonth,a.nowpunishmentday,1)
+       end
+       || CASE
+             WHEN a.predate IS NULL
+             THEN
+                ''
+             ELSE
+                 '@'||
+                   '减刑间隔时间：'
+                || F_FORMATYMD (a.intervalyear,
+                                a.intervalmonth,
+                                0,
+                                1)
+                || ''
+          END
+          
+       || CASE
+             WHEN a.sentencechageinfoshort IS NOT NULL
+             THEN
+                '@历次刑期变动：' || a.sentencechageinfoshort
+          END  
+       || CASE
+             WHEN a.rewardinfo IS NOT NULL
+             THEN 
+                   '@奖励情况：'
+                || REPLACE (a.rewardinfo, '\r\n', '、')
+                || ''
+          END
+       || CASE
+             WHEN d.int7 > 0 OR d.int8 > 0 OR d.int9 > 0
+             THEN
+                   '处罚情况：'
+                || DECODE (d.int7, 0, '', '警告' || d.int7 || '次')
+                || DECODE (d.int8, 0, '', '记过' || d.int8 || '次')
+                || DECODE (d.int9, 0, '', '禁闭' || d.int9 || '次')
+                || ''
+          END   
+       || CASE
+             WHEN f.typename IS NOT NULL
+             THEN
+                '@该犯为' || f.typename || '。'
+          END
+          AS criminalinfo
+		from
+		tbxf_sentencealteration a,tbprisoner_base_crime b,tbprisoner_baseinfo c,
+		(select *
+		from (select rownum as xuhao, f.*
+		from (select *
+		from tbxf_commuteparole_batch e
+		where e.departid = #{departid}
+		order by e.curyear desc, e.batch desc) f) g
+		where g.xuhao = 1) h,
+		tbxf_prisonerperformancemerge d,
+		(select d.crimid, to_char(wm_concat(e.name)) typename from
+		tbxf_crimetypesmapping d,tbxf_crimetypes e where d.typeid=e.typeid and
+		d.typeid not in('10014') and d.crimid =#{crimid} group by d.crimid) f
+		where a.crimid=b.crimid and a.crimid=c.crimid and a.crimid=f.crimid(+)
+		and a.crimid=d.crimid(+) and h.batchid=d.batchid and
+		a.jailid=h.departid
+		<if test="crimid!=null and crimid!=''">
+			and a.crimid = #{crimid}
+		</if>
+	</select>
+	<!-- 保外就医 案件查看：宁夏data -->
+	<select id="bwjyLookCaseDataInfoMapper" resultType="map">
+		<if test="nodeid != null and nodeid != ''">
+			SELECT '${nodeidname}' AS jincheng, uv.applyname as name,uv.applyid
+			as crimid,
+			'('|| SUBSTR (uv.text6, 0, 4)|| ')'|| info.shortname|| uv.casetype ||
+			'第'|| SUBSTR (uv.text6, 5)|| '号' AS anjianhao,
+			substr(uv.text6,0,4) as nianhao,
+			ce.orgname1 as areaname,
+			uv.flowid,
+			uv.flowdraftid,
+			uv.flowdefid
+			FROM UV_FLOW uv, TBPRISONER_BASE_CRIME ce,TBSYS_ORGINFO info
+			WHERE uv.flowdefid = #{flowdefid}
+			and ce.orgid=info.orgid
+			<if test="key != null and key != ''">
+				and (uv.applyid like concat(concat('%',#{key}),'%') or uv.applyname
+				like concat(concat('%',#{key}),'%'))
+			</if>
+			AND ( (uv.nodeid = #{nodeid1} AND uv.state IN (#{state1}, #{state2}))
+			OR (uv.nodeid = #{nodeid2} AND uv.state IN (#{state3})))
+			AND uv.applyid = ce.crimid
+			<if test="orgid != null and orgid != ''">
+				AND (ce.orgid1 IN (SELECT dorgid
+				FROM TBFLOW_ORG_ORG org
+				WHERE org.orgid = #{orgid})
+				OR ce.orgid2 IN (SELECT dorgid
+				FROM TBFLOW_ORG_ORG org
+				WHERE org.orgid = #{orgid}))
+			</if>
+		</if>
+		<if test="nodeid == null or nodeid == ''">
+			select * from
+			(select uv.applyname as name,
+			uv.applyid crimid,
+			'('|| SUBSTR (uv.text6, 0, 4)|| ')'|| uv.shortname|| uv.casetype || '第'||
+			SUBSTR (uv.text6, 5)|| '号' AS anjianhao,
+			substr(uv.text6,0,4) as nianhao,
+			uv.orgname1 as areaname,
+			rownum as rn,
+			uv.jincheng as jincheng,
+			uv.flowid,
+			uv.flowdraftid,
+			uv.flowdefid
+			from (
+			select '分监区办理中' as jincheng,uv.*,ce.orgname1,info.shortname from UV_FLOW
+			uv,TBPRISONER_BASE_CRIME ce,TBSYS_ORGINFO info where
+			uv.flowdefid=#{flowdefid} and ce.orgid=info.orgid and ((uv.nodeid =
+			'N0002' and uv.state in (0,0)) or (uv.nodeid = '0' and uv.state in
+			(0)) ) and uv.applyid=ce.crimid
+			union
+			select '监区办理中' as jincheng,uv.*,ce.orgname1,info.shortname from UV_FLOW
+			uv,TBPRISONER_BASE_CRIME ce,TBSYS_ORGINFO info where
+			uv.flowdefid=#{flowdefid} and ce.orgid=info.orgid and ((uv.nodeid =
+			'N0002' and uv.state in (-1,2)) or (uv.nodeid = 'N0003' and uv.state
+			in (0)) ) and uv.applyid=ce.crimid
+			union
+			select '科室办理中' as jincheng,uv.*,ce.orgname1,info.shortname from UV_FLOW
+			uv,TBPRISONER_BASE_CRIME ce,TBSYS_ORGINFO info where
+			uv.flowdefid=#{flowdefid} and ce.orgid=info.orgid and ((uv.nodeid =
+			'N0003' and uv.state in (-1,2)) or (uv.nodeid = 'N0004' and uv.state
+			in (0)) ) and uv.applyid=ce.crimid
+			union
+			select '监狱长办理中' as jincheng,uv.*,ce.orgname1,info.shortname from UV_FLOW
+			uv,TBPRISONER_BASE_CRIME ce,TBSYS_ORGINFO info where
+			uv.flowdefid=#{flowdefid} and ce.orgid=info.orgid and ((uv.nodeid =
+			'N0004' and uv.state in (-1,2)) or (uv.nodeid = '1' and uv.state in
+			(0)) ) and uv.applyid=ce.crimid
+			union
+			select '监狱办理通过' as jincheng,uv.*,ce.orgname1,info.shortname from UV_FLOW
+			uv,TBPRISONER_BASE_CRIME ce,TBSYS_ORGINFO info where
+			uv.flowdefid=#{flowdefid} and ce.orgid=info.orgid and ((uv.nodeid =
+			'1' and uv.state in (1,1)) or (uv.nodeid = '1' and uv.state in (1)) )
+			and uv.applyid=ce.crimid
+			union
+			select '监狱办理未通过' as jincheng,uv.*,ce.orgname1,info.shortname from UV_FLOW
+			uv,TBPRISONER_BASE_CRIME ce,TBSYS_ORGINFO info where
+			uv.flowdefid=#{flowdefid} and ce.orgid=info.orgid and ((uv.nodeid =
+			'-1' and uv.state in (3,3)) or (uv.nodeid = '-1' and uv.state in (3))
+			) and uv.applyid=ce.crimid
+			) uv where (uv.orgid in (select dorgid from TBFLOW_ORG_ORG org where
+			org.orgid=#{orgid})
+			or uv.orgid2 in (select dorgid from TBFLOW_ORG_ORG org where
+			org.orgid=#{orgid}))
+			<if test="key != null and key != ''">
+				and (uv.applyname like concat(concat('%',#{key}),'%') or uv.applyid
+				like concat(concat('%',#{key}),'%'))
+			</if>
+			and rownum &lt; #{end} order by uv.text6 ) where rn &gt;= #{start}
+		</if>
+	</select>
+	<!-- 当执行撤销操作 执行下面sql语句 -->
+	<delete id="deleteTbflowbaseByflowdraftids" parameterType="map">
+		delete from TBFLOW_BASE tb where tb.flowdraftid = #{flowdraftid}
+	</delete>
+	<delete id="deleteTbflowByflowdraftids" parameterType="map">
+		delete from TBFLOW tb where tb.flowdraftid = #{flowdraftid}
+	</delete>
+	<delete id="deleteTbflowOhterByflowdraftids" parameterType="map">
+		delete from TBFLOW_OTHER_FLOW tb where tb.flowdraftid = #{flowdraftid}
+	</delete>
+	<delete id="deleteTbflowBaseOhterByflowdraftids" parameterType="map">
+		delete from TBFLOW_BASE_OTHER tb where tb.otherid in (select otherid
+		from TBFLOW_OTHER_FLOW where flowdraftid = #{flowdraftid})
+	</delete>
+	<!-- 当执行完上面的删除操作以后，那么执行下面的更新操作 -->
+	<update id="updateDetainStatusByCrimds" parameterType="map">
+		update TBPRISONER_BASE_CRIME tb set tb.detainstatus=#{detainstatus} where
+		tb.crimid = #{crimid}
+	</update>
+	<update id="updateStatusByCrimids" parameterType="map">
+		update TBXF_SENTENCEALTERATION tb set tb.status=0 where tb.crimid =
+		#{crimid}
+	</update>
+	<!-- 保外就医 案件查看：宁夏count -->
+	<select id="bwjyLookCaseDataInfoCount" resultType="int">
+		<if test="nodeid != null and nodeid != ''">
+			SELECT count(*)as datacount
+			FROM UV_FLOW uv, TBPRISONER_BASE_CRIME ce
+			WHERE uv.flowdefid = #{flowdefid}
+			AND ( (uv.nodeid = #{nodeid1} AND uv.state IN (#{state1}, #{state2}))
+			OR (uv.nodeid = #{nodeid2} AND uv.state IN (#{state3})))
+			AND uv.applyid = ce.crimid
+			<if test="key != null and key != ''">
+				and (uv.applyid like concat(concat('%',#{key}),'%') or uv.applyname
+				like concat(concat('%',#{key}),'%'))
+			</if>
+			<if test="orgid != null and orgid != ''">
+				AND (ce.orgid1 IN (SELECT dorgid
+				FROM TBFLOW_ORG_ORG org
+				WHERE org.orgid = #{orgid})
+				OR ce.orgid2 IN (SELECT dorgid
+				FROM TBFLOW_ORG_ORG org
+				WHERE org.orgid = #{orgid}))
+			</if>
+		</if>
+		<if test="nodeid == null or nodeid == ''">
+			select count(*) as datacount from UV_FLOW uv,TBPRISONER_BASE_CRIME ce
+			where uv.flowdefid=#{flowdefid} and uv.applyid=ce.crimid
+			and (ce.orgid1 in (select dorgid from TBFLOW_ORG_ORG org where
+			org.orgid=#{orgid}) or ce.orgid2 in (select dorgid from
+			TBFLOW_ORG_ORG org where org.orgid=#{orgid}))
+			<if test="key != null and key != ''">
+				and (uv.applyid like concat(concat('%',#{key}),'%') or uv.applyname
+				like concat(concat('%',#{key}),'%'))
+			</if>
+			order by uv.text6
+		</if>
+	</select>
+	<!-- 获取法院复议表中所需要的信息 -->
+	<select id="getCourtFuyiInfo" parameterType="Map" resultType="Map">
+		SELECT tb.detainprison as jailname,
+		tf.crimid,
+		tf.name,
+		tf.usedname,
+		tf.gender,
+		TO_CHAR (birthday, 'yyyyMMdd') AS birthday,
+		TO_CHAR (birthday, 'yyyyMMdd') AS cbibirthday
+		FROM TBPRISONER_BASEINFO tf,
+		TBPRISONER_BASE_CRIME tb,
+		TBXF_SENTENCEALTERATION ts
+		WHERE tf.crimid = tb.crimid AND tf.crimid = ts.crimid and
+		tf.crimid=#{crimid}
+	</select>
+
+	<!-- 判断数据是否存在 -->
+	<select id="judgeBwCaseExistSave" resultType="map">
+		select count(*) as counts from TBFLOW_BASE_OTHER th,TBFLOW_OTHER_FLOW tb
+		where tb.tempid=#{tempid} and tb.flowdraftid=#{flowdraftid} and
+		th.otherid=tb.otherid
+	</select>
+	<select id="getFuxingbiaoxianByCrimid" parameterType="java.lang.String"
+		resultType="java.lang.String">
+		select
+		'考核期间（'||F_FORMATDATE(ts.REWARDSTART)||'至'||F_FORMATDATE(ts.REWARDEND)||'），共获得奖励：'||ts.rewardinfo
+		||'\r\n'|| ts.punishinfo AS rewardinfoandpunishinfo from
+		TBXF_SENTENCEALTERATION ts
+		WHERE ts.crimid=#{crimid}
+	</select>
+
+
+	<!-- 查询方案生成的sql文 -->
+	<select id="implementationOfTheSQL" resultType="java.util.HashMap">
+		<if test="sql!=null and sql!=''">${sql}</if>
+	</select>
+
+	<select id="ajaxtongji1" resultType="HashMap" parameterType="java.util.Map">
+		<if test="database == 'oracle'">
+			<if test="unitlevel != 3">
+				SELECT SUM(a.heji) as text0,SUM(a.sihuanxiaoji) as
+				text1,SUM(a.xianzhijianxing) as text2,SUM(a.wuqi) as
+				text3,SUM(a.youqi) as text4,SUM(a.laobingcan) as
+				text5,SUM(a.xianchujiyishang) as text6
+				FROM tjbb_statistics_basic_zaiya a, (SELECT * FROM tbsys_orginfo c WHERE
+				c.porgid=#{orgid}) b
+				WHERE a.provinceid=b.orgid AND a.year=#{year} and a.month =#{month} GROUP
+				BY year, month
+			</if>
+			<if test="unitlevel == 3">
+				select a.heji as text0,a.sihuanxiaoji as text1, a.xianzhijianxing as
+				text2,a.wuqi as text3,a.youqi as text4,a.laobingcan as
+				text5,a.xianchujiyishang as text6
+				FROM tjbb_statistics_basic_zaiya a where a.provinceid = #{orgid} and
+				a.year=#{year} and a.month =#{month}
+			</if>
+		</if>
+		<if test="database == 'dm'">
+			<if test="unitlevel != 3">
+				SELECT SUM(a."heji") as text0,SUM(a."sihuanxiaoji") as
+				text1,SUM(a."xianzhijianxing") as text2,SUM(a."wuqi") as
+				text3,SUM(a."youqi") as text4,SUM(a."laobingcan") as
+				text5,SUM(a."xianchujiyishang") as text6
+				FROM tjbb_statistics_basic_zaiya a, (SELECT * FROM tbsys_orginfo c WHERE
+				c.porgid=#{orgid}) b
+				WHERE a."provinceid"=b.orgid AND a."year"=#{year} and a."month" =#{month}
+				GROUP BY "year", "month"
+			</if>
+			<if test="unitlevel == 3">
+				select a."heji" as text0,a."sihuanxiaoji" as text1, a."xianzhijianxing" as
+				text2,a."wuqi" as text3,a."youqi" as text4,a."laobingcan" as
+				text5,a."xianchujiyishang" as text6
+				FROM tjbb_statistics_basic_zaiya a where a."provinceid" = #{orgid} and
+				a."year"=#{year} and a."month" =#{month}
+			</if>
+		</if>
+	</select>
+	<select id="ajaxtongji2" resultType="HashMap" parameterType="java.util.Map">
+		<if test="database == 'oracle'">
+			<if test="unitlevel != 3">
+				SELECT SUM(a.heji) as text7,SUM(a.zhanyafanbili) as text8,sum(a.pici) as
+				text9,SUM(a.sihuanjianwuqi) as text10,
+				SUM(a.sihuanjianyouqi) as text11,SUM(wuqijianyouqi) as text12,SUM(a.youqijianyouqi) as
+				text13,
+				SUM(a.ligong) as text14,SUM(a.zhongdaligong) as text15,SUM(a.laobingcan) as
+				text16,
+				SUM(a.laobingcanbili) as text17,SUM(a.xianchujiyishang) as text18,
+				SUM(a.xianchujibili) as text19 ,SUM(a.chehui) as text20,SUM(a.kaitingshenli) as text21,
+				SUM(fayuangaidong) as text22
+				FROM tjbb_statistics_basic_jxjs a, (SELECT * FROM tbsys_orginfo c WHERE
+				c.porgid=#{orgid}) b
+				WHERE a.provinceid=b.orgid AND a.year=#{year} and a.month =#{month} and
+				a.leibie='1' GROUP BY year ,month
+			</if>
+			<if test="unitlevel == 3">
+				SELECT a.heji as text7,a.zhanyafanbili as text8,a.pici as
+				text9,a.sihuanjianwuqi as text10,
+				a.sihuanjianyouqi as text11,wuqijianyouqi as text12,a.youqijianyouqi as text13,
+				a.ligong as text14,a.zhongdaligong as text15,a.laobingcan as text16,
+				a.laobingcanbili as text17,a.xianchujiyishang as text18,
+				a.xianchujibili as text19 ,a.chehui as text20,a.kaitingshenli as
+				text21,
+				fayuangaidong as text22
+				FROM tjbb_statistics_basic_jxjs a where a.provinceid = #{orgid} and
+				a.year=#{year} and a.month =#{month} and a.leibie='1'
+			</if>
+		</if>
+		<if test="database == 'dm'">
+			<if test="unitlevel != 3">
+				SELECT SUM(a."heji") as text7,SUM(a."zhanyafanbili") as
+				text8,sum(a."pici") as text9,SUM(a."sihuanjianwuqi") as text10,
+				SUM(a."sihuanjianyouqi") as text11,SUM("wuqijianyouqi") as
+				text12,SUM(a."youqijianyouqi") as text13,
+				SUM(a."ligong") as text14,SUM(a."zhongdaligong") as text15,SUM(a."laobingcan") as
+				text16,
+				SUM(a."laobingcanbili") as text17,SUM(a."xianchujiyishang") as text18,
+				SUM(a."xianchujibili") as text19 ,SUM(a."chehui") as
+				text20,SUM(a."kaitingshenli") as text21,
+				SUM("fayuangaidong") as text22
+				FROM tjbb_statistics_basic_jxjs a, (SELECT * FROM tbsys_orginfo c WHERE
+				c.porgid=#{orgid}) b
+				WHERE a."provinceid"=b.orgid AND a."year"=#{year} and a."month" =#{month}
+				and a."leibie"='1' GROUP BY "year" ,"month"
+			</if>
+			<if test="unitlevel == 3">
+				SELECT a."heji" as text7,a."zhanyafanbili" as text8,a."pici" as
+				text9,a."sihuanjianwuqi" as text10,
+				a."sihuanjianyouqi" as text11,"wuqijianyouqi" as text12,a."youqijianyouqi" as text13,
+				a."ligong" as text14,a."zhongdaligong" as text15,a."laobingcan" as
+				text16,
+				a."laobingcanbili" as text17,a."xianchujiyishang" as text18,
+				a."xianchujibili" as text19 ,a."chehui" as text20,a."kaitingshenli" as text21,
+				"fayuangaidong" as text22
+				FROM tjbb_statistics_basic_jxjs a where a."provinceid" = #{orgid} and
+				a."year"=#{year} and a."month" =#{month} and a."leibie"='1'
+			</if>
+		</if>
+	</select>
+	<select id="ajaxtongji3" resultType="HashMap" parameterType="java.util.Map">
+		<if test="database == 'oracle'">
+			<if test="unitlevel != 3">
+				SELECT SUM(a.heji) as text23,SUM(a.zhanyafanbili) as text24,SUM(a.pici) as
+				text25,SUM(a.laobingcan) as text26,SUM(a.laobingcanbili) as
+				text27,SUM(a.xianchujiyishang) as text28,
+				SUM(a.xianchujibili) as text29,SUM(a.chehui) as text30,SUM(a.chexiao) as
+				text31,SUM(a.kaitingshenli) as text32
+				FROM tjbb_statistics_basic_jxjs a, (SELECT * FROM tbsys_orginfo c WHERE
+				c.porgid=#{orgid}) b
+				WHERE a.provinceid=b.orgid AND a.year=#{year} and a.month = #{month} and
+				leibie='0' GROUP BY year ,month
+			</if>
+			<if test="unitlevel == 3">
+				SELECT a.heji as text23,a.zhanyafanbili as text24,a.pici as
+				text25,a.laobingcan as text26,a.laobingcanbili as
+				text27,a.xianchujiyishang as text28,
+				a.xianchujibili as text29,a.chehui as text30,a.chexiao as text31,a.kaitingshenli as
+				text32
+				FROM tjbb_statistics_basic_jxjs a where a.provinceid = #{orgid} and
+				a.year=#{year} and a.month =#{month} and leibie='0'
+			</if>
+		</if>
+		<if test="database == 'dm'">
+			<if test="unitlevel != 3">
+				SELECT SUM(a."heji") as text23,SUM(a."zhanyafanbili") as
+				text24,SUM(a."pici") as text25,SUM(a."laobingcan") as
+				text26,SUM(a."laobingcanbili") as text27,SUM(a."xianchujiyishang")
+				as text28,
+				SUM(a."xianchujibili") as text29,SUM(a."chehui") as text30,SUM(a."chexiao") as
+				text31,SUM(a."kaitingshenli") as text32
+				FROM tjbb_statistics_basic_jxjs a, (SELECT * FROM tbsys_orginfo c WHERE
+				c.porgid=#{orgid}) b
+				WHERE a."provinceid"=b.orgid AND a."year"=#{year} and a."month" =
+				#{month} and "leibie"='0' GROUP BY "year" ,"month"
+			</if>
+			<if test="unitlevel == 3">
+				SELECT a."heji" as text23,a."zhanyafanbili" as text24,a."pici" as
+				text25,a."laobingcan" as text26,a."laobingcanbili" as
+				text27,a."xianchujiyishang" as text28,
+				a."xianchujibili" as text29,a."chehui" as text30,a."chexiao" as
+				text31,a."kaitingshenli" as text32
+				FROM tjbb_statistics_basic_jxjs a where a."provinceid" = #{orgid} and
+				a."year"=#{year} and a."month" =#{month} and "leibie"='0'
+			</if>
+		</if>
+	</select>
+	<select id="ajaxtongji4" resultType="HashMap" parameterType="java.util.Map">
+		<if test="database == 'oracle'">
+			<if test="unitlevel != 3">
+				SELECT SUM(a.qmheji) as text33,SUM(a.qmyafanbili) as
+				text34,SUM(a.qmbenshengpizhun) as text35,SUM(a.qmwaishengzhuanlai)
+				as text36,SUM(a.qnheji) as text37,
+				SUM(a.qmyafanbili) as text38,SUM(a.qnbenshengpizhun) as
+				text39,SUM(a.qnwaishengzhuanlai) as text40,SUM(a.yanzhongjibing) as
+				text41,
+				SUM(a.ganyinghua) as text42,SUM(a.gaoxueya) as text43 ,
+				SUM(a.pinxue) as text44,SUM(a.huaiyun) as text45,SUM(a.bunengzili) as
+				text46,SUM(a.laobingcan) as text47,
+				SUM(a.laobingcanbili) as text48, SUM(a.xianjiyishang) as text49,SUM(a.xianjibili) as
+				text50,
+				SUM(a.shoujian) as text51,SUM(a.shifang) as text52,SUM(a.siwang) as
+				text53,SUM(a.youfanzui) as text54
+				FROM tjbb_statistics_basic_bwjy a, (SELECT * FROM tbsys_orginfo c WHERE
+				c.porgid=#{orgid}) b
+				WHERE a.provinceid=b.orgid AND a.year=#{year} and a.month = #{month}
+				GROUP BY year,month
+			</if>
+			<if test="unitlevel == 3">
+				SELECT a.qmheji as text33,a.qmyafanbili as text34,a.qmbenshengpizhun as
+				text35,a.qmwaishengzhuanlai as text36,a.qnheji as text37,
+				a.qmyafanbili as text38,a.qnbenshengpizhun as
+				text39,a.qnwaishengzhuanlai as text40,a.yanzhongjibing as text41,
+				a.ganyinghua as text42,a.gaoxueya as text43 ,
+				a.pinxue as text44,a.huaiyun as text45,a.bunengzili as text46,a.laobingcan
+				as text47,
+				a.laobingcanbili as text48, a.xianjiyishang as text49,a.xianjibili as text50,
+				a.shoujian as text51,a.shifang as text52,a.siwang as
+				text53,a.youfanzui as text54
+				FROM tjbb_statistics_basic_bwjy a where a.provinceid = #{orgid} and
+				a.year=#{year} and a.month =#{month}
+			</if>
+		</if>
+		<if test="database == 'dm'">
+			<if test="unitlevel != 3">
+				SELECT SUM(a."qmheji") as text33,SUM(a."qmyafanbili") as
+				text34,SUM(a."qmbenshengpizhun") as
+				text35,SUM(a."qmwaishengzhuanlai") as text36,SUM(a."qnheji") as
+				text37,
+				SUM(a."qmyafanbili") as text38,SUM(a."qnbenshengpizhun") as
+				text39,SUM(a."qnwaishengzhuanlai") as text40,SUM(a."yanzhongjibing")
+				as text41,
+				SUM(a."ganyinghua") as text42,SUM(a."gaoxueya") as text43 ,
+				SUM(a."pinxue") as text44,SUM(a."huaiyun") as text45,SUM(a."bunengzili") as
+				text46,SUM(a."laobingcan") as text47,
+				SUM(a."laobingcanbili") as text48, SUM(a."xianjiyishang") as text49,SUM(a."xianjibili") as
+				text50,
+				SUM(a."shoujian") as text51,SUM(a."shifang") as text52,SUM(a."siwang") as
+				text53,SUM(a."youfanzui") as text54
+				FROM tjbb_statistics_basic_bwjy a, (SELECT * FROM tbsys_orginfo c WHERE
+				c.porgid=#{orgid}) b
+				WHERE a."provinceid"=b.orgid AND a."year"=#{year} and a."month" =
+				#{month} GROUP BY "year","month"
+			</if>
+			<if test="unitlevel == 3">
+				SELECT a."qmheji" as text33,a."qmyafanbili" as text34,a."qmbenshengpizhun"
+				as text35,a."qmwaishengzhuanlai" as text36,a."qnheji" as text37,
+				a."qmyafanbili" as text38,a."qnbenshengpizhun" as
+				text39,a."qnwaishengzhuanlai" as text40,a."yanzhongjibing" as
+				text41,
+				a."ganyinghua" as text42,a."gaoxueya" as text43 ,
+				a."pinxue" as text44,a."huaiyun" as text45,a."bunengzili" as
+				text46,a."laobingcan" as text47,
+				a."laobingcanbili" as text48, a."xianjiyishang" as text49,a."xianjibili" as text50,
+				a."shoujian" as text51,a."shifang" as text52,a."siwang" as
+				text53,a."youfanzui" as text54
+				FROM tjbb_statistics_basic_bwjy a where a."provinceid" = #{orgid} and
+				a."year"=#{year} and a."month" =#{month}
+			</if>
+		</if>
+	</select>
+
+	<select id="ajaxtongji5" resultType="HashMap" parameterType="java.util.Map">
+		<if test="database == 'oracle'">
+			<if test="unitlevel != 3">
+				SELECT SUM(a.shensuheji) as text55,SUM(a.tqfyjcycl) as
+				text56,SUM(a.fyjcyhfjy) as text57,SUM(a.zftcfyjcycl) as
+				text58,SUM(a.fyjcyhfzf) as text59,
+				SUM(a.konggaoheji) as text60,SUM(a.jyzxcl) as text61,SUM(a.bsjjgcl) as
+				text62,SUM(a.zhganjcycl) as text63,SUM(a.jianchaheji) as
+				text64,SUM(a.jianchaygjjz) as text65,
+				SUM(a.jiuzhengheji) as text66,SUM(a.jiuzhengygjjz) as text67,SUM(a.jianjiazanheji) as
+				text68,SUM(a.xingshichufa) as text69,SUM(a.dangjizhengji) as text70
+				FROM tjbb_statistics_basic_qt a, (SELECT * FROM tbsys_orginfo c
+				WHERE c.porgid=#{orgid}) b
+				WHERE a.provinceid=b.orgid AND a.year=#{year} and a.month = #{month}
+				GROUP BY year ,month
+			</if>
+			<if test="unitlevel == 3">
+				SELECT a.shensuheji as text55,a.tqfyjcycl as text56,a.fyjcyhfjy as
+				text57,a.zftcfyjcycl as text58,a.fyjcyhfzf as text59,
+				a.konggaoheji as text60,a.jyzxcl as text61,a.bsjjgcl as text62,a.zhganjcycl as
+				text63,a.jianchaheji as text64,a.jianchaygjjz as text65,
+				a.jiuzhengheji as text66,a.jiuzhengygjjz as text67,a.jianjiazanheji
+				as text68,a.xingshichufa as text69,a.dangjizhengji as text70
+				FROM tjbb_statistics_basic_qt a where a.provinceid = #{orgid} and
+				a.year=#{year} and a.month =#{month}
+			</if>
+		</if>
+		<if test="database == 'dm'">
+			<if test="unitlevel != 3">
+				SELECT SUM(a."shensuheji") as text55,SUM(a."tqfyjcycl") as
+				text56,SUM(a."fyjcyhfjy") as text57,SUM(a."zftcfyjcycl") as
+				text58,SUM(a."fyjcyhfzf") as text59,
+				SUM(a."konggaoheji") as text60,SUM(a."jyzxcl") as text61,SUM(a."bsjjgcl") as
+				text62,SUM(a."zhganjcycl") as text63,SUM(a."jianchaheji") as
+				text64,SUM(a."jianchaygjjz") as text65,
+				SUM(a."jiuzhengheji") as text66,SUM(a."jiuzhengygjjz") as text67,SUM(a."jianjiazanheji")
+				as text68,SUM(a."xingshichufa") as text69,SUM(a."dangjizhengji") as
+				text70
+				FROM tjbb_statistics_basic_qt a, (SELECT * FROM tbsys_orginfo c WHERE
+				c.porgid=#{orgid}) b
+				WHERE a."provinceid"=b.orgid AND a."year"=#{year} and a."month" =
+				#{month} GROUP BY "year" ,"month"
+			</if>
+			<if test="unitlevel == 3">
+				SELECT a."shensuheji" as text55,a."tqfyjcycl" as text56,a."fyjcyhfjy" as
+				text57,a."zftcfyjcycl" as text58,a."fyjcyhfzf" as text59,
+				a."konggaoheji" as text60,a."jyzxcl" as text61,a."bsjjgcl" as
+				text62,a."zhganjcycl" as text63,a."jianchaheji" as
+				text64,a."jianchaygjjz" as text65,
+				a."jiuzhengheji" as text66,a."jiuzhengygjjz" as text67,a."jianjiazanheji" as
+				text68,a."xingshichufa" as text69,a."dangjizhengji" as text70
+				FROM tjbb_statistics_basic_qt a where a."provinceid" = #{orgid} and
+				a."year"=#{year} and a."month" =#{month}
+			</if>
+		</if>
+	</select>
+
+	<select id="ajaxtongji6" resultType="HashMap" parameterType="java.util.Map">
+		<if test="database == 'oracle'">
+			<if test="unitlevel != 3">
+				SELECT SUM(a.heji) as text71,SUM(a.jianyucount) as
+				text72,SUM(a.ysyjjzbaptjys) as text73,
+				SUM(a.yjcyfywsxtbaptjys) as text74,SUM(a.ysxjcjgjjzwsjdjys) as text75,
+				SUM(a.zzjsjjzbaptjys) as text76,SUM(a.yjcynftjys) as text77,SUM(a.njxycspktjys) as text78
+				FROM tjbb_statistics_basic_baptqktj a, (SELECT * FROM tbsys_orginfo
+				c WHERE c.porgid=#{orgid}) b
+				WHERE a.provinceid=b.orgid AND a.year=#{year} and a.month = #{month}
+				GROUP BY year ,month
+			</if>
+			<if test="unitlevel == 3">
+				SELECT a.heji as text71,a.jianyucount as text72,a.ysyjjzbaptjys as text73,
+				a.yjcyfywsxtbaptjys as text74,a.ysxjcjgjjzwsjdjys as text75,
+				a.zzjsjjzbaptjys as text76,a.yjcynftjys as text77,a.njxycspktjys as
+				text78
+				FROM tjbb_statistics_basic_baptqktj a where a.provinceid = #{orgid} and
+				a.year=#{year} and a.month =#{month}
+			</if>
+		</if>
+		<if test="database == 'dm'">
+			<if test="unitlevel != 3">
+				SELECT SUM(a."heji") as text71,SUM(a."jianyucount") as
+				text72,SUM(a."ysyjjzbaptjys") as text73,
+				SUM(a."yjcyfywsxtbaptjys") as text74,SUM(a."ysxjcjgjjzwsjdjys") as text75,
+				SUM(a."zzjsjjzbaptjys") as text76,SUM(a."yjcynftjys") as
+				text77,SUM(a."njxycspktjys") as text78
+				FROM tjbb_statistics_basic_baptqktj a, (SELECT * FROM tbsys_orginfo c
+				WHERE c.porgid=#{orgid}) b
+				WHERE a."provinceid"=b.orgid AND a."year"=#{year} and a."month" =
+				#{month} GROUP BY "year" ,"month"
+			</if>
+			<if test="unitlevel == 3">
+				SELECT a."heji" as text71,a."jianyucount" as text72,a."ysyjjzbaptjys" as
+				text73,
+				a."yjcyfywsxtbaptjys" as text74,a."ysxjcjgjjzwsjdjys" as text75,
+				a."zzjsjjzbaptjys" as text76,a."yjcynftjys" as text77,a."njxycspktjys" as text78
+				FROM tjbb_statistics_basic_baptqktj a where a."provinceid" = #{orgid}
+				and a."year"=#{year} and a."month" =#{month}
+			</if>
+		</if>
+	</select>
+
+	<select id="ajaxtongjisan1" resultType="HashMap" parameterType="java.util.Map">
+		<if test="database == 'oracle'">
+			<if test="unitlevel != 3">
+				select sum(heji) as text79, sum(zwfxj) as text80, sum(zwfyxcj) as text81,
+				sum(zwftjjys) as text82,
+				sum(qtfzzf) as text83, sum(jinrongfanzui) as text84, sum(sheheifanzui) as
+				text85 from tjbb_statistics_three_basic a,
+				(SELECT * FROM tbsys_orginfo c WHERE c.porgid=#{orgid}) b WHERE
+				a.provinceid=b.orgid AND a.year=#{year} and a.month=#{month} GROUP
+				BY year,month
+			</if>
+			<if test="unitlevel == 3">
+				select heji as text79, zwfxj as text80, zwfyxcj as text81, zwftjjys as
+				text82, qtfzzf as text83,
+				jinrongfanzui as text84, sheheifanzui as text85 from tjbb_statistics_three_basic
+				a
+				where a.provinceid = #{orgid} and a.year=#{year} and a.month =#{month}
+			</if>
+		</if>
+		<if test="database == 'dm'">
+			<if test="unitlevel != 3">
+				select sum("heji") as text79, sum("zwfxj") as text80, sum("zwfyxcj") as
+				text81, sum("zwftjjys") as text82,
+				sum("qtfzzf") as text83, sum("jinrongfanzui") as text84, sum("sheheifanzui") as
+				text85 from tjbb_statistics_three_basic a,
+				(SELECT * FROM tbsys_orginfo c WHERE c.porgid=#{orgid}) b WHERE
+				a."provinceid"=b.orgid AND a."year"=#{year} and a."month"=#{month}
+				GROUP BY "year","month"
+			</if>
+			<if test="unitlevel == 3">
+				select "heji" as text79, "zwfxj" as text80, "zwfyxcj" as text81,
+				"zwftjjys" as text82, "qtfzzf" as text83,
+				"jinrongfanzui" as text84, "sheheifanzui" as text85 from
+				tjbb_statistics_three_basic a
+				where a."provinceid" = #{orgid} and a."year"=#{year} and a."month"
+				=#{month}
+			</if>
+		</if>
+	</select>
+
+	<select id="ajaxtongjisan2" resultType="HashMap" parameterType="java.util.Map">
+		<if test="database == 'oracle'">
+			<if test="unitlevel != 3">
+				select sum(heji) as text86, sum(sanleifanjxjsl) as text87,
+				sum(zhiwufanxiaoji) as text88, sum(feizhiwufanjxjsl) as text89,
+				sum(zhiwufanyxcj) as text90,
+				sum(zhiwufanyxcjjxjsl) as text91, sum(zhiwufanytjjys) as text92, sum(zhiwufanytjjysjxjsl)
+				as text93, sum(qtzuifan) as text94, sum(qtjianxinglv) as text95,
+				sum(jinrongfan) as text96, sum(jinrongfanjxl) as text97,
+				sum(sheheifan) as text98, sum(sheheijxjsl) as text99 from
+				tjbb_statistics_three_jxjsbwjy a,
+				(SELECT * FROM tbsys_orginfo c WHERE c.porgid=#{orgid}) b WHERE
+				a.provinceid=b.orgid AND a.year=#{year} and a.leibie='1' and
+				month=#{month} GROUP BY year,month
+			</if>
+			<if test="unitlevel == 3">
+				select heji as text86, sanleifanjxjsl as text87, zhiwufanxiaoji as text88,
+				feizhiwufanjxjsl as text89, zhiwufanyxcj as text90,
+				zhiwufanyxcjjxjsl as text91,
+				zhiwufanytjjys as text92, zhiwufanytjjysjxjsl as text93, qtzuifan as text94,
+				qtjianxinglv as text95, jinrongfan as text96, jinrongfanjxl as
+				text97,
+				sheheifan as text98, sheheijxjsl as text99 from
+				tjbb_statistics_three_jxjsbwjy a
+				where a.provinceid = #{orgid} and a.year=#{year} and a.month =#{month}
+				and a.leibie='1'
+			</if>
+		</if>
+		<if test="database == 'dm'">
+			<if test="unitlevel != 3">
+				select sum("heji") as text86, sum("sanleifanjxjsl") as text87,
+				sum("zhiwufanxiaoji") as text88, sum("feizhiwufanjxjsl") as text89,
+				sum("zhiwufanyxcj") as text90,
+				sum("zhiwufanyxcjjxjsl") as text91, sum("zhiwufanytjjys") as text92,
+				sum("zhiwufanytjjysjxjsl") as text93, sum("qtzuifan") as text94,
+				sum("qtjianxinglv") as text95,
+				sum("jinrongfan") as text96, sum("jinrongfanjxl") as text97, sum("sheheifan") as
+				text98, sum("sheheijxjsl") as text99 from
+				tjbb_statistics_three_jxjsbwjy a,
+				(SELECT * FROM tbsys_orginfo c WHERE c.porgid=#{orgid}) b WHERE
+				a."provinceid"=b.orgid AND a."year"=#{year} and a."leibie"='1' and
+				"month"=#{month} GROUP BY "year","month"
+			</if>
+			<if test="unitlevel == 3">
+				select "heji" as text86, "sanleifanjxjsl" as text87, "zhiwufanxiaoji" as
+				text88, "feizhiwufanjxjsl" as text89, "zhiwufanyxcj" as text90,
+				"zhiwufanyxcjjxjsl" as text91,
+				"zhiwufanytjjys" as text92, "zhiwufanytjjysjxjsl" as text93, "qtzuifan" as text94,
+				"qtjianxinglv" as text95, "jinrongfan" as text96, "jinrongfanjxl" as
+				text97,
+				"sheheifan" as text98, "sheheijxjsl" as text99 from
+				tjbb_statistics_three_jxjsbwjy a
+				where a."provinceid" = #{orgid} and a."year"=#{year} and a."month"
+				=#{month} and a."leibie"='1'
+			</if>
+		</if>
+	</select>
+
+	<select id="ajaxtongjisan3" resultType="HashMap" parameterType="java.util.Map">
+		<if test="database == 'oracle'">
+			<if test="unitlevel != 3">
+				select sum(heji) as text100, sum(sanleifanjxjsl) as text101,
+				sum(zhiwufanxiaoji) as text102, sum(feizhiwufanjxjsl) as text103,
+				sum(zhiwufanyxcj) as text104,
+				sum(zhiwufanyxcjjxjsl) as text105, sum(zhiwufanytjjys) as text106,
+				sum(zhiwufanytjjysjxjsl) as text107, sum(qtzuifan) as text108,
+				sum(qtjianxinglv) as text109,
+				sum(jinrongfan) as text110, sum(jinrongfanjxl) as text111, sum(sheheifan) as
+				text112, sum(sheheijxjsl) as text113 from
+				tjbb_statistics_three_jxjsbwjy a,
+				(SELECT * FROM tbsys_orginfo c WHERE c.porgid=#{orgid}) b WHERE
+				a.provinceid=b.orgid AND a.year=#{year} and a.leibie='0' and
+				month=#{month} GROUP BY year,month
+			</if>
+			<if test="unitlevel == 3">
+				select heji as text100, sanleifanjxjsl as text101, zhiwufanxiaoji as
+				text102, feizhiwufanjxjsl as text103, zhiwufanyxcj as text104,
+				zhiwufanyxcjjxjsl as text105,
+				zhiwufanytjjys as text106, zhiwufanytjjysjxjsl as text107, qtzuifan as text108,
+				qtjianxinglv as text109, jinrongfan as text110, jinrongfanjxl as
+				text111,
+				sheheifan as text112, sheheijxjsl as text113 from
+				tjbb_statistics_three_jxjsbwjy a
+				where a.provinceid = #{orgid} and a.year=#{year} and a.month =#{month}
+				and a.leibie='0'
+			</if>
+		</if>
+		<if test="database == 'dm'">
+			<if test="unitlevel != 3">
+				select sum("heji") as text100, sum("sanleifanjxjsl") as text101,
+				sum("zhiwufanxiaoji") as text102, sum("feizhiwufanjxjsl") as
+				text103, sum("zhiwufanyxcj") as text104,
+				sum("zhiwufanyxcjjxjsl") as text105, sum("zhiwufanytjjys") as text106,
+				sum("zhiwufanytjjysjxjsl") as text107, sum("qtzuifan") as text108,
+				sum("qtjianxinglv") as text109,
+				sum("jinrongfan") as text110, sum("jinrongfanjxl") as text111, sum("sheheifan") as
+				text112, sum("sheheijxjsl") as text113 from
+				tjbb_statistics_three_jxjsbwjy a,
+				(SELECT * FROM tbsys_orginfo c WHERE c.porgid=#{orgid}) b WHERE
+				a."provinceid"=b.orgid AND a."year"=#{year} and a."leibie"='0' and
+				"month"=#{month} GROUP BY "year","month"
+			</if>
+			<if test="unitlevel == 3">
+				select "heji" as text100, "sanleifanjxjsl" as text101, "zhiwufanxiaoji" as
+				text102, "feizhiwufanjxjsl" as text103, "zhiwufanyxcj" as text104,
+				"zhiwufanyxcjjxjsl" as text105,
+				"zhiwufanytjjys" as text106, "zhiwufanytjjysjxjsl" as text107, "qtzuifan" as
+				text108, "qtjianxinglv" as text109, "jinrongfan" as text110,
+				"jinrongfanjxl" as text111,
+				"sheheifan" as text112, "sheheijxjsl" as text113 from
+				tjbb_statistics_three_jxjsbwjy a
+				where a."provinceid" = #{orgid} and a."year"=#{year} and a."month"
+				=#{month} and a."leibie"='0'
+			</if>
+		</if>
+	</select>
+
+	<select id="ajaxtongjisan4" resultType="HashMap" parameterType="java.util.Map">
+		<if test="database == 'oracle'">
+			<if test="unitlevel != 3">
+				select sum(heji) as text114, sum(sanleifanjxjsl) as text115,
+				sum(zhiwufanxiaoji) as text116, sum(feizhiwufanjxjsl) as text117,
+				sum(zhiwufanyxcj) as text118, sum(zhiwufanyxcjjxjsl) as text119,
+				sum(zhiwufanytjjys) as text120,
+				sum(zhiwufanytjjysjxjsl) as text121, sum(qtzuifan) as text122, sum(qtjianxinglv) as text123,
+				sum(jinrongfan) as text124, sum(jinrongfanjxl) as text125,
+				sum(sheheifan) as text126,
+				sum(sheheijxjsl) as text127, sum(shoujianxiaoji) as text128, sum(shoujianyxcj) as
+				text129, sum(shoujianytjjys) as text130 from
+				tjbb_statistics_three_jxjsbwjy a,
+				(SELECT * FROM tbsys_orginfo c WHERE c.porgid=#{orgid}) b WHERE
+				a.provinceid=b.orgid AND a.year=#{year} and a.leibie='2' and month
+				=#{month} GROUP BY year,month
+			</if>
+			<if test="unitlevel == 3">
+				select heji as text114, sanleifanjxjsl as text115, zhiwufanxiaoji as
+				text116, feizhiwufanjxjsl as text117,
+				zhiwufanyxcj as text118, zhiwufanyxcjjxjsl as text119, zhiwufanytjjys as
+				text120, zhiwufanytjjysjxjsl as text121,
+				qtzuifan as text122, qtjianxinglv as text123, jinrongfan as text124,
+				jinrongfanjxl as text125, sheheifan as text126,
+				sheheijxjsl as text127, shoujianxiaoji as text128, shoujianyxcj as text129,
+				shoujianytjjys as text130
+				FROM tjbb_statistics_three_jxjsbwjy a
+				where a.provinceid = #{orgid} and a.year=#{year} and a.month =#{month}
+				and a.leibie='2'
+			</if>
+		</if>
+		<if test="database == 'dm'">
+			<if test="unitlevel != 3">
+				select sum("heji") as text114, sum("sanleifanjxjsl") as text115,
+				sum("zhiwufanxiaoji") as text116, sum("feizhiwufanjxjsl") as
+				text117,
+				sum("zhiwufanyxcj") as text118, sum("zhiwufanyxcjjxjsl") as text119,
+				sum("zhiwufanytjjys") as text120,
+				sum("zhiwufanytjjysjxjsl") as text121, sum("qtzuifan") as text122, sum("qtjianxinglv") as
+				text123,
+				sum("jinrongfan") as text124, sum("jinrongfanjxl") as text125, sum("sheheifan") as
+				text126,
+				sum("sheheijxjsl") as text127, sum("shoujianxiaoji") as text128, sum("shoujianyxcj")
+				as text129, sum("shoujianytjjys") as text130 from
+				tjbb_statistics_three_jxjsbwjy a,
+				(SELECT * FROM tbsys_orginfo c WHERE c.porgid=#{orgid}) b WHERE
+				a."provinceid"=b.orgid AND a."year"=#{year} and a."leibie"='2' and
+				"month" =#{month} GROUP BY "year","month"
+			</if>
+			<if test="unitlevel == 3">
+				select "heji" as text114, "sanleifanjxjsl" as text115, "zhiwufanxiaoji" as
+				text116, "feizhiwufanjxjsl" as text117,
+				"zhiwufanyxcj" as text118, "zhiwufanyxcjjxjsl" as text119, "zhiwufanytjjys" as
+				text120, "zhiwufanytjjysjxjsl" as text121,
+				"qtzuifan" as text122, "qtjianxinglv" as text123, "jinrongfan" as text124,
+				"jinrongfanjxl" as text125, "sheheifan" as text126,
+				"sheheijxjsl" as text127, "shoujianxiaoji" as text128, "shoujianyxcj" as text129,
+				"shoujianytjjys" as text130
+				FROM tjbb_statistics_three_jxjsbwjy a
+				where a."provinceid" = #{orgid} and a."year"=#{year} and a."month"
+				=#{month} and a."leibie"='2'
+			</if>
+		</if>
+	</select>
+	<!-- 重要罪犯 -->
+	<!--减刑假释 案件查看 (刑期变动表+tbflowBase )-->
+	<select id="imselectTbxfs2" resultType="Map" parameterType="Map">
+		SELECT * FROM
+		(
+		SELECT A.*,ROWNUM RN
+		FROM
+		(
+
+		SELECT
+		UF.*,
+		tbc.orgname2 as areaname,
+		SUBSTR(UF.text15, 5) as casenumber,
+		 '('
+        || SUBSTR (UF.text6, 0, 4)
+        || ')'
+        || b.shortname
+        || UF.text14
+        || '第'
+        || SUBSTR(UF.text15, 5)
+        || '号'
+           AS anjianhao,
+		SUBSTR(uf.text6, 0,4) curyear,
+		decode(
+			UF.nodeid,'-1','未通过','0','经办人办理中','1',
+			DECODE (UF.state, '0', '监狱办理中', '已通过'),'N0001',
+			DECODE (UF.state, '0', '经办人办理中', '分监区办理中'),'N0002',
+			decode(UF.state,'0','分监区办理中','监区办理中'),'N0003',
+			decode(UF.state,'0','监区办理中','评审会办理中'),'N0004',
+			decode(UF.state,'0','评审会办理中','监狱办理中'),''
+		) casestate
+
+		FROM UV_FLOW UF,
+		tbprisoner_baseinfo tbi,
+		Tbprisoner_Base_Crime tbc,
+		TBSYS_ORGINFO b
+		WHERE UF.FLOWDEFID = #{flowdefid}
+		<if test="anhao != null and anhao != ''">
+		 and uf.flowdraftid in (
+                     select flowdraftid from tbflow_base where text15 in(
+                             select 
+                                      case when count(*) > 1 then
+                                              text15
+                                      end
+                              from tbflow_base where flowdefid='other_zfjyjxjssp' and text14='重审字' group by text15
+                             ) and flowdefid='other_zfjyjxjssp'  and text14='重审字' 
+                         )
+		</if>
+		
+		<if test="jianqu != null and jianqu != ''">
+			and tbc.orgid1 in (
+			SELECT T.DORGID FROM TBFLOW_ORG_ORG T WHERE T.ORGID =#{jianqu})
+		</if>
+
+		and uf.applyid=tbi.crimid
+		and uf.applyid=tbc.crimid
+		and UF.departid = b.orgid
+		AND EXISTS (
+		SELECT 'x'
+		FROM tbflow_org_org org
+		WHERE org.orgid=#{orgid}
+		and (tbc.orgid=org.dorgid or tbc.orgid1=org.dorgid or
+		tbc.orgid2=org.dorgid)
+		)
+
+		<if test="nodeid1!=null and nodeid1!='' and nodeid2!=null and nodeid2!=''">
+			and (
+			(uf.nodeid=#{nodeid1} and uf.state in (#{state1},2))
+			or (uf.nodeid=#{nodeid2} and uf.state=#{state2})
+			)
+		</if>
+		<if test="approval != null and approval != ''">
+			and (uf.nodeid != '1' and uf.state != 1)
+			and (uf.nodeid != '-1' and uf.state != 3)
+		</if>
+		<if test="key!=null and key!=''">
+			and (tbi.crimid like '%'||#{key}||'%' or tbi.name like '%'||#{key}||'%'
+			or tbi.NAMEPINYINSHORT like '%'||UPPER(#{key})||'%'
+			)
+		</if>
+		<if test="caseyear != null and caseyear != ''">
+			and SUBSTR(uf.text6, 0,4) = #{caseyear}
+		</if>
+
+		<if test="casetype != null and casetype != ''">
+			AND UF.text7 = #{casetype}
+		</if>
+        AND UF.text14='重审字'
+		<if test="casenums!=null and casenums!=''">
+			and to_number(uf.text15) IN (${casenums})
+		</if>
+		order by to_number(uf.text6) asc
+		<if
+			test="sortField != null and sortField != '' and sortOrder != null and sortOrder !=''">
+			, ${sortField} ${sortOrder}
+		</if>
+		) A
+		WHERE ROWNUM &lt;= #{end}
+		)
+		WHERE RN &gt;= #{start}
+	</select>
+	
+	<select id="imselectTbxfs2Count" resultType="int" parameterType="Map">
+		SELECT
+		count(uf.flowdraftid)
+		FROM UV_FLOW UF,
+		tbprisoner_baseinfo tbi,
+		Tbprisoner_Base_Crime tbc,
+		TBSYS_ORGINFO b
+		WHERE UF.FLOWDEFID = #{flowdefid}
+		and uf.applyid=tbi.crimid
+		and uf.applyid=tbc.crimid
+		and UF.departid = b.orgid
+		AND EXISTS (
+		SELECT 'x'
+		FROM tbflow_org_org org
+		WHERE org.orgid=#{orgid}
+		and (tbc.orgid=org.dorgid or tbc.orgid1=org.dorgid or
+		tbc.orgid2=org.dorgid)
+		)
+        <if test="anhao != null and anhao != ''">
+		  and uf.flowdraftid in (
+                     select flowdraftid from tbflow_base where text15 in(
+                             select 
+                                      case when count(*) > 1 then
+                                              text15
+                                      end
+                              from tbflow_base where flowdefid='other_zfjyjxjssp' and text14='重审字' group by text15
+                             ) and flowdefid='other_zfjyjxjssp'  and text14='重审字' 
+                         )
+		</if>
+		<if test="nodeid1!=null and nodeid1!='' and nodeid2!=null and nodeid2!=''">
+			and (
+			(uf.nodeid=#{nodeid1} and uf.state in (#{state1},2))
+			or (uf.nodeid=#{nodeid2} and uf.state=#{state2})
+			)
+		</if>
+		<if test="approval != null and approval != ''">
+			and (uf.nodeid != '1' and uf.state != 1)
+			and (uf.nodeid != '-1' and uf.state != 3)
+		</if>
+		<if test="key!=null and key!=''">
+			and (tbi.crimid like '%'||#{key}||'%' or tbi.name like '%'||#{key}||'%'
+			or tbi.NAMEPINYINSHORT like '%'||UPPER(#{key})||'%'
+			)
+		</if>
+		<if test="caseyear != null and caseyear != ''">
+			and SUBSTR(uf.text6, 0,4) = #{caseyear}
+		</if>
+		<if test="casenums!=null and casenums!=''">
+			and uf.text6 in (${casenums})
+		</if>
+		<if test="casetype != null and casetype != ''">
+			AND UF.text7=#{casetype}
+		</if>
+		AND UF.text14='重审字'
+		<if test="jianqu != null and jianqu != ''">
+			and tbc.orgid1 in (
+			SELECT T.DORGID FROM TBFLOW_ORG_ORG T WHERE T.ORGID =#{jianqu})
+		</if>
+
+	</select>
+	
+	
+	<update id="batchUpdateJiangChenInfo" parameterType="Map">
+		begin
+		<foreach collection="list" item="item" index="index"
+			separator=";">
+			update TBXF_PRISONERPERFORMANCEMERGE
+			<set>
+					INT24 = #{item.int24, jdbcType=DECIMAL},
+					INT2 = #{item.int2, jdbcType=DECIMAL},
+					INT40 = #{item.int40, jdbcType=DECIMAL},
+					INT28 = #{item.int28, jdbcType=DECIMAL},
+					INT45 = #{item.int45, jdbcType=DECIMAL},
+					TEXT3 = #{item.text3, jdbcType=VARCHAR},
+					TEXT4 = #{item.text4, jdbcType=VARCHAR},
+					TEXT1 = #{item.text1,jdbcType=CLOB},
+					TEXT2 = #{item.text2,jdbcType=CLOB},
+					TEXT5 = #{item.text5,jdbcType=CLOB},
+			</set>
+			where crimid = #{item.crimid}
+			  and batchid = #{item.batchid}
+		</foreach>
+		;end;
+	</update>
+	
+</mapper>

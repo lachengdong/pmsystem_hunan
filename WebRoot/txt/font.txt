@@ -1,0 +1,7 @@
+[
+	{id: "sbig", text: "超大", pid: "font"},
+	{id: "big", text: "大", pid: "font"},
+	{id: "zhong", text: "中", pid: "font"},
+	{id: "small", text: "小", pid: "font"}
+	
+]

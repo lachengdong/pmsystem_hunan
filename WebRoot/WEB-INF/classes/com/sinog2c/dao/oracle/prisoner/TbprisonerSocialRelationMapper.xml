@@ -1,0 +1,483 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.sinog2c.dao.api.prisoner.TbprisonerSocialRelationMapper" >
+  <resultMap id="BaseResultMap" type="com.sinog2c.model.prisoner.TbprisonerSocialRelation" >
+    <id column="SRID" property="srid" jdbcType="DECIMAL" />
+    <result column="CRIMID" property="crimid" jdbcType="VARCHAR" />
+    <result column="RELATIONSHIP" property="relationship" jdbcType="VARCHAR" />
+    <result column="NAME" property="name" jdbcType="VARCHAR" />
+    <result column="BIRTHDAY" property="birthday" jdbcType="VARCHAR" />
+    <result column="GENDER" property="gender" jdbcType="VARCHAR" />
+    <result column="ORGADDRESS" property="orgaddress" jdbcType="VARCHAR" />
+    <result column="ORGNAME" property="orgname" jdbcType="VARCHAR" />
+    <result column="ORGPOSTALCODE" property="orgpostalcode" jdbcType="VARCHAR" />
+    <result column="ORGTEL" property="orgtel" jdbcType="VARCHAR" />
+    <result column="PAPERTYPE" property="papertype" jdbcType="VARCHAR" />
+    <result column="PAPERID" property="paperid" jdbcType="VARCHAR" />
+    <result column="RDUTY" property="rduty" jdbcType="VARCHAR" />
+    <result column="VOCATION" property="vocation" jdbcType="VARCHAR" />
+    <result column="POLITICAL" property="political" jdbcType="VARCHAR" />
+    <result column="HOMEADDRESS" property="homeaddress" jdbcType="VARCHAR" />
+    <result column="POSTALCODE" property="postalcode" jdbcType="VARCHAR" />
+    <result column="PHONE" property="phone" jdbcType="VARCHAR" />
+    <result column="ISCRIMHISTORY" property="iscrimhistory" jdbcType="VARCHAR" />
+    <result column="ISPRIMARYCONTACT" property="isprimarycontact" jdbcType="VARCHAR" />
+    <result column="DELFLAG" property="delflag" jdbcType="VARCHAR" />
+    <result column="REMARK" property="remark" jdbcType="VARCHAR" />
+    <result column="OPID" property="opid" jdbcType="VARCHAR" />
+    <result column="OPTIME" property="optime" jdbcType="TIMESTAMP" />
+    <result column="CXCODE" property="cxcode" jdbcType="VARCHAR"/>
+    
+  </resultMap>
+  <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs"
+		type="com.sinog2c.model.prisoner.TbprisonerSocialRelation">
+		<result column="QRCODE" jdbcType="CLOB" property="qrcode" />
+	</resultMap>
+	<sql id="Blob_Column_List">
+		QRCODE
+  </sql>
+  <sql id="Base_Column_List" >
+    SRID, CRIMID, RELATIONSHIP, NAME, BIRTHDAY, GENDER, ORGADDRESS, ORGNAME, ORGPOSTALCODE, 
+    ORGTEL, PAPERTYPE, PAPERID, RDUTY, VOCATION, POLITICAL, HOMEADDRESS, POSTALCODE, 
+    PHONE, ISCRIMHISTORY, ISPRIMARYCONTACT, DELFLAG, REMARK, OPID, OPTIME
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from TBPRISONER_SOCIAL_RELATION
+    where SRID = #{srid,jdbcType=DECIMAL}
+  </select>
+  <select id="getSocialByMap" resultType="com.sinog2c.model.prisoner.TbprisonerSocialRelation" parameterType="Map" >
+    select 
+    <include refid="Base_Column_List" />
+    from TBPRISONER_SOCIAL_RELATION
+    where 1=1
+    and crimid = #{crimid}
+    and name = #{name}
+    and relationship = #{relationship}
+  </select>
+    <select id="getYorNnullByMap" resultType="com.sinog2c.model.prisoner.TbprisonerSocialRelation" parameterType="Map" >
+    select 
+    *
+    from TBPRISONER_SOCIAL_RELATION
+    where 1=1
+    and crimid = #{crimid}
+    and rownum=1
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from TBPRISONER_SOCIAL_RELATION
+    where SRID = #{srid,jdbcType=DECIMAL}
+  </delete>
+  <!-- 罪犯社会关系保存之前获取简历ID -->
+  <select id="getSrid" parameterType="String" resultType="String" >
+  	select nvl(max(srid),0)+1 as srid from TBPRISONER_SOCIAL_RELATION
+  </select>
+  <insert id="insertSelective" parameterType="com.sinog2c.model.prisoner.TbprisonerSocialRelation" >
+    insert into TBPRISONER_SOCIAL_RELATION
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="srid != null" >
+        SRID,
+      </if>
+      <if test="crimid != null" >
+        CRIMID,
+      </if>
+      <if test="relationship != null" >
+        RELATIONSHIP,
+      </if>
+      <if test="name != null" >
+        NAME,
+      </if>
+      <if test="birthday != null" >
+        BIRTHDAY,
+      </if>
+      <if test="gender != null" >
+        GENDER,
+      </if>
+      <if test="orgaddress != null" >
+        ORGADDRESS,
+      </if>
+      <if test="orgname != null" >
+        ORGNAME,
+      </if>
+      <if test="orgpostalcode != null" >
+        ORGPOSTALCODE,
+      </if>
+      <if test="orgtel != null" >
+        ORGTEL,
+      </if>
+      <if test="papertype != null" >
+        PAPERTYPE,
+      </if>
+      <if test="paperid != null" >
+        PAPERID,
+      </if>
+      <if test="rduty != null" >
+        RDUTY,
+      </if>
+      <if test="vocation != null" >
+        VOCATION,
+      </if>
+      <if test="political != null" >
+        POLITICAL,
+      </if>
+      <if test="homeaddress != null" >
+        HOMEADDRESS,
+      </if>
+      <if test="postalcode != null" >
+        POSTALCODE,
+      </if>
+      <if test="phone != null" >
+        PHONE,
+      </if>
+      <if test="iscrimhistory != null" >
+        ISCRIMHISTORY,
+      </if>
+      <if test="isprimarycontact != null" >
+        ISPRIMARYCONTACT,
+      </if>
+      <if test="delflag != null" >
+        DELFLAG,
+      </if>
+      <if test="remark != null" >
+        REMARK,
+      </if>
+      <if test="opid != null" >
+        OPID,
+      </if>
+      <if test="cxcode != null">
+        CXCODE,
+      </if>
+      <if test="optime != null" >
+        OPTIME,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="srid != null" >
+        #{srid,jdbcType=DECIMAL},
+      </if>
+      <if test="crimid != null" >
+        #{crimid,jdbcType=VARCHAR},
+      </if>
+      <if test="relationship != null" >
+        #{relationship,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null" >
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="birthday != null" >
+        #{birthday,jdbcType=VARCHAR},
+      </if>
+      <if test="gender != null" >
+        #{gender,jdbcType=VARCHAR},
+      </if>
+      <if test="orgaddress != null" >
+        #{orgaddress,jdbcType=VARCHAR},
+      </if>
+      <if test="orgname != null" >
+        #{orgname,jdbcType=VARCHAR},
+      </if>
+      <if test="orgpostalcode != null" >
+        #{orgpostalcode,jdbcType=VARCHAR},
+      </if>
+      <if test="orgtel != null" >
+        #{orgtel,jdbcType=VARCHAR},
+      </if>
+      <if test="papertype != null" >
+        #{papertype,jdbcType=VARCHAR},
+      </if>
+      <if test="paperid != null" >
+        #{paperid,jdbcType=VARCHAR},
+      </if>
+      <if test="rduty != null" >
+        #{rduty,jdbcType=VARCHAR},
+      </if>
+      <if test="vocation != null" >
+        #{vocation,jdbcType=VARCHAR},
+      </if>
+      <if test="political != null" >
+        #{political,jdbcType=VARCHAR},
+      </if>
+      <if test="homeaddress != null" >
+        #{homeaddress,jdbcType=VARCHAR},
+      </if>
+      <if test="postalcode != null" >
+        #{postalcode,jdbcType=VARCHAR},
+      </if>
+      <if test="phone != null" >
+        #{phone,jdbcType=VARCHAR},
+      </if>
+      <if test="iscrimhistory != null" >
+        #{iscrimhistory,jdbcType=VARCHAR},
+      </if>
+      <if test="isprimarycontact != null" >
+        #{isprimarycontact,jdbcType=VARCHAR},
+      </if>
+      <if test="delflag != null" >
+        #{delflag,jdbcType=VARCHAR},
+      </if>
+      <if test="remark != null" >
+        #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="opid != null" >
+        #{opid,jdbcType=VARCHAR},
+      </if>
+      <if test="cxcode != null" >
+        #{cxcode,jdbcType=VARCHAR},
+      </if>
+      <if test="optime != null" >
+        #{optime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <insert id="insertByMap" parameterType="Map" >
+    <selectKey keyProperty="srid" order="BEFORE" resultType="String">
+    	select nvl(max(srid),0)+1 as srid from TBPRISONER_SOCIAL_RELATION
+    </selectKey>
+    insert into TBPRISONER_SOCIAL_RELATION
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="srid != null" >
+        SRID,
+      </if>
+      <if test="crimid != null" >
+        CRIMID,
+      </if>
+      <if test="relationship != null" >
+        RELATIONSHIP,
+      </if>
+      <if test="name != null" >
+        NAME,
+      </if>
+      <if test="birthday != null" >
+        BIRTHDAY,
+      </if>
+      <if test="gender != null" >
+        GENDER,
+      </if>
+      <if test="orgaddress != null" >
+        ORGADDRESS,
+      </if>
+      <if test="orgname != null" >
+        ORGNAME,
+      </if>
+      <if test="orgpostalcode != null" >
+        ORGPOSTALCODE,
+      </if>
+      <if test="orgtel != null" >
+        ORGTEL,
+      </if>
+      <if test="papertype != null" >
+        PAPERTYPE,
+      </if>
+      <if test="paperid != null" >
+        PAPERID,
+      </if>
+      <if test="rduty != null" >
+        RDUTY,
+      </if>
+      <if test="vocation != null" >
+        VOCATION,
+      </if>
+      <if test="political != null" >
+        POLITICAL,
+      </if>
+      <if test="homeaddress != null" >
+        HOMEADDRESS,
+      </if>
+      <if test="postalcode != null" >
+        POSTALCODE,
+      </if>
+      <if test="phone != null" >
+        PHONE,
+      </if>
+      <if test="iscrimhistory != null" >
+        ISCRIMHISTORY,
+      </if>
+      <if test="isprimarycontact != null" >
+        ISPRIMARYCONTACT,
+      </if>
+      <if test="delflag != null" >
+        DELFLAG,
+      </if>
+      <if test="remark != null" >
+        REMARK,
+      </if>
+      <if test="opid != null" >
+        OPID,
+      </if>
+      <if test="cxcode != null">
+        CXCODE,
+      </if>
+      <if test="optime != null" >
+        OPTIME,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="srid != null" >
+        #{srid,jdbcType=DECIMAL},
+      </if>
+      <if test="crimid != null" >
+        #{crimid,jdbcType=VARCHAR},
+      </if>
+      <if test="relationship != null" >
+        #{relationship,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null" >
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="birthday != null" >
+        #{birthday,jdbcType=VARCHAR},
+      </if>
+      <if test="gender != null" >
+        #{gender,jdbcType=VARCHAR},
+      </if>
+      <if test="orgaddress != null" >
+        #{orgaddress,jdbcType=VARCHAR},
+      </if>
+      <if test="orgname != null" >
+        #{orgname,jdbcType=VARCHAR},
+      </if>
+      <if test="orgpostalcode != null" >
+        #{orgpostalcode,jdbcType=VARCHAR},
+      </if>
+      <if test="orgtel != null" >
+        #{orgtel,jdbcType=VARCHAR},
+      </if>
+      <if test="papertype != null" >
+        #{papertype,jdbcType=VARCHAR},
+      </if>
+      <if test="paperid != null" >
+        #{paperid,jdbcType=VARCHAR},
+      </if>
+      <if test="rduty != null" >
+        #{rduty,jdbcType=VARCHAR},
+      </if>
+      <if test="vocation != null" >
+        #{vocation,jdbcType=VARCHAR},
+      </if>
+      <if test="political != null" >
+        #{political,jdbcType=VARCHAR},
+      </if>
+      <if test="homeaddress != null" >
+        #{homeaddress,jdbcType=VARCHAR},
+      </if>
+      <if test="postalcode != null" >
+        #{postalcode,jdbcType=VARCHAR},
+      </if>
+      <if test="phone != null" >
+        #{phone,jdbcType=VARCHAR},
+      </if>
+      <if test="iscrimhistory != null" >
+        #{iscrimhistory,jdbcType=VARCHAR},
+      </if>
+      <if test="isprimarycontact != null" >
+        #{isprimarycontact,jdbcType=VARCHAR},
+      </if>
+      <if test="delflag != null" >
+        #{delflag,jdbcType=VARCHAR},
+      </if>
+      <if test="remark != null" >
+        #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="opid != null" >
+        #{opid,jdbcType=VARCHAR},
+      </if>
+      <if test="cxcode != null" >
+        #{cxcode,jdbcType=VARCHAR},
+      </if>
+      <if test="optime != null" >
+        #{optime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.sinog2c.model.prisoner.TbprisonerSocialRelation" >
+    update TBPRISONER_SOCIAL_RELATION
+    <set >
+      <if test="crimid != null" >
+        CRIMID = #{crimid,jdbcType=VARCHAR},
+      </if>
+      <if test="relationship != null" >
+        RELATIONSHIP = #{relationship,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null" >
+        NAME = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="birthday != null" >
+        BIRTHDAY = #{birthday,jdbcType=VARCHAR},
+      </if>
+      <if test="gender != null" >
+        GENDER = #{gender,jdbcType=VARCHAR},
+      </if>
+      <if test="orgaddress != null" >
+        ORGADDRESS = #{orgaddress,jdbcType=VARCHAR},
+      </if>
+      <if test="orgname != null" >
+        ORGNAME = #{orgname,jdbcType=VARCHAR},
+      </if>
+      <if test="orgpostalcode != null" >
+        ORGPOSTALCODE = #{orgpostalcode,jdbcType=VARCHAR},
+      </if>
+      <if test="orgtel != null" >
+        ORGTEL = #{orgtel,jdbcType=VARCHAR},
+      </if>
+      <if test="papertype != null" >
+        PAPERTYPE = #{papertype,jdbcType=VARCHAR},
+      </if>
+      <if test="paperid != null" >
+        PAPERID = #{paperid,jdbcType=VARCHAR},
+      </if>
+      <if test="rduty != null" >
+        RDUTY = #{rduty,jdbcType=VARCHAR},
+      </if>
+      <if test="vocation != null" >
+        VOCATION = #{vocation,jdbcType=VARCHAR},
+      </if>
+      <if test="political != null" >
+        POLITICAL = #{political,jdbcType=VARCHAR},
+      </if>
+      <if test="homeaddress != null" >
+        HOMEADDRESS = #{homeaddress,jdbcType=VARCHAR},
+      </if>
+      <if test="postalcode != null" >
+        POSTALCODE = #{postalcode,jdbcType=VARCHAR},
+      </if>
+      <if test="phone != null" >
+        PHONE = #{phone,jdbcType=VARCHAR},
+      </if>
+      <if test="iscrimhistory != null" >
+        ISCRIMHISTORY = #{iscrimhistory,jdbcType=VARCHAR},
+      </if>
+      <if test="isprimarycontact != null" >
+        ISPRIMARYCONTACT = #{isprimarycontact,jdbcType=VARCHAR},
+      </if>
+      <if test="delflag != null" >
+        DELFLAG = #{delflag,jdbcType=VARCHAR},
+      </if>
+      <if test="remark != null" >
+        REMARK = #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="opid != null" >
+        OPID = #{opid,jdbcType=VARCHAR},
+      </if>
+      <if test="optime != null" >
+        OPTIME = #{optime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="qrcode != null" >
+        QRCODE = #{qrcode,jdbcType=TIMESTAMP},
+      </if>
+      <if test="cxcode != null" >
+        CXCODE = #{cxcode,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where SRID = #{srid,jdbcType=DECIMAL}
+  </update>
+
+  <select id="findRelationBycrimid" resultType="com.sinog2c.model.prisoner.TbprisonerSocialRelation" >
+  	select * from TBPRISONER_SOCIAL_RELATION  where crimid=#{crimid} order by srid asc
+  </select>
+  <select id="findBycrimid" resultType="com.sinog2c.model.prisoner.TbprisonerSocialRelation">
+  	SELECT A.*, ROWNUM RN from TBPRISONER_SOCIAL_RELATION A where crimid=#{crimid}
+  		<if test="isprimarycontact != null" >
+        	and isprimarycontact = #{isprimarycontact,jdbcType=VARCHAR} and ROWNUM = 1
+      	</if>
+  </select>
+</mapper>

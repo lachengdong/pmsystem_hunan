@@ -1,0 +1,360 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.sinog2c.dao.api.dbmsnew.DbmsDatasTableNewMapper" >
+  <resultMap id="BaseResultMap" type="com.sinog2c.model.dbmsnew.DbmsDatasTableNew" >
+    <id column="DDTID" property="ddtid" jdbcType="VARCHAR" />
+    <id column="DDCID" property="ddcid" jdbcType="VARCHAR" />
+    <result column="TABLENAME" property="tablename" jdbcType="VARCHAR" />
+    <result column="DESCRITION" property="descrition" jdbcType="VARCHAR" />
+    <result column="DDTORDER" property="ddtorder" jdbcType="DECIMAL" />
+    <result column="UPDATEMENDER" property="updatemender" jdbcType="VARCHAR" />
+    <result column="UPDATETIME" property="updatetime" jdbcType="TIMESTAMP" />
+    <result column="DDTISSCREEN" property="ddtisscreen" jdbcType="VARCHAR" />
+    <result column="DDTISMAINTABLE" property="ddtismaintable" jdbcType="VARCHAR" />
+    <result column="DDTJOINEDFIELDS" property="ddtjoinedfields" jdbcType="VARCHAR" />
+    <result column="SHUJUGUANXI" property="shujuguanxi" jdbcType="VARCHAR" />
+    <result column="DAOCHUSQL" property="daochusql" jdbcType="VARCHAR" />
+    <result column="CREATETIME" property="createtime" jdbcType="TIMESTAMP" />
+    <result column="CREATEMENDER" property="createmender" jdbcType="VARCHAR" />
+    <result column="TOTABLE" property="totable" jdbcType="VARCHAR" />
+    <result column="DELFLG" property="delflg" jdbcType="VARCHAR" />
+    <result column="ADDCONDITION" property="addcondition" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    DDTID, DDCID, TABLENAME, DESCRITION, DDTORDER, UPDATEMENDER, UPDATETIME, DDTISSCREEN, 
+    DDTISMAINTABLE, DDTJOINEDFIELDS, SHUJUGUANXI, DAOCHUSQL, CREATETIME, CREATEMENDER, 
+    TOTABLE, DELFLG, ADDCONDITION
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="com.sinog2c.model.dbmsnew.DbmsDatasTableNewKey" >
+    select 
+    <include refid="Base_Column_List" />
+    from DBMS_DATAS_TABLE_NEW
+    where DDTID = #{ddtid,jdbcType=VARCHAR}
+      and DDCID = #{ddcid,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="com.sinog2c.model.dbmsnew.DbmsDatasTableNewKey" >
+    delete from DBMS_DATAS_TABLE_NEW
+    where DDTID = #{ddtid,jdbcType=VARCHAR}
+      and DDCID = #{ddcid,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.sinog2c.model.dbmsnew.DbmsDatasTableNew" >
+    insert into DBMS_DATAS_TABLE_NEW (DDTID, DDCID, TABLENAME, 
+      DESCRITION, DDTORDER, UPDATEMENDER, 
+      UPDATETIME, DDTISSCREEN, DDTISMAINTABLE, 
+      DDTJOINEDFIELDS, SHUJUGUANXI, DAOCHUSQL, 
+      CREATETIME, CREATEMENDER, TOTABLE, 
+      DELFLG, ADDCONDITION)
+    values (#{ddtid,jdbcType=VARCHAR}, #{ddcid,jdbcType=VARCHAR}, #{tablename,jdbcType=VARCHAR}, 
+      #{descrition,jdbcType=VARCHAR}, #{ddtorder,jdbcType=DECIMAL}, #{updatemender,jdbcType=VARCHAR}, 
+      #{updatetime,jdbcType=TIMESTAMP}, #{ddtisscreen,jdbcType=VARCHAR}, #{ddtismaintable,jdbcType=VARCHAR}, 
+      #{ddtjoinedfields,jdbcType=VARCHAR}, #{shujuguanxi,jdbcType=VARCHAR}, #{daochusql,jdbcType=VARCHAR}, 
+      #{createtime,jdbcType=TIMESTAMP}, #{createmender,jdbcType=VARCHAR}, #{totable,jdbcType=VARCHAR}, 
+      #{delflg,jdbcType=VARCHAR}, #{addcondition,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.sinog2c.model.dbmsnew.DbmsDatasTableNew" >
+    insert into DBMS_DATAS_TABLE_NEW
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="ddtid != null" >
+        DDTID,
+      </if>
+      <if test="ddcid != null" >
+        DDCID,
+      </if>
+      <if test="tablename != null" >
+        TABLENAME,
+      </if>
+      <if test="descrition != null" >
+        DESCRITION,
+      </if>
+      <if test="ddtorder != null" >
+        DDTORDER,
+      </if>
+      <if test="updatemender != null" >
+        UPDATEMENDER,
+      </if>
+      <if test="updatetime != null" >
+        UPDATETIME,
+      </if>
+      <if test="ddtisscreen != null" >
+        DDTISSCREEN,
+      </if>
+      <if test="ddtismaintable != null" >
+        DDTISMAINTABLE,
+      </if>
+      <if test="ddtjoinedfields != null" >
+        DDTJOINEDFIELDS,
+      </if>
+      <if test="shujuguanxi != null" >
+        SHUJUGUANXI,
+      </if>
+      <if test="daochusql != null" >
+        DAOCHUSQL,
+      </if>
+      <if test="createtime != null" >
+        CREATETIME,
+      </if>
+      <if test="createmender != null" >
+        CREATEMENDER,
+      </if>
+      <if test="totable != null" >
+        TOTABLE,
+      </if>
+      <if test="delflg != null" >
+        DELFLG,
+      </if>
+      <if test="addcondition != null" >
+        ADDCONDITION,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="ddtid != null" >
+        #{ddtid,jdbcType=VARCHAR},
+      </if>
+      <if test="ddcid != null" >
+        #{ddcid,jdbcType=VARCHAR},
+      </if>
+      <if test="tablename != null" >
+        #{tablename,jdbcType=VARCHAR},
+      </if>
+      <if test="descrition != null" >
+        #{descrition,jdbcType=VARCHAR},
+      </if>
+      <if test="ddtorder != null" >
+        #{ddtorder,jdbcType=DECIMAL},
+      </if>
+      <if test="updatemender != null" >
+        #{updatemender,jdbcType=VARCHAR},
+      </if>
+      <if test="updatetime != null" >
+        #{updatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="ddtisscreen != null" >
+        #{ddtisscreen,jdbcType=VARCHAR},
+      </if>
+      <if test="ddtismaintable != null" >
+        #{ddtismaintable,jdbcType=VARCHAR},
+      </if>
+      <if test="ddtjoinedfields != null" >
+        #{ddtjoinedfields,jdbcType=VARCHAR},
+      </if>
+      <if test="shujuguanxi != null" >
+        #{shujuguanxi,jdbcType=VARCHAR},
+      </if>
+      <if test="daochusql != null" >
+        #{daochusql,jdbcType=VARCHAR},
+      </if>
+      <if test="createtime != null" >
+        #{createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createmender != null" >
+        #{createmender,jdbcType=VARCHAR},
+      </if>
+      <if test="totable != null" >
+        #{totable,jdbcType=VARCHAR},
+      </if>
+      <if test="delflg != null" >
+        #{delflg,jdbcType=VARCHAR},
+      </if>
+      <if test="addcondition != null" >
+        #{addcondition,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.sinog2c.model.dbmsnew.DbmsDatasTableNew" >
+    update DBMS_DATAS_TABLE_NEW
+    <set >
+      <if test="tablename != null" >
+        TABLENAME = #{tablename,jdbcType=VARCHAR},
+      </if>
+      <if test="descrition != null" >
+        DESCRITION = #{descrition,jdbcType=VARCHAR},
+      </if>
+      <if test="ddtorder != null" >
+        DDTORDER = #{ddtorder,jdbcType=DECIMAL},
+      </if>
+      <if test="updatemender != null" >
+        UPDATEMENDER = #{updatemender,jdbcType=VARCHAR},
+      </if>
+      <if test="updatetime != null" >
+        UPDATETIME = #{updatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="ddtisscreen != null" >
+        DDTISSCREEN = #{ddtisscreen,jdbcType=VARCHAR},
+      </if>
+      <if test="ddtismaintable != null" >
+        DDTISMAINTABLE = #{ddtismaintable,jdbcType=VARCHAR},
+      </if>
+      <if test="ddtjoinedfields != null" >
+        DDTJOINEDFIELDS = #{ddtjoinedfields,jdbcType=VARCHAR},
+      </if>
+      <if test="shujuguanxi != null" >
+        SHUJUGUANXI = #{shujuguanxi,jdbcType=VARCHAR},
+      </if>
+      <if test="daochusql != null" >
+        DAOCHUSQL = #{daochusql,jdbcType=VARCHAR},
+      </if>
+      <if test="createtime != null" >
+        CREATETIME = #{createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createmender != null" >
+        CREATEMENDER = #{createmender,jdbcType=VARCHAR},
+      </if>
+      <if test="totable != null" >
+        TOTABLE = #{totable,jdbcType=VARCHAR},
+      </if>
+      <if test="delflg != null" >
+        DELFLG = #{delflg,jdbcType=VARCHAR},
+      </if>
+      <if test="addcondition != null" >
+        ADDCONDITION = #{addcondition,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where DDTID = #{ddtid,jdbcType=VARCHAR}
+      and DDCID = #{ddcid,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.sinog2c.model.dbmsnew.DbmsDatasTableNew" >
+    update DBMS_DATAS_TABLE_NEW
+    set TABLENAME = #{tablename,jdbcType=VARCHAR},
+      DESCRITION = #{descrition,jdbcType=VARCHAR},
+      DDTORDER = #{ddtorder,jdbcType=DECIMAL},
+      UPDATEMENDER = #{updatemender,jdbcType=VARCHAR},
+      UPDATETIME = #{updatetime,jdbcType=TIMESTAMP},
+      DDTISSCREEN = #{ddtisscreen,jdbcType=VARCHAR},
+      DDTISMAINTABLE = #{ddtismaintable,jdbcType=VARCHAR},
+      DDTJOINEDFIELDS = #{ddtjoinedfields,jdbcType=VARCHAR},
+      SHUJUGUANXI = #{shujuguanxi,jdbcType=VARCHAR},
+      DAOCHUSQL = #{daochusql,jdbcType=VARCHAR},
+      CREATETIME = #{createtime,jdbcType=TIMESTAMP},
+      CREATEMENDER = #{createmender,jdbcType=VARCHAR},
+      TOTABLE = #{totable,jdbcType=VARCHAR},
+      DELFLG = #{delflg,jdbcType=VARCHAR},
+      ADDCONDITION = #{addcondition,jdbcType=VARCHAR}
+    where DDTID = #{ddtid,jdbcType=VARCHAR}
+      and DDCID = #{ddcid,jdbcType=VARCHAR}
+  </update>
+  
+  
+  <select id="listByCondition" resultMap="BaseResultMap" parameterType="Map" >    <!-- 查询表中的信息 -->
+ 		SELECT * FROM DBMS_DATAS_TABLE_NEW
+	 	where 1=1 
+		 <if test="ddcexpscheme !=null and ddcexpscheme !=''">  
+	        and DDCID = #{ddcexpscheme}
+	     </if>
+		 <if test="ddcid !=null and ddcid !=''">  
+	        and DDCID = #{ddcid}
+	     </if>
+		 <if test="sortField!=null and sortField!='' and sortOrder!=null and sortOrder!=''">  
+ 		  order by  ${sortField} ${sortOrder}
+	     </if>
+  </select>
+  <select id="getShcemeTables" resultType="java.util.HashMap">
+      select * from dbms_datas_table_new t where t.ddcid=#{ddcid,jdbcType=VARCHAR} 
+	 <if test="ddctype!=null and ddctype!=1">  
+		  and t.totable is not null
+     </if>  
+  </select>
+  <select id="getSchemetablecolumn" resultType="java.util.HashMap">
+      select * from dbms_datas_cheme_detail_new c where c.ddcid=#{ddcid,jdbcType=VARCHAR} and c.ddtid=#{ddtid,jdbcType=VARCHAR}
+  </select>
+  <update id="updateSchemeTablecolumn" parameterType="Map">
+    update dbms_datas_cheme_detail_new 
+    <set >
+      <if test="dcdfromcolumns != null" >
+        dcdfromcolumns = #{dcdfromcolumns,jdbcType=VARCHAR},
+      </if>
+      <if test="dcdfromcolumnsscribe != null" >
+        dcdfromcolumnsscribe = #{dcdfromcolumnsscribe,jdbcType=VARCHAR},
+      </if>
+      <if test="dcdfromcloumnstype != null" >
+        dcdfromcloumnstype = #{dcdfromcloumnstype,jdbcType=VARCHAR},
+      </if>
+      <if test="dcdfromcloumnssize != null" >
+        dcdfromcloumnssize = #{dcdfromcloumnssize,jdbcType=DECIMAL},
+      </if>
+      <if test="dcdfromcloumnsdefaultvalue != null" >
+        dcdfromcloumnsdefaultvalue = #{dcdfromcloumnsdefaultvalue,jdbcType=VARCHAR},
+      </if>
+      <if test="dcdtotableid != null" >
+        dcdtotableid = #{dcdtotableid,jdbcType=VARCHAR},
+      </if>
+      <if test="dcdtocolumns != null" >
+        dcdtocolumns = #{dcdtocolumns,jdbcType=VARCHAR},
+      </if>
+      <if test="dcdtocolumnsscribe != null" >
+        dcdtocolumnsscribe = #{dcdtocolumnsscribe,jdbcType=VARCHAR},
+      </if>
+      <if test="dcdtocolumnstype != null" >
+        dcdtocolumnstype = #{dcdtocolumnstype,jdbcType=VARCHAR},
+      </if>
+      <if test="dcdtocolumnssize != null" >
+        dcdtocolumnssize = #{dcdtocolumnssize,jdbcType=VARCHAR},
+      </if>
+      <if test="dcdtocolumnspoint != null" >
+        dcdtocolumnspoint = #{dcdtocolumnspoint,jdbcType=DECIMAL},
+      </if>
+      <if test="dcdfromcolumnspoint != null" >
+        dcdfromcolumnspoint = #{dcdfromcolumnspoint,jdbcType=DECIMAL},
+      </if>
+      <if test="dcdifpkey != null" >
+        dcdifpkey = #{dcdifpkey,jdbcType=VARCHAR},
+      </if>
+      <if test="dcdpkgenerator != null" >
+        dcdpkgenerator = #{dcdpkgenerator,jdbcType=VARCHAR},
+      </if>
+      <if test="dcdcodetype != null" >
+        dcdcodetype = #{dcdcodetype,jdbcType=VARCHAR},
+      </if>
+      <if test="dcdtocloumnsdefaultvalue != null" >
+        dcdtocloumnsdefaultvalue = #{dcdtocloumnsdefaultvalue,jdbcType=VARCHAR},
+      </if>      
+    </set>
+    where dcdid = #{dcdid,jdbcType=VARCHAR}
+      and ddcid = #{ddcid,jdbcType=VARCHAR}
+  </update>
+  <update id="saveSchemetable" parameterType="Map">
+    update DBMS_DATAS_TABLE_NEW
+    <set >
+      <if test="tablename != null" >
+        TABLENAME = #{tablename,jdbcType=VARCHAR},
+      </if>
+      <if test="descrition != null" >
+        DESCRITION = #{descrition,jdbcType=VARCHAR},
+      </if>
+      <if test="ddtorder != null" >
+        DDTORDER = #{ddtorder,jdbcType=DECIMAL},
+      </if>
+      <if test="updatemender != null" >
+        UPDATEMENDER = #{updatemender,jdbcType=VARCHAR},
+      </if>
+      <if test="ddtisscreen != null" >
+        DDTISSCREEN = #{ddtisscreen,jdbcType=VARCHAR},
+      </if>
+      <if test="ddtismaintable != null" >
+        DDTISMAINTABLE = #{ddtismaintable,jdbcType=VARCHAR},
+      </if>
+      <if test="ddtjoinedfields != null" >
+        DDTJOINEDFIELDS = #{ddtjoinedfields,jdbcType=VARCHAR},
+      </if>
+      <if test="shujuguanxi != null" >
+        SHUJUGUANXI = #{shujuguanxi,jdbcType=VARCHAR},
+      </if>
+      <if test="daochusql != null" >
+        DAOCHUSQL = #{daochusql,jdbcType=VARCHAR},
+      </if>
+      <if test="createmender != null" >
+        CREATEMENDER = #{createmender,jdbcType=VARCHAR},
+      </if>
+      <if test="totable != null" >
+        TOTABLE = #{totable,jdbcType=VARCHAR},
+      </if>
+      <if test="delflg != null" >
+        DELFLG = #{delflg,jdbcType=VARCHAR},
+      </if>
+      <if test="addcondition != null" >
+        ADDCONDITION = #{addcondition,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where DDTID = #{ddtid,jdbcType=VARCHAR}
+      and DDCID = #{ddcid,jdbcType=VARCHAR}
+  </update>  
+</mapper>

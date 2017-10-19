@@ -1,0 +1,104 @@
+@charset "utf-8";
+/* CSS Document */
+ul li{
+	list-style:none;	
+}
+body,div,ul,li,p{
+	margin:0;
+	padding:0;	
+}
+body{
+	color:#333333;
+}
+a:focus{
+	outline:none;
+}
+#box{
+	margin: 0 auto;
+    width: 929px;	
+	padding-top:10%;
+}
+.shadetabs{
+	margin-left: 0;
+	margin-top: 1px;
+	margin-bottom: 0;
+	font: bold 22px Verdana;
+	list-style-type: none;
+	text-align: center;
+	width:230px;
+	float:left;
+	height:800px;
+	background:#101c1c;
+	background:rgba(16, 28, 28, 0.3)!important;
+	filter:Alpha(opacity=50); 
+	position: static;/*set to left, center, or right to align the menu as desired*/
+}
+
+.shadetabs li{
+	height:85px;
+	line-height:85px;
+	margin: 0;
+	font-size:30px;
+	font-family:"宋体";
+}
+.shadetabs li.current{
+	height:85px;
+	line-height:85px;
+	margin: 0;
+	font-size:30px;
+	font-family:"宋体";
+	background:url(../../../images/ywgk/images_family/li_tb.png) no-repeat center right #97a7b6;
+	border-right-color: white;
+	color: #000;
+	filter:Alpha(opacity=60);
+	font-weight:bold;
+	opacity: 0.54;
+	*zoom:1;
+}
+.shadetabs li a{
+	text-decoration: none;
+	color: #fff;
+	position:relative;
+	display:block;
+	height:85px;
+	line-height:85px;
+}
+
+.shadetabs li a:visited{
+	color: #fff;
+}
+
+.shadetabs li a:hover{
+	color: #2d2b2b;
+}
+
+
+.shadetabs li.selected a:hover{ /*selected main tab style */
+	text-decoration: none;
+}
+.shadetabs li.current a{
+	color:#000;
+}
+.tabcontentstyle{ /*style of tab content oontainer*/
+	width: 1320px;
+	margin-bottom: 1em;
+	float:right;
+	height:800px;
+	background:#fff;
+	background:rgba(255, 255, 255, 0.6)!important;
+	filter:Alpha(opacity=60);	
+	position:static; /* IE6、7、8只能设置position:static(默认属性) ，否则会导致子元素继承Alpha值 */
+  	*zoom:1; /* 激活IE6、7的haslayout属性，让它读懂Alpha */
+	opacity: 1;
+
+}
+
+.tabcontent{
+	display:none;
+}
+
+@media print {
+.tabcontent {
+	display:block!important;
+}
+}

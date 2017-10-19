@@ -1,0 +1,151 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.sinog2c.dao.api.dbmsnew.TbsysServicesMapper" >
+  <resultMap id="BaseResultMap" type="com.sinog2c.model.dbmsnew.TbsysServices" >
+    <id column="DEPARTID" property="departid" jdbcType="VARCHAR" />
+    <result column="ADDRESS" property="address" jdbcType="VARCHAR" />
+    <result column="PORT" property="port" jdbcType="VARCHAR" />
+    <result column="DDCID" property="ddcid" jdbcType="VARCHAR" />
+    <result column="CREATEUSER" property="createuser" jdbcType="VARCHAR" />
+    <result column="CREATEDATE" property="createdate" jdbcType="DATE" />
+    <result column="REMARK" property="remark" jdbcType="VARCHAR" />
+    <result column="TEXT1" property="text1" jdbcType="VARCHAR" />
+    <result column="TEXT2" property="text2" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    DEPARTID, ADDRESS, PORT, DDCID, CREATEUSER, CREATEDATE, REMARK, TEXT1, TEXT2
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from TBSYS_SERVICES
+    where DEPARTID = #{departid,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from TBSYS_SERVICES
+    where DEPARTID = #{departid,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.sinog2c.model.dbmsnew.TbsysServices" >
+    insert into TBSYS_SERVICES (DEPARTID, ADDRESS, PORT, 
+      DDCID, CREATEUSER, CREATEDATE, 
+      REMARK, TEXT1, TEXT2
+      )
+    values (#{departid,jdbcType=VARCHAR}, #{address,jdbcType=VARCHAR}, #{port,jdbcType=VARCHAR}, 
+      #{ddcid,jdbcType=VARCHAR}, #{createuser,jdbcType=VARCHAR}, #{createdate,jdbcType=DATE}, 
+      #{remark,jdbcType=VARCHAR}, #{text1,jdbcType=VARCHAR}, #{text2,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.sinog2c.model.dbmsnew.TbsysServices" >
+    insert into TBSYS_SERVICES
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="departid != null" >
+        DEPARTID,
+      </if>
+      <if test="address != null" >
+        ADDRESS,
+      </if>
+      <if test="port != null" >
+        PORT,
+      </if>
+      <if test="ddcid != null" >
+        DDCID,
+      </if>
+      <if test="createuser != null" >
+        CREATEUSER,
+      </if>
+      <if test="createdate != null" >
+        CREATEDATE,
+      </if>
+      <if test="remark != null" >
+        REMARK,
+      </if>
+      <if test="text1 != null" >
+        TEXT1,
+      </if>
+      <if test="text2 != null" >
+        TEXT2,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="departid != null" >
+        #{departid,jdbcType=VARCHAR},
+      </if>
+      <if test="address != null" >
+        #{address,jdbcType=VARCHAR},
+      </if>
+      <if test="port != null" >
+        #{port,jdbcType=VARCHAR},
+      </if>
+      <if test="ddcid != null" >
+        #{ddcid,jdbcType=VARCHAR},
+      </if>
+      <if test="createuser != null" >
+        #{createuser,jdbcType=VARCHAR},
+      </if>
+      <if test="createdate != null" >
+        #{createdate,jdbcType=DATE},
+      </if>
+      <if test="remark != null" >
+        #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="text1 != null" >
+        #{text1,jdbcType=VARCHAR},
+      </if>
+      <if test="text2 != null" >
+        #{text2,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.sinog2c.model.dbmsnew.TbsysServices" >
+    update TBSYS_SERVICES
+    <set >
+      <if test="address != null" >
+        ADDRESS = #{address,jdbcType=VARCHAR},
+      </if>
+      <if test="port != null" >
+        PORT = #{port,jdbcType=VARCHAR},
+      </if>
+      <if test="ddcid != null" >
+        DDCID = #{ddcid,jdbcType=VARCHAR},
+      </if>
+      <if test="createuser != null" >
+        CREATEUSER = #{createuser,jdbcType=VARCHAR},
+      </if>
+      <if test="createdate != null" >
+        CREATEDATE = #{createdate,jdbcType=DATE},
+      </if>
+      <if test="remark != null" >
+        REMARK = #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="text1 != null" >
+        TEXT1 = #{text1,jdbcType=VARCHAR},
+      </if>
+      <if test="text2 != null" >
+        TEXT2 = #{text2,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where DEPARTID = #{departid,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.sinog2c.model.dbmsnew.TbsysServices" >
+    update TBSYS_SERVICES
+    set ADDRESS = #{address,jdbcType=VARCHAR},
+      PORT = #{port,jdbcType=VARCHAR},
+      DDCID = #{ddcid,jdbcType=VARCHAR},
+      CREATEUSER = #{createuser,jdbcType=VARCHAR},
+      CREATEDATE = #{createdate,jdbcType=DATE},
+      REMARK = #{remark,jdbcType=VARCHAR},
+      TEXT1 = #{text1,jdbcType=VARCHAR},
+      TEXT2 = #{text2,jdbcType=VARCHAR}
+    where DEPARTID = #{departid,jdbcType=VARCHAR}
+  </update>
+  
+  <select id="selectByDepartid" parameterType="String" resultType="Map"><!-- text1=表示启用 -->
+  	select * from TBSYS_SERVICES t where t.departid=#{departid} and t.text1='1'
+  </select>
+  <select id="callProcedures">
+  		call p_updatesentencechangedata()
+  </select>
+  <select id="getAllServies" parameterType="Map" resultType="Map">
+  	select *  from (select a.*, rownum rn  from (select t.*,tt.name from TBSYS_SERVICES t,TBSYS_ORGINFO tt where t.departid=tt.orgid) a  where rownum &lt;= ${end}) where rn &gt;= ${start}
+  </select>
+</mapper>

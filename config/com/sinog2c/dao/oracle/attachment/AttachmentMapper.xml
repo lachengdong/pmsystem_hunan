@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.sinog2c.dao.api.attachment.AttachmentMapper">
+	<resultMap id="BaseResultMap" type="com.sinog2c.model.attachment.Attachment">
+		<id column="ID" property="id" jdbcType="DECIMAL" />
+		<result column="POS_ID" property="posId" jdbcType="DECIMAL" />
+		<result column="MODULE" property="module" jdbcType="VARCHAR" />
+		<result column="PATH" property="path" jdbcType="VARCHAR" />
+		<result column="MODEL" property="model" jdbcType="VARCHAR" />
+		<result column="ATTRIBUTE" property="attribute" jdbcType="VARCHAR" />
+		<result column="PK" property="pk" jdbcType="DECIMAL" />
+		<result column="CREATE_TIME" property="createTime" jdbcType="DATE" />
+	</resultMap>
+	<sql id="Base_Column_List">
+		ID, POS_ID, MODULE, PATH, MODEL, ATTRIBUTE, PK, CREATE_TIME
+	</sql>
+	<select id="selectByPrimaryKey" resultMap="BaseResultMap"
+		parameterType="java.lang.Long">
+		select
+		<include refid="Base_Column_List" />
+		from OA_ATTACHMENT
+		where ID = #{id,jdbcType=DECIMAL}
+	</select>
+	<delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+		delete from OA_ATTACHMENT
+		where ID = #{id,jdbcType=DECIMAL}
+	</delete>
+	<insert id="insert" parameterType="com.sinog2c.model.attachment.Attachment">
+		insert into OA_ATTACHMENT (ID, POS_ID, MODULE,
+		PATH, MODEL, ATTRIBUTE,
+		PK, CREATE_TIME)
+		values (#{id,jdbcType=DECIMAL}, #{posId,jdbcType=DECIMAL},
+		#{module,jdbcType=VARCHAR},
+		#{path,jdbcType=VARCHAR}, #{model,jdbcType=VARCHAR}, #{attribute,jdbcType=VARCHAR},
+		#{pk,jdbcType=DECIMAL}, #{createTime,jdbcType=DATE})
+	</insert>
+	<insert id="insertSelective" parameterType="com.sinog2c.model.attachment.Attachment">
+		insert into OA_ATTACHMENT
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				ID,
+			</if>
+			<if test="posId != null">
+				POS_ID,
+			</if>
+			<if test="module != null">
+				MODULE,
+			</if>
+			<if test="path != null">
+				PATH,
+			</if>
+			<if test="model != null">
+				MODEL,
+			</if>
+			<if test="attribute != null">
+				ATTRIBUTE,
+			</if>
+			<if test="pk != null">
+				PK,
+			</if>
+			<if test="createTime != null">
+				CREATE_TIME,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				#{id,jdbcType=DECIMAL},
+			</if>
+			<if test="posId != null">
+				#{posId,jdbcType=DECIMAL},
+			</if>
+			<if test="module != null">
+				#{module,jdbcType=VARCHAR},
+			</if>
+			<if test="path != null">
+				#{path,jdbcType=VARCHAR},
+			</if>
+			<if test="model != null">
+				#{model,jdbcType=VARCHAR},
+			</if>
+			<if test="attribute != null">
+				#{attribute,jdbcType=VARCHAR},
+			</if>
+			<if test="pk != null">
+				#{pk,jdbcType=DECIMAL},
+			</if>
+			<if test="createTime != null">
+				#{createTime,jdbcType=DATE},
+			</if>
+		</trim>
+	</insert>
+	<update id="updateByPrimaryKeySelective" parameterType="com.sinog2c.model.attachment.Attachment">
+		update OA_ATTACHMENT
+		<set>
+			<if test="posId != null">
+				POS_ID = #{posId,jdbcType=DECIMAL},
+			</if>
+			<if test="module != null">
+				MODULE = #{module,jdbcType=VARCHAR},
+			</if>
+			<if test="path != null">
+				PATH = #{path,jdbcType=VARCHAR},
+			</if>
+			<if test="model != null">
+				MODEL = #{model,jdbcType=VARCHAR},
+			</if>
+			<if test="attribute != null">
+				ATTRIBUTE = #{attribute,jdbcType=VARCHAR},
+			</if>
+			<if test="pk != null">
+				PK = #{pk,jdbcType=DECIMAL},
+			</if>
+			<if test="createTime != null">
+				CREATE_TIME = #{createTime,jdbcType=DATE},
+			</if>
+		</set>
+		where ID = #{id,jdbcType=DECIMAL}
+	</update>
+	<update id="updateByPrimaryKey" parameterType="com.sinog2c.model.attachment.Attachment">
+		update OA_ATTACHMENT
+		set POS_ID = #{posId,jdbcType=DECIMAL},
+		MODULE = #{module,jdbcType=VARCHAR},
+		PATH = #{path,jdbcType=VARCHAR},
+		MODEL = #{model,jdbcType=VARCHAR},
+		ATTRIBUTE = #{attribute,jdbcType=VARCHAR},
+		PK = #{pk,jdbcType=DECIMAL},
+		CREATE_TIME = #{createTime,jdbcType=DATE}
+		where ID = #{id,jdbcType=DECIMAL}
+	</update>
+	<select id="getNextId" resultType="java.lang.Long">  <!-- 获取下一个ID -->
+		SELECT attachment_id_seq.NEXTVAL FROM DUAL
+	</select>
+	
+	<select id="getattachmentBymodelandpk" resultMap="BaseResultMap">
+		Select
+		oa_attachment.id,oa_attachment.module,oa_attachment.path,oa_attachment.model,oa_attachment.pk,oa_attachment.attribute
+		from oa_attachment 
+		where oa_attachment.pk=#{pk} and oa_attachment.model=#{model}
+	</select>
+</mapper>

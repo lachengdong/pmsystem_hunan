@@ -1,0 +1,255 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.sinog2c.dao.api.supervise.SVTaskMapper" >
+  <resultMap id="BaseResultMap" type="com.sinog2c.model.supervise.SVTask" >
+    <id column="ID" property="id" jdbcType="DECIMAL" />
+    <result column="CATEGORY_ID" property="categoryId" jdbcType="DECIMAL" />
+    <result column="AUTHOR_ID" property="authorId" jdbcType="VARCHAR" />
+    <result column="PARENT_ID" property="parentId" jdbcType="DECIMAL" />
+    <result column="TITLE" property="title" jdbcType="VARCHAR" />
+    <result column="CONTENT" property="content" jdbcType="VARCHAR" />
+    <result column="USER_LEADER" property="userLeader" jdbcType="VARCHAR" />
+    <result column="USER_MAIN" property="userMain" jdbcType="VARCHAR" />
+    <result column="USER_HELP" property="userHelp" jdbcType="VARCHAR" />
+    <result column="STATUS" property="status" jdbcType="DECIMAL" />
+    <result column="DELETE_FLAG" property="deleteFlag" jdbcType="DECIMAL" />
+    <result column="BEGIN_TIME" property="beginTime" jdbcType="DATE" />
+    <result column="END_TIME" property="endTime" jdbcType="DATE" />
+    <result column="CREATE_TIME" property="createTime" jdbcType="DATE" />
+    <result column="UPDATE_TIME" property="updateTime" jdbcType="DATE" />
+    <result column="LOCK_STATUS" property="lockStatus" jdbcType="DECIMAL" />
+    <result column="CATEGORY" property="category" jdbcType="VARCHAR" />
+    <result column="FLOWID" property="flowid" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    ID, CATEGORY_ID, AUTHOR_ID, PARENT_ID, TITLE, CONTENT, USER_LEADER, USER_MAIN, USER_HELP, 
+    STATUS, DELETE_FLAG, BEGIN_TIME, END_TIME, CREATE_TIME, UPDATE_TIME, LOCK_STATUS, 
+    CATEGORY, FLOWID
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from SV_TASK
+    where ID = #{id,jdbcType=DECIMAL}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from SV_TASK
+    where ID = #{id,jdbcType=DECIMAL}
+  </delete>
+  <insert id="insert" parameterType="com.sinog2c.model.supervise.SVTask" >
+    insert into SV_TASK (ID, CATEGORY_ID, AUTHOR_ID, 
+      PARENT_ID, TITLE, CONTENT, 
+      USER_LEADER, USER_MAIN, USER_HELP, 
+      STATUS, DELETE_FLAG, BEGIN_TIME, 
+      END_TIME, CREATE_TIME, UPDATE_TIME, 
+      LOCK_STATUS, CATEGORY, FLOWID
+      )
+    values (#{id,jdbcType=DECIMAL}, #{categoryId,jdbcType=DECIMAL}, #{authorId,jdbcType=VARCHAR}, 
+      #{parentId,jdbcType=DECIMAL}, #{title,jdbcType=VARCHAR}, #{content,jdbcType=VARCHAR}, 
+      #{userLeader,jdbcType=VARCHAR}, #{userMain,jdbcType=VARCHAR}, #{userHelp,jdbcType=VARCHAR}, 
+      #{status,jdbcType=DECIMAL}, #{deleteFlag,jdbcType=DECIMAL}, #{beginTime,jdbcType=DATE}, 
+      #{endTime,jdbcType=DATE}, #{createTime,jdbcType=DATE}, #{updateTime,jdbcType=DATE}, 
+      #{lockStatus,jdbcType=DECIMAL}, #{category,jdbcType=VARCHAR}, #{flowid,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.sinog2c.model.supervise.SVTask" >
+    insert into SV_TASK
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        ID,
+      </if>
+      <if test="categoryId != null" >
+        CATEGORY_ID,
+      </if>
+      <if test="authorId != null" >
+        AUTHOR_ID,
+      </if>
+      <if test="parentId != null" >
+        PARENT_ID,
+      </if>
+      <if test="title != null" >
+        TITLE,
+      </if>
+      <if test="content != null" >
+        CONTENT,
+      </if>
+      <if test="userLeader != null" >
+        USER_LEADER,
+      </if>
+      <if test="userMain != null" >
+        USER_MAIN,
+      </if>
+      <if test="userHelp != null" >
+        USER_HELP,
+      </if>
+      <if test="status != null" >
+        STATUS,
+      </if>
+      <if test="deleteFlag != null" >
+        DELETE_FLAG,
+      </if>
+      <if test="beginTime != null" >
+        BEGIN_TIME,
+      </if>
+      <if test="endTime != null" >
+        END_TIME,
+      </if>
+      <if test="createTime != null" >
+        CREATE_TIME,
+      </if>
+      <if test="updateTime != null" >
+        UPDATE_TIME,
+      </if>
+      <if test="lockStatus != null" >
+        LOCK_STATUS,
+      </if>
+      <if test="category != null" >
+        CATEGORY,
+      </if>
+      <if test="flowid != null" >
+        FLOWID,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=DECIMAL},
+      </if>
+      <if test="categoryId != null" >
+        #{categoryId,jdbcType=DECIMAL},
+      </if>
+      <if test="authorId != null" >
+        #{authorId,jdbcType=VARCHAR},
+      </if>
+      <if test="parentId != null" >
+        #{parentId,jdbcType=DECIMAL},
+      </if>
+      <if test="title != null" >
+        #{title,jdbcType=VARCHAR},
+      </if>
+      <if test="content != null" >
+        #{content,jdbcType=VARCHAR},
+      </if>
+      <if test="userLeader != null" >
+        #{userLeader,jdbcType=VARCHAR},
+      </if>
+      <if test="userMain != null" >
+        #{userMain,jdbcType=VARCHAR},
+      </if>
+      <if test="userHelp != null" >
+        #{userHelp,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null" >
+        #{status,jdbcType=DECIMAL},
+      </if>
+      <if test="deleteFlag != null" >
+        #{deleteFlag,jdbcType=DECIMAL},
+      </if>
+      <if test="beginTime != null" >
+        #{beginTime,jdbcType=DATE},
+      </if>
+      <if test="endTime != null" >
+        #{endTime,jdbcType=DATE},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=DATE},
+      </if>
+      <if test="updateTime != null" >
+        #{updateTime,jdbcType=DATE},
+      </if>
+      <if test="lockStatus != null" >
+        #{lockStatus,jdbcType=DECIMAL},
+      </if>
+      <if test="category != null" >
+        #{category,jdbcType=VARCHAR},
+      </if>
+      <if test="flowid != null" >
+        #{flowid,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.sinog2c.model.supervise.SVTask" >
+    update SV_TASK
+    <set >
+      <if test="categoryId != null" >
+        CATEGORY_ID = #{categoryId,jdbcType=DECIMAL},
+      </if>
+      <if test="authorId != null" >
+        AUTHOR_ID = #{authorId,jdbcType=VARCHAR},
+      </if>
+      <if test="parentId != null" >
+        PARENT_ID = #{parentId,jdbcType=DECIMAL},
+      </if>
+      <if test="title != null" >
+        TITLE = #{title,jdbcType=VARCHAR},
+      </if>
+      <if test="content != null" >
+        CONTENT = #{content,jdbcType=VARCHAR},
+      </if>
+      <if test="userLeader != null" >
+        USER_LEADER = #{userLeader,jdbcType=VARCHAR},
+      </if>
+      <if test="userMain != null" >
+        USER_MAIN = #{userMain,jdbcType=VARCHAR},
+      </if>
+      <if test="userHelp != null" >
+        USER_HELP = #{userHelp,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null" >
+        STATUS = #{status,jdbcType=DECIMAL},
+      </if>
+      <if test="deleteFlag != null" >
+        DELETE_FLAG = #{deleteFlag,jdbcType=DECIMAL},
+      </if>
+      <if test="beginTime != null" >
+        BEGIN_TIME = #{beginTime,jdbcType=DATE},
+      </if>
+      <if test="endTime != null" >
+        END_TIME = #{endTime,jdbcType=DATE},
+      </if>
+      <if test="createTime != null" >
+        CREATE_TIME = #{createTime,jdbcType=DATE},
+      </if>
+      <if test="updateTime != null" >
+        UPDATE_TIME = #{updateTime,jdbcType=DATE},
+      </if>
+      <if test="lockStatus != null" >
+        LOCK_STATUS = #{lockStatus,jdbcType=DECIMAL},
+      </if>
+      <if test="category != null" >
+        CATEGORY = #{category,jdbcType=VARCHAR},
+      </if>
+      <if test="flowid != null" >
+        FLOWID = #{flowid,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where ID = #{id,jdbcType=DECIMAL}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.sinog2c.model.supervise.SVTask" >
+    update SV_TASK
+    set CATEGORY_ID = #{categoryId,jdbcType=DECIMAL},
+      AUTHOR_ID = #{authorId,jdbcType=VARCHAR},
+      PARENT_ID = #{parentId,jdbcType=DECIMAL},
+      TITLE = #{title,jdbcType=VARCHAR},
+      CONTENT = #{content,jdbcType=VARCHAR},
+      USER_LEADER = #{userLeader,jdbcType=VARCHAR},
+      USER_MAIN = #{userMain,jdbcType=VARCHAR},
+      USER_HELP = #{userHelp,jdbcType=VARCHAR},
+      STATUS = #{status,jdbcType=DECIMAL},
+      DELETE_FLAG = #{deleteFlag,jdbcType=DECIMAL},
+      BEGIN_TIME = #{beginTime,jdbcType=DATE},
+      END_TIME = #{endTime,jdbcType=DATE},
+      CREATE_TIME = #{createTime,jdbcType=DATE},
+      UPDATE_TIME = #{updateTime,jdbcType=DATE},
+      LOCK_STATUS = #{lockStatus,jdbcType=DECIMAL},
+      CATEGORY = #{category,jdbcType=VARCHAR},
+      FLOWID = #{flowid,jdbcType=VARCHAR}
+    where ID = #{id,jdbcType=DECIMAL}
+  </update>
+  
+   <select id="selectbyflowid" resultMap="BaseResultMap"
+	parameterType="java.lang.String">
+	select  <include refid="Base_Column_List" />
+	from SV_TASK
+	where FLOWID = #{flowid,jdbcType=VARCHAR}
+  </select>
+</mapper>

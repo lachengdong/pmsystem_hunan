@@ -1,0 +1,529 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.sinog2c.dao.api.commutationParole.TbxfPunishmentRangMapper" >
+  <resultMap id="BaseResultMap" type="com.sinog2c.model.commutationParole.TbxfPunishmentRang" >
+    <id column="PUNID" property="punid" jdbcType="DECIMAL" />
+    <result column="TYPEID" property="typeid" jdbcType="DECIMAL" />
+    <result column="PHID" property="phid" jdbcType="DECIMAL" />
+    <result column="SYEAR" property="syear" jdbcType="DECIMAL" />
+    <result column="EYEAR" property="eyear" jdbcType="DECIMAL" />
+    <result column="TYPE" property="type" jdbcType="DECIMAL" />
+    <result column="GENDER" property="gender" jdbcType="DECIMAL" />
+    <result column="SENID" property="senid" jdbcType="DECIMAL" />
+    <result column="ORIGINALSTART" property="originalstart" jdbcType="DECIMAL" />
+    <result column="ORIGINALEND" property="originalend" jdbcType="DECIMAL" />
+    <result column="SENTENCESTART" property="sentencestart" jdbcType="DECIMAL" />
+    <result column="SENTENCEEND" property="sentenceend" jdbcType="DECIMAL" />
+    <result column="STARTPERIOD" property="startperiod" jdbcType="DECIMAL" />
+    <result column="INTERVALPERIOD" property="intervalperiod" jdbcType="DECIMAL" />
+    <result column="DEPARTID" property="departid" jdbcType="VARCHAR" />
+    <result column="REMARK" property="remark" jdbcType="VARCHAR" />
+    <result column="DELFLAG" property="delflag" jdbcType="DECIMAL" />
+    <result column="ENDPERIOD" property="endperiod" jdbcType="DECIMAL" />
+    <result column="ENDINTERVALPERIOD" property="endintervalperiod" jdbcType="DECIMAL" />
+    <result column="OPID" property="opid" jdbcType="VARCHAR" />
+    <result column="OPTIME" property="optime" jdbcType="TIMESTAMP" />
+    <result column="SENTENCETYPE" property="sentenceType" jdbcType="DECIMAL" />
+    <result column="INTERVALPERIODSCALE" property="intervalperiodscale" jdbcType="DECIMAL" />
+    <result column="EXECUTIONSENTENCESCALE" property="executionsentencescale" jdbcType="DECIMAL" />
+    <result column="EXECUTIONSENTENCESSTART" property="executionsentencesstart" jdbcType="DECIMAL" />
+    <result column="EXECUTIONSENTENCESEND" property="executionsentencesend" jdbcType="DECIMAL" />
+    <result column="APPROVETYPE" property="approvetype" jdbcType="DECIMAL" />
+    <result column="NOWSENTENCETYPE" property="nowsentencetype" jdbcType="DECIMAL" />
+    <result column="RANGELIMIT" property="rangelimit" jdbcType="DECIMAL" />
+    <result column="EXECUTESENTENCELIMIT" property="executesentencelimit" jdbcType="DECIMAL" />
+    <result column="EXECUTESENTENCESCALELIMIT" property="executesentencescalelimit" jdbcType="DECIMAL" />
+    <result column="FIRSTCOMMUTATION" property="firstcommutation" jdbcType="DECIMAL" />
+    <result column="ALREADYCOMMUTATION" property="alreadycommutation" jdbcType="DECIMAL" />
+    <result column="SN" property="sn" jdbcType="DECIMAL" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    PUNID,TYPEID,PHID,SYEAR,EYEAR,TYPE,GENDER,SENID,ORIGINALSTART,ORIGINALEND,SENTENCESTART,SENTENCEEND,STARTPERIOD,INTERVALPERIOD,DEPARTID,
+    REMARK,DELFLAG,ENDPERIOD,ENDINTERVALPERIOD,OPID,OPTIME,SENTENCETYPE,INTERVALPERIODSCALE,EXECUTIONSENTENCESCALE,EXECUTIONSENTENCESSTART,
+    EXECUTIONSENTENCESEND,APPROVETYPE,NOWSENTENCETYPE,RANGELIMIT,EXECUTESENTENCELIMIT,EXECUTESENTENCESCALELIMIT,FIRSTCOMMUTATION,ALREADYCOMMUTATION,SN
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from TBXF_PUNISHMENTRANG
+    where PUNID = #{punid,jdbcType=DECIMAL}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from TBXF_PUNISHMENTRANG
+    where PUNID = #{punid,jdbcType=DECIMAL}
+  </delete>
+  <insert id="insert" parameterType="com.sinog2c.model.commutationParole.TbxfPunishmentRang" >
+	<selectKey keyProperty="punid" resultType="int" order="BEFORE">
+		select SEQ_BASE_DOC_ID.nextval as punid from dual
+  	</selectKey>
+    insert into TBXF_PUNISHMENTRANG (PUNID, TYPEID, PHID, 
+      SYEAR, EYEAR, TYPE, DEPARTID,
+      GENDER, ORIGINALSTART, ORIGINALEND, SENID, SENTENCESTART, SENTENCEEND, ALREADYCOMMUTATION, 
+      STARTPERIOD, INTERVALPERIOD, ENDPERIOD, ENDINTERVALPERIOD, SENTENCETYPE, INTERVALPERIODSCALE, EXECUTIONSENTENCESCALE, FIRSTCOMMUTATION,
+      EXECUTIONSENTENCESSTART, EXECUTIONSENTENCESEND, REMARK, APPROVETYPE, NOWSENTENCETYPE, RANGELIMIT, EXECUTESENTENCELIMIT, EXECUTESENTENCESCALELIMIT,
+      DELFLAG, OPID, OPTIME, SN)
+    values (#{punid,jdbcType=DECIMAL}, #{typeid,jdbcType=DECIMAL}, #{phid,jdbcType=DECIMAL}, 
+      #{syear,jdbcType=DECIMAL}, #{eyear,jdbcType=DECIMAL}, #{type,jdbcType=DECIMAL}, #{departid,jdbcType=VARCHAR},
+      #{gender,jdbcType=DECIMAL},#{originalstart,jdbcType=DECIMAL}, #{originalend,jdbcType=DECIMAL}, #{senid,jdbcType=DECIMAL}, #{sentencestart,jdbcType=DECIMAL}, #{sentenceend,jdbcType=DECIMAL}, #{alreadycommutation,jdbcType=DECIMAL}, 
+      #{startperiod,jdbcType=DECIMAL}, #{intervalperiod,jdbcType=DECIMAL},#{endperiod,jdbcType=DECIMAL}, #{endintervalperiod,jdbcType=DECIMAL}, #{sentenceType,jdbcType=DECIMAL}, #{intervalperiodscale,jdbcType=DECIMAL}, 
+      #{executionsentencescale,jdbcType=DECIMAL}, #{firstcommutation,jdbcType=DECIMAL}, #{executionsentencesstart,jdbcType=DECIMAL}, #{executionsentencesend,jdbcType=DECIMAL}, #{remark,jdbcType=VARCHAR}, #{approvetype,jdbcType=DECIMAL}, #{nowsentencetype,jdbcType=DECIMAL},#{rangelimit,jdbcType=DECIMAL},#{executesentencelimit,jdbcType=DECIMAL},#{executesentencescalelimit,jdbcType=DECIMAL},
+      #{delflag,jdbcType=DECIMAL}, #{opid,jdbcType=VARCHAR}, #{optime,jdbcType=TIMESTAMP}, #{sn,jdbcType=DECIMAL})
+  </insert>
+  <update id="updateByPrimaryKey" parameterType="com.sinog2c.model.commutationParole.TbxfPunishmentRang" >
+    update TBXF_PUNISHMENTRANG
+    set TYPEID = #{typeid,jdbcType=DECIMAL},
+      PHID = #{phid,jdbcType=DECIMAL},
+      SYEAR = #{syear,jdbcType=DECIMAL},
+      EYEAR = #{eyear,jdbcType=DECIMAL},
+      TYPE = #{type,jdbcType=DECIMAL},
+      DEPARTID = #{departid,jdbcType=DECIMAL},
+      GENDER = #{gender,jdbcType=DECIMAL},
+      SENID = #{senid,jdbcType=DECIMAL},
+      ORIGINALSTART = #{originalstart,jdbcType=DECIMAL},
+      ORIGINALEND = #{originalend,jdbcType=DECIMAL},
+      SENTENCESTART = #{sentencestart,jdbcType=DECIMAL},
+      SENTENCEEND = #{sentenceend,jdbcType=DECIMAL},
+      STARTPERIOD = #{startperiod,jdbcType=DECIMAL},
+      INTERVALPERIOD = #{intervalperiod,jdbcType=DECIMAL},
+      ENDPERIOD = #{endperiod,jdbcType=DECIMAL},
+      ENDINTERVALPERIOD = #{endintervalperiod,jdbcType=DECIMAL},
+      SENTENCETYPE = #{sentenceType,jdbcType=DECIMAL},
+      INTERVALPERIODSCALE = #{intervalperiodscale,jdbcType=DECIMAL},
+      EXECUTIONSENTENCESCALE = #{executionsentencescale,jdbcType=DECIMAL},
+      EXECUTIONSENTENCESSTART = #{executionsentencesstart,jdbcType=DECIMAL},
+      EXECUTIONSENTENCESEND = #{executionsentencesend,jdbcType=DECIMAL},
+      RANGELIMIT = #{rangelimit,jdbcType=DECIMAL},
+      REMARK = #{remark,jdbcType=VARCHAR},
+      APPROVETYPE = #{approvetype,jdbcType=DECIMAL},
+      NOWSENTENCETYPE = #{nowsentencetype,jdbcType=DECIMAL},
+      EXECUTESENTENCELIMIT = #{executesentencelimit,jdbcType=DECIMAL},
+      EXECUTESENTENCESCALELIMIT = #{executesentencescalelimit,jdbcType=DECIMAL},
+      FIRSTCOMMUTATION = #{firstcommutation,jdbcType=DECIMAL},
+      ALREADYCOMMUTATION = #{alreadycommutation,jdbcType=DECIMAL},
+      DELFLAG = #{delflag,jdbcType=DECIMAL},
+      OPID = #{opid,jdbcType=VARCHAR},
+      OPTIME = #{optime,jdbcType=TIMESTAMP},
+      SN = #{sn,jdbcType=DECIMAL}
+    where PUNID = #{punid,jdbcType=DECIMAL}
+  </update>
+  <select id="selectCount" resultType="int">
+  		select count(*) from  TBXF_PUNISHMENTRANG t left join TBXF_CRIMETYPES t1 on t.TYPEID = t1.TYPEID left join TBXF_PRISONERHEALTH t2 on t.PHID=t2.PHID left join TBXF_PRISONERSENTENCE t3 on t.SENID = t3.SENID where 1=1
+  		<trim prefix="" suffix="" suffixOverrides=",">
+	 		<if test="departid!=null and departid!=''"> and t.DEPARTID=#{departid} </if>
+	 	</trim>
+	    <trim prefix="" suffix="" suffixOverrides=",">
+	 		<if test="key!=null and key!=''"> and t.typeid=#{key} </if>
+	 	</trim>
+  </select>
+  <select id="selectDataList" parameterType="Object" resultType="java.util.HashMap">
+  	select * from
+    ( 
+	    select a.*, rownum rn from
+			    (
+            select t.*,
+                  case
+                         when t.originalstart = -3 then
+                          '死刑缓期两年执行'
+                         when t.originalstart = -2 then
+                          '无期徒刑'
+                         when t.originalstart = -1 then 
+                          '不限'
+                         else
+                          replace(replace(replace('start' ||
+                                                  floor(t.ORIGINALSTART / 12) || '年' ||
+                                                  mod(t.ORIGINALSTART, 12) || '个月' || '~start' ||
+                                                  floor(t.ORIGINALEND / 12) || '年' ||
+                                                  mod(t.ORIGINALEND, 12) || '个月',
+                                                  '年0个月',
+                                                  '年'),
+                                          'start0年',
+                                          ''),
+                                  'start',
+                                  '')
+                       end as original,
+                       case
+                         when t.nowsentencetype=1 then '有期徒刑'
+                         when t.nowsentencetype=2 then '无期徒刑'
+                         when t.nowsentencetype=3 then '死刑缓期两年执行'
+                         when t.sentenceend = -1 and t.sentencestart = -1 then
+                          '不限'
+                         when t.sentenceend = -1 and t.sentencestart > -1 then
+                           floor(t.SENTENCESTART / 12) || '年' ||
+                                                  mod(t.SENTENCESTART, 12) || '个月以上' 
+                         when t.sentenceend > -1 and t.sentencestart = -1 then
+                           floor(t.sentenceend / 12) || '年' ||
+                                                  mod(t.sentenceend, 12) || '个月以下'                            
+                         else
+                          replace(replace(replace('start' ||
+                                                  floor(t.SENTENCESTART / 12) || '年' ||
+                                                  mod(t.SENTENCESTART, 12) || '个月' || '~start' ||
+                                                  floor(t.SENTENCEEND / 12) || '年' ||
+                                                  mod(t.SENTENCEEND, 12) || '个月',
+                                                  '年0个月',
+                                                  '年'),
+                                          'start0年',
+                                          ''),
+                                  'start',
+                                  '')
+                       end as sentence,
+                 case when t.startperiod=-1 and t.endperiod=-1 then '不限'
+                      when t.startperiod=-1 and t.endperiod>-1 then 
+                          replace(replace(replace('start' ||
+                                                  floor(t.endperiod / 12) || '年' ||
+                                                  mod(t.endperiod, 12) || '个月' ,
+                                                  '年0个月',
+                                                  '年'),
+                                          'start0年',
+                                          ''),
+                                  'start',
+                                  '')||'以下'
+                      when t.startperiod>-1 and t.endperiod=-1 then
+                          replace(replace(replace('start' ||
+                                                  floor(t.startperiod / 12) || '年' ||
+                                                  mod(t.startperiod, 12) || '个月' ,
+                                                  '年0个月',
+                                                  '年'),
+                                          'start0年',
+                                          ''),
+                                  'start',
+                                  '')||'以上'
+                       else 
+                          replace(replace(replace('start' ||
+                                                  floor(t.startperiod / 12) || '年' ||
+                                                  mod(t.startperiod, 12) || '个月' || '~start' ||
+                                                  floor(t.endperiod / 12) || '年' ||
+                                                  mod(t.endperiod, 12) || '个月',
+                                                  '年0个月',
+                                                  '年'),
+                                          'start0年',
+                                          ''),
+                                  'start',
+                                  '')                       
+                 end SPERIOD,
+                 case when t.intervalperiodscale>0 then replace('占原判刑期'||t.intervalperiodscale,'期.','期0.') 
+                      when t.intervalperiod=-1 and t.endintervalperiod=-1 then '不限'
+                      when t.intervalperiod=-1 and t.endintervalperiod>-1 then 
+                          replace(replace(replace('start' ||
+                                                  floor(t.endintervalperiod / 12) || '年' ||
+                                                  mod(t.endintervalperiod, 12) || '个月' ,
+                                                  '年0个月',
+                                                  '年'),
+                                          'start0年',
+                                          ''),
+                                  'start',
+                                  '')||'以下'
+                       when t.intervalperiod>-1 and t.endintervalperiod=-1 then
+                          replace(replace(replace('start' ||
+                                                  floor(t.intervalperiod / 12) || '年' ||
+                                                  mod(t.intervalperiod, 12) || '个月' ,
+                                                  '年0个月',
+                                                  '年'),
+                                          'start0年',
+                                          ''),
+                                  'start',
+                                  '')||'以上'                   
+                          else 
+                           replace(replace(replace('start' ||
+                                                  floor(t.intervalperiod / 12) || '年' ||
+                                                  mod(t.intervalperiod, 12) || '个月' || '~start' ||
+                                                  floor(t.endintervalperiod / 12) || '年' ||
+                                                  mod(t.endintervalperiod, 12) || '个月',
+                                                  '年0个月',
+                                                  '年'),
+                                          'start0年',
+                                          ''),
+                                  'start',
+                                  '') end IPERIOD,
+                 case when t.executionsentencescale>0 then replace('占原判刑期'||t.executionsentencescale,'期.','期0.') 
+                      when t.executionsentencesstart=-1 and t.executionsentencesend=-1 then '不限'
+                      when t.executionsentencesstart=-1 and t.executionsentencesend>-1 then 
+                          replace(replace(replace('start' ||
+                                                  floor(t.executionsentencesend / 12) || '年' ||
+                                                  mod(t.executionsentencesend, 12) || '个月' ,
+                                                  '年0个月',
+                                                  '年'),
+                                          'start0年',
+                                          ''),
+                                  'start',
+                                  '')||'以下'
+                       when t.executionsentencesstart>-1 and t.executionsentencesend=-1 then
+                          replace(replace(replace('start' ||
+                                                  floor(t.executionsentencesstart / 12) || '年' ||
+                                                  mod(t.executionsentencesstart, 12) || '个月' ,
+                                                  '年0个月',
+                                                  '年'),
+                                          'start0年',
+                                          ''),
+                                  'start',
+                                  '')||'以上'                   
+                          else 
+                           replace(replace(replace('start' ||
+                                                  floor(t.executionsentencesstart / 12) || '年' ||
+                                                  mod(t.executionsentencesstart, 12) || '个月' || '~start' ||
+                                                  floor(t.executionsentencesend / 12) || '年' ||
+                                                  mod(t.executionsentencesend, 12) || '个月',
+                                                  '年0个月',
+                                                  '年'),
+                                          'start0年',
+                                          ''),
+                                  'start',
+                                  '') end executesentence,
+                 case when t.type=1 then '减刑' else '假释' end ptype,
+                 case when t.alreadycommutation=1 then '是' else '否' end alreadycommutationflag,
+                 case when FIRSTCOMMUTATION=1 then '是' else '否' end firstcommutationflag,
+                 case when t3.stime = to_date('1899-11-30','yyyy-MM-dd') then '2011年5月1日前犯罪' else '2011年5月1日后犯罪' end as setime
+            from TBXF_PUNISHMENTRANG t
+            left join TBXF_CRIMETYPES t1 on t.TYPEID = t1.TYPEID
+            left join TBXF_PRISONERHEALTH t2 on t.PHID = t2.PHID
+            left join TBXF_PRISONERSENTENCE t3 on t.SENID = t3.SENID
+           where 1 = 1 
+			<trim prefix="" suffix="" suffixOverrides=",">
+		 		<if test="departid!=null and departid!=''"> and t.DEPARTID=#{departid} </if>
+		 	</trim>
+		    <trim prefix="" suffix="" suffixOverrides=",">
+		 		<if test="key!=null and key!=''"> and t.typeid=#{key} </if>
+		 	</trim>
+		 	<trim prefix="" suffix="" suffixOverrides=",">
+				<if test="sortField!=null and sortField!=''"> order by ${sortField} ${sortOrder}</if>
+			</trim>
+	  	) a 
+	    <if test="end!=null and end!=''">
+	   		where rownum &lt;= #{end}
+	   	</if> 
+    )
+   	<if test="start!=null and start!=''">
+   		where  rn &gt;= #{start}
+   	</if>
+  </select>
+  <select id="ajaxSelectData" parameterType="Object" resultType="java.util.HashMap">
+  	select ${id} as id ,${text} as text from ${tableName}
+  </select>
+  <select id="selectPrisonerSentence" parameterType="Object" resultType="java.util.HashMap">
+  	select t.senid as id,t.name as text,t.remark from TBXF_PRISONERSENTENCE t where t.senid in('10014','10015')
+  </select>
+  <select id="getPrisonersentenceById" parameterType="Integer" resultType="java.util.HashMap">
+  	select * from TBXF_PRISONERSENTENCE t where t.SENID = #{senid}
+  </select>
+  <delete id="deleteCommutationreferenceByPunid" parameterType="java.lang.Integer" >
+    delete from TBXF_COMMUTATIONREFERENCE b where b.punid=#{punid,jdbcType=DECIMAL}
+  </delete>
+  <delete id="deleteWideandthinschemeByPunid" parameterType="java.lang.Integer" >
+    delete from TBXF_WIDEANDTHINSCHEME b where b.punid=#{punid,jdbcType=DECIMAL}
+  </delete>  
+
+  <insert id="insertTbxfWideandthinscheme" parameterType="Map" >
+	insert into TBXF_WIDEANDTHINSCHEME(lssid,punid,schemetype,criminaltype,
+	       lssexecutionsentences,lssexecutionsentencee,lssintervalperiod,lssendintervalperiod,
+	       lssstartperiod,lssendperiod,rangestart,rangeend,executesentencelimit,int1,int2,text1,text2,optime,opid,remark)
+	select SEQ_BASE_DOC_ID.nextval,${punid},schemetype,criminaltype,
+	       lssexecutionsentences,lssexecutionsentencee,lssintervalperiod,lssendintervalperiod,
+	       lssstartperiod,lssendperiod,rangestart,rangeend,executesentencelimit,int1,int2,text1,text2,optime,opid,remark
+	from TBXF_WIDEANDTHINSCHEME  t
+	where t.punid=${oldpunid}
+  </insert>
+
+  <delete id="deleteMergereferenceByPunid" parameterType="java.lang.Integer" >
+    delete from tbxf_mergereference c where c.refid in (select b.refid from TBXF_COMMUTATIONREFERENCE b where b.punid=#{punid,jdbcType=DECIMAL})
+  </delete>
+  <select id="getSchemeDepart" parameterType="Object" resultType="java.util.HashMap">
+	 select distinct t.orgid, t.name, t.belongorgid, t.unitlevel
+	  from TBSYS_ORGINFO t,tbxf_punishmentrang p
+	 where t.orgid=p.DEPARTID
+  </select>
+  <select id="getrangdataBydepartid" resultMap="BaseResultMap" parameterType="Object" >
+    select 
+    <include refid="Base_Column_List" />
+    from  tbxf_punishmentrang 
+    where departid = #{departid,jdbcType=VARCHAR}
+  </select>
+  <select id="getPunid" resultType="java.lang.Integer">
+	select SEQ_BASE_DOC_ID.nextval as punid from dual
+  </select> 
+  <insert id="insertAuto" parameterType="com.sinog2c.model.commutationParole.TbxfPunishmentRang" >
+    insert into TBXF_PUNISHMENTRANG (PUNID, TYPEID, PHID, 
+      SYEAR, EYEAR, TYPE, DEPARTID,
+      GENDER, ORIGINALSTART, ORIGINALEND,SENID, SENTENCESTART, SENTENCEEND, 
+      STARTPERIOD, INTERVALPERIOD,ENDPERIOD, ENDINTERVALPERIOD, SENTENCETYPE, INTERVALPERIODSCALE, EXECUTIONSENTENCESCALE, 
+      EXECUTIONSENTENCESSTART, EXECUTIONSENTENCESEND, REMARK, APPROVETYPE, NOWSENTENCETYPE,
+      DELFLAG, OPID, OPTIME, SN,
+      RANGELIMIT,EXECUTESENTENCELIMIT,EXECUTESENTENCESCALELIMIT,FIRSTCOMMUTATION,ALREADYCOMMUTATION)
+    values (#{punid,jdbcType=DECIMAL}, #{typeid,jdbcType=DECIMAL}, #{phid,jdbcType=DECIMAL}, 
+      #{syear,jdbcType=DECIMAL}, #{eyear,jdbcType=DECIMAL}, #{type,jdbcType=DECIMAL}, #{departid,jdbcType=VARCHAR},
+      #{gender,jdbcType=DECIMAL},#{originalstart,jdbcType=DECIMAL}, #{originalend,jdbcType=DECIMAL}, #{senid,jdbcType=DECIMAL}, #{sentencestart,jdbcType=DECIMAL}, #{sentenceend,jdbcType=DECIMAL}, 
+      #{startperiod,jdbcType=DECIMAL}, #{intervalperiod,jdbcType=DECIMAL},#{endperiod,jdbcType=DECIMAL}, #{endintervalperiod,jdbcType=DECIMAL}, #{sentenceType,jdbcType=DECIMAL}, #{intervalperiodscale,jdbcType=DECIMAL}, 
+      #{executionsentencescale,jdbcType=DECIMAL}, #{executionsentencesstart,jdbcType=DECIMAL}, #{executionsentencesend,jdbcType=DECIMAL}, #{remark,jdbcType=VARCHAR}, #{approvetype,jdbcType=DECIMAL}, #{nowsentencetype,jdbcType=DECIMAL}, 
+      #{delflag,jdbcType=DECIMAL}, #{opid,jdbcType=VARCHAR}, #{optime,jdbcType=TIMESTAMP},#{sn,jdbcType=DECIMAL},
+      #{rangelimit,jdbcType=DECIMAL},#{executesentencelimit,jdbcType=DECIMAL},#{executesentencescalelimit,jdbcType=DECIMAL},
+      #{firstcommutation,jdbcType=DECIMAL},#{alreadycommutation,jdbcType=DECIMAL})
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.sinog2c.model.commutationParole.TbxfPunishmentRang" >
+    update TBXF_PUNISHMENTRANG
+    <set >
+      <if test="typeid != null" >
+        TYPEID = #{typeid,jdbcType=DECIMAL},
+      </if>
+      <if test="phid != null" >
+        PHID = #{phid,jdbcType=DECIMAL},
+      </if>
+      <if test="syear != null" >
+        SYEAR = #{syear,jdbcType=DECIMAL},
+      </if>
+      <if test="eyear != null" >
+        EYEAR = #{eyear,jdbcType=DECIMAL},
+      </if>
+      <if test="type != null" >
+        TYPE = #{type,jdbcType=DECIMAL},
+      </if>
+      <if test="gender != null" >
+        GENDER = #{gender,jdbcType=DECIMAL},
+      </if>
+      <if test="senid != null" >
+        SENID = #{senid,jdbcType=DECIMAL},
+      </if>
+      <if test="originalstart != null" >
+        ORIGINALSTART = #{originalstart,jdbcType=DECIMAL},
+      </if>
+      <if test="originalend != null" >
+        ORIGINALEND = #{originalend,jdbcType=DECIMAL},
+      </if>
+      <if test="sentencestart != null" >
+        SENTENCESTART = #{sentencestart,jdbcType=DECIMAL},
+      </if>
+      <if test="sentenceend != null" >
+        SENTENCEEND = #{sentenceend,jdbcType=DECIMAL},
+      </if>
+      <if test="startperiod != null" >
+        STARTPERIOD = #{startperiod,jdbcType=DECIMAL},
+      </if>
+      <if test="intervalperiod != null" >
+        INTERVALPERIOD = #{intervalperiod,jdbcType=DECIMAL},
+      </if>
+      <if test="sentenceType != null" >
+        SENTENCETYPE = #{sentenceType,jdbcType=DECIMAL},
+      </if>      
+      <if test="remark != null" >
+        REMARK = #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="delflag != null" >
+        DELFLAG = #{delflag,jdbcType=DECIMAL},
+      </if>
+      <if test="opid != null" >
+        OPID = #{opid,jdbcType=VARCHAR},
+      </if>
+      <if test="optime != null" >
+        OPTIME = #{optime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="approvetype != null" >
+        APPROVETYPE = #{approvetype,jdbcType=DECIMAL},
+      </if>  
+      <if test="delflag != null" >
+        SN = #{sn,jdbcType=DECIMAL}
+      </if>    
+    </set>
+    where PUNID = #{punid,jdbcType=DECIMAL}
+  </update>   
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  <insert id="insertBySql" parameterType="java.util.Map" >
+    ${sql}
+  </insert>
+  
+  <select id="getAllQualifierItem" parameterType="Map" resultType="Map" >
+	select id,name,col_name,value_type,formula
+	from TBXF_QUALIFIER_ITEM t
+	where t.departid=#{departid}
+  </select>
+  
+    <select id="getQualifierSet" parameterType="Map" resultType="Map" >
+	select t.*
+	from TBXF_QUALIFIER_SET t
+	where t.departid=#{departid}
+	<if test="setlevel!=null and setlevel!=''">  
+     	and t.setlevel = #{setlevel}
+   	</if>
+   	<if test="qid!=null and qid!=''">  
+     	and t.qid = #{qid}
+   	</if>
+   	<if test="fid!=null and fid!=''">
+     	and t.fid = #{fid}
+   	</if>
+   	<if test="qtype!=null">
+     	and t.qtype = #{qtype}
+   	</if>
+	order by t.ORDERBY asc
+  </select>
+  
+   <select id="getQualifierItem" parameterType="Map" resultType="Map" >
+	select t.* 
+	from TBXF_QUALIFIER_ITEM t 
+	where t.DELFLAG=0 and t.DEPARTID=#{departid}
+	<if test="itemlevel!=null and itemlevel!=''">  
+     	and (t.itemlevel = #{itemlevel} or t.itemlevel=0)
+   	</if>
+	order by t.ORDERBY asc
+  </select>
+  
+    <update id="updateQualifierSet" parameterType="Map" >
+    update TBXF_QUALIFIER_SET
+    set DEPARTID = #{departid},
+        DESCRIBE = #{describe},
+        EXPRESSION = #{expression},
+        SETLEVEL = #{setlevel},
+        ORDERBY = #{orderby}
+    where QID = #{qid}
+  </update>
+  
+    <insert id="insertQualifierSet" parameterType="Map" >
+	<selectKey keyProperty="qid" resultType="int" order="BEFORE">
+		select SEQ_RES_ID.nextval as qid from dual
+  </selectKey>
+    insert into TBXF_QUALIFIER_SET (QID, FID, DEPARTID, DESCRIBE, EXPRESSION, SETLEVEL, ORDERBY, QTYPE)
+    values (#{qid,jdbcType=VARCHAR},#{fid,jdbcType=VARCHAR},#{departid,jdbcType=VARCHAR},#{describe,jdbcType=VARCHAR},
+    	    #{expression,jdbcType=VARCHAR}, #{setlevel,jdbcType=VARCHAR},#{orderby,jdbcType=DECIMAL},#{qtype,jdbcType=DECIMAL})
+  </insert>
+  
+  
+  <delete id="removeQualifierSet" parameterType="Map" >
+    delete from TBXF_QUALIFIER_SET
+    where QID = #{qid} or FID = #{qid}
+  </delete>
+  
+  <insert id="insertQualifierItem" parameterType="Map" >
+    insert into TBXF_QUALIFIER_ITEM (DEPARTID, NAME, COL_NAME, VALUE_TYPE, ITEMLEVEL, REMARK, FORMULA,ORDERBY)
+    values (#{departid,jdbcType=VARCHAR},#{name,jdbcType=VARCHAR},#{col_name,jdbcType=VARCHAR}, #{value_type,jdbcType=VARCHAR},
+    		#{itemlevel,jdbcType=VARCHAR},#{remark,jdbcType=VARCHAR},#{formula,jdbcType=VARCHAR}, #{orderby,jdbcType=DECIMAL})
+  </insert>
+  
+  <update id="updateQualifierItem" parameterType="Map" >
+    update TBXF_QUALIFIER_ITEM
+    set DEPARTID = #{departid},
+    	NAME = #{name},
+    	COL_NAME = #{col_name},
+    	VALUE_TYPE = #{value_type},
+    	ITEMLEVEL = #{itemlevel},
+        REMARK = #{remark},
+        FORMULA = #{formula},
+        ORDERBY = #{orderby}
+    where ID = #{id}
+  </update>
+  
+  <update id="updateQualifierItemFormula" parameterType="Map" >
+    update TBXF_QUALIFIER_ITEM
+    set FORMULA = #{formula}
+    where DEPARTID = #{departid}
+      and COL_NAME = #{col_name}
+  </update>
+  
+  <delete id="removeQualifierItem" parameterType="Map" >
+    delete from TBXF_QUALIFIER_ITEM
+    where ID = #{id}
+  </delete>
+  
+</mapper>

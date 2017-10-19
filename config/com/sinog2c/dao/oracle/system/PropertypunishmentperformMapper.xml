@@ -1,0 +1,263 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.sinog2c.dao.api.system.PropertypunishmentperformMapper" >
+  <resultMap id="BaseResultMap" type="com.sinog2c.model.system.Propertypunishmentperform" >
+    <id column="PROPERTYID" property="propertyid" jdbcType="DECIMAL" />
+    <result column="CRIMID" property="crimid" jdbcType="VARCHAR" />
+    <result column="NAME" property="name" jdbcType="VARCHAR" />
+    <result column="ZANGKUAN" property="zangkuan" jdbcType="DECIMAL" />
+    <result column="FAJIN" property="fajin" jdbcType="DECIMAL" />
+    <result column="MOSHOUCAICHAN" property="moshoucaichan" jdbcType="DECIMAL" />
+    <result column="PEICHANG" property="peichang" jdbcType="DECIMAL" />
+    <result column="LXRLB" property="lxrlb" jdbcType="VARCHAR" />
+    <result column="LXRNAME" property="lxrname" jdbcType="VARCHAR" />
+    <result column="REMARK1" property="remark1" jdbcType="VARCHAR" />
+    <result column="REMARK2" property="remark2" jdbcType="VARCHAR" />
+    <result column="REMARK3" property="remark3" jdbcType="VARCHAR" />
+    <result column="LXDATE" property="lxdate" jdbcType="DATE" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    PROPERTYID, CRIMID, NAME, ZANGKUAN, FAJIN, MOSHOUCAICHAN, PEICHANG, LXRLB, LXRNAME, 
+    REMARK1, REMARK2, REMARK3, LXDATE
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from TBXF_PROPERTYPUNISHMENTPERFORM
+    where PROPERTYID = #{propertyid,jdbcType=DECIMAL}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from TBXF_PROPERTYPUNISHMENTPERFORM
+    where PROPERTYID = #{propertyid,jdbcType=DECIMAL}
+  </delete>
+  <insert id="insert" parameterType="com.sinog2c.model.system.Propertypunishmentperform" >
+    insert into TBXF_PROPERTYPUNISHMENTPERFORM (PROPERTYID, CRIMID, NAME, 
+      FAJIN,
+      LXRLB, LXRNAME, 
+      REMARK1, REMARK2, 
+      LXDATE)
+    values (#{propertyid,jdbcType=DECIMAL}, #{crimid,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR},#{fajin,jdbcType=DECIMAL}, 
+       #{lxrlb,jdbcType=VARCHAR}, #{lxrname,jdbcType=VARCHAR}, 
+      #{remark1,jdbcType=VARCHAR}, #{remark2,jdbcType=VARCHAR},
+      #{lxdate,jdbcType=DATE})
+  </insert>
+  <insert id="insertSelective" parameterType="com.sinog2c.model.system.Propertypunishmentperform" >
+    insert into TBXF_PROPERTYPUNISHMENTPERFORM
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="propertyid != null" >
+        PROPERTYID,
+      </if>
+      <if test="crimid != null" >
+        CRIMID,
+      </if>
+      <if test="name != null" >
+        NAME,
+      </if>
+      <if test="zangkuan != null" >
+        ZANGKUAN,
+      </if>
+      <if test="fajin != null" >
+        FAJIN,
+      </if>
+      <if test="moshoucaichan != null" >
+        MOSHOUCAICHAN,
+      </if>
+      <if test="peichang != null" >
+        PEICHANG,
+      </if>
+      <if test="lxrlb != null" >
+        LXRLB,
+      </if>
+      <if test="lxrname != null" >
+        LXRNAME,
+      </if>
+      <if test="remark1 != null" >
+        REMARK1,
+      </if>
+      <if test="remark2 != null" >
+        REMARK2,
+      </if>
+      <if test="remark3 != null" >
+        REMARK3,
+      </if>
+      <if test="lxdate != null" >
+        LXDATE,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="propertyid != null" >
+        #{propertyid,jdbcType=DECIMAL},
+      </if>
+      <if test="crimid != null" >
+        #{crimid,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null" >
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="zangkuan != null" >
+        #{zangkuan,jdbcType=DECIMAL},
+      </if>
+      <if test="fajin != null" >
+        #{fajin,jdbcType=DECIMAL},
+      </if>
+      <if test="moshoucaichan != null" >
+        #{moshoucaichan,jdbcType=DECIMAL},
+      </if>
+      <if test="peichang != null" >
+        #{peichang,jdbcType=DECIMAL},
+      </if>
+      <if test="lxrlb != null" >
+        #{lxrlb,jdbcType=VARCHAR},
+      </if>
+      <if test="lxrname != null" >
+        #{lxrname,jdbcType=VARCHAR},
+      </if>
+      <if test="remark1 != null" >
+        #{remark1,jdbcType=VARCHAR},
+      </if>
+      <if test="remark2 != null" >
+        #{remark2,jdbcType=VARCHAR},
+      </if>
+      <if test="remark3 != null" >
+        #{remark3,jdbcType=VARCHAR},
+      </if>
+      <if test="lxdate != null" >
+        #{lxdate,jdbcType=DATE},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.sinog2c.model.system.Propertypunishmentperform" >
+    update TBXF_PROPERTYPUNISHMENTPERFORM
+    <set >
+      <if test="crimid != null" >
+        CRIMID = #{crimid,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null" >
+        NAME = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="zangkuan != null" >
+        ZANGKUAN = #{zangkuan,jdbcType=DECIMAL},
+      </if>
+      <if test="fajin != null" >
+        FAJIN = #{fajin,jdbcType=DECIMAL},
+      </if>
+      <if test="moshoucaichan != null" >
+        MOSHOUCAICHAN = #{moshoucaichan,jdbcType=DECIMAL},
+      </if>
+      <if test="peichang != null" >
+        PEICHANG = #{peichang,jdbcType=DECIMAL},
+      </if>
+      <if test="lxrlb != null" >
+        LXRLB = #{lxrlb,jdbcType=VARCHAR},
+      </if>
+      <if test="lxrname != null" >
+        LXRNAME = #{lxrname,jdbcType=VARCHAR},
+      </if>
+      <if test="remark1 != null" >
+        REMARK1 = #{remark1,jdbcType=VARCHAR},
+      </if>
+      <if test="remark2 != null" >
+        REMARK2 = #{remark2,jdbcType=VARCHAR},
+      </if>
+      <if test="remark3 != null" >
+        REMARK3 = #{remark3,jdbcType=VARCHAR},
+      </if>
+      <if test="lxdate != null" >
+        LXDATE = #{lxdate,jdbcType=DATE},
+      </if>
+    </set>
+    where PROPERTYID = #{propertyid,jdbcType=DECIMAL}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.sinog2c.model.system.Propertypunishmentperform">
+    update TBXF_PROPERTYPUNISHMENTPERFORM
+    set CRIMID = #{crimid,jdbcType=VARCHAR},
+      NAME = #{name,jdbcType=VARCHAR},
+      FAJIN = #{fajin,jdbcType=DECIMAL},
+      LXRLB = #{lxrlb,jdbcType=VARCHAR},
+      LXRNAME = #{lxrname,jdbcType=VARCHAR},
+      REMARK1 = #{remark1,jdbcType=VARCHAR},
+      REMARK2 = #{remark2,jdbcType=VARCHAR},
+      LXDATE = #{lxdate,jdbcType=DATE}
+    where PROPERTYID = #{propertyid,jdbcType=DECIMAL}
+  </update>
+  <select id="findByProperty" parameterType="Map" resultType="Map">
+  	select * from
+    	( select a.*, rownum rn
+    		from(
+    			SELECT 
+                b.crimid as crimid,b.name as name,
+   			    case when decode(e.orgname2,null,' ','', ' ',0,' ',e.orgname2)!=' '  then
+                     e.orgname2
+                else
+                  e.orgname1 
+                end
+                AS ACCENT ,
+                case when decode(e.orgid2,null,' ','', ' ',0,' ',e.orgid2)!=' '  then
+                    e.orgid2
+                else
+                  e.orgid1
+                end
+                AS departid,
+<!--                t.caichanxing  as usedname,-->
+              
+                decode(e.STOLENMONEY,null,'','追缴赃款：'||e.STOLENMONEY||'，')||
+                decode(e.FORFEIT,null,'',0,'','罚金：'||e.FORFEIT||'，')||
+                decode(e.FORFEITUREPROPERTY,null,'','没收财产：'||e.FORFEITUREPROPERTY||'，')||
+                decode(e.COMPENSATION,null,'','民事赔偿：'||e.COMPENSATION) as IDNUMBER
+                from TBPRISONER_BASEINFO b,TBPRISONER_BASE_CRIME e
+<!--                (select distinct (crimid)-->
+<!--                ,-->
+<!--	                        decode(sum(zangkuan),null,'',0,'','追缴赃款'||sum(zangkuan)||'，')||-->
+<!--	                        decode(sum(fajin),null,'',0,'','罚金'||sum(fajin)||'，' )||-->
+<!--	                        decode(sum(moshoucaichan),null,'',0,'','没收财产'||sum(moshoucaichan)||'，') ||-->
+<!--	                        decode(sum(peichang),null,'',0,'','民事赔偿'||sum(peichang)) as caichanxing-->
+<!--		          			from tbxf_propertypunishmentperform tt-->
+<!--		         			group by crimid) t-->
+                where b.crimid=e.crimid 
+<!--                and t.crimid(+) = b.crimid-->
+	<if test="departId!=null and departId!=''">  
+		and (E.ORGID1 IN (SELECT a.dorgid FROM  TBFLOW_ORG_ORG a where a.orgid = #{departId})
+		       or E.ORGID2 IN (SELECT a.dorgid FROM  TBFLOW_ORG_ORG a where a.orgid = #{departId}))
+	</if>
+    <if test="key!=null and key!=''">  
+        and (b.crimid like concat(concat('%', #{key}), '%') or name like concat(concat('%', #{key}), '%'))
+    </if>
+    <if test="sortField!=null and sortField!=''" > 
+     	order by b.${sortField}  ${sortOrder}
+    </if>
+    ) a 
+    <if test="end!=null and end!=''">
+   		where rownum &lt;= #{end}
+   	</if> 
+    )
+   	<if test="start!=null and start!=''">
+   		where  rn &gt;= #{start}
+   	</if>
+  </select>
+  <select id="findByPropertyCount" parameterType="Map" resultType="int">
+  	select count(a.CRIMID) c
+    from TBPRISONER_BASEINFO a,TBPRISONER_BASE_CRIME e 
+    where 1 = 1 and a.CRIMID=e.CRIMID 
+    <if test="departId!=null and departId!=''">  
+    and (E.ORGID1 IN (SELECT a.dorgid FROM  TBFLOW_ORG_ORG a where a.orgid = #{departId})
+           or E.ORGID2 IN (SELECT a.dorgid FROM  TBFLOW_ORG_ORG a where a.orgid = #{departId}))
+  </if>
+   
+    <if test="key!=null and key!=''">  
+        and (a.CRIMID like concat(concat('%', #{key}), '%') or a.NAME like concat(concat('%', #{key}), '%'))
+    </if>
+  </select>
+  
+  <select id="findByPropertyDetail" parameterType="Map" resultType="Map">
+  	select propertyid, crimid,name,fajin,lxrlb,lxrname,remark1,remark2,to_char(lxdate,'yyyy-MM-dd') as lxdate from tbxf_propertypunishmentperform where crimid = #{crimid}
+  </select>
+  <select id="findByPropertyDetailCount" parameterType="Map" resultType="int">
+  	select count(*) from tbxf_propertypunishmentperform where crimid = #{crimid}
+  </select>
+  <select id="findMaxid"  resultType="int">
+  	select nvl(max(propertyid),0)+1 from tbxf_propertypunishmentperform
+  </select>
+   <select id="findSumPro" parameterType="Map" resultType="String">
+  	select sum(fajin)  from tbxf_propertypunishmentperform t where t.crimid  = #{crimid} and remark1 = #{remark1} group by remark1
+  </select>
+</mapper>

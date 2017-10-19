@@ -1,0 +1,262 @@
+.img {
+	background: url(../images/email/img.png) no-repeat
+}
+
+.ico {
+	background: url(../images/email/global.png) no-repeat
+}
+
+.button {
+	background: url(../images/email/bt.png) no-repeat;
+	_font-size: 1px
+}
+
+.top-public {
+	height: 32px;
+	float: left
+}
+
+.top-epistolize {
+	background-position: 0 0;
+	width: 90px;
+	margin: 3px 0 0 5px
+}
+
+.top-epistolize:visited {
+	background-position: 0 0 !important
+}
+
+.top-epistolize:hover {
+	background-position: 0 -219px
+}
+
+.top-epistolize:active {
+	background-position: 0 -251px
+}
+
+.top-msgsnd {
+	background-position: right 0;
+	width: 93px;
+	margin: 3px 8px 0 0
+}
+
+.top-msgsnd:visited {
+	background-position: right 0 !important
+}
+
+.top-msgsnd:hover {
+	background-position: right -219px
+}
+
+.top-msgsnd:active {
+	background-position: right -251px
+}
+
+.frame-side {
+	float: left;
+	margin-top: 0px;
+	width: 195px;
+	height: 100%;
+	width: 195px;
+}
+
+.frame-side .side-folders {
+	font-size: 13px;
+}
+
+.frame-side .side-folders .folder-item {
+	LIST-STYLE-TYPE: none;
+	MARGIN: 0px;
+	padding-top: 1px;
+	_height: 10px
+}
+
+.frame-side .side-folders .folder-item a {
+	background: #eeeeee;
+	TEXT-DECORATION: none;
+	LIST-STYLE-TYPE: none;
+	MARGIN: 0px;
+	color: #333;
+	display: block;
+	overflow: hidden;
+	white-space: nowrap;
+	font-weight: normal;
+	line-height: 30px;
+	height: 30px;
+	display: block;
+}
+
+.frame-side .side-folders .folder-item a:hover {
+	background: #e0e0e0;
+	height: 30px
+}
+
+.frame-side .side-folders .folder-item a.activate {
+	background: #68be1f;
+	color: #fff
+}
+
+.frame-side .side-folders .trash {
+	background-position: 0 -40px;
+	margin-top: -20px;
+	left: 170px;
+	width: 15px;
+	height: 15px;
+	cursor: pointer;
+	position: absolute;
+	font-size: 1px;
+	_margin-top: -20px
+}
+
+.ico-type-63 {
+	float: left;
+	margin-left: 10px;
+	margin-right: 2px;
+	_margin: 7px 0 0 0;
+	margin-top: 2px;
+	WIDTH: 20px;
+	HEIGHT: 20px;
+	BACKGROUND-POSITION: -128px -159px;
+	CURSOR: pointer;
+	LEFT: 10px;
+	_margin-top: -13px;
+	WIDTH: 20px;
+}
+
+.ico-type-64 {
+	float: left;
+	margin-left: 10px;
+	margin-right: 2px;
+	_margin: 7px 0 0 0;
+	WIDTH: 20px;
+	HEIGHT: 20px;
+	background-position: -160px -159px;
+	CURSOR: pointer;
+	LEFT: 10px;
+	_margin-top: -13px
+}
+
+.ico-type-65 {
+	float: left;
+	margin-left: 10px;
+	margin-right: 2px;
+	_margin: 7px 0 0 0;
+	WIDTH: 20px;
+	HEIGHT: 20px;
+	BACKGROUND-POSITION: -192px -159px;
+	CURSOR: pointer;
+	LEFT: 10px;
+	_margin-top: -13px
+}
+
+.ico-type-66 {
+	float: left;
+	margin-left: 10px;
+	margin-right: 2px;
+	_margin: 7px 0 0 0;
+	MARGIN-TOP: 0px;
+	WIDTH: 20px;
+	HEIGHT: 20px;
+	background-position: -224px -159px;
+	CURSOR: pointer;
+	LEFT: 10px;
+	_margin-top: -13px
+}
+
+.icon_change {
+	float: left;
+	margin-left: 0px;
+	margin-right: 8px;
+	MARGIN-TOP: 0px;
+	WIDTH: 25px;
+	HEIGHT: 20px;
+	CURSOR: pointer;
+	_margin-top: -13px;
+	background: url(../images/email/change.gif) no-repeat 8px 4px;
+}
+
+.trash {
+	background-position: 0 -40px;
+	margin-top: 2px;
+	left: 150px;
+	width: 15px; height : 15px;
+	cursor: pointer;
+	position: absolute;
+	font-size: 1px;
+	_margin-top: -20px;
+	height: 15px;
+}
+
+.mailbtn {
+	text-align: left;
+	FILTER: progid:DXImageTransform.Microsoft.gradient(enabled=false);	
+	PADDING-BOTTOM: 5px;
+	LINE-HEIGHT: 20px;
+	BACKGROUND-COLOR: transparent;
+	PADDING-LEFT: 1px;
+	PADDING-RIGHT: 12px;
+	DISPLAY: inline-block;
+	BACKGROUND-REPEAT: no-repeat;
+	MARGIN-BOTTOM: 0px;
+	Margin-right: 2px;
+	COLOR: #333333;
+	FONT-SIZE: 12px;
+	text-valign: middle;
+	VERTICAL-ALIGN: middle;
+	CURSOR: pointer;	
+	PADDING-TOP: 5px;
+	text-shadow: 0 1px 1px rgba(255, 255, 255, 0.75);
+	
+	-webkit-border-radius: 4px;
+	-moz-border-radius: 4px;
+	border-radius: 4px;
+	-webkit-box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.2), 0 1px 2px
+		rgba(0, 0, 0, 0.05);
+	-moz-box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.2), 0 1px 2px
+		rgba(0, 0, 0, 0.05);
+	width: 170px;
+	heigt: 30px;
+}
+
+.mailbtn:hover {
+	BACKGROUND-COLOR: #e8f2ff;
+	COLOR: #333333
+}
+
+.mailbtn:focus {
+	BACKGROUND-COLOR: #e6e6e6;
+	COLOR: #333333
+}
+
+.mailbtn:active {
+	BACKGROUND-COLOR: #e6e6e6;
+	COLOR: #333333
+}
+
+.active.mailbtn {
+	BACKGROUND-COLOR: #e6e6e6;
+	COLOR: #333333
+}
+
+.disabled.mailbtn {
+	BACKGROUND-COLOR: #e6e6e6;
+	COLOR: #333333
+}
+
+.ico-read{display:inline-block; margin:6px 3px 0 2px; width: 14px;height: 10px;background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAA4AAAAKCAMAAACzB5/1AAAAA3NCSVQICAjb4U/gAAAAXVBMVEX////+/v79/f36+vr39/f19fX09PTz8/Pw8PDv7+/u7u7t7e3o6Oji4uLh4eHg4ODd3d3W1tbT09PS0tLLy8vHx8e9vb28vLy2trawsLCvr6+tra2hoaGhoqP////QBo2TAAAAH3RSTlP///////////////////////////////////////8AzRl2EAAAAAlwSFlzAAAOdAAADnQBaySz1gAAABZ0RVh0Q3JlYXRpb24gVGltZQAwNi8yNi8xMtWzjosAAAAcdEVYdFNvZnR3YXJlAEFkb2JlIEZpcmV3b3JrcyBDUzQGstOgAAAAV0lEQVQImVXNWQ6AIAxF0YeAIwooKArsf5vSEGO4fydtWuQm5KvD11moH1khb12IMSqSihOI4MECNnBU4vAp+Y0xRhRupuXecJouTtRT3AyF+/9oLWx6ATI3B11huEELAAAAAElFTkSuQmCC) no-repeat;}
+.ico-unread {display:inline-block; margin:5px 3px 0 1px; width: 15px; height: 11px;background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAA8AAAALCAMAAACXmSduAAAAA3NCSVQICAjb4U/gAAAAgVBMVEX98rn98rr88bn76o/654z554zz5Kv45ov35Yv45Ij144j244nv36Tz4IX234Pv3qPz34Xz2Hvz2Xzw1Hbo1Jjx1Hbq03ro0Xjr0HTtzG3nym/hx2/owmLfxG3ku27er13erlzXnmvYoD3UmDTRky7NjSjMiibNiSPMiSPEdw/////279kmAAAAK3RSTlP///////////////////////////////////////////////////////8AI8mn0AAAAAlwSFlzAAALEgAACxIB0t1+/AAAABZ0RVh0Q3JlYXRpb24gVGltZQAwNi8yOS8xMo3Qnt0AAAAcdEVYdFNvZnR3YXJlAEFkb2JlIEZpcmV3b3JrcyBDUzQGstOgAAAAYklEQVQImVXNRxaAIAxFUTA27L13sO1/gwbl6PHN7iA/ZP5H5onQtxE9LDqolgFNO85uMd5RaahFgAxEDY8h3RKI1xyUrbY5zr0qjMd+H933TulKh62t5o3CRGfa999D/7sA2s8K/6JvzZkAAAAASUVORK5CYII=) no-repeat;}
+.ico-important{display:inline-block; margin:6px 5px 0 5px; width: 2px!important;height: 9px;background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAIAAAAJAQMAAAAiv2+kAAAAA3NCSVQICAjb4U/gAAAABlBMVEXZMwD///92aRBsAAAAAnRSTlP/AOW3MEoAAAAJcEhZcwAADnQAAA50AWsks9YAAAAWdEVYdENyZWF0aW9uIFRpbWUAMDYvMjcvMTJtD+nuAAAAHHRFWHRTb2Z0d2FyZQBBZG9iZSBGaXJld29ya3MgQ1M0BrLToAAAAA5JREFUCJljYEACB0AEAAPSAME1WRHUAAAAAElFTkSuQmCC) no-repeat;}
+@CHARSET "UTF-8";
+
+.sidebar_logo {
+	height: 100px;
+	line-height: 100px;
+	font-size: 72px;
+	text-align: center;
+	color: #dd4b39;
+}
+
+.T_icon {
+	color: #2f8ac1 !important;
+}
+

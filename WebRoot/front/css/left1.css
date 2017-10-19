@@ -1,0 +1,56 @@
+@charset "utf-8";
+/* CSS Document */
+h2,h3,h4,em,strong{
+	font-weight:normal;	
+}
+body,h2,h3,h4,p,ul,li,pre,span,button,input,div,form,select,option{
+	margin:0;
+	padding:0;	
+}
+:link,:visited{
+	text-decoration:none;	
+}
+img{
+	border:0 none;	
+}
+ul{
+	list-style:none;	
+}
+a{
+	outline:none;blr:expression(this.onFocus=this.blur());
+}
+clear0{
+	clear:both;
+	height:0;
+	line-height:0;
+	overflow:hidden;	
+}
+.clear{
+	clear:both;	
+}
+.leftcd{
+	position:absolute;
+	width:235px;
+	height:auto;
+	background:none;	
+}
+.leftcd li{
+	background:url(../images/cd_bj.png) no-repeat;
+	width:229px;
+	height:55px;
+	line-height:55px;
+	text-align:center;	
+	font-family:"隶书";
+	margin-bottom:30px;
+	font-size:38px;
+}
+.leftcd li a:link,.leftcd li a:visited{
+	color:#fff;	
+}
+.leftcd li a:hover{
+	color:#000;	
+}
+.leftcd li a:action{
+	color:#000;	
+}
+

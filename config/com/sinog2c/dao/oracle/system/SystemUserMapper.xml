@@ -1,0 +1,745 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.sinog2c.dao.api.system.SystemUserMapper" >
+  <resultMap id="BaseResultMap" type="com.sinog2c.model.system.SystemUser" >
+    <result column="USERID" property="userid" jdbcType="VARCHAR" />
+    <result column="NAME" property="name" jdbcType="VARCHAR" />
+    <result column="PASSWORD" property="password" jdbcType="VARCHAR" />
+    <result column="DUTY" property="duty" jdbcType="VARCHAR" />
+    <result column="EMAIL" property="email" jdbcType="VARCHAR" />
+    <result column="GENDER" property="gender" jdbcType="DECIMAL" />
+    <result column="QQ" property="qq" jdbcType="VARCHAR" />
+    <result column="BIRTHDAY" property="birthday" jdbcType="TIMESTAMP" />
+    <result column="NATIONALITY" property="nationality" jdbcType="VARCHAR" />
+    <result column="CITY" property="city" jdbcType="VARCHAR" />
+    <result column="ADDRESS" property="address" jdbcType="VARCHAR" />
+    <result column="POSTCODE" property="postcode" jdbcType="VARCHAR" />
+    <result column="HOMEPHONE" property="homephone" jdbcType="VARCHAR" />
+    <result column="OFFICEPHONE" property="officephone" jdbcType="VARCHAR" />
+    <result column="FAX" property="fax" jdbcType="VARCHAR" />
+    <result column="MOBILE" property="mobile" jdbcType="VARCHAR" />
+    <result column="QUESTION" property="question" jdbcType="VARCHAR" />
+    <result column="ANSWER" property="answer" jdbcType="VARCHAR" />
+    <result column="SN" property="sn" jdbcType="DECIMAL" />
+    <result column="ISLOCKED" property="islocked" jdbcType="VARCHAR" />
+    <result column="REMARK" property="remark" jdbcType="VARCHAR" />
+    <result column="DELFLAG" property="delflag" jdbcType="VARCHAR" />
+    <result column="OPFLAG" property="opflag" jdbcType="DECIMAL" />
+    <result column="TEXT1" property="text1" jdbcType="VARCHAR" />
+    <result column="TEXT2" property="text2" jdbcType="VARCHAR" />
+    <result column="TEXT3" property="text3" jdbcType="VARCHAR" />
+    <result column="TEXT4" property="text4" jdbcType="VARCHAR" />
+    <result column="TEXT5" property="text5" jdbcType="VARCHAR" />
+    <result column="TEXT6" property="text6" jdbcType="VARCHAR" />
+    <result column="INT1" property="int1" jdbcType="DECIMAL" />
+    <result column="INT2" property="int2" jdbcType="DECIMAL" />
+    <result column="OPTIME" property="optime" jdbcType="TIMESTAMP" />
+    <result column="OPID" property="opid" jdbcType="VARCHAR" />
+    <result column="DEPARTID" property="departid" jdbcType="VARCHAR"/>
+    <!-- start add by blue_lv 2015-7-14 -->
+		<result column="orgname" property="orgname" jdbcType="VARCHAR" />
+		<!-- end add by blue_lv 2015-7-14 -->
+  </resultMap>
+
+  <resultMap id="ResultMapWithOrg" type="com.sinog2c.model.system.SystemUser" extends="BaseResultMap" >
+    <association property="organization" javaType="com.sinog2c.model.system.SystemOrganization">
+	    <id column="ORGID" property="orgid" jdbcType="VARCHAR" />
+	    <result column="PORGID" property="porgid" jdbcType="VARCHAR" />
+	    <result column="BELONGORGID" property="belongorgid" jdbcType="VARCHAR" />
+	    <result column="ORGNAME" property="name" jdbcType="VARCHAR" />
+	    <result column="SHORTNAME" property="shortname" jdbcType="VARCHAR" />
+	    <result column="FULLNAME" property="fullname" jdbcType="VARCHAR" />
+    </association>
+  </resultMap>
+  
+  <insert id="insert" parameterType="com.sinog2c.model.system.SystemUser" >
+    insert into TBSYS_USERINFO (USERID, NAME, PASSWORD, 
+      DUTY, EMAIL, GENDER, 
+      QQ, BIRTHDAY, NATIONALITY, 
+      CITY, ADDRESS, POSTCODE, 
+      HOMEPHONE, OFFICEPHONE, FAX, 
+      MOBILE, QUESTION, ANSWER, 
+      SN, ISLOCKED, REMARK, 
+      DELFLAG, OPFLAG, TEXT1, 
+      TEXT2, TEXT3, TEXT4, 
+      TEXT5, TEXT6, INT1, 
+      INT2, OPTIME, OPID)
+    values (#{userid,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR},  #{password,jdbcType=VARCHAR} , 
+      #{duty,jdbcType=VARCHAR}, #{email,jdbcType=VARCHAR}, #{gender,jdbcType=DECIMAL}, 
+      #{qq,jdbcType=VARCHAR}, #{birthday,jdbcType=DATE}, #{nationality,jdbcType=VARCHAR}, 
+      #{city,jdbcType=VARCHAR}, #{address,jdbcType=VARCHAR}, #{postcode,jdbcType=VARCHAR}, 
+      #{homephone,jdbcType=VARCHAR}, #{officephone,jdbcType=VARCHAR}, #{fax,jdbcType=VARCHAR}, 
+      #{mobile,jdbcType=VARCHAR}, #{question,jdbcType=VARCHAR}, #{answer,jdbcType=VARCHAR}, 
+      #{sn,jdbcType=DECIMAL}, #{islocked,jdbcType=VARCHAR}, #{remark,jdbcType=VARCHAR}, 
+      #{delflag,jdbcType=VARCHAR}, #{opflag,jdbcType=DECIMAL}, #{text1,jdbcType=VARCHAR}, 
+      #{text2,jdbcType=VARCHAR}, #{text3,jdbcType=VARCHAR}, #{text4,jdbcType=VARCHAR}, 
+      #{text5,jdbcType=VARCHAR}, #{text6,jdbcType=VARCHAR}, #{int1,jdbcType=DECIMAL}, 
+      #{int2,jdbcType=DECIMAL}, #{optime,jdbcType=TIMESTAMP}, #{opid,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.sinog2c.model.system.SystemUser" >
+    insert into TBSYS_USERINFO
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="userid != null" >
+        USERID,
+      </if>
+      <if test="name != null" >
+        NAME,
+      </if>
+      <if test="password != null" >
+        PASSWORD,
+      </if>
+      <if test="duty != null" >
+        DUTY,
+      </if>
+      <if test="email != null" >
+        EMAIL,
+      </if>
+      <if test="gender != 0" >
+        GENDER,
+      </if>
+      <if test="qq != null" >
+        QQ,
+      </if>
+      <if test="birthday != null" >
+        BIRTHDAY,
+      </if>
+      <if test="nationality != null" >
+        NATIONALITY,
+      </if>
+      <if test="city != null" >
+        CITY,
+      </if>
+      <if test="address != null" >
+        ADDRESS,
+      </if>
+      <if test="postcode != null" >
+        POSTCODE,
+      </if>
+      <if test="homephone != null" >
+        HOMEPHONE,
+      </if>
+      <if test="officephone != null" >
+        OFFICEPHONE,
+      </if>
+      <if test="fax != null" >
+        FAX,
+      </if>
+      <if test="mobile != null" >
+        MOBILE,
+      </if>
+      <if test="question != null" >
+        QUESTION,
+      </if>
+      <if test="answer != null" >
+        ANSWER,
+      </if>
+      <if test="sn != null" >
+        SN,
+      </if>
+      <if test="islocked != null" >
+        ISLOCKED,
+      </if>
+      <if test="remark != null" >
+        REMARK,
+      </if>
+      <if test="delflag != null" >
+        DELFLAG,
+      </if>
+      <if test="opflag != null" >
+        OPFLAG,
+      </if>
+      <if test="departid != null" >
+        DEPARTID,
+      </if>
+      <if test="text1 != null" >
+        TEXT1,
+      </if>
+      <if test="text2 != null" >
+        TEXT2,
+      </if>
+      <if test="text3 != null" >
+        TEXT3,
+      </if>
+      <if test="text4 != null" >
+        TEXT4,
+      </if>
+      <if test="text5 != null" >
+        TEXT5,
+      </if>
+      <if test="text6 != null" >
+        TEXT6,
+      </if>
+      <if test="int1 != null" >
+        INT1,
+      </if>
+      <if test="int2 != null" >
+        INT2,
+      </if>
+      <if test="optime != null" >
+        OPTIME,
+      </if>
+      <if test="opid != null" >
+        OPID,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="userid != null" >
+        #{userid,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null" >
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="password != null" >
+       #{password,jdbcType=VARCHAR} ,
+      </if>
+      <if test="duty != null" >
+        #{duty,jdbcType=VARCHAR},
+      </if>
+      <if test="email != null" >
+        #{email,jdbcType=VARCHAR},
+      </if>
+      <if test="gender != 0" >
+        #{gender,jdbcType=DECIMAL},
+      </if>
+      <if test="qq != null" >
+        #{qq,jdbcType=VARCHAR},
+      </if>
+      <if test="birthday != null" >
+        #{birthday,jdbcType=DATE},
+      </if>
+      <if test="nationality != null" >
+        #{nationality,jdbcType=VARCHAR},
+      </if>
+      <if test="city != null" >
+        #{city,jdbcType=VARCHAR},
+      </if>
+      <if test="address != null" >
+        #{address,jdbcType=VARCHAR},
+      </if>
+      <if test="postcode != null" >
+        #{postcode,jdbcType=VARCHAR},
+      </if>
+      <if test="homephone != null" >
+        #{homephone,jdbcType=VARCHAR},
+      </if>
+      <if test="officephone != null" >
+        #{officephone,jdbcType=VARCHAR},
+      </if>
+      <if test="fax != null" >
+        #{fax,jdbcType=VARCHAR},
+      </if>
+      <if test="mobile != null" >
+        #{mobile,jdbcType=VARCHAR},
+      </if>
+      <if test="question != null" >
+        #{question,jdbcType=VARCHAR},
+      </if>
+      <if test="answer != null" >
+        #{answer,jdbcType=VARCHAR},
+      </if>
+      <if test="sn != null" >
+        #{sn,jdbcType=DECIMAL},
+      </if>
+      <if test="islocked != null" >
+        #{islocked,jdbcType=VARCHAR},
+      </if>
+      <if test="remark != null" >
+        #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="delflag != null" >
+        #{delflag,jdbcType=VARCHAR},
+      </if>
+      <if test="opflag != null" >
+        #{opflag,jdbcType=DECIMAL},
+      </if>
+      <if test="departid != null" >
+        #{departid,jdbcType=VARCHAR},
+      </if>
+      <if test="text1 != null" >
+        #{text1,jdbcType=VARCHAR},
+      </if>
+      <if test="text2 != null" >
+        #{text2,jdbcType=VARCHAR},
+      </if>
+      <if test="text3 != null" >
+        #{text3,jdbcType=VARCHAR},
+      </if>
+      <if test="text4 != null" >
+        #{text4,jdbcType=VARCHAR},
+      </if>
+      <if test="text5 != null" >
+        #{text5,jdbcType=VARCHAR},
+      </if>
+      <if test="text6 != null" >
+        #{text6,jdbcType=VARCHAR},
+      </if>
+      <if test="int1 != null" >
+        #{int1,jdbcType=DECIMAL},
+      </if>
+      <if test="int2 != null" >
+        #{int2,jdbcType=DECIMAL},
+      </if>
+      <if test="optime != null" >
+        #{optime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="opid != null" >
+        #{opid,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  
+  <insert id="copyToHistory" parameterType="com.sinog2c.model.system.SystemUser" >
+    insert into TBSYS_USERINFO_HIS select * from TBSYS_USERINFO u
+	where u.USERID=#{userid}
+  </insert>
+  
+  <update id="updateSelfInfo" parameterType="com.sinog2c.model.system.SystemUser" >
+    update TBSYS_USERINFO
+	<set>
+		<if test="name != null">NAME=#{name},</if>
+		<if test="gender != 0">GENDER=#{gender},</if>
+		<if test="mobile != null">MOBILE=#{mobile},</if>
+		<if test="email != null">EMAIL=#{email},</if>
+		<if test="password != null">PASSWORD=#{password},</if>
+	</set>
+	where USERID=#{userid}
+  </update>
+  <update id="updateUserInfo" parameterType="com.sinog2c.model.system.SystemUser" >
+    update TBSYS_USERINFO
+	<set>
+		<if test="name != null">NAME=#{name},</if>
+		<if test="duty != null">DUTY=#{duty},</if>
+		<if test="password != null">PASSWORD=#{password},</if>
+		<if test="gender != null">GENDER=#{gender},</if>
+		<if test="mobile != null">MOBILE=#{mobile},</if>
+		<if test="email != null">EMAIL=#{email},</if>
+		<if test="qq != null">QQ=#{qq},</if>
+		<if test="sn != null">SN=#{sn},</if>
+		<if test="remark != null">REMARK=#{remark},</if>
+		<if test="departid != null">DEPARTID=#{departid},</if>
+		<if test="int1 != null" >INT1=#{int1},</if>
+		<if test="int2 != null" >INT2=#{int2},</if>
+		<if test="delflag != null" >DELFLAG=#{delflag},</if>
+		<if test="islocked != null" >ISLOCKED=#{islocked},</if>
+	</set>
+	where USERID=#{userid} 
+  </update>
+  
+  <delete id="deleteOnly" parameterType="com.sinog2c.model.system.SystemUser" >
+    delete from TBSYS_USERINFO u
+	where u.USERID=#{userid}
+  </delete>  
+  
+  <select id="getByUserId" resultMap="BaseResultMap">    <!-- 根据 userId 查询 -->
+	 select * from TBSYS_USERINFO where 1=1 and  USERID=#{userId} and delflag='0'
+  </select>
+  
+  <select id="getApprovePersons" parameterType="Map" resultType="Map">
+	 select userid, name from TBSYS_USERINFO where 1=1 and  userid in (${userids})
+  </select>
+  
+  <select id="selectAll" resultMap="BaseResultMap">    <!-- 查询表中的所有信息 -->
+	 select * from TBSYS_USERINFO where DELFLAG='0' order by USERID asc
+  </select>
+  <select id="countAll" resultType="int">  <!-- 查询表中记录总数 -->
+	 select count(*) c from TBSYS_USERINFO
+  </select>
+  <select id="getAllByPage" resultMap="BaseResultMap">    <!-- 分页查询表中的所有信息 -->
+	 SELECT * FROM 
+	 	( SELECT A.*, ROWNUM RN 
+		 	FROM 
+		 	(
+		 		SELECT * FROM TBSYS_USERINFO
+		 		  where DELFLAG=0
+		 		  order by USERID asc
+		 	) A 
+		 	WHERE ROWNUM &lt;= #{end,jdbcType=DECIMAL}
+	 	) 
+	 	WHERE RN &gt;= #{start,jdbcType=DECIMAL}
+  </select>  
+
+
+  <select id="countBySearch" resultType="int">  <!-- 查询搜索记录总数 -->
+	 	select count(*) c from TBSYS_USERINFO
+	 	where 1=1 
+		 <if test="key!=null and key!=''">  
+	        and 
+	        (
+	         USERID like CONCAT(CONCAT('%', #{key}), '%')
+	         or NAME like CONCAT(CONCAT('%', #{key}), '%')
+	        )
+	     </if>
+  </select>
+  <select id="searchByPage" resultMap="BaseResultMap">    <!-- 分页查询表中的所有信息 -->
+	 SELECT * FROM 
+	 	( SELECT A.*, ROWNUM RN 
+		 	FROM 
+		 	(
+		 		SELECT * FROM TBSYS_USERINFO
+		 		  where DELFLAG=0
+				 <if test="key!=null and key!=''">  
+			        and 
+			        (
+			         USERID like CONCAT(CONCAT('%', #{key}), '%')
+			         or NAME like CONCAT(CONCAT('%', #{key}), '%')
+			        )
+			     </if>
+		 		  order by USERID asc
+		 	) A 
+		 	WHERE ROWNUM &lt;= #{end,jdbcType=DECIMAL}
+	 	) 
+	 	WHERE RN &gt;= #{start,jdbcType=DECIMAL}
+  </select>  
+
+  <select id="countByOrgid" resultType="int">  <!-- 查询搜记录数 -->
+	 	select count(*) c from TBSYS_USERINFO t
+	 	where 1=1 and t.delflag=0 and t.islocked=0
+		 <if test="orgid!=null and orgid!=''">  
+	        and t.userid in (
+			    select uo.userid from tbsys_user_org uo
+			    	where uo.orgid in
+			    	(
+			    	select t.orgid from TBSYS_ORGINFO t
+ 					start with t.orgid= #{orgid} connect by prior t.orgid =t.porgid
+			     	)
+			)
+	     </if>
+  </select>
+  
+  <select id="getPageByOrgid" resultMap="ResultMapWithOrg">    <!-- 分页查询表中的信息, 带出ORG -->
+	 SELECT * FROM 
+	 	( SELECT A.*, ROWNUM RN 
+		 	FROM 
+		 	(
+		 		SELECT u.*, o.orgid, o.porgid, o.belongorgid, o.shortname, o.fullname, o.name as orgname
+				  FROM TBSYS_USERINFO u
+				  join tbsys_user_org uo
+				    on u.userid = uo.userid
+				  join (select o.*
+				          from TBSYS_ORGINFO o
+				          <if test="orgid!=null and orgid!=''">
+				 					start with o.orgid= #{orgid} connect by prior o.orgid =o.porgid
+					     </if>
+				        ) o
+				    on uo.orgid = o.orgid
+				  where u.DELFLAG=0 and u.islocked=0
+		 		  order by u.USERID asc
+		 	) A 
+		 	WHERE ROWNUM &lt;= #{end,jdbcType=DECIMAL}
+	 	) 
+	 	WHERE RN &gt;= #{start,jdbcType=DECIMAL}
+  </select>  
+
+  <select id="countByOrgidAndKey" resultType="int">  <!-- 查询搜索记录总数 -->
+	 	select count(*) c from TBSYS_USERINFO t
+	 	where t.DELFLAG=0  and t.islocked=0
+		 <if test="orgid!=null and orgid!=''">
+	        and t.userid in (
+			    select uo.userid from tbsys_user_org uo
+			    	where uo.orgid in
+			    	(
+			    	select t.orgid from TBSYS_ORGINFO t
+ 					start with t.orgid= #{orgid} connect by prior t.orgid =t.porgid
+			     	)
+			)
+	     </if>
+	     <if test="key!=null and key!=''">  
+	        and 
+	        (
+	         t.USERID like CONCAT(CONCAT('%', #{key}), '%')
+	         or t.NAME like CONCAT(CONCAT('%', #{key}), '%')
+	        )
+	     </if>
+  </select>
+  
+  <select id="getPageByOrgidAndKey" resultMap="ResultMapWithOrg">    <!-- 分页搜索表中的信息 -->
+	 SELECT * FROM 
+	 	( SELECT A.*, ROWNUM RN 
+		 	FROM 
+		 	(
+		 		SELECT u.*, o.orgid, o.porgid, o.belongorgid, o.shortname, o.fullname, o.name as orgname
+				  FROM TBSYS_USERINFO u
+				  join tbsys_user_org uo
+				    on u.userid = uo.userid
+				  join (select o.*
+				          from TBSYS_ORGINFO o
+				          <if test="orgid!=null and orgid!=''">
+				 					start with o.orgid= #{orgid} connect by prior o.orgid =o.porgid
+					     </if>
+				        ) o
+				    on uo.orgid = o.orgid
+				    where u.DELFLAG=0 and u.islocked=0
+			     <if test="key!=null and key!=''">  
+			        and 
+			        (
+			         u.USERID like CONCAT(CONCAT('%', #{key}), '%')
+			         or u.NAME like CONCAT(CONCAT('%', #{key}), '%')
+			        )
+			     </if>
+		 		  order by u.USERID asc
+		 	) A 
+		 	WHERE ROWNUM &lt;= #{end,jdbcType=DECIMAL}
+	 	) 
+	 	WHERE RN &gt;= #{start,jdbcType=DECIMAL}
+  </select>  
+
+  <select id="countByOrgids" resultType="int">  <!-- 查询搜索记录数 -->
+	 	select count(*) c from TBSYS_USERINFO t
+	 	where 1=1  and t.delflag=0 and t.islocked=0
+		 <if test="orgids!=null and orgids!=''">  
+	        and t.userid in (
+			    select uo.userid from tbsys_user_org uo where uo.orgid in (${orgids})
+			)
+	     </if>
+  </select>
+  
+  <select id="getUsersByDepartid"  parameterType="Map" resultType="Map"> 
+	 	select *  from TBSYS_USERINFO t
+	 	where 1=1  and t.delflag=0 and t.islocked=0
+		 <if test="departid!=null and departid!=''">  
+	        and t.userid in (
+			    select uo.userid from tbsys_user_org uo where uo.orgid= #{departid}
+			)
+	     </if>
+  </select>
+  
+  <select id="getCurrDepartUsersByDepartid"  parameterType="Map" resultType="Map"> 
+	 	select userid as id , name as text  from TBSYS_USERINFO t
+	 	where 1=1  and t.delflag=0 and t.islocked=0
+	 	  and t.departid=#{departid}
+  </select>
+  
+  
+  <select id="getPageByOrgids" resultMap="BaseResultMap">    <!-- 分页查询表中的信息 -->
+	 SELECT * FROM 
+	 	( SELECT A.*, ROWNUM RN 
+		 	FROM 
+		 	(
+		 		SELECT * FROM TBSYS_USERINFO t
+		 		  where DELFLAG=0 and t.islocked=0
+				 <if test="orgids!=null and orgids!=''">
+			        and t.userid in (
+					    select uo.userid from tbsys_user_org uo where uo.orgid in (${orgids})
+					)
+			     </if>
+		 		  order by USERID asc
+		 	) A 
+		 	WHERE ROWNUM &lt;= #{end,jdbcType=DECIMAL}
+	 	) 
+	 	WHERE RN &gt;= #{start,jdbcType=DECIMAL}
+  </select> 
+  <select id="getUsersByOrgid" parameterType="Map"  resultMap="BaseResultMap">
+	 select * from TBSYS_USERINFO t 
+	 where t.userid in 
+	 			(select t.userid from TBSYS_USER_ORG t where t.orgid=#{orgid}) 
+	   and t.delflag=0
+	   and t.islocked=0
+	 <if test="isfjquser!=null and isfjquser!=''">  
+	   and t.int2=1
+	 </if>
+  </select> 
+  <select id="getUserInfoByOrgid" resultMap="BaseResultMap">
+  	select * from tbsys_userinfo where departid=#{departid}
+  </select>
+  <select id="getUserIdByOrgids" resultType="com.sinog2c.model.system.SystemUser">
+  	select * from TBSYS_USER_ORG t where t.orgid in (select g.orgid
+             from tbsys_orginfo g where g.porgid = #{deparid} and g.unitlevel = '5')
+  </select>
+  <select id="getCurrentUserCourtRole" resultType="java.lang.String"> 
+	 select r.remark from TBSYS_ROLEINFO r where r.roleid in(select ur.roleid from TBSYS_USERS_ROLES ur where ur.userid=#{userid}) 
+  </select> 
+   <select id="getNextShenPiRenList" resultMap="BaseResultMap">    <!-- 根据 userId 查询 -->
+	 select * from TBSYS_USERINFO t where t.userid in (select ur.userid from TBSYS_USERS_ROLES ur where 
+	 	ur.roleid=(select r.roleid from TBSYS_ROLEINFO r where 1=1 and (${temprole}) )
+	 )  and  t.departid=#{orgid}
+  </select> 
+  
+  <!-- start add by blue_lv 2015-7-14 -->
+	<select id="getPageByOrgidAndKey2" resultMap="ResultMapWithOrg">
+		SELECT userid,name,duty,orgid,f_getorgname(orgid) as orgname FROM
+		(
+		SELECT A.*, ROWNUM RN
+		FROM ( SELECT u.userid,u.name,u.duty,orgid
+		FROM TBSYS_USERINFO u
+		join (Select userid,orgid
+		from tbsys_user_org t
+		where 1=1
+		<if test="orgid!=null and orgid!=''">
+			And EXISTS(
+			select orgid
+			from (select orgid
+			from TBSYS_ORGINFO
+			start with orgid= #{orgid} connect by prior orgid=porgid) o
+			where o.orgid=t.orgid )
+		</if>
+		) uo on u.userid = uo.userid
+		where u.DELFLAG=0 and u.islocked=0
+		<if test="key!=null and key!=''">
+			and
+			(u.USERID like CONCAT(CONCAT('%', #{key}), '%')
+			or u.NAME like CONCAT(CONCAT('%', #{key}), '%')
+			)
+		</if>
+		<if test="sortField!=null and sortField !=''">
+			order by ${sortField} ${sortOrder}
+		</if>
+		) A WHERE ROWNUM &lt;= #{end,jdbcType=DECIMAL})
+		WHERE RN
+		&gt;=#{start,jdbcType=DECIMAL}
+	</select>
+
+	<select id="getcountbyOrgidAndKey" resultType="int">
+		SELECT count(*)
+		FROM TBSYS_USERINFO u
+		join (Select userid,orgid
+		from tbsys_user_org t
+		where 1=1
+		<if test="orgid!=null and orgid!=''">
+			And EXISTS(
+			select orgid
+			from (select orgid
+			from TBSYS_ORGINFO
+			start with orgid= #{orgid} connect by prior orgid=porgid) o
+			where o.orgid=t.orgid )
+		</if>
+		) uo on u.userid = uo.userid
+		where u.DELFLAG=0 and u.islocked=0
+		<if test="key!=null and key!=''">
+			and
+			(u.USERID like CONCAT(CONCAT('%', #{key}), '%')
+			or u.NAME like CONCAT(CONCAT('%', #{key}), '%')
+			)
+		</if>
+
+	</select>
+	
+	
+	<update id="updateByPrimaryKeySelective" parameterType="com.sinog2c.model.system.SystemUser">
+		update TBSYS_USERINFO
+		<set>
+			<if test="name != null">
+				NAME = #{name,jdbcType=VARCHAR},
+			</if>
+			<if test="password != null">
+				PASSWORD = #{password,jdbcType=VARCHAR},
+			</if>
+			<if test="duty != null">
+				DUTY = #{duty,jdbcType=VARCHAR},
+			</if>
+			<if test="email != null">
+				EMAIL = #{email,jdbcType=VARCHAR},
+			</if>
+			<if test="gender != null">
+				GENDER = #{gender,jdbcType=DECIMAL},
+			</if>
+			<if test="qq != null">
+				QQ = #{qq,jdbcType=VARCHAR},
+			</if>
+			<if test="birthday != null">
+				BIRTHDAY = #{birthday,jdbcType=DATE},
+			</if>
+			<if test="nationality != null">
+				NATIONALITY = #{nationality,jdbcType=VARCHAR},
+			</if>
+			<if test="city != null">
+				CITY = #{city,jdbcType=VARCHAR},
+			</if>
+			<if test="address != null">
+				ADDRESS = #{address,jdbcType=VARCHAR},
+			</if>
+			<if test="postcode != null">
+				POSTCODE = #{postcode,jdbcType=VARCHAR},
+			</if>
+			<if test="homephone != null">
+				HOMEPHONE = #{homephone,jdbcType=VARCHAR},
+			</if>
+			<if test="officephone != null">
+				OFFICEPHONE = #{officephone,jdbcType=VARCHAR},
+			</if>
+			<if test="fax != null">
+				FAX = #{fax,jdbcType=VARCHAR},
+			</if>
+			<if test="mobile != null">
+				MOBILE = #{mobile,jdbcType=VARCHAR},
+			</if>
+			<if test="question != null">
+				QUESTION = #{question,jdbcType=VARCHAR},
+			</if>
+			<if test="answer != null">
+				ANSWER = #{answer,jdbcType=VARCHAR},
+			</if>
+			<if test="sn != null">
+				SN = #{sn,jdbcType=DECIMAL},
+			</if>
+			<if test="islocked != null">
+				ISLOCKED = #{islocked,jdbcType=VARCHAR},
+			</if>
+			<if test="remark != null">
+				REMARK = #{remark,jdbcType=VARCHAR},
+			</if>
+			<if test="delflag != null">
+				DELFLAG = #{delflag,jdbcType=VARCHAR},
+			</if>
+			<if test="opflag != null">
+				OPFLAG = #{opflag,jdbcType=DECIMAL},
+			</if>
+			<if test="departid != null">
+				DEPARTID = #{departid,jdbcType=VARCHAR},
+			</if>
+			<if test="text1 != null">
+				TEXT1 = #{text1,jdbcType=VARCHAR},
+			</if>
+			<if test="text2 != null">
+				TEXT2 = #{text2,jdbcType=VARCHAR},
+			</if>
+			<if test="text3 != null">
+				TEXT3 = #{text3,jdbcType=VARCHAR},
+			</if>
+			<if test="text4 != null">
+				TEXT4 = #{text4,jdbcType=VARCHAR},
+			</if>
+			<if test="text5 != null">
+				TEXT5 = #{text5,jdbcType=VARCHAR},
+			</if>
+			<if test="text6 != null">
+				TEXT6 = #{text6,jdbcType=VARCHAR},
+			</if>
+			<if test="int1 != null">
+				INT1 = #{int1,jdbcType=DECIMAL},
+			</if>
+			<if test="int2 != null">
+				INT2 = #{int2,jdbcType=DECIMAL},
+			</if>
+			<if test="optime != null">
+				OPTIME = #{optime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="opid != null">
+				OPID = #{opid,jdbcType=VARCHAR},
+			</if>
+		</set>
+		where USERID = #{userid,jdbcType=VARCHAR}
+	</update>
+
+	<select id="getKeYuanList" resultType="Map" parameterType="Map">
+		select u.* from tbsys_userinfo u,tbsys_users_roles ur 
+		where u.userid=ur.userid 
+		<if test="roleid != null and roleid !=''">
+			and ur.roleid=#{roleid}
+		</if>
+		 and u.departid=#{departid}
+	</select>
+	<!-- end add by blue_lv 2015-7-14 -->
+	<select id="getUserPassword" resultMap="BaseResultMap">
+    	select * from TBSYS_USERINFO u,TBYWGK_MODELCONTENT_FILTER t where t.userid=u.userid and t.ip like CONCAT(CONCAT('%', #{localip}), '%')
+  	</select>
+  	<update id="saveOrUpdateQianShou" parameterType="Map">
+    	update TBYWGK_CRIME_SHOPPINGLIST t set t.issign = '1'
+		where t.issign = '0' 
+		<if test="snumber != null and snumber !=''">
+			and t.snumber=#{snumber} 
+		</if>
+		<if test="listid != null and listid !=''">
+			and t.listid=#{listid}
+		</if>
+  	</update>
+</mapper>

@@ -1,0 +1,171 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.sinog2c.dao.api.commutationParole.TbxfScreeningPropertyMapper" >
+  <resultMap id="BaseResultMap" type="com.sinog2c.model.commutationParole.TbxfScreeningProperty" >
+    <id column="DEPARTID" property="departid" jdbcType="VARCHAR" />
+    <id column="TYPE" property="type" jdbcType="DECIMAL" />
+    <result column="SCONTENT" property="scontent" jdbcType="VARCHAR" />
+    <result column="ECONTENT" property="econtent" jdbcType="VARCHAR" />
+    <result column="INT1" property="int1" jdbcType="DECIMAL" />
+    <result column="INT2" property="int2" jdbcType="DECIMAL" />
+    <result column="INT3" property="int3" jdbcType="DECIMAL" />
+    <result column="TMP1" property="tmp1" jdbcType="VARCHAR" />
+    <result column="TMP2" property="tmp2" jdbcType="VARCHAR" />
+    <result column="TMP3" property="tmp3" jdbcType="VARCHAR" />
+    <result column="OPTIME" property="optime" jdbcType="DATE" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    DEPARTID, TYPE, SCONTENT, ECONTENT, INT1, INT2, INT3, TMP1, TMP2, TMP3, OPTIME
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="com.sinog2c.model.commutationParole.TbxfScreeningPropertyKey" >
+    select 
+    <include refid="Base_Column_List" />
+    from TBXF_SCREENING_PROPERTY
+    where DEPARTID = #{departid,jdbcType=VARCHAR}
+      and TYPE = #{type,jdbcType=DECIMAL}
+  </select>
+  <select id="selectByDepartid" resultMap="BaseResultMap" parameterType="Map" >
+    select 
+    <include refid="Base_Column_List" />
+    from TBXF_SCREENING_PROPERTY
+    where DEPARTID in (${departid})
+    and type = ${type}
+    order by DEPARTID desc
+  </select>  
+  <delete id="deleteByPrimaryKey" parameterType="com.sinog2c.model.commutationParole.TbxfScreeningPropertyKey" >
+    delete from TBXF_SCREENING_PROPERTY
+    where DEPARTID = #{departid,jdbcType=VARCHAR}
+      and TYPE = #{type,jdbcType=DECIMAL}
+  </delete>
+  <insert id="insert" parameterType="com.sinog2c.model.commutationParole.TbxfScreeningProperty" >
+    insert into TBXF_SCREENING_PROPERTY (DEPARTID, TYPE, SCONTENT, 
+      ECONTENT, INT1, INT2, 
+      INT3, TMP1, TMP2, TMP3, 
+      OPTIME)
+    values (#{departid,jdbcType=VARCHAR}, #{type,jdbcType=DECIMAL}, #{scontent,jdbcType=VARCHAR}, 
+      #{econtent,jdbcType=VARCHAR}, #{int1,jdbcType=DECIMAL}, #{int2,jdbcType=DECIMAL}, 
+      #{int3,jdbcType=DECIMAL}, #{tmp1,jdbcType=VARCHAR}, #{tmp2,jdbcType=VARCHAR}, #{tmp3,jdbcType=VARCHAR}, 
+      #{optime,jdbcType=DATE})
+  </insert>
+  <insert id="insertSelective" parameterType="com.sinog2c.model.commutationParole.TbxfScreeningProperty" >
+    insert into TBXF_SCREENING_PROPERTY
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="departid != null" >
+        DEPARTID,
+      </if>
+      <if test="type != null" >
+        TYPE,
+      </if>
+      <if test="scontent != null" >
+        SCONTENT,
+      </if>
+      <if test="econtent != null" >
+        ECONTENT,
+      </if>
+      <if test="int1 != null" >
+        INT1,
+      </if>
+      <if test="int2 != null" >
+        INT2,
+      </if>
+      <if test="int3 != null" >
+        INT3,
+      </if>
+      <if test="tmp1 != null" >
+        TMP1,
+      </if>
+      <if test="tmp2 != null" >
+        TMP2,
+      </if>
+      <if test="tmp3 != null" >
+        TMP3,
+      </if>
+      <if test="optime != null" >
+        OPTIME,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="departid != null" >
+        #{departid,jdbcType=VARCHAR},
+      </if>
+      <if test="type != null" >
+        #{type,jdbcType=DECIMAL},
+      </if>
+      <if test="scontent != null" >
+        #{scontent,jdbcType=VARCHAR},
+      </if>
+      <if test="econtent != null" >
+        #{econtent,jdbcType=VARCHAR},
+      </if>
+      <if test="int1 != null" >
+        #{int1,jdbcType=DECIMAL},
+      </if>
+      <if test="int2 != null" >
+        #{int2,jdbcType=DECIMAL},
+      </if>
+      <if test="int3 != null" >
+        #{int3,jdbcType=DECIMAL},
+      </if>
+      <if test="tmp1 != null" >
+        #{tmp1,jdbcType=VARCHAR},
+      </if>
+      <if test="tmp2 != null" >
+        #{tmp2,jdbcType=VARCHAR},
+      </if>
+      <if test="tmp3 != null" >
+        #{tmp3,jdbcType=VARCHAR},
+      </if>
+      <if test="optime != null" >
+        #{optime,jdbcType=DATE},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.sinog2c.model.commutationParole.TbxfScreeningProperty" >
+    update TBXF_SCREENING_PROPERTY
+    <set >
+      <if test="scontent != null" >
+        SCONTENT = #{scontent,jdbcType=VARCHAR},
+      </if>
+      <if test="econtent != null" >
+        ECONTENT = #{econtent,jdbcType=VARCHAR},
+      </if>
+      <if test="int1 != null" >
+        INT1 = #{int1,jdbcType=DECIMAL},
+      </if>
+      <if test="int2 != null" >
+        INT2 = #{int2,jdbcType=DECIMAL},
+      </if>
+      <if test="int3 != null" >
+        INT3 = #{int3,jdbcType=DECIMAL},
+      </if>
+      <if test="tmp1 != null" >
+        TMP1 = #{tmp1,jdbcType=VARCHAR},
+      </if>
+      <if test="tmp2 != null" >
+        TMP2 = #{tmp2,jdbcType=VARCHAR},
+      </if>
+      <if test="tmp3 != null" >
+        TMP3 = #{tmp3,jdbcType=VARCHAR},
+      </if>
+      <if test="optime != null" >
+        OPTIME = #{optime,jdbcType=DATE},
+      </if>
+    </set>
+    where DEPARTID = #{departid,jdbcType=VARCHAR}
+      and TYPE = #{type,jdbcType=DECIMAL}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.sinog2c.model.commutationParole.TbxfScreeningProperty" >
+    update TBXF_SCREENING_PROPERTY
+    set SCONTENT = #{scontent,jdbcType=VARCHAR},
+      ECONTENT = #{econtent,jdbcType=VARCHAR},
+      INT1 = #{int1,jdbcType=DECIMAL},
+      INT2 = #{int2,jdbcType=DECIMAL},
+      INT3 = #{int3,jdbcType=DECIMAL},
+      TMP1 = #{tmp1,jdbcType=VARCHAR},
+      TMP2 = #{tmp2,jdbcType=VARCHAR},
+      TMP3 = #{tmp3,jdbcType=VARCHAR},
+      OPTIME = #{optime,jdbcType=DATE}
+    where DEPARTID = #{departid,jdbcType=VARCHAR}
+      and TYPE = #{type,jdbcType=DECIMAL}
+  </update>
+</mapper>

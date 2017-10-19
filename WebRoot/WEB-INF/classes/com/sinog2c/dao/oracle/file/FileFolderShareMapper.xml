@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.sinog2c.dao.api.file.FileFolderShareMapper">
+	<resultMap id="BaseResultMap" type="com.sinog2c.model.file.FileFolderShare">
+		<id column="ID" property="id" jdbcType="DECIMAL" />
+		<result column="FOLDER_ID" property="folderId" jdbcType="DECIMAL" />
+		<result column="IUID" property="iuid" jdbcType="VARCHAR" />
+		<result column="IS_EDITABLE" property="isEditable" jdbcType="DECIMAL" />
+		<result column="START_TIME" property="startTime" jdbcType="TIMESTAMP" />
+		<result column="END_TIME" property="endTime" jdbcType="TIMESTAMP" />
+		<result column="NAME" property="username" jdbcType="VARCHAR" />
+	</resultMap>
+	<sql id="Base_Column_List">
+		ID, FOLDER_ID, IUID, IS_EDITABLE, START_TIME, END_TIME
+	</sql>
+	<select id="selectByPrimaryKey" resultMap="BaseResultMap"
+		parameterType="java.lang.Long">
+		select
+		<include refid="Base_Column_List" />
+		from FILE_FOLDER_SHARE
+		where ID = #{id,jdbcType=DECIMAL}
+	</select>
+	<delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+		delete from
+		FILE_FOLDER_SHARE
+		where ID = #{id,jdbcType=DECIMAL}
+	</delete>
+	<insert id="insert" parameterType="com.sinog2c.model.file.FileFolderShare">
+		insert into FILE_FOLDER_SHARE
+		(ID, FOLDER_ID, IUID,
+		IS_EDITABLE, START_TIME, END_TIME
+		)
+		values
+		(#{id,jdbcType=DECIMAL}, #{folderId,jdbcType=DECIMAL},
+		#{iuid,jdbcType=VARCHAR},
+		#{isEditable,jdbcType=DECIMAL},
+		#{startTime,jdbcType=TIMESTAMP}, #{endTime,jdbcType=TIMESTAMP}
+		)
+	</insert>
+	<insert id="insertSelective" parameterType="com.sinog2c.model.file.FileFolderShare">
+		insert into FILE_FOLDER_SHARE
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				ID,
+			</if>
+			<if test="folderId != null">
+				FOLDER_ID,
+			</if>
+			<if test="iuid != null">
+				IUID,
+			</if>
+			<if test="isEditable != null">
+				IS_EDITABLE,
+			</if>
+			<if test="startTime != null">
+				START_TIME,
+			</if>
+			<if test="endTime != null">
+				END_TIME,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				#{id,jdbcType=DECIMAL},
+			</if>
+			<if test="folderId != null">
+				#{folderId,jdbcType=DECIMAL},
+			</if>
+			<if test="iuid != null">
+				#{iuid,jdbcType=VARCHAR},
+			</if>
+			<if test="isEditable != null">
+				#{isEditable,jdbcType=DECIMAL},
+			</if>
+			<if test="startTime != null">
+				#{startTime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="endTime != null">
+				#{endTime,jdbcType=TIMESTAMP},
+			</if>
+		</trim>
+	</insert>
+	<update id="updateByPrimaryKeySelective" parameterType="com.sinog2c.model.file.FileFolderShare">
+		update FILE_FOLDER_SHARE
+		<set>
+			<if test="folderId != null">
+				FOLDER_ID = #{folderId,jdbcType=DECIMAL},
+			</if>
+			<if test="iuid != null">
+				IUID = #{iuid,jdbcType=VARCHAR},
+			</if>
+			<if test="isEditable != null">
+				IS_EDITABLE = #{isEditable,jdbcType=DECIMAL},
+			</if>
+			<if test="startTime != null">
+				START_TIME = #{startTime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="endTime != null">
+				END_TIME = #{endTime,jdbcType=TIMESTAMP},
+			</if>
+		</set>
+		where ID = #{id,jdbcType=DECIMAL}
+	</update>
+	<update id="updateByPrimaryKey" parameterType="com.sinog2c.model.file.FileFolderShare">
+		update
+		FILE_FOLDER_SHARE
+		set FOLDER_ID = #{folderId,jdbcType=DECIMAL},
+		IUID =
+		#{iuid,jdbcType=VARCHAR},
+		IS_EDITABLE = #{isEditable,jdbcType=DECIMAL},
+		START_TIME = #{startTime,jdbcType=TIMESTAMP},
+		END_TIME =
+		#{endTime,jdbcType=TIMESTAMP}
+		where ID = #{id,jdbcType=DECIMAL}
+	</update>
+
+	<select id="getFolderShareInfosByFolderID" resultMap="BaseResultMap"
+		parameterType="java.lang.Long">
+		select
+		<include refid="Base_Column_List" />,Name
+		from FILE_FOLDER_SHARE join TBSYS_USERINFO on IUID=USERID
+		where
+		FOLDER_ID = #{folderId,jdbcType=DECIMAL}
+	</select>
+	
+	<delete id="deleteByfolderid" parameterType="java.lang.Long">
+		delete from
+		FILE_FOLDER_SHARE
+		where FOLDER_ID = #{folderId,jdbcType=DECIMAL}
+	</delete>
+	
+	<select id="getSharedFolderByUserId" resultMap="BaseResultMap"
+		parameterType="java.lang.String">
+		select
+		<include refid="Base_Column_List" />
+		from FILE_FOLDER_SHARE 
+		where
+		IUID = #{iuid,jdbcType=VARCHAR}
+	</select>
+
+</mapper>

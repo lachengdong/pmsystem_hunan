@@ -1,0 +1,165 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.sinog2c.dao.api.system.TbsysQueryplansqlMapper" >
+  <resultMap id="BaseResultMap" type="com.sinog2c.model.system.TbsysQueryplansql" >
+    <id column="SQLID" property="sqlid" jdbcType="DECIMAL" />
+    <result column="PLANID" property="planid" jdbcType="DECIMAL" />
+    <result column="OPSIGN" property="opsign" jdbcType="DECIMAL" />
+    <result column="SQLTEXT" property="sqltext" jdbcType="VARCHAR" />
+    <result column="DELFLAG" property="delflag" jdbcType="VARCHAR" />
+    <result column="REMARK" property="remark" jdbcType="VARCHAR" />
+    <result column="OPTIME" property="optime" jdbcType="TIMESTAMP" />
+    <result column="OPID" property="opid" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    SQLID, PLANID, OPSIGN, SQLTEXT, DELFLAG, REMARK, OPTIME, OPID
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from TBSYS_QUERYPLANSQL
+    where SQLID = #{sqlid,jdbcType=DECIMAL}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from TBSYS_QUERYPLANSQL
+    where SQLID = #{sqlid,jdbcType=DECIMAL}
+  </delete>
+  <insert id="insert" parameterType="com.sinog2c.model.system.TbsysQueryplansql" >
+    insert into TBSYS_QUERYPLANSQL (SQLID, PLANID, OPSIGN, 
+      SQLTEXT, DELFLAG, REMARK, 
+      OPTIME, OPID)
+    values (#{sqlid,jdbcType=DECIMAL}, #{planid,jdbcType=DECIMAL}, #{opsign,jdbcType=DECIMAL}, 
+      #{sqltext,jdbcType=VARCHAR}, #{delflag,jdbcType=VARCHAR}, #{remark,jdbcType=VARCHAR}, 
+      #{optime,jdbcType=TIMESTAMP}, #{opid,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.sinog2c.model.system.TbsysQueryplansql" >
+    insert into TBSYS_QUERYPLANSQL
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="sqlid != null" >
+        SQLID,
+      </if>
+      <if test="planid != null" >
+        PLANID,
+      </if>
+      <if test="opsign != null" >
+        OPSIGN,
+      </if>
+      <if test="sqltext != null" >
+        SQLTEXT,
+      </if>
+      <if test="delflag != null" >
+        DELFLAG,
+      </if>
+      <if test="remark != null" >
+        REMARK,
+      </if>
+      <if test="optime != null" >
+        OPTIME,
+      </if>
+      <if test="opid != null" >
+        OPID,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="sqlid != null" >
+        #{sqlid,jdbcType=DECIMAL},
+      </if>
+      <if test="planid != null" >
+        #{planid,jdbcType=DECIMAL},
+      </if>
+      <if test="opsign != null" >
+        #{opsign,jdbcType=DECIMAL},
+      </if>
+      <if test="sqltext != null" >
+        #{sqltext,jdbcType=VARCHAR},
+      </if>
+      <if test="delflag != null" >
+        #{delflag,jdbcType=VARCHAR},
+      </if>
+      <if test="remark != null" >
+        #{REMARK,jdbcType=VARCHAR},
+      </if>
+      <if test="optime != null" >
+        #{optime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="opid != null" >
+        #{opid,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.sinog2c.model.system.TbsysQueryplansql" >
+    update TBSYS_QUERYPLANSQL
+    <set >
+      <if test="planid != null" >
+        PLANID = #{planid,jdbcType=DECIMAL},
+      </if>
+      <if test="opsign != null" >
+        OPSIGN = #{opsign,jdbcType=DECIMAL},
+      </if>
+      <if test="sqltext != null" >
+        SQLTEXT = #{sqltext,jdbcType=VARCHAR},
+      </if>
+      <if test="delflag != null" >
+        DELFLAG = #{delflag,jdbcType=VARCHAR},
+      </if>
+      <if test="remark != null" >
+        REMARK = #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="optime != null" >
+        OPTIME = #{optime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="opid != null" >
+        OPID = #{opid,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where SQLID = #{sqlid,jdbcType=DECIMAL}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.sinog2c.model.system.TbsysQueryplansql" >
+    update TBSYS_QUERYPLANSQL
+    set PLANID = #{planid,jdbcType=DECIMAL},
+      OPSIGN = #{opsign,jdbcType=DECIMAL},
+      SQLTEXT = #{sqltext,jdbcType=VARCHAR},
+      DELFLAG = #{delflag,jdbcType=VARCHAR},
+      REMARK = #{remark,jdbcType=VARCHAR},
+      OPTIME = #{optime,jdbcType=TIMESTAMP},
+      OPID = #{opid,jdbcType=VARCHAR}
+    where SQLID = #{sqlid,jdbcType=DECIMAL}
+  </update>
+  <select id="selectByPlanId" parameterType="int" resultType="com.sinog2c.model.system.TbsysQueryplansql">
+	select * from TBSYS_QUERYPLANSQL where PLANID=#{planid}
+  </select>
+  <!-- 新增查询方案SQL -->		
+  <insert id="insertQueryplansql" parameterType="com.sinog2c.model.system.TbsysQueryplansql" >
+		<selectKey resultType="int" order="BEFORE" keyProperty="sqlid">	
+			select SEQ_TBSYS_QUERYPLANSQL.nextval as sqlid from dual
+		</selectKey>	
+		insert into TBSYS_QUERYPLANSQL(sqlid,planid,opsign,sqltext,delflag,remark,optime,opid) 
+		values(#{sqlid},#{planid},#{opsign},#{sqltext},#{delflag},#{remark},sysdate,#{opid})	
+ </insert>
+ <!-- 修改查询方案SQL -->	
+ <update id="updateQueryplansql" parameterType="com.sinog2c.model.system.TbsysQueryplansql" >
+   update TBSYS_QUERYPLANSQL
+   set OPSIGN = #{opsign} , SQLTEXT = #{sqltext}, OPTIME = sysdate , OPID = #{opid} 
+   where PLANID = #{planid}
+ </update>
+ <!-- 删除查询方案SQL -->	
+  <update id="delQuerySchemesql" parameterType="com.sinog2c.model.system.TbsysQueryplan" >
+      update TBSYS_QUERYPLANSQL
+      set DELFLAG = #{delflag}, OPTIME = sysdate , OPID = #{opid}
+      where PLANID = #{planid}
+  </update>
+  <select id="selectSqlListByPlanId" resultType="com.sinog2c.model.system.TbsysQueryplansql">
+	select * from TBSYS_QUERYPLANSQL where PLANID in (select PLANID from TBSYS_QUERYPLAN where PLANID=#{planid} or PPLANID=#{planid} and delflag=0)
+	<if test="opsign!=null and opsign!=''"> 
+    	and opsign=#{opsign}
+    </if>
+  </select>
+  
+  <select id="getScreeningSchemeSqlListByPlanId" resultType="com.sinog2c.model.system.TbsysQueryplansql">
+	select * from TBSYS_QUERYPLANSQL where PLANID in (${planids})
+  </select>  
+  <select id="getQuerySqlForWordByPlanId" resultType="java.util.Map">
+       select q.* from TBSYS_QUERYPLANSQL q where  q.delflag !=1 and  q.planid in 
+ 		(select b.planid from TBSYS_QUERYPLAN  b where b.pplanid=#{planid} or b.planid=#{planid}) order by q.planid
+      </select>
+</mapper>

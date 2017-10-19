@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.sinog2c.dao.api.commutationParole.TbxfCrimetypesmappingMapper" >
+  <resultMap id="BaseResultMap" type="com.sinog2c.model.commutationParole.TbxfCrimetypesmapping" >
+    <id column="CRIMID" property="crimid" jdbcType="VARCHAR" />
+    <id column="TYPEID" property="typeid" jdbcType="DECIMAL" />
+    <result column="INT1" property="int1" jdbcType="DECIMAL" />
+    <result column="INT2" property="int2" jdbcType="DECIMAL" />
+    <result column="INT3" property="int3" jdbcType="DECIMAL" />
+    <result column="TEXT1" property="text1" jdbcType="VARCHAR" />
+    <result column="TEXT2" property="text2" jdbcType="VARCHAR" />
+    <result column="TEXT3" property="text3" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    CRIMID, TYPEID, INT1, INT2, INT3, TEXT1, TEXT2, TEXT3
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="com.sinog2c.model.commutationParole.TbxfCrimetypesmappingKey" >
+    select 
+    <include refid="Base_Column_List" />
+    from TBXF_CRIMETYPESMAPPING
+    where CRIMID = #{crimid,jdbcType=VARCHAR}
+      and TYPEID = #{typeid,jdbcType=DECIMAL}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="com.sinog2c.model.commutationParole.TbxfCrimetypesmappingKey" >
+    delete from TBXF_CRIMETYPESMAPPING
+    where CRIMID = #{crimid,jdbcType=VARCHAR}
+      and TYPEID = #{typeid,jdbcType=DECIMAL}
+  </delete>
+  <insert id="insert" parameterType="com.sinog2c.model.commutationParole.TbxfCrimetypesmapping" >
+    insert into TBXF_CRIMETYPESMAPPING (CRIMID, TYPEID, INT1, 
+      INT2, INT3, TEXT1, 
+      TEXT2, TEXT3)
+    values (#{crimid,jdbcType=VARCHAR}, #{typeid,jdbcType=DECIMAL}, #{int1,jdbcType=DECIMAL}, 
+      #{int2,jdbcType=DECIMAL}, #{int3,jdbcType=DECIMAL}, #{text1,jdbcType=VARCHAR}, 
+      #{text2,jdbcType=VARCHAR}, #{text3,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.sinog2c.model.commutationParole.TbxfCrimetypesmapping" >
+    insert into TBXF_CRIMETYPESMAPPING
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="crimid != null" >
+        CRIMID,
+      </if>
+      <if test="typeid != null" >
+        TYPEID,
+      </if>
+      <if test="int1 != null" >
+        INT1,
+      </if>
+      <if test="int2 != null" >
+        INT2,
+      </if>
+      <if test="int3 != null" >
+        INT3,
+      </if>
+      <if test="text1 != null" >
+        TEXT1,
+      </if>
+      <if test="text2 != null" >
+        TEXT2,
+      </if>
+      <if test="text3 != null" >
+        TEXT3,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="crimid != null" >
+        #{crimid,jdbcType=VARCHAR},
+      </if>
+      <if test="typeid != null" >
+        #{typeid,jdbcType=DECIMAL},
+      </if>
+      <if test="int1 != null" >
+        #{int1,jdbcType=DECIMAL},
+      </if>
+      <if test="int2 != null" >
+        #{int2,jdbcType=DECIMAL},
+      </if>
+      <if test="int3 != null" >
+        #{int3,jdbcType=DECIMAL},
+      </if>
+      <if test="text1 != null" >
+        #{text1,jdbcType=VARCHAR},
+      </if>
+      <if test="text2 != null" >
+        #{text2,jdbcType=VARCHAR},
+      </if>
+      <if test="text3 != null" >
+        #{text3,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.sinog2c.model.commutationParole.TbxfCrimetypesmapping" >
+    update TBXF_CRIMETYPESMAPPING
+    <set >
+      <if test="int1 != null" >
+        INT1 = #{int1,jdbcType=DECIMAL},
+      </if>
+      <if test="int2 != null" >
+        INT2 = #{int2,jdbcType=DECIMAL},
+      </if>
+      <if test="int3 != null" >
+        INT3 = #{int3,jdbcType=DECIMAL},
+      </if>
+      <if test="text1 != null" >
+        TEXT1 = #{text1,jdbcType=VARCHAR},
+      </if>
+      <if test="text2 != null" >
+        TEXT2 = #{text2,jdbcType=VARCHAR},
+      </if>
+      <if test="text3 != null" >
+        TEXT3 = #{text3,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where CRIMID = #{crimid,jdbcType=VARCHAR}
+      and TYPEID = #{typeid,jdbcType=DECIMAL}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.sinog2c.model.commutationParole.TbxfCrimetypesmapping" >
+    update TBXF_CRIMETYPESMAPPING
+    set INT1 = #{int1,jdbcType=DECIMAL},
+      INT2 = #{int2,jdbcType=DECIMAL},
+      INT3 = #{int3,jdbcType=DECIMAL},
+      TEXT1 = #{text1,jdbcType=VARCHAR},
+      TEXT2 = #{text2,jdbcType=VARCHAR},
+      TEXT3 = #{text3,jdbcType=VARCHAR}
+    where CRIMID = #{crimid,jdbcType=VARCHAR}
+      and TYPEID = #{typeid,jdbcType=DECIMAL}
+  </update>
+</mapper>

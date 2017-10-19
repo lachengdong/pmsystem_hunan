@@ -1,0 +1,147 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:tx="http://www.springframework.org/schema/tx" xmlns:aop="http://www.springframework.org/schema/aop"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+	http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.0.xsd
+	http://www.springframework.org/schema/tx  http://www.springframework.org/schema/tx/spring-tx-3.0.xsd
+    http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-3.0.xsd
+">
+	
+	<!--  数据交换作业对象; 正式需要的作业对象类 -->
+	<bean id="DataExchangeJobTask" class="com.sinog2c.quartz.DataExchangeJobTask" />
+	<!-- 作业包装器 -->
+	<bean id="DataExchangeJobTaskjobDetail"
+		class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+		<property name="targetObject" ref="DataExchangeJobTask" />
+		<property name="targetMethod" value="doBiz" />
+	</bean>
+	<!-- 
+		0秒,0分,3点, 每天, 每月, 问号不管
+		<property name="cronExpression" value="0 0 3 * * ?" />
+	-->
+	<bean id="dataExchangeTrigger" class="org.springframework.scheduling.quartz.CronTriggerBean">
+		<property name="jobDetail" ref="DataExchangeJobTaskjobDetail" />
+		<property name="cronExpression" value="0 0 3 * * ?" />
+	</bean>
+	
+	<!--  刑期变动数据更新作业对象; 正式需要的作业对象类 -->
+	<bean id="UpdateSentenceChangeJobTask" class="com.sinog2c.quartz.UpdateSentenceChangeJobTask" />
+	<!-- 作业包装器 -->
+	<bean id="UpdateSentenceChangeJobTaskjobDetail"
+		class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+		<property name="targetObject" ref="UpdateSentenceChangeJobTask" />
+		<property name="targetMethod" value="doBiz" />
+	</bean>
+	<!--  每隔1分钟执行一次  -->
+	<bean id="updateSentenceChangeTrigger" class="org.springframework.scheduling.quartz.CronTriggerBean">
+		<property name="jobDetail" ref="UpdateSentenceChangeJobTaskjobDetail" />
+		<property name="cronExpression" value="0 */1 * * * ?" />
+	</bean>
+	
+	
+	
+	<bean id ="selectPiCi" class="com.sinog2c.quartz.InsertUserNoticeData"/>
+	<bean id="insertdata" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+		<property name="targetObject" ref="selectPiCi" />
+		<property name="targetMethod" value="autoInsertData" />
+	</bean>
+	<!--每隔20分钟执行一次：0 */10 * * * ?  -->
+	<bean id="selectPiCi3" class="org.springframework.scheduling.quartz.CronTriggerBean">
+		<property name="jobDetail" ref="insertdata" />
+		<property name="cronExpression" value="0 */20 * * * ?" />
+	</bean>
+	
+	
+	
+	
+	<bean id="selectUserInfos" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+		<property name="targetObject" ref="selectPiCi" />
+		<property name="targetMethod" value="selectUserInfo"/>
+	</bean>
+	<bean id="userInfo" class="org.springframework.scheduling.quartz.CronTriggerBean">
+		<property name="jobDetail" ref="selectUserInfos" />
+		<property name="cronExpression" value="0 */10 * * * ? " />
+	</bean>
+	
+	
+	<bean id="deleteNotice" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+		<property name="targetObject" ref="selectPiCi" />
+		<property name="targetMethod" value="autoDelMessage"/>
+	</bean>
+	<!--  每天22点执行一次：0 0 22 * * ? -->
+	<bean id="deleteUserNotice" class="org.springframework.scheduling.quartz.CronTriggerBean">
+		<property name="jobDetail" ref="deleteNotice" />
+		<property name="cronExpression" value="0 0 22 * * ?" />
+	</bean>
+	
+	
+	<bean id="insertCJdata" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+		<property name="targetObject" ref="selectPiCi"/>
+		<property name="targetMethod" value="autoInsertChuJianData"/>
+	</bean>
+	<!--  每天凌晨1点执行一次：0 0 1 * * ? -->
+	<bean id="chuJianData" class="org.springframework.scheduling.quartz.CronTriggerBean">
+		<property name="jobDetail" ref="insertCJdata"/>
+		<property name="cronExpression" value="0 0 1 * * ?"/>
+	</bean>
+	
+		<!--  定时向法院-->
+<!-- 	<bean id="GetDataFromCourt" class="com.sinog2c.quartz.GetDataFromCourt" />
+	<bean id="GetDataFromCourtjobDetail"
+		class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+		<property name="targetObject" ref="GetDataFromCourt" />
+		<property name="targetMethod" value="doBiz" />
+	</bean>
+	<bean id="getFromCourtJXJSTrigger" class="org.springframework.scheduling.quartz.CronTriggerBean">
+		<property name="jobDetail" ref="GetDataFromCourtjobDetail"/>
+		<property name="cronExpression" value="0 */10 * * * ?"/>
+	</bean> -->
+	
+	
+	
+	<bean id="archivesExchangeMonitor" class="com.sinog2c.quartz.ArchivesExchangeMonitor" />
+	
+	<!-- 自动归档  -->
+	<bean id="autoCaseArchivesJobDetail"
+		class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+		<property name="targetObject" ref="archivesExchangeMonitor" />
+		<property name="targetMethod" value="autoCaseArchive" />
+	</bean>
+	<bean id="autoCaseArchivesTrigger" class="org.springframework.scheduling.quartz.CronTriggerBean">
+		<property name="jobDetail" ref="autoCaseArchivesJobDetail"/>
+		<property name="cronExpression" value="0 */1 * * * ?"/>
+	</bean>
+	
+	
+	
+	<!-- 设置调度 -->
+	<bean class="org.springframework.scheduling.quartz.SchedulerFactoryBean"  lazy-init="false">
+		<property name="triggers">
+			<list>
+				<ref bean="dataExchangeTrigger" />
+				<ref bean="updateSentenceChangeTrigger" />
+				<ref bean="selectPiCi3"/>
+				<ref bean="deleteUserNotice"/>
+				<ref bean="chuJianData"/>
+				<ref bean="userInfo"/><!--用户通知
+				
+
+				  自动归档-->
+				 <!-- <ref bean="autoCaseArchivesTrigger" />  -->
+				<!-- <ref bean="getFromCourtJXJSTrigger"/> -->
+				
+			</list>
+		</property>
+		<property name="taskExecutor" ref="executor" />
+	</bean>
+	
+	<!-- 线程池, 线程执行器配置，用于任务执行 -->
+	<bean id="executor"
+		class="org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor">
+		<property name="corePoolSize" value="10" />
+		<property name="maxPoolSize" value="100" />
+		<property name="queueCapacity" value="500" />
+	</bean>
+	
+</beans>

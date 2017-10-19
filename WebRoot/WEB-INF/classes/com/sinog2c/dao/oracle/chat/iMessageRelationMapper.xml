@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.sinog2c.dao.api.chat.iMessageRelationMapper" >
+  <resultMap id="BaseResultMap" type="com.sinog2c.model.chat.iMessageRelation" >
+    <id column="ID" property="id" jdbcType="DECIMAL" />
+    <result column="USER1" property="user1" jdbcType="VARCHAR" />
+    <result column="USER2" property="user2" jdbcType="VARCHAR" />
+    <result column="MSG_ID" property="msgId" jdbcType="DECIMAL" />
+    <result column="UPDATE_TIME" property="updateTime" jdbcType="TIMESTAMP" />
+    <result column="COUNTER1" property="counter1" jdbcType="DECIMAL" />
+    <result column="COUNTER2" property="counter2" jdbcType="DECIMAL" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    ID, USER1, USER2, MSG_ID, UPDATE_TIME, COUNTER1, COUNTER2
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from OA_MESSAGE_RELATIONS
+    where ID = #{id,jdbcType=DECIMAL}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from OA_MESSAGE_RELATIONS
+    where ID = #{id,jdbcType=DECIMAL}
+  </delete>
+  <insert id="insert" parameterType="com.sinog2c.model.chat.iMessageRelation" >
+    insert into OA_MESSAGE_RELATIONS (ID, USER1, USER2, 
+      MSG_ID, UPDATE_TIME, COUNTER1, 
+      COUNTER2)
+    values (#{id,jdbcType=DECIMAL}, #{user1,jdbcType=VARCHAR}, #{user2,jdbcType=VARCHAR}, 
+      #{msgId,jdbcType=DECIMAL}, #{updateTime,jdbcType=TIMESTAMP}, #{counter1,jdbcType=DECIMAL}, 
+      #{counter2,jdbcType=DECIMAL})
+  </insert>
+  <insert id="insertSelective" parameterType="com.sinog2c.model.chat.iMessageRelation" >
+    insert into OA_MESSAGE_RELATIONS
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        ID,
+      </if>
+      <if test="user1 != null" >
+        USER1,
+      </if>
+      <if test="user2 != null" >
+        USER2,
+      </if>
+      <if test="msgId != null" >
+        MSG_ID,
+      </if>
+      <if test="updateTime != null" >
+        UPDATE_TIME,
+      </if>
+      <if test="counter1 != null" >
+        COUNTER1,
+      </if>
+      <if test="counter2 != null" >
+        COUNTER2,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=DECIMAL},
+      </if>
+      <if test="user1 != null" >
+        #{user1,jdbcType=VARCHAR},
+      </if>
+      <if test="user2 != null" >
+        #{user2,jdbcType=VARCHAR},
+      </if>
+      <if test="msgId != null" >
+        #{msgId,jdbcType=DECIMAL},
+      </if>
+      <if test="updateTime != null" >
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="counter1 != null" >
+        #{counter1,jdbcType=DECIMAL},
+      </if>
+      <if test="counter2 != null" >
+        #{counter2,jdbcType=DECIMAL},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.sinog2c.model.chat.iMessageRelation" >
+    update OA_MESSAGE_RELATIONS
+    <set >
+      <if test="user1 != null" >
+        USER1 = #{user1,jdbcType=VARCHAR},
+      </if>
+      <if test="user2 != null" >
+        USER2 = #{user2,jdbcType=VARCHAR},
+      </if>
+      <if test="msgId != null" >
+        MSG_ID = #{msgId,jdbcType=DECIMAL},
+      </if>
+      <if test="updateTime != null" >
+        UPDATE_TIME = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="counter1 != null" >
+        COUNTER1 = #{counter1,jdbcType=DECIMAL},
+      </if>
+      <if test="counter2 != null" >
+        COUNTER2 = #{counter2,jdbcType=DECIMAL},
+      </if>
+    </set>
+    where ID = #{id,jdbcType=DECIMAL}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.sinog2c.model.chat.iMessageRelation" >
+    update OA_MESSAGE_RELATIONS
+    set USER1 = #{user1,jdbcType=VARCHAR},
+      USER2 = #{user2,jdbcType=VARCHAR},
+      MSG_ID = #{msgId,jdbcType=DECIMAL},
+      UPDATE_TIME = #{updateTime,jdbcType=TIMESTAMP},
+      COUNTER1 = #{counter1,jdbcType=DECIMAL},
+      COUNTER2 = #{counter2,jdbcType=DECIMAL}
+    where ID = #{id,jdbcType=DECIMAL}
+  </update>
+</mapper>

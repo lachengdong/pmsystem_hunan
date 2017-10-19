@@ -1,0 +1,34 @@
+@CHARSET "UTF-8";
+body{
+	margin:0;
+	padding:0;
+	}
+.top{
+	width:100%;
+	height:75px;
+	position:relative;
+	overflow: hidden;
+	background:url(../images/xingfayy_04.png) repeat-x;
+	}
+.top .logo{
+	position: absolute;
+	top:0;
+	left:5%;
+	width:565px;
+	height:75px;
+	overflow:hidden;
+	}
+.top .right{
+	position:absolute;
+	top:0;
+	right:0;
+	width:456px;
+	height:75px;
+	}
+	.she{
+		margin-top:-47px;
+		margin-left:-250px;
+		color:#F9F900;
+		font-size:30px;
+		font-weight:bold;
+		}

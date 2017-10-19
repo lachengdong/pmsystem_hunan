@@ -1,0 +1,170 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.sinog2c.dao.api.system.PrintSchemeConfigMapper" >
+  <resultMap id="BaseResultMap" type="com.sinog2c.model.system.PrintSchemeConfig" >
+    <id column="PSID" property="psid" jdbcType="DECIMAL" />
+    <id column="CONFID" property="confid" jdbcType="VARCHAR" />
+    <result column="PTYPE" property="ptype" jdbcType="CHAR" />
+    <result column="PNUMBER" property="pnumber" jdbcType="DECIMAL" />
+    <result column="SN" property="sn" jdbcType="DECIMAL" />
+    <result column="REMARK" property="remark" jdbcType="VARCHAR" />
+    <result column="OPTIME" property="optime" jdbcType="TIMESTAMP" />
+    <result column="OPID" property="opid" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    PSID, CONFID, PTYPE, PNUMBER, SN, REMARK, OPTIME, OPID
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="com.sinog2c.model.system.PrintSchemeConfigKey" >
+    select 
+    <include refid="Base_Column_List" />
+    from TBXF_PRINTSCHEME_CONFIG
+    where PSID = #{psid,jdbcType=DECIMAL}
+      and CONFID = #{confid,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="com.sinog2c.model.system.PrintSchemeConfigKey" >
+    delete from TBXF_PRINTSCHEME_CONFIG
+    where PSID = #{psid,jdbcType=DECIMAL}
+      and CONFID = #{confid,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.sinog2c.model.system.PrintSchemeConfig" >
+    insert into TBXF_PRINTSCHEME_CONFIG (PSID, CONFID, PTYPE, 
+      PNUMBER, SN, REMARK, 
+      OPTIME, OPID)
+    values (#{psid,jdbcType=DECIMAL}, #{confid,jdbcType=VARCHAR}, #{ptype,jdbcType=CHAR}, 
+      #{pnumber,jdbcType=DECIMAL}, #{sn,jdbcType=DECIMAL}, #{remark,jdbcType=VARCHAR}, 
+      #{optime,jdbcType=DATE}, #{opid,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.sinog2c.model.system.PrintSchemeConfig" >
+    insert into TBXF_PRINTSCHEME_CONFIG
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="psid != null" >
+        PSID,
+      </if>
+      <if test="confid != null" >
+        CONFID,
+      </if>
+      <if test="ptype != null" >
+        PTYPE,
+      </if>
+      <if test="pnumber != null" >
+        PNUMBER,
+      </if>
+      <if test="sn != null" >
+        SN,
+      </if>
+      <if test="remark != null" >
+        REMARK,
+      </if>
+      <if test="optime != null" >
+        OPTIME,
+      </if>
+      <if test="opid != null" >
+        OPID,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="psid != null" >
+        #{psid,jdbcType=DECIMAL},
+      </if>
+      <if test="confid != null" >
+        #{confid,jdbcType=VARCHAR},
+      </if>
+      <if test="ptype != null" >
+        #{ptype,jdbcType=CHAR},
+      </if>
+      <if test="pnumber != null" >
+        #{pnumber,jdbcType=DECIMAL},
+      </if>
+      <if test="sn != null" >
+        #{sn,jdbcType=DECIMAL},
+      </if>
+      <if test="remark != null" >
+        #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="optime != null" >
+        #{optime,jdbcType=DATE},
+      </if>
+      <if test="opid != null" >
+        #{opid,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.sinog2c.model.system.PrintSchemeConfig" >
+    update TBXF_PRINTSCHEME_CONFIG
+    <set >
+      <if test="ptype != null" >
+        PTYPE = #{ptype,jdbcType=CHAR},
+      </if>
+      <if test="pnumber != null" >
+        PNUMBER = #{pnumber,jdbcType=DECIMAL},
+      </if>
+      <if test="sn != null" >
+        SN = #{sn,jdbcType=DECIMAL},
+      </if>
+      <if test="remark != null" >
+        REMARK = #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="optime != null" >
+        OPTIME = #{optime,jdbcType=DATE},
+      </if>
+      <if test="opid != null" >
+        OPID = #{opid,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where PSID = #{psid,jdbcType=DECIMAL}
+      and CONFID = #{confid,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.sinog2c.model.system.PrintSchemeConfig" >
+    update TBXF_PRINTSCHEME_CONFIG
+    set PTYPE = #{ptype,jdbcType=CHAR},
+      PNUMBER = #{pnumber,jdbcType=DECIMAL},
+      SN = #{sn,jdbcType=DECIMAL},
+      REMARK = #{remark,jdbcType=VARCHAR},
+      OPTIME = #{optime,jdbcType=DATE},
+      OPID = #{opid,jdbcType=VARCHAR}
+    where PSID = #{psid,jdbcType=DECIMAL}
+      and CONFID = #{confid,jdbcType=VARCHAR}
+  </update>
+  
+  <select id="queryPrintSchemeConfigCount" resultType="int">  <!-- 查询搜索记录总数 -->
+	 	 SELECT count(1)
+		 	FROM 
+		 	(
+		 		SELECT u.*, r.name as schemename
+				  FROM TBXF_PRINTSCHEME_CONFIG u left join TBXF_PRINTSCHEME r on u.psid=r.psid  
+		 		  where u.PSID = #{psid,jdbcType=DECIMAL} order by u.SN asc
+		 	) A 
+		 	WHERE 1=1
+		 	<if test="sortField != null and sortField != '' and sortOrder != null and sortOrder !=''" >
+		 	 order by a.${sortField} ${sortOrder} 
+		 	</if>
+		 	<if test="sortField == null or sortField == '' or sortOrder == null or sortOrder ==''" >
+		 	  order by a.SN asc 
+		 	</if>
+  </select>
+  
+   <select id="getPrintSchemeConfigPageList" resultType="java.util.Map">    <!-- 分页搜索表中的信息 报表管理用-->
+	 SELECT * FROM 
+	 	( SELECT A.*, ROWNUM RN 
+		 	FROM 
+		 	(
+		 		SELECT u.*, r.name as schemename
+				  FROM TBXF_PRINTSCHEME_CONFIG u left join TBXF_PRINTSCHEME r on u.psid=r.psid  
+		 		  where u.PSID = #{psid,jdbcType=DECIMAL} order by u.SN asc
+		 	) A 
+		 	WHERE ROWNUM &lt;= #{end,jdbcType=DECIMAL}
+		 	<if test="sortField != null and sortField != '' and sortOrder != null and sortOrder !=''" >
+		 	 order by a.${sortField} ${sortOrder} 
+		 	</if>
+		 	<if test="sortField == null or sortField == '' or sortOrder == null or sortOrder ==''" >
+		 	  order by a.SN asc 
+		 	</if>
+	 	) 
+	 	WHERE RN &gt;= #{start,jdbcType=DECIMAL} 
+  </select> 
+  <select id="selectConfigsByPrintSchemeKey" resultMap="BaseResultMap">    <!-- 分页搜索表中的信息 报表管理用-->
+ 		SELECT u.*
+		FROM TBXF_PRINTSCHEME_CONFIG u  
+ 		where u.PSID = #{psid,jdbcType=DECIMAL} order by u.SN asc
+  </select> 
+</mapper>

@@ -1,0 +1,913 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.sinog2c.dao.api.commutationParole.TbxfScreeningMapper" >
+  <resultMap id="BaseResultMap" type="com.sinog2c.model.commutationParole.TbxfScreening" >
+    <id column="CRIMID" property="crimid" jdbcType="VARCHAR" />
+    <result column="DEPARTID" property="departid" jdbcType="VARCHAR" />
+    <result column="STATUS" property="status" jdbcType="DECIMAL" />
+    <result column="CSTATUS" property="cstatus" jdbcType="DECIMAL" />
+    <result column="BATCHID" property="batchid" jdbcType="DECIMAL" />
+    <result column="PUNID" property="punid" jdbcType="DECIMAL" />
+    <result column="REFID" property="refid" jdbcType="DECIMAL" />
+    <result column="OPTIME" property="optime" jdbcType="DATE" />
+   <result column="TMP1" property="tmp1" jdbcType="VARCHAR"/>
+    <result column="TMP2" property="tmp2" jdbcType="VARCHAR"/>
+  </resultMap>
+  <sql id="Base_Column_List" >
+    CRIMID, DEPARTID, STATUS, CSTATUS, BATCHID, PUNID, REFID, OPTIME,TMP1,TMP2
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from TBXF_SCREENING
+    where CRIMID = #{crimid,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from TBXF_SCREENING
+    where CRIMID = #{crimid,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteWastedata" parameterType="java.lang.String" >
+  delete from TBXF_SCREENING a where a.departid=#{departid,jdbcType=VARCHAR}
+       and (not exists (select 'x' from Tbprisoner_Base_Crime b where (b.detainstatus ='在押' or b.detainstatus ='1' ) and a.crimid=b.crimid) 
+           or exists (select 'x' from UV_FLOW t where  t.nodeid in ('1','-1') and t.state=1 and t.flowdefid = 'other_zfjyjxjssp' and a.crimid=t.applyid)) 
+  </delete>  
+  <insert id="insert" parameterType="com.sinog2c.model.commutationParole.TbxfScreening" >
+    insert into TBXF_SCREENING (CRIMID, DEPARTID, STATUS, 
+      CSTATUS, BATCHID, PUNID, 
+      REFID,INT1)
+    values (#{crimid,jdbcType=VARCHAR}, #{departid,jdbcType=VARCHAR}, #{status,jdbcType=DECIMAL}, 
+      #{cstatus,jdbcType=DECIMAL}, #{batchid,jdbcType=DECIMAL}, #{punid,jdbcType=DECIMAL}, 
+      #{refid,jdbcType=DECIMAL},#{int1,jdbcType=DECIMAL})
+  </insert>
+  <insert id="insertNewdata" parameterType="java.lang.String" >
+	insert into TBXF_SCREENING a (a.crimid,a.departid,a.status,a.cstatus,a.batchid,a.punid,a.isdeclare) 
+	(select t.crimid,t.orgid,0,0,0,0,0 from Tbprisoner_Base_Crime t 
+		where t.crimid not in(select a.crimid from TBXF_SCREENING a) and (t.detainstatus ='在押' or t.detainstatus ='1' ) and t.orgid=#{departid,jdbcType=VARCHAR})
+  </insert>  
+  <insert id="insertSelective" parameterType="com.sinog2c.model.commutationParole.TbxfScreening" >
+    insert into TBXF_SCREENING
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="crimid != null" >
+        CRIMID,
+      </if>
+      <if test="departid != null" >
+        DEPARTID,
+      </if>
+      <if test="status != null" >
+        STATUS,
+      </if>
+      <if test="cstatus != null" >
+        CSTATUS,
+      </if>
+      <if test="batchid != null" >
+        BATCHID,
+      </if>
+      <if test="punid != null" >
+        PUNID,
+      </if>
+      <if test="refid != null" >
+        REFID,
+      </if>
+      <if test="optime != null" >
+        OPTIME,
+      </if>
+      <if test="tmp1 != ull">
+      	TMP1,
+      </if>
+      <if test="tmp2 != null">
+      	TMP2,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="crimid != null" >
+        #{crimid,jdbcType=VARCHAR},
+      </if>
+      <if test="departid != null" >
+        #{departid,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null" >
+        #{status,jdbcType=DECIMAL},
+      </if>
+      <if test="cstatus != null" >
+        #{cstatus,jdbcType=DECIMAL},
+      </if>
+      <if test="batchid != null" >
+        #{batchid,jdbcType=DECIMAL},
+      </if>
+      <if test="punid != null" >
+        #{punid,jdbcType=DECIMAL},
+      </if>
+      <if test="refid != null" >
+        #{refid,jdbcType=DECIMAL},
+      </if>
+      <if test="optime != null" >
+        #{optime,jdbcType=DATE},
+      </if>
+      <if test="tmp1 != null">
+      	#{tmp1,jdbcType=VARCHAR},
+      </if>
+      <if test="tmp2 != null">
+      	#{tmp2,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.sinog2c.model.commutationParole.TbxfScreening" >
+    update TBXF_SCREENING
+    <set >
+      <if test="departid != null" >
+        DEPARTID = #{departid,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null" >
+        STATUS = #{status,jdbcType=DECIMAL},
+      </if>
+      <if test="cstatus != null" >
+        CSTATUS = #{cstatus,jdbcType=DECIMAL},
+      </if>
+      <if test="batchid != null" >
+        BATCHID = #{batchid,jdbcType=DECIMAL},
+      </if>
+      <if test="punid != null" >
+        PUNID = #{punid,jdbcType=DECIMAL},
+      </if>
+      <if test="refid != null" >
+        REFID = #{refid,jdbcType=DECIMAL},
+      </if>
+      <if test="optime != null" >
+        OPTIME = #{optime,jdbcType=DATE},
+      </if>
+      <if test="int1 != null" >
+        OPTIME = #{int1,jdbcType=DECIMAL},
+      </if>     
+       <if test="tmp1!=null">
+      	TMP1=#{tmp1,jdbcType=VARCHAR},
+      </if>
+      <if test="tmp2!=null">
+      	TMP2=#{tmp2,jdbcType=VARCHAR},
+      </if>  
+    </set>
+    where CRIMID = #{crimid,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.sinog2c.model.commutationParole.TbxfScreening" >
+    update TBXF_SCREENING
+    set DEPARTID = #{departid,jdbcType=VARCHAR},
+      STATUS = #{status,jdbcType=DECIMAL},
+      CSTATUS = #{cstatus,jdbcType=DECIMAL},
+      BATCHID = #{batchid,jdbcType=DECIMAL},
+      PUNID = #{punid,jdbcType=DECIMAL},
+      REFID = #{refid,jdbcType=DECIMAL},
+      OPTIME = #{optime,jdbcType=DATE}
+    where CRIMID = #{crimid,jdbcType=VARCHAR}
+  </update>
+  <update id="wastedata" parameterType="java.lang.String" >
+	update TBXF_SCREENING t set t.cstatus=0, t.status=t.cstatus, t.int1=0 where t.crimid=#{crimid,jdbcType=VARCHAR}
+  </update>  
+  <update id="updateDataAfterPrisonerLiAn" parameterType="Map" >
+    update TBXF_SCREENING
+    set ISDECLARE = #{isdeclare,jdbcType=DECIMAL}
+    where CRIMID = #{crimid,jdbcType=VARCHAR}
+  </update>
+  
+  <update id="updateDataAfterWithdraw" parameterType="Map" >
+    update TBXF_SCREENING
+    set ISDECLARE = #{isdeclare,jdbcType=DECIMAL}
+    where CRIMID in (${crimids})
+  </update>
+  
+  <select id="screeningList" parameterType="String" resultType="com.sinog2c.model.commutationParole.TbxfScreening">
+  		 select * from TBXF_SCREENING t where departid = #{departid}
+  </select>
+  <select id="deleteAll" parameterType="String">
+  		 delete from TBXF_SCREENING t where departid = #{departid}
+  </select>
+  
+   <select id="getLiAnCount" parameterType="Map" resultType="int">
+   		select count(bbb.crimid)
+		from
+		   (
+				select tsr.crimid,
+						tsr.batchid,
+						REMAINDERPUNISHMENT, 
+						REFID,
+						INT3 JSPUNID,
+						EXAMINEEND 
+				from TBXF_SCREENING tsr,
+					(SELECT * FROM tbxf_commuteparole_batch a WHERE a.remark = '999') tss
+				where tsr.batchid=tss.batchid 
+					and tsr.departid = #{departid} 
+					AND tsr.departid = tss.departid
+					and (tsr.isdeclare=#{sel}) 
+		   ) ddd,
+		  tbprisoner_baseinfo bbb, 
+		  TBPRISONER_BASE_CRIME btc,
+		   
+		   (SELECT * FROM TBDATA_SENTCHAGE A
+				WHERE A.CATEGORY = '1' AND A.COURTSANCTION = (SELECT MIN (COURTSANCTION)
+					FROM TBDATA_SENTCHAGE B WHERE B.CATEGORY = '1' AND B.CRIMID = A.CRIMID)) J,
+					
+			(SELECT * FROM TBDATA_SENTCHAGE A
+				WHERE A.COURTSANCTION = (SELECT MAX (COURTSANCTION)
+					FROM TBDATA_SENTCHAGE B WHERE B.CRIMID = A.CRIMID)) M
+					
+		where ddd.crimid = J.crimid 
+		 and  ddd.crimid = M.crimid
+		 and  ddd.crimid = btc.crimid
+		 and  ddd.crimid = bbb.crimid 
+		 and exists (
+			  select 'x' from tbflow_org_org too WHERE too.orgid = #{orgid} and too.dorgid=btc.orgid2
+		 )
+		<trim prefix="" suffix="" suffixOverrides=",">
+		 <if test="key!=null and key!=''"> 
+			and (
+					bbb.crimid like '%'||#{key}||'%' 
+					or bbb.name like '%'||#{key}||'%' 
+					or bbb.namepinyinshort like concat(UPPER(#{key}),'%')
+			)
+		 </if>
+		</trim>
+		<if test="isstatus!=null and isstatus!=''">
+			and eee.STATUS = 5
+		</if>
+   </select>
+  
+  <select id="getCrimiNameByCrimid" parameterType="String"  resultType="String">
+  	select tb.name from TBPRISONER_BASEINFO tb where tb.CRIMID = #{crimid}
+  </select>
+  
+  <select id="getLiAnList" parameterType="Map"  resultType="Map"> 
+	select * from (
+      select a.*, rownum rn from
+      ( 
+	      select bbb.crimid,
+	      		 bbb.NAME,
+	      		 btc.orgid2 as orgid,
+	      		 ddd.REFID,
+	      		 ddd.JSPUNID,
+	      		 btc.causeaction,
+	      		 getage(bbb.BIRTHDAY) as age,
+				 F_FORMATYMD_SD (J.SENTENCE) as ORIGINALYEAR,
+				 
+				 F_FORMATDATE(to_date( M.COURTCHANGEFROM,'yyyy-MM-dd')) as SENTENCESTIME,
+				 F_FORMATDATE(to_date( M.COURTCHANGETO,'yyyy-MM-dd')) as SENTENCEETIME,
+				 F_FORMATDATE(to_date( M.COURTSANCTION,'yyyy-MM-dd')) as PREDATE,
+				 F_FORMATDATE(to_date( M.COURTCHANGETO,'yyyy-MM-dd')) as xianxingqizhiristr,
+				 
+				 F_FORMATYMD_SD (M.SENTENCE) as nowpunishmenttype,
+				 F_FORMATYMD_SD (M.SENTENCE) as nowpunishmentyear,
+				 
+				 CASE WHEN M.COURTSANCTION IS NOT NULL
+                             THEN GETDISOFTWODATE_SD (TO_DATE (M.COURTSANCTION, 'yyyyMMdd'),
+                             	DECODE (ddd.EXAMINEEND, '', SYSDATE, ddd.EXAMINEEND))
+                  ELSE GETDISOFTWODATE_SD (TO_DATE (J.EXECTIME, 'yyyyMMdd'),
+                             	DECODE (ddd.EXAMINEEND, '', SYSDATE, ddd.EXAMINEEND))
+                 END AS JIANGGEQI,
+                 
+				 ddd.batchid
+	      from
+	           (
+		          	select tsr.crimid,
+		          			tsr.batchid,
+		          			REMAINDERPUNISHMENT, 
+		          			REFID,
+		          			INT3 JSPUNID,
+		          			EXAMINEEND 
+		          	from TBXF_SCREENING tsr,
+		          		(SELECT * FROM tbxf_commuteparole_batch a WHERE a.remark = '999') tss
+		            where tsr.batchid=tss.batchid 
+		            	and tsr.departid = #{departid} 
+		            	AND tsr.departid = tss.departid
+		            	and (tsr.isdeclare=#{sel}) 
+	           ) ddd,
+		      tbprisoner_baseinfo bbb, 
+		      TBPRISONER_BASE_CRIME btc,
+			   
+			   (SELECT * FROM TBDATA_SENTCHAGE A
+                	WHERE A.CATEGORY = '1' AND A.COURTSANCTION = (SELECT MIN (COURTSANCTION)
+                    	FROM TBDATA_SENTCHAGE B WHERE B.CATEGORY = '1' AND B.CRIMID = A.CRIMID)) J,
+						
+                (SELECT * FROM TBDATA_SENTCHAGE A
+                	WHERE A.COURTSANCTION = (SELECT MAX (COURTSANCTION)
+                    	FROM TBDATA_SENTCHAGE B WHERE B.CRIMID = A.CRIMID)) M
+						
+	   	  where ddd.crimid = J.crimid 
+	   	     and  ddd.crimid = M.crimid
+	   	  	 and  ddd.crimid = btc.crimid
+	   	     and  ddd.crimid = bbb.crimid 
+      	     and exists (
+      	  	      select 'x' from tbflow_org_org too WHERE too.orgid = #{orgid} and too.dorgid=btc.orgid2
+       	     )
+	     <trim prefix="" suffix="" suffixOverrides=",">
+	         <if test="key!=null and key!=''"> 
+	         	and (
+	         			bbb.crimid like '%'||#{key}||'%' 
+	         			or bbb.name like '%'||#{key}||'%' 
+	         			or bbb.namepinyinshort like concat(UPPER(#{key}),'%')
+	         	)
+	         </if>
+	     </trim>
+	     <if test="isstatus!=null and isstatus!=''">
+	     	and eee.STATUS = 5
+	     </if>
+	     <trim prefix="" suffix="" suffixOverrides=",">
+	        <if test="sortField!=null and sortField!=''"> order by ${sortField} ${sortOrder}</if>
+	    </trim>
+      ) a 
+      <if test="end!=null and end!=''">
+         where rownum &lt;= #{end}
+       </if> 
+       )
+      <if test="start!=null and start!=''">
+       where  rn &gt;= #{start}
+     </if>
+  </select>
+
+  <select id="getLiAnCrimList" parameterType="Map"  resultType="Map"> 
+	      select crimid
+	      from 
+          TBXF_SCREENING tsr
+          where 1=1 
+          and crimid in (${crimids})
+	     <if test="commutetype ==0">
+	     	and REFID is not null
+	     </if>
+	     <if test="commutetype ==1">
+	     	and INT3 is not null
+	     </if>     
+  </select>
+
+    <select id="getLiAnApproveList" parameterType="Map"  resultType="Map"> 
+		select * from( 
+      		select a.*, rownum rn from
+      			( select * from(select eee.crimid,eee.NAME,eee.areaid as orgid,eee.reportaudit,
+      			getage(eee.BRITHDAY) as age,GETDISOFTWODATE(PREDATE,REMAINDERPUNISHMENT) as JIANGGEQI,
+      			F_FORMATYMD(ORIGINALYEAR,ORIGINALMONTH,ORIGINALDAY,'0') as ORIGINALYEAR,
+		SENTENCESTIME,SENTENCEETIME,PREDATE,eee.NOWPUNISHMENTYEAR as nowpunishmenttype,
+		<!-- F_FORMATYMD(eee.NOWPUNISHMENTYEAR,eee.NOWPUNISHMENTMONTH, eee.NOWPUNISHMENTDAY,'0') as nowpunishmentyear,-->
+		(case
+             when eee.NOWPUNISHMENTYEAR = '9996' then
+                  '死缓'
+                  when eee.NOWPUNISHMENTYEAR = '9995' then
+                  '无期徒刑'
+             else
+                  GETDISOFTWODATE(REMAINDERPUNISHMENT, COURTCHANGETO)
+         end) as nowpunishmentyear,
+		F_FORMATYMD(eee.PUNISHMENTYEAR, eee.PUNISHMENTMONTH, eee.PUNISHMENTDAY, 0) as punishment,
+		B.idnumber,B.flowid as registerarea,B.duty,B.orgcontact,NVL (B.state, 0) AS ACCENT,DECODE (B.idnumber,NULL, '未处理',
+		DECODE (B.duty,'-1', '未通过','0', '未审批','1',decode(B.flowstate,1,'通过',0,'已处理','审批中'),
+		DECODE (B.state, '1', '未审批', DECODE(b.orgcontact2,0,'已处理','审批中')))) AS identity,
+		CASE WHEN three.crimid IS NOT NULL THEN '三类犯' ELSE '普通犯' END AS crimtype
+    from <!-- 查询申报后的数据   -->
+         (select tsr.crimid,REMAINDERPUNISHMENT,EXAMINEEND from TBXF_SCREENING tsr,tbxf_commuteparole_batch tss
+                 where tsr.batchid=tss.batchid and tsr.departid IN (SELECT too.dorgid FROM tbflow_org_org too WHERE too.orgid = #{departid}) and (tsr.isdeclare='1')) ddd ,
+      TBXF_SENTENCEALTERATION  eee,TBPRISONER_BASE_CRIME btc,(SELECT t.crimid FROM TBXF_CRIMETYPESMAPPING t WHERE t.typeid = '10000') three,
+      <!-- B表查询流程  -->
+      (SELECT F1.FLOWDRAFTID AS idnumber,F1.flowid,F1.NOdeid AS duty,T3.applyid,decode(F1.OPID,#{userid},0,1) orgcontact2,
+      decode(f1.opid,#{userid},decode(f1.state,null,4,'-1',0,'-2',1)) orgcontact,  <!-- 处理0修改1查看2  -->
+              DECODE (F1.FLOWDRAFTID,NULL, F1.FLOWDRAFTID,DECODE (F1.FLOWID, '', '1', '2')) AS state,F1.state flowstate
+       FROM TBFLOW F1,(SELECT TF.FLOWDRAFTID, MAX (TO_NUMBER(TF.FLOWSN)) FLOWSN FROM TBFLOW TF GROUP BY TF.FLOWDRAFTID) F2,
+            (SELECT applyid, FLOWDRAFTID FROM TBFLOW_BASE T1 WHERE 1=1 AND FLOWDEFID = #{flowdefid} AND NOT EXISTS
+            (SELECT 1 FROM TBFLOW_BASE T2 WHERE T1.APPLYID = T2.APPLYID AND T1.FLOWDEFID = T2.FLOWDEFID AND T2.OPTIME > T1.OPTIME)) T3
+       WHERE F1.FLOWDRAFTID = T3.FLOWDRAFTID AND F1.FLOWDRAFTID = F2.FLOWDRAFTID AND F1.FLOWSN = F2.FLOWSN) B
+   where ddd.crimid = btc.crimid and ddd.crimid = eee.crimid and ddd.crimid = b.applyid(+) AND ddd.crimid = three.crimid(+)
+      and (btc.orgid2 IN (SELECT too.dorgid FROM tbflow_org_org too WHERE too.orgid = #{orgid}) 
+       or btc.orgid1 IN (SELECT too.dorgid FROM tbflow_org_org too WHERE too.orgid = #{orgid})
+       or btc.orgid IN (SELECT too.dorgid FROM tbflow_org_org too WHERE too.orgid = #{orgid}) )
+     <trim prefix="" suffix="" suffixOverrides=",">
+         <if test="key!=null and key!=''"> and (eee.crimid like '%'||#{key}||'%' or eee.name like '%'||#{key}||'%')</if>
+     </trim>
+     )
+     <trim prefix="" suffix="" suffixOverrides=",">
+        <if test="sortField!=null and sortField!=''"> order by ${sortField} ${sortOrder}</if>
+    </trim>
+      ) a 
+      <if test="end!=null and end!=''">
+         where rownum &lt;= #{end}
+       </if> 
+       )
+      <if test="start!=null and start!=''">
+       where  rn &gt;= #{start}
+     </if>
+  </select>
+  <select id="getLiAnApproveCount" parameterType="Map" resultType="int">
+     select count(eee.crimid) from 
+         (select tsr.crimid,REMAINDERPUNISHMENT from TBXF_SCREENING tsr,tbxf_commuteparole_batch tss
+                 where tsr.batchid=tss.batchid and tsr.departid = #{departid} and (tsr.isdeclare='1' ))ddd ,
+      TBXF_SENTENCEALTERATION  eee,TBPRISONER_BASE_CRIME btc
+    where ddd.crimid = eee.crimid and  ddd.crimid = btc.crimid
+     and (btc.orgid2 IN (SELECT too.dorgid FROM tbflow_org_org too WHERE too.orgid = #{orgid})  
+     or btc.orgid1 IN (SELECT too.dorgid FROM tbflow_org_org too WHERE too.orgid = #{orgid}) )
+     <trim prefix="" suffix="" suffixOverrides=",">
+         <if test="key!=null and key!=''"> and (eee.crimid like '%'||#{key}||'%' or eee.name like '%'||#{key}||'%')</if>
+     </trim>
+  </select>
+  
+  <update id="updateIsdeclare" parameterType="List">
+  	update TBXF_SCREENING set isdeclare=1-decode(isdeclare,1,1,0) where crimid in
+<foreach item="item" index="index" collection="list"
+open="(" separator="," close=")">
+#{item}
+</foreach>
+  </update>
+  
+  <update id="updateSpecialCrim" parameterType="Map">
+  	update TBXF_SCREENING set tmp1=#{specialcrim} where crimid in
+	(${crimids})
+  </update>
+  
+    <update id="updateLiAnBack" parameterType="Map">
+  	update TBXF_SENTENCEALTERATION set JAILTO='0' where crimid in
+	(${crimids})
+  </update>
+  
+  <select id="getAnJianXingZhiList" parameterType="Map"  resultType="Map"> 
+	select * from( 
+      select a.*, rownum rn from
+      ( 
+	      select tmp1 as codeid,
+	      		tmp2 as name
+	      		from TBXF_SCREENING
+     		where crimid=#{crimid}
+     <trim prefix="" suffix="" suffixOverrides=",">
+        <if test="sortField!=null and sortField!=''"> order by ${sortField} ${sortOrder}</if>
+    </trim>
+      ) a 
+      <if test="end!=null and end!=''">
+         where rownum &lt;= #{end}
+       </if> 
+       )
+      <if test="start!=null and start!=''">
+       where  rn &gt;= #{start}
+     </if>
+  </select>
+  
+   <select id="getAnjianXingZhiCount" parameterType="Map" resultType="int">
+    select count(*) from 
+       (select tmp1 as codeid,
+	      		tmp2 as name
+	      		from TBXF_SCREENING
+     		where crimid=#{crimid}
+     )a
+  </select>
+  
+  <update id="dealSpecialCase" parameterType="Map" >
+    update TBXF_SCREENING
+    set cstatus = 1, optime = sysdate, 
+         EXCUSE = EXCUSE||'特案办理，可提请减刑。'
+    where CRIMID in (${crimids})
+  </update>
+  
+  
+   <select id="getBaobeiLiAnCount" parameterType="Map" resultType="int">
+    select count(eee.crimid) from 
+    (
+		select tsr.crimid,
+    	REMAINDERPUNISHMENT 
+    	from TBXF_SCREENING tsr,
+    	tbxf_commuteparole_batch tss
+       where 
+       tsr.batchid=tss.batchid 
+       and tsr.departid = #{departid} 
+       and (tsr.isdeclare=#{sel}) 
+    )ddd ,
+    TBXF_SENTENCEALTERATION  eee,
+    tbprisoner_baseinfo bbb,
+    TBPRISONER_BASE_CRIME btc
+   where ddd.crimid = eee.crimid 
+   and ddd.crimid = btc.crimid
+   and ddd.crimid = bbb.crimid
+   and (
+   		btc.orgid2 IN (SELECT too.dorgid FROM tbflow_org_org too WHERE too.orgid = #{orgid})  
+   		or 
+   		btc.orgid1 IN (SELECT too.dorgid FROM tbflow_org_org too WHERE too.orgid = #{orgid}) 
+   		)
+     <trim prefix="" suffix="" suffixOverrides=",">
+         <if test="key!=null and key!=''"> and (eee.crimid like '%'||#{key}||'%' or eee.name like '%'||#{key}||'%' or bbb.namepinyinshort like concat(UPPER(#{key}),'%'))</if>
+     </trim>
+     <if test="isstatus!=null and isstatus!=''">
+     	and eee.STATUS = 5
+     </if>
+  </select>
+  
+  <select id="getBaobeiLiAnList" parameterType="Map"  resultType="Map"> 
+	select * from( 
+      select a.*, rownum rn from
+      ( 
+	      select eee.crimid,
+	      		 eee.NAME,
+	      		 btc.orgid2 as orgid,
+	      		 eee.reportaudit,ddd.REFID,ddd.JSPUNID,
+	      		 getage(eee.BRITHDAY) as age,
+				 F_FORMATYMD(ORIGINALYEAR,ORIGINALMONTH,ORIGINALDAY,'0') as ORIGINALYEAR,
+				 SENTENCESTIME,
+				 SENTENCEETIME,
+				 PREDATE,
+				 eee.NOWPUNISHMENTYEAR as nowpunishmenttype,
+				 (CASE
+                      WHEN eee.NOWPUNISHMENTYEAR = '9996'
+                      THEN
+                         '死缓'
+                      WHEN eee.NOWPUNISHMENTYEAR = '9995'
+                      THEN
+                         '无期徒刑'
+                      ELSE
+                         GETDISOFTWODATE (ddd.REMAINDERPUNISHMENT,eee.COURTCHANGETO)
+                 END) as nowpunishmentyear,
+				 GETDISOFTWODATE(nvl(t1.REPORTTIME,PREDATE),EXAMINEEND) as JIANGGEQI 
+	      from 
+          (
+          	select tsr.crimid,
+          	REMAINDERPUNISHMENT, REFID,INT3 JSPUNID,
+          	EXAMINEEND 
+          	from TBXF_SCREENING tsr,tbxf_commuteparole_batch tss
+            where tsr.batchid=tss.batchid 
+            and tsr.departid = #{departid} 
+            and (tsr.isdeclare=#{sel}) 
+           ) ddd ,
+	      TBXF_SENTENCEALTERATION  eee,
+	      tbprisoner_baseinfo bbb, 
+	      TBPRISONER_BASE_CRIME btc
+	      ,	(select t1.crimid, f_isdate(REPORTTIME,'YYYYMMDD') as REPORTTIME from tbdata_sentchage t1,
+			 (select a.crimid as crimid,max(a.COURTSANCTION) as COURTSANCTION from tbdata_sentchage a
+			  group by a.crimid) t2 where t1.crimid=t2.crimid and t1.COURTSANCTION=t2.COURTSANCTION) t1
+	   	  where ddd.crimid = eee.crimid 
+	   	  and  ddd.crimid = btc.crimid
+	   	  and  ddd.crimid = bbb.crimid 
+	   	  and ddd.crimid = t1.crimid
+      	  and (
+      		btc.orgid2 IN (SELECT too.dorgid FROM tbflow_org_org too WHERE too.orgid = #{orgid}) 
+       		or 
+       		btc.orgid1 IN (SELECT too.dorgid FROM tbflow_org_org too  WHERE too.orgid = #{orgid}) 
+       	  )
+     <trim prefix="" suffix="" suffixOverrides=",">
+         <if test="key!=null and key!=''"> and (eee.crimid like '%'||#{key}||'%' or eee.name like '%'||#{key}||'%' or bbb.namepinyinshort like concat(UPPER(#{key}),'%'))</if>
+     </trim>
+     <if test="isstatus!=null and isstatus!=''">
+     	and eee.STATUS = 5
+     </if>
+     <trim prefix="" suffix="" suffixOverrides=",">
+        <if test="sortField!=null and sortField!=''"> order by ${sortField} ${sortOrder}</if>
+    </trim>
+      ) a 
+      <if test="end!=null and end!=''">
+         where rownum &lt;= #{end}
+       </if> 
+       )
+      <if test="start!=null and start!=''">
+       where  rn &gt;= #{start}
+     </if>
+  </select>
+  <select id="getCrimidFlowData" parameterType="Map" resultType="Map">
+    select uf.* from UV_FLOW uf where uf.flowdraftid=#{flowdraftid}
+  </select>
+  
+  <insert id="addSanLeiFanBaoBei" parameterType="Map" >
+    insert into TBFLOW_CASE_CRIMINAL
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="crimid != null" >
+        CRIMID,
+      </if>
+      <if test="flowdraftid != null" >
+        FLOWDRAFTID,
+      </if>
+      <if test="flowdefid != null" >
+        FLOWDEFID,
+      </if>
+      <if test="flowid != null" >
+        FLOWID,
+      </if>
+      <if test="departid != null" >
+        DEPARTID,
+      </if>
+      <if test="caseno != null" >
+        CASENO,
+      </if>
+      <if test="orgflg != null" >
+        ORGFLG,
+      </if>
+      <if test="state1 != null" >
+        state1,
+      </if>
+      <if test="state2 != null" >
+        state2,
+      </if>
+      <if test="state3 != null" >
+        state3,
+      </if>
+      <if test="state4 != null" >
+        state4,
+      </if>
+      <if test="state5 != null" >
+        state5,
+      </if>
+      <if test="state6 != null" >
+        state6,
+      </if>  
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="crimid != null" >
+         #{crimid,jdbcType=VARCHAR},
+      </if>
+      <if test="flowdraftid != null" >
+         #{flowdraftid,jdbcType=VARCHAR},
+      </if>
+      <if test="flowdefid != null" >
+         #{flowdefid,jdbcType=VARCHAR},
+      </if>
+      <if test="flowid != null" >
+         #{flowid,jdbcType=VARCHAR},
+      </if>
+      <if test="departid != null" >
+         #{departid,jdbcType=VARCHAR},
+      </if>
+      <if test="caseno != null" >
+         #{caseno,jdbcType=VARCHAR},
+      </if>
+      <if test="orgflg != null" >
+         #{orgflg,jdbcType=DECIMAL},
+      </if>
+      <if test="state1 != null" >
+         #{state1,jdbcType=DECIMAL},
+      </if>
+      <if test="state2 != null" >
+         #{state2,jdbcType=DECIMAL},
+      </if>
+      <if test="state3 != null" >
+         #{state3,jdbcType=DECIMAL},
+      </if>
+      <if test="state4 != null" >
+         #{state4,jdbcType=DECIMAL},
+      </if>
+      <if test="state5 != null" >
+         #{state5,jdbcType=DECIMAL},
+      </if>
+      <if test="state6 != null" >
+         #{state6,jdbcType=DECIMAL},
+      </if>
+      
+    </trim>
+  </insert>
+  
+  <update id="updateSanLeiFanBaoBei" parameterType="Map" >
+    update TBFLOW_CASE_CRIMINAL
+    <set>
+      
+      <if test="flowid != null" >
+         flowid =#{flowid,jdbcType=VARCHAR},
+      </if>
+      <if test="caseno != null" >
+         caseno =#{caseno,jdbcType=VARCHAR},
+      </if>
+      <if test="orgflg != null" >
+         orgflg =#{orgflg,jdbcType=DECIMAL},
+      </if>
+      <if test="state1 != null" >
+         state1 =#{state1,jdbcType=DECIMAL},
+      </if>
+      <if test="state2 != null" >
+         state2 =#{state2,jdbcType=DECIMAL},
+      </if>
+      <if test="state3 != null" >
+         state3 =#{state3,jdbcType=DECIMAL},
+      </if>
+      <if test="state4 != null" >
+         state4 =#{state4,jdbcType=DECIMAL},
+      </if>
+      <if test="state5 != null" >
+         state5 =#{state5,jdbcType=DECIMAL},
+      </if>
+      <if test="state6 != null" >
+         state6 =#{state6,jdbcType=DECIMAL},
+      </if>
+    </set>
+    where CRIMID = #{crimid} and flowdefid='other_zfjyjxjssp'
+  </update>
+  
+  <select id="getLiAnCountSH" parameterType="Map" resultType="int">
+   		select
+       count(uf.flowdraftid)
+        from (select uft.*, td.text3 as process
+                from uv_flow uft
+                left join (select *
+                            from TBFLOW_DELIVER
+                           where flowdefid = #{flowdefid}
+                             and departid = #{departid}
+                             and (state = 0 or state = 1)) td
+                  on uft.nodeid = td.snodeid) uf,
+             TBXF_SENTENCEALTERATION t,
+             TBPRISONER_BASE_CRIME tbc,
+             TBPRISONER_BASEINFO tbi,
+             TBFLOW_BASE tbbb,
+             TBSYS_ORGINFO tr
+       where 1=1
+        and uf.applyid = t.crimid 
+        and uf.applyid =tbc.crimid
+        and uf.flowdraftid =tbbb.flowdraftid
+        and uf.applyid = tbi.crimid
+        
+       and tr.orgid = #{departid}
+       and exists (select 'x' from tbflow_org_org where orgid = #{orgid}  and (dorgid=tbc.orgid2 or dorgid=tbc.orgid1 or dorgid=tbc.orgid))
+       and uf.nodeid='1' 
+        
+        <trim prefix="" suffix="" suffixOverrides=",">
+	         <if test="key!=null and key!=''"> 
+	         	and (tbi.crimid like '%'||#{key}||'%' or tbi.name like '%'||#{key}||'%' 
+                    or tbi.NAMEPINYINSHORT like '%'||UPPER(#{key})||'%'
+	         	)
+	         </if>
+	     </trim>
+        <if test="casetype!=null and casetype!=''">  
+          and uf.casetype2=#{casetype}
+        </if>
+        
+        <if test="casenums!=null and casenums!=''">
+          and uf.text6 in (#{casenums})
+        </if>
+        <if test="year!=null and year!=''">
+          and SUBSTR(nvl(uf.text6,0), 1, 4) = #{year}
+        </if>
+        <if test="int6!=null and int6!=''">
+          and tbbb.int6=#{int6}
+        </if>
+       <if test="flowdefid!=null and flowdefid!=''"> 
+           and uf.flowdefid=#{flowdefid}
+       </if>
+
+        <if test="xingqileixing!=null and xingqileixing!=''">
+          and F_getSentenceType(tbc.PUNISHMENTYEAR) = #{xingqileixing}
+        </if>
+         <if test="jailid!=null and jailid!=''">
+          and t.jailid=#{jailid}
+        </if>
+        <if test="jianqu!=null and jianqu!=''">
+          and (tbc.orgid2 = #{jianqu} or tbc.orgid1=#{jianqu})
+        </if>      
+   </select>
+  
+  <select id="getLiAnListSH" parameterType="Map"  resultType="Map"> 
+	select * from
+	(  select a.*, rownum rn
+	  from
+	  (
+	    select * 
+	    from(
+	      select 
+	        tbc.orgname1 as orgname,
+	        uf.flowdraftid ,
+	        uf.state,
+	        uf.conent, 
+	        uf.optime as operatetime,
+	        uf.text8,
+	        uf.commenttext,
+	        uf.nodeid,
+	        sysdate as currdate, 
+	        t.crimid,
+	        t.name,
+	        getage(t.BRITHDAY) as age, 
+	        t.PREDATE,
+	        t.areaid as orgid, 
+	        SENTENCESTIME,
+	        SENTENCEETIME,
+	        t.JAILNAME,
+	        '(' || substr(uf.text6,1,4) || ')' || tr.shortname 
+	        ||uf.text7||'第' ||substr(uf.text6,5) || '号' as ANJIANHAO,
+	        
+	        F_FORMATYMD(ORIGINALYEAR,ORIGINALMONTH,ORIGINALDAY,0) as ORIGINALYEAR,
+	        F_FORMATYMD(NOWPUNISHMENTYEAR,NOWPUNISHMENTMONTH,NOWPUNISHMENTDAY,0)  AS nowpunishmentyear
+	      from 
+	        (
+	         select uft.*,td.text3 as process from uv_flow uft left join 
+	                   (select * from TBFLOW_DELIVER where flowdefid=#{flowdefid}
+	                       and departid=#{departid} and (state=0 or state=1)
+	                   ) td
+	           on uft.nodeid = td.snodeid
+	        ) uf ,
+	        TBXF_SENTENCEALTERATION t ,
+	        TBPRISONER_BASE_CRIME tbc,
+	            TBPRISONER_BASEINFO tbi,
+	           TBFLOW_BASE tbbb,
+	            TBSYS_ORGINFO tr
+	       where 1=1
+	        and uf.applyid = t.crimid 
+	        and uf.applyid =tbc.crimid
+	        and uf.flowdraftid =tbbb.flowdraftid
+	        and uf.applyid = tbi.crimid
+	        
+	       and tr.orgid = #{departid}
+	       and exists (select 'x' from tbflow_org_org where orgid = #{orgid}  and (dorgid=tbc.orgid2 or dorgid=tbc.orgid1 or dorgid=tbc.orgid))
+	       and uf.nodeid='1' 
+	        
+	        <trim prefix="" suffix="" suffixOverrides=",">
+		         <if test="key!=null and key!=''"> 
+		         	and (tbi.crimid like '%'||#{key}||'%' or tbi.name like '%'||#{key}||'%' 
+	                    or tbi.NAMEPINYINSHORT like '%'||UPPER(#{key})||'%'
+		         	)
+		         </if>
+		     </trim>
+	        <if test="casetype!=null and casetype!=''">  
+	          and uf.casetype2=#{casetype}
+	        </if>
+	        
+	        <if test="casenums!=null and casenums!=''">
+	          and uf.text6 in (#{casenums})
+	        </if>
+	        <if test="year!=null and year!=''">
+	          and SUBSTR(nvl(uf.text6,0), 1, 4) = #{year}
+	        </if>
+	        <if test="int6!=null and int6!=''">
+	          and tbbb.int6=#{int6}
+	        </if>
+	       <if test="flowdefid!=null and flowdefid!=''"> 
+	           and uf.flowdefid=#{flowdefid}
+	       </if>
+	
+	        <if test="xingqileixing!=null and xingqileixing!=''">
+	          and F_getSentenceType(tbc.PUNISHMENTYEAR) = #{xingqileixing}
+	        </if>
+	         <if test="jailid!=null and jailid!=''">
+	          and t.jailid=#{jailid}
+	        </if>
+	        <if test="jianqu!=null and jianqu!=''">
+	          and (tbc.orgid2 = #{jianqu} or tbc.orgid1=#{jianqu})
+	        </if>      
+	        order by to_number(uf.text6)
+	    )
+	    <trim prefix="" suffix="" suffixOverrides=",">
+		        <if test="sortField!=null and sortField!=''"> order by ${sortField} ${sortOrder}</if>
+		  </trim>
+	  ) a 
+	  <if test="end!=null and end!=''">
+	     where rownum &lt;= #{end}
+	  </if> 
+	 )
+	 <if test="start!=null and start!=''">
+	    where  rn &gt;= #{start}
+	 </if>
+  </select> 
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  <update id="updateStatus4Qualificate" parameterType="java.lang.String" >
+    update TBXF_SCREENING ts 
+       set ts.status=0, ts.cstatus=0, ts.ISDECLARE=0, INT3=0, ts.EXCUSE=null
+    where ts.DEPARTID = #{departid,jdbcType=VARCHAR}
+      and ts.ISDECLARE != 1
+      and not exists (
+	   		select 'x' from tbflow_base t1
+            where t1.flowdefid = 'other_zfjyjxjssp' and t1.applyid=ts.crimid
+              and (t1.state=-2 or t1.state=-1 or t1.state=0 or t1.state=2)
+	  ) 
+  </update>
+  
+  
+  <select id="callPSENTNCECHANG" parameterType="String">
+  		 <![CDATA[   
+		   {call P_SENTNCECHANG(#{departid},1,0)}   
+		]]>  
+  </select>
+  
+  <select id="countDepartQualifierTemp" parameterType="Map" resultType="int">
+    select 
+      count(tt.crimid)
+    from TBXF_QUALIFIER_TEMP tt
+    where tt.DEPARTID = #{departid,jdbcType=VARCHAR}
+  </select>
+  
+    <select id="getQualifierCriminal" parameterType="Map" resultType="Map">
+  	select tt3.*
+  	from (
+	  		select tt2.*,rownum rn
+		    from (
+				    select
+				      tt1.*
+				    from TBXF_QUALIFIER_TEMP tt1
+				    where tt1.DEPARTID = #{departid,jdbcType=VARCHAR}
+				    order by tt1.crimid
+		    	) tt2
+		    where rownum &lt;= #{end}
+  		 ) tt3
+  	where tt3.rn &gt;= #{start}
+  </select>
+  
+  
+  <select id="decideOperateSymbol" parameterType="String" resultType="String">
+    SELECT
+	   (CASE WHEN sen.NOWPUNISHMENTYEAR = '9996' OR sen.NOWPUNISHMENTYEAR = '9995' 
+				  or tbc.casenature is not null
+				  or tbc.undermine = '是' or tbc.undermine = '1'
+				  or tbc.underworld= '是' or tbc.underworld = '1'
+				  or tbc.postcrime='是' or tbc.postcrime='1'
+			 THEN '1'
+		 ELSE '0'
+	  END) AS operatesymbol
+	FROM TBXF_SENTENCEALTERATION sen,
+		 tbprisoner_base_crime tbc
+	where sen.crimid=tbc.crimid
+	  and sen.crimid = #{applyid}
+  </select>
+  
+</mapper>

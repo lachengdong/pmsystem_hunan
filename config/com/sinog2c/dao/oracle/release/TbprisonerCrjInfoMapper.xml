@@ -1,0 +1,337 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.sinog2c.dao.api.release.TbprisonerCrjInfoMapper" >
+  <resultMap id="BaseResultMap" type="com.sinog2c.model.release.TBPRISONERCRJINFO" >
+    <id column="CRIMID" property="crimid" jdbcType="VARCHAR" />
+    <result column="PLENTYTYPE" property="plentytype" jdbcType="VARCHAR" />
+    <result column="INPRISONDATE" property="inprisondate" jdbcType="DATE" />
+    <result column="OUTPRISONDATE" property="outprisondate" jdbcType="DATE" />
+    <result column="LJLB" property="ljlb" jdbcType="VARCHAR" />
+    <result column="QXQH" property="qxqh" jdbcType="VARCHAR" />
+    <result column="QXQX" property="qxqx" jdbcType="VARCHAR" />
+    <result column="DAH" property="dah" jdbcType="VARCHAR" />
+    <result column="WATCHHOUSE" property="watchhouse" jdbcType="VARCHAR" />
+    <result column="SONGFUJIGUAN" property="songfujiguan" jdbcType="VARCHAR" />
+    <result column="CREATETIME" property="createtime" jdbcType="DATE" />
+    <result column="CREATEMENDER" property="createmender" jdbcType="VARCHAR" />
+    <result column="UPDATETIME" property="updatetime" jdbcType="DATE" />
+    <result column="UPDATEMENDER" property="updatemender" jdbcType="VARCHAR" />
+    <result column="REMARK" property="remark" jdbcType="VARCHAR" />
+    <result column="DELFLG" property="delflg" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    CRIMID, PLENTYTYPE, INPRISONDATE, OUTPRISONDATE, LJLB, QXQH, QXQX, DAH, WATCHHOUSE, 
+    SONGFUJIGUAN, CREATETIME, CREATEMENDER, UPDATETIME, UPDATEMENDER, REMARK, DELFLG
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from TBPRISONER_CRJ_INFO
+    where CRIMID = #{crimid,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from TBPRISONER_CRJ_INFO
+    where CRIMID = #{crimid,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.sinog2c.model.release.TBPRISONERCRJINFO" >
+    insert into TBPRISONER_CRJ_INFO (CRIMID, PLENTYTYPE, INPRISONDATE, 
+      OUTPRISONDATE, LJLB, QXQH, 
+      QXQX, DAH, WATCHHOUSE, 
+      SONGFUJIGUAN, CREATETIME, CREATEMENDER, 
+      UPDATETIME, UPDATEMENDER, REMARK, 
+      DELFLG)
+    values (#{crimid,jdbcType=VARCHAR}, #{plentytype,jdbcType=VARCHAR}, #{inprisondate,jdbcType=DATE}, 
+      #{outprisondate,jdbcType=DATE}, #{ljlb,jdbcType=VARCHAR}, #{qxqh,jdbcType=VARCHAR}, 
+      #{qxqx,jdbcType=VARCHAR}, #{dah,jdbcType=VARCHAR}, #{watchhouse,jdbcType=VARCHAR}, 
+      #{songfujiguan,jdbcType=VARCHAR}, #{createtime,jdbcType=DATE}, #{createmender,jdbcType=VARCHAR}, 
+      #{updatetime,jdbcType=DATE}, #{updatemender,jdbcType=VARCHAR}, #{remark,jdbcType=VARCHAR}, 
+      #{delflg,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.sinog2c.model.release.TBPRISONERCRJINFO" >
+    insert into TBPRISONER_CRJ_INFO
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="crimid != null" >
+        CRIMID,
+      </if>
+      <if test="plentytype != null" >
+        PLENTYTYPE,
+      </if>
+      <if test="inprisondate != null" >
+        INPRISONDATE,
+      </if>
+      <if test="outprisondate != null" >
+        OUTPRISONDATE,
+      </if>
+      <if test="ljlb != null" >
+        LJLB,
+      </if>
+      <if test="qxqh != null" >
+        QXQH,
+      </if>
+      <if test="qxqx != null" >
+        QXQX,
+      </if>
+      <if test="dah != null" >
+        DAH,
+      </if>
+      <if test="watchhouse != null" >
+        WATCHHOUSE,
+      </if>
+      <if test="songfujiguan != null" >
+        SONGFUJIGUAN,
+      </if>
+      <if test="createtime != null" >
+        CREATETIME,
+      </if>
+      <if test="createmender != null" >
+        CREATEMENDER,
+      </if>
+      <if test="updatetime != null" >
+        UPDATETIME,
+      </if>
+      <if test="updatemender != null" >
+        UPDATEMENDER,
+      </if>
+      <if test="remark != null" >
+        REMARK,
+      </if>
+      <if test="delflg != null" >
+        DELFLG,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="crimid != null" >
+        #{crimid,jdbcType=VARCHAR},
+      </if>
+      <if test="plentytype != null" >
+        #{plentytype,jdbcType=VARCHAR},
+      </if>
+      <if test="inprisondate != null" >
+        #{inprisondate,jdbcType=DATE},
+      </if>
+      <if test="outprisondate != null" >
+        #{outprisondate,jdbcType=DATE},
+      </if>
+      <if test="ljlb != null" >
+        #{ljlb,jdbcType=VARCHAR},
+      </if>
+      <if test="qxqh != null" >
+        #{qxqh,jdbcType=VARCHAR},
+      </if>
+      <if test="qxqx != null" >
+        #{qxqx,jdbcType=VARCHAR},
+      </if>
+      <if test="dah != null" >
+        #{dah,jdbcType=VARCHAR},
+      </if>
+      <if test="watchhouse != null" >
+        #{watchhouse,jdbcType=VARCHAR},
+      </if>
+      <if test="songfujiguan != null" >
+        #{songfujiguan,jdbcType=VARCHAR},
+      </if>
+      <if test="createtime != null" >
+        #{createtime,jdbcType=DATE},
+      </if>
+      <if test="createmender != null" >
+        #{createmender,jdbcType=VARCHAR},
+      </if>
+      <if test="updatetime != null" >
+        #{updatetime,jdbcType=DATE},
+      </if>
+      <if test="updatemender != null" >
+        #{updatemender,jdbcType=VARCHAR},
+      </if>
+      <if test="remark != null" >
+        #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="delflg != null" >
+        #{delflg,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.sinog2c.model.release.TBPRISONERCRJINFO" >
+    update TBPRISONER_CRJ_INFO
+    <set >
+      <if test="plentytype != null" >
+        PLENTYTYPE = #{plentytype,jdbcType=VARCHAR},
+      </if>
+      <if test="inprisondate != null" >
+        INPRISONDATE = #{inprisondate,jdbcType=DATE},
+      </if>
+      <if test="outprisondate != null" >
+        OUTPRISONDATE = #{outprisondate,jdbcType=DATE},
+      </if>
+      <if test="ljlb != null" >
+        LJLB = #{ljlb,jdbcType=VARCHAR},
+      </if>
+      <if test="qxqh != null" >
+        QXQH = #{qxqh,jdbcType=VARCHAR},
+      </if>
+      <if test="qxqx != null" >
+        QXQX = #{qxqx,jdbcType=VARCHAR},
+      </if>
+      <if test="dah != null" >
+        DAH = #{dah,jdbcType=VARCHAR},
+      </if>
+      <if test="watchhouse != null" >
+        WATCHHOUSE = #{watchhouse,jdbcType=VARCHAR},
+      </if>
+      <if test="songfujiguan != null" >
+        SONGFUJIGUAN = #{songfujiguan,jdbcType=VARCHAR},
+      </if>
+      <if test="createtime != null" >
+        CREATETIME = #{createtime,jdbcType=DATE},
+      </if>
+      <if test="createmender != null" >
+        CREATEMENDER = #{createmender,jdbcType=VARCHAR},
+      </if>
+      <if test="updatetime != null" >
+        UPDATETIME = #{updatetime,jdbcType=DATE},
+      </if>
+      <if test="updatemender != null" >
+        UPDATEMENDER = #{updatemender,jdbcType=VARCHAR},
+      </if>
+      <if test="remark != null" >
+        REMARK = #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="delflg != null" >
+        DELFLG = #{delflg,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where CRIMID = #{crimid,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.sinog2c.model.release.TBPRISONERCRJINFO" >
+    update TBPRISONER_CRJ_INFO
+    set PLENTYTYPE = #{plentytype,jdbcType=VARCHAR},
+      INPRISONDATE = #{inprisondate,jdbcType=DATE},
+      OUTPRISONDATE = #{outprisondate,jdbcType=DATE},
+      LJLB = #{ljlb,jdbcType=VARCHAR},
+      QXQH = #{qxqh,jdbcType=VARCHAR},
+      QXQX = #{qxqx,jdbcType=VARCHAR},
+      DAH = #{dah,jdbcType=VARCHAR},
+      WATCHHOUSE = #{watchhouse,jdbcType=VARCHAR},
+      SONGFUJIGUAN = #{songfujiguan,jdbcType=VARCHAR},
+      CREATETIME = #{createtime,jdbcType=DATE},
+      CREATEMENDER = #{createmender,jdbcType=VARCHAR},
+      UPDATETIME = #{updatetime,jdbcType=DATE},
+      UPDATEMENDER = #{updatemender,jdbcType=VARCHAR},
+      REMARK = #{remark,jdbcType=VARCHAR},
+      DELFLG = #{delflg,jdbcType=VARCHAR}
+    where CRIMID = #{crimid,jdbcType=VARCHAR}
+  </update>
+  
+  <select id="ajaxCodeData"  resultType="map">
+  	select pcodeid, codeid, noid, name
+	  from TBSYS_CODE t
+	 where t.codetype = #{codetype}
+	   and t.noid not in
+	       (select tc.noid from TBSYS_CODE tc where tc.codeid = #{codetype})
+  </select>
+  <insert id="savePrison" >
+    insert into TBPRISONER_CRJ_INFO
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="crimid != null" >
+        CRIMID,
+      </if>
+      <if test="plentytype != null" >
+        PLENTYTYPE,
+      </if>
+      <if test="inprisondate != null" >
+        INPRISONDATE,
+      </if>
+      <if test="outprisondate != null" >
+        OUTPRISONDATE,
+      </if>
+      <if test="ljlb != null" >
+        LJLB,
+      </if>
+      <if test="qxqh != null" >
+        QXQH,
+      </if>
+      <if test="qxqx != null" >
+        QXQX,
+      </if>
+      <if test="dah != null" >
+        DAH,
+      </if>
+      <if test="watchhouse != null" >
+        WATCHHOUSE,
+      </if>
+      <if test="songfujiguan != null" >
+        SONGFUJIGUAN,
+      </if>
+      <if test="createtime != null" >
+        CREATETIME,
+      </if>
+      <if test="createmender != null" >
+        CREATEMENDER,
+      </if>
+      <if test="updatetime != null" >
+        UPDATETIME,
+      </if>
+      <if test="updatemender != null" >
+        UPDATEMENDER,
+      </if>
+      <if test="remark != null" >
+        REMARK,
+      </if>
+      <if test="delflg != null" >
+        DELFLG,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="crimid != null" >
+        #{crimid,jdbcType=VARCHAR},
+      </if>
+      <if test="plentytype != null" >
+        #{plentytype,jdbcType=VARCHAR},
+      </if>
+      <if test="inprisondate != null" >
+        #{inprisondate,jdbcType=DATE},
+      </if>
+      <if test="outprisondate != null" >
+        #{outprisondate,jdbcType=DATE},
+      </if>
+      <if test="ljlb != null" >
+        #{ljlb,jdbcType=VARCHAR},
+      </if>
+      <if test="qxqh != null" >
+        #{qxqh,jdbcType=VARCHAR},
+      </if>
+      <if test="qxqx != null" >
+        #{qxqx,jdbcType=VARCHAR},
+      </if>
+      <if test="dah != null" >
+        #{dah,jdbcType=VARCHAR},
+      </if>
+      <if test="watchhouse != null" >
+        #{watchhouse,jdbcType=VARCHAR},
+      </if>
+      <if test="songfujiguan != null" >
+        #{songfujiguan,jdbcType=VARCHAR},
+      </if>
+      <if test="createtime != null" >
+        #{createtime,jdbcType=DATE},
+      </if>
+      <if test="createmender != null" >
+        #{createmender,jdbcType=VARCHAR},
+      </if>
+      <if test="updatetime != null" >
+        #{updatetime,jdbcType=DATE},
+      </if>
+      <if test="updatemender != null" >
+        #{updatemender,jdbcType=VARCHAR},
+      </if>
+      <if test="remark != null" >
+        #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="delflg != null" >
+        #{delflg,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="getOutPrison"  resultType="map">
+  	select t.* from TBPRISONER_CRJ_INFO t where t.crimid=#{crimid}
+  </select>
+</mapper>

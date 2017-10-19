@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.sinog2c.dao.api.khjc.KhjcCriminalMonthScoreBlSdMapper" >
+  <resultMap id="BaseResultMap" type="com.sinog2c.model.khjc.KhjcCriminalMonthScoreBlSd" >
+    <id column="CRIMINALID" property="criminalid" jdbcType="VARCHAR" />
+    <result column="SCORE" property="score" jdbcType="VARCHAR" />
+    <result column="LOGINFO" property="loginfo" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    CRIMINALID, SCORE, LOGINFO
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from KHJC_CRIMINAL_MONTHSCORE_BL_SD
+    where CRIMINALID = #{criminalid,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from KHJC_CRIMINAL_MONTHSCORE_BL_SD
+    where CRIMINALID = #{criminalid,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.sinog2c.model.khjc.KhjcCriminalMonthScoreBlSd" >
+    insert into KHJC_CRIMINAL_MONTHSCORE_BL_SD (CRIMINALID, SCORE, LOGINFO
+      )
+    values (#{criminalid,jdbcType=VARCHAR}, #{score,jdbcType=VARCHAR}, #{loginfo,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.sinog2c.model.khjc.KhjcCriminalMonthScoreBlSd" >
+    insert into KHJC_CRIMINAL_MONTHSCORE_BL_SD
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="criminalid != null" >
+        CRIMINALID,
+      </if>
+      <if test="score != null" >
+        SCORE,
+      </if>
+      <if test="loginfo != null" >
+        LOGINFO,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="criminalid != null" >
+        #{criminalid,jdbcType=VARCHAR},
+      </if>
+      <if test="score != null" >
+        #{score,jdbcType=VARCHAR},
+      </if>
+      <if test="loginfo != null" >
+        #{loginfo,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.sinog2c.model.khjc.KhjcCriminalMonthScoreBlSd" >
+    update KHJC_CRIMINAL_MONTHSCORE_BL_SD
+    <set >
+      <if test="score != null" >
+        SCORE = #{score,jdbcType=VARCHAR},
+      </if>
+      <if test="loginfo != null" >
+        LOGINFO = #{loginfo,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where CRIMINALID = #{criminalid,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.sinog2c.model.khjc.KhjcCriminalMonthScoreBlSd" >
+    update KHJC_CRIMINAL_MONTHSCORE_BL_SD
+    set SCORE = #{score,jdbcType=VARCHAR},
+      LOGINFO = #{loginfo,jdbcType=VARCHAR}
+    where CRIMINALID = #{criminalid,jdbcType=VARCHAR}
+  </update>
+</mapper>

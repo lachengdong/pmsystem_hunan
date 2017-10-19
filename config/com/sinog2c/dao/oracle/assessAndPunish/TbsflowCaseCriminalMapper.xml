@@ -1,0 +1,227 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.sinog2c.dao.api.assessAndPunish.TbsflowCaseCriminalMapper" >
+  <resultMap id="BaseResultMap" type="com.sinog2c.model.assessAndPunish.TbsflowCaseCriminal" >
+    <id column="CRIMID" property="crimid" jdbcType="VARCHAR" />
+    <result column="FLOWDRAFTID" property="flowdraftid" jdbcType="VARCHAR" />
+    <result column="FLOWDEFID" property="flowdefid" jdbcType="VARCHAR" />
+    <result column="FLOWID" property="flowid" jdbcType="VARCHAR" />
+    <result column="DEPARTID" property="departid" jdbcType="VARCHAR" />
+    <result column="CASENO" property="caseno" jdbcType="VARCHAR" />
+    <result column="CASETYPE" property="casetype" jdbcType="DECIMAL" />
+    <result column="STATE" property="state" jdbcType="DECIMAL" />
+    <result column="ENDTIME" property="endtime" jdbcType="DATE" />
+    <result column="ISDEFER" property="isdefer" jdbcType="DECIMAL" />
+    <result column="DEFERMONTH" property="defermonth" jdbcType="DECIMAL" />
+    <result column="DEFERTIME" property="defertime" jdbcType="DATE" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    CRIMID, FLOWDRAFTID, FLOWDEFID, FLOWID, DEPARTID, CASENO, CASETYPE, STATE, ENDTIME, 
+    ISDEFER, DEFERMONTH, DEFERTIME
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from TBFLOW_CASE_CRIMINAL
+    where CRIMID = #{crimid,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from TBFLOW_CASE_CRIMINAL
+    where CRIMID = #{crimid,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.sinog2c.model.assessAndPunish.TbsflowCaseCriminal" >
+    insert into TBFLOW_CASE_CRIMINAL (CRIMID, FLOWDRAFTID, FLOWDEFID, 
+      FLOWID, DEPARTID, CASENO, 
+      CASETYPE, STATE, ENDTIME, 
+      ISDEFER, DEFERMONTH, DEFERTIME
+      )
+    values (#{crimid,jdbcType=VARCHAR}, #{flowdraftid,jdbcType=VARCHAR}, #{flowdefid,jdbcType=VARCHAR}, 
+      #{flowid,jdbcType=VARCHAR}, #{departid,jdbcType=VARCHAR}, #{caseno,jdbcType=VARCHAR}, 
+      #{casetype,jdbcType=DECIMAL}, #{state,jdbcType=DECIMAL}, #{endtime,jdbcType=DATE}, 
+      #{isdefer,jdbcType=DECIMAL}, #{defermonth,jdbcType=DECIMAL}, #{defertime,jdbcType=DATE}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.sinog2c.model.assessAndPunish.TbsflowCaseCriminal" >
+    insert into TBFLOW_CASE_CRIMINAL
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="crimid != null" >
+        CRIMID,
+      </if>
+      <if test="flowdraftid != null" >
+        FLOWDRAFTID,
+      </if>
+      <if test="flowdefid != null" >
+        FLOWDEFID,
+      </if>
+      <if test="flowid != null" >
+        FLOWID,
+      </if>
+      <if test="departid != null" >
+        DEPARTID,
+      </if>
+      <if test="caseno != null" >
+        CASENO,
+      </if>
+      <if test="casetype != null" >
+        CASETYPE,
+      </if>
+      <if test="state != null" >
+        STATE,
+      </if>
+      <if test="endtime != null" >
+        ENDTIME,
+      </if>
+      <if test="isdefer != null" >
+        ISDEFER,
+      </if>
+      <if test="defermonth != null" >
+        DEFERMONTH,
+      </if>
+      <if test="defertime != null" >
+        DEFERTIME,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="crimid != null" >
+        #{crimid,jdbcType=VARCHAR},
+      </if>
+      <if test="flowdraftid != null" >
+        #{flowdraftid,jdbcType=VARCHAR},
+      </if>
+      <if test="flowdefid != null" >
+        #{flowdefid,jdbcType=VARCHAR},
+      </if>
+      <if test="flowid != null" >
+        #{flowid,jdbcType=VARCHAR},
+      </if>
+      <if test="departid != null" >
+        #{departid,jdbcType=VARCHAR},
+      </if>
+      <if test="caseno != null" >
+        #{caseno,jdbcType=VARCHAR},
+      </if>
+      <if test="casetype != null" >
+        #{casetype,jdbcType=DECIMAL},
+      </if>
+      <if test="state != null" >
+        #{state,jdbcType=DECIMAL},
+      </if>
+      <if test="endtime != null" >
+        #{endtime,jdbcType=DATE},
+      </if>
+      <if test="isdefer != null" >
+        #{isdefer,jdbcType=DECIMAL},
+      </if>
+      <if test="defermonth != null" >
+        #{defermonth,jdbcType=DECIMAL},
+      </if>
+      <if test="defertime != null" >
+        #{defertime,jdbcType=DATE},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.sinog2c.model.assessAndPunish.TbsflowCaseCriminal" >
+    update TBFLOW_CASE_CRIMINAL
+    <set >
+      <if test="flowdraftid != null" >
+        FLOWDRAFTID = #{flowdraftid,jdbcType=VARCHAR},
+      </if>
+      <if test="flowdefid != null" >
+        FLOWDEFID = #{flowdefid,jdbcType=VARCHAR},
+      </if>
+      <if test="flowid != null" >
+        FLOWID = #{flowid,jdbcType=VARCHAR},
+      </if>
+      <if test="departid != null" >
+        DEPARTID = #{departid,jdbcType=VARCHAR},
+      </if>
+      <if test="caseno != null" >
+        CASENO = #{caseno,jdbcType=VARCHAR},
+      </if>
+      <if test="casetype != null" >
+        CASETYPE = #{casetype,jdbcType=DECIMAL},
+      </if>
+      <if test="state != null" >
+        STATE = #{state,jdbcType=DECIMAL},
+      </if>
+      <if test="endtime != null" >
+        ENDTIME = #{endtime,jdbcType=DATE},
+      </if>
+      <if test="isdefer != null" >
+        ISDEFER = #{isdefer,jdbcType=DECIMAL},
+      </if>
+      <if test="defermonth != null" >
+        DEFERMONTH = #{defermonth,jdbcType=DECIMAL},
+      </if>
+      <if test="defertime != null" >
+        DEFERTIME = #{defertime,jdbcType=DATE},
+      </if>
+    </set>
+    where CRIMID = #{crimid,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.sinog2c.model.assessAndPunish.TbsflowCaseCriminal" >
+    update TBFLOW_CASE_CRIMINAL
+    set FLOWDRAFTID = #{flowdraftid,jdbcType=VARCHAR},
+      FLOWDEFID = #{flowdefid,jdbcType=VARCHAR},
+      FLOWID = #{flowid,jdbcType=VARCHAR},
+      DEPARTID = #{departid,jdbcType=VARCHAR},
+      CASENO = #{caseno,jdbcType=VARCHAR},
+      CASETYPE = #{casetype,jdbcType=DECIMAL},
+      STATE = #{state,jdbcType=DECIMAL},
+      ENDTIME = #{endtime,jdbcType=DATE},
+      ISDEFER = #{isdefer,jdbcType=DECIMAL},
+      DEFERMONTH = #{defermonth,jdbcType=DECIMAL},
+      DEFERTIME = #{defertime,jdbcType=DATE}
+    where CRIMID = #{crimid,jdbcType=VARCHAR}
+  </update>
+  <!--  
+  <select id="selectByDateAndId" parameterType="Object" resultType="java.util.HashMap">
+  	select * from TBFLOW_CASE_CRIMINAL t
+  	where 1=1 
+  	<if test="crimid!=null and crimid!=''">
+  		and t.CRIMID = #{crimid,jdbcType=VARCHAR} 
+  	</if>
+  	<if test="defertime!=null and defertime!=''">
+  		and t.DEFERTIME= to_date('${defertime}','yyyy-MM-dd')
+  	</if>
+  </select>
+  -->
+  
+  
+   <select id="selectByDateAndId" parameterType="Object" resultType="java.util.HashMap">
+  		select * from
+	    ( 
+		    select a.*, rownum rn from
+				    (	
+				    	select t.*,
+				    	 substr( t.caseno,0,4)||'年'||O.SHORTNAME||DECODE(T.CASETYPE,0,'减字',1,'假字','')||'第'||substr(t.caseno,5)||'号' anjianhao,
+                         DECODE(t.casetype,0,'减刑',1,'假释','') anjiantype
+				    	 from TBFLOW_CASE_CRIMINAL t ,TBSYS_ORGINFO O where 1=1 
+                         AND T.DEPARTID = O.ORGID
+				    	 AND flowdefid='other_zfjyjxjssp' 
+				    	 AND DEFERMONTH!='0'
+					    
+			    <trim prefix="" suffix="" suffixOverrides=",">
+			 		<if test="crimid!=null and crimid!=''"> and t.CRIMID = #{crimid,jdbcType=VARCHAR} </if>
+			 		<if test="defertime!=null and defertime!=''">and t.DEFERTIME= to_date('${defertime}','yyyy-MM-dd')</if>
+			 	</trim>
+			 	<trim prefix="" suffix="" suffixOverrides=",">
+					<if test="sortField!=null and sortField!=''"> order by ${sortField} ${sortOrder}</if>
+				</trim>
+		  	) a 
+		    <if test="end!=null and end!=''">
+		   		where rownum &lt;= #{end}
+		   	</if> 
+	    )
+	   	<if test="start!=null and start!=''">
+	   		where  rn &gt;= #{start}
+	   	</if>
+  </select>
+  
+  
+  <select id="getTbsflowCaseCriminalCount" resultType="int">
+  		select count(*) from  TBFLOW_CASE_CRIMINAL t  where 1=1 and flowdefid='other_zfjyjxjssp' and DEFERMONTH!='0'
+  		<if test="crimid!=null and crimid!=''"> and t.CRIMID = #{crimid,jdbcType=VARCHAR} </if>
+		<if test="defertime!=null and defertime!=''">and t.DEFERTIME= to_date('${defertime}','yyyy-MM-dd')</if>
+  </select>
+</mapper>

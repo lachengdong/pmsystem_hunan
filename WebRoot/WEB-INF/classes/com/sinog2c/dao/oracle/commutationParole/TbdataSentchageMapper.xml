@@ -1,0 +1,1637 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.sinog2c.dao.api.commutationParole.TbdataSentchageMapper" >
+  <resultMap id="BaseResultMap" type="com.sinog2c.model.commutationParole.TbdataSentchage" >
+    <id column="CRIMID" property="crimid" jdbcType="VARCHAR" />
+    <id column="COURTSANCTION" property="courtsanction" jdbcType="VARCHAR" />
+    <result column="CATEGORY" property="category" jdbcType="VARCHAR" />
+    <result column="COURTNAME" property="courtname" jdbcType="VARCHAR" />
+    <result column="COURTTITLE" property="courttitle" jdbcType="VARCHAR" />
+    <result column="COURTYEAR" property="courtyear" jdbcType="VARCHAR" />
+    <result column="COURTSHORT" property="courtshort" jdbcType="VARCHAR" />
+    <result column="COURTSN" property="courtsn" jdbcType="VARCHAR" />
+    <result column="COURTCHANGE" property="courtchange" jdbcType="VARCHAR" />
+    <result column="SENTENCE" property="sentence" jdbcType="VARCHAR" />
+    <result column="COURTCHANGEFROM" property="courtchangefrom" jdbcType="VARCHAR" />
+    <result column="COURTCHANGETO" property="courtchangeto" jdbcType="VARCHAR" />
+    <result column="COURTAREA" property="courtarea" jdbcType="VARCHAR" />
+    <result column="LOSEPOWER" property="losepower" jdbcType="VARCHAR" />
+    <result column="FINE" property="fine" jdbcType="VARCHAR" />
+    <result column="SUMFINE" property="sumfine" jdbcType="VARCHAR" />
+    <result column="OFINE" property="ofine" jdbcType="VARCHAR" />
+    <result column="ISDEPORTATION" property="isdeportation" jdbcType="DECIMAL" />
+    <result column="ATTACHINFO" property="attachinfo" jdbcType="VARCHAR" />
+    <result column="CIVILFINE" property="civilfine" jdbcType="VARCHAR" />
+    <result column="EXPROPRIATIONINFO" property="expropriationinfo" jdbcType="VARCHAR" />
+    <result column="SUMCIVILFINE" property="sumcivilfine" jdbcType="VARCHAR" />
+    <result column="CRIMCLASSES" property="crimclasses" jdbcType="VARCHAR" />
+    <result column="ISLIMIT" property="islimit" jdbcType="DECIMAL" />
+    <result column="ISPAROLE" property="isparole" jdbcType="DECIMAL" />
+    <result column="ORGID" property="orgid" jdbcType="VARCHAR" />
+    <result column="ORGNAME" property="orgname" jdbcType="VARCHAR" />
+    <result column="AWARDEND" property="awardend" jdbcType="VARCHAR" />
+    <result column="REPORTTIME" property="reporttime" jdbcType="VARCHAR" />
+    <result column="EXECTIME" property="exectime" jdbcType="VARCHAR" />
+    <result column="REMARK" property="remark" jdbcType="VARCHAR" />
+    <result column="ISTHROUGH" property="isthrough" jdbcType="DECIMAL" />
+    <result column="COURTNAME_CODE" property="courtname_code" jdbcType="VARCHAR" />
+    
+    <result column="UUID" property="uuid" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria" item="criterion" >
+              <choose >
+                <when test="noValue" >
+                  and ${condition}
+                </when>
+                <when test="singleValue" >
+                  and ${condition} #{value}
+                </when>
+                <when test="betweenValue" >
+                  and ${condition} #{value} and #{secondValue}
+                </when>
+                <when test="listValue" >
+                  and ${condition}
+                  <foreach collection="value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    CRIMID, COURTSANCTION, CATEGORY, COURTNAME, COURTTITLE, COURTYEAR, COURTSHORT, COURTSN, 
+    COURTCHANGE, SENTENCE, COURTCHANGEFROM, COURTCHANGETO, COURTAREA, LOSEPOWER, FINE, 
+    SUMFINE, OFINE, ISDEPORTATION, ATTACHINFO, CIVILFINE, EXPROPRIATIONINFO, SUMCIVILFINE, 
+    CRIMCLASSES, ISLIMIT, ISPAROLE, ORGID, ORGNAME, AWARDEND, REPORTTIME, EXECTIME, REMARK
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="com.sinog2c.model.commutationParole.TbdataSentchageKey" >
+    select 
+    <include refid="Base_Column_List" />
+    from TBDATA_SENTCHAGE
+    where CRIMID = #{crimid,jdbcType=VARCHAR}
+      and COURTSANCTION = #{courtsanction,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="com.sinog2c.model.commutationParole.TbdataSentchageKey" >
+    delete from TBDATA_SENTCHAGE
+    where CRIMID = #{crimid,jdbcType=VARCHAR}
+      and COURTSANCTION = #{courtsanction,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.sinog2c.model.commutationParole.TbdataSentchage" >
+    insert into TBDATA_SENTCHAGE (CRIMID, COURTSANCTION, CATEGORY, 
+      COURTNAME, COURTTITLE, COURTYEAR, 
+      COURTSHORT, COURTSN, COURTCHANGE, 
+      SENTENCE, COURTCHANGEFROM, COURTCHANGETO, 
+      COURTAREA, LOSEPOWER, FINE, 
+      SUMFINE, OFINE, ISDEPORTATION, 
+      ATTACHINFO, CIVILFINE, EXPROPRIATIONINFO, 
+      SUMCIVILFINE, CRIMCLASSES, ISLIMIT, 
+      ISPAROLE, ORGID, ORGNAME, 
+      AWARDEND, REPORTTIME, EXECTIME, 
+      REMARK,CHARGE)
+    values (#{crimid,jdbcType=VARCHAR}, #{courtsanction,jdbcType=VARCHAR}, #{category,jdbcType=VARCHAR}, 
+      #{courtname,jdbcType=VARCHAR}, #{courttitle,jdbcType=VARCHAR}, #{courtyear,jdbcType=VARCHAR}, 
+      #{courtshort,jdbcType=VARCHAR}, #{courtsn,jdbcType=VARCHAR}, #{courtchange,jdbcType=VARCHAR}, 
+      #{sentence,jdbcType=VARCHAR}, #{courtchangefrom,jdbcType=VARCHAR}, #{courtchangeto,jdbcType=VARCHAR}, 
+      #{courtarea,jdbcType=VARCHAR}, #{losepower,jdbcType=VARCHAR}, #{fine,jdbcType=VARCHAR}, 
+      #{sumfine,jdbcType=VARCHAR}, #{ofine,jdbcType=VARCHAR}, #{isdeportation,jdbcType=DECIMAL}, 
+      #{attachinfo,jdbcType=VARCHAR}, #{civilfine,jdbcType=VARCHAR}, #{expropriationinfo,jdbcType=VARCHAR}, 
+      #{sumcivilfine,jdbcType=VARCHAR}, #{crimclasses,jdbcType=VARCHAR}, #{islimit,jdbcType=DECIMAL}, 
+      #{isparole,jdbcType=DECIMAL}, #{orgid,jdbcType=VARCHAR}, #{orgname,jdbcType=VARCHAR}, 
+      #{awardend,jdbcType=VARCHAR}, #{reporttime,jdbcType=VARCHAR}, #{exectime,jdbcType=VARCHAR}, 
+      #{remark,jdbcType=VARCHAR}, #{charge,jdbcType=VARCHAR})
+  </insert>
+  
+  <insert id="insertSelective" parameterType="com.sinog2c.model.commutationParole.TbdataSentchage" >
+    insert into TBDATA_SENTCHAGE
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+        CRIMID,
+        COURTSANCTION,
+        CATEGORY,
+        COURTNAME,
+        COURTTITLE,
+        COURTYEAR,
+        COURTSHORT,
+        COURTSN,
+        COURTCHANGE,
+        SENTENCE,
+        COURTCHANGEFROM,
+        COURTCHANGETO,
+        COURTAREA,
+        LOSEPOWER,
+        FINE,
+        SUMFINE,
+        OFINE,
+        ISDEPORTATION,
+        ATTACHINFO,
+        CIVILFINE,
+        EXPROPRIATIONINFO,
+        SUMCIVILFINE,
+        CRIMCLASSES,
+        ISLIMIT,
+        ISPAROLE,
+        ORGID,
+        ORGNAME,
+        REPORTTIME,
+        EXECTIME,
+        REMARK,
+        CHARGE,
+        courtname_code,
+        AWARDBEGIN,
+        AWARDEND,
+      FAJIN,
+      MINPEI,
+      MOSHOUCAICHAN,
+      XIANZHIJIANXING,
+      ZHONGSHENJIANJIN,
+      ISTHROUGH,
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+        #{crimid,jdbcType=VARCHAR},
+        #{courtsanction,jdbcType=VARCHAR},
+        #{category,jdbcType=VARCHAR},
+        #{courtname,jdbcType=VARCHAR},
+        #{courttitle,jdbcType=VARCHAR},
+        #{courtyear,jdbcType=VARCHAR},
+        #{courtshort,jdbcType=VARCHAR},
+        #{courtsn,jdbcType=VARCHAR},
+        #{courtchange,jdbcType=VARCHAR},
+        #{sentence,jdbcType=VARCHAR},
+        #{courtchangefrom,jdbcType=VARCHAR},
+        #{courtchangeto,jdbcType=VARCHAR},
+        #{courtarea,jdbcType=VARCHAR},
+        #{losepower,jdbcType=VARCHAR},
+        #{fine,jdbcType=VARCHAR},
+        #{sumfine,jdbcType=VARCHAR},
+        #{ofine,jdbcType=VARCHAR},
+        #{isdeportation,jdbcType=DECIMAL},
+        #{attachinfo,jdbcType=VARCHAR},
+        #{civilfine,jdbcType=VARCHAR},
+        #{expropriationinfo,jdbcType=VARCHAR},
+        #{sumcivilfine,jdbcType=VARCHAR},
+        #{crimclasses,jdbcType=VARCHAR},
+        #{islimit,jdbcType=DECIMAL},
+        #{isparole,jdbcType=DECIMAL},
+        #{orgid,jdbcType=VARCHAR},
+        #{orgname,jdbcType=VARCHAR},
+        #{reporttime,jdbcType=VARCHAR},
+        #{exectime,jdbcType=VARCHAR},
+        #{remark,jdbcType=VARCHAR},
+       #{charge,jdbcType=VARCHAR},
+        #{courtname_code,jdbcType=VARCHAR},
+        #{awardbegin,jdbcType=VARCHAR},
+        #{awardend,jdbcType=VARCHAR},
+       #{fajin,jdbcType=VARCHAR},
+       #{minpei,jdbcType=VARCHAR},
+       #{moshoucaichan,jdbcType=VARCHAR},
+       #{xianzhijianxing,jdbcType=VARCHAR},
+       #{zhongshenjianjin,jdbcType=VARCHAR},
+       #{isthrough,jdbcType=VARCHAR},
+    </trim>
+  </insert>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update TBDATA_SENTCHAGE
+    <set >
+      <if test="category != null" >
+        CATEGORY = #{category,jdbcType=VARCHAR},
+      </if>
+      <if test="courtname != null" >
+        COURTNAME = #{courtname,jdbcType=VARCHAR},
+      </if>
+      <if test="courttitle != null" >
+        COURTTITLE = #{courttitle,jdbcType=VARCHAR},
+      </if>
+      <if test="courtyear != null" >
+        COURTYEAR = #{courtyear,jdbcType=VARCHAR},
+      </if>
+      <if test="courtshort != null" >
+        COURTSHORT = #{courtshort,jdbcType=VARCHAR},
+      </if>
+      <if test="courtsn != null" >
+        COURTSN = #{courtsn,jdbcType=VARCHAR},
+      </if>
+      <if test="courtchange != null" >
+        COURTCHANGE = #{courtchange,jdbcType=VARCHAR},
+      </if>
+      <if test="sentence != null" >
+        SENTENCE = #{sentence,jdbcType=VARCHAR},
+      </if>
+      <if test="courtchangefrom != null" >
+        COURTCHANGEFROM = #{courtchangefrom,jdbcType=VARCHAR},
+      </if>
+      <if test="courtchangeto != null" >
+        COURTCHANGETO = #{courtchangeto,jdbcType=VARCHAR},
+      </if>
+      <if test="courtarea != null" >
+        COURTAREA = #{courtarea,jdbcType=VARCHAR},
+      </if>
+      <if test="losepower != null" >
+        LOSEPOWER = #{losepower,jdbcType=VARCHAR},
+      </if>
+      <if test="fine != null" >
+        FINE = #{fine,jdbcType=VARCHAR},
+      </if>
+      <if test="sumfine != null" >
+        SUMFINE = #{sumfine,jdbcType=VARCHAR},
+      </if>
+      <if test="ofine != null" >
+        OFINE = #{ofine,jdbcType=VARCHAR},
+      </if>
+      <if test="isdeportation != null" >
+        ISDEPORTATION = #{isdeportation,jdbcType=DECIMAL},
+      </if>
+      <if test="attachinfo != null" >
+        ATTACHINFO = #{attachinfo,jdbcType=VARCHAR},
+      </if>
+      <if test="civilfine != null" >
+        CIVILFINE = #{civilfine,jdbcType=VARCHAR},
+      </if>
+      <if test="expropriationinfo != null" >
+        EXPROPRIATIONINFO = #{expropriationinfo,jdbcType=VARCHAR},
+      </if>
+      <if test="sumcivilfine != null" >
+        SUMCIVILFINE = #{sumcivilfine,jdbcType=VARCHAR},
+      </if>
+      <if test="crimclasses != null" >
+        CRIMCLASSES = #{crimclasses,jdbcType=VARCHAR},
+      </if>
+      <if test="islimit != null" >
+        ISLIMIT = #{islimit,jdbcType=DECIMAL},
+      </if>
+      <if test="isparole != null" >
+        ISPAROLE = #{isparole,jdbcType=DECIMAL},
+      </if>
+      <if test="orgid != null" >
+        ORGID = #{orgid,jdbcType=VARCHAR},
+      </if>
+      <if test="orgname != null" >
+        ORGNAME = #{orgname,jdbcType=VARCHAR},
+      </if>
+      <if test="awardend != null" >
+        AWARDEND = #{awardend,jdbcType=VARCHAR},
+      </if>
+      <if test="awardbegin != null" >
+        AWARDBEGIN = #{awardbegin,jdbcType=VARCHAR},
+      </if>
+      <if test="reporttime != null" >
+        REPORTTIME = #{reporttime,jdbcType=VARCHAR},
+      </if>
+      <if test="exectime != null" >
+        EXECTIME = #{exectime,jdbcType=VARCHAR},
+      </if>
+      <if test="remark != null" >
+        REMARK = #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="courtname_code != null">
+        courtname_code = #{courtname_code,jdbcType=VARCHAR},
+      </if>
+      <if test="courtsanction != null">
+        COURTSANCTION = #{courtsanction,jdbcType=VARCHAR},
+      </if>
+      FAJIN = #{fajin,jdbcType=VARCHAR},
+      MINPEI = #{minpei,jdbcType=VARCHAR},
+      MOSHOUCAICHAN = #{moshoucaichan,jdbcType=VARCHAR},
+      XIANZHIJIANXING= #{xianzhijianxing,jdbcType=VARCHAR},
+      ZHONGSHENJIANJIN= #{zhongshenjianjin,jdbcType=VARCHAR},
+      <if test="charge != null">
+         CHARGE = #{charge,jdbcType=VARCHAR}
+      </if>
+     
+    </set>
+    where uuid=#{uuid}
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update TBDATA_SENTCHAGE
+    set CRIMID = #{crimid,jdbcType=VARCHAR},
+      COURTSANCTION = #{courtsanction,jdbcType=VARCHAR},
+      CATEGORY = #{category,jdbcType=VARCHAR},
+      COURTNAME = #{courtname,jdbcType=VARCHAR},
+      COURTTITLE = #{courttitle,jdbcType=VARCHAR},
+      COURTYEAR = #{courtyear,jdbcType=VARCHAR},
+      COURTSHORT = #{courtshort,jdbcType=VARCHAR},
+      COURTSN = #{courtsn,jdbcType=VARCHAR},
+      COURTCHANGE = #{courtchange,jdbcType=VARCHAR},
+      SENTENCE = #{sentence,jdbcType=VARCHAR},
+      COURTCHANGEFROM = #{courtchangefrom,jdbcType=VARCHAR},
+      COURTCHANGETO = #{courtchangeto,jdbcType=VARCHAR},
+      COURTAREA = #{courtarea,jdbcType=VARCHAR},
+      LOSEPOWER = #{losepower,jdbcType=VARCHAR},
+      FINE = #{fine,jdbcType=VARCHAR},
+      SUMFINE = #{sumfine,jdbcType=VARCHAR},
+      OFINE = #{ofine,jdbcType=VARCHAR},
+      ISDEPORTATION = #{isdeportation,jdbcType=DECIMAL},
+      ATTACHINFO = #{attachinfo,jdbcType=VARCHAR},
+      CIVILFINE = #{civilfine,jdbcType=VARCHAR},
+      EXPROPRIATIONINFO = #{expropriationinfo,jdbcType=VARCHAR},
+      SUMCIVILFINE = #{sumcivilfine,jdbcType=VARCHAR},
+      CRIMCLASSES = #{crimclasses,jdbcType=VARCHAR},
+      ISLIMIT = #{islimit,jdbcType=DECIMAL},
+      ISPAROLE = #{isparole,jdbcType=DECIMAL},
+      ORGID = #{orgid,jdbcType=VARCHAR},
+      ORGNAME = #{orgname,jdbcType=VARCHAR},
+      AWARDEND = #{awardend,jdbcType=VARCHAR},
+      REPORTTIME = #{reporttime,jdbcType=VARCHAR},
+      EXECTIME = #{exectime,jdbcType=VARCHAR},
+      REMARK = #{remark,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.sinog2c.model.commutationParole.TbdataSentchage" >
+    update TBDATA_SENTCHAGE
+    <set >
+      <if test="category != null" >
+        CATEGORY = #{category,jdbcType=VARCHAR},
+      </if>
+      <if test="courtname != null" >
+        COURTNAME = #{courtname,jdbcType=VARCHAR},
+      </if>
+      <if test="courttitle != null" >
+        COURTTITLE = #{courttitle,jdbcType=VARCHAR},
+      </if>
+      <if test="courtyear != null" >
+        COURTYEAR = #{courtyear,jdbcType=VARCHAR},
+      </if>
+      <if test="courtshort != null" >
+        COURTSHORT = #{courtshort,jdbcType=VARCHAR},
+      </if>
+      <if test="courtsn != null" >
+        COURTSN = #{courtsn,jdbcType=VARCHAR},
+      </if>
+      <if test="courtchange != null" >
+        COURTCHANGE = #{courtchange,jdbcType=VARCHAR},
+      </if>
+      <if test="sentence != null" >
+        SENTENCE = #{sentence,jdbcType=VARCHAR},
+      </if>
+      <if test="courtchangefrom != null" >
+        COURTCHANGEFROM = #{courtchangefrom,jdbcType=VARCHAR},
+      </if>
+      <if test="courtchangeto != null" >
+        COURTCHANGETO = #{courtchangeto,jdbcType=VARCHAR},
+      </if>
+      <if test="courtarea != null" >
+        COURTAREA = #{courtarea,jdbcType=VARCHAR},
+      </if>
+      <if test="losepower != null" >
+        LOSEPOWER = #{losepower,jdbcType=VARCHAR},
+      </if>
+      <if test="fine != null" >
+        FINE = #{fine,jdbcType=VARCHAR},
+      </if>
+      <if test="sumfine != null" >
+        SUMFINE = #{sumfine,jdbcType=VARCHAR},
+      </if>
+      <if test="ofine != null" >
+        OFINE = #{ofine,jdbcType=VARCHAR},
+      </if>
+      <if test="isdeportation != null" >
+        ISDEPORTATION = #{isdeportation,jdbcType=DECIMAL},
+      </if>
+      <if test="attachinfo != null" >
+        ATTACHINFO = #{attachinfo,jdbcType=VARCHAR},
+      </if>
+      <if test="civilfine != null" >
+        CIVILFINE = #{civilfine,jdbcType=VARCHAR},
+      </if>
+      <if test="expropriationinfo != null" >
+        EXPROPRIATIONINFO = #{expropriationinfo,jdbcType=VARCHAR},
+      </if>
+      <if test="sumcivilfine != null" >
+        SUMCIVILFINE = #{sumcivilfine,jdbcType=VARCHAR},
+      </if>
+      <if test="crimclasses != null" >
+        CRIMCLASSES = #{crimclasses,jdbcType=VARCHAR},
+      </if>
+      <if test="islimit != null" >
+        ISLIMIT = #{islimit,jdbcType=DECIMAL},
+      </if>
+      <if test="isparole != null" >
+        ISPAROLE = #{isparole,jdbcType=DECIMAL},
+      </if>
+      <if test="orgid != null" >
+        ORGID = #{orgid,jdbcType=VARCHAR},
+      </if>
+      <if test="orgname != null" >
+        ORGNAME = #{orgname,jdbcType=VARCHAR},
+      </if>
+      <if test="awardend != null" >
+        AWARDEND = #{awardend,jdbcType=VARCHAR},
+      </if>
+      <if test="reporttime != null" >
+        REPORTTIME = #{reporttime,jdbcType=VARCHAR},
+      </if>
+      <if test="exectime != null" >
+        EXECTIME = #{exectime,jdbcType=VARCHAR},
+      </if>
+      <if test="remark != null" >
+        REMARK = #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="charge != null" >
+        CHARGE = #{charge,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where CRIMID = #{crimid,jdbcType=VARCHAR}
+      and COURTSANCTION = #{courtsanction,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.sinog2c.model.commutationParole.TbdataSentchage" >
+    update TBDATA_SENTCHAGE
+    set CATEGORY = #{category,jdbcType=VARCHAR},
+      COURTNAME = #{courtname,jdbcType=VARCHAR},
+      COURTTITLE = #{courttitle,jdbcType=VARCHAR},
+      COURTYEAR = #{courtyear,jdbcType=VARCHAR},
+      COURTSHORT = #{courtshort,jdbcType=VARCHAR},
+      COURTSN = #{courtsn,jdbcType=VARCHAR},
+      COURTCHANGE = #{courtchange,jdbcType=VARCHAR},
+      SENTENCE = #{sentence,jdbcType=VARCHAR},
+      COURTCHANGEFROM = #{courtchangefrom,jdbcType=VARCHAR},
+      COURTCHANGETO = #{courtchangeto,jdbcType=VARCHAR},
+      COURTAREA = #{courtarea,jdbcType=VARCHAR},
+      LOSEPOWER = #{losepower,jdbcType=VARCHAR},
+      FINE = #{fine,jdbcType=VARCHAR},
+      SUMFINE = #{sumfine,jdbcType=VARCHAR},
+      OFINE = #{ofine,jdbcType=VARCHAR},
+      ISDEPORTATION = #{isdeportation,jdbcType=DECIMAL},
+      ATTACHINFO = #{attachinfo,jdbcType=VARCHAR},
+      CIVILFINE = #{civilfine,jdbcType=VARCHAR},
+      EXPROPRIATIONINFO = #{expropriationinfo,jdbcType=VARCHAR},
+      SUMCIVILFINE = #{sumcivilfine,jdbcType=VARCHAR},
+      CRIMCLASSES = #{crimclasses,jdbcType=VARCHAR},
+      ISLIMIT = #{islimit,jdbcType=DECIMAL},
+      ISPAROLE = #{isparole,jdbcType=DECIMAL},
+      ORGID = #{orgid,jdbcType=VARCHAR},
+      ORGNAME = #{orgname,jdbcType=VARCHAR},
+      AWARDEND = #{awardend,jdbcType=VARCHAR},
+      REPORTTIME = #{reporttime,jdbcType=VARCHAR},
+      EXECTIME = #{exectime,jdbcType=VARCHAR},
+      REMARK = #{remark,jdbcType=VARCHAR}
+    where CRIMID = #{crimid,jdbcType=VARCHAR}
+      and COURTSANCTION = #{courtsanction,jdbcType=VARCHAR}
+  </update>
+	<!-- 考核之日补录列表 -->
+  <select id="selectDataList" resultType="Map" parameterType="Map" >
+  		select * from
+    	( select a.*, rownum rn
+    		from(
+    		select t1.crimid, 
+	       decode(t1.AWARDEND,
+	              null,
+	              F_ISDATE(zfxx.rjrq,'YYYYMMDD'),F_ISDATE(t1.AWARDEND,'YYYYMMDD')) as AWARDEND,
+	       F_ISDATE(t1.EXECTIME,'YYYYMMDD') as EXECTIME,
+	       F_ISDATE(t1.REPORTTIME,'YYYYMMDD') as REPORTTIME,
+	       t1.courtname || t1.courttitle as COURTNAME,
+	       t1.courtsanction,
+	       F_ISDATE(t1.COURTCHANGEFROM,'YYYYMMDD') as COURTCHANGEFROM,
+	       F_ISDATE(t1.courtchangeto,'YYYYMMDD') as COURTCHANGETO,
+		   tbc.orgname1 as ATTACHINFO,
+    		zfxx.xm name,substr(TYPENAME,0,length(TYPENAME)-1) typemappingname,typemapping from tbdata_sentchage t1 , ZTIANJIN_VI_INTERFACE_ZFXX zfxx,
+      		 tbprisoner_base_crime tbc ,tbprisoner_baseinfo bbb,
+			 (select a.crimid as crimid,max(a.COURTSANCTION) as COURTSANCTION from tbdata_sentchage a,tbprisoner_base_crime tb
+			  where a.crimid = tb.crimid and tb.orgid1 in (select d.dorgid from tbflow_org_org d where d.orgid=#{departId})
+			  group by a.crimid) t2,
+			  (SELECT t.crimid zfbh,
+			       max(decode(t.typeid, '10018',typeid, '')) ||'||'||
+			       max(decode(t.typeid, '10029',typeid, '')) typemapping,
+			       max(decode(t.typeid, '10018','未履行财产刑；', ''))||
+			       max(decode(t.typeid, '10029','困难证明；', '')) TYPENAME
+			  FROM TBXF_CRIMETYPESMAPPING t
+			 WHERE t.typeid in ('10018', '10029')
+			 group by t.crimid)  tm
+			 where t1.crimid=t2.crimid and t1.COURTSANCTION=t2.COURTSANCTION and t1.crimid=bbb.crimid
+			 and tbc.crimid=t2.crimid
+			 and t1.crimid=zfxx.bh
+			 and t1.crimid = tm.zfbh(+)
+    <if test="key!=null and key!=''">  
+        and (t1.crimid like concat(concat('%', #{key}), '%') or zfxx.xm like concat(concat('%', #{key}), '%') or bbb.namepinyinshort like concat(UPPER(#{key}),'%'))
+    </if>
+    <if test="sortField!=null and sortField!=''" > 
+     	order by ${sortField} ${sortOrder}
+    </if>
+    ) a 
+    <if test="start!=null and start!=''">
+   		where rownum &lt;= #{end}
+   	</if> 
+    )
+   	<if test="start!=null and start!=''">
+   		where  rn &gt;= #{start}
+   	</if>
+  </select>
+  
+  <select id="selectDataListCount" resultType="int" parameterType="Map" >
+  select count(*) from tbdata_sentchage t1,ZTIANJIN_VI_INTERFACE_ZFXX zfxx,tbprisoner_base_crime tbc,tbprisoner_baseinfo bbb,
+		(select a.crimid as crimid,max(a.COURTSANCTION) as COURTSANCTION from tbdata_sentchage a,tbprisoner_base_crime tb
+		 where a.crimid = tb.crimid and tb.orgid1 in (select d.dorgid from tbflow_org_org d where d.orgid=#{departId})
+		 group by a.crimid) t2,(select t.crimid zfbh from TBXF_CRIMETYPESMAPPING t where t.typeid='10018') tm
+			where t1.crimid=t2.crimid and t1.crimid=bbb.crimid and t1.COURTSANCTION=t2.COURTSANCTION and tbc.crimid=t2.crimid and t1.crimid = zfxx.bh and t1.crimid = tm.zfbh(+)
+    <if test="key!=null and key!=''">  
+        and (t1.crimid like concat(concat('%', #{key}), '%') or zfxx.xm like concat(concat('%', #{key}), '%') or bbb.namepinyinshort like concat(UPPER(#{key}),'%'))
+    </if>
+  </select>
+  
+  <!-- 考核之日补录列表 -->
+  <select id="getSentenceChangeData" resultType="Map" parameterType="Map" >
+ 		select * from
+		    ( select a.*, rownum rn
+		    		from(
+						select t2.crimid, 
+							   F_ISDATE(t2.AWARDEND,'YYYYMMDD') as AWARDEND,    
+							   F_ISDATE(t2.EXECTIME,'YYYYMMDD') as EXECTIME,
+							   F_ISDATE(t2.REPORTTIME,'YYYYMMDD') as REPORTTIME,
+							   t2.courtsanction,
+							   t2.courtname || t2.courttitle as COURTNAME,
+							   F_ISDATE(t2.COURTCHANGEFROM,'YYYYMMDD') as COURTCHANGEFROM,
+							   F_ISDATE(t2.courtchangeto,'YYYYMMDD') as COURTCHANGETO,
+							   tbc.name
+						from 
+							(
+								select a.crimid,
+									max(a.COURTSANCTION) as COURTSANCTION 
+								from tbdata_sentchage a,
+									tbprisoner_base_crime tb
+								where a.crimid = tb.crimid 
+								and tb.orgid2 in (select d.dorgid from tbflow_org_org d where d.orgid=#{orgid})
+									  group by a.crimid
+							) t1,
+							tbdata_sentchage t2, 
+							TBPRISONER_BASEINFO tbc
+						where t1.crimid=t2.crimid 
+						and t1.COURTSANCTION=t2.COURTSANCTION 
+						and t1.crimid=tbc.crimid
+						<if test="key!=null and key!=''">  
+							and ( tbc.crimid like concat(concat('%', #{key}), '%')   or  tbc.name like concat(concat('%', #{key}), '%') or tbc.namepinyinshort like concat(#{key},'%'))
+						</if>
+						<if test="sortField!=null and sortField!=''" > 
+							order by ${sortField} ${sortOrder}
+						</if>
+			    ) a 
+			    <if test="start!=null and start!=''">
+			   		where rownum &lt;= #{end}
+			   	</if> 
+		    )
+		   	<if test="start!=null and start!=''">
+		   		where  rn &gt;= #{start}
+		   	</if>
+  </select>
+  
+  <select id="countSentenceChangeData" resultType="int" parameterType="Map" >
+	  select count(t2.crimid)   
+		from 
+			(
+				select a.crimid,
+					max(a.COURTSANCTION) as COURTSANCTION 
+				from tbdata_sentchage a,
+					tbprisoner_base_crime tb
+				where a.crimid = tb.crimid 
+				and tb.orgid2 in (select d.dorgid from tbflow_org_org d where d.orgid=#{orgid})
+					  group by a.crimid
+			) t1,
+			tbdata_sentchage t2, 
+			TBPRISONER_BASEINFO tbc
+		where t1.crimid=t2.crimid 
+		and t1.COURTSANCTION=t2.COURTSANCTION 
+		and t1.crimid=tbc.crimid
+		<if test="key!=null and key!=''">  
+			and ( tbc.crimid like concat(concat('%', #{key}), '%')   or  tbc.name like concat(concat('%', #{key}), '%')  or tbc.namepinyinshort like concat(#{key},'%'))
+		</if>
+  </select>
+  
+  <update id="updateKHZR" parameterType="map" >
+    update TBDATA_SENTCHAGE
+    <set>
+     	<if test="AWARDEND != null and AWARDEND !='' " >
+        	AWARDEND = #{AWARDEND},
+        </if>
+        <if test="REPORTTIME != null and REPORTTIME !='' " >
+        	REPORTTIME = #{REPORTTIME},
+        </if>
+         <!-- <if test="ISTHROUGH !=null and ISTHROUGH !=''">  -->
+        	ISTHROUGH = #{ISTHROUGH},
+         <!-- </if> -->
+    </set> where crimid = #{CRIMID} and COURTSANCTION=#{COURTSANCTION}
+  </update>
+  
+  <update id="updateDataSentenceAwardend" parameterType="map" >
+    update TBDATA_SENTCHAGE
+    <set>
+     	<if test="awardend != null and awardend != '' " >
+        	AWARDEND = #{awardend},
+        </if>
+    </set> where crimid = #{crimid} and COURTSANCTION=#{courtsanction}
+  </update>
+  
+  <insert id="setCrimeTypesMapping" parameterType="map" >
+    insert into TBXF_CRIMETYPESMAPPING(crimid,typeid)values(#{CRIMID},#{typeid})
+  </insert>
+  <delete id="deleteCrimeTypesMapping" parameterType="map" >
+    delete from TBXF_CRIMETYPESMAPPING where crimid =#{CRIMID} and typeid=#{typeid}
+  </delete>
+    <select id="callREWARDSTARTProcedure">
+  		<![CDATA[   
+		   {call TIANJIN_REWARDSTART}   
+		]]> 
+  </select>
+  <select id="selectDataByPk" resultType="com.sinog2c.model.commutationParole.TbdataSentchage" parameterType="Map" >
+  	 select 
+  	       courtyear,
+            courtsn,
+            courtshort,
+            decode(courtsanction,null,'','','',courtsanction) courtsanction,
+            decode(exectime,null,'','','',to_char(to_date(exectime ,'yyyyMMdd'),'yyyyMMdd')) exectime ,
+            courtname as courtname,
+            courttitle as courttitle,
+            case when category=1 then
+                 '原判'
+                 when category=7 then
+                 '减刑'
+                 when category=4 then
+                 '加刑'
+            end as category,
+            case when courtchange ='9995'
+            	 then '无期徒刑'
+            	 when courtchange ='9996'
+            	 then '死缓'
+            	 when courtchange is null 
+            	 then ''
+            	else
+             decode(substr(courtchange, 0, 2),
+                      00,
+                      '',
+                      decode(substr(courtchange,0,1),'0',substr(courtchange,2, 1) || '年',substr(courtchange,0, 2) || '年')) ||
+               decode(substr(courtchange, 3, 2),
+                      00,
+                      '',
+                      decode(substr(courtchange, 3, 1),'0',substr(courtchange, 4, 1) || '个月',substr(courtchange, 3, 2) || '个月')) ||
+               decode(substr(courtchange, 5, 2),
+                      00,
+                      '',
+                      decode(substr(courtchange, 5, 1),'0',substr(courtchange, 6, 1),substr(courtchange, 5, 2) || '天')) end as courtchange,
+            case when sentence='9995'
+            	 then '无期徒刑'
+            	 when sentence='9996'
+            	 then '死缓'
+            	 when sentence is null
+            	 then ''
+            	 else
+              decode(substr(sentence, 0, 2),
+                      00,
+                      '',
+                      decode(substr(sentence,0,1),'0',substr(sentence,2, 1) || '年',substr(sentence,0, 2) || '年')) ||
+               decode(substr(sentence, 3, 2),
+                      00,
+                      '',
+                      decode(substr(sentence, 3, 1),'0',substr(sentence, 4, 1) || '个月',substr(sentence, 3, 2) || '个月')) ||
+               decode(substr(sentence, 5, 2),
+                      00,
+                      '',
+                      decode(substr(sentence, 5, 1),'0',substr(sentence, 6, 1),substr(sentence, 5, 2) || '天')) end as sentence,
+            case when losepower='97'
+            	 then '终身'
+            	 when losepower is null
+            	 then ''
+				 else	
+             decode(substr(losepower, 0, 2),
+                      00,
+                      '',
+                      decode(substr(losepower,0,1),'0',substr(losepower,2, 1) || '年',substr(losepower,0, 2) || '年')) ||
+               decode(substr(losepower, 3, 2),
+                      00,
+                      '',
+                      decode(substr(losepower, 3, 1),'0',substr(losepower, 4, 1) || '个月',substr(losepower, 3, 2) || '个月')) ||
+               decode(substr(losepower, 5, 2),
+                      00,
+                      '',
+                      decode(substr(losepower, 5, 1),'0',substr(losepower, 6, 1),substr(losepower, 5, 2) || '天')) end as losepower,
+            decode(courtchangefrom,null,'','','',to_char(to_date(courtchangefrom,'yyyyMMdd'),'yyyyMMdd')) courtchangefrom,
+            decode(courtchangeto,null,'','','',to_char(to_date(courtchangeto,'yyyyMMdd'),'yyyyMMdd')) courtchangeto,
+            category category1,
+            decode(substr(courtchange,0,2),00,'',substr(courtchange,0,2)||'年')||decode(substr(courtchange,3,2),00,'',substr(courtchange,3,2)||'个月')||decode(substr(courtchange,5,2),00,'',substr(courtchange,5,2)||'天') as courtchange1,
+            decode(substr(sentence,0,2),00,'',substr(sentence,0,2)||'年')||decode(substr(sentence,3,2),00,'',substr(sentence,3,2)||'个月')||decode(substr(sentence,5,2),00,'',substr(sentence,5,2)||'天') as sentence1,
+            decode(substr(losepower,0,2),00,'',substr(losepower,0,2)||'年')||decode(substr(losepower,3,2),00,'',substr(losepower,3,2)||'个月')||decode(substr(losepower,5,2),00,'',substr(losepower,5,2)||'天') as losepower1
+        from TBDATA_SENTCHAGE t where CRIMID=#{crimid}
+  	 <if test="courtsanction!=null and courtsanction!=''">  
+        and courtsanction=#{courtsanction}
+     </if>
+  	 <if test="category!=null and category!=''">  
+        and category=#{category}
+     </if>
+  </select>
+  <select id="selectDataByUuid" resultType="com.sinog2c.model.commutationParole.TbdataSentchage" parameterType="Map" >
+  	 select 
+  	        courtyear,
+            courtsn,
+            courtshort,
+            charge,
+            AWARDBEGIN,
+            AWARDEND,
+            decode(courtsanction,null,'','','',courtsanction) courtsanction,
+            decode(exectime,null,'','','',to_char(to_date(exectime ,'yyyyMMdd'),'yyyyMMdd')) exectime ,
+            courtname as courtname,
+            courttitle as courttitle,
+            
+            case when category=1 then
+                 '原判'
+                 when category=7 then
+                 '减刑'
+                 when category=6 then
+                 '漏罪加刑'
+                 when category=20 then
+                 '刑期顺延'
+                 when category=4 then
+                 '加刑'
+            end as category,
+            
+            case when courtchange ='9995'
+            	 then '无期徒刑'
+            	 when courtchange ='9996'
+            	 then '死刑，缓期二年执行'
+            	 when courtchange = '9997'
+            	 then '死刑'
+            	 when courtchange is null 
+            	 then ''
+            	else
+             decode(substr(courtchange, 0, 2),
+                      00,
+                      '',
+                      decode(substr(courtchange,0,1),'0',substr(courtchange,2, 1) || '年',substr(courtchange,0, 2) || '年')) ||
+               decode(substr(courtchange, 3, 2),
+                      00,
+                      '',
+                      decode(substr(courtchange, 3, 1),'0',substr(courtchange, 4, 1) || '个月',substr(courtchange, 3, 2) || '个月')) ||
+               decode(substr(courtchange, 5, 2),
+                      00,
+                      '',
+                      decode(substr(courtchange, 5, 1),'0',substr(courtchange, 6, 1),substr(courtchange, 5, 2) || '天')) end as courtchange,
+                      
+            case when sentence='9995'
+            	 then '无期徒刑'
+            	 when sentence='9996'
+            	 then '死刑，缓期二年执行'
+            	 when sentence='9997'
+            	 then '死刑'
+            	 when sentence is null
+            	 then ''
+            	 else
+              decode(substr(sentence, 0, 2),
+                      00,
+                      '',
+                      decode(substr(sentence,0,1),'0',substr(sentence,2, 1) || '年',substr(sentence,0, 2) || '年')) ||
+               decode(substr(sentence, 3, 2),
+                      00,
+                      '',
+                      decode(substr(sentence, 3, 1),'0',substr(sentence, 4, 1) || '个月',substr(sentence, 3, 2) || '个月')) ||
+               decode(substr(sentence, 5, 2),
+                      00,
+                      '',
+                      decode(substr(sentence, 5, 1),'0',substr(sentence, 6, 1),substr(sentence, 5, 2) || '天')) end as sentence,
+                      
+            case when losepower='97'
+            	 then '终身'
+            	 when losepower is null
+            	 then ''
+				 else	
+             decode(substr(losepower, 0, 2),
+                      00,
+                      '',
+                      decode(substr(losepower,0,1),'0',substr(losepower,2, 1) || '年',substr(losepower,0, 2) || '年')) ||
+               decode(substr(losepower, 3, 2),
+                      00,
+                      '',
+                      decode(substr(losepower, 3, 1),'0',substr(losepower, 4, 1) || '个月',substr(losepower, 3, 2) || '个月')) ||
+               decode(substr(losepower, 5, 2),
+                      00,
+                      '',
+                      decode(substr(losepower, 5, 1),'0',substr(losepower, 6, 1),substr(losepower, 5, 2) || '天')) end as losepower,
+                      
+            decode(courtchangefrom,null,'','','',to_char(to_date(courtchangefrom,'yyyyMMdd'),'yyyyMMdd')) courtchangefrom,
+            decode(courtchangeto,null,'','','',to_char(to_date(courtchangeto,'yyyyMMdd'),'yyyyMMdd')) courtchangeto,
+            category category1,
+            
+            decode(substr(courtchange,0,2),00,'',substr(courtchange,0,2)||'年')
+            	||decode(substr(courtchange,3,2),00,'',substr(courtchange,3,2)||'个月')
+            	||decode(substr(courtchange,5,2),00,'',substr(courtchange,5,2)||'天') as courtchange1,
+            	
+            decode(substr(sentence,0,2),00,'',substr(sentence,0,2)||'年')
+            	||decode(substr(sentence,3,2),00,'',substr(sentence,3,2)||'个月')
+            	||decode(substr(sentence,5,2),00,'',substr(sentence,5,2)||'天') as sentence1,
+            	
+            decode(substr(losepower,0,2),00,'',substr(losepower,0,2)||'年')
+            	||decode(substr(losepower,3,2),00,'',substr(losepower,3,2)||'个月')
+            	||decode(substr(losepower,5,2),00,'',substr(losepower,5,2)||'天') as losepower1,
+            	
+            courtname_code,
+            fajin,
+            minpei,
+            moshoucaichan,
+            xianzhijianxing,
+            zhongshenjianjin,
+            courtarea
+        from TBDATA_SENTCHAGE t
+        where uuid=#{uuid}
+  </select>
+  
+  
+   <select id="selectDataBycrimid" resultType="Map" parameterType="Map" >
+  	 select F_TRY_FORMATDATE(t.COURTSANCTION) as COURTSANCTION from TBDATA_SENTCHAGE t where CRIMID=#{crimid}
+  </select>
+   <select id="selectAllBycrimidAndCategory" resultType="Map" parameterType="Map" >
+  	 select distinct courttitle,courtname,
+  	 		t.courtname||t.courttitle as panjuefayuan,
+        	'('||t.courtyear||')'||t.courtshort||t.courtsn as anjianhao,
+       		t.courtsanction,
+        	t.crimid from TBDATA_SENTCHAGE t
+            where CRIMID=#{crimid} and category in ('1','255') order by courtsanction
+  </select>
+  <select id="selectAllBycrimidAndCategoryAndCourtsanction" resultType="Map" parameterType="Map" >
+  	 select distinct courttitle,courtname,
+  	 		t.courtname||decode(t.courttitle,null,'',t.courttitle) as panjuefayuan,
+        	'('||t.courtyear||')'||t.courtshort||t.courtsn as anjianhao,
+       		t.courtsanction,
+        	t.crimid from TBDATA_SENTCHAGE t
+            where CRIMID=#{crimid} and category in ('1','255') and courtsanction=#{courtsanction}
+  </select>
+  <select id="getLastCommutationData" resultType="Map" parameterType="Map" >
+  		select * from
+    	( select a.*, rownum rn
+    		from(
+	    		select t.crimid,b.name,to_date(t.reporttime,'yyyy-MM-dd') reporttime,to_date(t.courtsanction,'yyyyMMdd') courtsanctiondate,t.courtsanction,
+					case when t.courtchange='9995' then '无期徒刑' when t.courtchange is not null and length(t.courtchange)=6 
+					then f_formatymd(to_number(substr(t.courtchange,'0','2')),to_number(substr(t.courtchange,'3','2')),substr(t.courtchange,'5','2'),0) end courtchange,
+					to_date(t.courtchangefrom,'yyyy-MM-dd') courtchangefrom,to_date(t.courtchangeto,'yyyy-MM-dd') courtchangeto
+					from TBDATA_SENTCHAGE t,
+					(select t.crimid,max(t.courtsanction) as courtsanction from TBDATA_SENTCHAGE t where t.category='7' group by t.crimid) a,
+					tbprisoner_baseinfo b
+					where t.crimid=a.crimid and t.courtsanction=a.courtsanction and t.crimid=b.crimid
+					and exists (select 'X' from tbprisoner_base_crime c where c.crimid=t.crimid and (c.orgid1 in (select d.dorgid from tbflow_org_org d where d.orgid=#{orgid}) or 
+					c.orgid2 in (select d.dorgid from tbflow_org_org d where d.orgid=#{orgid})
+					)) 
+    <if test="key!=null and key!=''">  
+        and (t.crimid like concat(concat('%', #{key}), '%') or b.name like concat(concat('%', #{key}), '%')  or b.namepinyinshort like concat(#{key},'%'))
+    </if>
+    <if test="sortField!=null and sortField!=''" > 
+     	order by ${sortField} ${sortOrder}
+    </if>
+    ) a 
+    <if test="start!=null and start!=''">
+   		where rownum &lt;= #{end}
+   	</if> 
+    )
+   	<if test="start!=null and start!=''">
+   		where  rn &gt;= #{start}
+   	</if>
+  </select>
+  <select id="getLastCommutationDataCount" resultType="int" parameterType="Map" >
+		select count(t.crimid)
+			from TBDATA_SENTCHAGE t,
+			(select t.crimid,max(t.courtsanction) as courtsanction from TBDATA_SENTCHAGE t where t.category='7' group by t.crimid) a,
+			tbprisoner_baseinfo b
+			where t.crimid=a.crimid and t.courtsanction=a.courtsanction and t.crimid=b.crimid
+			and exists (select 'X' from tbprisoner_base_crime c where c.crimid=t.crimid and (c.orgid1 in (select d.dorgid from tbflow_org_org d where d.orgid=#{orgid}) or 
+			c.orgid2 in (select d.dorgid from tbflow_org_org d where d.orgid=#{orgid})))
+	    <if test="key!=null and key!=''">  
+	        and (t.crimid like concat(concat('%', #{key}), '%') or b.name like concat(concat('%', #{key}), '%') or t.namepinyinshort like concat(#{key},'%'))
+	    </if>
+  </select>
+  <select id="getOrgSentenceInfoCount" resultType="int" parameterType="Map" >
+	select count(t.crimid)
+	from TBDATA_SENTCHAGE t where t.category='1' and t.crimid=#{crimid}
+  </select>
+  <select id="getSentenceCountByCrimid" resultType="int" parameterType="String" >
+	select count(t.crimid) from TBDATA_SENTCHAGE t where t.crimid=#{crimid}
+  </select>
+  <!-- 查询罪犯第一次刑期变动信息 -->
+  <select id="getCheckendByCrimid" resultMap="BaseResultMap" parameterType="String" >
+	select * from TBDATA_SENTCHAGE t where t.crimid=#{crimid} and COURTSANCTION = (select min(COURTSANCTION) from TBDATA_SENTCHAGE s where s.crimid = t.crimid)
+  </select>
+  <select id="getOrgSentenceInfoList" resultType="Map" parameterType="Map" >
+	select t.crimid,t.courtname||t.courttitle courtname,f_formatdate(to_date(t.courtsanction,'yyyyMMdd')) courtsanction, t.courtsanction as courtsanctiondate,
+		case when t.sentence='9996' then '死刑，缓期两年执行' when t.sentence='9995' then '无期徒刑' else '有期徒刑' end sentence,
+		'('||t.courtyear||')'||t.courtshort||'第'||t.courtsn||'号' courtsn
+	from TBDATA_SENTCHAGE t 
+		where t.category='1' and t.crimid=#{crimid}
+  </select> 
+
+  <select id="viewScreeningExcuse" resultType="Map" parameterType="Map" >
+	select t.excuse
+	from TBXF_SCREENING t 
+		where t.crimid=#{crimid}
+  </select>  
+   
+  <select id="getCourtInfoByCrimid" resultType="String" parameterType="String" >
+	select decode(COURTSANCTION,
+              null,
+              '',
+              substr(t1.COURTCHANGEFROM, 0, 4) || '年' ||
+                            substr(t1.COURTCHANGEFROM, 5, 2) || '月' ||
+                            substr(t1.COURTCHANGEFROM, 7, 2) || '日') || '，经' || COURTNAME || '判处该犯' ||
+              decode(t1.SENTENCE,
+                     null,
+                     '',
+                     '9995',
+                     '无期',
+                     '9996',
+                     '死刑，缓期二年执行',
+                     '有期徒刑' ||
+                     decode(length(t1.SENTENCE),
+                            6,
+                            decode(substr(t1.SENTENCE, 0, 2),
+                                   '00',
+                                   '',
+                                   F_EXCHANGENUM(substr(t1.SENTENCE, 0, 2)) || '年') ||
+                            decode(substr(t1.SENTENCE, 3, 2),
+                                   '00',
+                                   '',
+                                   F_EXCHANGENUM(substr(t1.SENTENCE, 3, 2)) || '个月') ||
+                            decode(substr(t1.SENTENCE, 5, 2),
+                                   '00',
+                                   '',
+                                   F_EXCHANGENUM(substr(t1.SENTENCE, 5, 2)) || '天'),
+                            t1.SENTENCE)) ||
+              decode(t1.SENTENCE,
+                     null,
+                     '',
+                     '9995',
+                     '',
+                     '9996',
+                     '',
+                     decode(t1.COURTCHANGEFROM,
+                            null,
+                            '',
+                            '，刑期起日为' || substr(t1.COURTCHANGEFROM, 0, 4) || '年' ||
+                            substr(t1.COURTCHANGEFROM, 5, 2) || '月' ||
+                            substr(t1.COURTCHANGEFROM, 7, 2) || '日')) ||
+              decode(t1.SENTENCE,
+                     null,
+                     '',
+                     '9995',
+                     '',
+                     '9996',
+                     '',
+                     decode(t1.COURTCHANGEFROM,
+                            null,
+                            '',
+                            '，刑期止日为' || substr(t1.COURTCHANGETO, 0, 4) || '年' ||
+                            substr(t1.COURTCHANGETO, 5, 2) || '月' ||
+                            substr(t1.COURTCHANGETO, 7, 2) || '日')) ||
+              decode(t1.LOSEPOWER,
+                     '0',
+                     '',
+                     '000000',
+                     '',
+                     null,
+                     '',
+                     '，剥夺政治权利' ||
+                     decode(length(t1.LOSEPOWER),
+                            6,
+                            decode(substr(t1.LOSEPOWER, 0, 2),
+                                   '00',
+                                   '',
+                                   F_EXCHANGENUM(substr(t1.LOSEPOWER, 0, 2)) || '年') ||
+                            decode(substr(t1.LOSEPOWER, 3, 2),
+                                   '00',
+                                   '',
+                                   F_EXCHANGENUM(substr(t1.LOSEPOWER, 3, 2)) || '个月') ||
+                            decode(substr(t1.LOSEPOWER, 5, 2),
+                                   '00',
+                                   '',
+                                   F_EXCHANGENUM(substr(t1.LOSEPOWER, 5, 2)) || '天'),
+                            t1.LOSEPOWER)) ||
+              decode(t1.FINE, null, '', '，并处罚金' || t1.FINE) || '。'
+  from TBDATA_SENTCHAGE t1
+ where t1.crimid = #{crimid}
+   and t1.CATEGORY = '1'
+
+  </select>
+  
+  <select id="getConsumeCount" resultType="int">
+  	select count(*) from 
+	ZTIANJIN_VI_INTERFACE_ZFXFMX t 
+	where 1=1
+  	<trim prefix="" suffix="" suffixOverrides=",">
+ 		<if test="crimid!=null and crimid!=''"> and t.bh=#{crimid} </if>
+ 	</trim>
+  </select>
+    
+  <select id="getConsumeList" parameterType="Object" resultType="java.util.HashMap">
+  	select * from
+    ( 
+	    select a.*, rownum rn from
+	    (
+		    select t.typename,t.je,substr(rq,1,4)||'年'||substr(rq,5,2)||'月' as rq from 
+			ZTIANJIN_VI_INTERFACE_ZFXFMX t
+ 			where 1=1
+		    <trim prefix="" suffix="" suffixOverrides=",">
+		 		<if test="crimid!=null and crimid!=''"> and t.bh=#{crimid} </if>
+		 	</trim>
+		 	<trim prefix="" suffix="" suffixOverrides=",">
+				<if test="sortField!=null and sortField!=''"> order by ${sortField} ${sortOrder}</if>
+			</trim>
+	  	) a 
+	    <if test="end!=null and end!=''">
+	   		where rownum &lt;= #{end}
+	   	</if> 
+    )
+   	<if test="start!=null and start!=''">
+   		where  rn &gt;= #{start}
+   	</if>
+  </select>  
+  
+  <select id="getCrimQpbTeaCount" resultType="int">
+  	select count(*) from 
+		(select ROWNUM AS id, zfbh,y, y as term, SJ_TYPE award,Y awardno, 3 as vtype,donedate
+		  from ZTIANJIN_VI_INTERFACE_SJGZJJFZ t
+		union
+		select id, zfbh,y,decode(term, '1', '2', '4') as term,award,awardno, 1 as vtype,donedate
+		  from ZTIANJIN_VI_INTERFACE_TEA t
+		union
+		select id, zfbh, y, q as term, a as award, awardno, 2 as vtype,donedate
+		  from ZTIANJIN_VI_INTERFACE_QPB t
+		 where t.a = 0) t 
+	 where 1=1
+  	<trim prefix="" suffix="" suffixOverrides=",">
+ 		<if test="crimid!=null and crimid!=''"> and t.zfbh=#{crimid} </if>
+ 	</trim>
+  </select>
+    
+  <select id="getCrimQpbTeaList" parameterType="Object" resultType="java.util.HashMap">
+  	select * from
+    ( 
+	    select a.*, rownum rn from
+	    (
+		    select id,t.REWARDID,t.REWARDDATE,t.awardno,REWARDNAME from 
+				(select ROWNUM||'@'||y||'@'||y AS id, zfbh ,y, y as term, SJ_TYPE award,Y awardno, 3 as vtype,donedate as REWARDDATE,'10003' as  REWARDID,'ZTIANJIN_VI_INTERFACE_SJGZJJFZ' as TABLEID,nvl(REWARDNAME,'市级改造积极分子') REWARDNAME
+				  from ZTIANJIN_VI_INTERFACE_SJGZJJFZ t
+				union
+				select id||'@'||y||'@'||term as id, zfbh,y,decode(term, '1', '2', '4') as term,award,awardno, 1 as vtype,donedate as REWARDDATE,decode(award, '98', '10001','99', '10002',award) as  REWARDID,'ZTIANJIN_VI_INTERFACE_TEA' as TABLEID,
+				nvl(REWARDNAME,decode(award, '98', '监狱级表扬','99', '监狱级改造积极分子','10005','立功','10006','重大立功','')) REWARDNAME
+				  from ZTIANJIN_VI_INTERFACE_TEA t
+				union
+				select id||'@'||y||'@'||q as id, zfbh, y, q as term, a as award, awardno, 2 as vtype,donedate as REWARDDATE,'10000' as  REWARDID,'ZTIANJIN_VI_INTERFACE_QPB' as TABLEID,nvl(REWARDNAME,'季度奖') REWARDNAME
+				  from ZTIANJIN_VI_INTERFACE_QPB t
+				 where t.a = 0) t
+ 			where 1=1
+		    <trim prefix="" suffix="" suffixOverrides=",">
+		 		<if test="crimid!=null and crimid!=''"> and t.zfbh=#{crimid} </if>
+		 	</trim>
+		 	<trim prefix="" suffix="" suffixOverrides=",">
+				<if test="sortField!=null and sortField!=''"> order by ${sortField} ${sortOrder}</if>
+			</trim>
+	  	) a 
+	    <if test="end!=null and end!=''">
+	   		where rownum &lt;= #{end}
+	   	</if> 
+    )
+   	<if test="start!=null and start!=''">
+   		where  rn &gt;= #{start}
+   	</if>
+  </select>  
+
+  <insert id="insertCrimQpb" parameterType="java.util.HashMap" >
+  	<selectKey keyProperty="id" resultType="int" order="BEFORE">
+		select SEQ_BASE_DOC_ID.nextval as id from dual
+  	</selectKey>
+    insert into ZTIANJIN_VI_INTERFACE_QPB (id, zfbh, y, 
+      q, a, awardno,rewardname, 
+      donedate)
+    values (#{id,jdbcType=DECIMAL}, #{zfbh,jdbcType=VARCHAR}, 
+      #{y,jdbcType=VARCHAR}, #{q,jdbcType=VARCHAR}, #{a,jdbcType=VARCHAR}, 
+      #{awardno,jdbcType=VARCHAR},#{rewardname,jdbcType=VARCHAR},#{donedate,jdbcType=DATE})
+  </insert> 
+  
+  <insert id="insertCrimTea" parameterType="java.util.HashMap" >
+  	<selectKey keyProperty="id" resultType="int" order="BEFORE">
+		select SEQ_BASE_DOC_ID.nextval as id from dual
+  	</selectKey>
+    insert into ZTIANJIN_VI_INTERFACE_TEA (id, zfbh, y, 
+      term, award, awardno, rewardname,
+      donedate)
+    values (#{id,jdbcType=DECIMAL}, #{zfbh,jdbcType=VARCHAR}, 
+      #{y,jdbcType=VARCHAR}, #{term,jdbcType=VARCHAR}, #{award,jdbcType=VARCHAR}, 
+      #{awardno,jdbcType=VARCHAR},#{rewardname,jdbcType=VARCHAR},#{donedate,jdbcType=DATE})
+  </insert>  
+
+  <insert id="insertCrimSjgzjj" parameterType="java.util.HashMap" >
+    insert into ZTIANJIN_VI_INTERFACE_SJGZJJFZ (state, zfbh, y, 
+      llrq, sj_type,rewardname, 
+      donedate)
+    values (#{state,jdbcType=VARCHAR}, #{zfbh,jdbcType=VARCHAR}, 
+      #{y,jdbcType=VARCHAR}, #{llrq,jdbcType=DATE}, #{sj_type,jdbcType=VARCHAR}, #{rewardname,jdbcType=VARCHAR},
+      #{donedate,jdbcType=DATE})
+  </insert>       
+  
+  <delete id="deleteCrimQpb" parameterType="java.util.HashMap" >
+    delete from ZTIANJIN_VI_INTERFACE_QPB
+    where zfbh = #{zfbh,jdbcType=VARCHAR}
+      and y = #{y,jdbcType=VARCHAR}
+      and q = #{q,jdbcType=VARCHAR}
+      and a = #{a,jdbcType=VARCHAR}
+  </delete> 
+
+  <delete id="deleteCrimTea" parameterType="java.util.HashMap" >
+    delete from ZTIANJIN_VI_INTERFACE_TEA
+    where zfbh = #{zfbh,jdbcType=VARCHAR}
+      and y = #{y,jdbcType=VARCHAR}
+      and term = #{term,jdbcType=VARCHAR}
+      and award = #{award,jdbcType=VARCHAR}
+  </delete>  
+  
+  <delete id="deleteCrimSjgzjj" parameterType="java.util.HashMap" >
+    delete from ZTIANJIN_VI_INTERFACE_SJGZJJFZ
+    where zfbh = #{zfbh,jdbcType=VARCHAR}
+      and y = #{y,jdbcType=VARCHAR}
+  </delete>
+   <!-- 考核之日补录列表 -->
+  <select id="getSentenceChangedData" resultType="Map" parameterType="Map" >
+ 		select * from
+		    ( select a.*, rownum rn
+		    		from (
+		    		
+		    			  select distinct to_char((F_ISDATE(COURTSANCTION, 'YYYYMMDD')),
+						                        'yyyy-MM-dd') as COURTSANCTION,
+						                to_date(awardend, 'yyyyMMdd') awardend
+						  from ( 
+								   select t2.COURTSANCTION,t2.awardend
+								    from   
+								      (select COURTSANCTION
+								          from tbdata_sentchage a, tbprisoner_base_crime tb
+								         where a.crimid = tb.crimid
+								           and a.category= '7'
+								           and exists (
+								                   select 'x' from tbflow_org_org org where org.orgid=#{orgid} and org.dorgid=tb.orgid2
+								               )
+								         group by COURTSANCTION
+								       ) t1,
+								       tbdata_sentchage t2
+								     where t2.category = '7'
+								       and t1.COURTSANCTION = t2.COURTSANCTION
+						   		)
+						   order by COURTSANCTION desc
+			    
+			    ) a 
+			    <if test="start!=null and start!=''">
+			   		where rownum &lt;= #{end}
+			   	</if> 
+		    )
+		   	<if test="start!=null and start!=''">
+		   		where  rn &gt;= #{start}
+		   	</if>
+  </select>
+  
+  <select id="countSentenceChangedData" resultType="int" parameterType="Map" >
+	  select count(*) from
+		(
+				select distinct to_char((F_ISDATE(COURTSANCTION, 'YYYYMMDD')),
+									'yyyy-MM-dd') as COURTSANCTION,
+							to_date(awardend, 'yyyyMMdd') awardend
+				from ( 
+					   select t2.COURTSANCTION,t2.awardend
+						from   
+						  (select COURTSANCTION
+							  from tbdata_sentchage a, tbprisoner_base_crime tb
+							 where a.crimid = tb.crimid
+							   and a.category= '7'
+							   and exists (
+									   select 'x' from tbflow_org_org org where org.orgid=#{orgid} and org.dorgid=tb.orgid2
+								   )
+							 group by COURTSANCTION
+						   ) t1,
+						   tbdata_sentchage t2
+						 where t2.category = '7'
+						   and t1.COURTSANCTION = t2.COURTSANCTION
+				)
+		)
+  </select>  
+  
+  <update id="updateBianDongFuDuByMap" parameterType="map" >
+    update TBDATA_SENTCHAGE
+    <set>
+     	<if test="commuterange != null and commuterange != '' " >
+        	commuterange = #{commuterange},
+        </if>
+    </set> where crimid = #{crimid} and COURTSANCTION=#{date1}
+  </update>
+       
+  <select id="selectJxCrimid" parameterType="Map" resultType="String">
+  		select t.crimid
+		  from tbdata_sentchage t,
+		        tbprisoner_base_crime b
+		 where t.crimid = b.crimid
+			   and t.category = '7'
+			   and t.courtsanction=#{courtsanction}
+			   
+  </select>
+  <update id="updateAwardends" parameterType="Map">
+		 update TBDATA_SENTCHAGE
+	           set  AWARDEND=#{awardend}
+	            where courtsanction = #{courtsanction}
+			    and crimid = #{crimid}
+			    and CATEGORY = '7'
+  </update>
+  
+  <select id="getBasicBianDongInfoList"  parameterType="Map" resultType="Map">
+	 select *
+  	from (select a.*, rownum rn
+          		from (select uf.*,t.text4 curyear,t.text5 curmonth,t.text6 curday,
+          					case when t.int2 is not null then
+                            	to_char(t.int2)
+                           	when s.losepoweryear is not null then
+                            	s.losepoweryear
+                            end boquan,
+          				s.nowpunishmentyear,to_char(b.sentencestime,'yyyyMMdd') sentencestime,
+          				to_char(s.courtchangeto,'yyyyMMdd') courtchangeto,s.batchid,
+                        f_formatymd(t.text4, t.text5, t.text6) as commuterange,
+                        case when t.text4!='9995' then
+                        	case when length(t.text4)=1 then
+                        		'0'||t.text4
+                            else
+                            	t.text4
+                            end||
+                            case when length(t.text5)=1 then
+                        		'0'||t.text5
+                            else
+                            	t.text5
+                            end||
+                            case when length(t.text6)=1 then
+                        		'0'||t.text6
+                            else
+                            	t.text6
+                            end||'@'||
+                            case when t.int2 is not null then
+                            	to_char(t.int2)
+                           	when s.losepoweryear is not null then
+                            	s.losepoweryear
+                            end
+                         end  commuterange_id,
+                        
+                       decode(uf.int1, 0, '减刑', 1, '假释') as category,
+                       substr(uf.text6, 5, length(uf.text6))  as caseno
+                  from uv_flow uf,
+                       tbprisoner_baseinfo tb,
+                       tbxf_sentencealteration s,
+                       tbprisoner_base_crime b,
+                       (select t1.* from tbflow t1,
+                        (select max(t2.optime) optime, t2.flowdraftid
+                           from tbflow t2 where t2.nodeid='N0005'
+                          group by t2.flowdraftid) t3 where
+                        t1.flowdraftid = t3.flowdraftid and
+                        t1.optime = t3.optime
+                       ) t
+                 where uf.applyid = tb.crimid
+                   and uf.text16 is null
+                   and s.crimid = tb.crimid
+                   and tb.crimid=b.crimid
+                   and uf.flowdraftid = t.flowdraftid
+                   and uf.nodeid in ('N0008','N0010','N0011','N0012','N0013','1')
+        <if test="flowdefid!=null and flowdefid!=''">
+        and uf.flowdefid=#{flowdefid}
+        </if>
+        <if test="departid!=null and departid!=''">
+        and uf.departid =#{departid}
+        </if>
+		<if test="key!=null and key!=''">  
+			and ( 
+					tb.crimid like concat(concat('%', #{key}), '%')   
+					or  tb.name like concat(concat('%', #{key}), '%')  
+					or tb.namepinyinshort like concat(UPPER(#{key}),'%')
+			)
+		</if>
+		) a 
+	    <if test="end!=null and end!=''">
+	   		where rownum &lt;= #{end}
+	   	</if> 
+    )
+   	<if test="start!=null and start!=''">
+   		where  rn &gt;= #{start}
+   	</if>
+  </select>
+      
+   
+  <select id="getZhiXingDate" parameterType="Map" resultType="String">
+  		select to_char(F_GETZHIXINGDATE(#{courtchangeto},#{year},#{month},#{day}),'yyyyMMdd') from dual
+  </select>
+  <select id="getXianXingQi" parameterType="Map" resultType="String">
+  		select F_BETWEENYMD(#{courtchangefrom},#{courtchangeto}) from dual
+  </select>
+  <!-- 执行更新刑期变动存储过程 manual_UpdateSentncechang-->
+  <select id="manual_UpdateSentncechang">
+		<![CDATA[   
+		   {call manual_UpdateSentncechang(#{crimid},#{departid})}   
+		]]>
+  </select>
+  
+  <delete id="removeSentenceChange" parameterType="Map">
+  		delete from TBDATA_SENTCHAGE where uuid = #{xfbduuid}
+  </delete>
+  
+  
+  
+  <insert id="insertJiFenBuLu" parameterType="java.util.HashMap" >
+  	<selectKey keyProperty="id" resultType="int" order="BEFORE">
+		select ZHUNAN_RCKH_ID_SEQ.nextval as id from dual
+  	</selectKey>
+    insert into ZHUNAN_RCKH (id, PR_ID1,AWPS_ABSTRACT, AWPS_SCORE,AWPS_DATE,ENTRY_NAME,ENTRY_DATE)
+    values (#{id,jdbcType=DECIMAL}, #{criminalid,jdbcType=VARCHAR}, #{content,jdbcType=VARCHAR},
+      #{score,jdbcType=VARCHAR},TO_DATE(REPLACE(REPLACE(REPLACE(#{donedate},'年','-'),'月','-'),'日',''),'yyyy-MM-dd'),#{username,jdbcType=VARCHAR},sysdate)
+  </insert> 
+  
+  
+  
+   <update id="updateJiFenBuLuById" parameterType="map" >
+    update ZHUNAN_RCKH
+    <set >
+      AWPS_ABSTRACT = #{content,jdbcType=VARCHAR},
+      AWPS_SCORE  = #{score,jdbcType=VARCHAR},
+      AWPS_DATE = TO_DATE(REPLACE(REPLACE(REPLACE(#{donedate},'年','-'),'月','-'),'日',''),'yyyy-MM-dd')
+    </set>
+    where id=#{id}
+  </update>
+  
+  
+  <delete id="removeJiFenBuLuById" parameterType="Map">
+  		delete from ZHUNAN_RCKH where id = #{id}
+  </delete>
+  
+  <insert id="insertKaoHeZongFen" parameterType="Map" >
+  	insert into KHJC_YFANDLJBY(CRIMID,SUMFEN, LEIJIBIAOYANG, YUFEN)
+  	values (#{crimid},#{kaohezongfen}, #{leijibiaoyang}, #{yufen})
+  </insert> 
+  
+   <update id="updateKaoHeZongFenById" parameterType="Map" >
+    update KHJC_YFANDLJBY
+    <set>
+      <if test="kaohezongfen!=null and kaohezongfen!=''">
+	  		SUMFEN = #{kaohezongfen,jdbcType=VARCHAR},
+      </if>
+      <if test="leijibiaoyang!=null and leijibiaoyang!=''">
+            LEIJIBIAOYANG = #{leijibiaoyang,jdbcType=VARCHAR},
+      </if> 
+      <if test="yufen!=null and yufen!=''">
+            YUFEN = #{yufen,jdbcType=VARCHAR}
+      </if>  
+    </set>
+    where CRIMID=#{crimid}
+  </update>
+  
+  <select id="getKaoHeZongFenByCrimid" parameterType="Map" resultType="Map">
+  		select * from KHJC_YFANDLJBY where crimid = #{crimid}
+  </select>  
+  
+  <select id="getJiFenBuLuById" parameterType="Object" resultType="java.util.HashMap">
+  	select a.awps_score as score,a.awps_abstract as content,TO_CHAR(a.awps_date,'yyyyMMdd') as donedate ,a.* from ZHUNAN_RCKH a where  a.id = #{id}
+  </select>
+  
+  
+   <select id="getCaiDingList" parameterType="Object" resultType="java.util.HashMap">
+  	select * from KHJC_KAOHEFEN where crimid = #{crimid}
+  </select> 
+  
+  
+  <select id="getSentenceChangeByBatch"  parameterType="Map" resultType="Map">
+	 	select *
+		from (select a.*, rownum rn
+		      from (
+		        select 
+		            (case when tem.courtchange = '9995' or tem.courtchange = '9996' then ''
+		             WHEN tem.oldcourtchangeto is not null 
+		              THEN TO_CHAR(ADD_MONTHS(TO_DATE(tem.oldcourtchangeto, 'yyyyMMdd'),
+		                     TO_NUMBER(SUBSTR(tem.courtchange,0,2)* 12 * -1)+TO_NUMBER(SUBSTR(tem.courtchange,3,2) * -1))
+		                          +TO_NUMBER(SUBSTR(tem.courtchange,5,2)*-1)
+		                    ,'yyyymmdd')
+		             else
+		              to_char(add_months(TO_DATE(tem.courtchangefrom,'yyyyMMdd'),
+		              TO_NUMBER(SUBSTR(GETXINGQIXIANGJIAN_SD(tem.xianxingqi, tem.courtchange),0,2))*12
+		              +TO_NUMBER(SUBSTR(GETXINGQIXIANGJIAN_SD(tem.xianxingqi, tem.courtchange),3,2)))
+		              +TO_NUMBER(SUBSTR(GETXINGQIXIANGJIAN_SD(tem.xianxingqi, tem.courtchange),5,2))-1,'yyyymmdd')
+		             end
+		            ) as courtchangeto,
+		            
+		            GETXINGQIXIANGJIAN_SD(tem.xianxingqi,tem.courtchange) as sentence,
+		            
+		            tem.* 
+		        from 
+		            (SELECT tb.applyid AS crimid,
+		                tb.APPLYNAME AS crimname,
+		                tb.flowdraftid,
+		                tbc.orgname1,
+		                DECODE (tb.int1,'1', '15','7') as category,
+		                
+		                (CASE
+		                  WHEN TO_NUMBER (tb.int2) > 9000 THEN TO_CHAR (tb.int2)
+		                  ELSE
+		                     CASE
+		                      WHEN TO_NUMBER (tb.int2) > 9 THEN TO_CHAR (tb.int2)
+		                      ELSE '0' || tb.int2
+		                     END ||
+		                     CASE
+		                      WHEN TO_NUMBER (tb.int3) > 9 THEN TO_CHAR (tb.int3)
+		                      ELSE '0' || tb.int3
+		                     END || 
+		                     CASE
+		                      WHEN TO_NUMBER (tb.int4) > 9 THEN TO_CHAR (tb.int4)
+		                      ELSE '0' || tb.int4
+		                     END
+		                END) AS courtchange,
+		                     
+		                SUBSTR(tb.text6, 5) AS anjianhao,
+		                DECODE(tb.int1,  '0', '0',  '1', '1') AS jianxingorderby,
+		                tb.int6 AS batchid,
+		                
+		                F_FORMAT_SENTENCE(sen.punishmentyear, sen.punishmentmonth, sen.punishmentday) as xianxingqi,
+		                
+		                to_char(sen.courtchangefrom, 'yyyyMMdd') as courtchangefrom,
+		                to_char(sen.courtchangeto, 'yyyyMMdd') as oldcourtchangeto,
+		                
+		                '' AS courtarea,
+		                  
+		                (CASE
+		                  WHEN TO_NUMBER (tb.int5) > 90 THEN TO_CHAR (tb.int5)
+		                  WHEN TO_NUMBER (tb.int5) > 9 THEN tb.int5||'0000'
+		                  WHEN TO_NUMBER (tb.int5) > 0 THEN '0'||tb.int5||'0000'
+		                  ELSE '000000'
+		                END) AS losepower,
+		                
+		                '' AS isdeportation,
+		                '' AS islimit,
+		                TO_CHAR (bat.EXAMINEEND, 'yyyyMMdd') AS awardend,
+		                bat.EXAMINEEND AS exectime,
+		                '1' AS isthrough,
+		                SYS_GUID () AS uuid,
+		                '' AS courtname_code,
+		                '' AS courttitle_code,
+		                '' AS charge
+		                 
+		              FROM TBFLOW_BASE tb,  
+		                TBPRISONER_BASEINFO tbi,
+		                TBPRISONER_BASE_CRIME tbc,
+		                TBXF_SENTENCEALTERATION sen,
+		                TBXF_COMMUTEPAROLE_BATCH bat
+		          
+		              WHERE tb.FLOWDEFID = 'other_zfjyjxjssp'
+		                AND tb.applyid = tbi.CRIMID
+		                AND tb.applyid = tbc.CRIMID
+		                AND tb.applyid = sen.CRIMID
+		                AND SUBSTR(tb.text6, 0, 4) = bat.CURYEAR
+		                AND tb.int6 = bat.batch
+		                AND tb.TEXT30 IS NULL
+		                AND tb.currnodeid = '1'
+		                and exists (
+		                   select 'x' from tbflow_org_org where orgid = #{orgid} and dorgid=tbc.orgid2
+		                )
+		              <if test="year!=null and year!=''">
+		                and SUBSTR(tb.text6, 0,4) = #{year}
+		              </if> 
+		              <if test="batchid!=null and batchid!=''">
+		                and tb.int6 = #{batchid}
+		              </if>
+		              <if test="key!=null and key!=''">  
+		                and(
+		                  tbi.crimid like concat(concat('%', #{key}), '%')   
+		                  or tbi.name like concat(concat('%', #{key}), '%')  
+		                  or tbi.namepinyinshort like concat(UPPER(#{key}),'%')
+		                 )
+		              </if>
+		          ) tem
+		          order by tem.batchid asc,tem.jianxingorderby asc ,tem.anjianhao asc
+		   ) a 
+		   <if test="end!=null and end!=''">
+		     where rownum &lt;= #{end}
+		   </if> 
+		)
+		<if test="start!=null and start!=''">
+		  where  rn &gt;= #{start}
+		</if>
+  </select>
+ 
+ <select id="countAllBianDongByCondition" resultType="int" parameterType="Map" >
+		SELECT count(tb.flowdraftid)
+		FROM TBFLOW_BASE tb,  
+		  TBPRISONER_BASEINFO tbi,
+		  TBPRISONER_BASE_CRIME tbc,
+		  TBXF_SENTENCEALTERATION sen,
+		  TBXF_COMMUTEPAROLE_BATCH bat
+		WHERE tb.FLOWDEFID = 'other_zfjyjxjssp'
+		  AND tb.applyid = tbi.CRIMID
+		  AND tb.applyid = tbc.CRIMID
+		  AND tb.applyid = sen.CRIMID
+		  AND SUBSTR(tb.text6, 0, 4) = bat.CURYEAR
+		  AND tb.int6 = bat.batch
+		  AND tb.TEXT30 IS NULL
+		  AND tb.currnodeid = '1'
+		  and exists (
+		     select 'x' from tbflow_org_org where orgid = #{orgid} and dorgid=tbc.orgid2
+		  )
+		<if test="year!=null and year!=''">
+		  and SUBSTR(tb.text6, 0,4) = #{year}
+		</if> 
+		<if test="batchid!=null and batchid!=''">
+		  and tb.int6 = #{batchid}
+		</if>
+		<if test="key!=null and key!=''">  
+		  and(
+		    tbi.crimid like concat(concat('%', #{key}), '%')   
+		    or tbi.name like concat(concat('%', #{key}), '%')  
+		    or tbi.namepinyinshort like concat(UPPER(#{key}),'%')
+		   )
+		</if>  
+  </select>
+ 
+  
+  <select id="countSentenceChangeByBatch" resultType="int" parameterType="Map" >
+        SELECT count(*)
+  FROM (SELECT *
+          FROM TBFLOW_BASE
+         WHERE FLOWDEFID = 'other_zfjyjxjssp') a,
+       (SELECT *
+          FROM TBFLOW_BASE_OTHER_TABLE
+         WHERE TEMPID = 'JXJS_JXJSSHB') b,
+       (SELECT *
+          FROM TBDATA_SENTCHAGE A
+         WHERE A.CATEGORY != '1'
+               AND A.COURTSANCTION =
+                      (SELECT MAX (COURTSANCTION)
+                         FROM TBDATA_SENTCHAGE B
+                        WHERE B.CATEGORY != '1' AND B.CRIMID = A.CRIMID)) c,
+                        TBPRISONER_BASEINFO d,
+                        TBXF_COMMUTEPAROLE_BATCH E
+ WHERE     a.flowdraftid = b.flowdraftid
+       AND A.applyid = c.CRIMID(+)
+       AND A.applyid = D.CRIMID(+)
+       and SUBSTR (a.text6, 0, 4) = e.CURYEAR
+       and a.int6 = e.batch
+       and a.text16 is null
+       AND a.TEXT30 IS NULL
+       
+        <if test="batchid!=null and batchid!=''">
+        and a.batchid = #{batchid}
+        </if>
+		<if test="key!=null and key!=''">  
+			and ( 
+					a.applyid like concat(concat('%', #{key}), '%')   
+					or d.name like concat(concat('%', #{key}), '%')  
+					or d.namepinyinshort like concat(UPPER(#{key}),'%')
+			)
+		</if>
+  </select>
+  
+  
+  
+  
+  
+  
+  <update id="updateSentenceAlterationRewardinfo" parameterType="map" >
+    update TBXF_SENTENCEALTERATION set
+        	rewardinfo = '表扬'||#{leijibiaoyang}||'次，并余'||#{yufen}|| '分'
+    where crimid = #{crimid}
+  </update>
+  
+  
+  
+  <update id="updateOriginalSentenceData" parameterType="String" >
+    update tbprisoner_base_crime tbc 
+	 set (tbc.punishmenttype, 
+	 	  tbc.punishmentyear, 
+	 	  tbc.punishmentmonth,
+	 	  tbc.punishmentday,
+	 	  tbc.isremission
+	 	 )=(
+		       select (case when punishmentyear is not null and punishmentyear='9996' then '死刑，缓期二年执行'
+		                    when punishmentyear is not null and punishmentyear='9995' then '无期徒刑'
+		                  else '有期徒刑'
+		               end) as punishmenttype,
+		             punishmentyear,
+		             punishmentmonth,
+		             punishmentday,
+		             (	case when xianzhijianxing is not null and (xianzhijianxing = '是' or xianzhijianxing = '1') then 1
+		             	   else 0
+		             	end
+		             ) as isremission
+		       from (
+		            select F_FORMAT_PART_SENTENCE(ts.sentence,1) as punishmentyear, 
+		                   F_FORMAT_PART_SENTENCE(ts.sentence,2) as punishmentmonth,
+		                   F_FORMAT_PART_SENTENCE(ts.sentence,3) as punishmentday,
+		                   ts.xianzhijianxing
+		           from tbdata_sentchage ts 
+		           where ts.crimid=#{crimid} 
+		             and ts.category='1'
+		           order by ts.courtsanction desc
+		       ) where rownum=1
+	       
+	       )
+	where tbc.crimid=#{crimid}
+	 <!-- 
+	  and (tbc.punishmentyear is null or tbc.punishmentyear=0)
+	  and (tbc.punishmentmonth is null or tbc.punishmentmonth=0)
+	  and (tbc.punishmentday is null or tbc.punishmentday=0)
+	 -->
+  </update>
+  
+  
+  
+</mapper>

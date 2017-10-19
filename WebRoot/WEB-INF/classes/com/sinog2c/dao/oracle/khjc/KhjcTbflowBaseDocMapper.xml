@@ -1,0 +1,360 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.sinog2c.dao.api.khjc.KhjcTbflowBaseDocMapper" >
+  <resultMap id="BaseResultMap" type="com.sinog2c.model.khjc.KhjcTbflowBaseDoc" >
+    <id column="DOCID" property="docid" jdbcType="VARCHAR" />
+    <result column="TEMPLETID" property="templetid" jdbcType="VARCHAR" />
+    <result column="CONTENT" property="content" jdbcType="VARCHAR" />
+    <result column="FLOWDEFID" property="flowdefid" jdbcType="VARCHAR" />
+    <result column="FLOWDEFORDERBY" property="flowdeforderby" jdbcType="VARCHAR" />
+    <result column="FLOWDEFSTATE" property="flowdefstate" jdbcType="VARCHAR" />
+    <result column="DOCDEP" property="docdep" jdbcType="VARCHAR" />
+    <result column="DEPARTID" property="departid" jdbcType="VARCHAR" />
+    <result column="DELFLAG" property="delflag" jdbcType="VARCHAR" />
+    <result column="ISSEE" property="issee" jdbcType="VARCHAR" />
+    <result column="SIGNACOUNT" property="signacount" jdbcType="VARCHAR" />
+    <result column="CREATETIME" property="createtime" jdbcType="VARCHAR" />
+    <result column="CREATEMENDER" property="createmender" jdbcType="VARCHAR" />
+    <result column="UPDATETIME" property="updatetime" jdbcType="VARCHAR" />
+    <result column="UPDATEMENDER" property="updatemender" jdbcType="VARCHAR" />
+    <result column="CRIMID" property="crimid" jdbcType="VARCHAR" />
+  </resultMap>
+  <resultMap id="ResultMapWithBLOBs" type="com.sinog2c.model.khjc.KhjcTbflowBaseDoc" extends="BaseResultMap" >
+    <result column="DOCCONENT" property="docconent" jdbcType="CLOB" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    DOCID, TEMPLETID, CONTENT, FLOWDEFID, FLOWDEFORDERBY, FLOWDEFSTATE, DOCDEP, DEPARTID, 
+    DELFLAG, ISSEE, SIGNACOUNT, CREATETIME, CREATEMENDER, UPDATETIME, UPDATEMENDER, CRIMID
+  </sql>
+  <sql id="Blob_Column_List" >
+    DOCCONENT
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from KHJC_TBFLOW_BASE_DOC
+    where DOCID = #{docid,jdbcType=VARCHAR}
+  </select>
+  
+  <select id="selectByCondition" resultMap="ResultMapWithBLOBs" parameterType="Map" >
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from KHJC_TBFLOW_BASE_DOC
+    where DOCID = #{docid,jdbcType=VARCHAR}
+    <if test="templetid != null and templetid !=''" >
+        and TEMPLETID = #{templetid,jdbcType=VARCHAR}
+     </if>
+  </select>
+  
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from KHJC_TBFLOW_BASE_DOC
+    where DOCID = #{docid,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.sinog2c.model.khjc.KhjcTbflowBaseDoc" >
+    insert into KHJC_TBFLOW_BASE_DOC (DOCID, TEMPLETID, CONTENT, 
+      FLOWDEFID, FLOWDEFORDERBY, FLOWDEFSTATE, 
+      DOCDEP, DEPARTID, DELFLAG, 
+      ISSEE, SIGNACOUNT, CREATETIME, 
+      CREATEMENDER, UPDATETIME, UPDATEMENDER, 
+      CRIMID, DOCCONENT)
+    values (#{docid,jdbcType=VARCHAR}, #{templetid,jdbcType=VARCHAR}, #{content,jdbcType=VARCHAR}, 
+      #{flowdefid,jdbcType=VARCHAR}, #{flowdeforderby,jdbcType=VARCHAR}, #{flowdefstate,jdbcType=VARCHAR}, 
+      #{docdep,jdbcType=VARCHAR}, #{departid,jdbcType=VARCHAR}, #{delflag,jdbcType=VARCHAR}, 
+      #{issee,jdbcType=VARCHAR}, #{signacount,jdbcType=VARCHAR}, #{createtime,jdbcType=VARCHAR}, 
+      #{createmender,jdbcType=VARCHAR}, #{updatetime,jdbcType=VARCHAR}, #{updatemender,jdbcType=VARCHAR}, 
+      #{crimid,jdbcType=VARCHAR}, #{docconent,jdbcType=CLOB})
+  </insert>
+  <insert id="insertSelective" parameterType="com.sinog2c.model.khjc.KhjcTbflowBaseDoc" >
+    insert into KHJC_TBFLOW_BASE_DOC
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="docid != null" >
+        DOCID,
+      </if>
+      <if test="templetid != null" >
+        TEMPLETID,
+      </if>
+      <if test="content != null" >
+        CONTENT,
+      </if>
+      <if test="flowdefid != null" >
+        FLOWDEFID,
+      </if>
+      <if test="flowdeforderby != null" >
+        FLOWDEFORDERBY,
+      </if>
+      <if test="flowdefstate != null" >
+        FLOWDEFSTATE,
+      </if>
+      <if test="docdep != null" >
+        DOCDEP,
+      </if>
+      <if test="departid != null" >
+        DEPARTID,
+      </if>
+      <if test="delflag != null" >
+        DELFLAG,
+      </if>
+      <if test="issee != null" >
+        ISSEE,
+      </if>
+      <if test="signacount != null" >
+        SIGNACOUNT,
+      </if>
+      <if test="createtime != null" >
+        CREATETIME,
+      </if>
+      <if test="createmender != null" >
+        CREATEMENDER,
+      </if>
+      <if test="updatetime != null" >
+        UPDATETIME,
+      </if>
+      <if test="updatemender != null" >
+        UPDATEMENDER,
+      </if>
+      <if test="crimid != null" >
+        CRIMID,
+      </if>
+      <if test="docconent != null" >
+        DOCCONENT,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="docid != null" >
+        #{docid,jdbcType=VARCHAR},
+      </if>
+      <if test="templetid != null" >
+        #{templetid,jdbcType=VARCHAR},
+      </if>
+      <if test="content != null" >
+        #{content,jdbcType=VARCHAR},
+      </if>
+      <if test="flowdefid != null" >
+        #{flowdefid,jdbcType=VARCHAR},
+      </if>
+      <if test="flowdeforderby != null" >
+        #{flowdeforderby,jdbcType=VARCHAR},
+      </if>
+      <if test="flowdefstate != null" >
+        #{flowdefstate,jdbcType=VARCHAR},
+      </if>
+      <if test="docdep != null" >
+        #{docdep,jdbcType=VARCHAR},
+      </if>
+      <if test="departid != null" >
+        #{departid,jdbcType=VARCHAR},
+      </if>
+      <if test="delflag != null" >
+        #{delflag,jdbcType=VARCHAR},
+      </if>
+      <if test="issee != null" >
+        #{issee,jdbcType=VARCHAR},
+      </if>
+      <if test="signacount != null" >
+        #{signacount,jdbcType=VARCHAR},
+      </if>
+      <if test="createtime != null" >
+        #{createtime,jdbcType=VARCHAR},
+      </if>
+      <if test="createmender != null" >
+        #{createmender,jdbcType=VARCHAR},
+      </if>
+      <if test="updatetime != null" >
+        #{updatetime,jdbcType=VARCHAR},
+      </if>
+      <if test="updatemender != null" >
+        #{updatemender,jdbcType=VARCHAR},
+      </if>
+      <if test="crimid != null" >
+        #{crimid,jdbcType=VARCHAR},
+      </if>
+      <if test="docconent != null" >
+        #{docconent,jdbcType=CLOB},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.sinog2c.model.khjc.KhjcTbflowBaseDoc" >
+    update KHJC_TBFLOW_BASE_DOC
+    <set >
+      <if test="templetid != null" >
+        TEMPLETID = #{templetid,jdbcType=VARCHAR},
+      </if>
+      <if test="content != null" >
+        CONTENT = #{content,jdbcType=VARCHAR},
+      </if>
+      <if test="flowdefid != null" >
+        FLOWDEFID = #{flowdefid,jdbcType=VARCHAR},
+      </if>
+      <if test="flowdeforderby != null" >
+        FLOWDEFORDERBY = #{flowdeforderby,jdbcType=VARCHAR},
+      </if>
+      <if test="flowdefstate != null" >
+        FLOWDEFSTATE = #{flowdefstate,jdbcType=VARCHAR},
+      </if>
+      <if test="docdep != null" >
+        DOCDEP = #{docdep,jdbcType=VARCHAR},
+      </if>
+      <if test="departid != null" >
+        DEPARTID = #{departid,jdbcType=VARCHAR},
+      </if>
+      <if test="delflag != null" >
+        DELFLAG = #{delflag,jdbcType=VARCHAR},
+      </if>
+      <if test="issee != null" >
+        ISSEE = #{issee,jdbcType=VARCHAR},
+      </if>
+      <if test="signacount != null" >
+        SIGNACOUNT = #{signacount,jdbcType=VARCHAR},
+      </if>
+      <if test="createtime != null" >
+        CREATETIME = #{createtime,jdbcType=VARCHAR},
+      </if>
+      <if test="createmender != null" >
+        CREATEMENDER = #{createmender,jdbcType=VARCHAR},
+      </if>
+      <if test="updatetime != null" >
+        UPDATETIME = #{updatetime,jdbcType=VARCHAR},
+      </if>
+      <if test="updatemender != null" >
+        UPDATEMENDER = #{updatemender,jdbcType=VARCHAR},
+      </if>
+      <if test="crimid != null" >
+        CRIMID = #{crimid,jdbcType=VARCHAR},
+      </if>
+      <if test="docconent != null" >
+        DOCCONENT = #{docconent,jdbcType=CLOB},
+      </if>
+    </set>
+    where DOCID = #{docid,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.sinog2c.model.khjc.KhjcTbflowBaseDoc" >
+    update KHJC_TBFLOW_BASE_DOC
+    set TEMPLETID = #{templetid,jdbcType=VARCHAR},
+      CONTENT = #{content,jdbcType=VARCHAR},
+      FLOWDEFID = #{flowdefid,jdbcType=VARCHAR},
+      FLOWDEFORDERBY = #{flowdeforderby,jdbcType=VARCHAR},
+      FLOWDEFSTATE = #{flowdefstate,jdbcType=VARCHAR},
+      DOCDEP = #{docdep,jdbcType=VARCHAR},
+      DEPARTID = #{departid,jdbcType=VARCHAR},
+      DELFLAG = #{delflag,jdbcType=VARCHAR},
+      ISSEE = #{issee,jdbcType=VARCHAR},
+      SIGNACOUNT = #{signacount,jdbcType=VARCHAR},
+      CREATETIME = #{createtime,jdbcType=VARCHAR},
+      CREATEMENDER = #{createmender,jdbcType=VARCHAR},
+      UPDATETIME = #{updatetime,jdbcType=VARCHAR},
+      UPDATEMENDER = #{updatemender,jdbcType=VARCHAR},
+      CRIMID = #{crimid,jdbcType=VARCHAR},
+      DOCCONENT = #{docconent,jdbcType=CLOB}
+    where DOCID = #{docid,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.sinog2c.model.khjc.KhjcTbflowBaseDoc" >
+    update KHJC_TBFLOW_BASE_DOC
+    set TEMPLETID = #{templetid,jdbcType=VARCHAR},
+      CONTENT = #{content,jdbcType=VARCHAR},
+      FLOWDEFID = #{flowdefid,jdbcType=VARCHAR},
+      FLOWDEFORDERBY = #{flowdeforderby,jdbcType=VARCHAR},
+      FLOWDEFSTATE = #{flowdefstate,jdbcType=VARCHAR},
+      DOCDEP = #{docdep,jdbcType=VARCHAR},
+      DEPARTID = #{departid,jdbcType=VARCHAR},
+      DELFLAG = #{delflag,jdbcType=VARCHAR},
+      ISSEE = #{issee,jdbcType=VARCHAR},
+      SIGNACOUNT = #{signacount,jdbcType=VARCHAR},
+      CREATETIME = #{createtime,jdbcType=VARCHAR},
+      CREATEMENDER = #{createmender,jdbcType=VARCHAR},
+      UPDATETIME = #{updatetime,jdbcType=VARCHAR},
+      UPDATEMENDER = #{updatemender,jdbcType=VARCHAR},
+      CRIMID = #{crimid,jdbcType=VARCHAR}
+    where DOCID = #{docid,jdbcType=VARCHAR}
+  </update>
+  
+  <!-- 获取当前页面数据（分页） -->
+   <select id="getBaseDocByCondition" resultType="Map">
+		select * from (
+			SELECT ar.*, ROWNUM RN FROM
+				(select * from (
+					select a.docid,a.templetid, a.crimid,b.name as crimname,b.namepinyinshort as pinyin,
+		           		   a.docdep,a.departid,a.content,a.flowdefid,a.flowdeforderby,g.nodeid,h.explain as nodename,
+		           		   a.delflag,a.issee,a.signacount,a.createtime,d.name as createmender,a.updatetime,f.name as updatemender
+		           	from khjc_tbflow_base_doc a,
+		           			tbprisoner_baseinfo b ,
+		           			tbsys_userinfo d,
+		           			tbsys_userinfo f,
+		           			khjc_tbflow_deliver g,
+		           			khjc_tbflow_deliver_name h 
+		             where a.crimid=b.crimid(+) 
+		               and  a.createmender = d.userid(+) 
+		               and a.updatemender = f.userid(+)  
+		               and a.flowdefid = g.flowdefid(+) 
+		               and a.flowdeforderby = g.orderby(+) 
+		               and g.nodeid = h.snodeid(+)  
+		               and a.delflag = '0' 
+		        		<if test="crimid !=null and crimid!=''">  
+			        	  and a.crimid = #{crimid}
+			   			</if>
+			 		<if test="tempcondition !=null and tempcondition!=''">  
+			        	 and a.templetid in (${tempcondition})
+			   		</if>
+			   	)	
+			   	<if test="sortField!=null and sortField!=''"> 
+					 order by ${sortField} ${sortOrder}
+				</if>
+		  ) ar
+		  <if test="end!=null and end!=''">
+	   		where rownum &lt;= #{end}
+	   	</if> 
+	    )
+	   	<if test="start!=null and start!=''">
+	   		where  rn &gt;= #{start}
+	   	</if>
+  </select>
+  
+  <!-- 查询表中数据总数 -->
+  <select id="countBaseDocByCondition" resultType="int">  
+		select count(uf.flowdraftid)
+       			from uv_flow uf, TBFLOW_OTHER_FLOW tof
+            where 1=1 and uf.flowdraftid = tof.flowdraftid
+           <if test="applyid!=null and applyid!=''">  
+        	and uf.applyid = #{applyid}
+       </if>
+           <if test="flowdefid!=null and flowdefid!=''">  
+        	and uf.flowdefid = #{flowdefid}
+       </if>
+       <if test="tempid!=null and tempid!=''">  
+        	and tof.tempid = #{tempid}
+       </if>
+   </select>
+   
+   <!-- 获取当前页面数据（分页） -->
+   <select id="getKhjcFlowBaseDoctListByNodeid" resultType="Map">
+		SELECT * FROM 
+	 	(SELECT A.*, ROWNUM RN FROM 
+		 	( 					  
+					select uf.nodeid,uf.applyid,uf.flowdraftid,uf.conent,uf.opname,uf.flowid,uf.flowdefid,
+							uf.optime,uf.startsummry,uf.endsummry,uf.state,uf.commenttext
+          			from uv_flow uf, TBFLOW_OTHER_FLOW tof
+		             where 1=1 and uf.flowdraftid = tof.flowdraftid
+		            <if test="applyid!=null and applyid!=''">  
+			        	and uf.applyid = #{applyid}
+			       </if>
+		            <if test="flowdefid!=null and flowdefid!=''">  
+			        	and uf.flowdefid = #{flowdefid}
+			       </if>
+			       <if test="tempid!=null and tempid!=''">  
+			        	and tof.tempid = #{tempid}
+			       </if>
+			       order by tof.optime desc
+			 		<if test="sortField!=null and sortField!=''"> 
+	     				, ${sortField} ${sortOrder}
+	    			</if>
+		 	 ) A 
+		 	WHERE ROWNUM &lt;= #{end,jdbcType=DECIMAL}
+	 	)
+	 	WHERE RN &gt;= #{start,jdbcType=DECIMAL}
+  </select>
+  
+ 
+</mapper>

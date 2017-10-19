@@ -1,0 +1,265 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.sinog2c.dao.api.system.SystemTemplateMapper" >
+  <resultMap id="BaseResultMap" type="com.sinog2c.model.system.SystemTemplate" >
+    <result column="TEMPID" property="tempid" jdbcType="VARCHAR" />
+    <result column="FUNCTIONNAME" property="functionname" jdbcType="VARCHAR" />
+    <result column="TEMPNAME" property="tempname" jdbcType="VARCHAR" />
+    <result column="DELFLAG" property="delflag" jdbcType="DECIMAL" />
+    <result column="TYPE" property="type" jdbcType="DECIMAL" />
+    <result column="FINDID" property="findid" jdbcType="DECIMAL" />
+    <result column="REMARK" property="remark" jdbcType="VARCHAR" />
+    <result column="DEPARTID" property="departid" jdbcType="VARCHAR" />
+    <result column="OPTIME" property="optime" jdbcType="TIMESTAMP" />
+    <result column="OPID" property="opid" jdbcType="VARCHAR" />
+  </resultMap>
+  <resultMap id="ResultMapWithBLOBs" type="com.sinog2c.model.system.SystemTemplate" extends="BaseResultMap" >
+    <result column="CONTENT" property="content" jdbcType="CLOB" />
+  </resultMap>
+  <sql id="Blob_Column_List" >
+    CONTENT
+  </sql>
+  <insert id="insert" parameterType="com.sinog2c.model.system.SystemTemplate" >
+    insert into TBSYS_TEMPLATE (TEMPID, FUNCTIONNAME, TEMPNAME, DELFLAG, 
+      TYPE, FINDID, REMARK, DEPARTID, OPTIME, OPID, CONTENT, GENERALTYPE)
+    values (#{tempid,jdbcType=VARCHAR}, #{functionname,jdbcType=VARCHAR}, #{tempname,jdbcType=VARCHAR}, 
+      #{delflag,jdbcType=DECIMAL}, #{type,jdbcType=DECIMAL}, #{findid,jdbcType=DECIMAL}, 
+      #{remark,jdbcType=VARCHAR}, #{departid,jdbcType=VARCHAR}, #{optime,jdbcType=TIMESTAMP}, 
+      #{opid,jdbcType=VARCHAR}, #{content,jdbcType=CLOB}, #{generaltype,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.sinog2c.model.system.SystemTemplate" >
+    insert into TBSYS_TEMPLATE
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="tempid != null" >
+        TEMPID,
+      </if>
+      <if test="functionname != null" >
+        FUNCTIONNAME,
+      </if>
+      <if test="tempname != null" >
+        TEMPNAME,
+      </if>
+      <if test="delflag != null" >
+        DELFLAG,
+      </if>
+      <if test="type != null" >
+        TYPE,
+      </if>
+      <if test="findid != null" >
+        FINDID,
+      </if>
+      <if test="remark != null" >
+        REMARK,
+      </if>
+      <if test="departid != null" >
+        DEPARTID,
+      </if>
+      <if test="optime != null" >
+        OPTIME,
+      </if>
+      <if test="opid != null" >
+        OPID,
+      </if>
+      <if test="content != null" >
+        CONTENT,
+      </if>
+      <if test="generaltype != null" >
+        GENERALTYPE,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="tempid != null" >
+        #{tempid,jdbcType=VARCHAR},
+      </if>
+      <if test="functionname != null" >
+        #{functionname,jdbcType=VARCHAR},
+      </if>
+      <if test="tempname != null" >
+        #{tempname,jdbcType=VARCHAR},
+      </if>
+      <if test="delflag != null" >
+        #{delflag,jdbcType=DECIMAL},
+      </if>
+      <if test="type != null" >
+        #{type,jdbcType=DECIMAL},
+      </if>
+      <if test="findid != null" >
+        #{findid,jdbcType=DECIMAL},
+      </if>
+      <if test="remark != null" >
+        #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="departid != null" >
+        #{departid,jdbcType=VARCHAR},
+      </if>
+      <if test="optime != null" >
+        #{optime,jdbcType=DATE},
+      </if>
+      <if test="opid != null" >
+        #{opid,jdbcType=VARCHAR},
+      </if>
+      <if test="content != null" >
+        #{content,jdbcType=CLOB},
+      </if>
+      <if test="generaltype != null" >
+        #{generaltype,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="update" parameterType="com.sinog2c.model.system.SystemTemplate">
+		update TBSYS_TEMPLATE set functionname = #{functionname},tempname = #{tempname},optime = #{optime},content = #{content,jdbcType=CLOB} where tempid = #{tempid} and departid = #{departid}
+  </update>
+  <update id="updateUneditedfields" parameterType="com.sinog2c.model.system.SystemTemplate">
+		update TBSYS_TEMPLATE set uneditedfields = #{uneditedfields}, remark=#{remark} 
+		where tempid = #{tempid} and departid = #{departid}
+  </update>
+  <delete id="deleteByTempid" parameterType="String">
+ 		delete from TBSYS_TEMPLATE where tempid = #{tempid}
+ 		<if test="departid!=null and departid!=''">  
+	        and 
+	        (
+	        	departid = #{departid}
+	        	or 
+	        	departid = 0
+	        	or
+	        	departid = 
+	        			(
+	        				select porgid from TBSYS_ORGINFO where orgid = #{departid} 
+	        			)
+	        )
+	    </if>
+  </delete>
+  <select id="selectByTempid" parameterType="String" resultType="com.sinog2c.model.system.SystemTemplate">
+  		select * from (select * from TBSYS_TEMPLATE where tempid = #{tempid}
+  		<if test="departid != null and departid !=''" >
+        	and (
+  					departid = 0   
+  					or departid =#{departid}
+  					or departid 
+  					in (
+  							select porgid  from TBSYS_ORGINFO  where  orgid = #{departid} 
+  					   )
+  				)
+       </if>
+       order by departid desc) where rownum=1
+  </select>
+  <select id="validateTempidByDepartid"  resultType="int">
+		select count(*)
+		  from (select tempid c
+		          from TBSYS_TEMPLATE
+		         where tempid = #{tempid}
+		           and departid = #{departid}
+		        union
+		        select departid
+		          from tbsys_template
+		         where tempid = #{tempid}
+		           and departid in (select t.orgid
+		                              from TBSYS_ORGINFO t
+		                             start with t.orgid = #{departid}
+		                            connect by prior t.orgid = t.porgid))  		
+  </select>
+   <!-- 根据部门ID查询表中记录 -->
+  <select id="selectAllByDepartid" parameterType="String" resultType="com.sinog2c.model.system.SystemTemplate">
+	SELECT *
+    FROM (SELECT *
+          FROM TBSYS_TEMPLATE
+         WHERE 1 = 1
+               AND (   departid = '0'
+                    OR departid = #{departid}
+                    OR departid IN (SELECT porgid
+                                      FROM TBSYS_ORGINFO
+                                     WHERE orgid = #{departid}))) a,
+       (  SELECT MAX (departid) maxdepartid, tempid
+            FROM TBSYS_TEMPLATE
+           WHERE 1 = 1
+                 AND (   departid = '0'
+                      OR departid = #{departid}
+                      OR departid IN (SELECT porgid
+                                        FROM TBSYS_ORGINFO
+                                       WHERE orgid = #{departid}))
+        GROUP BY tempid) b
+ 	WHERE a.departid = b.maxdepartid and a.tempid = b.tempid
+       AND a.tempid IN (SELECT tempid
+                          FROM TBFLOW_ARCHIVESCODE
+                         WHERE tempid IS NOT NULL and departid =#{departid} or departid in (select porgid from tbsys_orginfo  where orgid =#{departid}))
+  </select>
+  
+  <select id="getTemplateListByTempids" parameterType="Map" resultType="Map">
+  		SELECT tempid,TEMPNAME FROM TBSYS_TEMPLATE where tempid in (${tempid})
+  		<if test="departid!=null and departid!=''">  
+        	and departid = #{departid}
+    	</if>
+  </select>
+  
+  <!-- 根据条件查询表中记录 -->
+  <select id="selectAllByCondition" parameterType="Map" resultType="com.sinog2c.model.system.SystemTemplate">
+	select * from
+    ( select a.*, rownum rn
+    from
+    (
+    select tempid,functionname,tempname,findid,departid,temptype,generaltype,uneditedfields from TBSYS_TEMPLATE where 1=1 
+     <if test="type!=null and type!=''">  
+        and type = #{type}
+    </if>
+     <if test="departid!=null and departid!=''">  
+        and 
+        (
+        	departid = #{departid}
+        	or 
+        	departid = '0'
+        	or
+        	departid = 
+        			(
+        				select porgid from TBSYS_ORGINFO where orgid = #{departid} 
+        			)
+        )
+    </if>
+    <if test="key!=null and key!=''">  
+        and (tempname like '%'||#{key}||'%' or functionname like '%'||#{key}||'%' or tempid like '%'||#{key}||'%')
+    </if>
+    <if test="sortField!=null and sortField!=''" > 
+     	order by ${sortField}  ${sortOrder}
+    </if>
+    ) a 
+    <if test="start!=null and start!=''">
+   		where rownum &lt;= #{end}
+   	</if> 
+    )
+   	<if test="start!=null and start!=''">
+   		where  rn &gt;= #{start}
+   	</if>
+  </select>
+  <!-- 根据条件查询表中记录总数 -->
+  <select id="countAllByCondition" parameterType="Map" resultType="int">
+	select count(*) c from TBSYS_TEMPLATE where 1=1 
+	<if test="type!=null and type!=''">  
+        and type = #{type}
+    </if>
+    <if test="departid!=null and departid!=''">  
+         and 
+        (
+        	departid = #{departid}
+        	or 
+        	departid = '0'
+        	or 
+        	departid = 
+        			(
+        				select porgid from TBSYS_ORGINFO where orgid = #{departid} 
+        			)
+        )
+    </if>
+    <if test="key!=null and key!=''">  
+		and (tempname like '%'||#{key}||'%' or functionname like '%'||#{key}||'%' or tempid like '%'||#{key}||'%')    </if>
+  </select>
+  
+   <select id="selectAllTemplate"  resultType="java.util.Map">
+     select tempid as confid,tempname as name from TBSYS_TEMPLATE where type=2 order by tempid
+   </select>
+   
+   <select id="findTemplate" parameterType="String" resultType="String">
+   select content from TBSYS_TEMPLATE where TEMPID=#{s}
+   </select>
+   <select id="getCourtSystemModelTree" parameterType="Map" resultType="map">
+   select tempname,tempid,findid from TBSYS_TEMPLATE where TEMPTYPE=#{temptype} and TYPE='1' and DEPARTID=#{departid} order by optime
+   </select>
+</mapper>

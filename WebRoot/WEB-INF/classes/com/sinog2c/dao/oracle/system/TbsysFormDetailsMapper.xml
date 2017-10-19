@@ -1,0 +1,191 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.sinog2c.dao.api.system.TbsysFormDetailsMapper" >
+  <resultMap id="BaseResultMap" type="com.sinog2c.model.system.TbsysFormDetails" >
+    <result column="TEMPID" property="tempid" jdbcType="VARCHAR" />
+    <result column="NODEID" property="nodeid" jdbcType="VARCHAR" />
+    <result column="TYPE" property="type" jdbcType="DECIMAL" />
+    <result column="SYSTEMPID" property="systempid" jdbcType="VARCHAR" />
+    <result column="INPUTPARAM" property="inputparam" jdbcType="VARCHAR" />
+    <result column="OUTPUTPARAM" property="outputparam" jdbcType="VARCHAR" />
+    <result column="DEPARTID" property="departid" jdbcType="VARCHAR" />
+    <result column="REMARK" property="remark" jdbcType="VARCHAR" />
+    <result column="OPTIME" property="optime" jdbcType="DATE" />
+    <result column="OPID" property="opid" jdbcType="VARCHAR" />
+    <result column="TEXT1" property="text1" jdbcType="VARCHAR" />
+    <result column="TEXT2" property="text2" jdbcType="VARCHAR" />
+    <result column="TEXT3" property="text3" jdbcType="VARCHAR" />
+    <result column="TEXT4" property="text4" jdbcType="VARCHAR" />
+    <result column="TEXT5" property="text5" jdbcType="VARCHAR" />
+    <result column="INT1" property="int1" jdbcType="DECIMAL" />
+    <result column="INT2" property="int2" jdbcType="DECIMAL" />
+    <result column="INT3" property="int3" jdbcType="DECIMAL" />
+    <result column="INT4" property="int4" jdbcType="DECIMAL" />
+    <result column="INT5" property="int5" jdbcType="DECIMAL" />
+    <result column="TOJSP" property="tojsp" jdbcType="VARCHAR" />
+  </resultMap>
+  <insert id="insert" parameterType="com.sinog2c.model.system.TbsysFormDetails" >
+    insert into TBSYS_FORM_DETAILS (TEMPID, NODEID, TYPE, 
+      SYSTEMPID, INPUTPARAM, OUTPUTPARAM, 
+      DEPARTID, REMARK, OPTIME, 
+      OPID, TEXT1, TEXT2, 
+      TEXT3, TEXT4, TEXT5, 
+      INT1, INT2, INT3, INT4, 
+      INT5, TOJSP)
+    values (#{tempid,jdbcType=VARCHAR}, #{nodeid,jdbcType=VARCHAR}, #{type,jdbcType=DECIMAL}, 
+      #{systempid,jdbcType=VARCHAR}, #{inputparam,jdbcType=VARCHAR}, #{outputparam,jdbcType=VARCHAR}, 
+      #{departid,jdbcType=VARCHAR}, #{remark,jdbcType=VARCHAR}, #{optime,jdbcType=DATE}, 
+      #{opid,jdbcType=VARCHAR}, #{text1,jdbcType=VARCHAR}, #{text2,jdbcType=VARCHAR}, 
+      #{text3,jdbcType=VARCHAR}, #{text4,jdbcType=VARCHAR}, #{text5,jdbcType=VARCHAR}, 
+      #{int1,jdbcType=DECIMAL}, #{int2,jdbcType=DECIMAL}, #{int3,jdbcType=DECIMAL}, #{int4,jdbcType=DECIMAL}, 
+      #{int5,jdbcType=DECIMAL}, #{tojsp,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.sinog2c.model.system.TbsysFormDetails" >
+    insert into TBSYS_FORM_DETAILS
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="tempid != null" >
+        TEMPID,
+      </if>
+      <if test="nodeid != null" >
+        NODEID,
+      </if>
+      <if test="type != null" >
+        TYPE,
+      </if>
+      <if test="systempid != null" >
+        SYSTEMPID,
+      </if>
+      <if test="inputparam != null" >
+        INPUTPARAM,
+      </if>
+      <if test="outputparam != null" >
+        OUTPUTPARAM,
+      </if>
+      <if test="departid != null" >
+        DEPARTID,
+      </if>
+      <if test="remark != null" >
+        REMARK,
+      </if>
+      <if test="optime != null" >
+        OPTIME,
+      </if>
+      <if test="opid != null" >
+        OPID,
+      </if>
+      <if test="text1 != null" >
+        TEXT1,
+      </if>
+      <if test="text2 != null" >
+        TEXT2,
+      </if>
+      <if test="text3 != null" >
+        TEXT3,
+      </if>
+      <if test="text4 != null" >
+        TEXT4,
+      </if>
+      <if test="text5 != null" >
+        TEXT5,
+      </if>
+      <if test="int1 != null" >
+        INT1,
+      </if>
+      <if test="int2 != null" >
+        INT2,
+      </if>
+      <if test="int3 != null" >
+        INT3,
+      </if>
+      <if test="int4 != null" >
+        INT4,
+      </if>
+      <if test="int5 != null" >
+        INT5,
+      </if>
+      <if test="tojsp != null" >
+        TOJSP,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="tempid != null" >
+        #{tempid,jdbcType=VARCHAR},
+      </if>
+      <if test="nodeid != null" >
+        #{nodeid,jdbcType=VARCHAR},
+      </if>
+      <if test="type != null" >
+        #{type,jdbcType=DECIMAL},
+      </if>
+      <if test="systempid != null" >
+        #{systempid,jdbcType=VARCHAR},
+      </if>
+      <if test="inputparam != null" >
+        #{inputparam,jdbcType=VARCHAR},
+      </if>
+      <if test="outputparam != null" >
+        #{outputparam,jdbcType=VARCHAR},
+      </if>
+      <if test="departid != null" >
+        #{departid,jdbcType=VARCHAR},
+      </if>
+      <if test="remark != null" >
+        #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="optime != null" >
+        #{optime,jdbcType=DATE},
+      </if>
+      <if test="opid != null" >
+        #{opid,jdbcType=VARCHAR},
+      </if>
+      <if test="text1 != null" >
+        #{text1,jdbcType=VARCHAR},
+      </if>
+      <if test="text2 != null" >
+        #{text2,jdbcType=VARCHAR},
+      </if>
+      <if test="text3 != null" >
+        #{text3,jdbcType=VARCHAR},
+      </if>
+      <if test="text4 != null" >
+        #{text4,jdbcType=VARCHAR},
+      </if>
+      <if test="text5 != null" >
+        #{text5,jdbcType=VARCHAR},
+      </if>
+      <if test="int1 != null" >
+        #{int1,jdbcType=DECIMAL},
+      </if>
+      <if test="int2 != null" >
+        #{int2,jdbcType=DECIMAL},
+      </if>
+      <if test="int3 != null" >
+        #{int3,jdbcType=DECIMAL},
+      </if>
+      <if test="int4 != null" >
+        #{int4,jdbcType=DECIMAL},
+      </if>
+      <if test="int5 != null" >
+        #{int5,jdbcType=DECIMAL},
+      </if>
+      <if test="tojsp != null" >
+        #{tojsp,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  
+  <select id="getFormDetails" parameterType="Map" resultMap="BaseResultMap">    <!-- 查询表单细节信息-->
+	 SELECT * FROM TBSYS_FORM_DETAILS t
+		 where t.TEMPID=#{tempid} and t.TYPE = #{type}
+	  <if test="nodeid != null and nodeid !=''" >
+	   		and t.NODEID = #{nodeid}
+      </if>
+	  <if test="departid != null and departid !=''" >
+	   		and t.DEPARTID = #{departid}
+      </if>
+	  <if test="systempid != null and systempid !=''" >
+	   		and t.SYSTEMPID = #{systempid}
+      </if>
+  </select>
+  
+</mapper>

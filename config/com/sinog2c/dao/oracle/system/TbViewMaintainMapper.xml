@@ -1,0 +1,167 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.sinog2c.dao.api.system.TbViewMaintainMapper" >
+  <resultMap id="BaseResultMap" type="com.sinog2c.model.system.TbViewMaintain" >
+    <id column="ID" property="id" jdbcType="VARCHAR" />
+    <result column="FLOWDEFID" property="flowdefid" jdbcType="VARCHAR" />
+    <result column="PROVINCEID" property="provinceid" jdbcType="VARCHAR" />
+    <result column="NODEID" property="nodeid" jdbcType="VARCHAR" />
+    <result column="DAYS" property="days" jdbcType="DECIMAL" />
+  </resultMap>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    ID, FLOWDEFID, PROVINCEID, NODEID, DAYS
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from TBVIEW_MAINTAIN
+    where ID = #{id,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from TBVIEW_MAINTAIN
+    where ID = #{id,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.sinog2c.model.system.TbViewMaintain" >
+    insert into TBVIEW_MAINTAIN (ID, FLOWDEFID, PROVINCEID, 
+      NODEID, DAYS)
+    values (#{id,jdbcType=VARCHAR}, #{flowdefid,jdbcType=VARCHAR}, #{provinceid,jdbcType=VARCHAR}, 
+      #{nodeid,jdbcType=VARCHAR}, #{days,jdbcType=DECIMAL})
+  </insert>
+  <insert id="insertSelective" parameterType="com.sinog2c.model.system.TbViewMaintain" >
+    insert into TBVIEW_MAINTAIN
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        ID,
+      </if>
+      <if test="flowdefid != null" >
+        FLOWDEFID,
+      </if>
+      <if test="provinceid != null" >
+        PROVINCEID,
+      </if>
+      <if test="nodeid != null" >
+        NODEID,
+      </if>
+      <if test="days != null" >
+        DAYS,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=VARCHAR},
+      </if>
+      <if test="flowdefid != null" >
+        #{flowdefid,jdbcType=VARCHAR},
+      </if>
+      <if test="provinceid != null" >
+        #{provinceid,jdbcType=VARCHAR},
+      </if>
+      <if test="nodeid != null" >
+        #{nodeid,jdbcType=VARCHAR},
+      </if>
+      <if test="days != null" >
+        #{days,jdbcType=DECIMAL},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update TBVIEW_MAINTAIN
+    <set >
+      <if test="record.id != null" >
+        ID = #{record.id,jdbcType=VARCHAR},
+      </if>
+      <if test="record.flowdefid != null" >
+        FLOWDEFID = #{record.flowdefid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.provinceid != null" >
+        PROVINCEID = #{record.provinceid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.nodeid != null" >
+        NODEID = #{record.nodeid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.days != null" >
+        DAYS = #{record.days,jdbcType=DECIMAL},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update TBVIEW_MAINTAIN
+    set ID = #{record.id,jdbcType=VARCHAR},
+      FLOWDEFID = #{record.flowdefid,jdbcType=VARCHAR},
+      PROVINCEID = #{record.provinceid,jdbcType=VARCHAR},
+      NODEID = #{record.nodeid,jdbcType=VARCHAR},
+      DAYS = #{record.days,jdbcType=DECIMAL}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.sinog2c.model.system.TbViewMaintain" >
+    update TBVIEW_MAINTAIN
+    <set >
+      <if test="flowdefid != null" >
+        FLOWDEFID = #{flowdefid,jdbcType=VARCHAR},
+      </if>
+      <if test="provinceid != null" >
+        PROVINCEID = #{provinceid,jdbcType=VARCHAR},
+      </if>
+      <if test="nodeid != null" >
+        NODEID = #{nodeid,jdbcType=VARCHAR},
+      </if>
+      <if test="days != null" >
+        DAYS = #{days,jdbcType=DECIMAL},
+      </if>
+    </set>
+    where ID = #{id,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.sinog2c.model.system.TbViewMaintain" >
+    update TBVIEW_MAINTAIN
+    set FLOWDEFID = #{flowdefid,jdbcType=VARCHAR},
+      PROVINCEID = #{provinceid,jdbcType=VARCHAR},
+      NODEID = #{nodeid,jdbcType=VARCHAR},
+      DAYS = #{days,jdbcType=DECIMAL}
+    where ID = #{id,jdbcType=VARCHAR}
+  </update>
+  
+  <select id="selectByCondition" resultType="Map" parameterType="Map" >
+    select *
+    from TBVIEW_MAINTAIN
+    where flowdefid=#{flowdefid} and provinceid=#{provinceid}
+  </select>
+  
+  <select id="selectByProvinceid" resultType="Map" parameterType="Map" >
+    select * from TBVIEW_MAINTAIN where provinceid=#{provinceid}
+  </select>
+  
+</mapper>

@@ -1,0 +1,492 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.sinog2c.dao.api.common.MeetingRecordFlowMapper" >
+  <resultMap id="BaseResultMap" type="com.sinog2c.model.common.MeetingRecordFlow" >
+    <id column="FLOWDRAFTID" property="flowdraftid" jdbcType="VARCHAR" />
+    <id column="CRIMID" property="crimid" jdbcType="VARCHAR" />
+    <result column="TEMPID" property="tempid" jdbcType="VARCHAR" />
+    <result column="GRADE" property="grade" jdbcType="DECIMAL" />
+    <result column="DELFLAG" property="delflag" jdbcType="DECIMAL" />
+    <result column="TEXT1" property="text1" jdbcType="VARCHAR" />
+    <result column="TEXT2" property="text2" jdbcType="VARCHAR" />
+    <result column="TEXT3" property="text3" jdbcType="VARCHAR" />
+    <result column="TEXT4" property="text4" jdbcType="VARCHAR" />
+    <result column="TEXT5" property="text5" jdbcType="VARCHAR" />
+    <result column="TEXT6" property="text6" jdbcType="VARCHAR" />
+    <result column="INT1" property="int1" jdbcType="DECIMAL" />
+    <result column="INT2" property="int2" jdbcType="DECIMAL" />
+    <result column="INT3" property="int3" jdbcType="DECIMAL" />
+    <result column="INT4" property="int4" jdbcType="DECIMAL" />
+    <result column="INT5" property="int5" jdbcType="DECIMAL" />
+    <result column="INT6" property="int6" jdbcType="DECIMAL" />
+    <result column="OPID" property="opid" jdbcType="VARCHAR" />
+    <result column="OPTIME" property="optime" jdbcType="DATE" />
+    <result column="REMARK" property="remark" jdbcType="VARCHAR" />
+    <result column="CASETYPE" property="casetype" jdbcType="VARCHAR" />
+    <result column="DEPARTID" property="departid" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    FLOWDRAFTID, CRIMID, TEMPID, GRADE, DELFLAG, TEXT1, TEXT2, TEXT3, TEXT4, TEXT5, TEXT6, 
+    INT1, INT2, INT3, INT4, INT5, INT6, OPID, OPTIME, REMARK,CASETYPE,DEPARTID
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="com.sinog2c.model.common.MeetingRecordFlowKey" >
+    select 
+    <include refid="Base_Column_List" />
+    from TBSYS_MEETINGRECORDFLOW
+    where FLOWDRAFTID = #{flowdraftid,jdbcType=VARCHAR}
+      and CRIMID = #{crimid,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="com.sinog2c.model.common.MeetingRecordFlowKey" >
+    delete from TBSYS_MEETINGRECORDFLOW
+    where FLOWDRAFTID = #{flowdraftid,jdbcType=VARCHAR}
+      and CRIMID = #{crimid,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.sinog2c.model.common.MeetingRecordFlow" >
+    insert into TBSYS_MEETINGRECORDFLOW (FLOWDRAFTID, CRIMID, TEMPID, 
+      GRADE, DELFLAG, TEXT1, 
+      TEXT2, TEXT3, TEXT4, 
+      TEXT5, TEXT6, INT1, 
+      INT2, INT3, INT4, INT5, 
+      INT6, OPID, OPTIME, REMARK,
+      CASETYPE,DEPARTID
+      )
+    values (#{flowdraftid,jdbcType=VARCHAR}, #{crimid,jdbcType=VARCHAR}, #{tempid,jdbcType=VARCHAR}, 
+      #{grade,jdbcType=DECIMAL}, #{delflag,jdbcType=DECIMAL}, #{text1,jdbcType=VARCHAR}, 
+      #{text2,jdbcType=VARCHAR}, #{text3,jdbcType=VARCHAR}, #{text4,jdbcType=VARCHAR}, 
+      #{text5,jdbcType=VARCHAR}, #{text6,jdbcType=VARCHAR}, #{int1,jdbcType=DECIMAL}, 
+      #{int2,jdbcType=DECIMAL}, #{int3,jdbcType=DECIMAL}, #{int4,jdbcType=DECIMAL}, #{int5,jdbcType=DECIMAL}, 
+      #{int6,jdbcType=DECIMAL}, #{opid,jdbcType=VARCHAR}, #{optime,jdbcType=DATE}, #{remark,jdbcType=VARCHAR},
+      #{casetype,jdbcType=VARCHAR},#{departid,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.sinog2c.model.common.MeetingRecordFlow" >
+    insert into TBSYS_MEETINGRECORDFLOW
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="flowdraftid != null" >
+        FLOWDRAFTID,
+      </if>
+      <if test="crimid != null" >
+        CRIMID,
+      </if>
+      <if test="tempid != null" >
+        TEMPID,
+      </if>
+      <if test="grade != null" >
+        GRADE,
+      </if>
+      <if test="delflag != null" >
+        DELFLAG,
+      </if>
+      <if test="text1 != null" >
+        TEXT1,
+      </if>
+      <if test="text2 != null" >
+        TEXT2,
+      </if>
+      <if test="text3 != null" >
+        TEXT3,
+      </if>
+      <if test="text4 != null" >
+        TEXT4,
+      </if>
+      <if test="text5 != null" >
+        TEXT5,
+      </if>
+      <if test="text6 != null" >
+        TEXT6,
+      </if>
+      <if test="int1 != null" >
+        INT1,
+      </if>
+      <if test="int2 != null" >
+        INT2,
+      </if>
+      <if test="int3 != null" >
+        INT3,
+      </if>
+      <if test="int4 != null" >
+        INT4,
+      </if>
+      <if test="int5 != null" >
+        INT5,
+      </if>
+      <if test="int6 != null" >
+        INT6,
+      </if>
+      <if test="opid != null" >
+        OPID,
+      </if>
+      <if test="optime != null" >
+        OPTIME,
+      </if>
+      <if test="remark != null" >
+        REMARK,
+      </if>
+      <if test="casetype != null" >
+        CASETYPE,
+      </if>
+      <if test="departid != null" >
+        DEPARTID,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="flowdraftid != null" >
+        #{flowdraftid,jdbcType=VARCHAR},
+      </if>
+      <if test="crimid != null" >
+        #{crimid,jdbcType=VARCHAR},
+      </if>
+      <if test="tempid != null" >
+        #{tempid,jdbcType=VARCHAR},
+      </if>
+      <if test="grade != null" >
+        #{grade,jdbcType=DECIMAL},
+      </if>
+      <if test="delflag != null" >
+        #{delflag,jdbcType=DECIMAL},
+      </if>
+      <if test="text1 != null" >
+        #{text1,jdbcType=VARCHAR},
+      </if>
+      <if test="text2 != null" >
+        #{text2,jdbcType=VARCHAR},
+      </if>
+      <if test="text3 != null" >
+        #{text3,jdbcType=VARCHAR},
+      </if>
+      <if test="text4 != null" >
+        #{text4,jdbcType=VARCHAR},
+      </if>
+      <if test="text5 != null" >
+        #{text5,jdbcType=VARCHAR},
+      </if>
+      <if test="text6 != null" >
+        #{text6,jdbcType=VARCHAR},
+      </if>
+      <if test="int1 != null" >
+        #{int1,jdbcType=DECIMAL},
+      </if>
+      <if test="int2 != null" >
+        #{int2,jdbcType=DECIMAL},
+      </if>
+      <if test="int3 != null" >
+        #{int3,jdbcType=DECIMAL},
+      </if>
+      <if test="int4 != null" >
+        #{int4,jdbcType=DECIMAL},
+      </if>
+      <if test="int5 != null" >
+        #{int5,jdbcType=DECIMAL},
+      </if>
+      <if test="int6 != null" >
+        #{int6,jdbcType=DECIMAL},
+      </if>
+      <if test="opid != null" >
+        #{opid,jdbcType=VARCHAR},
+      </if>
+      <if test="optime != null" >
+        #{optime,jdbcType=DATE},
+      </if>
+      <if test="remark != null" >
+        #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="casetype != null" >
+        #{casetype,jdbcType=VARCHAR},
+      </if>
+      <if test="departid != null" >
+        #{departid,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.sinog2c.model.common.MeetingRecordFlow" >
+    update TBSYS_MEETINGRECORDFLOW
+    <set >
+      <if test="tempid != null" >
+        TEMPID = #{tempid,jdbcType=VARCHAR},
+      </if>
+      <if test="grade != null" >
+        GRADE = #{grade,jdbcType=DECIMAL},
+      </if>
+      <if test="delflag != null" >
+        DELFLAG = #{delflag,jdbcType=DECIMAL},
+      </if>
+      <if test="text1 != null" >
+        TEXT1 = #{text1,jdbcType=VARCHAR},
+      </if>
+      <if test="text2 != null" >
+        TEXT2 = #{text2,jdbcType=VARCHAR},
+      </if>
+      <if test="text3 != null" >
+        TEXT3 = #{text3,jdbcType=VARCHAR},
+      </if>
+      <if test="text4 != null" >
+        TEXT4 = #{text4,jdbcType=VARCHAR},
+      </if>
+      <if test="text5 != null" >
+        TEXT5 = #{text5,jdbcType=VARCHAR},
+      </if>
+      <if test="text6 != null" >
+        TEXT6 = #{text6,jdbcType=VARCHAR},
+      </if>
+      <if test="int1 != null" >
+        INT1 = #{int1,jdbcType=DECIMAL},
+      </if>
+      <if test="int2 != null" >
+        INT2 = #{int2,jdbcType=DECIMAL},
+      </if>
+      <if test="int3 != null" >
+        INT3 = #{int3,jdbcType=DECIMAL},
+      </if>
+      <if test="int4 != null" >
+        INT4 = #{int4,jdbcType=DECIMAL},
+      </if>
+      <if test="int5 != null" >
+        INT5 = #{int5,jdbcType=DECIMAL},
+      </if>
+      <if test="int6 != null" >
+        INT6 = #{int6,jdbcType=DECIMAL},
+      </if>
+      <if test="opid != null" >
+        OPID = #{opid,jdbcType=VARCHAR},
+      </if>
+      <if test="optime != null" >
+        OPTIME = #{optime,jdbcType=DATE},
+      </if>
+      <if test="remark != null" >
+        REMARK = #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="casetype != null" >
+        CASETYPE = #{casetype,jdbcType=VARCHAR},
+      </if>
+      <if test="departid != null" >
+        DEPARTID = #{departid,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where FLOWDRAFTID = #{flowdraftid,jdbcType=VARCHAR}
+      and CRIMID = #{crimid,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.sinog2c.model.common.MeetingRecordFlow" >
+    update TBSYS_MEETINGRECORDFLOW
+    set TEMPID = #{tempid,jdbcType=VARCHAR},
+      GRADE = #{grade,jdbcType=DECIMAL},
+      DELFLAG = #{delflag,jdbcType=DECIMAL},
+      TEXT1 = #{text1,jdbcType=VARCHAR},
+      TEXT2 = #{text2,jdbcType=VARCHAR},
+      TEXT3 = #{text3,jdbcType=VARCHAR},
+      TEXT4 = #{text4,jdbcType=VARCHAR},
+      TEXT5 = #{text5,jdbcType=VARCHAR},
+      TEXT6 = #{text6,jdbcType=VARCHAR},
+      INT1 = #{int1,jdbcType=DECIMAL},
+      INT2 = #{int2,jdbcType=DECIMAL},
+      INT3 = #{int3,jdbcType=DECIMAL},
+      INT4 = #{int4,jdbcType=DECIMAL},
+      INT5 = #{int5,jdbcType=DECIMAL},
+      INT6 = #{int6,jdbcType=DECIMAL},
+      OPID = #{opid,jdbcType=VARCHAR},
+      OPTIME = #{optime,jdbcType=DATE},
+      REMARK = #{remark,jdbcType=VARCHAR},
+      CASETYPE = #{casetype,jdbcType=VARCHAR},
+      DEPARTID = #{departid,jdbcType=VARCHAR}
+    where FLOWDRAFTID = #{flowdraftid,jdbcType=VARCHAR}
+      and CRIMID = #{crimid,jdbcType=VARCHAR}
+  </update>
+  <!--add YZGL 20150907 begin -->
+   <insert id="addYZGLDataMain" parameterType="Map" >
+    insert into TBYZ_MAG_MTHREPORTER
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="tbnumber != null" >
+        TBNUMBER,
+      </if>
+      <if test="reportertime != null" >
+        REPORTERTIME,
+      </if>
+      <if test="ed_rdprisoner != null" >
+        ED_RDPRISONER,
+      </if>  
+      <if test="escapes != null" >
+        ESCAPES,
+      </if>  
+      <if test="recaptureescapee != null" >
+        RECAPTUREESCAPEE,
+      </if>  
+      <if test="incidence != null" >
+        INCIDENCE,
+      </if>   
+      <if test="lgincidence != null" >
+        LGINCIDENCE,
+      </if>
+      <if test="detection != null" >
+        DETECTION,
+      </if>
+      <if test="new_rdprisoner != null" >
+        NEW_RDPRISONER,
+      </if>
+      <if test="flowdraftid != null" >
+        FLOWDRAFTID,
+      </if> 
+      <if test="auditor != null" >
+        AUDITOR,
+      </if> 
+      <if test="preparer != null" >
+        PREPARER,
+      </if> 
+      <if test="filingdate != null" >
+        FILINGDATE,
+      </if> 
+      <if test="depart != null" >
+        DEPART
+      </if> 
+  </trim>
+<trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="tbnumber != null" >
+        #{tbnumber,jdbcType=VARCHAR},
+      </if> 
+      <if test="reportertime != null" >
+        #{reportertime,jdbcType=VARCHAR},
+      </if>  
+      <if test="ed_rdprisoner != null" >
+        #{ed_rdprisoner,jdbcType=VARCHAR},
+      </if>  
+      <if test="escapes != null" >
+        #{escapes,jdbcType=VARCHAR},
+      </if>  
+      <if test="recaptureescapee != null" >
+        #{recaptureescapee,jdbcType=VARCHAR},
+      </if>  
+      <if test="incidence != null" >
+        #{incidence,jdbcType=VARCHAR},
+      </if>  
+      <if test="lgincidence != null" >
+        #{lgincidence,jdbcType=VARCHAR},
+      </if>  
+      <if test="detection != null" >
+        #{detection,jdbcType=VARCHAR},
+      </if>  
+      <if test="new_rdprisoner != null" >
+        #{new_rdprisoner,jdbcType=VARCHAR},
+      </if>  
+      <if test="flowdraftid != null" >
+        #{flowdraftid,jdbcType=VARCHAR},
+      </if>  
+      <if test="auditor != null" >
+        #{auditor,jdbcType=VARCHAR},
+      </if>  
+      <if test="preparer != null" >
+        #{preparer,jdbcType=VARCHAR},
+      </if>       
+      <if test="filingdate != null" >
+        #{filingdate,jdbcType=VARCHAR},
+      </if> 
+      <if test="depart != null" >
+        #{depart,jdbcType=VARCHAR}
+      </if> 
+    </trim>
+  </insert>
+   <insert id="addYZGLDataChild" parameterType="Map" >
+    insert into TBYZ_MAG_MTHREPORTER_CHD
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="departid != null" >
+        DEPARTID,
+      </if>
+      <if test="escapeway != null" >
+        ESCAPEWAY,
+      </if>
+      <if test="escapepopulation != null" >
+        ESCAPEPOPULATION,
+      </if>  
+      <if test="incidencedept != null" >
+        INCIDENCEDEPT,
+      </if>  
+      <if test="casecategory != null" >
+        CASECATEGORY,
+      </if>  
+      <if test="casequality != null" >
+        CASEQUALITY,
+      </if>   
+      <if test="sunqipopulation != null" >
+        SUNQIPOPULATION,
+      </if>
+      <if test="flowdraftid != null" >
+        FLOWDRAFTID
+      </if>
+  </trim> 
+<trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="departid != null" >
+        #{departid,jdbcType=VARCHAR},
+      </if> 
+      <if test="escapeway != null" >
+        #{escapeway,jdbcType=VARCHAR},
+      </if>  
+      <if test="escapepopulation != null" >
+        #{escapepopulation,jdbcType=VARCHAR},
+      </if>  
+      <if test="incidencedept != null" >
+        #{incidencedept,jdbcType=VARCHAR},
+      </if>  
+      <if test="casecategory != null" >
+        #{casecategory,jdbcType=VARCHAR},
+      </if>  
+      <if test="casequality != null" >
+        #{casequality,jdbcType=VARCHAR},
+      </if>  
+      <if test="sunqipopulation != null" >
+        #{sunqipopulation,jdbcType=VARCHAR},
+      </if>  
+      <if test="flowdraftid != null" >
+        #{flowdraftid,jdbcType=VARCHAR}
+      </if>  
+    </trim>
+  </insert> 
+   <update id="updateYZGLDataMain" parameterType="Map" >
+    update TBYZ_MAG_MTHREPORTER
+    <set >
+      <if test="tbnumber != null" >
+        TBNUMBER = #{tbnumber,jdbcType=VARCHAR},
+      </if> 
+      <if test="reportertime != null" >
+        REPORTERTIME = #{reportertime,jdbcType=VARCHAR},
+      </if>  
+      <if test="ed_rdprisoner != null" >
+        ED_RDPRISONER = #{ed_rdprisoner,jdbcType=VARCHAR},
+      </if>  
+      <if test="escapes != null" >
+       ESCAPES = #{escapes,jdbcType=VARCHAR},
+      </if>  
+      <if test="recaptureescapee != null" >
+        RECAPTUREESCAPEE = #{recaptureescapee,jdbcType=VARCHAR},
+      </if>  
+      <if test="incidence != null" >
+        INCIDENCE = #{incidence,jdbcType=VARCHAR},
+      </if>  
+      <if test="lgincidence != null" >
+        LGINCIDENCE = #{lgincidence,jdbcType=VARCHAR},
+      </if>  
+      <if test="detection != null" >
+        DETECTION = #{detection,jdbcType=VARCHAR},
+      </if>  
+      <if test="new_rdprisoner != null" >
+        NEW_RDPRISONER = #{new_rdprisoner,jdbcType=VARCHAR},
+      </if>  
+      <if test="new_flowdraftid != null" >
+        FLOWDRAFTID = #{new_flowdraftid,jdbcType=VARCHAR},
+      </if>  
+      <if test="auditor != null" >
+        AUDITOR = #{auditor,jdbcType=VARCHAR},
+      </if>  
+      <if test="preparer != null" >
+        PREPARER = #{preparer,jdbcType=VARCHAR},
+      </if>       
+      <if test="filingdate != null" >
+        FILINGDATE = #{filingdate,jdbcType=VARCHAR},
+      </if> 
+      <if test="depart != null" >
+       DEPART = #{depart,jdbcType=VARCHAR}
+      </if>
+    </set>
+   		 where FLOWDRAFTID = #{flowdraftid,jdbcType=VARCHAR}
+  </update> 
+<delete id="deleteOldYZGLDataChild" parameterType="Map">
+		delete from TBYZ_MAG_MTHREPORTER_CHD
+				where FLOWDRAFTID = #{old_flowdraftid,jdbcType=VARCHAR}
+</delete>
+</mapper>

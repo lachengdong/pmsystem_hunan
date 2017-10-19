@@ -1,0 +1,234 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.sinog2c.dao.api.prisoner.TbprisonerResumeMapper" >
+  <resultMap id="BaseResultMap" type="com.sinog2c.model.prisoner.TbprisonerResume" >
+    <id column="RESUMEID" property="resumeid" jdbcType="DECIMAL" />
+    <result column="ID" property="id" jdbcType="VARCHAR" />
+    <result column="CRIMID" property="crimid" jdbcType="VARCHAR" />
+    <result column="BEGINDATE" property="begindate" jdbcType="VARCHAR" />
+    <result column="ENDDATE" property="enddate" jdbcType="VARCHAR" />
+    <result column="ORGADDRESS" property="orgaddress" jdbcType="VARCHAR" />
+    <result column="ORGNAME" property="orgname" jdbcType="VARCHAR" />
+    <result column="POSTALCODE" property="postalcode" jdbcType="VARCHAR" />
+    <result column="VOCATION" property="vocation" jdbcType="VARCHAR" />
+    <result column="RETERENCE" property="reterence" jdbcType="VARCHAR" />
+    <result column="RETERENCELINK" property="reterencelink" jdbcType="VARCHAR" />
+    <result column="IDENTITY" property="identity" jdbcType="VARCHAR" />
+    <result column="CLEVEL" property="clevel" jdbcType="VARCHAR" />
+    <result column="DUTY" property="duty" jdbcType="VARCHAR" />
+    <result column="ORGMARK" property="orgmark" jdbcType="DECIMAL" />
+    <result column="REMARK" property="remark" jdbcType="VARCHAR" />
+    <result column="DELFLAG" property="delflag" jdbcType="VARCHAR" />
+    <result column="OPID" property="opid" jdbcType="VARCHAR" />
+    <result column="OPTIME" property="optime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    RESUMEID, ID, CRIMID, BEGINDATE, ENDDATE, ORGADDRESS, ORGNAME, POSTALCODE, VOCATION, 
+    RETERENCE, RETERENCELINK, "IDENTITY", CLEVEL, DUTY, ORGMARK, REMARK, DELFLAG, OPID, 
+    OPTIME
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select <include refid="Base_Column_List" /> from TBPRISONER_RESUME
+         where RESUMEID = #{resumeid,jdbcType=DECIMAL}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from TBPRISONER_RESUME where RESUMEID = #{resumeid,jdbcType=DECIMAL}
+  </delete>
+  <!-- 罪犯简历保存之前获取简历ID -->
+  <select id="getResumeid" parameterType="String" resultType="String" >
+  	select nvl(max(resumeid),0)+1 as resumeid from TBPRISONER_RESUME 
+  </select>
+  <insert id="insertSelective" parameterType="com.sinog2c.model.prisoner.TbprisonerResume" >
+    insert into TBPRISONER_RESUME
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="resumeid != null" >
+        RESUMEID,
+      </if>
+      <if test="id != null" >
+        ID,
+      </if>
+      <if test="crimid != null" >
+        CRIMID,
+      </if>
+      <if test="begindate != null" >
+        BEGINDATE,
+      </if>
+      <if test="enddate != null" >
+        ENDDATE,
+      </if>
+      <if test="orgaddress != null" >
+        ORGADDRESS,
+      </if>
+      <if test="orgname != null" >
+        ORGNAME,
+      </if>
+      <if test="postalcode != null" >
+        POSTALCODE,
+      </if>
+      <if test="vocation != null" >
+        VOCATION,
+      </if>
+      <if test="reterence != null" >
+        RETERENCE,
+      </if>
+      <if test="reterencelink != null" >
+        RETERENCELINK,
+      </if>
+      <if test="identity != null" >
+        IDENTITY,
+      </if>
+      <if test="clevel != null" >
+        CLEVEL,
+      </if>
+      <if test="duty != null" >
+        DUTY,
+      </if>
+      <if test="orgmark != null" >
+        ORGMARK,
+      </if>
+      <if test="remark != null" >
+        REMARK,
+      </if>
+      <if test="delflag != null" >
+        DELFLAG,
+      </if>
+      <if test="opid != null" >
+        OPID,
+      </if>
+      <if test="optime != null" >
+        OPTIME,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="resumeid != null" >
+        #{resumeid,jdbcType=DECIMAL},
+      </if>
+      <if test="id != null" >
+        #{id,jdbcType=VARCHAR},
+      </if>
+      <if test="crimid != null" >
+        #{crimid,jdbcType=VARCHAR},
+      </if>
+      <if test="begindate != null" >
+        #{begindate,jdbcType=VARCHAR},
+      </if>
+      <if test="enddate != null" >
+        #{enddate,jdbcType=VARCHAR},
+      </if>
+      <if test="orgaddress != null" >
+        #{orgaddress,jdbcType=VARCHAR},
+      </if>
+      <if test="orgname != null" >
+        #{orgname,jdbcType=VARCHAR},
+      </if>
+      <if test="postalcode != null" >
+        #{postalcode,jdbcType=VARCHAR},
+      </if>
+      <if test="vocation != null" >
+        #{vocation,jdbcType=VARCHAR},
+      </if>
+      <if test="reterence != null" >
+        #{reterence,jdbcType=VARCHAR},
+      </if>
+      <if test="reterencelink != null" >
+        #{reterencelink,jdbcType=VARCHAR},
+      </if>
+      <if test="identity != null" >
+        #{identity,jdbcType=VARCHAR},
+      </if>
+      <if test="clevel != null" >
+        #{clevel,jdbcType=VARCHAR},
+      </if>
+      <if test="duty != null" >
+        #{duty,jdbcType=VARCHAR},
+      </if>
+      <if test="orgmark != null" >
+        #{orgmark,jdbcType=DECIMAL},
+      </if>
+      <if test="remark != null" >
+        #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="delflag != null" >
+        #{delflag,jdbcType=VARCHAR},
+      </if>
+      <if test="opid != null" >
+        #{opid,jdbcType=VARCHAR},
+      </if>
+      <if test="optime != null" >
+        #{optime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.sinog2c.model.prisoner.TbprisonerResume" >
+    update TBPRISONER_RESUME
+    <set >
+      <if test="id != null" >
+        CRIMID = #{id,jdbcType=VARCHAR},
+      </if>
+      <if test="crimid != null" >
+        CRIMID = #{crimid,jdbcType=VARCHAR},
+      </if>
+      <if test="begindate != null" >
+        BEGINDATE = #{begindate,jdbcType=VARCHAR},
+      </if>
+      <if test="enddate != null" >
+        ENDDATE = #{enddate,jdbcType=VARCHAR},
+      </if>
+      <if test="orgaddress != null" >
+        ORGADDRESS = #{orgaddress,jdbcType=VARCHAR},
+      </if>
+      <if test="orgname != null" >
+        ORGNAME = #{orgname,jdbcType=VARCHAR},
+      </if>
+      <if test="postalcode != null" >
+        POSTALCODE = #{postalcode,jdbcType=VARCHAR},
+      </if>
+      <if test="vocation != null" >
+        VOCATION = #{vocation,jdbcType=VARCHAR},
+      </if>
+      <if test="reterence != null" >
+        RETERENCE = #{reterence,jdbcType=VARCHAR},
+      </if>
+      <if test="reterencelink != null" >
+        RETERENCELINK = #{reterencelink,jdbcType=VARCHAR},
+      </if>
+      <if test="identity != null" >
+        IDENTITY = #{identity,jdbcType=VARCHAR},
+      </if>
+      <if test="clevel != null" >
+        CLEVEL = #{clevel,jdbcType=VARCHAR},
+      </if>
+      <if test="duty != null" >
+        DUTY = #{duty,jdbcType=VARCHAR},
+      </if>
+      <if test="orgmark != null" >
+        ORGMARK = #{orgmark,jdbcType=DECIMAL},
+      </if>
+      <if test="remark != null" >
+        REMARK = #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="delflag != null" >
+        DELFLAG = #{delflag,jdbcType=VARCHAR},
+      </if>
+      <if test="opid != null" >
+        OPID = #{opid,jdbcType=VARCHAR},
+      </if>
+      <if test="optime != null" >
+        OPTIME = #{optime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where RESUMEID = #{resumeid,jdbcType=DECIMAL}
+  </update>
+  <select id="findBycrimid" resultType="com.sinog2c.model.prisoner.TbprisonerResume" >
+  	select * from TBPRISONER_RESUME  where crimid=#{crimid} order by resumeid asc
+  </select>
+  
+  <select id="getJianXingBaseInfo" resultType="Map" >
+  	select * from CRIMINAL_JIANXINGINFO_UV  where crimid=#{crimid} 
+  </select>
+  
+  <select id="getCriminalInfo" resultType="Map" >
+  	select * from UV_CRIMINAL_INFO  where crimid=#{crimid} 
+  </select>
+  
+</mapper>

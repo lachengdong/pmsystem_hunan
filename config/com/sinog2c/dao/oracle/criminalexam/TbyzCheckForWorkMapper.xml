@@ -1,0 +1,1592 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.sinog2c.dao.api.criminalexam.TbyzCheckForWorkMapper" >
+  <resultMap id="BaseResultMap" type="com.sinog2c.model.criminalexam.TbyzCheckForWork" >
+    <id column="CRIMID" property="crimid" jdbcType="VARCHAR" />
+    <id column="YEARDATE" property="yeardate" jdbcType="VARCHAR" />
+    <result column="DEPARTID" property="departid" jdbcType="VARCHAR" />
+    <result column="DAY01" property="day01" jdbcType="VARCHAR" />
+    <result column="DAY02" property="day02" jdbcType="VARCHAR" />
+    <result column="DAY03" property="day03" jdbcType="VARCHAR" />
+    <result column="DAY04" property="day04" jdbcType="VARCHAR" />
+    <result column="DAY05" property="day05" jdbcType="VARCHAR" />
+    <result column="DAY06" property="day06" jdbcType="VARCHAR" />
+    <result column="DAY07" property="day07" jdbcType="VARCHAR" />
+    <result column="DAY08" property="day08" jdbcType="VARCHAR" />
+    <result column="DAY09" property="day09" jdbcType="VARCHAR" />
+    <result column="DAY10" property="day10" jdbcType="VARCHAR" />
+    <result column="DAY11" property="day11" jdbcType="VARCHAR" />
+    <result column="DAY12" property="day12" jdbcType="VARCHAR" />
+    <result column="DAY13" property="day13" jdbcType="VARCHAR" />
+    <result column="DAY14" property="day14" jdbcType="VARCHAR" />
+    <result column="DAY15" property="day15" jdbcType="VARCHAR" />
+    <result column="DAY16" property="day16" jdbcType="VARCHAR" />
+    <result column="DAY17" property="day17" jdbcType="VARCHAR" />
+    <result column="DAY18" property="day18" jdbcType="VARCHAR" />
+    <result column="DAY19" property="day19" jdbcType="VARCHAR" />
+    <result column="DAY20" property="day20" jdbcType="VARCHAR" />
+    <result column="DAY21" property="day21" jdbcType="VARCHAR" />
+    <result column="DAY22" property="day22" jdbcType="VARCHAR" />
+    <result column="DAY23" property="day23" jdbcType="VARCHAR" />
+    <result column="DAY24" property="day24" jdbcType="VARCHAR" />
+    <result column="DAY25" property="day25" jdbcType="VARCHAR" />
+    <result column="DAY26" property="day26" jdbcType="VARCHAR" />
+    <result column="DAY27" property="day27" jdbcType="VARCHAR" />
+    <result column="DAY28" property="day28" jdbcType="VARCHAR" />
+    <result column="DAY29" property="day29" jdbcType="VARCHAR" />
+    <result column="DAY30" property="day30" jdbcType="VARCHAR" />
+    <result column="DAY31" property="day31" jdbcType="VARCHAR" />
+    <result column="REMARK" property="remark" jdbcType="VARCHAR" />
+    <result column="BASICSCORE" property="basicscore" jdbcType="FLOAT" />
+    <result column="ZHJFSCORE" property="zhjfscore" jdbcType="FLOAT" />
+    <result column="LDGZSCORE" property="ldgzscore" jdbcType="FLOAT" />
+    <result column="XZJFSCORE" property="xzjfscore" jdbcType="FLOAT" />
+    <result column="XZKFSCORE" property="xzkfscore" jdbcType="FLOAT" />
+    <result column="KHSCORE" property="khscore" jdbcType="FLOAT" />
+    <result column="CCJFSCORE" property="ccjfscore" jdbcType="FLOAT" />
+    <result column="STATE" property="state" jdbcType="VARCHAR" />
+    <result column="WORKDAYNUM" property="workdaynum" jdbcType="DECIMAL" />
+    <result column="LASTSCORE" property="lastscore" jdbcType="DECIMAL" />
+    <result column="TEXT1" property="text1" jdbcType="VARCHAR" />
+    <result column="TEXT2" property="text2" jdbcType="VARCHAR" />
+    <result column="TEXT3" property="text3" jdbcType="VARCHAR" />
+    <result column="TEXT4" property="text4" jdbcType="VARCHAR" />
+    <result column="INT1" property="int1" jdbcType="DECIMAL" />
+    <result column="INT2" property="int2" jdbcType="DECIMAL" />
+    <result column="OPTIME" property="optime" jdbcType="DATE" />
+    <result column="OPID" property="opid" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    CRIMID, YEARDATE, DEPARTID, DAY01, DAY02, DAY03, DAY04, DAY05, DAY06, DAY07, DAY08, 
+    DAY09, DAY10, DAY11, DAY12, DAY13, DAY14, DAY15, DAY16, DAY17, DAY18, DAY19, DAY20, 
+    DAY21, DAY22, DAY23, DAY24, DAY25, DAY26, DAY27, DAY28, DAY29, DAY30, DAY31, REMARK, 
+    ZHJFSCORE, LDGZSCORE, XZJFSCORE, XZKFSCORE, KHSCORE, CCJFSCORE, STATE, WORKDAYNUM, 
+    LASTSCORE, TEXT1, TEXT2, TEXT3, TEXT4, INT1, INT2, OPTIME, OPID
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="com.sinog2c.model.criminalexam.TbyzCheckForWorkKey" >
+    select 
+    <include refid="Base_Column_List" />
+    from TBYZ_CHECK_FOR_WORK
+    where CRIMID = #{crimid,jdbcType=VARCHAR}
+      and YEARDATE = #{yeardate,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="com.sinog2c.model.criminalexam.TbyzCheckForWorkKey" >
+    delete from TBYZ_CHECK_FOR_WORK
+    where CRIMID = #{crimid,jdbcType=VARCHAR}
+      and YEARDATE = #{yeardate,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.sinog2c.model.criminalexam.TbyzCheckForWork" >
+    insert into TBYZ_CHECK_FOR_WORK (CRIMID, YEARDATE, DEPARTID, 
+      DAY01, DAY02, DAY03, 
+      DAY04, DAY05, DAY06, 
+      DAY07, DAY08, DAY09, 
+      DAY10, DAY11, DAY12, 
+      DAY13, DAY14, DAY15, 
+      DAY16, DAY17, DAY18, 
+      DAY19, DAY20, DAY21, 
+      DAY22, DAY23, DAY24, 
+      DAY25, DAY26, DAY27, 
+      DAY28, DAY29, DAY30, 
+      DAY31, REMARK,BASICSCORE, ZHJFSCORE, 
+      LDGZSCORE, XZJFSCORE, XZKFSCORE, 
+      KHSCORE, CCJFSCORE, STATE, 
+      WORKDAYNUM, LASTSCORE, TEXT1, 
+      TEXT2, TEXT3, TEXT4, 
+      INT1, INT2, OPTIME, OPID
+      )
+    values (#{crimid,jdbcType=VARCHAR}, #{yeardate,jdbcType=VARCHAR}, #{departid,jdbcType=VARCHAR}, 
+      #{day01,jdbcType=VARCHAR}, #{day02,jdbcType=VARCHAR}, #{day03,jdbcType=VARCHAR}, 
+      #{day04,jdbcType=VARCHAR}, #{day05,jdbcType=VARCHAR}, #{day06,jdbcType=VARCHAR}, 
+      #{day07,jdbcType=VARCHAR}, #{day08,jdbcType=VARCHAR}, #{day09,jdbcType=VARCHAR}, 
+      #{day10,jdbcType=VARCHAR}, #{day11,jdbcType=VARCHAR}, #{day12,jdbcType=VARCHAR}, 
+      #{day13,jdbcType=VARCHAR}, #{day14,jdbcType=VARCHAR}, #{day15,jdbcType=VARCHAR}, 
+      #{day16,jdbcType=VARCHAR}, #{day17,jdbcType=VARCHAR}, #{day18,jdbcType=VARCHAR}, 
+      #{day19,jdbcType=VARCHAR}, #{day20,jdbcType=VARCHAR}, #{day21,jdbcType=VARCHAR}, 
+      #{day22,jdbcType=VARCHAR}, #{day23,jdbcType=VARCHAR}, #{day24,jdbcType=VARCHAR}, 
+      #{day25,jdbcType=VARCHAR}, #{day26,jdbcType=VARCHAR}, #{day27,jdbcType=VARCHAR}, 
+      #{day28,jdbcType=VARCHAR}, #{day29,jdbcType=VARCHAR}, #{day30,jdbcType=VARCHAR}, 
+      #{day31,jdbcType=VARCHAR}, #{remark,jdbcType=VARCHAR},  #{basicscore,jdbcType=FLOAT}, #{zhjfscore,jdbcType=FLOAT}, 
+      #{ldgzscore,jdbcType=FLOAT}, #{xzjfscore,jdbcType=FLOAT}, #{xzkfscore,jdbcType=FLOAT}, 
+      #{khscore,jdbcType=FLOAT}, #{ccjfscore,jdbcType=FLOAT}, #{state,jdbcType=VARCHAR}, 
+      #{workdaynum,jdbcType=DECIMAL}, #{lastscore,jdbcType=DECIMAL}, #{text1,jdbcType=VARCHAR}, 
+      #{text2,jdbcType=VARCHAR}, #{text3,jdbcType=VARCHAR}, #{text4,jdbcType=VARCHAR}, 
+      #{int1,jdbcType=DECIMAL}, #{int2,jdbcType=DECIMAL}, #{optime,jdbcType=DATE}, #{opid,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.sinog2c.model.criminalexam.TbyzCheckForWork" >
+    insert into TBYZ_CHECK_FOR_WORK
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="crimid != null and crimid!= ''" >
+        CRIMID,
+      </if>
+      <if test="yeardate != null and yeardate!= ''" >
+        YEARDATE,
+      </if>
+      <if test="departid != null and departid!= ''" >
+        DEPARTID,
+      </if>
+      <if test="day01 != null and day01!= ''" >
+        DAY01,
+      </if>
+      <if test="day02 != null and day02!= ''" >
+        DAY02,
+      </if>
+      <if test="day03 != null and day03!= ''" >
+        DAY03,
+      </if>
+      <if test="day04 != null and day04!= ''" >
+        DAY04,
+      </if>
+      <if test="day05 != null and day05!= ''" >
+        DAY05,
+      </if>
+      <if test="day06 != null and day06!= ''" >
+        DAY06,
+      </if>
+      <if test="day07 != null and day07!= ''" >
+        DAY07,
+      </if>
+      <if test="day08 != null and day08!= ''" >
+        DAY08,
+      </if>
+      <if test="day09 != null and day09!= ''" >
+        DAY09,
+      </if>
+      <if test="day10 != null and day10!= ''" >
+        DAY10,
+      </if>
+      <if test="day11 != null and day11!= ''" >
+        DAY11,
+      </if>
+      <if test="day12 != null and day12!= ''" >
+        DAY12,
+      </if>
+      <if test="day13 != null and day13!= ''" >
+        DAY13,
+      </if>
+      <if test="day14 != null and day14!= ''" >
+        DAY14,
+      </if>
+      <if test="day15 != null and day15!= ''" >
+        DAY15,
+      </if>
+      <if test="day16 != null and day16!= ''" >
+        DAY16,
+      </if>
+      <if test="day17 != null and day17!= ''" >
+        DAY17,
+      </if>
+      <if test="day18 != null and day18!= ''" >
+        DAY18,
+      </if>
+      <if test="day19 != null and day19!= ''" >
+        DAY19,
+      </if>
+      <if test="day20 != null and day20!= ''" >
+        DAY20,
+      </if>
+      <if test="day21 != null and day21!= ''" >
+        DAY21,
+      </if>
+      <if test="day22 != null and day22!= ''" >
+        DAY22,
+      </if>
+      <if test="day23 != null and day23!= ''" >
+        DAY23,
+      </if>
+      <if test="day24 != null and day24!= ''" >
+        DAY24,
+      </if>
+      <if test="day25 != null and day25!= ''" >
+        DAY25,
+      </if>
+      <if test="day26 != null and day26!= ''" >
+        DAY26,
+      </if>
+      <if test="day27 != null and day27!= ''" >
+        DAY27,
+      </if>
+      <if test="day28 != null and day28!= ''" >
+        DAY28,
+      </if>
+      <if test="day29 != null and day29!= ''" >
+        DAY29,
+      </if>
+      <if test="day30 != null and day30!= ''" >
+        DAY30,
+      </if>
+      <if test="day31 != null and day31!= ''" >
+        DAY31,
+      </if>
+      <if test="remark != null and remark!= ''" >
+        REMARK,
+      </if>
+      <if test="basicscore != null and basicscore!= ''" >
+        BASICSCORE,
+      </if>
+      <if test="zhjfscore != null and zhjfscore!= ''" >
+        ZHJFSCORE,
+      </if>
+      <if test="ldgzscore != null and ldgzscore!= ''" >
+        LDGZSCORE,
+      </if>
+      <if test="xzjfscore != null and xzjfscore!= ''" >
+        XZJFSCORE,
+      </if>
+      <if test="xzkfscore != null and xzkfscore!= ''" >
+        XZKFSCORE,
+      </if>
+      <if test="khscore != null and khscore!= ''" >
+        KHSCORE,
+      </if>
+      <if test="ccjfscore != null and ccjfscore!= ''" >
+        CCJFSCORE,
+      </if>
+      <if test="state != null and state!= ''" >
+        STATE,
+      </if>
+      <if test="workdaynum != null and workdaynum!= ''" >
+        WORKDAYNUM,
+      </if>
+      <if test="lastscore != null and lastscore!= ''" >
+        LASTSCORE,
+      </if>
+      <if test="text1 != null and text1!= ''" >
+        TEXT1,
+      </if>
+      <if test="text2 != null and text2!= ''" >
+        TEXT2,
+      </if>
+      <if test="text3 != null and text3!= ''" >
+        TEXT3,
+      </if>
+      <if test="text4 != null and text4!= ''" >
+        TEXT4,
+      </if>
+      <if test="int1 != null and int1!= ''" >
+        INT1,
+      </if>
+      <if test="int2 != null and int2!= ''" >
+        INT2,
+      </if>
+      <if test="optime != null and optime!= ''" >
+        OPTIME,
+      </if>
+      <if test="opid != null and opid!= ''" >
+        OPID,
+      </if>
+      <if test="jcfdjscore != null and jcfdjscore!= ''" >
+        JCFDJSCORE,
+      </if>
+      <if test="lddjscore != null and lddjscore!= ''" >
+        LDDJSCORE,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+     <if test="crimid != null and crimid != ''" >
+        #{crimid,jdbcType=VARCHAR},
+      </if>
+      <if test="yeardate != null and yeardate!= ''" >
+        #{yeardate,jdbcType=VARCHAR},
+      </if>
+      <if test="departid != null and departid!= ''" >
+        #{departid,jdbcType=VARCHAR},
+      </if>
+      <if test="day01 != null and day01!= ''" >
+        #{wtype,jdbcType=VARCHAR},
+      </if>
+      <if test="day02 != null and day02!= ''" >
+        #{wtype,jdbcType=VARCHAR},
+      </if>
+      <if test="day03 != null and day03!= ''" >
+        #{wtype,jdbcType=VARCHAR},
+      </if>
+      <if test="day04 != null and day04!= ''" >
+        #{wtype,jdbcType=VARCHAR},
+      </if>
+      <if test="day05 != null and day05!= ''" >
+        #{wtype,jdbcType=VARCHAR},
+      </if>
+      <if test="day06 != null and day06!= ''" >
+        #{wtype,jdbcType=VARCHAR},
+      </if>
+      <if test="day07 != null and day07!= ''" >
+        #{wtype,jdbcType=VARCHAR},
+      </if>
+      <if test="day08 != null and day08!= ''" >
+        #{wtype,jdbcType=VARCHAR},
+      </if>
+      <if test="day09 != null and day09!= ''" >
+        #{wtype,jdbcType=VARCHAR},
+      </if>
+      <if test="day10 != null and day10!= ''" >
+        #{wtype,jdbcType=VARCHAR},
+      </if>
+      <if test="day11 != null and day11!= ''" >
+        #{wtype,jdbcType=VARCHAR},
+      </if>
+      <if test="day12 != null and day12!= ''" >
+        #{wtype,jdbcType=VARCHAR},
+      </if>
+      <if test="day13 != null and day13!= ''" >
+        #{wtype,jdbcType=VARCHAR},
+      </if>
+      <if test="day14 != null and day14!= ''" >
+        #{wtype,jdbcType=VARCHAR},
+      </if>
+      <if test="day15 != null and day15!= ''" >
+        #{wtype,jdbcType=VARCHAR},
+      </if>
+      <if test="day16 != null and day16!= ''" >
+        #{wtype,jdbcType=VARCHAR},
+      </if>
+      <if test="day17 != null and day17!= ''" >
+        #{wtype,jdbcType=VARCHAR},
+      </if>
+      <if test="day18 != null and day18!= ''" >
+        #{wtype,jdbcType=VARCHAR},
+      </if>
+      <if test="day19 != null and day19!= ''" >
+        #{wtype,jdbcType=VARCHAR},
+      </if>
+      <if test="day20 != null and day20!= ''" >
+        #{wtype,jdbcType=VARCHAR},
+      </if>
+      <if test="day21 != null and day21!= ''" >
+        #{wtype,jdbcType=VARCHAR},
+      </if>
+      <if test="day22 != null and day22!= ''" >
+        #{wtype,jdbcType=VARCHAR},
+      </if>
+      <if test="day23 != null and day23!= ''" >
+        #{wtype,jdbcType=VARCHAR},
+      </if>
+      <if test="day24 != null and day24!= ''" >
+        #{wtype,jdbcType=VARCHAR},
+      </if>
+      <if test="day25 != null and day25!= ''" >
+        #{wtype,jdbcType=VARCHAR},
+      </if>
+      <if test="day26 != null and day26!= ''" >
+        #{wtype,jdbcType=VARCHAR},
+      </if>
+      <if test="day27 != null and day27!= ''" >
+        #{wtype,jdbcType=VARCHAR},
+      </if>
+      <if test="day28 != null and day28!= ''" >
+        #{wtype,jdbcType=VARCHAR},
+      </if>
+      <if test="day29 != null and day29!= ''" >
+        #{wtype,jdbcType=VARCHAR},
+      </if>
+      <if test="day30 != null and day30!= ''" >
+        #{wtype,jdbcType=VARCHAR},
+      </if>
+      <if test="day31 != null and day31!= ''" >
+        #{wtype,jdbcType=VARCHAR},
+      </if>
+      <if test="remark != null and remark!= ''" >
+        #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="basicscore != null and basicscore!= ''" >
+        #{basicscore,jdbcType=FLOAT},
+      </if>
+      <if test="zhjfscore != null and zhjfscore!= ''" >
+        #{zhjfscore,jdbcType=FLOAT},
+      </if>
+      <if test="ldgzscore != null and ldgzscore!= ''" >
+        #{ldgzscore,jdbcType=FLOAT},
+      </if>
+      <if test="xzjfscore != null and xzjfscore!= ''" >
+        #{xzjfscore,jdbcType=FLOAT},
+      </if>
+      <if test="xzkfscore != null and xzkfscore!= ''" >
+        #{xzkfscore,jdbcType=FLOAT},
+      </if>
+      <if test="khscore != null and khscore!= ''" >
+        #{khscore,jdbcType=FLOAT},
+      </if>
+      <if test="ccjfscore != null and ccjfscore!= ''" >
+        #{ccjfscore,jdbcType=FLOAT},
+      </if>
+      <if test="state != null and state!= ''" >
+        #{state,jdbcType=VARCHAR},
+      </if>
+      <if test="workdaynum != null and workdaynum!= ''" >
+        #{workdaynum,jdbcType=DECIMAL},
+      </if>
+      <if test="lastscore != null and lastscore!= ''" >
+        #{lastscore,jdbcType=DECIMAL},
+      </if>
+      <if test="text1 != null and text1!= ''" >
+        #{text1,jdbcType=VARCHAR},
+      </if>
+      <if test="text2 != null and text2!= ''" >
+        #{text2,jdbcType=VARCHAR},
+      </if>
+      <if test="text3 != null and text3!= ''" >
+        #{text3,jdbcType=VARCHAR},
+      </if>
+      <if test="text4 != null and text4!= ''" >
+        #{text4,jdbcType=VARCHAR},
+      </if>
+      <if test="int1 != null and int1!= ''" >
+        #{int1,jdbcType=DECIMAL},
+      </if>
+      <if test="int2 != null and int2!= ''" >
+        #{int2,jdbcType=DECIMAL},
+      </if>
+      <if test="optime != null and optime!= ''" >
+        #{optime,jdbcType=DATE},
+      </if>
+      <if test="opid != null and opid!= ''" >
+        #{opid,jdbcType=VARCHAR},
+      </if>
+      <if test="jcfdjscore != null and jcfdjscore != ''" >
+        #{jcfdjscore,jdbcType=DECIMAL},
+      </if>
+      <if test="lddjscore != null and lddjscore != ''" >
+        #{lddjscore,jdbcType=DECIMAL},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update TBYZ_CHECK_FOR_WORK
+    <set >
+      <if test="record.crimid != null" >
+        CRIMID = #{record.crimid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.yeardate != null" >
+        YEARDATE = #{record.yeardate,jdbcType=VARCHAR},
+      </if>
+      <if test="record.departid != null" >
+        DEPARTID = #{record.departid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.day01 != null" >
+        DAY01 = #{record.day01,jdbcType=VARCHAR},
+      </if>
+      <if test="record.day02 != null" >
+        DAY02 = #{record.day02,jdbcType=VARCHAR},
+      </if>
+      <if test="record.day03 != null" >
+        DAY03 = #{record.day03,jdbcType=VARCHAR},
+      </if>
+      <if test="record.day04 != null" >
+        DAY04 = #{record.day04,jdbcType=VARCHAR},
+      </if>
+      <if test="record.day05 != null" >
+        DAY05 = #{record.day05,jdbcType=VARCHAR},
+      </if>
+      <if test="record.day06 != null" >
+        DAY06 = #{record.day06,jdbcType=VARCHAR},
+      </if>
+      <if test="record.day07 != null" >
+        DAY07 = #{record.day07,jdbcType=VARCHAR},
+      </if>
+      <if test="record.day08 != null" >
+        DAY08 = #{record.day08,jdbcType=VARCHAR},
+      </if>
+      <if test="record.day09 != null" >
+        DAY09 = #{record.day09,jdbcType=VARCHAR},
+      </if>
+      <if test="record.day10 != null" >
+        DAY10 = #{record.day10,jdbcType=VARCHAR},
+      </if>
+      <if test="record.day11 != null" >
+        DAY11 = #{record.day11,jdbcType=VARCHAR},
+      </if>
+      <if test="record.day12 != null" >
+        DAY12 = #{record.day12,jdbcType=VARCHAR},
+      </if>
+      <if test="record.day13 != null" >
+        DAY13 = #{record.day13,jdbcType=VARCHAR},
+      </if>
+      <if test="record.day14 != null" >
+        DAY14 = #{record.day14,jdbcType=VARCHAR},
+      </if>
+      <if test="record.day15 != null" >
+        DAY15 = #{record.day15,jdbcType=VARCHAR},
+      </if>
+      <if test="record.day16 != null" >
+        DAY16 = #{record.day16,jdbcType=VARCHAR},
+      </if>
+      <if test="record.day17 != null" >
+        DAY17 = #{record.day17,jdbcType=VARCHAR},
+      </if>
+      <if test="record.day18 != null" >
+        DAY18 = #{record.day18,jdbcType=VARCHAR},
+      </if>
+      <if test="record.day19 != null" >
+        DAY19 = #{record.day19,jdbcType=VARCHAR},
+      </if>
+      <if test="record.day20 != null" >
+        DAY20 = #{record.day20,jdbcType=VARCHAR},
+      </if>
+      <if test="record.day21 != null" >
+        DAY21 = #{record.day21,jdbcType=VARCHAR},
+      </if>
+      <if test="record.day22 != null" >
+        DAY22 = #{record.day22,jdbcType=VARCHAR},
+      </if>
+      <if test="record.day23 != null" >
+        DAY23 = #{record.day23,jdbcType=VARCHAR},
+      </if>
+      <if test="record.day24 != null" >
+        DAY24 = #{record.day24,jdbcType=VARCHAR},
+      </if>
+      <if test="record.day25 != null" >
+        DAY25 = #{record.day25,jdbcType=VARCHAR},
+      </if>
+      <if test="record.day26 != null" >
+        DAY26 = #{record.day26,jdbcType=VARCHAR},
+      </if>
+      <if test="record.day27 != null" >
+        DAY27 = #{record.day27,jdbcType=VARCHAR},
+      </if>
+      <if test="record.day28 != null" >
+        DAY28 = #{record.day28,jdbcType=VARCHAR},
+      </if>
+      <if test="record.day29 != null" >
+        DAY29 = #{record.day29,jdbcType=VARCHAR},
+      </if>
+      <if test="record.day30 != null" >
+        DAY30 = #{record.day30,jdbcType=VARCHAR},
+      </if>
+      <if test="record.day31 != null" >
+        DAY31 = #{record.day31,jdbcType=VARCHAR},
+      </if>
+      <if test="record.remark != null" >
+        REMARK = #{record.remark,jdbcType=VARCHAR},
+      </if>
+      <if test="record.basicscore != null" >
+        BASICSCORE = #{record.basicscore,jdbcType=FLOAT},
+      </if>
+      <if test="record.zhjfscore != null" >
+        ZHJFSCORE = #{record.zhjfscore,jdbcType=FLOAT},
+      </if>
+      <if test="record.ldgzscore != null" >
+        LDGZSCORE = #{record.ldgzscore,jdbcType=FLOAT},
+      </if>
+      <if test="record.xzjfscore != null" >
+        XZJFSCORE = #{record.xzjfscore,jdbcType=FLOAT},
+      </if>
+      <if test="record.xzkfscore != null" >
+        XZKFSCORE = #{record.xzkfscore,jdbcType=FLOAT},
+      </if>
+      <if test="record.khscore != null" >
+        KHSCORE = #{record.khscore,jdbcType=FLOAT},
+      </if>
+      <if test="record.ccjfscore != null" >
+        CCJFSCORE = #{record.ccjfscore,jdbcType=FLOAT},
+      </if>
+      <if test="record.state != null" >
+        STATE = #{record.state,jdbcType=VARCHAR},
+      </if>
+      <if test="record.workdaynum != null" >
+        WORKDAYNUM = #{record.workdaynum,jdbcType=DECIMAL},
+      </if>
+      <if test="record.lastscore != null" >
+        LASTSCORE = #{record.lastscore,jdbcType=DECIMAL},
+      </if>
+      <if test="record.text1 != null" >
+        TEXT1 = #{record.text1,jdbcType=VARCHAR},
+      </if>
+      <if test="record.text2 != null" >
+        TEXT2 = #{record.text2,jdbcType=VARCHAR},
+      </if>
+      <if test="record.text3 != null" >
+        TEXT3 = #{record.text3,jdbcType=VARCHAR},
+      </if>
+      <if test="record.text4 != null" >
+        TEXT4 = #{record.text4,jdbcType=VARCHAR},
+      </if>
+      <if test="record.int1 != null" >
+        INT1 = #{record.int1,jdbcType=DECIMAL},
+      </if>
+      <if test="record.int2 != null" >
+        INT2 = #{record.int2,jdbcType=DECIMAL},
+      </if>
+      <if test="record.optime != null" >
+        OPTIME = #{record.optime,jdbcType=DATE},
+      </if>
+      <if test="record.opid != null" >
+        OPID = #{record.opid,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update TBYZ_CHECK_FOR_WORK
+    set CRIMID = #{record.crimid,jdbcType=VARCHAR},
+      YEARDATE = #{record.yeardate,jdbcType=VARCHAR},
+      DEPARTID = #{record.departid,jdbcType=VARCHAR},
+      DAY01 = #{record.day01,jdbcType=VARCHAR},
+      DAY02 = #{record.day02,jdbcType=VARCHAR},
+      DAY03 = #{record.day03,jdbcType=VARCHAR},
+      DAY04 = #{record.day04,jdbcType=VARCHAR},
+      DAY05 = #{record.day05,jdbcType=VARCHAR},
+      DAY06 = #{record.day06,jdbcType=VARCHAR},
+      DAY07 = #{record.day07,jdbcType=VARCHAR},
+      DAY08 = #{record.day08,jdbcType=VARCHAR},
+      DAY09 = #{record.day09,jdbcType=VARCHAR},
+      DAY10 = #{record.day10,jdbcType=VARCHAR},
+      DAY11 = #{record.day11,jdbcType=VARCHAR},
+      DAY12 = #{record.day12,jdbcType=VARCHAR},
+      DAY13 = #{record.day13,jdbcType=VARCHAR},
+      DAY14 = #{record.day14,jdbcType=VARCHAR},
+      DAY15 = #{record.day15,jdbcType=VARCHAR},
+      DAY16 = #{record.day16,jdbcType=VARCHAR},
+      DAY17 = #{record.day17,jdbcType=VARCHAR},
+      DAY18 = #{record.day18,jdbcType=VARCHAR},
+      DAY19 = #{record.day19,jdbcType=VARCHAR},
+      DAY20 = #{record.day20,jdbcType=VARCHAR},
+      DAY21 = #{record.day21,jdbcType=VARCHAR},
+      DAY22 = #{record.day22,jdbcType=VARCHAR},
+      DAY23 = #{record.day23,jdbcType=VARCHAR},
+      DAY24 = #{record.day24,jdbcType=VARCHAR},
+      DAY25 = #{record.day25,jdbcType=VARCHAR},
+      DAY26 = #{record.day26,jdbcType=VARCHAR},
+      DAY27 = #{record.day27,jdbcType=VARCHAR},
+      DAY28 = #{record.day28,jdbcType=VARCHAR},
+      DAY29 = #{record.day29,jdbcType=VARCHAR},
+      DAY30 = #{record.day30,jdbcType=VARCHAR},
+      DAY31 = #{record.day31,jdbcType=VARCHAR},
+      REMARK = #{record.remark,jdbcType=VARCHAR},
+      BASICSCORE = #{record.basicscore,jdbcType=FLOAT},
+      ZHJFSCORE = #{record.zhjfscore,jdbcType=FLOAT},
+      LDGZSCORE = #{record.ldgzscore,jdbcType=FLOAT},
+      XZJFSCORE = #{record.xzjfscore,jdbcType=FLOAT},
+      XZKFSCORE = #{record.xzkfscore,jdbcType=FLOAT},
+      KHSCORE = #{record.khscore,jdbcType=FLOAT},
+      CCJFSCORE = #{record.ccjfscore,jdbcType=FLOAT},
+      STATE = #{record.state,jdbcType=VARCHAR},
+      WORKDAYNUM = #{record.workdaynum,jdbcType=DECIMAL},
+      LASTSCORE = #{record.lastscore,jdbcType=DECIMAL},
+      TEXT1 = #{record.text1,jdbcType=VARCHAR},
+      TEXT2 = #{record.text2,jdbcType=VARCHAR},
+      TEXT3 = #{record.text3,jdbcType=VARCHAR},
+      TEXT4 = #{record.text4,jdbcType=VARCHAR},
+      INT1 = #{record.int1,jdbcType=DECIMAL},
+      INT2 = #{record.int2,jdbcType=DECIMAL},
+      OPTIME = #{record.optime,jdbcType=DATE},
+      OPID = #{record.opid,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.sinog2c.model.criminalexam.TbyzCheckForWork" >
+    update TBYZ_CHECK_FOR_WORK
+    <set >
+      <if test="departid != null" >
+        DEPARTID = #{departid,jdbcType=VARCHAR},
+      </if>
+      <if test="day01 != null" >
+        DAY01 = #{day01,jdbcType=VARCHAR},
+      </if>
+      <if test="day02 != null" >
+        DAY02 = #{day02,jdbcType=VARCHAR},
+      </if>
+      <if test="day03 != null" >
+        DAY03 = #{day03,jdbcType=VARCHAR},
+      </if>
+      <if test="day04 != null" >
+        DAY04 = #{day04,jdbcType=VARCHAR},
+      </if>
+      <if test="day05 != null" >
+        DAY05 = #{day05,jdbcType=VARCHAR},
+      </if>
+      <if test="day06 != null" >
+        DAY06 = #{day06,jdbcType=VARCHAR},
+      </if>
+      <if test="day07 != null" >
+        DAY07 = #{day07,jdbcType=VARCHAR},
+      </if>
+      <if test="day08 != null" >
+        DAY08 = #{day08,jdbcType=VARCHAR},
+      </if>
+      <if test="day09 != null" >
+        DAY09 = #{day09,jdbcType=VARCHAR},
+      </if>
+      <if test="day10 != null" >
+        DAY10 = #{day10,jdbcType=VARCHAR},
+      </if>
+      <if test="day11 != null" >
+        DAY11 = #{day11,jdbcType=VARCHAR},
+      </if>
+      <if test="day12 != null" >
+        DAY12 = #{day12,jdbcType=VARCHAR},
+      </if>
+      <if test="day13 != null" >
+        DAY13 = #{day13,jdbcType=VARCHAR},
+      </if>
+      <if test="day14 != null" >
+        DAY14 = #{day14,jdbcType=VARCHAR},
+      </if>
+      <if test="day15 != null" >
+        DAY15 = #{day15,jdbcType=VARCHAR},
+      </if>
+      <if test="day16 != null" >
+        DAY16 = #{day16,jdbcType=VARCHAR},
+      </if>
+      <if test="day17 != null" >
+        DAY17 = #{day17,jdbcType=VARCHAR},
+      </if>
+      <if test="day18 != null" >
+        DAY18 = #{day18,jdbcType=VARCHAR},
+      </if>
+      <if test="day19 != null" >
+        DAY19 = #{day19,jdbcType=VARCHAR},
+      </if>
+      <if test="day20 != null" >
+        DAY20 = #{day20,jdbcType=VARCHAR},
+      </if>
+      <if test="day21 != null" >
+        DAY21 = #{day21,jdbcType=VARCHAR},
+      </if>
+      <if test="day22 != null" >
+        DAY22 = #{day22,jdbcType=VARCHAR},
+      </if>
+      <if test="day23 != null" >
+        DAY23 = #{day23,jdbcType=VARCHAR},
+      </if>
+      <if test="day24 != null" >
+        DAY24 = #{day24,jdbcType=VARCHAR},
+      </if>
+      <if test="day25 != null" >
+        DAY25 = #{day25,jdbcType=VARCHAR},
+      </if>
+      <if test="day26 != null" >
+        DAY26 = #{day26,jdbcType=VARCHAR},
+      </if>
+      <if test="day27 != null" >
+        DAY27 = #{day27,jdbcType=VARCHAR},
+      </if>
+      <if test="day28 != null" >
+        DAY28 = #{day28,jdbcType=VARCHAR},
+      </if>
+      <if test="day29 != null" >
+        DAY29 = #{day29,jdbcType=VARCHAR},
+      </if>
+      <if test="day30 != null" >
+        DAY30 = #{day30,jdbcType=VARCHAR},
+      </if>
+      <if test="day31 != null" >
+        DAY31 = #{day31,jdbcType=VARCHAR},
+      </if>
+      <if test="remark != null" >
+        REMARK = #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="basicscore != null" >
+        BASICSCORE = #{basicscore,jdbcType=FLOAT},
+      </if>
+      <if test="zhjfscore != null" >
+        ZHJFSCORE = #{zhjfscore,jdbcType=FLOAT},
+      </if>
+      <if test="ldgzscore != null" >
+        LDGZSCORE = #{ldgzscore,jdbcType=FLOAT},
+      </if>
+      <if test="xzjfscore != null" >
+        XZJFSCORE = #{xzjfscore,jdbcType=FLOAT},
+      </if>
+      <if test="xzkfscore != null" >
+        XZKFSCORE = #{xzkfscore,jdbcType=FLOAT},
+      </if>
+      <if test="khscore != null" >
+        KHSCORE = #{khscore,jdbcType=FLOAT},
+      </if>
+      <if test="ccjfscore != null" >
+        CCJFSCORE = #{ccjfscore,jdbcType=FLOAT},
+      </if>
+      <if test="state != null" >
+        STATE = #{state,jdbcType=VARCHAR},
+      </if>
+      <if test="workdaynum != null" >
+        WORKDAYNUM = #{workdaynum,jdbcType=DECIMAL},
+      </if>
+      <if test="lastscore != null" >
+        LASTSCORE = #{lastscore,jdbcType=DECIMAL},
+      </if>
+      <if test="text1 != null" >
+        TEXT1 = #{text1,jdbcType=VARCHAR},
+      </if>
+      <if test="text2 != null" >
+        TEXT2 = #{text2,jdbcType=VARCHAR},
+      </if>
+      <if test="text3 != null" >
+        TEXT3 = #{text3,jdbcType=VARCHAR},
+      </if>
+      <if test="text4 != null" >
+        TEXT4 = #{text4,jdbcType=VARCHAR},
+      </if>
+      <if test="int1 != null" >
+        INT1 = #{int1,jdbcType=DECIMAL},
+      </if>
+      <if test="int2 != null" >
+        INT2 = #{int2,jdbcType=DECIMAL},
+      </if>
+      <if test="optime != null" >
+        OPTIME = #{optime,jdbcType=DATE},
+      </if>
+      <if test="opid != null" >
+        OPID = #{opid,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where CRIMID = #{crimid,jdbcType=VARCHAR}
+      and YEARDATE = #{yeardate,jdbcType=VARCHAR}
+  </update>
+  <update id="updateSelective" parameterType="com.sinog2c.model.criminalexam.TbyzCheckForWork" >
+    update TBYZ_CHECK_FOR_WORK
+    <set >
+      <if test="day01 != null and day01 != '' " >
+        DAY01 = #{day01,jdbcType=VARCHAR},
+      </if>
+      <if test="day02 != null and day02 != '' " >
+        DAY02 = #{day02,jdbcType=VARCHAR},
+      </if>
+      <if test="day03 != null and day03 != '' " >
+        DAY03 = #{day03,jdbcType=VARCHAR},
+      </if>
+      <if test="day04 != null and day04 != '' " >
+        DAY04 = #{day04,jdbcType=VARCHAR},
+      </if>
+      <if test="day05 != null and day05 != '' " >
+        DAY05 = #{day05,jdbcType=VARCHAR},
+      </if>
+      <if test="day06 != null and day06 != '' " >
+        DAY06 = #{day06,jdbcType=VARCHAR},
+      </if>
+      <if test="day07 != null and day07 != '' " >
+        DAY07 = #{day07,jdbcType=VARCHAR},
+      </if>
+      <if test="day08 != null and day08 != '' " >
+        DAY08 = #{day08,jdbcType=VARCHAR},
+      </if>
+      <if test="day09 != null and day09 != '' " >
+        DAY09 = #{day09,jdbcType=VARCHAR},
+      </if>
+      <if test="day10 != null and day10 != '' " >
+        DAY10 = #{day10,jdbcType=VARCHAR},
+      </if>
+      <if test="day11 != null and day11 != '' " >
+        DAY11 = #{day11,jdbcType=VARCHAR},
+      </if>
+      <if test="day12 != null and day12 != '' " >
+        DAY12 = #{day12,jdbcType=VARCHAR},
+      </if>
+      <if test="day13 != null and day13 != '' " >
+        DAY13 = #{day13,jdbcType=VARCHAR},
+      </if>
+      <if test="day14 != null and day14 != '' " >
+        DAY14 = #{day14,jdbcType=VARCHAR},
+      </if>
+      <if test="day15 != null and day15 != '' " >
+        DAY15 = #{day15,jdbcType=VARCHAR},
+      </if>
+      <if test="day16 != null and day16 != '' " >
+        DAY16 = #{day16,jdbcType=VARCHAR},
+      </if>
+      <if test="day17 != null and day17 != '' " >
+        DAY17 = #{day17,jdbcType=VARCHAR},
+      </if>
+      <if test="day18 != null and day18 != '' " >
+        DAY18 = #{day18,jdbcType=VARCHAR},
+      </if>
+      <if test="day19 != null and day19 != '' " >
+        DAY19 = #{day19,jdbcType=VARCHAR},
+      </if>
+      <if test="day20 != null and day20 != '' " >
+        DAY20 = #{day20,jdbcType=VARCHAR},
+      </if>
+      <if test="day21 != null and day21 != '' " >
+        DAY21 = #{day21,jdbcType=VARCHAR},
+      </if>
+      <if test="day22 != null and day22 != '' " >
+        DAY22 = #{day22,jdbcType=VARCHAR},
+      </if>
+      <if test="day23 != null and day23 != '' " >
+        DAY23 = #{day23,jdbcType=VARCHAR},
+      </if>
+      <if test="day24 != null and day24 != '' " >
+        DAY24 = #{day24,jdbcType=VARCHAR},
+      </if>
+      <if test="day25 != null and day25 != '' " >
+        DAY25 = #{day25,jdbcType=VARCHAR},
+      </if>
+      <if test="day26 != null and day26 != '' " >
+        DAY26 = #{day26,jdbcType=VARCHAR},
+      </if>
+      <if test="day27 != null and day27 != '' " >
+        DAY27 = #{day27,jdbcType=VARCHAR},
+      </if>
+      <if test="day28 != null and day28 != '' " >
+        DAY28 = #{day28,jdbcType=VARCHAR},
+      </if>
+      <if test="day29 != null and day29 != '' " >
+        DAY29 = #{day29,jdbcType=VARCHAR},
+      </if>
+      <if test="day30 != null and day30 != '' " >
+        DAY30 = #{day30,jdbcType=VARCHAR},
+      </if>
+      <if test="day31 != null and day31 != '' " >
+        DAY31 = #{day31,jdbcType=VARCHAR},
+      </if>
+        OPTIME=sysdate,
+      <if test="opid != null and opid != '' " >
+        OPID = #{opid,jdbcType=VARCHAR}
+      </if>
+    </set>
+    where CRIMID = #{crimid,jdbcType=VARCHAR}
+      and YEARDATE = #{yeardate,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.sinog2c.model.criminalexam.TbyzCheckForWork" >
+    update TBYZ_CHECK_FOR_WORK
+    set DEPARTID = #{departid,jdbcType=VARCHAR},
+      DAY01 = #{day01,jdbcType=VARCHAR},
+      DAY02 = #{day02,jdbcType=VARCHAR},
+      DAY03 = #{day03,jdbcType=VARCHAR},
+      DAY04 = #{day04,jdbcType=VARCHAR},
+      DAY05 = #{day05,jdbcType=VARCHAR},
+      DAY06 = #{day06,jdbcType=VARCHAR},
+      DAY07 = #{day07,jdbcType=VARCHAR},
+      DAY08 = #{day08,jdbcType=VARCHAR},
+      DAY09 = #{day09,jdbcType=VARCHAR},
+      DAY10 = #{day10,jdbcType=VARCHAR},
+      DAY11 = #{day11,jdbcType=VARCHAR},
+      DAY12 = #{day12,jdbcType=VARCHAR},
+      DAY13 = #{day13,jdbcType=VARCHAR},
+      DAY14 = #{day14,jdbcType=VARCHAR},
+      DAY15 = #{day15,jdbcType=VARCHAR},
+      DAY16 = #{day16,jdbcType=VARCHAR},
+      DAY17 = #{day17,jdbcType=VARCHAR},
+      DAY18 = #{day18,jdbcType=VARCHAR},
+      DAY19 = #{day19,jdbcType=VARCHAR},
+      DAY20 = #{day20,jdbcType=VARCHAR},
+      DAY21 = #{day21,jdbcType=VARCHAR},
+      DAY22 = #{day22,jdbcType=VARCHAR},
+      DAY23 = #{day23,jdbcType=VARCHAR},
+      DAY24 = #{day24,jdbcType=VARCHAR},
+      DAY25 = #{day25,jdbcType=VARCHAR},
+      DAY26 = #{day26,jdbcType=VARCHAR},
+      DAY27 = #{day27,jdbcType=VARCHAR},
+      DAY28 = #{day28,jdbcType=VARCHAR},
+      DAY29 = #{day29,jdbcType=VARCHAR},
+      DAY30 = #{day30,jdbcType=VARCHAR},
+      DAY31 = #{day31,jdbcType=VARCHAR},
+      REMARK = #{remark,jdbcType=VARCHAR},
+      BASICSCORE = #{basicscore,jdbcType=FLOAT},
+      ZHJFSCORE = #{zhjfscore,jdbcType=FLOAT},
+      LDGZSCORE = #{ldgzscore,jdbcType=FLOAT},
+      XZJFSCORE = #{xzjfscore,jdbcType=FLOAT},
+      XZKFSCORE = #{xzkfscore,jdbcType=FLOAT},
+      KHSCORE = #{khscore,jdbcType=FLOAT},
+      CCJFSCORE = #{ccjfscore,jdbcType=FLOAT},
+      STATE = #{state,jdbcType=VARCHAR},
+      WORKDAYNUM = #{workdaynum,jdbcType=DECIMAL},
+      LASTSCORE = #{lastscore,jdbcType=DECIMAL},
+      TEXT1 = #{text1,jdbcType=VARCHAR},
+      TEXT2 = #{text2,jdbcType=VARCHAR},
+      TEXT3 = #{text3,jdbcType=VARCHAR},
+      TEXT4 = #{text4,jdbcType=VARCHAR},
+      INT1 = #{int1,jdbcType=DECIMAL},
+      INT2 = #{int2,jdbcType=DECIMAL},
+      OPTIME = #{optime,jdbcType=DATE},
+      OPID = #{opid,jdbcType=VARCHAR}
+    where CRIMID = #{crimid,jdbcType=VARCHAR}
+      and YEARDATE = #{yeardate,jdbcType=VARCHAR}
+  </update>
+  <select id="selectCheckForWork" resultType="com.sinog2c.model.criminalexam.TbyzCheckForWork">
+  		SELECT * FROM 
+	 	( SELECT A.*, ROWNUM RN 
+		 	FROM 
+		 	(
+		 		SELECT * FROM TBYZ_CHECK_FOR_WORK t
+		 		 <!-- where MODULEID = #{moduleid} --> 
+		 		  order by crimid desc
+		 	) A 
+		 	WHERE ROWNUM &lt;= #{end,jdbcType=DECIMAL}
+	 	) 
+	 	WHERE RN &gt;= #{start,jdbcType=DECIMAL} 
+  
+  </select>
+  
+  <select id="selectCheckForWorkMap" parameterType="Map" resultType="Map">
+	 select * from
+	    ( select a.*, rownum rn
+	    from
+	    (
+	    	SELECT  tbi.crimid,
+					tbi.name,
+					#{yeardate} as yeardate,
+					day01,
+					day02,
+					day03,
+					day04,
+					day05,
+					day06,
+					day07,
+					day08,
+					day09,
+					day10,
+					day11,
+					day12,
+					day13,
+					day14,
+					day15,
+					day16,
+					day17,
+					day18,
+					day19,
+					day20,
+					day21,
+					day22,
+					day23,
+					day24,
+					day25,
+					day26,
+					day27,
+					day28,
+					day29,
+					day30,
+					day31
+			   FROM TBPRISONER_BASEINFO tbi,
+					TBPRISONER_BASE_CRIME tbc,
+					(select * from TBYZ_CHECK_FOR_WORK where YEARDATE = #{yeardate} ) w 
+			  WHERE tbi.crimid=tbc.crimid
+				and tbi.crimid=w.crimid(+)
+				and tbc.DETAINSTATUS='在押'
+			  <if test="key!=null and key!=''">
+						and (tbi.crimid like '%'||#{key}||'%' or tbi.name like '%'||#{key}||'%' or tbi.NAMEPINYINSHORT like UPPER('%'||#{key}||'%') )
+				</if>
+				and exists(
+					select 'x' from tbflow_org_org og where og.orgid=#{orgid} and og.dorgid=tbc.orgid2
+				)
+				order by tbi.crimid	
+	    ) a 
+	    <if test="start!=null and start!=''">
+	   		where rownum &lt;= #{end}
+	   	</if> 
+	    )
+	   	<if test="start!=null and start!=''">
+	   		where  rn &gt;= #{start}
+	   	</if>
+  </select>
+  
+  <select id="selectCheckForWorkCount" parameterType="Map" resultType="int">
+		SELECT  count(tbi.crimid)
+	   FROM TBPRISONER_BASEINFO tbi,
+	        TBPRISONER_BASE_CRIME tbc,
+	        (select * from TBYZ_CHECK_FOR_WORK where YEARDATE = #{yeardate} ) w 
+	  WHERE tbi.crimid=tbc.crimid
+	    and tbi.crimid=w.crimid(+)
+	    and tbc.DETAINSTATUS='在押'
+	  <if test="key!=null and key!=''">
+	      and (tbi.crimid like '%'||#{key}||'%' or tbi.name like '%'||#{key}||'%' or tbi.NAMEPINYINSHORT like UPPER('%'||#{key}||'%') )
+	  </if>
+	    and exists(
+	        select 'x' from tbflow_org_org og where og.orgid=#{orgid} and og.dorgid=tbc.orgid2
+	    )
+  </select>
+  
+  <select id="getInfobyDepartAndMonth"  resultType="Map" parameterType="String" >
+  	SELECT b.crimid,b.name,a.*
+   FROM TBPRISONER_BASE_CRIME c,
+   			 TBPRISONER_BASEINFO b,
+             (SELECT *  FROM TBYZ_CHECK_FOR_WORK
+         		WHERE  yeardate = #{yeardate,jdbcType=VARCHAR}
+             ) a
+   WHERE b.crimid= a.crimid(+) 
+          and b.crimid=c.crimid
+          and c.DETAINSTATUS = '在押'
+          and exists(
+          		select 'x' from tbflow_org_org og where og.orgid=#{orgid} and og.dorgid=c.orgid2
+          )
+    order by b.crimid
+  </select>
+  
+  <select id="workSetDanGeUpdate"  parameterType="map" resultType="java.lang.String">
+    update TBYZ_CHECK_FOR_WORK
+    <set>
+	    <if test="batchop != null and batchop != ''">
+	      DAY01 = #{wtype,jdbcType=VARCHAR},
+	      DAY02 = #{wtype,jdbcType=VARCHAR}, 
+	      DAY03 = #{wtype,jdbcType=VARCHAR},
+	      DAY04 = #{wtype,jdbcType=VARCHAR},
+	      DAY05 = #{wtype,jdbcType=VARCHAR},
+	      DAY06 = #{wtype,jdbcType=VARCHAR},
+	      DAY07 = #{wtype,jdbcType=VARCHAR},
+	      DAY08 = #{wtype,jdbcType=VARCHAR},
+	      DAY09 = #{wtype,jdbcType=VARCHAR},
+	      DAY10 = #{wtype,jdbcType=VARCHAR},
+	      DAY11 = #{wtype,jdbcType=VARCHAR},
+	      DAY12 = #{wtype,jdbcType=VARCHAR},
+	      DAY13 = #{wtype,jdbcType=VARCHAR},
+	      DAY14 = #{wtype,jdbcType=VARCHAR},
+	      DAY15 = #{wtype,jdbcType=VARCHAR},
+	      DAY16 = #{wtype,jdbcType=VARCHAR},
+	      DAY17 = #{wtype,jdbcType=VARCHAR},
+	      DAY18 = #{wtype,jdbcType=VARCHAR},
+	      DAY19 = #{wtype,jdbcType=VARCHAR},
+	      DAY20 = #{wtype,jdbcType=VARCHAR},
+	      DAY21 = #{wtype,jdbcType=VARCHAR},
+	      DAY22 = #{wtype,jdbcType=VARCHAR},
+	      DAY23 = #{wtype,jdbcType=VARCHAR},
+	      DAY24 = #{wtype,jdbcType=VARCHAR},
+	      DAY25 = #{wtype,jdbcType=VARCHAR},
+	      DAY26 = #{wtype,jdbcType=VARCHAR},
+	      DAY27 = #{wtype,jdbcType=VARCHAR},
+		  DAY28 = #{wtype,jdbcType=VARCHAR},
+	    </if>
+	    <if test="maxDay==29">
+	        DAY29 = #{wtype,jdbcType=VARCHAR},
+	    </if>
+	    <if test="maxDay==30">
+	    	DAY29 = #{wtype,jdbcType=VARCHAR},
+	        DAY30 = #{wtype,jdbcType=VARCHAR},
+	    </if>
+	    <if test="maxDay==31">
+	    	DAY29 = #{wtype,jdbcType=VARCHAR},
+	        DAY30 = #{wtype,jdbcType=VARCHAR},
+	       	DAY31 = #{wtype,jdbcType=VARCHAR},
+	    </if>
+     </set>
+    where CRIMID = #{crimid,jdbcType=VARCHAR}
+    	and
+       	YEARDATE = #{batchdate,jdbcType=VARCHAR}
+       	and
+       	departid = #{departid,jdbcType=VARCHAR}
+  </select>
+   <select id="workSetAddOrUpdate"  parameterType="map" resultType="java.lang.String">
+    update TBYZ_CHECK_FOR_WORK
+    <set>
+    <if test="batchop==1">
+      DAY01 = #{wtype,jdbcType=VARCHAR},
+    </if>
+    <if test="batchop==2">
+      DAY02 = #{wtype,jdbcType=VARCHAR},
+    </if>
+    <if test="batchop==3">
+      DAY03 = #{wtype,jdbcType=VARCHAR},
+    </if>
+    <if test="batchop==4">
+      DAY04 = #{wtype,jdbcType=VARCHAR},
+    </if>
+    <if test="batchop==5">
+      DAY05 = #{wtype,jdbcType=VARCHAR},
+    </if>
+    <if test="batchop==6">
+      DAY06 = #{wtype,jdbcType=VARCHAR},
+    </if>
+    <if test="batchop==7">
+      DAY07 = #{wtype,jdbcType=VARCHAR},
+    </if>
+    <if test="batchop==8">
+      DAY08 = #{wtype,jdbcType=VARCHAR},
+    </if>
+    <if test="batchop==9">
+      DAY09 = #{wtype,jdbcType=VARCHAR},
+    </if>
+    <if test="batchop==10">
+       DAY10 = #{wtype,jdbcType=VARCHAR},
+    </if>
+    <if test="batchop==11">
+        DAY11 = #{wtype,jdbcType=VARCHAR},
+    </if>
+    <if test="batchop==12">
+       DAY12 = #{wtype,jdbcType=VARCHAR},
+    </if>
+    <if test="batchop==13">
+        DAY13 = #{wtype,jdbcType=VARCHAR},
+    </if>
+    <if test="batchop==14">
+       DAY14 = #{wtype,jdbcType=VARCHAR},
+    </if>
+    <if test="batchop==15">
+       DAY15 = #{wtype,jdbcType=VARCHAR},
+    </if>
+    <if test="batchop==16">
+       DAY16 = #{wtype,jdbcType=VARCHAR},
+    </if>
+    <if test="batchop==17">
+       DAY17 = #{wtype,jdbcType=VARCHAR},
+    </if>
+    <if test="batchop==18">
+       DAY18 = #{wtype,jdbcType=VARCHAR},
+    </if>
+    <if test="batchop==19">
+       DAY19 = #{wtype,jdbcType=VARCHAR},
+    </if>
+    <if test="batchop==20">
+       DAY20 = #{wtype,jdbcType=VARCHAR},
+    </if>
+    <if test="batchop==21">
+       DAY21 = #{wtype,jdbcType=VARCHAR},
+    </if>
+    <if test="batchop==22">
+       DAY22 = #{wtype,jdbcType=VARCHAR},
+    </if>
+    <if test="batchop==23">
+       DAY23 = #{wtype,jdbcType=VARCHAR},
+    </if>
+    <if test="batchop==24">
+       DAY24 = #{wtype,jdbcType=VARCHAR},
+    </if>
+    <if test="batchop==25">
+       DAY25 = #{wtype,jdbcType=VARCHAR},
+    </if>
+    <if test="batchop==26">
+       DAY26 = #{wtype,jdbcType=VARCHAR},
+    </if>
+    <if test="batchop==27">
+       DAY27 = #{wtype,jdbcType=VARCHAR},
+    </if>
+    <if test="batchop==28">
+        DAY28 = #{wtype,jdbcType=VARCHAR},
+    </if>
+    <if test="batchop==29">
+        DAY29 = #{wtype,jdbcType=VARCHAR},
+    </if>
+    <if test="batchop==30">
+       DAY30 = #{wtype,jdbcType=VARCHAR},
+    </if>
+    <if test="batchop==31">
+       DAY31 = #{wtype,jdbcType=VARCHAR}
+    </if>
+      </set>
+    where CRIMID = #{crimid,jdbcType=VARCHAR}
+  </select>
+  <select id="workAddOrUpdate" parameterType="map" resultType="java.lang.String" >
+    update TBYZ_CHECK_FOR_WORK
+    <set>
+       <if test="batchop == 1" >
+        DAY01 = #{wtype,jdbcType=VARCHAR},
+      </if>
+      <if test="batchop == 2" >
+        DAY02 = #{wtype,jdbcType=VARCHAR},
+      </if>
+      <if test="batchop == 3" >
+       DAY03 = #{wtype,jdbcType=VARCHAR},
+      </if>
+      <if test="batchop == 4" >
+        DAY04 = #{wtype,jdbcType=VARCHAR},
+      </if>
+      <if test="batchop == 5" >
+        DAY05 = #{wtype,jdbcType=VARCHAR},
+      </if>
+      <if test="batchop == 6" >
+       DAY06 = #{wtype,jdbcType=VARCHAR},
+      </if>
+      <if test="batchop == 7" >
+       DAY07 = #{wtype,jdbcType=VARCHAR},
+      </if>
+      <if test="batchop == 8" >
+        DAY08 = #{wtype,jdbcType=VARCHAR},
+      </if>
+      <if test="batchop == 9" >
+        DAY09 = #{wtype,jdbcType=VARCHAR},
+      </if>
+      <if test="batchop == 10" >
+       DAY10 = #{wtype,jdbcType=VARCHAR},
+      </if>
+      <if test="batchop == 11" >
+       DAY11 = #{wtype,jdbcType=VARCHAR},
+      </if>
+      <if test="batchop == 12" >
+        DAY12 = #{wtype,jdbcType=VARCHAR},
+      </if>
+      <if test="batchop == 13" >
+       DAY13 = #{wtype,jdbcType=VARCHAR},
+      </if>
+      <if test="batchop == 14" >
+        DAY14 = #{wtype,jdbcType=VARCHAR},
+      </if>
+      <if test="batchop == 15" >
+        DAY15 = #{wtype,jdbcType=VARCHAR},
+      </if>
+      <if test="batchop == 16" >
+        DAY16 = #{wtype,jdbcType=VARCHAR},
+      </if>
+      <if test="batchop == 17" >
+        DAY17 = #{wtype,jdbcType=VARCHAR},
+      </if>
+      <if test="batchop == 18" >
+        DAY18 = #{wtype,jdbcType=VARCHAR},
+      </if>
+      <if test="batchop == 19" >
+        DAY19 = #{wtype,jdbcType=VARCHAR},
+      </if>
+      <if test="batchop == 20" >
+       DAY20 = #{wtype,jdbcType=VARCHAR},
+      </if>
+      <if test="batchop == 21" >
+        DAY21 = #{wtype,jdbcType=VARCHAR},
+      </if>
+      <if test="batchop == 22" >
+        DAY22 = #{wtype,jdbcType=VARCHAR},
+      </if>
+      <if test="batchop == 23" >
+        DAY23 = #{wtype,jdbcType=VARCHAR},
+      </if>
+      <if test="batchop == 24" >
+        DAY24 = #{wtype,jdbcType=VARCHAR},
+      </if>
+      <if test="batchop == 25" >
+        DAY25 = #{wtype,jdbcType=VARCHAR},
+      </if>
+      <if test="batchop == 26" >
+       DAY26 = #{wtype,jdbcType=VARCHAR},
+      </if>
+      <if test="batchop == 27" >
+        DAY27 = #{wtype,jdbcType=VARCHAR},
+      </if>
+      <if test="batchop == 28" >
+        DAY28 = #{wtype,jdbcType=VARCHAR},
+      </if>
+      <if test="batchop == 29" >
+        DAY29 = #{wtype,jdbcType=VARCHAR},
+      </if>
+      <if test="batchop == 30" >
+        DAY30 = #{wtype,jdbcType=VARCHAR},
+      </if>
+      <if test="batchop == 31" >
+        DAY31 = #{wtype,jdbcType=VARCHAR},
+      </if>
+     </set>
+       where CRIMID = #{crimid,jdbcType=VARCHAR}
+       and
+       YEARDATE = #{batchdate,jdbcType=VARCHAR}
+       and
+       departid = #{departid,jdbcType=VARCHAR}
+  </select>
+  <select id="workSetSelect" parameterType="map" resultType="com.sinog2c.model.criminalexam.TbyzCheckForWork">
+	    select * from TBYZ_CHECK_FOR_WORK 
+	    where YEARDATE=#{yeardate,jdbcType=VARCHAR} 
+	       and crimid=#{crimid}
+  </select>
+  
+  <insert id="workSetDanGeAdd" parameterType="com.sinog2c.model.criminalexam.TbyzCheckForWork" >
+    insert into TBYZ_CHECK_FOR_WORK (crimid,
+		                      yeardate,
+		                      departid,
+		                      day01,
+		                      day02,
+		                      day03,
+		                      day04,
+		                      day05,
+		                      day06,
+		                      day07,
+		                      day08,
+		                      day09,
+		                      day10,
+		                      day11,
+		                      day12,
+		                      day13,
+		                      day14,
+		                      day15,
+		                      day16,
+		                      day17,
+		                      day18,
+		                      day19,
+		                      day20,
+		                      day21,
+		                      day22,
+		                      day23,
+		                      day24,
+		                      day25,
+		                      day26,
+		                      day27,
+		                      day28,
+		                      day29,
+		                      day30,
+		                      day31,optime,opid)
+
+        values(#{crimid,jdbcType=VARCHAR},
+
+        #{yeardate,jdbcType=VARCHAR},
+
+        #{departid,jdbcType=VARCHAR},
+
+        #{wtype,jdbcType=VARCHAR},
+
+        #{wtype,jdbcType=VARCHAR},
+
+        #{wtype,jdbcType=VARCHAR},
+
+        #{wtype,jdbcType=VARCHAR},
+
+        #{wtype,jdbcType=VARCHAR},
+
+        #{wtype,jdbcType=VARCHAR},
+     
+        #{wtype,jdbcType=VARCHAR},
+      
+        #{wtype,jdbcType=VARCHAR},
+      
+        #{wtype,jdbcType=VARCHAR},
+      
+        #{wtype,jdbcType=VARCHAR},
+      
+        #{wtype,jdbcType=VARCHAR},
+      
+        #{wtype,jdbcType=VARCHAR},
+      
+        #{wtype,jdbcType=VARCHAR},
+      
+        #{wtype,jdbcType=VARCHAR},
+     
+        #{wtype,jdbcType=VARCHAR},
+     
+        #{wtype,jdbcType=VARCHAR},
+      
+        #{wtype,jdbcType=VARCHAR},
+      
+        #{wtype,jdbcType=VARCHAR},
+      
+        #{wtype,jdbcType=VARCHAR},
+      
+        #{wtype,jdbcType=VARCHAR},
+      
+        #{wtype,jdbcType=VARCHAR},
+      
+        #{wtype,jdbcType=VARCHAR},
+     
+        #{wtype,jdbcType=VARCHAR},
+
+        #{wtype,jdbcType=VARCHAR},
+
+        #{wtype,jdbcType=VARCHAR},
+
+        #{wtype,jdbcType=VARCHAR},
+
+        #{wtype,jdbcType=VARCHAR},
+
+        <if test="maxDay==28">
+	        #{wtype,jdbcType=VARCHAR},
+	        '',
+	        '',
+	        '',
+	    </if>
+		<if test="maxDay==29">
+	        #{wtype,jdbcType=VARCHAR},
+	        #{wtype,jdbcType=VARCHAR},
+	        '',
+	        '',
+	    </if>
+	    <if test="maxDay==30">
+	    	#{wtype,jdbcType=VARCHAR},
+	        #{wtype,jdbcType=VARCHAR},
+	        #{wtype,jdbcType=VARCHAR},
+	        '',
+	    </if>
+	    <if test="maxDay==31">
+	    	#{wtype,jdbcType=VARCHAR},
+	        #{wtype,jdbcType=VARCHAR},
+	       	#{wtype,jdbcType=VARCHAR},
+	       	#{wtype,jdbcType=VARCHAR},
+	    </if>
+        sysdate,#{opid,jdbcType=VARCHAR})
+  </insert>
+  <update id="updateWorkData" parameterType="map" >
+    update TBYZ_CHECK_FOR_WORK
+    <set>
+      <if test="remark != null" >
+        REMARK = #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="basicscore != null" >
+        BASICSCORE = #{basicscore,jdbcType=FLOAT},
+      </if>
+      <if test="zhjfscore != null" >
+        ZHJFSCORE = #{zhjfscore,jdbcType=FLOAT},
+      </if>
+      <if test="ldgzscore != null" >
+        LDGZSCORE = #{ldgzscore,jdbcType=FLOAT},
+      </if>
+      <if test="xzjfscore != null" >
+        XZJFSCORE = #{xzjfscore,jdbcType=FLOAT},
+      </if>
+      <if test="xzkfscore != null" >
+        XZKFSCORE = #{xzkfscore,jdbcType=FLOAT},
+      </if>
+      <if test="khscore != null" >
+        KHSCORE = #{khscore,jdbcType=FLOAT},
+      </if>
+      <if test="ccjfscore != null" >
+        CCJFSCORE = #{ccjfscore,jdbcType=FLOAT},
+      </if>
+      <if test="state != null" >
+        STATE = #{state,jdbcType=VARCHAR},
+      </if>
+      <if test="workdaynum != null and workdaynum!= ''" >
+        WORKDAYNUM = #{workdaynum,jdbcType=DECIMAL},
+      </if>
+      <if test="lastscore != null" >
+        LASTSCORE = #{lastscore,jdbcType=DECIMAL},
+      </if>
+      <if test="text1 != null" >
+        TEXT1 = #{text1,jdbcType=VARCHAR},
+      </if>
+      <if test="text2 != null" >
+        TEXT2 = #{text2,jdbcType=VARCHAR},
+      </if>
+      <if test="text3 != null" >
+        TEXT3 = #{text3,jdbcType=VARCHAR},
+      </if>
+      <if test="text4 != null" >
+        TEXT4 = #{text4,jdbcType=VARCHAR},
+      </if>
+      <if test="int1 != null" >
+        INT1 = #{int1,jdbcType=DECIMAL},
+      </if>
+      <if test="int2 != null" >
+        INT2 = #{int2,jdbcType=DECIMAL},
+      </if>
+      <if test="jcfdjscore != null" >
+        JCFDJSCORE = #{jcfdjscore,jdbcType=DECIMAL},
+      </if>
+      <if test="lddjscore != null" >
+        LDDJSCORE = #{lddjscore,jdbcType=DECIMAL}
+      </if>
+    </set>
+    	where CRIMID = #{crimid,jdbcType=VARCHAR}
+          and
+        YEARDATE = #{yeardate,jdbcType=VARCHAR}
+          and
+        departid = #{departid,jdbcType=VARCHAR}
+  </update>
+  <select id="selectByCrimid" parameterType="Map" resultType="int" >
+	select count(*) from TBYZ_CHECK_FOR_WORK
+	 where CRIMID = #{crimid, jdbcType = VARCHAR}
+	   and YEARDATE = #{yeardate, jdbcType = VARCHAR}
+
+  </select>
+</mapper>

@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.sinog2c.dao.api.prisoner.TbprisonerPapersMapper" >
+  <resultMap id="BaseResultMap" type="com.sinog2c.model.prisoner.TbprisonerPapers" >
+    <id column="PAPERID" property="paperid" jdbcType="DECIMAL" />
+    <result column="CRIMID" property="crimid" jdbcType="VARCHAR" />
+    <result column="TYPE" property="type" jdbcType="VARCHAR" />
+    <result column="CODE" property="code" jdbcType="VARCHAR" />
+    <result column="ENDTIME" property="endtime" jdbcType="TIMESTAMP" />
+    <result column="DELFLAG" property="delflag" jdbcType="VARCHAR" />
+    <result column="REMARK" property="remark" jdbcType="VARCHAR" />
+    <result column="OPID" property="opid" jdbcType="VARCHAR" />
+    <result column="OPTIME" property="optime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    PAPERID, CRIMID, TYPE, CODE, ENDTIME, DELFLAG, REMARK, OPID, OPTIME
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.math.BigDecimal" >
+    select 
+    <include refid="Base_Column_List" />
+    from TBPRISONER_PAPERS
+    where PAPERID = #{paperid,jdbcType=DECIMAL}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.math.BigDecimal" >
+    delete from TBPRISONER_PAPERS
+    where PAPERID = #{paperid,jdbcType=DECIMAL}
+  </delete>
+  <insert id="insert" parameterType="com.sinog2c.model.prisoner.TbprisonerPapers" >
+    insert into TBPRISONER_PAPERS (PAPERID, CRIMID, TYPE, 
+      CODE, ENDTIME, DELFLAG, 
+      REMARK, OPID, OPTIME)
+    values (#{paperid,jdbcType=DECIMAL}, #{crimid,jdbcType=VARCHAR}, #{type,jdbcType=VARCHAR}, 
+      #{code,jdbcType=VARCHAR}, #{endtime,jdbcType=DATE}, #{delflag,jdbcType=VARCHAR}, 
+      #{remark,jdbcType=VARCHAR}, #{opid,jdbcType=VARCHAR}, #{optime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.sinog2c.model.prisoner.TbprisonerPapers" >
+    insert into TBPRISONER_PAPERS
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="paperid != null" >
+        PAPERID,
+      </if>
+      <if test="crimid != null" >
+        CRIMID,
+      </if>
+      <if test="type != null" >
+        TYPE,
+      </if>
+      <if test="code != null" >
+        CODE,
+      </if>
+      <if test="endtime != null" >
+        ENDTIME,
+      </if>
+      <if test="delflag != null" >
+        DELFLAG,
+      </if>
+      <if test="remark != null" >
+        REMARK,
+      </if>
+      <if test="opid != null" >
+        OPID,
+      </if>
+      <if test="optime != null" >
+        OPTIME,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="paperid != null" >
+        #{paperid,jdbcType=DECIMAL},
+      </if>
+      <if test="crimid != null" >
+        #{crimid,jdbcType=VARCHAR},
+      </if>
+      <if test="type != null" >
+        #{type,jdbcType=VARCHAR},
+      </if>
+      <if test="code != null" >
+        #{code,jdbcType=VARCHAR},
+      </if>
+      <if test="endtime != null" >
+        #{endtime,jdbcType=DATE},
+      </if>
+      <if test="delflag != null" >
+        #{delflag,jdbcType=VARCHAR},
+      </if>
+      <if test="remark != null" >
+        #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="opid != null" >
+        #{opid,jdbcType=VARCHAR},
+      </if>
+      <if test="optime != null" >
+        #{optime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.sinog2c.model.prisoner.TbprisonerPapers" >
+    update TBPRISONER_PAPERS
+    <set >
+      <if test="crimid != null" >
+        CRIMID = #{crimid,jdbcType=VARCHAR},
+      </if>
+      <if test="type != null" >
+        TYPE = #{type,jdbcType=VARCHAR},
+      </if>
+      <if test="code != null" >
+        CODE = #{code,jdbcType=VARCHAR},
+      </if>
+      <if test="endtime != null" >
+        ENDTIME = #{endtime,jdbcType=DATE},
+      </if>
+      <if test="delflag != null" >
+        DELFLAG = #{delflag,jdbcType=VARCHAR},
+      </if>
+      <if test="remark != null" >
+        REMARK = #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="opid != null" >
+        OPID = #{opid,jdbcType=VARCHAR},
+      </if>
+      <if test="optime != null" >
+        OPTIME = #{optime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where PAPERID = #{paperid,jdbcType=DECIMAL}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.sinog2c.model.prisoner.TbprisonerPapers" >
+    update TBPRISONER_PAPERS
+    set CRIMID = #{crimid,jdbcType=VARCHAR},
+      TYPE = #{type,jdbcType=VARCHAR},
+      CODE = #{code,jdbcType=VARCHAR},
+      ENDTIME = #{endtime,jdbcType=DATE},
+      DELFLAG = #{delflag,jdbcType=VARCHAR},
+      REMARK = #{remark,jdbcType=VARCHAR},
+      OPID = #{opid,jdbcType=VARCHAR},
+      OPTIME = #{optime,jdbcType=TIMESTAMP}
+    where PAPERID = #{paperid,jdbcType=DECIMAL}
+  </update>
+  <select id="selectByCrimid" parameterType="String" resultType="com.sinog2c.model.prisoner.TbprisonerPapers">
+    select * from TBPRISONER_PAPERS where crimid=#{crimid}
+  </select>
+</mapper>

@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.sinog2c.dao.api.prisoner.TbprisonerLanguagesHisMapper" >
+  <resultMap id="BaseResultMap" type="com.sinog2c.model.prisoner.TbprisonerLanguagesHis" >
+    <result column="LANGUID" property="languid" jdbcType="DECIMAL" />
+    <result column="CRIMID" property="crimid" jdbcType="VARCHAR" />
+    <result column="LANGUAGES" property="languages" jdbcType="VARCHAR" />
+    <result column="REMARK" property="remark" jdbcType="VARCHAR" />
+    <result column="DELFLAG" property="delflag" jdbcType="VARCHAR" />
+    <result column="OPID" property="opid" jdbcType="VARCHAR" />
+    <result column="OPTIME" property="optime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <insert id="insert" parameterType="com.sinog2c.model.prisoner.TbprisonerLanguagesHis" >
+    insert into TBPRISONER_LANGUAGES_HIS (LANGUID, CRIMID, LANGUAGES, 
+      REMARK, DELFLAG, OPID, 
+      OPTIME)
+    values (#{languid,jdbcType=DECIMAL}, #{crimid,jdbcType=VARCHAR}, #{languages,jdbcType=VARCHAR}, 
+      #{remark,jdbcType=VARCHAR}, #{delflag,jdbcType=VARCHAR}, #{opid,jdbcType=VARCHAR}, 
+      #{optime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.sinog2c.model.prisoner.TbprisonerLanguagesHis" >
+    insert into TBPRISONER_LANGUAGES_HIS
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="languid != null" >
+        LANGUID,
+      </if>
+      <if test="crimid != null" >
+        CRIMID,
+      </if>
+      <if test="languages != null" >
+        LANGUAGES,
+      </if>
+      <if test="remark != null" >
+        REMARK,
+      </if>
+      <if test="delflag != null" >
+        DELFLAG,
+      </if>
+      <if test="opid != null" >
+        OPID,
+      </if>
+      <if test="optime != null" >
+        OPTIME,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="languid != null" >
+        #{languid,jdbcType=DECIMAL},
+      </if>
+      <if test="crimid != null" >
+        #{crimid,jdbcType=VARCHAR},
+      </if>
+      <if test="languages != null" >
+        #{languages,jdbcType=VARCHAR},
+      </if>
+      <if test="remark != null" >
+        #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="delflag != null" >
+        #{delflag,jdbcType=VARCHAR},
+      </if>
+      <if test="opid != null" >
+        #{opid,jdbcType=VARCHAR},
+      </if>
+      <if test="optime != null" >
+        #{optime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+</mapper>

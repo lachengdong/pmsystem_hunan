@@ -1,0 +1,174 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.sinog2c.dao.api.system.ResourceTypeMapper">
+	  <resultMap id="BaseResultMap" type="com.sinog2c.model.system.ResourceType">
+	    <result column="RESTYPEID" jdbcType="DECIMAL" property="restypeid" />
+	    <result column="NAME" jdbcType="VARCHAR" property="name" />
+	  </resultMap>
+	  <insert id="insert" parameterType="com.sinog2c.model.system.ResourceType">
+	    insert into TBSYS_RESOURCES_TYPE (RESTYPEID, NAME)
+	    values (#{restypeid,jdbcType=DECIMAL}, #{name,jdbcType=VARCHAR})
+	  </insert>
+	
+	  <insert id="insertSelective" parameterType="com.sinog2c.model.system.ResourceType">
+	    insert into TBSYS_RESOURCES_TYPE
+	    <trim prefix="(" suffix=")" suffixOverrides=",">
+	      <if test="restypeid != null">
+	        RESTYPEID,
+	      </if>
+	      <if test="name != null">
+	        NAME,
+	      </if>
+	    </trim>
+	    <trim prefix="values (" suffix=")" suffixOverrides=",">
+	      <if test="restypeid != null">
+	        #{restypeid,jdbcType=DECIMAL},
+	      </if>
+	      <if test="name != null">
+	        #{name,jdbcType=VARCHAR},
+	      </if>
+	    </trim>
+	  </insert>
+	 <!-- 通过 资源id 查询出 所有对应查询方案的sql语句 -->
+      <select id="getPlanSqlByResidNew" resultType="java.util.Map">
+           select q.* from TBSYS_QUERYPLANSQL q where  q.delflag !=1 and  q.planid in 
+ 		(select b.planid from TBSYS_QUERYPLAN  b where b.resid=#{resid} ) 
+ 		  <!-- 因为很多报表 当时创建的时候未 指明是报表用还是模板用，加上这个会出现一些问题(mushuhong备注) -->
+ 		  <!-- and b.reportortemp=0 -->
+ 		  order by q.planid
+      </select>
+	  <select id="listAll" resultMap="BaseResultMap">    <!-- 查询表中的所有信息 -->
+		 select * from TBSYS_RESOURCES_TYPE order by RESTYPEID asc
+	  </select>
+	  <select id="getReducePenaltyData" resultType="java.util.HashMap">
+	       <!-- select t.crimid as crimid,t.orgname1 as orgname1,t.orgname2 as orgname2,to_char(t.detaindate,'yyyy-MM-dd') as detaindate  from TBPRISONER_BASE_CRIME t where rownum &lt;= 10 -->
+	       select * from (SELECT o.crimid AS crimid,
+	       O.NAME AS name,
+	       TO_NUMBER (TO_CHAR (SYSDATE, 'yyyy')) - TO_NUMBER (TO_CHAR (O.BIRTHDAY, 'yyyy'))
+	          AS age,
+	       t.causeaction AS causeaction,
+	       to_char(t.judgedate,'yyyy/MM') as judgedate,
+	       t.sentencestime as sentencestime,
+	       t.sentenceetime as sentenceetime,
+	       t.executiondate as executiondate,
+	       t.inprisondate as inprisondate,
+	       decode(s.sentencechageinfo,'','减刑1年',s.sentencechageinfo) AS sentencechageinfo,
+           s.nowpunishmentyear || '/' || s.nowpunishmentmonth AS nowyearmonth,
+           decode(s.leniency,'','从宽',s.leniency) AS leniency,
+	       decode(s.isold,'1','老','')||' '||decode(s.isill,'1','老','')||' '||decode(s.ISDISABILITY ,'1','老','') as oldillity,
+	       '嘉奖1次' as jiajiang,
+	       '表扬1次' as biaoyang,
+	       '改积1次' as gaiji,
+	       '记功1次' as jigong,
+	       '立功1次' as ligong,
+	       '扣罚1次'  as koufa,
+	       decode(s.nowpunishmentyear,'','',s.nowpunishmentyear||'年')||decode(s.nowpunishmentmonth,'','',s.nowpunishmentmonth||'个月')||decode(s.nowpunishmentday,'','',s.nowpunishmentday||'天') as yearmonthday
+	       FROM TBPRISONER_BASE_CRIME t, TBPRISONER_BASEINFO o,TBXF_SENTENCEALTERATION s
+	       WHERE o.CRIMID = T.CRIMID(+) and O.CRIMID=s.crimid(+)) where rownum &lt;= 1 
+	  </select>
+	  
+	  <select id="getColumnDataType" resultType="java.util.Map">
+	       select column_name,data_type,data_length from all_tab_columns where table_name='TBPRISONER_BASE_CRIME' and column_name in (UPPER('crimid'),UPPER('orgname1'),UPPER('orgname2'),upper('detaindate'))
+	  </select>
+	  <!-- 通过资源编号查询出资源 名称 -->
+      <select id="getReportNameBySn" resultType="java.util.Map">
+           select r.name as rname from  TBUSER_USERREPORT r where r.resid= #{resid}
+      </select>
+      <!-- 通过 报表id 查询出 所有对应查询方案的sql语句 -->
+      <select id="getPlanSqlByResid" resultType="java.util.Map">
+           select q.* from TBSYS_QUERYPLANSQL q where  q.delflag !=1 and  q.planid in 
+ 		(select b.planid from TBSYS_QUERYPLAN  b,TBUSER_USERREPORT u where u.resid=#{resid} and  (b.pplanid=u.planid or b.planid=u.planid) 
+ 		  <!-- 因为很多报表 当时创建的时候未 指明是报表用还是模板用，加上这个会出现一些问题(mushuhong备注) -->
+ 		  <!-- and b.reportortemp=0 -->
+ 		  ) order by q.planid
+      </select>
+      <!-- 通过查询方案的sql 查询出对应的内容 -->
+      <select id="getReportDataByPlanSql" resultType="java.util.HashMap" parameterType="java.lang.String">
+          <if test="sql!=null and sql!=''">${sql}</if> 
+      </select>
+      <!-- 查询出所有的报表  -->
+      <select id="getAllReportResourcesMapper" resultType="java.util.Map">
+		   SELECT *
+               FROM TBUSER_USERREPORT t1,
+                    (SELECT s.resid
+                       FROM TBSYS_RESOURCES e,
+                            (SELECT DISTINCT e.resid AS resid
+                               FROM TBSYS_ROLE_RES e
+                              WHERE e.roleid IN (SELECT roleid
+                                                   FROM TBSYS_USERS_ROLES
+                                                  WHERE userid = #{userid,jdbcType=VARCHAR})) s
+                      WHERE e.resid = s.resid) t0
+               WHERE t1.TYPE = '1' and t1.resid=t0.resid
+           
+      </select>
+      <select id="getResouceType"  resultType="map">
+          SELECT   *
+  				FROM   (SELECT   A.*, ROWNUM RN
+           			 FROM   (SELECT * FROM TBSYS_RESOURCES_TYPE tr
+            WHERE 1=1 
+		   <if test=" key != null and key != '' ">  
+	        and  tr.NAME like '%'||#{key}||'%' 
+	       </if>
+            order by tr.RESTYPEID asc) A
+         	 	 WHERE   ROWNUM &lt;= #{end,jdbcType=DECIMAL}
+         	 	 )
+ 			WHERE   RN &gt;= #{start,jdbcType=DECIMAL}
+      </select>
+      <select id="getCount" resultType="int">  
+		SELECT count(*) FROM TBSYS_RESOURCES_TYPE tr
+            WHERE 1=1 
+		   <if test=" key != null and key != '' ">  
+	        and  tr.NAME like '%'||#{key}||'%' 
+	       </if>
+            order by tr.RESTYPEID asc
+   </select>
+      <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String">
+            select * from TBSYS_RESOURCES_TYPE WHERE RESTYPEID= #{restypeid,jdbcType=VARCHAR}
+      </select>
+      
+      <update id="updateByPrimaryKeySelective" parameterType="com.sinog2c.model.system.ResourceType">
+       update TBSYS_RESOURCES_TYPE set  NAME = #{name,jdbcType=VARCHAR} 
+       where RESTYPEID= #{restypeid,jdbcType=VARCHAR}
+      </update>
+      
+      <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+         delete from TBSYS_RESOURCES_TYPE 
+         where  RESTYPEID= #{restypeid,jdbcType=VARCHAR}
+      </delete>
+      <!-- 查询 呈报榜单 的数据条数据 -->
+      <select id="jqCaseTypeChengBaoBangPageCount" resultType="int">
+           <if test="planSql!=null and planSql!=''">${planSql}</if>        
+      </select>
+      <select id="jqCaseTypeChengBaoBangPageData" resultType="map">
+           <if test="planSql!=null and planSql!=''">${planSql}</if>  
+      </select>
+      <!-- 查询列标题表页列，进行组织表格内容 reportortemp=2-->
+      <select id="jqCaseTypeChengBaobiao" resultType="map">
+           select qu.* from TBSYS_QUERYPLAN tb,TBSYS_QUERYPLANSQL qu where 
+           tb.planid=qu.planid(+) and tb.resid=#{menuid} and tb.reportortemp=2
+      </select>
+      <!-- 执行sql -->
+      <select id="jqCaseTypeChengBaobiaoSql" resultType="map" parameterType="java.lang.String">
+           <!-- 如果需要添加条件可以再最外围进行添加比如：applyid like '%key%' -->
+           <if test="planSql!=null and planSql!=''">${planSql}</if> 
+      </select>
+      <!-- 查询 列表页 主要显示内容reportortemp=1-->
+      <select id="listMapsTemplateByMenuid" resultType="map">
+           select qu.* from TBSYS_QUERYPLAN tb,TBSYS_QUERYPLANSQL qu where 
+           tb.planid=qu.planid(+) and tb.resid=#{menuid} and tb.reportortemp=#{reportortemp}
+      </select>
+      <!-- 导出数据 需要执行的 -->
+      <select id="exportXlsServiceMapper" resultType="map" parameterType="java.lang.String">
+           <if test="planSql!=null and planSql!=''">${planSql}</if>  
+      </select>
+      <!--  -->
+      <select id="getCaoZuoResource" resultType="map">
+           SELECT *
+				  FROM TBFLOW_DELIVER
+				 WHERE     flowdefid = #{flowdefid}
+				       AND state = 0
+				       AND resid IN (SELECT ro.resid
+				                       FROM TBSYS_USERS_ROLEs us, TBSYS_ROLE_RES ro
+				                      WHERE us.userid = #{userid} AND us.roleid = ro.roleid)
+      </select>
+</mapper>

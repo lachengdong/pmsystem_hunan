@@ -1,0 +1,203 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.sinog2c.dao.api.officeAssistant.TbuserFileinfoMapper">
+	<resultMap id="BaseResultMap"
+		type="com.sinog2c.model.officeAssistant.TbuserFileinfo">
+		<result column="FILEID" property="fileid" jdbcType="DECIMAL" />
+		<result column="PFILEID" property="pfileid" jdbcType="DECIMAL" />
+		<result column="ISHARED" property="ishared" jdbcType="DECIMAL" />
+		<result column="ISLEAF" property="isleaf" jdbcType="DECIMAL" />
+		<result column="REALNAME" property="realname" jdbcType="VARCHAR" />
+		<result column="VIRTUALNAME" property="virtualname" jdbcType="VARCHAR" />
+		<result column="FILENO" property="fileno" jdbcType="VARCHAR" />
+		<result column="REMARK" property="remark" jdbcType="VARCHAR" />
+		<result column="FILETYPE" property="filetype" jdbcType="VARCHAR" />
+		<result column="TEXT1" property="text1" jdbcType="VARCHAR" />
+		<result column="TEXT2" property="text2" jdbcType="VARCHAR" />
+		<result column="TEXT3" property="text3" jdbcType="VARCHAR" />
+		<result column="OPTIME" property="optime" jdbcType="TIMESTAMP" />
+		<result column="OPID" property="opid" jdbcType="VARCHAR" />
+		<result column="OPNAME" property="opname" jdbcType="VARCHAR" />
+	</resultMap>
+
+	<insert id="addfile" parameterType="Object">
+		<selectKey resultType="int" order="BEFORE" keyProperty="fileid">
+			select SQ_FILEID.nextval as fileid from dual
+		</selectKey>
+		insert into tbuser_fileinfo
+		(fileid,pfileid,ishared,isleaf,realname,virtualname,fileno,remark,filetype,opid,opname)
+		values(#{fileid},#{pfileid},#{ishared},#{isleaf},#{realname},#{virtualname},#{fileno},#{remark},#{filetype},#{opid},#{opname})
+	</insert>
+
+	<insert id="insertSelective" parameterType="com.sinog2c.model.officeAssistant.TbuserFileinfo">
+		<selectKey resultType="int" order="BEFORE" keyProperty="fileid">
+			select SQ_FILEID.nextval as fileid from dual
+		</selectKey>
+		insert into TBUSER_FILEINFO
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="fileid != null">
+				FILEID,
+      </if>
+			<if test="pfileid != null">
+				PFILEID,
+      </if>
+			<if test="ishared != null">
+				ISHARED,
+      </if>
+			<if test="isleaf != null">
+				ISLEAF,
+      </if>
+			<if test="realname != null">
+				REALNAME,
+      </if>
+			<if test="virtualname != null">
+				VIRTUALNAME,
+      </if>
+			<if test="fileno != null">
+				FILENO,
+      </if>
+			<if test="remark != null">
+				REMARK,
+      </if>
+			<if test="filetype != null">
+				FILETYPE,
+      </if>
+			<if test="text1 != null">
+				TEXT1,
+      </if>
+			<if test="text2 != null">
+				TEXT2,
+      </if>
+			<if test="text3 != null">
+				TEXT3,
+      </if>
+			<if test="optime != null">
+				OPTIME,
+      </if>
+			<if test="opid != null">
+				OPID,
+      </if>
+			<if test="opname != null">
+				OPNAME,
+      </if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="fileid != null">
+				#{fileid,jdbcType=DECIMAL},
+      </if>
+			<if test="pfileid != null">
+				#{pfileid,jdbcType=DECIMAL},
+      </if>
+			<if test="ishared != null">
+				#{ishared,jdbcType=DECIMAL},
+      </if>
+			<if test="isleaf != null">
+				#{isleaf,jdbcType=DECIMAL},
+      </if>
+			<if test="realname != null">
+				#{realname,jdbcType=VARCHAR},
+      </if>
+			<if test="virtualname != null">
+				#{virtualname,jdbcType=VARCHAR},
+      </if>
+			<if test="fileno != null">
+				#{fileno,jdbcType=VARCHAR},
+      </if>
+			<if test="remark != null">
+				#{remark,jdbcType=VARCHAR},
+      </if>
+			<if test="filetype != null">
+				#{filetype,jdbcType=VARCHAR},
+      </if>
+			<if test="text1 != null">
+				#{text1,jdbcType=VARCHAR},
+      </if>
+			<if test="text2 != null">
+				#{text2,jdbcType=VARCHAR},
+      </if>
+			<if test="text3 != null">
+				#{text3,jdbcType=VARCHAR},
+      </if>
+			<if test="optime != null">
+				#{optime,jdbcType=TIMESTAMP},
+      </if>
+			<if test="opid != null">
+				#{opid,jdbcType=VARCHAR},
+      </if>
+			<if test="opname != null">
+				#{opname,jdbcType=VARCHAR},
+      </if>
+		</trim>
+	</insert>
+	<insert id="insertFile" parameterType="com.sinog2c.model.officeAssistant.TbuserFileinfo">
+
+	</insert>
+	<select id="selectAll" resultType="java.util.HashMap">
+		select * from tbuser_fileinfo
+ </select>
+    <!--把公共的和私有的都查询出来-->
+	<select id="selectTree" resultType="java.util.HashMap">
+	     select * from TBUSER_FILEINFO o where o.filetype=#{filetype} and o.opid=#{opid}  and o.isleaf=1
+			union 
+		 select * from TBUSER_FILEINFO o1 where o1.ishared ='1' and o1.isleaf=1 and o1.filetype=#{filetype}
+	     <!--select * from tbuser_fileinfo t where  filetype=#{filetype}
+	     <if test="opid != null">
+				and (opid=#{opid} or ishared !=0)
+         </if>  -->
+  </select>
+	<select id="selectData" resultType="java.util.HashMap">
+		select * from tbuser_fileinfo where pfileid=#{0} and fileType &lt;&gt; #{1}  and isleaf=1
+	</select>
+	<!-- 根据 文件夹id，分页查询出所有的文件内容(查询当前页的内容) -->
+	<select id="selectFileData" resultType="java.util.Map">
+	    select * from (select f1.*,rownum as rn from 
+	    (select * from tbuser_fileinfo f where f.pfileid = #{fileId} and f.filetype &lt;&gt; #{file} )
+	     f1 where rownum &lt;= #{end} ) where rn &gt; #{start}
+	</select>
+	<!-- 根据文件夹id，查询出出所有的id对应的内容 -->
+	<select id="selectFileDataCount" resultType="int">
+	     select count(*) from tbuser_fileinfo f where f.pfileid = #{fileId} and f.filetype &lt;&gt; #{file}
+	</select>
+	<select id="getfileInfo" resultType="com.sinog2c.model.officeAssistant.TbuserFileinfo">
+		select * from tbuser_fileinfo where fileid=#{0}	
+  </select>
+	<select id="selectIsPid" parameterType="Object">
+		select pfileid form tbuser_fileinfo where fileid=#{id}
+  </select>
+    <!-- 修改删除标志(标志为已经删除) -->
+    <update id="updateFileIeaf">
+         update tbuser_fileinfo set isleaf=0 where fileid 
+         in (select file1.fileid From TBUSER_FILEINFO file1 Start With
+            file1.fileid = #{fileid} Connect By Prior file1.fileid=file1.pfileid )
+    </update>
+    <!-- 删除之前 查询出所有的需要删除的文件名称，通过名称删除服务器上面文件 -->
+    <select id="selectFileName" resultType="java.util.Map">
+         select * from tbuser_fileinfo where fileid in
+         <foreach collection="list" item="item" index="index" open="(" separator="," close=")">
+              #{item}
+         </foreach>
+    </select>
+    <!-- 删除所选择的所有的 文件 -->
+	<delete id="deleteFile">
+		DELETE tbuser_fileinfo WHERE fileid IN(
+		Select a.fileid
+		From tbuser_fileinfo a
+		Start With a.fileid in
+		<foreach item="item" index="index" collection="list" open="("
+			separator="," close=")">
+			#{item}   
+        </foreach>
+		Connect By Prior a.fileid=a.pfileid)
+	</delete>
+
+	<update id="updateFile" parameterType="Object">
+		update tbuser_fileinfo set virtualname=#{1},remark=#{2} where fileid=#{0}
+	</update>
+    <select id="selectFolderByFolderId" resultType="java.util.Map">
+         SELECT a1.fileid,a1.virtualname,a1.remark,a2.pfileid1 as pfileid,a2.pname FROM (SELECT *  FROM tbuser_fileinfo  WHERE fileid = #{fileid}) a1, (SELECT fileid AS fileid1, pfileid AS pfileid1, virtualname AS pname
+          FROM tbuser_fileinfo   WHERE fileid = (SELECT pfileid FROM tbuser_fileinfo  WHERE fileid = #{fileid}) ) a2 WHERE a1.pfileid = a2.fileid1
+    </select>
+    <select id="judgeIsharedByFileid" resultType="java.util.Map">
+         select * from TBUSER_FILEINFO o where fileid =#{fileid} 
+    </select>
+</mapper>

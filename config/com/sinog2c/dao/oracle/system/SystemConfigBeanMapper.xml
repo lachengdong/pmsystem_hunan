@@ -1,0 +1,377 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.sinog2c.dao.api.system.SystemConfigBeanMapper" >
+  <resultMap id="BaseResultMap" type="com.sinog2c.model.system.SystemConfigBean" >
+    <id column="ID" property="id" jdbcType="DECIMAL" />
+    <result column="DEPARTID" property="departid" jdbcType="VARCHAR" />
+    <result column="CATAGORY" property="catagory" jdbcType="VARCHAR" />
+    <result column="NAME" property="name" jdbcType="VARCHAR" />
+    <result column="VALUE" property="value" jdbcType="VARCHAR" />
+    <result column="STATUS" property="status" jdbcType="DECIMAL" />
+    <result column="OPTIME" property="optime" jdbcType="TIMESTAMP" />
+    <result column="OPID" property="opid" jdbcType="VARCHAR" />
+    <result column="DESCRIBE" property="describe" jdbcType="VARCHAR" />
+  </resultMap>
+  
+  <sql id="Base_Column_List" >
+    ID, DEPARTID, CATAGORY, NAME, VALUE, STATUS, OPTIME, OPID, DESCRIBE
+  </sql>
+  
+  <insert id="insert" parameterType="com.sinog2c.model.system.SystemConfigBean" >
+    insert into TBSYS_CONFIG (ID, DEPARTID, CATAGORY, 
+      NAME, VALUE, STATUS, 
+      OPTIME, OPID, DESCRIBE
+      )
+    values (#{id,jdbcType=DECIMAL}, #{departid,jdbcType=VARCHAR}, #{catagory,jdbcType=VARCHAR}, 
+      #{name,jdbcType=VARCHAR}, #{value,jdbcType=VARCHAR}, #{status,jdbcType=DECIMAL}, 
+      #{optime,jdbcType=TIMESTAMP}, #{opid,jdbcType=VARCHAR}, #{describe,jdbcType=VARCHAR}
+      )
+  </insert>
+  
+  <insert id="insertSelective" parameterType="com.sinog2c.model.system.SystemConfigBean" >
+  	<!-- 先查询出主键,再执行插入 -->
+    <selectKey resultType="int" keyProperty="id" order="BEFORE">
+   		select SEQ_CONFIG_ID.NEXTVAL  from dual
+    </selectKey>
+    insert into TBSYS_CONFIG
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        ID,
+      </if>
+      <if test="departid != null" >
+        DEPARTID,
+      </if>
+      <if test="catagory != null" >
+        CATAGORY,
+      </if>
+      <if test="name != null" >
+        NAME,
+      </if>
+      <if test="value != null" >
+        VALUE,
+      </if>
+      <if test="status != null" >
+        STATUS,
+      </if>
+      <if test="optime != null" >
+        OPTIME,
+      </if>
+      <if test="opid != null" >
+        OPID,
+      </if>
+      <if test="describe != null" >
+        DESCRIBE,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=DECIMAL},
+      </if>
+      <if test="departid != null" >
+        #{departid,jdbcType=VARCHAR},
+      </if>
+      <if test="catagory != null" >
+        #{catagory,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null" >
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="value != null" >
+        #{value,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null" >
+        #{status,jdbcType=DECIMAL},
+      </if>
+      <if test="optime != null" >
+        #{optime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="opid != null" >
+        #{opid,jdbcType=VARCHAR},
+      </if>
+      <if test="describe != null" >
+        #{describe,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  
+  <insert id="insertByMap" parameterType="map" >
+  	<!-- 先查询出主键,再执行插入 -->
+    <selectKey resultType="int" keyProperty="id" order="BEFORE">
+   		select SEQ_CONFIG_ID.NEXTVAL  from dual
+    </selectKey>
+    insert into TBSYS_CONFIG
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        ID,
+      </if>
+      <if test="departid != null" >
+        DEPARTID,
+      </if>
+      <if test="catagory != null" >
+        CATAGORY,
+      </if>
+      <if test="name != null" >
+        NAME,
+      </if>
+      <if test="value != null" >
+        VALUE,
+      </if>
+      <if test="status != null" >
+        STATUS,
+      </if>
+      <if test="optime != null" >
+        OPTIME,
+      </if>
+      <if test="opid != null" >
+        OPID,
+      </if>
+      <if test="describe != null" >
+        DESCRIBE,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=DECIMAL},
+      </if>
+      <if test="departid != null" >
+        #{departid,jdbcType=VARCHAR},
+      </if>
+      <if test="catagory != null" >
+        #{catagory,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null" >
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="value != null" >
+        #{value,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null" >
+        #{status,jdbcType=DECIMAL},
+      </if>
+      <if test="optime != null" >
+        #{optime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="opid != null" >
+        #{opid,jdbcType=VARCHAR},
+      </if>
+      <if test="describe != null" >
+        #{describe,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  
+  <update id="update" parameterType="com.sinog2c.model.system.SystemConfigBean" >
+    update TBSYS_CONFIG
+    set DEPARTID = #{departid,jdbcType=VARCHAR},
+      CATAGORY = #{catagory,jdbcType=VARCHAR},
+      NAME = #{name,jdbcType=VARCHAR},
+      VALUE = #{value,jdbcType=VARCHAR},
+      STATUS = #{status,jdbcType=DECIMAL},
+      OPTIME = #{optime,jdbcType=TIMESTAMP},
+      OPID = #{opid,jdbcType=VARCHAR},
+      DESCRIBE = #{describe,jdbcType=VARCHAR}
+    where ID = #{id,jdbcType=DECIMAL}
+  </update>
+  
+  <update id="updateSelective" parameterType="com.sinog2c.model.system.SystemConfigBean" >
+    update TBSYS_CONFIG
+    <set >
+      <if test="departid != null" >
+        DEPARTID = #{departid,jdbcType=VARCHAR},
+      </if>
+      <if test="catagory != null" >
+        CATAGORY = #{catagory,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null" >
+        NAME = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="value != null" >
+        VALUE = #{value,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null" >
+        STATUS = #{status,jdbcType=DECIMAL},
+      </if>
+      <if test="optime != null" >
+        OPTIME = #{optime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="opid != null" >
+        OPID = #{opid,jdbcType=VARCHAR},
+      </if>
+      <if test="describe != null" >
+        DESCRIBE = #{describe,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where ID = #{id,jdbcType=DECIMAL}
+  </update>
+  
+  <update id="updateByMap" parameterType="map" >
+    update TBSYS_CONFIG
+    <set >
+      <if test="departid != null" >
+        DEPARTID = #{departid,jdbcType=VARCHAR},
+      </if>
+      <if test="catagory != null" >
+        CATAGORY = #{catagory,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null" >
+        NAME = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="value != null" >
+        VALUE = #{value,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null" >
+        STATUS = #{status,jdbcType=DECIMAL},
+      </if>
+      <if test="optime != null" >
+        OPTIME = #{optime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="opid != null" >
+        OPID = #{opid,jdbcType=VARCHAR},
+      </if>
+      <if test="describe != null" >
+        DESCRIBE = #{describe,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where ID = #{id,jdbcType=DECIMAL}
+  </update>  
+  
+  <delete id="deleteById" parameterType="java.lang.Long" >
+    delete from TBSYS_CONFIG
+    where ID = #{id,jdbcType=DECIMAL}
+  </delete>
+  
+  <select id="getById" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from TBSYS_CONFIG
+    where ID = #{id,jdbcType=DECIMAL}
+  </select>
+  
+  <select id="countAll" resultType="int">  <!-- 查询表中记录总数 -->
+		select count(*) c from TBSYS_CONFIG
+  </select>
+  
+  <select id="listAll" resultMap="BaseResultMap">    <!-- 分页查询表中的所有信息 -->
+		 		SELECT * FROM TBSYS_CONFIG 
+		 		where 1=1 
+		 		  order by  id asc
+  </select>
+  
+  <select id="countByCondition" resultType="int" parameterType="Map" >  <!-- 根据条件查询表中记录数 -->
+		select count(*) c from TBSYS_CONFIG
+	 	where 1=1 
+			 <if test="departid!=null and departid!=''">
+		        and DEPARTID = #{departid}
+		     </if>
+			 <if test="catagory !=null and catagory !=''">  
+		        and CATAGORY = #{catagory}
+		     </if>
+			 <if test="key !=null and key !=''">  
+		        and (
+		        	NAME like '%'||#{key}||'%'
+		        	or VALUE like '%'||#{key}||'%'
+		        	or DESCRIBE like '%'||#{key}||'%'
+		        ) 
+		     </if>
+  </select>
+
+  <select id="listByCondition" resultMap="BaseResultMap" parameterType="Map" >    <!-- 分页查询表中的信息 -->
+	 SELECT * FROM 
+	 	( SELECT A.*, ROWNUM RN 
+		 	FROM 
+		 	(
+		 		SELECT * FROM TBSYS_CONFIG
+			 	where 1=1 
+					 <if test="departid!=null and departid!=''">
+				        and DEPARTID = #{departid}
+				     </if>
+					 <if test="catagory !=null and catagory !=''">  
+				        and CATAGORY = #{catagory}
+				     </if>
+					 <if test="key !=null and key !=''">  
+				        and (
+				        	NAME like '%'||#{key}||'%'
+				        	or VALUE like '%'||#{key}||'%'
+				        	or DESCRIBE like '%'||#{key}||'%'
+				        ) 
+				     </if>
+		     
+				 <if test="sortField !=null and sortField !='' and sortOrder !=null and sortOrder !=''">  
+		 		  order by  ${sortField} ${sortOrder}
+			     </if>
+		 	) A 
+		 	WHERE ROWNUM &lt;= #{end,jdbcType=DECIMAL}
+	 	) 
+	 	WHERE RN &gt;= #{start,jdbcType=DECIMAL}
+  </select>
+  
+  <select id="getConfigByMap" resultMap="BaseResultMap" parameterType="Map" >    <!-- 分页查询表中的信息 -->
+	 SELECT * FROM TBSYS_CONFIG
+	 	where 1=1 
+	 <if test="departid!=null and departid!=''">
+        and DEPARTID = #{departid}
+     </if>
+	 <if test="name!=null and name!=''">
+        and name = #{name}
+     </if>
+	 <if test="catagory !=null and catagory !=''">  
+        and CATAGORY = #{catagory}
+     </if>
+  </select>
+  
+  <select id="listAllByPage" resultMap="BaseResultMap">    <!-- 分页查询表中的所有信息 -->
+	 SELECT * FROM 
+	 	( SELECT A.*, ROWNUM RN 
+		 	FROM 
+		 	(
+		 		SELECT * FROM TBSYS_CONFIG
+				 <if test="sortField!=null and sortField!='' and sortOrder!=null and sortOrder!=''">  
+		 		  order by  ${sortField} ${sortOrder}
+			     </if>
+		 	) A 
+		 	WHERE ROWNUM &lt;= #{end,jdbcType=DECIMAL}
+	 	) 
+	 	WHERE RN &gt;= #{start,jdbcType=DECIMAL}
+  </select>
+
+  <select id="countBySearch" resultType="int">  <!-- 查询搜索记录总数 -->
+	 	select count(*) c from TBSYS_CONFIG
+	 	where 1=1 
+		 <if test="key!=null and key!=''">  
+	        and 
+	        (
+	        	NAME like CONCAT(CONCAT('%', #{key}), '%')
+	        	or
+	        	CATAGORY like CONCAT(CONCAT('%', #{key}), '%')
+	        	or
+	        	DESCRIBE like CONCAT(CONCAT('%', #{key}), '%')
+	        )
+	     </if>
+  </select>
+  
+  <select id="search" resultMap="BaseResultMap">    <!-- 分页查询表中的所有信息 -->
+	 SELECT * FROM 
+	 	( SELECT A.*, ROWNUM RN 
+		 	FROM 
+		 	(
+		 		SELECT * FROM TBSYS_CONFIG
+		 		  where 1=1 
+				 <if test="key!=null and key!=''">    
+			        and 
+			        (
+			        	NAME like CONCAT(CONCAT('%', #{key}), '%')
+			        	or
+			        	CATAGORY like CONCAT(CONCAT('%', #{key}), '%')
+			        	or
+			        	DESCRIBE like CONCAT(CONCAT('%', #{key}), '%')
+			        )
+			     </if>
+				 <if test="sortField!=null and sortField!='' and sortOrder!=null and sortOrder!=''"> 
+		 		  order by  ${sortField} ${sortOrder}
+			     </if>
+		 	) A 
+		 	WHERE ROWNUM &lt;= #{end,jdbcType=DECIMAL}
+	 	) 
+	 	WHERE RN &gt;= #{start,jdbcType=DECIMAL}
+  </select>
+</mapper>

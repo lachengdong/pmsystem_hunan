@@ -1,0 +1,686 @@
+body {font-size: 12pt; font-family:Verdana;}
+.bodycolor { BACKGROUND: #677CAD}
+
+.button {
+	BORDER: #A9ACB5 1px solid; PADDING-RIGHT: 5px; PADDING-LEFT: 5px; 
+	FONT-SIZE:12px; CURSOR: default; COLOR: #000000; PADDING-TOP: 2px; 
+	HEIGHT: 24px; width:70px; BACKGROUND-COLOR: #DEE0E8;CURSOR: hand;
+}
+
+.small  { font-size: 9pt;}
+.small1  { font-size: 9pt;COLOR: #FFFFFF;}
+.big { font-size: 12pt;}
+.big1   { font-size: 12pt;COLOR: #FFFFFF;}
+.big2   { font-size: 18pt}
+.big3   { font-size: 12pt;COLOR: #FFFFFF;FONT-WEIGHT: bold;}
+.big4   { COLOR: #FF0000;}
+.verybig{ font-size: 24pt}
+.title {font-family:宋体, Verdana, Arial;font-weight:bold;font-size:18pt;}
+.title1 {font-family:宋体, Verdana, Arial;font-weight:bold;font-size:16pt;}
+
+.Pager {font-size:10.5pt;}
+.Message {font-weight:bold; color: Red;}
+
+.GroupHeader
+{
+	font-family: 宋体, Verdana, Arial;
+	font-size: 10.5pt;
+	font-weight: bold;
+	color: #496690;
+	background-color: #E6ECF4;
+	background-image: url(../Images/images/Table_GroupHeader.gif);
+	border-top: #89959B 1px solid;
+	border-right: #89959B 1px solid;
+	border-left: #89959B 1px solid;
+	height: 31;
+}
+
+.TableHeader
+{
+	font-family: 宋体, Verdana, Arial;
+	font-size: 10.5pt;
+	color: #FFFFFF;
+	font-weight: bold;
+	background-image: url(../Images/images/Table_Header.gif);
+	background-color: #F4F6FA;
+	height: 31;
+}
+
+.TableHeader_1
+{
+	font-family: 宋体, Verdana, Arial;
+	font-size: 10.5pt;
+	color: #333333;
+	background-image: url(../scripts/miniui/themes/default/images/grid/toolbar1.png);
+	background-color: #F4F6FA;
+	height: 31;
+}
+.FindHeader
+{
+	font-family: 宋体, Verdana, Arial;
+	font-size: 10.5pt;
+	color: #FFFFFF;
+	font-weight: bold;
+	background-image: url(../Images/images/Find_Header.gif);
+	background-color: #F4F6FA;
+	height: 31;
+}
+.fontTitle
+{
+	font-family: 宋体, Verdana, Arial;
+	font-size: 10.5pt;
+	color: #FFFFFF;
+	font-weight: bold;
+}
+.TableHeaderText
+{
+	font-family: 宋体, Verdana, Arial;
+	font-size: 10.5pt;
+	color: #FFFFFF;
+	font-weight: bold;	
+}
+
+.TableBody
+{
+	font-family: 宋体, Verdana, Arial;
+	font-size: 10.5pt;
+	font-weight: normal;
+	color: #4A5566;
+	background-color: #ECF0F6;
+	border-top: #ffffff 1px solid;
+	border-right: #ffffff 1px solid;
+}
+
+.TableBackGround
+{
+	background-color: #ffffff;
+	font-family: Tahoma, Verdana, Arial;
+	font-size: 10.5pt;
+	font-weight: normal;
+	color: #3F9ADE;
+}
+
+pre
+{
+    font-family: 'verdana, arial';
+    font-size: 10.5pt;
+    background-color: #eeeeee;
+    border: #d6be5a 1px solid;
+    padding-right: 10px;
+    padding-left: 10px;
+    padding-bottom: 5px;
+    padding-top: 5px;
+}
+
+.DataGrid
+{
+  border-color:#999999;
+  border-style:outset;
+  border-width:0px;
+}
+
+.DataGridHead
+{	
+	
+	/*background-image: url(../Images/images/DataGridHeader.gif);*/
+    border-bottom: dimgray;
+    border: #999999 1px solid;
+	color: #000000;
+	background-color:#E9EDF0;
+    font-size: 10px;
+    
+}
+.Headimg
+{	
+	font-weight: bold;
+	background-image: url(../Images/images/DataGridHeader.gif);
+    
+	color: #FFFFFF;
+    font-family: 宋体, Arial;
+    font-size: 10.5pt;
+    font-weight: bold;
+}
+.DataGridItem
+{
+    background-color: #F3F4FD;
+    border-bottom: dimgray  1px solid;
+    border-left: dimgray 1px solid;
+    color: black;
+    font-family: 宋体, Arial;
+    font-size: 10.5pt;
+    padding-left: 5px
+}
+
+.DataGridItemAlt
+{
+    background-color: #ECF0F6;
+    border-bottom: dimgray;
+    border-left: dimgray 1px solid;
+    color: black;
+    font-family: 宋体, Arial;
+    font-size: 10.5pt;
+    padding-left: 5px
+}
+
+.DataGridFooter
+{
+    background-color: white;
+    line-height: 10pt
+}
+.DataGridPager 
+{
+	text-align:right ;
+}
+
+.DataGridPager  td 
+{
+	padding:5px;
+	background-color:White;
+	color:gray;
+}
+
+.DataGridPager span
+{
+	font-size:10.5pt;
+}
+
+.DataGridPager a
+{
+	font-size:10.5pt;
+	text-decoration:none;
+}
+
+
+
+.NavTabBG 
+{
+	BACKGROUND-IMAGE: url(../Images/images/header2.gif); 
+	WIDTH: 90px; 
+	HEIGHT: 25px;
+	BACKGROUND-REPEAT: repeat-x	 
+}
+.SelNavTabBG 
+{ 
+	BACKGROUND-IMAGE: url(../Images/images/header1.gif); 
+	WIDTH: 90px; 
+	HEIGHT: 25px;
+	BACKGROUND-REPEAT: repeat-x
+}
+
+.NavLink { FONT-SIZE: 10.5pt; COLOR: white; FONT-FAMILY: "Tahoma","宋体"; TEXT-DECORATION: none }
+A.NavLink:link { TEXT-DECORATION: none }
+A.NavLink:visited { COLOR: white; TEXT-DECORATION: none }
+A.NavLink:hover { COLOR: #ff4500; TEXT-DECORATION: none }
+
+a.readmore {
+    text-decoration: none;
+color: blue;
+}
+a.readmore:hover {
+    text-decoration: none;
+    color: red;
+}
+
+.text				{color:#000000; font-size:10.5pt; font-family: verdana}
+A.text:LINK			{Text-Decoration: none; color:#000000; font-size:10.5pt; font-family: verdana} 
+A.text:VISITED		{Text-Decoration: none; color:#000000; font-size:10.5pt; font-family: verdana}
+A.text:HOVER		{Text-Decoration: underline; color:#000000; font-size:10.5pt; font-family: verdana}
+
+.delta				{color:#a9a9a9; font-size:10.5pt; font-family: verdana} 
+A.delta:LINK		{Text-Decoration: none; color:#a9a9a9; font-size:10.5pt; font-family: verdana} 
+A.delta:VISITED		{Text-Decoration: none; color:#a9a9a9; font-size:10.5pt; font-family: verdana}
+A.delta:HOVER		{Text-Decoration: none; background-color:#a9a9a9; color:#ffffff; font-size:10.5pt; font-family: verdana}
+
+.current			{color:#395A84; font-size:10.5pt; font-family: verdana} 
+A.current:LINK		{Text-Decoration: none; color:#395A84; font-size:10.5pt; font-family: verdana} 
+A.current:VISITED	{Text-Decoration: none; color:#395A84; font-size:10.5pt; font-family: verdana}
+A.current:HOVER		{Text-Decoration: none; background-color:#172676; color:#ffffff; font-size:10.5pt; font-family: verdana}
+
+.today				{color:Red; font-size:10.5pt; font-family: verdana} 
+A.today:LINK		{Text-Decoration: none; color:Red; font-size:10.5pt; font-family: verdana} 
+A.today:VISITED		{Text-Decoration: none; color:#395A84; font-size:10.5pt; font-family: verdana}
+A.today:HOVER		{Text-Decoration: none; background-color:#172676; color:#ffffff; font-size:10.5pt; font-family: verdana}
+
+.Normal { FONT-SIZE: 10.5pt; COLOR: blue; FONT-FAMILY: "Tahoma","宋体"; TEXT-DECORATION: none }
+A.Normal:link { TEXT-DECORATION: none }
+A.Normal:visited { COLOR: blue; TEXT-DECORATION: none }
+A.Normal:hover { COLOR: #ff4500; TEXT-DECORATION: none }
+
+.TitleHref { FONT-SIZE: 10.5pt; COLOR: white; FONT-FAMILY: "Tahoma","宋体"; TEXT-DECORATION: none }
+A.TitleHref:link { TEXT-DECORATION: none }
+A.TitleHref:visited { COLOR: white; TEXT-DECORATION: none }
+A.TitleHref:hover { COLOR: red; TEXT-DECORATION: none }
+
+.DesktopMenu { FONT-SIZE: 10.5pt; COLOR: blue; FONT-FAMILY: "Tahoma","宋体"; TEXT-DECORATION: none }
+A.DesktopMenu:link { TEXT-DECORATION: none }
+A.DesktopMenu:visited { COLOR: blue; TEXT-DECORATION: none }
+A.DesktopMenu:hover { COLOR: #ff4500; TEXT-DECORATION: none }
+.linkbutton   
+  {   
+    text-decoration:   none;   
+  }  
+  
+.record_odd {
+	FONT-SIZE: 12px;
+	background-color:#FBFBF0;
+	COLOR: #215E88;
+	Height: 20px;
+	LINE-HEIGHT: 18px;
+    font-family:"宋体";
+}
+.emailFont{
+	FONT-SIZE: 12px;
+	COLOR: #FFFFFF;
+	Height: 20px;
+	LINE-HEIGHT: 18px;
+    font-family:"宋体";
+    font-weight: bold ;
+}
+
+  .GridViewRowStyle
+{
+    background-color: #FFFFFF;
+    border-bottom: dimgray  1px solid;
+    border-left: dimgray 1px solid;
+    color: black;
+    font-family: 宋体, Arial;
+    font-size: 10.5pt;
+    padding-left: 5px
+}
+
+.GridViewAlternatingRowStyle
+{
+    background-color: #F7F4FD;
+    border-bottom: dimgray;
+    border-left: dimgray 1px solid;
+    color: black;
+    font-family: 宋体, Arial;
+    font-size: 10.5pt;
+    padding-left: 5px
+}
+
+<!-- add by fengyy -->
+.readonlyinput {
+	background-color: #E8E8E8;
+	height: 18px;
+	border: 1px solid #7F9DB9;
+	width: auto;
+	font-size:12px;
+	font-family:"宋体";
+	color:#333333
+}
+.input {
+	background-color: #F5FCFE;
+	height: 18px;
+	border: 1px solid #7F9DB9;
+	width: auto;
+	font-size:12px;
+	font-family:"宋体";
+	color:#333333;
+}
+
+.ModalDialog{
+	border: 1px #b8d1e2 solid;
+	background: #FFF;
+	padding: 0px;
+	margin: 10px auto;
+	clear: both;
+	position: absolute;
+	z-index: 10000;
+	display:none;
+}
+.normal1_table{
+	width:98%; 
+	border:"2px solid #ffffff"; 
+	background-color:#E8F1FF;
+}/*浅蓝色*/
+
+.inputLabelPic{
+  width:7px;
+  height:15px;
+  background-image:url(../Images/gif/first_09.gif)
+}
+
+body {font-size: 12pt; font-family:Verdana;}
+.bodycolor { BACKGROUND: #677CAD}
+
+.button {
+	BORDER-RIGHT: #f0f0f0 1px solid; PADDING-RIGHT: 5px; BORDER-TOP: #f0f0f0 1px solid; PADDING-LEFT: 5px; FONT-SIZE: 10.5pt; BACKGROUND-IMAGE: url(../Images/images/button_a_blue.gif); BORDER-LEFT: #f0f0f0 1px solid; CURSOR: default; COLOR: #FFFFFF; PADDING-TOP: 2px; BORDER-BOTTOM: #f0f0f0 1px solid; HEIGHT: 24px; BACKGROUND-COLOR: #333333;CURSOR: hand;
+}
+
+.small  { font-size: 9pt;}
+.small1  { font-size: 9pt;COLOR: #FFFFFF;}
+.big { font-size: 12pt;}
+.big1   { font-size: 12pt;COLOR: #FFFFFF;}
+.big2   { font-size: 18pt}
+.big3   { font-size: 12pt;COLOR: #FFFFFF;FONT-WEIGHT: bold;}
+.big4   { COLOR: #FF0000;}
+.verybig{ font-size: 24pt}
+.title {font-family:宋体, Verdana, Arial;font-weight:bold;font-size:18pt;}
+.title1 {font-family:宋体, Verdana, Arial;font-weight:bold;font-size:16pt;}
+
+.Pager {font-size:10.5pt;}
+.Message {font-weight:bold; color: Red;}
+
+.GroupHeader
+{
+	font-family: 宋体, Verdana, Arial;
+	font-size: 10.5pt;
+	font-weight: bold;
+	color: #496690;
+	background-color: #E6ECF4;
+	background-image: url(../Images/images/Table_GroupHeader.gif);
+	border-top: #89959B 1px solid;
+	border-right: #89959B 1px solid;
+	border-left: #89959B 1px solid;
+	height: 31;
+}
+
+.TableHeader
+{
+	font-family: 宋体, Verdana, Arial;
+	font-size: 10.5pt;
+	color: #FFFFFF;
+	font-weight: bold;
+	background-image: url(../Images/images/Table_Header.gif);
+	background-color: #F4F6FA;
+	height: 31;
+}
+.FindHeader
+{
+	font-family: 宋体, Verdana, Arial;
+	font-size: 10.5pt;
+	color: #FFFFFF;
+	font-weight: bold;
+	background-image: url(../Images/images/Find_Header.gif);
+	background-color: #F4F6FA;
+	height: 31;
+}
+.fontTitle
+{
+	font-family: 宋体, Verdana, Arial;
+	font-size: 10.5pt;
+	color: #FFFFFF;
+	font-weight: bold;
+}
+.TableHeaderText
+{
+	font-family: 宋体, Verdana, Arial;
+	font-size: 10.5pt;
+	color: #FFFFFF;
+	font-weight: bold;	
+}
+
+.TableBody
+{
+	font-family: 宋体, Verdana, Arial;
+	font-size: 10.5pt;
+	font-weight: normal;
+	color: #4A5566;
+	background-color: #ECF0F6;
+	border-top: #ffffff 1px solid;
+	border-right: #ffffff 1px solid;
+}
+
+.TableBackGround
+{
+	background-color: #89959B;
+	font-family: Tahoma, Verdana, Arial;
+	font-size: 10.5pt;
+	font-weight: normal;
+	color: #3F9ADE;
+}
+
+pre
+{
+    font-family: 'verdana, arial';
+    font-size: 10.5pt;
+    background-color: #eeeeee;
+    border: #d6be5a 1px solid;
+    padding-right: 10px;
+    padding-left: 10px;
+    padding-bottom: 5px;
+    padding-top: 5px;
+}
+
+.DataGrid
+{
+  border-color:#89959B;
+  border-style:outset;
+  border-width:1px;
+}
+
+.DataGridHead
+{	
+	
+	/*background-image: url(../Images/images/DataGridHeader.gif);*/
+    border-bottom: dimgray;
+    border: #999999 1px solid;
+	color: #000000;
+	background-color:#E9EDF0;
+    font-size: 10px;
+    
+}
+.Headimg
+{	
+	font-weight: bold;
+	background-image: url(../Images/images/DataGridHeader.gif);
+    
+	color: #FFFFFF;
+    font-family: 宋体, Arial;
+    font-size: 10.5pt;
+    font-weight: bold;
+}
+.DataGridItem
+{
+    background-color: #F3F4FD;
+    border-bottom: dimgray  1px solid;
+    border-left: dimgray 1px solid;
+    color: black;
+    font-family: 宋体, Arial;
+    font-size: 10.5pt;
+    padding-left: 5px
+}
+
+.DataGridItemAlt
+{
+    background-color: #ECF0F6;
+    border-bottom: dimgray;
+    border-left: dimgray 1px solid;
+    color: black;
+    font-family: 宋体, Arial;
+    font-size: 10.5pt;
+    padding-left: 5px
+}
+
+.DataGridFooter
+{
+    background-color: white;
+    line-height: 10pt
+}
+.DataGridPager 
+{
+	text-align:right ;
+}
+
+.DataGridPager  td 
+{
+	padding:5px;
+	background-color:White;
+	color:gray;
+}
+
+.DataGridPager span
+{
+	font-size:10.5pt;
+}
+
+.DataGridPager a
+{
+	font-size:10.5pt;
+	text-decoration:none;
+}
+
+
+
+.NavTabBG 
+{
+	BACKGROUND-IMAGE: url(../Images/images/header2.gif); 
+	WIDTH: 90px; 
+	HEIGHT: 25px;
+	BACKGROUND-REPEAT: repeat-x	 
+}
+.SelNavTabBG 
+{ 
+	BACKGROUND-IMAGE: url(../Images/images/header1.gif); 
+	WIDTH: 90px; 
+	HEIGHT: 25px;
+	BACKGROUND-REPEAT: repeat-x
+}
+
+.NavLink { FONT-SIZE: 10.5pt; COLOR: white; FONT-FAMILY: "Tahoma","宋体"; TEXT-DECORATION: none }
+A.NavLink:link { TEXT-DECORATION: none }
+A.NavLink:visited { COLOR: white; TEXT-DECORATION: none }
+A.NavLink:hover { COLOR: #ff4500; TEXT-DECORATION: none }
+
+a.readmore {
+    text-decoration: none;
+color: blue;
+}
+a.readmore:hover {
+    text-decoration: none;
+    color: red;
+}
+
+.text				{color:#000000; font-size:10.5pt; font-family: verdana}
+A.text:LINK			{Text-Decoration: none; color:#000000; font-size:10.5pt; font-family: verdana} 
+A.text:VISITED		{Text-Decoration: none; color:#000000; font-size:10.5pt; font-family: verdana}
+A.text:HOVER		{Text-Decoration: underline; color:#000000; font-size:10.5pt; font-family: verdana}
+
+.delta				{color:#a9a9a9; font-size:10.5pt; font-family: verdana} 
+A.delta:LINK		{Text-Decoration: none; color:#a9a9a9; font-size:10.5pt; font-family: verdana} 
+A.delta:VISITED		{Text-Decoration: none; color:#a9a9a9; font-size:10.5pt; font-family: verdana}
+A.delta:HOVER		{Text-Decoration: none; background-color:#a9a9a9; color:#ffffff; font-size:10.5pt; font-family: verdana}
+
+.current			{color:#395A84; font-size:10.5pt; font-family: verdana} 
+A.current:LINK		{Text-Decoration: none; color:#395A84; font-size:10.5pt; font-family: verdana} 
+A.current:VISITED	{Text-Decoration: none; color:#395A84; font-size:10.5pt; font-family: verdana}
+A.current:HOVER		{Text-Decoration: none; background-color:#172676; color:#ffffff; font-size:10.5pt; font-family: verdana}
+
+.today				{color:Red; font-size:10.5pt; font-family: verdana} 
+A.today:LINK		{Text-Decoration: none; color:Red; font-size:10.5pt; font-family: verdana} 
+A.today:VISITED		{Text-Decoration: none; color:#395A84; font-size:10.5pt; font-family: verdana}
+A.today:HOVER		{Text-Decoration: none; background-color:#172676; color:#ffffff; font-size:10.5pt; font-family: verdana}
+
+.Normal { FONT-SIZE: 10.5pt; COLOR: blue; FONT-FAMILY: "Tahoma","宋体"; TEXT-DECORATION: none }
+A.Normal:link { TEXT-DECORATION: none }
+A.Normal:visited { COLOR: blue; TEXT-DECORATION: none }
+A.Normal:hover { COLOR: #ff4500; TEXT-DECORATION: none }
+
+.TitleHref { FONT-SIZE: 10.5pt; COLOR: white; FONT-FAMILY: "Tahoma","宋体"; TEXT-DECORATION: none }
+A.TitleHref:link { TEXT-DECORATION: none }
+A.TitleHref:visited { COLOR: white; TEXT-DECORATION: none }
+A.TitleHref:hover { COLOR: red; TEXT-DECORATION: none }
+
+.DesktopMenu { FONT-SIZE: 10.5pt; COLOR: blue; FONT-FAMILY: "Tahoma","宋体"; TEXT-DECORATION: none }
+A.DesktopMenu:link { TEXT-DECORATION: none }
+A.DesktopMenu:visited { COLOR: blue; TEXT-DECORATION: none }
+A.DesktopMenu:hover { COLOR: #ff4500; TEXT-DECORATION: none }
+.linkbutton   
+  {   
+    text-decoration:   none;   
+  }  
+  
+.record_odd {
+	FONT-SIZE: 12px;
+	background-color:#FBFBF0;
+	COLOR: #215E88;
+	Height: 20px;
+	LINE-HEIGHT: 18px;
+    font-family:"宋体";
+}
+.emailFont{
+	FONT-SIZE: 12px;
+	COLOR: #FFFFFF;
+	Height: 20px;
+	LINE-HEIGHT: 18px;
+    font-family:"宋体";
+    font-weight: bold ;
+}
+
+  .GridViewRowStyle
+{
+    background-color: #F3F4FD;
+    border-bottom: dimgray  1px solid;
+    border-left: dimgray 1px solid;
+    color: black;
+    font-family: 宋体, Arial;
+    font-size: 10.5pt;
+    padding-left: 5px
+}
+
+.GridViewAlternatingRowStyle
+{
+    background-color: #ECF0F6;
+    border-bottom: dimgray;
+    border-left: dimgray 1px solid;
+    color: black;
+    font-family: 宋体, Arial;
+    font-size: 10.5pt;
+    padding-left: 5px
+}
+
+<!-- add by fengyy -->
+.readonlyinput {
+	background-color: #E8E8E8;
+	height: 18px;
+	border: 1px solid #7F9DB9;
+	width: auto;
+	font-size:12px;
+	font-family:"宋体";
+	color:#333333
+}
+.input {
+	background-color: #F5FCFE;
+	height: 18px;
+	border: 1px solid #7F9DB9;
+	width: auto;
+	font-size:12px;
+	font-family:"宋体";
+	color:#333333;
+}
+
+.ModalDialog{
+	border: 1px #b8d1e2 solid;
+	background: #FFF;
+	padding: 0px;
+	margin: 10px auto;
+	clear: both;
+	position: absolute;
+	z-index: 10000;
+	display:none;
+}
+.normal1_table{
+	width:98%; 
+	border:"2px solid #ffffff"; 
+	background-color:#E8F1FF;
+}/*浅蓝色*/
+
+.inputLabelPic{
+  width:7px;
+  height:15px;
+  background-image:url(../Images/gif/first_09.gif)
+}
+
+.TableHeader_form
+{
+	font-family: 宋体, Verdana, Arial;
+	font-size: 10.5pt;
+	color: #000000;
+	background-image: url(../Images/images/header_form.jpg);
+	background-color: #F4F6FA;
+	height: 31;
+}	
+
+
+

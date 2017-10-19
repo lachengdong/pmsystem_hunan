@@ -1,0 +1,175 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.sinog2c.dao.api.system.PrintSchemeMapper" >
+  <resultMap id="BaseResultMap" type="com.sinog2c.model.system.PrintScheme" >
+    <id column="PSID" property="psid" jdbcType="DECIMAL" />
+    <result column="NAME" property="name" jdbcType="VARCHAR" />
+    <result column="TYPE" property="type" jdbcType="VARCHAR" />
+    <result column="RESID" property="resid" jdbcType="VARCHAR" />
+    <result column="SN" property="sn" jdbcType="DECIMAL" />
+    <result column="REMARK" property="remark" jdbcType="VARCHAR" />
+    <result column="OPTIME" property="optime" jdbcType="TIMESTAMP" />
+    <result column="OPID" property="opid" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    PSID, NAME, TYPE, RESID, SN, REMARK, OPTIME, OPID
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from TBXF_PRINTSCHEME
+    where PSID = #{psid,jdbcType=DECIMAL}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from TBXF_PRINTSCHEME
+    where PSID = #{psid,jdbcType=DECIMAL}
+  </delete>
+  <insert id="insert" parameterType="com.sinog2c.model.system.PrintScheme" >
+    insert into TBXF_PRINTSCHEME (PSID, NAME, TYPE, 
+      RESID, SN, REMARK, 
+      OPTIME, OPID)
+    values (#{psid,jdbcType=DECIMAL}, #{name,jdbcType=VARCHAR}, #{type,jdbcType=VARCHAR}, 
+      #{resid,jdbcType=VARCHAR}, #{sn,jdbcType=DECIMAL}, #{remark,jdbcType=VARCHAR}, 
+      #{optime,jdbcType=DATE}, #{opid,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.sinog2c.model.system.PrintScheme" >
+  	<selectKey keyProperty="psid" resultType="int" order="BEFORE">
+		select SEQ_TBXF_PRINTSCHEME.nextval as psid from dual
+  	</selectKey>
+    insert into TBXF_PRINTSCHEME
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="psid != null" >
+        PSID,
+      </if>
+      <if test="name != null" >
+        NAME,
+      </if>
+      <if test="type != null" >
+        TYPE,
+      </if>
+      <if test="resid != null" >
+        RESID,
+      </if>
+      <if test="sn != null" >
+        SN,
+      </if>
+      <if test="remark != null" >
+        REMARK,
+      </if>
+      <if test="optime != null" >
+        OPTIME,
+      </if>
+      <if test="opid != null" >
+        OPID,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="psid != null" >
+        #{psid,jdbcType=DECIMAL},
+      </if>
+      <if test="name != null" >
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="type != null" >
+        #{type,jdbcType=VARCHAR},
+      </if>
+      <if test="resid != null" >
+        #{resid,jdbcType=VARCHAR},
+      </if>
+      <if test="sn != null" >
+        #{sn,jdbcType=DECIMAL},
+      </if>
+      <if test="remark != null" >
+        #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="optime != null" >
+        #{optime,jdbcType=DATE},
+      </if>
+      <if test="opid != null" >
+        #{opid,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.sinog2c.model.system.PrintScheme" >
+    update TBXF_PRINTSCHEME
+    <set >
+      <if test="name != null" >
+        NAME = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="type != null" >
+        TYPE = #{type,jdbcType=VARCHAR},
+      </if>
+      <if test="resid != null" >
+        RESID = #{resid,jdbcType=VARCHAR},
+      </if>
+      <if test="sn != null" >
+        SN = #{sn,jdbcType=DECIMAL},
+      </if>
+      <if test="remark != null" >
+        REMARK = #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="optime != null" >
+        OPTIME = #{optime,jdbcType=DATE},
+      </if>
+      <if test="opid != null" >
+        OPID = #{opid,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where PSID = #{psid,jdbcType=DECIMAL}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.sinog2c.model.system.PrintScheme" >
+    update TBXF_PRINTSCHEME
+    set NAME = #{name,jdbcType=VARCHAR},
+      TYPE = #{type,jdbcType=VARCHAR},
+      RESID = #{resid,jdbcType=VARCHAR},
+      SN = #{sn,jdbcType=DECIMAL},
+      REMARK = #{remark,jdbcType=VARCHAR},
+      OPTIME = #{optime,jdbcType=DATE},
+      OPID = #{opid,jdbcType=VARCHAR}
+    where PSID = #{psid,jdbcType=DECIMAL}
+  </update>
+  
+   <select id="queryPrintSchemeCount" resultType="int">  <!-- 查询搜索记录总数 -->
+	 	 	SELECT count(1)
+		 	FROM 
+		 	(
+		 		SELECT u.name,u.type,u.remark,u.sn, r.name as resourcename
+				  FROM TBXF_PRINTSCHEME u left join TBSYS_RESOURCES r on u.resid=r.resid  
+		 	) A 
+		 	WHERE 1=1
+		 	<if test="sortField != null and sortField != '' and sortOrder != null and sortOrder !=''" >
+		 	 order by a.${sortField} ${sortOrder} 
+		 	</if>
+		 	<if test="sortField == null or sortField == '' or sortOrder == null or sortOrder ==''" >
+		 	  order by a.SN asc 
+		 	</if>
+  </select>
+  
+  <select id="getPrintSchemePageList" resultType="java.util.Map">    <!-- 分页搜索表中的信息 报表管理用-->
+	 SELECT * FROM 
+	 	( SELECT A.*, ROWNUM RN 
+		 	FROM 
+		 	(
+		 		SELECT u.*, r.name as resourcename
+				  FROM TBXF_PRINTSCHEME u left join TBSYS_RESOURCES r on u.resid=r.resid  
+		 	) A 
+		 	WHERE ROWNUM &lt;= #{end,jdbcType=DECIMAL}
+		 	<if test="sortField != null and sortField != '' and sortOrder != null and sortOrder !=''" >
+		 	 order by a.${sortField} ${sortOrder} 
+		 	</if>
+		 	<if test="sortField == null or sortField == '' or sortOrder == null or sortOrder ==''" >
+		 	  order by a.SN asc 
+		 	</if>
+	 	) 
+	 	WHERE RN &gt;= #{start,jdbcType=DECIMAL} 
+  </select> 
+  
+  <select id="getPrintSchemeComboBox" resultMap="BaseResultMap">  <!-- 查询打印方案 -->
+	 	select p.* from TBXF_PRINTSCHEME p where 1=1 
+	 	<if test="_parameter != null and _parameter != ''" >
+        	 and p.resid in (select r.resid from TBSYS_ROLE_RES r 
+        	 where r.roleid in (select u.roleid from TBSYS_USERS_ROLES u where u.userid = #{_parameter}))
+      	</if>
+	 	 order by p.sn 
+  </select>
+</mapper>

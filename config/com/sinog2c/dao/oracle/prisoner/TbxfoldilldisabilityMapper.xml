@@ -1,0 +1,330 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.sinog2c.dao.api.prisoner.TbxfoldilldisabilityMapper" >
+  <resultMap id="BaseResultMap" type="com.sinog2c.model.prisoner.Tbxfoldilldisability" >
+    <id column="CRIMID" property="crimid" jdbcType="VARCHAR" />
+    <id column="CONFIRMTIME" property="confirmtime" jdbcType="DATE" />
+    <result column="DEPARTID" property="departid" jdbcType="VARCHAR" />
+    <result column="OIDTYPE" property="oidtype" jdbcType="VARCHAR" />
+    <result column="OIDTYPEDETAIL" property="oidtypedetail" jdbcType="VARCHAR" />
+    <result column="DESCRIPTION" property="description" jdbcType="VARCHAR" />
+    <result column="CAUSE" property="cause" jdbcType="VARCHAR" />
+    <result column="DISABILITYTYPE" property="disabilitytype" jdbcType="VARCHAR" />
+    <result column="REMARK" property="remark" jdbcType="VARCHAR" />
+    <result column="OPID" property="opid" jdbcType="VARCHAR" />
+    <result column="OPTIME" property="optime" jdbcType="DATE" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    CRIMID, CONFIRMTIME, DEPARTID, OIDTYPE, OIDTYPEDETAIL, DESCRIPTION, CAUSE, DISABILITYTYPE, 
+    REMARK, OPID, OPTIME
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="com.sinog2c.model.prisoner.TbxfoldilldisabilityKey" >
+    select 
+    <include refid="Base_Column_List" />
+    from TBXF_OLDILLDISABILITY
+    where CRIMID = #{crimid,jdbcType=VARCHAR}
+      and CONFIRMTIME = #{confirmtime,jdbcType=TIMESTAMP}
+  </select>
+  <delete id="deleteByPrimaryKey">
+    delete from TBXF_OLDILLDISABILITY where id = #{id}
+  </delete>
+  
+  <insert id="insertSelective" parameterType="com.sinog2c.model.prisoner.Tbxfoldilldisability" >
+  	<!-- 先查询出主键,再执行插入 -->
+    <selectKey resultType="String" keyProperty="id" order="BEFORE">
+   		select SEQ_RES_ID.NEXTVAL from dual
+    </selectKey>
+    insert into TBXF_OLDILLDISABILITY
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        ID,
+      </if>
+      <if test="crimid != null" >
+        CRIMID,
+      </if>
+      <if test="confirmtime != null" >
+        CONFIRMTIME,
+      </if>
+      <if test="departid != null" >
+        DEPARTID,
+      </if>
+      <if test="oidtype != null" >
+        OIDTYPE,
+      </if>
+      <if test="oidtypedetail != null" >
+        OIDTYPEDETAIL,
+      </if>
+      <if test="description != null" >
+        DESCRIPTION,
+      </if>
+      <if test="cause != null" >
+        CAUSE,
+      </if>
+      <if test="disabilitytype != null" >
+        DISABILITYTYPE,
+      </if>
+      <if test="remark != null" >
+        REMARK,
+      </if>
+      <if test="opid != null" >
+        OPID,
+      </if>
+      <if test="optime != null" >
+        OPTIME,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=VARCHAR},
+      </if>
+      <if test="crimid != null" >
+        #{crimid,jdbcType=VARCHAR},
+      </if>
+      <if test="confirmtime != null" >
+        #{confirmtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="departid != null" >
+        #{departid,jdbcType=VARCHAR},
+      </if>
+      <if test="oidtype != null" >
+        #{oidtype,jdbcType=VARCHAR},
+      </if>
+      <if test="oidtypedetail != null" >
+        #{oidtypedetail,jdbcType=VARCHAR},
+      </if>
+      <if test="description != null" >
+        #{description,jdbcType=VARCHAR},
+      </if>
+      <if test="cause != null" >
+        #{cause,jdbcType=VARCHAR},
+      </if>
+      <if test="disabilitytype != null" >
+        #{disabilitytype,jdbcType=VARCHAR},
+      </if>
+      <if test="remark != null" >
+        #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="opid != null" >
+        #{opid,jdbcType=VARCHAR},
+      </if>
+      <if test="optime != null" >
+        #{optime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  
+  <update id="updateByPrimaryKeySelective" parameterType="com.sinog2c.model.prisoner.Tbxfoldilldisability">
+    update TBXF_OLDILLDISABILITY
+    <set >
+      <if test="departid != null" >
+        DEPARTID = #{departid,jdbcType=VARCHAR},
+      </if>
+      <if test="oidtype != null" >
+        OIDTYPE = #{oidtype,jdbcType=VARCHAR},
+      </if>
+      <if test="oidtypedetail != null" >
+        OIDTYPEDETAIL = #{oidtypedetail,jdbcType=VARCHAR},
+      </if>
+      <if test="description != null" >
+        DESCRIPTION = #{description,jdbcType=VARCHAR},
+      </if>
+      <if test="cause != null" >
+        CAUSE = #{cause,jdbcType=VARCHAR},
+      </if>
+      <if test="disabilitytype != null" >
+        DISABILITYTYPE = #{disabilitytype,jdbcType=VARCHAR},
+      </if>
+      <if test="remark != null" >
+        REMARK = #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="opid != null" >
+        OPID = #{opid,jdbcType=VARCHAR},
+      </if>
+      <if test="optime != null" >
+        OPTIME = #{optime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where ID = #{id}
+  </update>
+  
+  
+  <select id="findByCrimid" parameterType="Map"  resultType="Map" >
+	  select * from
+	    (   
+	    	select a.*, rownum rn
+		    from
+		    (
+		      	select td.*, replace(replace(replace(td.disabilitytype,'1@',''),'2@',''),'3@','') as osdtype
+		      	from TBXF_OLDILLDISABILITY td
+		      	where td.crimid=  #{crimid} 
+	            <if test="key!=null and key!=''">  
+	              and (td.crimid like concat(concat('%', #{key}), '%'))
+	        	</if>
+		        <if test="sortField!=null and sortField!=''" > 
+		         	order by ${sortField}  ${sortOrder}
+		    	</if>
+		    ) a 
+	        <if test="start!=null and start!=''">
+	           where rownum &lt;= #{end}
+	       </if> 
+	    )
+       <if test="start!=null and start!=''">
+           where  rn &gt;= #{start}
+       </if>
+  </select>
+  
+  <select id="findByCrimidCount" parameterType="Map" resultType="int" >
+      select count(*)
+      from TBXF_OLDILLDISABILITY
+      where crimid= #{crimid} 
+      <if test="key!=null and key!=''">  
+         and (crimid like concat(concat('%', #{key}), '%'))
+      </if>
+  </select>
+  
+   <select id="checkByPrimaryKey" parameterType="Map"  resultType="int" >
+    select count(*) from TBXF_OLDILLDISABILITY
+    where CRIMID = #{crimid}
+      and DISABILITYTYPE = #{disabilitytype,jdbcType=VARCHAR}
+  </select>
+  
+  
+  
+  <update id="updatetbprisonerbasecrime" parameterType="Map">
+  	update TBPRISONER_BASE_CRIME 
+  	<set >
+      <if test="OLDPRISONER != null" >
+        OLDPRISONER = #{OLDPRISONER,jdbcType=VARCHAR},
+      </if>
+      <if test="ILLPRISONER != null" >
+        ILLPRISONER = #{ILLPRISONER,jdbcType=VARCHAR},
+      </if>
+      <if test="DEFORMITYPRISONER != null" >
+        DEFORMITYPRISONER = #{DEFORMITYPRISONER,jdbcType=VARCHAR}
+      </if>
+    </set>
+    where CRIMID = #{CRIMID,jdbcType=VARCHAR}
+  </update>
+  
+  <update id="updatetbxfsentencealteration" parameterType="Map">
+  	update TBXF_SENTENCEALTERATION 
+  	<set >
+      <if test="OLDTYPE != null" >
+        OLDTYPE = #{OLDTYPE,jdbcType=VARCHAR},
+      </if>
+      <if test="ILLPRISONER != null" >
+        ILLTYPE = #{ILLTYPE,jdbcType=VARCHAR},
+      </if>
+      <if test="DEFORMITYPRISONER != null" >
+        DISABILITYPE = #{DISABILITYPE,jdbcType=VARCHAR},
+      </if>
+      <if test="ISOLD != null" >
+        ISOLD = #{ISOLD,jdbcType=VARCHAR},
+      </if>
+      <if test="ISILL != null" >
+        ISILL = #{ISILL,jdbcType=VARCHAR},
+      </if>
+      <if test="ISDISABILITY != null" >
+        ISDISABILITY = #{ISDISABILITY,jdbcType=VARCHAR}
+      </if>
+    </set>
+    where CRIMID = #{CRIMID,jdbcType=VARCHAR}
+  </update>
+  
+  
+   <update id="updateOldIllDisabilityStatus" parameterType="Map">
+  	update TBXF_OLDILLDISABILITY 
+  	<set >
+        TSTATUS = #{tstatus,jdbcType=VARCHAR},
+      <if test="revokereason != null" >
+        REVOKE_RS = #{revokereason,jdbcType=VARCHAR},
+      </if>
+      <if test="revokedate != null" >
+        REVOKE_DATE =to_date(#{revokedate},'yyyy-MM-dd hh24:mi:ss')
+      </if>
+    </set>
+    where CRIMID = #{crimid,jdbcType=VARCHAR} and id=#{id,jdbcType=VARCHAR}
+  </update>
+  
+  
+  
+  <update id="tongbuBaseCrimeAndSentenceAlteration" parameterType="Map">
+    <![CDATA[   
+		   {call P_LAOBINGCAN(#{crimid,jdbcType=VARCHAR})}
+		]]> 
+  </update>
+  
+  
+  <select id="getOldSickDisableInfoByCrimid" parameterType="String"  resultType="Map" >
+	  select
+	        old.OIDTYPE as oldtype,
+	        old.DISABILITYTYPE as olddetail,
+	        
+	        ill.OIDTYPE as illtype,
+	        ill.DISABILITYTYPE as illdetail,
+	        
+	        disability.OIDTYPE as disabilitytype,
+	        disability.DISABILITYTYPE as disabilitydetail
+	        
+	  from
+	    TBPRISONER_BASE_CRIME tbc,
+	    (SELECT *
+	     FROM TBXF_OLDILLDISABILITY A
+	     WHERE CONFIRMTIME =
+	             (SELECT MAX (CONFIRMTIME)
+	                FROM TBXF_OLDILLDISABILITY B
+	               WHERE B.CRIMID = A.CRIMID AND B.OIDTYPE like '%老%') and nvl(tstatus,'xx') = '1') old,
+	    (SELECT *
+	     FROM TBXF_OLDILLDISABILITY A
+	     WHERE CONFIRMTIME =
+	             (SELECT MAX (CONFIRMTIME)
+	                FROM TBXF_OLDILLDISABILITY B
+	               WHERE B.CRIMID = A.CRIMID AND B.OIDTYPE like '%病%') and nvl(tstatus,'xx') = '1') ill,
+	    (SELECT *
+	     FROM TBXF_OLDILLDISABILITY A
+	     WHERE CONFIRMTIME =
+	             (SELECT MAX (CONFIRMTIME)
+	                FROM TBXF_OLDILLDISABILITY B
+	               WHERE B.CRIMID = A.CRIMID AND B.OIDTYPE like '%残%') and nvl(tstatus,'xx') = '1') disability
+	
+	  where tbc.crimid=#{crimid}
+	    and tbc.crimid=old.crimid(+)
+	    and tbc.crimid=ill.crimid(+)
+	    and tbc.crimid=disability.crimid(+)
+  </select>
+  
+  
+  
+  <update id="updateSentenceOldIllDisability" parameterType="Map">
+  	update tbxf_sentencealteration ts
+	  set ISOLD=#{laofan},
+	      ISILL=#{binfan},
+	      ISDISABILITY=#{canfan},
+	      
+	      OLDTYPE=#{laofantype},
+	      ILLTYPE=#{binfantype},
+	      DISABILITYPE=#{canfantype}
+	where ts.crimid=#{crimid,jdbcType=VARCHAR}
+  </update>
+  
+  
+  <update id="updateBaseCrimeOldIllDisability" parameterType="Map">
+  	update tbprisoner_base_crime tbc
+      set OLDPRISONER=#{laofan},
+    	  ILLPRISONER=#{binfan},
+    	  DEFORMITYPRISONER=#{canfan}
+  	where tbc.crimid=#{crimid,jdbcType=VARCHAR}
+  </update>
+  
+  
+  
+  <select id="getcontrolsymbolByCrimid" parameterType="String"  resultType="Map" >
+	select 
+		t.currnodeid,t.state,applyid
+	from 
+		tbflow_base t 
+	where 
+		flowdefid='other_zfjyjxjssp' and state not in ('1','3') and t.applyid=#{crimid}    
+  </select>
+  
+</mapper>

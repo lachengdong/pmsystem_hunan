@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.sinog2c.dao.api.system.TbxfCrimetypesCodeMapper" >
+  <resultMap id="BaseResultMap" type="com.sinog2c.model.system.TbxfCrimetypesCode" >
+    <result column="TYPEID" property="typeid" jdbcType="DECIMAL" />
+    <result column="NOID" property="noid" jdbcType="DECIMAL" />
+  </resultMap>
+  <insert id="insert" parameterType="com.sinog2c.model.system.TbxfCrimetypesCode" >
+    insert into TBXF_CRIMETYPES_CODE (TYPEID, NOID)
+    values (#{typeid,jdbcType=DECIMAL}, #{noid,jdbcType=DECIMAL})
+  </insert>
+  <insert id="insertSelective" parameterType="com.sinog2c.model.system.TbxfCrimetypesCode" >
+    insert into TBXF_CRIMETYPES_CODE
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="typeid != null" >
+        TYPEID,
+      </if>
+      <if test="noid != null" >
+        NOID,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="typeid != null" >
+        #{typeid,jdbcType=DECIMAL},
+      </if>
+      <if test="noid != null" >
+        #{noid,jdbcType=DECIMAL},
+      </if>
+    </trim>
+  </insert>
+</mapper>

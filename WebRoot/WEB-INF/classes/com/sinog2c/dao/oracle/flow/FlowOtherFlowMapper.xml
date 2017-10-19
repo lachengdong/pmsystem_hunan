@@ -1,0 +1,249 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.sinog2c.dao.api.flow.FlowOtherFlowMapper">
+	<resultMap id="BaseResultMap" type="com.sinog2c.model.flow.FlowOtherFlow">
+		<result column="OTHERID" property="otherid" jdbcType="VARCHAR" />
+		<result column="FLOWDRAFTID" jdbcType="VARCHAR" property="flowdraftid" />
+		<result column="FLOWID" property="flowid" jdbcType="VARCHAR" />
+		<result column="TEMPID" property="tempid" jdbcType="VARCHAR" />
+		<result column="OPID" property="opid" jdbcType="VARCHAR" />
+		<result column="OPTIME" property="optime" jdbcType="TIMESTAMP" />
+	</resultMap>
+	<insert id="insert" parameterType="com.sinog2c.model.flow.FlowOtherFlow">
+		insert into TBFLOW_OTHER_FLOW
+		(OTHERID, FLOWDRAFTID, FLOWID, TEMPID, OPID,OPTIME)
+		values
+		(#{otherid,jdbcType=VARCHAR},
+		#{flowdraftid,jdbcType=VARCHAR},
+		#{flowid,jdbcType=VARCHAR},
+		#{tempid,jdbcType=VARCHAR},
+		#{opid,jdbcType=VARCHAR},
+		#{optime,jdbcType=TIMESTAMP})
+  </insert>
+   <update id="updateByCondition" parameterType="Map" >
+		update TBFLOW_OTHER_FLOW set flowdraftid = flowdraftid+1, opid=#{opid},optime=sysdate where otherid=#{otherid} 
+  </update>
+  
+  <update id="updateByCondition2" parameterType="com.sinog2c.model.flow.FlowOtherFlow" >
+    update TBFLOW_OTHER_FLOW
+    <set >
+      <if test="flowid != null and flowid !=''" >
+        flowid = #{flowid,jdbcType=DECIMAL},
+      </if>
+      <if test="opid != null and opid != ''" >
+        opid = #{opid,jdbcType=VARCHAR},
+      </if>
+      <if test="optime != null and optime !=''" >
+        optime = #{optime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where tempid = #{tempid}
+      <if test="flowdraftid != null and flowdraftid !=''" >
+        and flowdraftid = #{flowdraftid}
+      </if>
+      <if test="otherid != null and otherid !=''" >
+        and otherid = #{otherid}
+      </if>
+  </update>
+  
+  
+  <update id="updateByOtherid" parameterType="com.sinog2c.model.flow.FlowOtherFlow" >
+    update TBFLOW_OTHER_FLOW
+    <set >
+      <if test="flowid != null and flowid !=''" >
+        flowid = #{flowid,jdbcType=DECIMAL},
+      </if>
+      <if test="opid != null and opid != ''" >
+        opid = #{opid,jdbcType=VARCHAR},
+      </if>
+      <if test="optime != null and optime !=''" >
+        optime = #{optime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where otherid = #{otherid}
+  </update>
+  
+    
+  <!-- 查询表中记录总数 -->
+	<select id="countAll" resultType="int">  
+		select count(*) c from TBFLOW_OTHER_FLOW
+	</select>
+	<!-- 查询表中的所有流程信息 -->
+	<select id="selectAll" resultType="com.sinog2c.model.flow.FlowOtherFlow">    
+		select * from TBFLOW_OTHER_FLOW order by optime asc
+	</select>
+	<!-- 根据流程ID查找流程信息 -->
+	<select id="findById" parameterType="String"
+		resultType="com.sinog2c.model.flow.FlowOtherFlow"> 
+		select f.* from TBFLOW_OTHER_FLOW f  where f.flowid=#{flowid} and f.otherid = (select max(to_number(o.otherid)) from TBFLOW_OTHER_FLOW o where o.flowid=f.flowid)
+	</select>
+	
+	<select id="getSequenceNextValue" parameterType="map" resultType="int" >
+		${sql}
+	</select>
+	<select id="findById2" parameterType="Map"
+		resultType="com.sinog2c.model.flow.FlowOtherFlow"> 
+		select * from TBFLOW_OTHER_FLOW where flowid=#{flowid} and tempid=#{tempid}
+	</select>
+	<!-- 查找是否存在建议书 -->
+	<select id = "isExistJys" parameterType ="String" resultType="int">
+		select count(*) c from  TBFLOW_OTHER_FLOW  where 
+		<if test="tempid != null and tempid !=''" >
+        	tempid = #{tempid}  
+      	</if>
+		<if test="flowdraftid != null and flowdraftid !=''" >
+        	and flowdraftid = #{flowdraftid}
+      	</if>
+	</select>
+	<!-- 判断本批次本部门 是否已经保存过一次会议记录 -->
+	<select id="judgeExistMeetByOrgid" resultType="java.util.Map">
+	     select * from (select b.* from TBFLOW_BASE_OTHER b,(select * from (select * from tbxf_commuteparole_batch where 
+         curyear =( SELECT max(curyear)   FROM TBXF_COMMUTEPAROLE_BATCH where departid=#{sysdep}  ) and  departid =#{sysdep} order by batch desc) where rownum=1) b2
+         where b.text6 =#{orgid} and b.text3='meetContent' and b.text1=b2.curyear and b.text2=b2.batch
+         and b.otherid in (select f.otherid from TBFLOW_OTHER_FLOW f where f.tempid=#{tempid})  order by b.optime desc ) where  rownum=1 
+	</select>
+	
+	<!-- 判断当前用户是否保存过一次会议记录 -->
+	<select id="judgeExistMeetRecordByUser" parameterType ="Map" resultType="java.util.Map">
+	     select flowdraftid from(
+			select * from (
+			  select tbo.*, tof.flowdraftid
+			  from TBFLOW_BASE_OTHER tbo,
+			       tbflow_other_flow tof
+			  where 1=1 
+			    and tof.tempid=#{tempid}
+			    and tbo.opid=#{userid}
+			    and tbo.text6=#{orgid}
+			    and tbo.otherid = tof.otherid
+			  order by tbo.optime desc
+			) where rownum=1
+		) where trunc(sysdate-optime) &lt;= 30 and docconent is not null
+	</select>
+	
+	<!-- 根据模板编号 查询出对应的模板内容 -->
+	<select id="getMeetContent" resultType="java.util.Map">
+		select * from (
+			select * from TBSYS_TEMPLATE where tempid= #{tempid} 
+			and (
+	        		departid = 0   
+	         		or departid = #{departid}
+	            	or departid in	(select porgid  from TBSYS_ORGINFO  where  orgid = #{departid})
+				)
+		   order by departid desc 
+		) t where rownum =1
+	          
+	</select>
+	<!-- 通过 报表id 查询出 所有对应查询方案的sql语句 -->
+      <select id="getMeetPlanSqlByResid" resultType="java.util.Map">
+		select q.* from TBSYS_QUERYPLANSQL q where  q.delflag !=1 and  q.planid in 
+		(
+			select b.planid from 
+			TBSYS_QUERYPLAN  b,TBUSER_USERREPORT u 
+			where u.resid=#{resid} 
+ 			and u.resid = b.resid
+ 			/*and (b.pplanid=u.planid or b.planid=u.planid)*/
+ 			and b.reportortemp=1
+ 		) order by q.planid
+      </select>
+      <!-- 通过查询方案的sql 查询出对应的内容 -->
+      <select id="getMeetReportDataByPlanSql" resultType="java.util.HashMap" parameterType="java.lang.String">
+          <if test="sql!=null and sql!=''">${sql}</if> 
+      </select>
+	
+	<!-- 查询出需要替换的内容-->
+	<select id="getReplaceContent" resultType="java.util.Map">
+	       select o.name as 主持人,o.name as 记录人,to_char(sysdate,'yyyy"年"MM"月"dd"日"')||'   '||to_char(sysdate,'Day') as 日期 from TBSYS_USERINFO o where o.userid=#{userid}
+	</select> 
+	<!-- 查询最大批次 -->
+	<select id="queryMaxBatchMapper" resultType="java.util.Map">
+	     SELECT *  FROM (  SELECT * FROM tbxf_commuteparole_batch WHERE curyear = (SELECT MAX (curyear)
+         FROM TBXF_COMMUTEPAROLE_BATCH WHERE departid = #{sysdep})  AND departid = #{sysdep} ORDER BY batch DESC)  WHERE ROWNUM = 1
+	</select>
+	<!-- 新增 otherflow内容 -->
+	<insert id="saveMeetContentsOtherFlow">
+	     insert into TBFLOW_OTHER_FLOW(otherid,flowdraftid,tempid,opid)
+	     values(#{otherid},#{flowdraftid},#{tempid},#{opid})
+	     
+	</insert>
+	<!-- 新增 会议记录内容 -->
+	<insert id="saveMeetContentsBaseOther">
+	     insert into TBFLOW_BASE_OTHER(otherid,docconent,text1,text2,text3,text6,opid)
+	     values(#{otherid},#{annexcontent},#{curyear},#{batch},#{text3},#{orgid},#{opid})
+	     
+	</insert>
+	<!-- 查询出 考核奖惩数据 -->
+	<select id="getPrisonErperManceImplMapper" resultType="Map">
+	     select * from TBXF_PRISONERPERFORMANCE where criid=#{crimid} and batchid=#{batchid}
+	</select>
+	<!-- 插入 考核信息 -->
+	<insert id="insertPrisonErperManceImplMapper">
+	     insert into TBXF_PRISONERPERFORMANCE(departid,criid,int1,int2,int3,int4,int5,int6,int7,int8,int9,opid,int11,int12,int13,batchid,text1)
+         
+         values(#{departid},#{crimid},#{int1},#{int2},#{int3},#{int4},#{int5},#{int6},#{int7},#{int8},#{int9},#{opid},#{int11},#{int12},#{int13},#{batchid},#{text1})
+	</insert>
+	<!-- 更新 考核信息 -->
+	<update id="updatePrisonErperManceImplMapper">
+	     update TBXF_PRISONERPERFORMANCE set departid=#{departid},int1=#{int1},int2=#{int2},
+	                                         int3=#{int3},int4=#{int4},int5=#{int5},int6=#{int6},int7=#{int7}
+	                                         ,int8=#{int8},int9=#{int9},opid=#{opid},int11=#{int11},int12=#{int12}
+	                                         ,int13=#{int13},text1=#{text1}
+	                                         where criid=#{crimid} and batchid=#{batchid}
+	</update>
+	<!-- 删除会议记录内容 -->
+	<delete id="deleteMeetingImplMapper">
+	     delete from TBFLOW_BASE_OTHER h where h.otherid=#{otherid}
+	</delete>
+	<!--更新会议记录内容 -->
+	<update id="updateMeetContentBase">
+	     update TBFLOW_BASE_OTHER set docconent=#{annexcontent} where otherid =#{otherid}
+	</update>
+	<select id="getAnJianBigData" resultType="java.lang.String">
+		<if test="flowdefid!=null and flowdefid!=''">
+		     <if test="tempid!=null and tempid!=''"><!-- 法院用监狱大字段拼接otherid的 -->
+		     	SELECT u.docconent  FROM UV_COURT_BIGDATA u where 
+		     		u.flowdraftid=(
+		     			select max(to_number(flowdraftid)) from TBFLOW_BASE b where b.flowdefid=#{flowdefid} 
+		     			and b.APPLYID= (select bb.APPLYID  from TBFLOW_BASE bb where bb.flowdraftid=#{flowdraftid})
+		     		) 
+		     	and u.doctype=#{doctype}||(
+		     		select max(to_number(f.otherid)) from TBFLOW_OTHER_FLOW f where 
+		     		f.flowdraftid=(
+		     			select max(to_number(flowdraftid)) from TBFLOW_BASE b where b.flowdefid=#{flowdefid} 
+		     			and b.APPLYID= (
+		     				select bb.APPLYID  from TBFLOW_BASE bb where bb.flowdraftid=#{flowdraftid}
+		     			)
+		     		) 
+		     		and f.tempid=#{tempid}
+		     	) 
+		     </if> 
+		     <if test="tempid==null or tempid==''"><!-- 法院用监狱大字段不拼接otherid的 -->
+			     SELECT u.docconent  FROM UV_COURT_BIGDATA u where u.doctype=#{doctype} and
+			     u.flowdraftid=(select max(to_number(flowdraftid)) from TBFLOW_BASE b where b.flowdefid=#{flowdefid} and b.APPLYID=
+			     	(select bb.APPLYID  from TBFLOW_BASE bb where bb.flowdraftid=#{flowdraftid})
+			     )
+		     </if> 
+		</if>
+		<if test="flowdefid==null or flowdefid==''">
+			<if test="tempid!=null and tempid!=''"><!-- 法院大字段拼接otherid的 -->
+		     	SELECT b.docconent  FROM UV_COURT_BIGDATA b where b.flowdraftid=#{flowdraftid} 
+		     	and b.doctype=#{doctype}||(select max(to_number(f.otherid)) from TBFLOW_OTHER_FLOW f where f.flowdraftid=#{flowdraftid} and f.tempid=#{tempid}) 
+		     </if> 
+		     <if test="tempid==null or tempid==''"><!-- 法院大字段不拼接otherid的 -->
+			     SELECT docconent  FROM UV_COURT_BIGDATA where flowdraftid=#{flowdraftid} and doctype=#{doctype}
+		     </if> 
+		</if>
+	</select>
+	<select id="getAnJianText" resultType="java.lang.String">
+		 SELECT a.docconent  FROM UV_COURT_BIGDATA a where a.flowdraftid=#{flowdraftid} and a.doctype=#{tempid}
+		 and a.baseorotherid=(select max(to_number(b.baseorotherid)) from UV_COURT_BIGDATA b where b.flowdraftid=a.flowdraftid and b.doctype=a.doctype)
+	</select>
+	<!-- 查询出病情鉴定意见及大字段 -->
+	<select id="identificationOfDisease" resultType="Map">
+		select doc.docconent,flow.flowdraftid,flow.text18,flow.text19,to_char(flow.optime,'yyyyMMdd') as optime from TBFLOW_BASE_DOC doc, (
+			select * from (
+				SELECT ba.flowdraftid,ba.text18,ba.text19,ba.optime FROM TBFLOW_BASE ba,TBFLOW fl WHERE 
+					ba.applyid = #{crimid} AND ba.flowdefid in ('doc_bwbqzdsp','doc_bwrcjdsp','doc_bwshbnzlsp') 
+			and fl.nodeid='1' order by ba.applydatetime desc) where ROWNUM = 1
+	 	)flow where doc.flowdraftid=flow.flowdraftid
+	</select>
+</mapper>

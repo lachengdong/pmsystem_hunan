@@ -1,0 +1,208 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.sinog2c.dao.api.khjc.KhjcTbflowBaseDocSlaveMapper" >
+  <resultMap id="BaseResultMap" type="com.sinog2c.model.khjc.KhjcTbflowBaseDocSlave" >
+    <id column="DOCID" property="docid" jdbcType="VARCHAR" />
+    <id column="SN" property="sn" jdbcType="DECIMAL" />
+    <id column="TEMPLETID" property="templetid" jdbcType="VARCHAR" />
+    <result column="DELFLAG" property="delflag" jdbcType="VARCHAR" />
+    <result column="CREATETIME" property="createtime" jdbcType="DATE" />
+    <result column="CREATEMENDER" property="createmender" jdbcType="VARCHAR" />
+    <result column="UPDATETIME" property="updatetime" jdbcType="DATE" />
+    <result column="UPDATEMENDER" property="updatemender" jdbcType="VARCHAR" />
+    <result column="CRIMID" property="crimid" jdbcType="VARCHAR" />
+    <result column="DEPARTID" property="departid" jdbcType="VARCHAR" />
+  </resultMap>
+  <resultMap id="ResultMapWithBLOBs" type="com.sinog2c.model.khjc.KhjcTbflowBaseDocSlave" extends="BaseResultMap" >
+    <result column="DOCCONENT" property="docconent" jdbcType="CLOB" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    DOCID, SN, TEMPLETID, DELFLAG, CREATETIME, CREATEMENDER, UPDATETIME, UPDATEMENDER, 
+    CRIMID,DEPARTID
+  </sql>
+  <sql id="Blob_Column_List" >
+    DOCCONENT
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs" parameterType="com.sinog2c.model.khjc.KhjcTbflowBaseDocSlaveKey" >
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from KHJC_TBFLOW_BASE_DOC_SLAVE
+    where DOCID = #{docid,jdbcType=VARCHAR}
+      and SN = #{sn,jdbcType=DECIMAL}
+      and TEMPLETID = #{templetid,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="com.sinog2c.model.khjc.KhjcTbflowBaseDocSlaveKey" >
+    delete from KHJC_TBFLOW_BASE_DOC_SLAVE
+    where DOCID = #{docid,jdbcType=VARCHAR}
+      and SN = #{sn,jdbcType=DECIMAL}
+      and TEMPLETID = #{templetid,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.sinog2c.model.khjc.KhjcTbflowBaseDocSlave" >
+    insert into KHJC_TBFLOW_BASE_DOC_SLAVE (DOCID, SN, TEMPLETID, 
+      DELFLAG, CREATETIME, CREATEMENDER, 
+      UPDATETIME, UPDATEMENDER, CRIMID, DEPARTID,
+      DOCCONENT)
+    values (#{docid,jdbcType=VARCHAR}, #{sn,jdbcType=DECIMAL}, #{templetid,jdbcType=VARCHAR}, 
+      #{delflag,jdbcType=VARCHAR}, #{createtime,jdbcType=DATE}, #{createmender,jdbcType=VARCHAR}, 
+      #{updatetime,jdbcType=DATE}, #{updatemender,jdbcType=VARCHAR}, #{crimid,jdbcType=VARCHAR}, 
+      #{departid,jdbcType=VARCHAR}, #{docconent,jdbcType=CLOB})
+  </insert>
+  <insert id="insertSelective" parameterType="com.sinog2c.model.khjc.KhjcTbflowBaseDocSlave" >
+    insert into KHJC_TBFLOW_BASE_DOC_SLAVE
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="docid != null" >
+        DOCID,
+      </if>
+      <if test="sn != null" >
+        SN,
+      </if>
+      <if test="templetid != null" >
+        TEMPLETID,
+      </if>
+      <if test="delflag != null" >
+        DELFLAG,
+      </if>
+      <if test="createtime != null" >
+        CREATETIME,
+      </if>
+      <if test="createmender != null" >
+        CREATEMENDER,
+      </if>
+      <if test="updatetime != null" >
+        UPDATETIME,
+      </if>
+      <if test="updatemender != null" >
+        UPDATEMENDER,
+      </if>
+      <if test="crimid != null" >
+        CRIMID,
+      </if>
+      <if test="departid != null" >
+        DEPARTID,
+      </if>
+      <if test="docconent != null" >
+        DOCCONENT,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="docid != null" >
+        #{docid,jdbcType=VARCHAR},
+      </if>
+      <if test="sn != null" >
+        #{sn,jdbcType=DECIMAL},
+      </if>
+      <if test="templetid != null" >
+        #{templetid,jdbcType=VARCHAR},
+      </if>
+      <if test="delflag != null" >
+        #{delflag,jdbcType=VARCHAR},
+      </if>
+      <if test="createtime != null" >
+        #{createtime,jdbcType=DATE},
+      </if>
+      <if test="createmender != null" >
+        #{createmender,jdbcType=VARCHAR},
+      </if>
+      <if test="updatetime != null" >
+        #{updatetime,jdbcType=DATE},
+      </if>
+      <if test="updatemender != null" >
+        #{updatemender,jdbcType=VARCHAR},
+      </if>
+      <if test="crimid != null" >
+        #{crimid,jdbcType=VARCHAR},
+      </if>
+      <if test="departid != null" >
+        #{departid,jdbcType=VARCHAR},
+      </if>
+      <if test="docconent != null" >
+        #{docconent,jdbcType=CLOB},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.sinog2c.model.khjc.KhjcTbflowBaseDocSlave" >
+    update KHJC_TBFLOW_BASE_DOC_SLAVE
+    <set >
+      <if test="delflag != null" >
+        DELFLAG = #{delflag,jdbcType=VARCHAR},
+      </if>
+      <if test="createtime != null" >
+        CREATETIME = #{createtime,jdbcType=DATE},
+      </if>
+      <if test="createmender != null" >
+        CREATEMENDER = #{createmender,jdbcType=VARCHAR},
+      </if>
+      <if test="updatetime != null" >
+        UPDATETIME = #{updatetime,jdbcType=DATE},
+      </if>
+      <if test="updatemender != null" >
+        UPDATEMENDER = #{updatemender,jdbcType=VARCHAR},
+      </if>
+      <if test="crimid != null" >
+        CRIMID = #{crimid,jdbcType=VARCHAR},
+      </if>
+      <if test="departid != null" >
+        DEPARTID = #{departid,jdbcType=VARCHAR},
+      </if>
+      <if test="docconent != null" >
+        DOCCONENT = #{docconent,jdbcType=CLOB},
+      </if>
+    </set>
+    where DOCID = #{docid,jdbcType=VARCHAR}
+      and SN = #{sn,jdbcType=DECIMAL}
+      and TEMPLETID = #{templetid,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.sinog2c.model.khjc.KhjcTbflowBaseDocSlave" >
+    update KHJC_TBFLOW_BASE_DOC_SLAVE
+    set DELFLAG = #{delflag,jdbcType=VARCHAR},
+      CREATETIME = #{createtime,jdbcType=DATE},
+      CREATEMENDER = #{createmender,jdbcType=VARCHAR},
+      UPDATETIME = #{updatetime,jdbcType=DATE},
+      UPDATEMENDER = #{updatemender,jdbcType=VARCHAR},
+      CRIMID = #{crimid,jdbcType=VARCHAR},
+      DEPARTID = #{departid,jdbcType=VARCHAR},
+      DOCCONENT = #{docconent,jdbcType=CLOB}
+    where DOCID = #{docid,jdbcType=VARCHAR}
+      and SN = #{sn,jdbcType=DECIMAL}
+      and TEMPLETID = #{templetid,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.sinog2c.model.khjc.KhjcTbflowBaseDocSlave" >
+    update KHJC_TBFLOW_BASE_DOC_SLAVE
+    set DELFLAG = #{delflag,jdbcType=VARCHAR},
+      CREATETIME = #{createtime,jdbcType=DATE},
+      CREATEMENDER = #{createmender,jdbcType=VARCHAR},
+      UPDATETIME = #{updatetime,jdbcType=DATE},
+      UPDATEMENDER = #{updatemender,jdbcType=VARCHAR},
+      CRIMID = #{crimid,jdbcType=VARCHAR}
+      DEPARTID = #{departid,jdbcType=VARCHAR}
+    where DOCID = #{docid,jdbcType=VARCHAR}
+      and SN = #{sn,jdbcType=DECIMAL}
+      and TEMPLETID = #{templetid,jdbcType=VARCHAR}
+  </update>
+  
+   <select id="selectSNByMap" resultType="String" parameterType="Map" >
+	    select sn from(
+			    select sn
+			    from KHJC_TBFLOW_BASE_DOC_SLAVE
+			    where DOCID = #{docid,jdbcType=VARCHAR}
+			      and TEMPLETID = #{templetid,jdbcType=VARCHAR}
+			      order by sn desc
+	     ) where rownum = 1
+  </select>
+  
+  <select id="getKhjcTbflowBaseDocSlaveByCondition" resultMap="ResultMapWithBLOBs" parameterType="Map" >
+	    select * from(
+			    select 
+				    <include refid="Base_Column_List" />
+				    ,
+				    <include refid="Blob_Column_List" />
+			    from KHJC_TBFLOW_BASE_DOC_SLAVE
+			    where DOCID = #{docid,jdbcType=VARCHAR}
+			      and TEMPLETID = #{templetid,jdbcType=VARCHAR}
+			      order by sn desc
+	     ) where rownum = 1
+  </select>
+  
+</mapper>

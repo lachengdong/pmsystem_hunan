@@ -1,0 +1,550 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.sinog2c.dao.api.statistical.StatisticalPunishmentReleaseMapper" >
+  <resultMap id="BaseResultMap" type="com.sinog2c.model.statistical.StatisticalPunishmentRelease" >
+    <id column="DEPARTID" property="departid" jdbcType="VARCHAR" />
+    <id column="YEARTYPE" property="yeartype" jdbcType="VARCHAR" />
+    <result column="QMHJ" property="qmhj" jdbcType="DECIMAL" />
+    <result column="QMZYFBL" property="qmzyfbl" jdbcType="VARCHAR" />
+    <result column="QMBSPZ" property="qmbspz" jdbcType="DECIMAL" />
+    <result column="QMWSZL" property="qmwszl" jdbcType="DECIMAL" />
+    <result column="QNHJ" property="qnhj" jdbcType="DECIMAL" />
+    <result column="QNZYFBL" property="qnzyfbl" jdbcType="VARCHAR" />
+    <result column="QNBSPZ" property="qnbspz" jdbcType="DECIMAL" />
+    <result column="QNWSZL" property="qnwszl" jdbcType="DECIMAL" />
+    <result column="YZJBBW" property="yzjbbw" jdbcType="DECIMAL" />
+    <result column="GYHSDCQ" property="gyhsdcq" jdbcType="DECIMAL" />
+    <result column="GXYSQ" property="gxysq" jdbcType="DECIMAL" />
+    <result column="ZSZAXPX" property="zszaxpx" jdbcType="DECIMAL" />
+    <result column="HYPRYR" property="hypryr" jdbcType="DECIMAL" />
+    <result column="SHBNZL" property="shbnzl" jdbcType="DECIMAL" />
+    <result column="QNLBCFZW" property="qnlbcfzw" jdbcType="DECIMAL" />
+    <result column="QNZLBCFBL" property="qnzlbcfbl" jdbcType="VARCHAR" />
+    <result column="QNYXCYSZW" property="qnyxcyszw" jdbcType="DECIMAL" />
+    <result column="QNZYXCYSBL" property="qnzyxcysbl" jdbcType="VARCHAR" />
+    <result column="BWHSJ" property="bwhsj" jdbcType="DECIMAL" />
+    <result column="BWHSF" property="bwhsf" jdbcType="DECIMAL" />
+    <result column="BWHSW" property="bwhsw" jdbcType="DECIMAL" />
+    <result column="BWHZFZ" property="bwhzfz" jdbcType="DECIMAL" />
+    <result column="OPTIME" property="optime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <delete id="deleteByPrimaryKey" parameterType="com.sinog2c.model.statistical.StatisticalPunishmentRelease" >
+    delete from STATISTICAL_PUNISHMENT_RELEASE
+    where DEPARTID = #{departid,jdbcType=VARCHAR}
+      and YEARTYPE = #{yeartype,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.sinog2c.model.statistical.StatisticalPunishmentRelease" >
+    insert into STATISTICAL_PUNISHMENT_RELEASE (DEPARTID, YEARTYPE, QMHJ, 
+      QMZYFBL, QMBSPZ, QMWSZL, 
+      QNHJ, QNZYFBL, QNBSPZ, 
+      QNWSZL, YZJBBW, GYHSDCQ, 
+      GXYSQ, ZSZAXPX, HYPRYR, 
+      SHBNZL, QNLBCFZW, QNZLBCFBL, 
+      QNYXCYSZW, QNZYXCYSBL, BWHSJ, 
+      BWHSF, BWHSW, BWHZFZ, 
+      OPTIME)
+    values (#{departid,jdbcType=VARCHAR}, #{yeartype,jdbcType=VARCHAR}, #{qmhj,jdbcType=DECIMAL}, 
+      #{qmzyfbl,jdbcType=VARCHAR}, #{qmbspz,jdbcType=DECIMAL}, #{qmwszl,jdbcType=DECIMAL}, 
+      #{qnhj,jdbcType=DECIMAL}, #{qnzyfbl,jdbcType=VARCHAR}, #{qnbspz,jdbcType=DECIMAL}, 
+      #{qnwszl,jdbcType=DECIMAL}, #{yzjbbw,jdbcType=DECIMAL}, #{gyhsdcq,jdbcType=DECIMAL}, 
+      #{gxysq,jdbcType=DECIMAL}, #{zszaxpx,jdbcType=DECIMAL}, #{hypryr,jdbcType=DECIMAL}, 
+      #{shbnzl,jdbcType=DECIMAL}, #{qnlbcfzw,jdbcType=DECIMAL}, #{qnzlbcfbl,jdbcType=VARCHAR}, 
+      #{qnyxcyszw,jdbcType=DECIMAL}, #{qnzyxcysbl,jdbcType=VARCHAR}, #{bwhsj,jdbcType=DECIMAL}, 
+      #{bwhsf,jdbcType=DECIMAL}, #{bwhsw,jdbcType=DECIMAL}, #{bwhzfz,jdbcType=DECIMAL}, 
+      #{optime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.sinog2c.model.statistical.StatisticalPunishmentRelease" >
+    insert into STATISTICAL_PUNISHMENT_RELEASE
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="departid != null" >
+        DEPARTID,
+      </if>
+      <if test="yeartype != null" >
+        YEARTYPE,
+      </if>
+      <if test="qmhj != null" >
+        QMHJ,
+      </if>
+      <if test="qmzyfbl != null" >
+        QMZYFBL,
+      </if>
+      <if test="qmbspz != null" >
+        QMBSPZ,
+      </if>
+      <if test="qmwszl != null" >
+        QMWSZL,
+      </if>
+      <if test="qnhj != null" >
+        QNHJ,
+      </if>
+      <if test="qnzyfbl != null" >
+        QNZYFBL,
+      </if>
+      <if test="qnbspz != null" >
+        QNBSPZ,
+      </if>
+      <if test="qnwszl != null" >
+        QNWSZL,
+      </if>
+      <if test="yzjbbw != null" >
+        YZJBBW,
+      </if>
+      <if test="gyhsdcq != null" >
+        GYHSDCQ,
+      </if>
+      <if test="gxysq != null" >
+        GXYSQ,
+      </if>
+      <if test="zszaxpx != null" >
+        ZSZAXPX,
+      </if>
+      <if test="hypryr != null" >
+        HYPRYR,
+      </if>
+      <if test="shbnzl != null" >
+        SHBNZL,
+      </if>
+      <if test="qnlbcfzw != null" >
+        QNLBCFZW,
+      </if>
+      <if test="qnzlbcfbl != null" >
+        QNZLBCFBL,
+      </if>
+      <if test="qnyxcyszw != null" >
+        QNYXCYSZW,
+      </if>
+      <if test="qnzyxcysbl != null" >
+        QNZYXCYSBL,
+      </if>
+      <if test="bwhsj != null" >
+        BWHSJ,
+      </if>
+      <if test="bwhsf != null" >
+        BWHSF,
+      </if>
+      <if test="bwhsw != null" >
+        BWHSW,
+      </if>
+      <if test="bwhzfz != null" >
+        BWHZFZ,
+      </if>
+      <if test="optime != null" >
+        OPTIME,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="departid != null" >
+        #{departid,jdbcType=VARCHAR},
+      </if>
+      <if test="yeartype != null" >
+        #{yeartype,jdbcType=VARCHAR},
+      </if>
+      <if test="qmhj != null" >
+        #{qmhj,jdbcType=DECIMAL},
+      </if>
+      <if test="qmzyfbl != null" >
+        #{qmzyfbl,jdbcType=VARCHAR},
+      </if>
+      <if test="qmbspz != null" >
+        #{qmbspz,jdbcType=DECIMAL},
+      </if>
+      <if test="qmwszl != null" >
+        #{qmwszl,jdbcType=DECIMAL},
+      </if>
+      <if test="qnhj != null" >
+        #{qnhj,jdbcType=DECIMAL},
+      </if>
+      <if test="qnzyfbl != null" >
+        #{qnzyfbl,jdbcType=VARCHAR},
+      </if>
+      <if test="qnbspz != null" >
+        #{qnbspz,jdbcType=DECIMAL},
+      </if>
+      <if test="qnwszl != null" >
+        #{qnwszl,jdbcType=DECIMAL},
+      </if>
+      <if test="yzjbbw != null" >
+        #{yzjbbw,jdbcType=DECIMAL},
+      </if>
+      <if test="gyhsdcq != null" >
+        #{gyhsdcq,jdbcType=DECIMAL},
+      </if>
+      <if test="gxysq != null" >
+        #{gxysq,jdbcType=DECIMAL},
+      </if>
+      <if test="zszaxpx != null" >
+        #{zszaxpx,jdbcType=DECIMAL},
+      </if>
+      <if test="hypryr != null" >
+        #{hypryr,jdbcType=DECIMAL},
+      </if>
+      <if test="shbnzl != null" >
+        #{shbnzl,jdbcType=DECIMAL},
+      </if>
+      <if test="qnlbcfzw != null" >
+        #{qnlbcfzw,jdbcType=DECIMAL},
+      </if>
+      <if test="qnzlbcfbl != null" >
+        #{qnzlbcfbl,jdbcType=VARCHAR},
+      </if>
+      <if test="qnyxcyszw != null" >
+        #{qnyxcyszw,jdbcType=DECIMAL},
+      </if>
+      <if test="qnzyxcysbl != null" >
+        #{qnzyxcysbl,jdbcType=VARCHAR},
+      </if>
+      <if test="bwhsj != null" >
+        #{bwhsj,jdbcType=DECIMAL},
+      </if>
+      <if test="bwhsf != null" >
+        #{bwhsf,jdbcType=DECIMAL},
+      </if>
+      <if test="bwhsw != null" >
+        #{bwhsw,jdbcType=DECIMAL},
+      </if>
+      <if test="bwhzfz != null" >
+        #{bwhzfz,jdbcType=DECIMAL},
+      </if>
+      <if test="optime != null" >
+        #{optime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <insert id="insertByMap" parameterType="Map" >
+    insert into STATISTICAL_PUNISHMENT_RELEASE
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="departid != null" >
+        DEPARTID,
+      </if>
+      <if test="yeartype != null" >
+        YEARTYPE,
+      </if>
+      <if test="qmhj != null" >
+        QMHJ,
+      </if>
+      <if test="qmzyfbl != null" >
+        QMZYFBL,
+      </if>
+      <if test="qmbspz != null" >
+        QMBSPZ,
+      </if>
+      <if test="qmwszl != null" >
+        QMWSZL,
+      </if>
+      <if test="qnhj != null" >
+        QNHJ,
+      </if>
+      <if test="qnzyfbl != null" >
+        QNZYFBL,
+      </if>
+      <if test="qnbspz != null" >
+        QNBSPZ,
+      </if>
+      <if test="qnwszl != null" >
+        QNWSZL,
+      </if>
+      <if test="yzjbbw != null" >
+        YZJBBW,
+      </if>
+      <if test="gyhsdcq != null" >
+        GYHSDCQ,
+      </if>
+      <if test="gxysq != null" >
+        GXYSQ,
+      </if>
+      <if test="zszaxpx != null" >
+        ZSZAXPX,
+      </if>
+      <if test="hypryr != null" >
+        HYPRYR,
+      </if>
+      <if test="shbnzl != null" >
+        SHBNZL,
+      </if>
+      <if test="qnlbcfzw != null" >
+        QNLBCFZW,
+      </if>
+      <if test="qnzlbcfbl != null" >
+        QNZLBCFBL,
+      </if>
+      <if test="qnyxcyszw != null" >
+        QNYXCYSZW,
+      </if>
+      <if test="qnzyxcysbl != null" >
+        QNZYXCYSBL,
+      </if>
+      <if test="bwhsj != null" >
+        BWHSJ,
+      </if>
+      <if test="bwhsf != null" >
+        BWHSF,
+      </if>
+      <if test="bwhsw != null" >
+        BWHSW,
+      </if>
+      <if test="bwhzfz != null" >
+        BWHZFZ,
+      </if>
+      <if test="optime != null" >
+        OPTIME,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="departid != null" >
+        #{departid,jdbcType=VARCHAR},
+      </if>
+      <if test="yeartype != null" >
+        #{yeartype,jdbcType=VARCHAR},
+      </if>
+      <if test="qmhj != null" >
+        #{qmhj,jdbcType=DECIMAL},
+      </if>
+      <if test="qmzyfbl != null" >
+        #{qmzyfbl,jdbcType=VARCHAR},
+      </if>
+      <if test="qmbspz != null" >
+        #{qmbspz,jdbcType=DECIMAL},
+      </if>
+      <if test="qmwszl != null" >
+        #{qmwszl,jdbcType=DECIMAL},
+      </if>
+      <if test="qnhj != null" >
+        #{qnhj,jdbcType=DECIMAL},
+      </if>
+      <if test="qnzyfbl != null" >
+        #{qnzyfbl,jdbcType=VARCHAR},
+      </if>
+      <if test="qnbspz != null" >
+        #{qnbspz,jdbcType=DECIMAL},
+      </if>
+      <if test="qnwszl != null" >
+        #{qnwszl,jdbcType=DECIMAL},
+      </if>
+      <if test="yzjbbw != null" >
+        #{yzjbbw,jdbcType=DECIMAL},
+      </if>
+      <if test="gyhsdcq != null" >
+        #{gyhsdcq,jdbcType=DECIMAL},
+      </if>
+      <if test="gxysq != null" >
+        #{gxysq,jdbcType=DECIMAL},
+      </if>
+      <if test="zszaxpx != null" >
+        #{zszaxpx,jdbcType=DECIMAL},
+      </if>
+      <if test="hypryr != null" >
+        #{hypryr,jdbcType=DECIMAL},
+      </if>
+      <if test="shbnzl != null" >
+        #{shbnzl,jdbcType=DECIMAL},
+      </if>
+      <if test="qnlbcfzw != null" >
+        #{qnlbcfzw,jdbcType=DECIMAL},
+      </if>
+      <if test="qnzlbcfbl != null" >
+        #{qnzlbcfbl,jdbcType=VARCHAR},
+      </if>
+      <if test="qnyxcyszw != null" >
+        #{qnyxcyszw,jdbcType=DECIMAL},
+      </if>
+      <if test="qnzyxcysbl != null" >
+        #{qnzyxcysbl,jdbcType=VARCHAR},
+      </if>
+      <if test="bwhsj != null" >
+        #{bwhsj,jdbcType=DECIMAL},
+      </if>
+      <if test="bwhsf != null" >
+        #{bwhsf,jdbcType=DECIMAL},
+      </if>
+      <if test="bwhsw != null" >
+        #{bwhsw,jdbcType=DECIMAL},
+      </if>
+      <if test="bwhzfz != null" >
+        #{bwhzfz,jdbcType=DECIMAL},
+      </if>
+      <if test="optime != null" >
+        #{optime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.sinog2c.model.statistical.StatisticalPunishmentRelease" >
+    update STATISTICAL_PUNISHMENT_RELEASE
+    <set >
+      <if test="qmhj != null" >
+        QMHJ = #{qmhj,jdbcType=DECIMAL},
+      </if>
+      <if test="qmzyfbl != null" >
+        QMZYFBL = #{qmzyfbl,jdbcType=VARCHAR},
+      </if>
+      <if test="qmbspz != null" >
+        QMBSPZ = #{qmbspz,jdbcType=DECIMAL},
+      </if>
+      <if test="qmwszl != null" >
+        QMWSZL = #{qmwszl,jdbcType=DECIMAL},
+      </if>
+      <if test="qnhj != null" >
+        QNHJ = #{qnhj,jdbcType=DECIMAL},
+      </if>
+      <if test="qnzyfbl != null" >
+        QNZYFBL = #{qnzyfbl,jdbcType=VARCHAR},
+      </if>
+      <if test="qnbspz != null" >
+        QNBSPZ = #{qnbspz,jdbcType=DECIMAL},
+      </if>
+      <if test="qnwszl != null" >
+        QNWSZL = #{qnwszl,jdbcType=DECIMAL},
+      </if>
+      <if test="yzjbbw != null" >
+        YZJBBW = #{yzjbbw,jdbcType=DECIMAL},
+      </if>
+      <if test="gyhsdcq != null" >
+        GYHSDCQ = #{gyhsdcq,jdbcType=DECIMAL},
+      </if>
+      <if test="gxysq != null" >
+        GXYSQ = #{gxysq,jdbcType=DECIMAL},
+      </if>
+      <if test="zszaxpx != null" >
+        ZSZAXPX = #{zszaxpx,jdbcType=DECIMAL},
+      </if>
+      <if test="hypryr != null" >
+        HYPRYR = #{hypryr,jdbcType=DECIMAL},
+      </if>
+      <if test="shbnzl != null" >
+        SHBNZL = #{shbnzl,jdbcType=DECIMAL},
+      </if>
+      <if test="qnlbcfzw != null" >
+        QNLBCFZW = #{qnlbcfzw,jdbcType=DECIMAL},
+      </if>
+      <if test="qnzlbcfbl != null" >
+        QNZLBCFBL = #{qnzlbcfbl,jdbcType=VARCHAR},
+      </if>
+      <if test="qnyxcyszw != null" >
+        QNYXCYSZW = #{qnyxcyszw,jdbcType=DECIMAL},
+      </if>
+      <if test="qnzyxcysbl != null" >
+        QNZYXCYSBL = #{qnzyxcysbl,jdbcType=VARCHAR},
+      </if>
+      <if test="bwhsj != null" >
+        BWHSJ = #{bwhsj,jdbcType=DECIMAL},
+      </if>
+      <if test="bwhsf != null" >
+        BWHSF = #{bwhsf,jdbcType=DECIMAL},
+      </if>
+      <if test="bwhsw != null" >
+        BWHSW = #{bwhsw,jdbcType=DECIMAL},
+      </if>
+      <if test="bwhzfz != null" >
+        BWHZFZ = #{bwhzfz,jdbcType=DECIMAL},
+      </if>
+      <if test="optime != null" >
+        OPTIME = #{optime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where DEPARTID = #{departid,jdbcType=VARCHAR}
+      and YEARTYPE = #{yeartype,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByMap" parameterType="Map" >
+    update STATISTICAL_PUNISHMENT_RELEASE
+    <set >
+      <if test="qmhj != null" >
+        QMHJ = #{qmhj,jdbcType=DECIMAL},
+      </if>
+      <if test="qmzyfbl != null" >
+        QMZYFBL = #{qmzyfbl,jdbcType=VARCHAR},
+      </if>
+      <if test="qmbspz != null" >
+        QMBSPZ = #{qmbspz,jdbcType=DECIMAL},
+      </if>
+      <if test="qmwszl != null" >
+        QMWSZL = #{qmwszl,jdbcType=DECIMAL},
+      </if>
+      <if test="qnhj != null" >
+        QNHJ = #{qnhj,jdbcType=DECIMAL},
+      </if>
+      <if test="qnzyfbl != null" >
+        QNZYFBL = #{qnzyfbl,jdbcType=VARCHAR},
+      </if>
+      <if test="qnbspz != null" >
+        QNBSPZ = #{qnbspz,jdbcType=DECIMAL},
+      </if>
+      <if test="qnwszl != null" >
+        QNWSZL = #{qnwszl,jdbcType=DECIMAL},
+      </if>
+      <if test="yzjbbw != null" >
+        YZJBBW = #{yzjbbw,jdbcType=DECIMAL},
+      </if>
+      <if test="gyhsdcq != null" >
+        GYHSDCQ = #{gyhsdcq,jdbcType=DECIMAL},
+      </if>
+      <if test="gxysq != null" >
+        GXYSQ = #{gxysq,jdbcType=DECIMAL},
+      </if>
+      <if test="zszaxpx != null" >
+        ZSZAXPX = #{zszaxpx,jdbcType=DECIMAL},
+      </if>
+      <if test="hypryr != null" >
+        HYPRYR = #{hypryr,jdbcType=DECIMAL},
+      </if>
+      <if test="shbnzl != null" >
+        SHBNZL = #{shbnzl,jdbcType=DECIMAL},
+      </if>
+      <if test="qnlbcfzw != null" >
+        QNLBCFZW = #{qnlbcfzw,jdbcType=DECIMAL},
+      </if>
+      <if test="qnzlbcfbl != null" >
+        QNZLBCFBL = #{qnzlbcfbl,jdbcType=VARCHAR},
+      </if>
+      <if test="qnyxcyszw != null" >
+        QNYXCYSZW = #{qnyxcyszw,jdbcType=DECIMAL},
+      </if>
+      <if test="qnzyxcysbl != null" >
+        QNZYXCYSBL = #{qnzyxcysbl,jdbcType=VARCHAR},
+      </if>
+      <if test="bwhsj != null" >
+        BWHSJ = #{bwhsj,jdbcType=DECIMAL},
+      </if>
+      <if test="bwhsf != null" >
+        BWHSF = #{bwhsf,jdbcType=DECIMAL},
+      </if>
+      <if test="bwhsw != null" >
+        BWHSW = #{bwhsw,jdbcType=DECIMAL},
+      </if>
+      <if test="bwhzfz != null" >
+        BWHZFZ = #{bwhzfz,jdbcType=DECIMAL},
+      </if>
+      <if test="optime != null" >
+        OPTIME = #{optime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where DEPARTID = #{departid,jdbcType=VARCHAR}
+      and YEARTYPE = #{yeartype,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.sinog2c.model.statistical.StatisticalPunishmentRelease" >
+    update STATISTICAL_PUNISHMENT_RELEASE
+    set QMHJ = #{qmhj,jdbcType=DECIMAL},
+      QMZYFBL = #{qmzyfbl,jdbcType=VARCHAR},
+      QMBSPZ = #{qmbspz,jdbcType=DECIMAL},
+      QMWSZL = #{qmwszl,jdbcType=DECIMAL},
+      QNHJ = #{qnhj,jdbcType=DECIMAL},
+      QNZYFBL = #{qnzyfbl,jdbcType=VARCHAR},
+      QNBSPZ = #{qnbspz,jdbcType=DECIMAL},
+      QNWSZL = #{qnwszl,jdbcType=DECIMAL},
+      YZJBBW = #{yzjbbw,jdbcType=DECIMAL},
+      GYHSDCQ = #{gyhsdcq,jdbcType=DECIMAL},
+      GXYSQ = #{gxysq,jdbcType=DECIMAL},
+      ZSZAXPX = #{zszaxpx,jdbcType=DECIMAL},
+      HYPRYR = #{hypryr,jdbcType=DECIMAL},
+      SHBNZL = #{shbnzl,jdbcType=DECIMAL},
+      QNLBCFZW = #{qnlbcfzw,jdbcType=DECIMAL},
+      QNZLBCFBL = #{qnzlbcfbl,jdbcType=VARCHAR},
+      QNYXCYSZW = #{qnyxcyszw,jdbcType=DECIMAL},
+      QNZYXCYSBL = #{qnzyxcysbl,jdbcType=VARCHAR},
+      BWHSJ = #{bwhsj,jdbcType=DECIMAL},
+      BWHSF = #{bwhsf,jdbcType=DECIMAL},
+      BWHSW = #{bwhsw,jdbcType=DECIMAL},
+      BWHZFZ = #{bwhzfz,jdbcType=DECIMAL},
+      OPTIME = #{optime,jdbcType=TIMESTAMP}
+    where DEPARTID = #{departid,jdbcType=VARCHAR}
+      and YEARTYPE = #{yeartype,jdbcType=VARCHAR}
+  </update>
+</mapper>

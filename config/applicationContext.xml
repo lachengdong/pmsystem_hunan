@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:jaxws="http://cxf.apache.org/jaxws"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+	http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.0.xsd
+	http://cxf.apache.org/jaxws 
+	http://cxf.apache.org/schemas/jaxws.xsd
+">
+	<context:annotation-config />
+	<context:component-scan base-package="com.sinog2c">
+		<!--将controller排除在外，spring root中不初始化controller
+			因为事务是加在service上，需要把service和Controller加以区别, 这两者不能使用 @Component，
+			而dao对象在什么时候初始化都可以，可以继续使用通用的Component注解;
+			
+		<context:exclude-filter type="annotation" expression="org.springframework.stereotype.Controller" />
+		-->
+	</context:component-scan>
+	<import resource="classpath:mybatis/configuration.xml" />
+	
+	<import resource="classpath:quartz/spring-quartz.xml" />
+	<!---->
+	
+    <!-- 持有Spring上下文环境的类 -->
+    <bean id="springContextHolder" class="com.sinog2c.config.SpringContextHolder" />  
+    <!-- 定义狱务公开 拦截器  不需要的请注释掉 -->
+      <bean  class ="org.springframework.web.servlet.mvc.annotation.DefaultAnnotationHandlerMapping" >
+       <property  name ="interceptors">
+           <list>   
+                 <!-- <bean  class ="com.sinog2c.mvc.front.interceptor.FrontLoginInterceptor"/>
+                  <bean  class ="com.sinog2c.mvc.interceptor.ywgk.YwgkInterceptor"/>--> 
+           </list>
+       </property>
+  </bean>
+    
+	<!--     针对于CXF进行整合  -->
+	<import resource="classpath:META-INF/cxf/cxf.xml" />
+	<!-- <import resource="classpath:META-INF/cxf/cxf-extension-soap.xml" /> -->
+	<import resource="classpath:META-INF/cxf/cxf-servlet.xml" />
+	
+	<!-- 运行时发布webservice到localhost:8080/ws/pmsystem?wsdl -->
+	<jaxws:endpoint implementor="#pmsysWebServiceImpl" address="/pmsystem">
+		<jaxws:inInterceptors>
+			<bean class="org.apache.cxf.interceptor.LoggingInInterceptor"></bean>
+		</jaxws:inInterceptors>
+		
+		<jaxws:outInterceptors>
+			<bean class="org.apache.cxf.interceptor.LoggingOutInterceptor"></bean>
+		</jaxws:outInterceptors>
+	</jaxws:endpoint>
+</beans>

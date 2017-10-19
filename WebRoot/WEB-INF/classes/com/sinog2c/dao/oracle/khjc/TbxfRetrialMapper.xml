@@ -1,0 +1,365 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.sinog2c.dao.api.khjc.TbxfRetrialMapper" >
+  <resultMap id="BaseResultMap" type="com.sinog2c.model.khjc.TbxfRetrial" >
+    <id column="DOCID" property="docid" jdbcType="VARCHAR" />
+    <result column="FLOWDEFID" property="flowdefid" jdbcType="VARCHAR" />
+    <result column="CRIMID" property="crimid" jdbcType="VARCHAR" />
+    <result column="DEPARTID" property="departid" jdbcType="VARCHAR" />
+    <result column="RETRIALNUM" property="retrialnum" jdbcType="DECIMAL" />
+    <result column="RETRIALSTART" property="retrialstart" jdbcType="VARCHAR" />
+    <result column="RETRIALEND" property="retrialend" jdbcType="VARCHAR" />
+    <result column="REPORTUNIT" property="reportunit" jdbcType="VARCHAR" />
+    <result column="RETRIALUNIT" property="retrialunit" jdbcType="VARCHAR" />
+    <result column="RETRIALCAUSE" property="retrialcause" jdbcType="VARCHAR" />
+    <result column="RETRIALSJOPIOION" property="retrialsjopioion" jdbcType="VARCHAR" />
+    <result column="RETRIALPERSON" property="retrialperson" jdbcType="VARCHAR" />
+    <result column="CONTACT" property="contact" jdbcType="VARCHAR" />
+    <result column="REMARK" property="remark" jdbcType="VARCHAR" />
+    <result column="CREATETIME" property="createtime" jdbcType="DATE" />
+    <result column="CREATEMENDER" property="createmender" jdbcType="VARCHAR" />
+    <result column="UPDATETIME" property="updatetime" jdbcType="DATE" />
+    <result column="UPDATEMENDER" property="updatemender" jdbcType="VARCHAR" />
+    <result column="TEXT1" property="text1" jdbcType="VARCHAR" />
+    <result column="TEXT2" property="text2" jdbcType="VARCHAR" />
+    <result column="TEXT3" property="text3" jdbcType="VARCHAR" />
+    <result column="TEXT4" property="text4" jdbcType="VARCHAR" />
+    <result column="TEXT5" property="text5" jdbcType="VARCHAR" />
+    <result column="INT1" property="int1" jdbcType="DECIMAL" />
+    <result column="INT2" property="int2" jdbcType="DECIMAL" />
+    <result column="INT3" property="int3" jdbcType="DECIMAL" />
+    <result column="INT4" property="int4" jdbcType="DECIMAL" />
+    <result column="INT5" property="int5" jdbcType="DECIMAL" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    DOCID, FLOWDRAFTID, CRIMID, DEPARTID, RETRIALNUM, RETRIALSTART, RETRIALEND, REPORTUNIT, 
+    RETRIALUNIT, RETRIALCAUSE, RETRIALSJOPIOION, RETRIALPERSON, CONTACT, REMARK, CREATETIME, 
+    CREATEMENDER, UPDATETIME, UPDATEMENDER, TEXT1, TEXT2, TEXT3, TEXT4, TEXT5, INT1, 
+    INT2, INT3, INT4, INT5
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from TBXF_RETRIAL
+    where DOCID = #{docid,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from TBXF_RETRIAL
+    where DOCID = #{docid,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.sinog2c.model.khjc.TbxfRetrial" >
+    insert into TBXF_RETRIAL (DOCID, FLOWDRAFTID, CRIMID, 
+      DEPARTID, RETRIALNUM, RETRIALSTART, 
+      RETRIALEND, REPORTUNIT, RETRIALUNIT, 
+      RETRIALCAUSE, RETRIALSJOPIOION, RETRIALPERSON, 
+      CONTACT, REMARK, CREATETIME, 
+      CREATEMENDER, UPDATETIME, UPDATEMENDER, 
+      TEXT1, TEXT2, TEXT3, 
+      TEXT4, TEXT5, INT1, 
+      INT2, INT3, INT4, INT5
+      )
+    values (#{docid,jdbcType=VARCHAR}, #{flowdefid,jdbcType=VARCHAR}, #{crimid,jdbcType=VARCHAR}, 
+      #{departid,jdbcType=VARCHAR}, #{retrialnum,jdbcType=DECIMAL}, #{retrialstart,jdbcType=DATE}, 
+      #{retrialend,jdbcType=DATE}, #{reportunit,jdbcType=VARCHAR}, #{retrialunit,jdbcType=VARCHAR}, 
+      #{retrialcause,jdbcType=VARCHAR}, #{retrialsjopioion,jdbcType=VARCHAR}, #{retrialperson,jdbcType=VARCHAR}, 
+      #{contact,jdbcType=VARCHAR}, #{remark,jdbcType=VARCHAR}, #{createtime,jdbcType=DATE}, 
+      #{createmender,jdbcType=VARCHAR}, #{updatetime,jdbcType=DATE}, #{updatemender,jdbcType=VARCHAR}, 
+      #{text1,jdbcType=VARCHAR}, #{text2,jdbcType=VARCHAR}, #{text3,jdbcType=VARCHAR}, 
+      #{text4,jdbcType=VARCHAR}, #{text5,jdbcType=VARCHAR}, #{int1,jdbcType=DECIMAL}, 
+      #{int2,jdbcType=DECIMAL}, #{int3,jdbcType=DECIMAL}, #{int4,jdbcType=DECIMAL}, #{int5,jdbcType=DECIMAL}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.sinog2c.model.khjc.TbxfRetrial" >
+    insert into TBXF_RETRIAL
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="docid != null" >
+        DOCID,
+      </if>
+      <if test="flowdefid != null" >
+        FLOWDEFID,
+      </if>
+      <if test="crimid != null" >
+        CRIMID,
+      </if>
+      <if test="departid != null" >
+        DEPARTID,
+      </if>
+      <if test="retrialnum != null" >
+        RETRIALNUM,
+      </if>
+      <if test="retrialstart != null" >
+        RETRIALSTART,
+      </if>
+      <if test="retrialend != null" >
+        RETRIALEND,
+      </if>
+      <if test="reportunit != null" >
+        REPORTUNIT,
+      </if>
+      <if test="retrialunit != null" >
+        RETRIALUNIT,
+      </if>
+      <if test="retrialcause != null" >
+        RETRIALCAUSE,
+      </if>
+      <if test="retrialsjopioion != null" >
+        RETRIALSJOPIOION,
+      </if>
+      <if test="retrialperson != null" >
+        RETRIALPERSON,
+      </if>
+      <if test="contact != null" >
+        CONTACT,
+      </if>
+      <if test="remark != null" >
+        REMARK,
+      </if>
+      <if test="createtime != null" >
+        CREATETIME,
+      </if>
+      <if test="createmender != null" >
+        CREATEMENDER,
+      </if>
+      <if test="updatetime != null" >
+        UPDATETIME,
+      </if>
+      <if test="updatemender != null" >
+        UPDATEMENDER,
+      </if>
+      <if test="text1 != null" >
+        TEXT1,
+      </if>
+      <if test="text2 != null" >
+        TEXT2,
+      </if>
+      <if test="text3 != null" >
+        TEXT3,
+      </if>
+      <if test="text4 != null" >
+        TEXT4,
+      </if>
+      <if test="text5 != null" >
+        TEXT5,
+      </if>
+      <if test="int1 != null" >
+        INT1,
+      </if>
+      <if test="int2 != null" >
+        INT2,
+      </if>
+      <if test="int3 != null" >
+        INT3,
+      </if>
+      <if test="int4 != null" >
+        INT4,
+      </if>
+      <if test="int5 != null" >
+        INT5,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="docid != null" >
+        #{docid,jdbcType=VARCHAR},
+      </if>
+      <if test="flowdefid != null" >
+        #{flowdefid,jdbcType=VARCHAR},
+      </if>
+      <if test="crimid != null" >
+        #{crimid,jdbcType=VARCHAR},
+      </if>
+      <if test="departid != null" >
+        #{departid,jdbcType=VARCHAR},
+      </if>
+      <if test="retrialnum != null" >
+        #{retrialnum,jdbcType=DECIMAL},
+      </if>
+      <if test="retrialstart != null" >
+        #{retrialstart,jdbcType=DATE},
+      </if>
+      <if test="retrialend != null" >
+        #{retrialend,jdbcType=DATE},
+      </if>
+      <if test="reportunit != null" >
+        #{reportunit,jdbcType=VARCHAR},
+      </if>
+      <if test="retrialunit != null" >
+        #{retrialunit,jdbcType=VARCHAR},
+      </if>
+      <if test="retrialcause != null" >
+        #{retrialcause,jdbcType=VARCHAR},
+      </if>
+      <if test="retrialsjopioion != null" >
+        #{retrialsjopioion,jdbcType=VARCHAR},
+      </if>
+      <if test="retrialperson != null" >
+        #{retrialperson,jdbcType=VARCHAR},
+      </if>
+      <if test="contact != null" >
+        #{contact,jdbcType=VARCHAR},
+      </if>
+      <if test="remark != null" >
+        #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="createtime != null" >
+        #{createtime,jdbcType=DATE},
+      </if>
+      <if test="createmender != null" >
+        #{createmender,jdbcType=VARCHAR},
+      </if>
+      <if test="updatetime != null" >
+        #{updatetime,jdbcType=DATE},
+      </if>
+      <if test="updatemender != null" >
+        #{updatemender,jdbcType=VARCHAR},
+      </if>
+      <if test="text1 != null" >
+        #{text1,jdbcType=VARCHAR},
+      </if>
+      <if test="text2 != null" >
+        #{text2,jdbcType=VARCHAR},
+      </if>
+      <if test="text3 != null" >
+        #{text3,jdbcType=VARCHAR},
+      </if>
+      <if test="text4 != null" >
+        #{text4,jdbcType=VARCHAR},
+      </if>
+      <if test="text5 != null" >
+        #{text5,jdbcType=VARCHAR},
+      </if>
+      <if test="int1 != null" >
+        #{int1,jdbcType=DECIMAL},
+      </if>
+      <if test="int2 != null" >
+        #{int2,jdbcType=DECIMAL},
+      </if>
+      <if test="int3 != null" >
+        #{int3,jdbcType=DECIMAL},
+      </if>
+      <if test="int4 != null" >
+        #{int4,jdbcType=DECIMAL},
+      </if>
+      <if test="int5 != null" >
+        #{int5,jdbcType=DECIMAL},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.sinog2c.model.khjc.TbxfRetrial" >
+    update TBXF_RETRIAL
+    <set >
+      <if test="flowdefid != null" >
+        FLOWDEFID = #{flowdefid,jdbcType=VARCHAR},
+      </if>
+      <if test="crimid != null" >
+        CRIMID = #{crimid,jdbcType=VARCHAR},
+      </if>
+      <if test="departid != null" >
+        DEPARTID = #{departid,jdbcType=VARCHAR},
+      </if>
+      <if test="retrialnum != null" >
+        RETRIALNUM = #{retrialnum,jdbcType=DECIMAL},
+      </if>
+      <if test="retrialstart != null" >
+        RETRIALSTART = #{retrialstart,jdbcType=VARCHAR},
+      </if>
+      <if test="retrialend != null" >
+        RETRIALEND = #{retrialend,jdbcType=VARCHAR},
+      </if>
+      <if test="reportunit != null" >
+        REPORTUNIT = #{reportunit,jdbcType=VARCHAR},
+      </if>
+      <if test="retrialunit != null" >
+        RETRIALUNIT = #{retrialunit,jdbcType=VARCHAR},
+      </if>
+      <if test="retrialcause != null" >
+        RETRIALCAUSE = #{retrialcause,jdbcType=VARCHAR},
+      </if>
+      <if test="retrialsjopioion != null" >
+        RETRIALSJOPIOION = #{retrialsjopioion,jdbcType=VARCHAR},
+      </if>
+      <if test="retrialperson != null" >
+        RETRIALPERSON = #{retrialperson,jdbcType=VARCHAR},
+      </if>
+      <if test="contact != null" >
+        CONTACT = #{contact,jdbcType=VARCHAR},
+      </if>
+      <if test="remark != null" >
+        REMARK = #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="createtime != null" >
+        CREATETIME = #{createtime,jdbcType=DATE},
+      </if>
+      <if test="createmender != null" >
+        CREATEMENDER = #{createmender,jdbcType=VARCHAR},
+      </if>
+      <if test="updatetime != null" >
+        UPDATETIME = #{updatetime,jdbcType=DATE},
+      </if>
+      <if test="updatemender != null" >
+        UPDATEMENDER = #{updatemender,jdbcType=VARCHAR},
+      </if>
+      <if test="text1 != null" >
+        TEXT1 = #{text1,jdbcType=VARCHAR},
+      </if>
+      <if test="text2 != null" >
+        TEXT2 = #{text2,jdbcType=VARCHAR},
+      </if>
+      <if test="text3 != null" >
+        TEXT3 = #{text3,jdbcType=VARCHAR},
+      </if>
+      <if test="text4 != null" >
+        TEXT4 = #{text4,jdbcType=VARCHAR},
+      </if>
+      <if test="text5 != null" >
+        TEXT5 = #{text5,jdbcType=VARCHAR},
+      </if>
+      <if test="int1 != null" >
+        INT1 = #{int1,jdbcType=DECIMAL},
+      </if>
+      <if test="int2 != null" >
+        INT2 = #{int2,jdbcType=DECIMAL},
+      </if>
+      <if test="int3 != null" >
+        INT3 = #{int3,jdbcType=DECIMAL},
+      </if>
+      <if test="int4 != null" >
+        INT4 = #{int4,jdbcType=DECIMAL},
+      </if>
+      <if test="int5 != null" >
+        INT5 = #{int5,jdbcType=DECIMAL},
+      </if>
+    </set>
+    where DOCID = #{docid,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.sinog2c.model.khjc.TbxfRetrial" >
+    update TBXF_RETRIAL
+    set FLOWDEFID = #{flowdefid,jdbcType=VARCHAR},
+      CRIMID = #{crimid,jdbcType=VARCHAR},
+      DEPARTID = #{departid,jdbcType=VARCHAR},
+      RETRIALNUM = #{retrialnum,jdbcType=DECIMAL},
+      RETRIALSTART = #{retrialstart,jdbcType=VARCHAR},
+      RETRIALEND = #{retrialend,jdbcType=VARCHAR},
+      REPORTUNIT = #{reportunit,jdbcType=VARCHAR},
+      RETRIALUNIT = #{retrialunit,jdbcType=VARCHAR},
+      RETRIALCAUSE = #{retrialcause,jdbcType=VARCHAR},
+      RETRIALSJOPIOION = #{retrialsjopioion,jdbcType=VARCHAR},
+      RETRIALPERSON = #{retrialperson,jdbcType=VARCHAR},
+      CONTACT = #{contact,jdbcType=VARCHAR},
+      REMARK = #{remark,jdbcType=VARCHAR},
+      CREATETIME = #{createtime,jdbcType=DATE},
+      CREATEMENDER = #{createmender,jdbcType=VARCHAR},
+      UPDATETIME = #{updatetime,jdbcType=DATE},
+      UPDATEMENDER = #{updatemender,jdbcType=VARCHAR},
+      TEXT1 = #{text1,jdbcType=VARCHAR},
+      TEXT2 = #{text2,jdbcType=VARCHAR},
+      TEXT3 = #{text3,jdbcType=VARCHAR},
+      TEXT4 = #{text4,jdbcType=VARCHAR},
+      TEXT5 = #{text5,jdbcType=VARCHAR},
+      INT1 = #{int1,jdbcType=DECIMAL},
+      INT2 = #{int2,jdbcType=DECIMAL},
+      INT3 = #{int3,jdbcType=DECIMAL},
+      INT4 = #{int4,jdbcType=DECIMAL},
+      INT5 = #{int5,jdbcType=DECIMAL}
+    where DOCID = #{docid,jdbcType=VARCHAR}
+  </update>
+</mapper>

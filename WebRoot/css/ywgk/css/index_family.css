@@ -1,0 +1,442 @@
+@charset "utf-8";
+/* CSS Document */
+
+html,body,div,p,ul,li,h1,a{
+	margin:0;
+	padding:0;	
+}
+html,body{
+	background:url(../../../images/ywgk/images_family/home_bj.jpg) no-repeat top center;
+	width:100%;
+	height:100%;
+	margin:0 auto;	
+}
+ul li{
+	list-style:none;
+}
+a{
+	text-decoration:none;
+}
+a:focus{
+	outline:none;
+}
+.clear{
+	clear:both;	
+}
+/*home*/
+.time1{
+	margin:0 auto; 
+	font-size:22px;
+	color:#000;
+	width:1011px;
+	text-align:left;
+	margin:120px 0 20px 0;
+}
+.time2{
+	position: absolute;
+	font-size:22px;
+	color:#000;
+	text-align:right;
+	width:1560px;
+	padding-top: 18px;
+	top:0;        
+    margin: 150px auto 0 -780px;
+    left:50%  
+}
+#home_box{
+	margin:0 auto;
+	padding-top:180px;	
+}
+#con_box{
+	margin:0 auto;
+	padding-top:60px;	
+}
+.log{
+	background:url(../../../images/ywgk/images_family/log.png) no-repeat;
+	width:572px;
+	height:83px;
+	display:block;	
+}
+.two_code{
+	position:absolute;
+	margin: -230px 0 0 932px;
+	*margin:-230px 0 0 430px;	
+}
+.home_con{
+	
+	background:#fff;
+	background:rgba(255, 255, 255, 0.6)!important;
+	filter:Alpha(opacity=60);	
+	width:1011px;
+	height:350px;
+	position:static; /* IE6、7、8只能设置position:static(默认属性) ，否则会导致子元素继承Alpha值 */
+  	*zoom:1; /* 激活IE6、7的haslayout属性，让它读懂Alpha */
+
+}
+.home_con ul{
+	padding:45px 53px;
+	position:relative;
+}
+.home_con ul li{
+	width:211px;
+	height:108px;
+	margin-right:16px;
+	margin-bottom:46px;	
+	float:left;
+	*margin-bottom:0px;	
+}
+.home_con ul li a{
+	display: block;
+    height: 42px;
+    padding-top: 67px;
+    width: 211px;
+	font-size:25px;
+	font-family:"微软雅黑";	
+	color:#fff;
+}
+.home_con ul li .home_jyjj{
+	background:url(../../../images/ywgk/images_family/home_jyjj.png) no-repeat;
+}
+.home_con ul li .home_flfg{
+	background:url(../../../images/ywgk/images_family/home_flfg.png) no-repeat;
+}
+.home_con ul li .home_gzdt{
+	background:url(../../../images/ywgk/images_family/home_gzdt.png) no-repeat;
+}
+.home_con ul li .home_zncx{
+	background:url(../../../images/ywgk/images_family/home_zncx.png) no-repeat;
+}
+.home_con ul .marginr0{
+	margin-right:0;
+}
+.home_con ul li .home_xwgk{
+	background:url(../../../images/ywgk/images_family/home_xwgk.png) no-repeat;
+}
+.home_con ul li .home_qqfw{
+	background:url(../../../images/ywgk/images_family/home_qqfw.png) no-repeat;
+}
+.home_con ul li .home_shbj{
+	background:url(../../../images/ywgk/images_family/home_shbj.png) no-repeat;
+}
+.home_con ul li .home_jspj{
+	background:url(../../../images/ywgk/images_family/home_jspj.png) no-repeat;
+}
+.home_foot{
+	margin-top:150px;
+	padding-bottom:100px;
+	clear:both;
+	font-size:16px;
+}
+/*list_jyjj*/
+.list_content{
+	width:1560px;
+	margin: 55px auto 0;
+}
+.con_jyjj{
+	padding:20px 40px;
+	color:#000;
+	font-family:"宋体";	
+	position: relative;
+}
+.contents{
+	height: 675px;
+    margin-top: 15px;
+    position:relative;
+}
+#dv_scroll{position:absolute;height:655px;overflow:hidden;width:100%;}
+#dv_scroll .Scroller-Container{width:100%;}
+#dv_scroll_bar {position:absolute;right:0;top:10px;width:1px;height:655px;}
+#dv_scroll_bar .Scrollbar-Track{position:absolute;left:0;top:20px;width:1px;height:615px;}
+#dv_scroll_bar .Scrollbar-Handle{position:absolute;left:-8px;top:0;width:1px;height:29px;overflow:hidden;background:url(images/srcoll.gif) no-repeat;cursor:pointer;}
+#dv_scroll_text {position:absolute;}
+
+
+.contents p{
+	text-align:justify;
+	line-height:30px;
+	font-size:28px;
+	text-indent:2em	
+}
+.pages{
+	margin-top:10px;
+	float:right;	
+}
+.pages-left{
+	margin-top:10px;
+	float:left;	
+}
+.pages-left a{
+	width:82px;
+	text-align:center;
+	height:35px;
+	line-height:35px;
+	border:1px solid #8b8487;
+	background:url(../../../images/ywgk/images_family/back.jpg) repeat-x;
+	display: block;
+    float: left;
+	margin-left:20px;
+	color:#000;
+}
+.pages-left a:hover{
+	width:82px;
+	text-align:center;
+	height:35px;
+	line-height:35px;
+	border:1px solid #4ac8ec;
+	background:url(../../../images/ywgk/images_family/next.jpg) repeat-x;
+	display: block;
+    float: left;
+	margin-left:20px;
+	color:#000		
+}
+.pages a{
+	width:82px;
+	text-align:center;
+	height:35px;
+	line-height:35px;
+	border:1px solid #8b8487;
+	background:url(../../../images/ywgk/images_family/back.jpg) repeat-x;
+	display: block;
+    float: left;
+	margin-left:20px;
+	color:#000;
+}
+.pages a:hover{
+	width:82px;
+	text-align:center;
+	height:35px;
+	line-height:35px;
+	border:1px solid #4ac8ec;
+	background:url(../../../images/ywgk/images_family/next.jpg) repeat-x;
+	display: block;
+    float: left;
+	margin-left:20px;
+	color:#000		
+}
+.list_foot{	
+	padding-top:40px;
+	padding-bottom:150px;
+	font-size:16px;
+}
+/*list_flfg*/
+.con_flfg{
+	padding:66px 78px;
+	color:#000;
+	font-family:"宋体";	
+	position: relative;	
+}
+.con_flfg ul{
+	height:680px;
+	overflow:hidden;	
+}
+.con_flfg ul li{
+	width:172px;
+	height:217px;
+	overflow:hidden;
+	float:left;
+	margin-left:20px;
+	margin-bottom:10px;
+}
+.con_flfg ul li a{
+	width:172px;
+	display:block;
+	float:left;
+	text-align:left;
+	margin-bottom:10px;
+	position:absolute;
+	margin-top:-45px;
+	height:0;
+	*position:static; 	
+}
+.shadeDivWrap{	
+	display:block;
+	height:42px;
+	line-height:42px;	
+	width:172px;
+	color:#fff;
+	top:216px;
+	 position:relative; /* IE6、7、8只能设置position:static(默认属性) ，否则会导致子元素继承Alpha值 */
+  	*zoom:1; /* 激活IE6、7的haslayout属性，让它读懂Alpha */
+	background-color:#000;/*:rgba(0,0,0,0.3);*/ 
+	opacity:0.2;
+	filter:alpha(opacity=30);
+
+}
+.shadeDiv{
+	width:162px;
+	height:42px;
+	line-height:42px;
+	position:relative;
+	padding-left:10px;
+}
+.con_flfg ul li a .bacgs{
+	width:172px;
+	height:217px;	
+}
+/*.con_flfg ul li a .a1{
+	background:url(../../../images/ywgk/images_family/flfg_xf.jpg) no-repeat;
+	margin-left:0;	
+}
+.con_flfg ul li a .a2{
+	background:url(../../../images/ywgk/images_family/flfg_xsssf.jpg) no-repeat;
+}
+.con_flfg ul li a .a3{
+	background:url(../../../images/ywgk/images_family/flfg_zagl.jpg) no-repeat;
+}
+.con_flfg ul li a .a4{
+	background:url(../../../images/ywgk/images_family/flfg_dljtf.jpg) no-repeat;
+}
+.con_flfg ul li a .a5{
+	background:url(../../../images/ywgk/images_family/flfg_sstl.jpg) no-repeat;
+	margin-left:0;
+}
+.con_flfg ul li a .a6{
+	background:url(../../../images/ywgk/images_family/flfg_cxgd.jpg) no-repeat;
+}
+.con_flfg ul li a .a7{
+	background:url(../../../images/ywgk/images_family/flfg_zacf.jpg) no-repeat;
+}
+.con_flfg ul li a .a8{
+	background:url(../../../images/ywgk/images_family/flfg_sstl.jpg) no-repeat;
+}*/
+.iframe{
+	height:800px;
+	width:100%;
+}
+.znhd_four_cons{
+	background:url(../../../images/ywgk/images/succeed_two.png) no-repeat;
+	width:676px;
+	height:301px;
+	margin:0 auto;
+	margin-top:115px;	
+}
+.attention{
+	margin-left: 203px;
+    margin-top: 147px;
+    position: absolute;
+	color:#2d4afc;	
+}
+.explain{
+	background:url(../../../images/ywgk/images_family/explain_bj.png) no-repeat left center;
+	font-size:30px;
+	padding-left:30px;
+	margin:10px 0 0 25px;
+}
+.response{
+	color:#db3d42;
+	font-size:22px;
+	margin:25px 0 0 55px;
+}
+.imprinters{
+	background:url(../../../images/ywgk/images_family/shuakatishi.png) no-repeat;
+	width:937px;
+	height:459px;
+	margin:0 auto;
+	margin-top:70px;
+	padding-top:50px;
+}
+.IDIdentification{
+	position: relative;
+	background:url(../../../images/ywgk/images_family/IDIdentification_family.gif) no-repeat;
+	width:590px;
+	height:376px;
+	margin: 0 0 0 317px;
+}
+.zhinenghudongbt{
+	border-bottom:2px solid #1167e2;
+}
+.guanji{
+	background:url(../../../images/ywgk/images_family/power_icons.png) no-repeat;
+	width:135px;
+	height:123px;
+	position: absolute;
+	top:88%; 
+}
+.passwords{
+	font-size:28px;
+	margin-left:22px;
+	hight:50px;
+	margin : 10px 0px 10px 40px;
+}
+.passwords input{
+	font-size:22px;
+}
+.inpubj{
+	padding:20px;
+}
+
+.inpubj ul li input{
+	margin-left:15px;
+	padding:0;
+}
+.inpubj ul li input{
+	background:url(../../../images/ywgk/images_1920_1080/Keyboardz.png) no-repeat;
+	width:67px;
+	height:44px;
+	line-height:44px;
+	text-align:center;
+	font-size:24px;
+	margin-bottom:20px;
+	border:0;
+	outline:none;
+}
+.inpubj ul li input:hover{
+	background:url(../../../images/ywgk/images_1920_1080/Keyboardh.png) no-repeat;
+	width:67px;
+	height:44px;
+	line-height:44px;
+	text-align:center;
+	font-size:24px;
+	margin-bottom:20px;
+	border:0;
+	outline:none;
+}
+/*滚动条到顶、到底提示样式*/
+.tishi{
+	height:0px;
+	width:100px;
+	position:relative;
+	left:-350px;
+	top:20px;
+	font-size:20px;
+	color:red;
+}
+.chaxun{
+	height:38px;
+	width:200px;
+	font-size:25px;
+	color:red;
+	text-align:center;
+	line-height:35px;
+	border:1px solid #8b8487;
+	background:url(../../../images/ywgk/images_family/back.jpg) repeat-x;
+	display: block;
+    float: left;
+	margin-left:20px;
+	color:#000;
+}
+.chaxun:hover{
+	height:38px;
+	width:200px;
+	font-size:25px;
+	color:red;
+	text-align:center;
+	line-height:35px;
+	border:1px solid #4ac8ec;
+	background:url(../../../images/ywgk/images_family/next.jpg) repeat-x;
+	display: block;
+    float: left;
+	margin-left:20px;
+	color:#000;
+}
+.gnlist_family{
+	padding: 0 61px 0 0px;	
+	height:105px;
+}
+.gnlist_family li{
+	background:url(../../../images/ywgk/images/czsmbj2.jpg) no-repeat left center;
+	line-height:30px;
+	float:left;	
+	width:430px;
+	padding-left:15px;
+}

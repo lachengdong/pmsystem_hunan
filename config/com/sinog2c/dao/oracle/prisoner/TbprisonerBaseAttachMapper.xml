@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.sinog2c.dao.api.prisoner.TbprisonerBaseAttachMapper" >
+  <resultMap id="BaseResultMap" type="com.sinog2c.model.prisoner.TbprisonerBaseAttach" >
+    <result column="CRIMINALID" property="criminalid" jdbcType="VARCHAR" />
+    <result column="PRISONERTYPE" property="prisonertype" jdbcType="DECIMAL" />
+    <result column="OPTIME" property="optime" jdbcType="TIMESTAMP" />
+    <result column="OPID" property="opid" jdbcType="VARCHAR" />
+  </resultMap>
+  <resultMap id="ResultMapWithBLOBs" type="com.sinog2c.model.prisoner.TbprisonerBaseAttach" extends="BaseResultMap" >
+    <result column="CONTENT" property="content" jdbcType="CLOB" />
+  </resultMap>
+  <sql id="Blob_Column_List" >
+    CONTENT
+  </sql>
+  <insert id="insert" parameterType="com.sinog2c.model.prisoner.TbprisonerBaseAttach" >
+    insert into TBPRISONER_BASE_ATTACH (CRIMINALID, PRISONERTYPE, OPTIME, 
+      OPID, CONTENT)
+    values (#{criminalid,jdbcType=VARCHAR}, #{prisonertype,jdbcType=DECIMAL}, #{optime,jdbcType=TIMESTAMP}, 
+      #{opid,jdbcType=VARCHAR}, #{content,jdbcType=CLOB})
+  </insert>
+  <insert id="insertSelective" parameterType="com.sinog2c.model.prisoner.TbprisonerBaseAttach" >
+    insert into TBPRISONER_BASE_ATTACH
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="criminalid != null" >
+        CRIMINALID,
+      </if>
+      <if test="prisonertype != null" >
+        PRISONERTYPE,
+      </if>
+      <if test="optime != null" >
+        OPTIME,
+      </if>
+      <if test="opid != null" >
+        OPID,
+      </if>
+      <if test="content != null" >
+        CONTENT,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="criminalid != null" >
+        #{criminalid,jdbcType=VARCHAR},
+      </if>
+      <if test="prisonertype != null" >
+        #{prisonertype,jdbcType=DECIMAL},
+      </if>
+      <if test="optime != null" >
+        #{optime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="opid != null" >
+        #{opid,jdbcType=VARCHAR},
+      </if>
+      <if test="content != null" >
+        #{content,jdbcType=CLOB},
+      </if>
+    </trim>
+  </insert>
+</mapper>

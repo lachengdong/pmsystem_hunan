@@ -1,0 +1,177 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.sinog2c.dao.api.oa.OAyzMapper">
+  <resultMap id="BaseResultMap" type="com.sinog2c.model.oa.OAyz">
+    <id column="YZID" jdbcType="VARCHAR" property="yzid" />
+    <result column="BGR" jdbcType="VARCHAR" property="bgr" />
+    <result column="USERID" jdbcType="DECIMAL" property="userid" />
+    <result column="DEPARTMENTID" jdbcType="DECIMAL" property="departmentid" />
+    <result column="YZMC" jdbcType="VARCHAR" property="yzmc" />
+    <result column="YZYM" jdbcType="VARCHAR" property="yzym" />
+    <result column="QRZT" jdbcType="VARCHAR" property="qrzt" />
+    <result column="JSRQ" jdbcType="DATE" property="jsrq" />
+    <result column="OPTIME" jdbcType="DATE" property="optime" />
+    <result column="OPID" jdbcType="VARCHAR" property="opid" />
+    <result column="REMARK" jdbcType="VARCHAR" property="remark" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    YZID, BGR, USERID, DEPARTMENTID, YZMC, YZYM, QRZT, JSRQ, OPTIME, OPID, REMARK
+  </sql>
+   <select id="getYzList" resultType="java.util.HashMap" parameterType="java.util.HashMap">
+  		select 
+  		YZID, BGR, USERID, DEPARTMENTID, YZMC, YZYM, QRZT, 
+  		to_char(JSRQ,'yyyy-MM-dd') jsrq, 
+  		OPTIME, OPID, REMARK
+  		from OA_YZ t  where 1=1
+  		<if test="key!=null and key!=''">  
+          and t.yzmc like CONCAT(CONCAT('%', #{key}), '%')
+      	</if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from OA_YZ
+    where YZID = #{yzid,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from OA_YZ
+    where YZID = #{yzid,jdbcType=VARCHAR}
+  </delete>
+   <delete id="deleteOayz" parameterType="java.lang.String">
+    delete from OA_YZ
+    where YZID in (#{yzids,jdbcType=VARCHAR})
+  </delete>
+  <insert id="insert" parameterType="com.sinog2c.model.oa.OAyz">
+    insert into OA_YZ (YZID, BGR, USERID, 
+      DEPARTMENTID, YZMC, YZYM, 
+      QRZT, JSRQ, OPTIME, OPID, 
+      REMARK)
+    values (#{yzid,jdbcType=VARCHAR}, #{bgr,jdbcType=VARCHAR}, #{userid,jdbcType=DECIMAL}, 
+      #{departmentid,jdbcType=DECIMAL}, #{yzmc,jdbcType=VARCHAR}, #{yzym,jdbcType=VARCHAR}, 
+      #{qrzt,jdbcType=VARCHAR}, #{jsrq,jdbcType=DATE}, #{optime,jdbcType=DATE}, #{opid,jdbcType=VARCHAR}, 
+      #{remark,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.sinog2c.model.oa.OAyz">
+    insert into OA_YZ
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="yzid != null">
+        YZID,
+      </if>
+      <if test="bgr != null">
+        BGR,
+      </if>
+      <if test="userid != null">
+        USERID,
+      </if>
+      <if test="departmentid != null">
+        DEPARTMENTID,
+      </if>
+      <if test="yzmc != null">
+        YZMC,
+      </if>
+      <if test="yzym != null">
+        YZYM,
+      </if>
+      <if test="qrzt != null">
+        QRZT,
+      </if>
+      <if test="jsrq != null">
+        JSRQ,
+      </if>
+      <if test="optime != null">
+        OPTIME,
+      </if>
+      <if test="opid != null">
+        OPID,
+      </if>
+      <if test="remark != null">
+        REMARK,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="yzid != null">
+        #{yzid,jdbcType=VARCHAR},
+      </if>
+      <if test="bgr != null">
+        #{bgr,jdbcType=VARCHAR},
+      </if>
+      <if test="userid != null">
+        #{userid,jdbcType=DECIMAL},
+      </if>
+      <if test="departmentid != null">
+        #{departmentid,jdbcType=DECIMAL},
+      </if>
+      <if test="yzmc != null">
+        #{yzmc,jdbcType=VARCHAR},
+      </if>
+      <if test="yzym != null">
+        #{yzym,jdbcType=VARCHAR},
+      </if>
+      <if test="qrzt != null">
+        #{qrzt,jdbcType=VARCHAR},
+      </if>
+      <if test="jsrq != null">
+        #{jsrq,jdbcType=DATE},
+      </if>
+      <if test="optime != null">
+         sysdate,
+      </if>
+      <if test="opid != null">
+        #{opid,jdbcType=VARCHAR},
+      </if>
+      <if test="remark != null">
+        #{remark,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.sinog2c.model.oa.OAyz">
+    update OA_YZ
+    <set>
+      <if test="bgr != null">
+        BGR = #{bgr,jdbcType=VARCHAR},
+      </if>
+      <if test="userid != null">
+        USERID = #{userid,jdbcType=DECIMAL},
+      </if>
+      <if test="departmentid != null">
+        DEPARTMENTID = #{departmentid,jdbcType=DECIMAL},
+      </if>
+      <if test="yzmc != null">
+        YZMC = #{yzmc,jdbcType=VARCHAR},
+      </if>
+      <if test="yzym != null">
+        YZYM = #{yzym,jdbcType=VARCHAR},
+      </if>
+      <if test="qrzt != null">
+        QRZT = #{qrzt,jdbcType=VARCHAR},
+      </if>
+      <if test="jsrq != null">
+        JSRQ = #{jsrq,jdbcType=DATE},
+      </if>
+      <if test="optime != null">
+        OPTIME = #{optime,jdbcType=DATE},
+      </if>
+      <if test="opid != null">
+        OPID = #{opid,jdbcType=VARCHAR},
+      </if>
+      <if test="remark != null">
+        REMARK = #{remark,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where YZID = #{yzid,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.sinog2c.model.oa.OAyz">
+    update OA_YZ
+    set BGR = #{bgr,jdbcType=VARCHAR},
+      USERID = #{userid,jdbcType=DECIMAL},
+      DEPARTMENTID = #{departmentid,jdbcType=DECIMAL},
+      YZMC = #{yzmc,jdbcType=VARCHAR},
+      YZYM = #{yzym,jdbcType=VARCHAR},
+      QRZT = #{qrzt,jdbcType=VARCHAR},
+      JSRQ = #{jsrq,jdbcType=DATE},
+      OPTIME = #{optime,jdbcType=DATE},
+      OPID = #{opid,jdbcType=VARCHAR},
+      REMARK = #{remark,jdbcType=VARCHAR}
+    where YZID = #{yzid,jdbcType=VARCHAR}
+  </update>
+</mapper>

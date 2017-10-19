@@ -1,0 +1,7 @@
+[
+	{id: "zhi", text: "羊皮纸", pid: "color"},
+	{id: "yellow", text: "桔黄色", pid: "color"},
+	{id: "green", text: "浅绿色", pid: "color"},
+	{id: "white", text: "经典白", pid: "color"},
+	{id: "tianlan", text: "天蓝色", pid: "color"}
+]

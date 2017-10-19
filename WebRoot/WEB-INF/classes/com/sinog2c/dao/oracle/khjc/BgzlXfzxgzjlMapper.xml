@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.sinog2c.dao.api.khjc.BgzlXfzxgzjlMapper">
+  <resultMap id="BaseResultMap" type="com.sinog2c.model.khjc.BgzlXfzxgzjl">
+    <id column="ID" jdbcType="VARCHAR" property="id" />
+    <result column="SHIJIAN" jdbcType="VARCHAR" property="shijian" />
+    <result column="BUMEN" jdbcType="VARCHAR" property="bumen" />
+    <result column="YEWU" jdbcType="VARCHAR" property="yewu" />
+    <result column="BANLIQINGKUANG" jdbcType="VARCHAR" property="banliqingkuang" />
+    <result column="CUNZAIWENTI" jdbcType="VARCHAR" property="cunzaiwenti" />
+    <result column="BEIZHU" jdbcType="VARCHAR" property="beizhu" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    ID, SHIJIAN, BUMEN, YEWU, BANLIQINGKUANG, CUNZAIWENTI, BEIZHU
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from BGZL_XFZXGZJL
+    where ID = #{id,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from BGZL_XFZXGZJL
+    where ID = #{id,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.sinog2c.model.khjc.BgzlXfzxgzjl">
+    insert into BGZL_XFZXGZJL (ID, SHIJIAN, BUMEN, 
+      YEWU, BANLIQINGKUANG, CUNZAIWENTI, 
+      BEIZHU)
+    values (#{id,jdbcType=VARCHAR}, #{shijian,jdbcType=VARCHAR}, #{bumen,jdbcType=VARCHAR}, 
+      #{yewu,jdbcType=VARCHAR}, #{banliqingkuang,jdbcType=VARCHAR}, #{cunzaiwenti,jdbcType=VARCHAR}, 
+      #{beizhu,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.sinog2c.model.khjc.BgzlXfzxgzjl">
+    insert into BGZL_XFZXGZJL
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        ID,
+      </if>
+      <if test="shijian != null">
+        SHIJIAN,
+      </if>
+      <if test="bumen != null">
+        BUMEN,
+      </if>
+      <if test="yewu != null">
+        YEWU,
+      </if>
+      <if test="banliqingkuang != null">
+        BANLIQINGKUANG,
+      </if>
+      <if test="cunzaiwenti != null">
+        CUNZAIWENTI,
+      </if>
+      <if test="beizhu != null">
+        BEIZHU,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=VARCHAR},
+      </if>
+      <if test="shijian != null">
+        #{shijian,jdbcType=VARCHAR},
+      </if>
+      <if test="bumen != null">
+        #{bumen,jdbcType=VARCHAR},
+      </if>
+      <if test="yewu != null">
+        #{yewu,jdbcType=VARCHAR},
+      </if>
+      <if test="banliqingkuang != null">
+        #{banliqingkuang,jdbcType=VARCHAR},
+      </if>
+      <if test="cunzaiwenti != null">
+        #{cunzaiwenti,jdbcType=VARCHAR},
+      </if>
+      <if test="beizhu != null">
+        #{beizhu,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.sinog2c.model.khjc.BgzlXfzxgzjl">
+    update BGZL_XFZXGZJL
+    <set>
+      <if test="shijian != null">
+        SHIJIAN = #{shijian,jdbcType=VARCHAR},
+      </if>
+      <if test="bumen != null">
+        BUMEN = #{bumen,jdbcType=VARCHAR},
+      </if>
+      <if test="yewu != null">
+        YEWU = #{yewu,jdbcType=VARCHAR},
+      </if>
+      <if test="banliqingkuang != null">
+        BANLIQINGKUANG = #{banliqingkuang,jdbcType=VARCHAR},
+      </if>
+      <if test="cunzaiwenti != null">
+        CUNZAIWENTI = #{cunzaiwenti,jdbcType=VARCHAR},
+      </if>
+      <if test="beizhu != null">
+        BEIZHU = #{beizhu,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where ID = #{id,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.sinog2c.model.khjc.BgzlXfzxgzjl">
+    update BGZL_XFZXGZJL
+    set SHIJIAN = #{shijian,jdbcType=VARCHAR},
+      BUMEN = #{bumen,jdbcType=VARCHAR},
+      YEWU = #{yewu,jdbcType=VARCHAR},
+      BANLIQINGKUANG = #{banliqingkuang,jdbcType=VARCHAR},
+      CUNZAIWENTI = #{cunzaiwenti,jdbcType=VARCHAR},
+      BEIZHU = #{beizhu,jdbcType=VARCHAR}
+    where ID = #{id,jdbcType=VARCHAR}
+  </update>
+</mapper>

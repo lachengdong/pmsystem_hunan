@@ -1,0 +1,538 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.sinog2c.dao.api.system.TbsysDocumentMapper">
+	<resultMap id="BaseResultMap" type="com.sinog2c.model.system.TbsysDocument">
+		<id column="DOCID" property="docid" jdbcType="DECIMAL" />
+		<result column="DEPARTID" property="departid" jdbcType="VARCHAR" />
+		<result column="TEMPID" property="tempid" jdbcType="VARCHAR" />
+		<result column="INTRODUCTION" property="introduction" jdbcType="VARCHAR" />
+		<result column="DELFLAG" property="delflag" jdbcType="DECIMAL" />
+		<result column="CRIMID" property="crimid" jdbcType="VARCHAR" />
+		<result column="OPID" property="opid" jdbcType="VARCHAR" />
+		<result column="TEXT1" property="text1" jdbcType="VARCHAR" />
+		<result column="OPTIME" property="optime" jdbcType="TIMESTAMP" />
+	</resultMap>
+	<resultMap id="ResultMapWithBLOBs" type="com.sinog2c.model.system.TbsysDocument"
+		extends="BaseResultMap">
+		<result column="CONTENT" property="content" jdbcType="CLOB" />
+	</resultMap>
+	<sql id="Blob_Column_List">
+		CONTENT
+  </sql>
+
+	<insert id="insert" parameterType="com.sinog2c.model.system.TbsysDocument">
+		insert into TBSYS_DOCUMENT
+		(DOCID, DEPARTID, TEMPID,
+		INTRODUCTION, DELFLAG, CRIMID, OPID,
+		OPTIME,
+		CONTENT)
+		values (#{docid,jdbcType=DECIMAL},
+		#{departid,jdbcType=VARCHAR},
+		#{tempid,jdbcType=VARCHAR},
+		#{introduction,jdbcType=VARCHAR}, #{delflag,jdbcType=DECIMAL},
+		#{crimid,jdbcType=VARCHAR},
+		#{opid,jdbcType=VARCHAR},
+		#{optime,jdbcType=TIMESTAMP},
+		#{content,jdbcType=CLOB})
+  </insert>
+	<!-- 新增数据 -->
+	<insert id="insertSelective" parameterType="com.sinog2c.model.system.TbsysDocument">
+		<selectKey resultType="int" order="BEFORE" keyProperty="docid">
+			select SEQ_SYS_DOC_ID.nextval as docid from dual
+	</selectKey>
+		insert into TBSYS_DOCUMENT
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="docid != null">
+				DOCID,
+      </if>
+			<if test="departid != null">
+				DEPARTID,
+      </if>
+			<if test="tempid != null">
+				TEMPID,
+      </if>
+			<if test="introduction != null">
+				INTRODUCTION,
+      </if>
+			<if test="delflag != null">
+				DELFLAG,
+      </if>
+			<if test="crimid != null">
+				CRIMID,
+      </if>
+			<if test="opid != null">
+				OPID,
+      </if>
+			<if test="optime != null">
+				OPTIME,
+      </if>
+			<if test="text1 != null">
+				TEXT1,
+      </if>
+			<if test="content != null">
+				CONTENT,
+      </if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="docid != null">
+				#{docid,jdbcType=DECIMAL},
+      </if>
+			<if test="departid != null">
+				#{departid,jdbcType=VARCHAR},
+      </if>
+			<if test="tempid != null">
+				#{tempid,jdbcType=VARCHAR},
+      </if>
+			<if test="introduction != null">
+				#{introduction,jdbcType=VARCHAR},
+      </if>
+			<if test="delflag != null">
+				#{delflag,jdbcType=DECIMAL},
+      </if>
+			<if test="crimid != null">
+				#{crimid,jdbcType=VARCHAR},
+      </if>
+			<if test="opid != null">
+				#{opid,jdbcType=VARCHAR},
+      </if>
+			<if test="optime != null">
+				#{optime,jdbcType=TIMESTAMP},
+      </if>
+			<if test="text1 != null">
+				#{text1,jdbcType=VARCHAR},
+      </if>
+			<if test="content != null">
+				#{content,jdbcType=CLOB},
+      </if>
+		</trim>
+	</insert>
+	<!-- 获取当前页面数据（分页） -->
+	<select id="getTbsysDocumentList" resultType="com.sinog2c.model.system.TbsysDocument">
+		SELECT * FROM
+		(SELECT A.*, ROWNUM RN FROM
+		(SELECT doc.docid,org.name as
+		departid,doc.tempid,doc.introduction,doc.crimid,info.name as
+		opid,doc.optime FROM TBSYS_DOCUMENT doc,TBSYS_ORGINFO org,TBSYS_USERINFO info 
+		WHERE 1=1 
+		<if test="tempid!='ZFBCJDB'">
+		and doc.delflag = '0' 
+		</if>
+		and org.orgid = doc.departid and doc.opid = info.userid
+		<if test="key!=null and key!=''">
+			and doc.INTRODUCTION like CONCAT(CONCAT('%',#{key}),'%')
+		</if>
+		<if test="departid!=null and departid!=''">
+			and (doc.departid in (
+							select dorgid from tbflow_org_org org
+							where org.orgid=#{departid}
+						)
+				)
+		</if>
+		<if test="tempid!=null and tempid!=''">
+			and doc.tempid = #{tempid}
+		</if>
+		<if test="crimid!=null and crimid!=''">
+			and doc.crimid = #{crimid}
+		</if>
+		<if test="sortField!=null and sortField!=''">
+			order by doc.${sortField} ${sortOrder} 
+    	</if>
+		) A
+		WHERE ROWNUM &lt;= #{end,jdbcType=DECIMAL}
+		)
+		WHERE RN &gt;=
+		#{start,jdbcType=DECIMAL}
+	</select>
+	
+	
+	<!-- 获取当前页面数据（分页） -->
+	<select id="getTbsysDocumentList2" resultType="com.sinog2c.model.system.TbsysDocument">
+		SELECT * FROM
+		(SELECT A.*, ROWNUM RN FROM
+		(SELECT doc.docid,org.name as
+		departid,doc.tempid,doc.introduction,doc.crimid,info.name as
+		opid,doc.optime FROM TBSYS_DOCUMENT doc,TBSYS_ORGINFO org,TBSYS_USERINFO info 
+		WHERE 1=1 
+		<if test="tempid!='ZFBCJDB'">
+		and doc.delflag = '0' 
+		</if>
+		and org.orgid = doc.departid and doc.opid = info.userid
+		<if test="key!=null and key!=''">
+			and doc.INTRODUCTION like CONCAT(CONCAT('%',#{key}),'%')
+		</if>
+		
+		<if test="orgid!=null and orgid!=''">
+			and exists (
+					select 'x' from  tbflow_org_org org where org.orgid=#{orgid} and doc.departid=org.dorgid
+				)
+		</if>
+		
+		<if test="tempid!=null and tempid!=''">
+			and doc.tempid = #{tempid}
+		</if>
+		<if test="crimid!=null and crimid!=''">
+			and doc.crimid = #{crimid}
+		</if>
+		<if test="sortField!=null and sortField!=''">
+			order by doc.${sortField} ${sortOrder} 
+    	</if>
+		) A
+		WHERE ROWNUM &lt;= #{end,jdbcType=DECIMAL}
+		)
+		WHERE RN &gt;=
+		#{start,jdbcType=DECIMAL}
+	</select>
+
+	<select id="findreprotList" resultType="Map">
+		select doc.docid as docid ,org.name as name,doc.introduction as
+		title,info.name as opid, to_char(doc.optime,'yyyy-MM-dd') as
+		optime from tbsys_orginfo org,TBSYS_USERINFO info,TBSYS_DOCUMENT
+		doc WHERE 1=1 and doc.departid=org.orgid and
+		doc.tempid=#{tempid} and doc.opid=info.userid
+		<if test="departid!=null and departid!=''">
+			and doc.departid in (select dorgid from tbflow_org_org org
+			where org.orgid=#{departid})
+		</if>
+		order by docid desc
+	</select>
+	<!-- 查询表中数据总数 -->
+	<select id="getCount" resultType="int">
+		SELECT count(*) FROM TBSYS_DOCUMENT where 1=1 and delflag='0'
+		<if test="key!=null and key!=''">
+			and INTRODUCTION like CONCAT(CONCAT('%',#{key}),'%')
+		    </if>
+		<if test="tempid!=null and tempid!=''">
+			and tempid = #{tempid}
+		    </if>
+		<if test="crimid!=null and crimid!=''">
+			and crimid = #{crimid}
+		    </if>
+		<if test="departid!=null and departid!=''">
+			and departid in (
+				select dorgid from tbflow_org_org org
+							where org.orgid=#{departid}
+			)
+			
+		</if>
+	</select>
+	
+	<!-- 查询表中数据总数 -->
+	<select id="getCount2" resultType="int">
+		SELECT count(*) FROM TBSYS_DOCUMENT doc where 1=1 and delflag='0'
+		<if test="key!=null and key!=''">
+			and INTRODUCTION like CONCAT(CONCAT('%',#{key}),'%')
+		    </if>
+		<if test="tempid!=null and tempid!=''">
+			and tempid = #{tempid}
+		    </if>
+		<if test="crimid!=null and crimid!=''">
+			and crimid = #{crimid}
+		    </if>
+		<if test="orgid!=null and orgid!=''">
+			and exists (
+					select 'x' from  tbflow_org_org org where org.orgid=#{orgid} and doc.departid=org.dorgid
+				)
+		</if>
+	</select>
+	
+	<select id="findreportDataByDocid" parameterType="Map"
+		resultType="String">
+		select t.content from tbsys_document t where 1=1 
+		<if test="docid!=null and docid!=''">
+			and t.docid=${docid}
+		</if>
+		<if test="crimid!=null and crimid!='' and tempid!=null and tempid!=''">
+			and t.crimid=#{crimid} and t.tempid=#{tempid} and t.optime=(select max(optime) from tbsys_document where crimid=#{crimid} and tempid=#{tempid} )
+		</if>
+	</select>
+	<!-- 根据文书Id修改数据 -->
+	<update id="updateTbsysDocument" parameterType="com.sinog2c.model.system.TbsysDocument">
+		update TBSYS_DOCUMENT
+		<set>
+			<if test="departid != null">
+				DEPARTID = #{departid,jdbcType=VARCHAR},
+      </if>
+			<if test="tempid != null">
+				TEMPID = #{tempid,jdbcType=VARCHAR},
+      </if>
+			<if test="introduction != null">
+				INTRODUCTION = #{introduction,jdbcType=VARCHAR},
+      </if>
+			<if test="delflag != null">
+				DELFLAG = #{delflag,jdbcType=DECIMAL},
+      </if>
+			<if test="crimid != null">
+				CRIMID = #{crimid,jdbcType=VARCHAR},
+      </if>
+			<if test="opid != null">
+				OPID = #{opid,jdbcType=VARCHAR},
+      </if>
+			<if test="optime != null">
+				OPTIME = #{optime,jdbcType=TIMESTAMP},
+      </if>
+			<if test="content != null">
+				CONTENT = #{content,jdbcType=CLOB},
+      </if>
+			<if test="text1!=null">
+				text1=#{text1,jdbcType=VARCHAR},
+      </if>
+		</set>
+		where DOCID = #{docid,jdbcType=DECIMAL}
+	</update>
+
+	<update id="updateTbsysDocuments" parameterType="com.sinog2c.model.system.TbsysDocument">
+		update TBSYS_DOCUMENT
+		<set>
+			<if test="departid != null">
+				DEPARTID = #{departid,jdbcType=VARCHAR},
+      </if>
+			<if test="tempid != null">
+				TEMPID = #{tempid,jdbcType=VARCHAR},
+      </if>
+			<if test="introduction != null">
+				INTRODUCTION = #{introduction,jdbcType=VARCHAR},
+      </if>
+			<if test="delflag != null">
+				DELFLAG = #{delflag,jdbcType=DECIMAL},
+      </if>
+			<if test="crimid != null">
+				CRIMID = #{crimid,jdbcType=VARCHAR},
+      </if>
+			<if test="opid != null">
+				OPID = #{opid,jdbcType=VARCHAR},
+      </if>
+			<if test="optime != null">
+				OPTIME = #{optime,jdbcType=TIMESTAMP},
+      </if>
+			<if test="content != null">
+				CONTENT = #{content,jdbcType=CLOB},
+      </if>
+		</set>
+		where tempid=#{tempid} and crimid=#{crimid}
+	</update>
+
+	<!-- 获取文书信息的序号 -->
+	<select id="getXuHao" resultType="String">
+		SELECT nvl(count(docid),0)+1 as xuhao FROM TBSYS_DOCUMENT where 1=1
+		and delflag = 0
+		<if test="key!=null and key!=''">
+			and INTRODUCTION like CONCAT(CONCAT('%',#{key}),'%')
+		    </if>
+		<if test="tempid!=null and tempid!=''">
+			and tempid = #{tempid}
+		    </if>
+		<if test="departid!=null and departid!=''">
+			and departid in (
+			select a.dorgid from TBFLOW_ORG_ORG a where a.orgid=#{departid}
+			)
+		</if>
+		<if test="crimid!=null and crimid!=''">
+			and crimid = #{crimid}
+		    </if>
+	</select>
+	<!-- 获取系统文书的详细信息 -->
+	<select id="getTbsysDocument" resultType="com.sinog2c.model.system.TbsysDocument">
+		SELECT docid,content FROM TBSYS_DOCUMENT where 1=1
+		<if test="docid!=null and docid!=''">
+			and docid = #{docid,jdbcType=DECIMAL}
+		    </if>
+		<if test="tempid!=null and tempid!=''">
+			and tempid = #{tempid,jdbcType=VARCHAR}
+		    </if>
+		<if test="departid!=null and departid!=''">
+			and departid in (
+			select a.orgid From TBSYS_ORGINFO a Start
+			With
+			a.orgid = #{departid,jdbcType=VARCHAR} Connect By Prior
+			a.orgid=a.porgid
+			)
+		    </if>
+		<if test="crimid!=null and crimid!=''">
+			and crimid = #{crimid}
+		    </if>
+	</select>
+
+	<!-- 获取系统文书的详细信息 -->
+	<select id="getTbsysDocument1" resultType="com.sinog2c.model.system.TbsysDocument">
+		SELECT docid,content FROM TBSYS_DOCUMENT where 1=1
+		<if test="text1!=null and text1!=''">
+			and text1 = #{text1,jdbcType=DECIMAL}
+		    </if>
+		<if test="tempid!=null and tempid!=''">
+			and tempid = #{tempid,jdbcType=VARCHAR}
+		    </if>
+		<if test="departid!=null and departid!=''">
+			and departid in (
+			select a.orgid From TBSYS_ORGINFO a Start
+			With
+			a.orgid = #{departid,jdbcType=VARCHAR} Connect By Prior
+			a.orgid=a.porgid
+			)
+		    </if>
+		<if test="crimid!=null and crimid!=''">
+			and crimid = #{crimid}
+		    </if>
+	</select>
+
+	<!-- 获取系统文书的详细信息 -->
+	<select id="getTbsysDocumentByMap" resultType="com.sinog2c.model.system.TbsysDocument">
+		SELECT * FROM
+		TBSYS_DOCUMENT td where 1=1 and
+		td.tempid=#{tempid,jdbcType=VARCHAR}
+		and td.crimid=#{crimid} and td.optime =
+		(select max(t.optime) from
+		TBSYS_DOCUMENT t where t.tempid =
+		#{tempid,jdbcType=VARCHAR} and
+		t.crimid=#{crimid})
+  </select>
+
+	<!-- 获取系统文书的详细信息 -->
+	<select id="getTbsysDocumentByMap2" resultType="com.sinog2c.model.system.TbsysDocument">
+		SELECT * FROM
+		TBSYS_DOCUMENT td where 1=1 and
+		td.tempid=#{tempid,jdbcType=VARCHAR}
+		and td.crimid=#{crimid}
+  </select>
+
+	<!-- 根据文书Id删除数据，将删除标志修改为1 -->
+	<delete id="deleteTbsysDocument" parameterType="Object">
+		update
+		TBSYS_DOCUMENT set DELFLAG = '1' where DOCID =
+		#{docid,jdbcType=DECIMAL} 
+  </delete>
+	<select id="selectByCpdnumber" resultType="com.sinog2c.model.system.TbsysDocument">
+		select * from
+		TBSYS_DOCUMENT where crimid=(select distinct(applyid) from
+		TBFLOW_BASE
+		a where text1=#{caseyear} and text2=#{cpdnumber} and
+		flowdefid=#{tempid}) and TEMPID=#{tempid}
+  </select>
+	<select id="selectByText1" resultType="com.sinog2c.model.system.TbsysDocument">
+	    select * from ( select * from TBSYS_DOCUMENT where text1=#{text1} order by optime desc) where rownum=1
+		<!-- select * from
+		TBSYS_DOCUMENT where text1= -->
+  </select>
+	<delete id="deleteByText1" parameterType="String">
+		delete from
+		TBSYS_DOCUMENT where text1=#{text1}
+  </delete>
+	<update id="updateTbsysDocumentByDocId" parameterType="com.sinog2c.model.system.TbsysDocument">
+		update TBSYS_DOCUMENT
+		<set>
+			<if test="content != null">
+				CONTENT = #{content,jdbcType=CLOB},
+      </if>
+		</set>
+		where docid=#{docid}
+	</update>
+
+    <!-- 宁夏分离 更新大字段内容 -->
+    <update id="updateTbsysDocumentByDocId_nx" parameterType="com.sinog2c.model.system.TbsysDocument">
+		update TBSYS_DOCUMENT
+		<set>
+			<if test="content != null">
+				CONTENT = #{content,jdbcType=CLOB},
+      </if>
+		</set>
+		where docid=#{docid}
+	</update>
+	<!-- 根据Map新增 -->
+	<insert id="insertByMap" parameterType="Map">
+		<selectKey resultType="int" order="BEFORE" keyProperty="docid">
+			select SEQ_SYS_DOC_ID.nextval as docid from dual
+	</selectKey>
+		insert into TBSYS_DOCUMENT
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="docid != null">
+				DOCID,
+      </if>
+			<if test="departid != null">
+				DEPARTID,
+      </if>
+			<if test="tempid != null">
+				TEMPID,
+      </if>
+			<if test="introduction != null">
+				INTRODUCTION,
+      </if>
+			<if test="crimid != null">
+				CRIMID,
+      </if>
+			<if test="opid != null">
+				OPID,
+      </if>
+			<if test="text1 != null">
+				TEXT1,
+      </if>
+			<if test="content != null">
+				CONTENT,
+      </if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="docid != null">
+				#{docid,jdbcType=DECIMAL},
+      </if>
+			<if test="departid != null">
+				#{departid,jdbcType=VARCHAR},
+      </if>
+			<if test="tempid != null">
+				#{tempid,jdbcType=VARCHAR},
+      </if>
+			<if test="introduction != null">
+				#{introduction,jdbcType=VARCHAR},
+      </if>
+			<if test="crimid != null">
+				#{crimid,jdbcType=VARCHAR},
+      </if>
+			<if test="opid != null">
+				#{opid,jdbcType=VARCHAR},
+      </if>
+			<if test="text1 != null">
+				#{text1,jdbcType=VARCHAR},
+      </if>
+			<if test="content != null">
+				#{content,jdbcType=CLOB},
+      </if>
+		</trim>
+	</insert>
+
+	<update id="updateByMap" parameterType="Map">
+		update TBSYS_DOCUMENT
+		<set>
+			<if test="content != null">
+				CONTENT = #{content,jdbcType=CLOB},
+      		</if>
+			<if test="opid != null">
+				OPID = #{opid,jdbcType=VARCHAR},
+      		</if>
+		</set>
+		where tempid= #{tempid} and crimid= #{crimid}
+		
+		<if test="_appendCondition != null">
+			and ${_appendCondition}
+     	</if>
+	</update>
+	<!--根据条件 查询出对应的 病残鉴定表  -->
+	<select id="getFlowBaseDocByMap" resultType="map">
+	    SELECT *
+			  FROM TBFLOW_BASE_DOC td,
+			       (SELECT *
+			          FROM (  SELECT *
+			                    FROM TBFLOW_BASE f
+			                   WHERE f.applyid = #{crimid}
+			                         AND f.flowdefid = #{flowdefid}
+			                ORDER BY to_number(flowdraftid) DESC)
+			         WHERE ROWNUM = 1) tb
+			 WHERE td.flowdraftid = tb.flowdraftid
+      		   and TD.OTHERCODEID=#{tempid}
+	</select>
+	<select id="getCount1" parameterType="String" resultType="int">
+	    SELECT count(*) FROM TBSYS_DOCUMENT where 1=1 and delflag='0'
+		<if test="tempid!=null and tempid!=''">
+			and tempid = #{tempid}
+		    </if>
+	<if test="opid!=null and opid!=''">
+			and opid = #{opid}
+		    </if>
+	</select>
+</mapper>

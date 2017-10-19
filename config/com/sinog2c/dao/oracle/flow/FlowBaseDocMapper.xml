@@ -1,0 +1,334 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.sinog2c.dao.api.flow.FlowBaseDocMapper">
+  <resultMap id="BaseResultMap" type="com.sinog2c.model.flow.FlowBaseDoc">
+    <result column="FLOWDRAFTID" jdbcType="VARCHAR" property="flowdraftid" />
+    <result column="FLOWID" jdbcType="VARCHAR" property="flowid" />
+    <result column="BASEID" jdbcType="VARCHAR" property="baseid" />
+    <result column="OTHERCODEID" jdbcType="VARCHAR" property="othercodeid" />
+    <result column="TEXT1" jdbcType="VARCHAR" property="text1" />
+    <result column="TEXT2" jdbcType="VARCHAR" property="text2" />
+    <result column="TEXT3" jdbcType="VARCHAR" property="text3" />
+    <result column="TEXT4" jdbcType="VARCHAR" property="text4" />
+    <result column="TEXT5" jdbcType="VARCHAR" property="text5" />
+    <result column="TEXT6" jdbcType="VARCHAR" property="text6" />
+    <result column="INT1" jdbcType="DECIMAL" property="int1" />
+    <result column="INT2" jdbcType="DECIMAL" property="int2" />
+    <result column="OPID" jdbcType="VARCHAR" property="opid" />
+    <result column="OPTIME" jdbcType="TIMESTAMP" property="optime" />
+  </resultMap>
+  <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs"
+		type="com.sinog2c.model.flow.FlowBaseDoc">
+		<result column="DOCCONENT" jdbcType="CLOB" property="docconent" />
+ </resultMap>
+  <sql id="Base_Column_List">
+    FLOWDRAFTID,FLOWID,BASEID,OTHERCODEID,TEXT1,TEXT2,TEXT3,TEXT4,TEXT5,TEXT6,INT1,INT2,OPID,OPTIME
+  </sql>
+  <sql id="Blob_Column_List">
+    DOCCONENT
+  </sql>
+  <insert id="insert" parameterType="com.sinog2c.model.flow.FlowBaseDoc">
+  <selectKey keyProperty="baseid" resultType="String" order="BEFORE">
+		select SEQ_BASE_DOC_ID.nextval||F_GETCURRENTTIME||replace(replace(#{departid},'c',''),'C','') as baseid from dual
+  </selectKey>
+    insert into TBFLOW_BASE_DOC (FLOWDRAFTID,FLOWID, BASEID, OTHERCODEID, 
+      TEXT1, TEXT2, TEXT3, 
+      TEXT4, TEXT5, TEXT6, 
+      INT1, INT2, OPID, OPTIME, 
+      DOCCONENT)
+    values (#{flowdraftid,jdbcType=VARCHAR},#{flowid,jdbcType=VARCHAR}, #{baseid,jdbcType=VARCHAR}, #{othercodeid,jdbcType=VARCHAR}, 
+      #{text1,jdbcType=VARCHAR}, #{text2,jdbcType=VARCHAR}, #{text3,jdbcType=VARCHAR}, 
+      #{text4,jdbcType=VARCHAR}, #{text5,jdbcType=VARCHAR}, #{text6,jdbcType=VARCHAR}, 
+      #{int1,jdbcType=DECIMAL}, #{int2,jdbcType=DECIMAL}, #{opid,jdbcType=VARCHAR}, #{optime,jdbcType=TIMESTAMP}, 
+      #{docconent,jdbcType=CLOB})
+  </insert>
+  <update id="updateByCondition" parameterType="com.sinog2c.model.flow.FlowBaseDoc">
+		update TBFLOW_BASE_DOC 
+		<set>
+			<if test="docconent!= null and docconent!=''">docconent = #{docconent},</if>
+			<if test="opid != null and opid !=''">opid =#{opid},</if>
+			<if test="flowid != null and flowid !=''">flowid =#{flowid},</if>
+			<if test="optime != null and optime !=''">optime =#{optime,jdbcType=TIMESTAMP},</if>
+			<if test="int2 != null and int2 !=''">int2 =#{int2},</if>
+		</set>
+		where 1=1
+		<if test="flowdraftid != null and flowdraftid !=''">
+		 and flowdraftid = #{flowdraftid,jdbcType=VARCHAR}
+		</if>
+		<if test="othercodeid != null and othercodeid !=''">
+			and othercodeid =#{othercodeid}
+		</if>
+		<if test="baseid != null and baseid !=''">
+			and baseid =#{baseid}
+		</if>
+  </update>
+  <select id="countAll" resultType="int">  <!-- 查询表中记录总数 -->
+		select count(*) c from TBFLOW_BASE_DOC
+	</select>
+
+	<select id="selectAll" resultType="com.sinog2c.model.flow.FlowBaseDoc">    <!-- 查询表中的所有流程信息 -->
+		select * from TBFLOW_BASE_DOC order by FLOWID asc
+	</select>
+	<select id="findById" parameterType="String"
+		resultType="com.sinog2c.model.flow.FlowBaseDoc"> <!-- 根据流程ID查找流程信息 -->
+		select * from TBFLOW_BASE_DOC where flowid=#{flowid}
+	</select>
+	<select id="findDocByflowdraftid" parameterType="String"
+		resultType="com.sinog2c.model.flow.FlowBaseDoc"> <!-- 根据流程草稿ID查找文档信息 -->
+		select * from TBFLOW_BASE_DOC where FLOWDRAFTID=#{flowdraftid}
+	</select>
+	<select id="findLastDocByflowdraftid" parameterType="Map" resultType="com.sinog2c.model.flow.FlowBaseDoc"><!-- 根据流程草稿ID查找文档信息 -->
+		select * from ( 
+			select * 
+			from TBFLOW_BASE_DOC 
+			where FLOWDRAFTID=#{flowdraftid} 
+			order by OPTIME desc
+		 )
+		where rownum=1
+	</select>
+	<select id="findDocByflowdraftid2" parameterType="String"
+		resultType="com.sinog2c.model.flow.FlowBaseDoc"> <!-- 根据流程草稿ID查找文档信息 -->
+		select * from TBFLOW_BASE_DOC where OTHERCODEID=#{tempid} and  FLOWDRAFTID=(select flowdraftid from (select flowdraftid from TBFLOW_BASE where flowdefid=#{flowdefid} and applyid=#{crimid} order by flowdraftid) where rownum=1) 
+	</select>
+	
+	<!-- start add by blue_lv 2015-07-14 -->
+	<select id="selectByPrimaryKey" parameterType="java.lang.String"
+		resultMap="ResultMapWithBLOBs">
+		select
+		<include refid="Base_Column_List" />
+		,
+		<include refid="Blob_Column_List" />
+		from TBFLOW_BASE_DOC
+		where BASEID = #{baseid,jdbcType=VARCHAR}
+	</select>
+	<delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+		delete from
+		TBFLOW_BASE_DOC
+		where BASEID = #{baseid,jdbcType=VARCHAR}
+	</delete>
+
+	<insert id="insertSelective" parameterType="com.sinog2c.model.flow.TbflowInstanceDoc">
+		<selectKey keyProperty="baseid" resultType="String" order="BEFORE">
+			select SEQ_BASE_DOC_ID.nextval as baseid from dual
+		</selectKey>
+		insert into TBFLOW_BASE_DOC
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="baseid != null">
+				BASEID,
+			</if>
+			<if test="flowid != null">
+				FLOWID,
+			</if>
+			<if test="othercodeid != null">
+				OTHERCODEID,
+			</if>
+			<if test="text1 != null">
+				TEXT1,
+			</if>
+			<if test="text2 != null">
+				TEXT2,
+			</if>
+			<if test="text3 != null">
+				TEXT3,
+			</if>
+			<if test="text4 != null">
+				TEXT4,
+			</if>
+			<if test="text5 != null">
+				TEXT5,
+			</if>
+			<if test="text6 != null">
+				TEXT6,
+			</if>
+			<if test="int1 != null">
+				INT1,
+			</if>
+			<if test="int2 != null">
+				INT2,
+			</if>
+			<if test="opid != null">
+				OPID,
+			</if>
+			<if test="optime != null">
+				OPTIME,
+			</if>
+			<if test="templetid != null">
+				TEMPLETID,
+			</if>
+			<if test="flowdefid != null">
+				FLOWDEFID,
+			</if>
+			<if test="flowdescription != null">
+				FLOWDESCRIPTION,
+			</if>
+			<if test="doccontent != null">
+				DOCCONENT,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="baseid != null">
+				#{baseid,jdbcType=VARCHAR},
+			</if>
+			<if test="flowid != null">
+				#{flowid,jdbcType=VARCHAR},
+			</if>
+			<if test="othercodeid != null">
+				#{othercodeid,jdbcType=VARCHAR},
+			</if>
+			<if test="text1 != null">
+				#{text1,jdbcType=VARCHAR},
+			</if>
+			<if test="text2 != null">
+				#{text2,jdbcType=VARCHAR},
+			</if>
+			<if test="text3 != null">
+				#{text3,jdbcType=VARCHAR},
+			</if>
+			<if test="text4 != null">
+				#{text4,jdbcType=VARCHAR},
+			</if>
+			<if test="text5 != null">
+				#{text5,jdbcType=VARCHAR},
+			</if>
+			<if test="text6 != null">
+				#{text6,jdbcType=VARCHAR},
+			</if>
+			<if test="int1 != null">
+				#{int1,jdbcType=DECIMAL},
+			</if>
+			<if test="int2 != null">
+				#{int2,jdbcType=DECIMAL},
+			</if>
+			<if test="opid != null">
+				#{opid,jdbcType=VARCHAR},
+			</if>
+			<if test="optime != null">
+				#{optime,jdbcType=DATE},
+			</if>
+			<if test="templetid != null">
+				#{templetid,jdbcType=VARCHAR},
+			</if>
+			<if test="flowdefid != null">
+				#{flowdefid,jdbcType=VARCHAR},
+			</if>
+			<if test="flowdescription != null">
+				#{flowdescription,jdbcType=VARCHAR},
+			</if>
+			<if test="doccontent != null">
+				#{doccontent,jdbcType=CLOB},
+			</if>
+		</trim>
+	</insert>
+	<update id="updateByPrimaryKeySelective" parameterType="com.sinog2c.model.flow.TbflowInstanceDoc">
+		update TBFLOW_BASE_DOC
+		<set>
+			<if test="flowid != null">
+				FLOWID = #{flowid,jdbcType=VARCHAR},
+			</if>
+			<if test="othercodeid != null">
+				OTHERCODEID = #{othercodeid,jdbcType=VARCHAR},
+			</if>
+			<if test="text1 != null">
+				TEXT1 = #{text1,jdbcType=VARCHAR},
+			</if>
+			<if test="text2 != null">
+				TEXT2 = #{text2,jdbcType=VARCHAR},
+			</if>
+			<if test="text3 != null">
+				TEXT3 = #{text3,jdbcType=VARCHAR},
+			</if>
+			<if test="text4 != null">
+				TEXT4 = #{text4,jdbcType=VARCHAR},
+			</if>
+			<if test="text5 != null">
+				TEXT5 = #{text5,jdbcType=VARCHAR},
+			</if>
+			<if test="text6 != null">
+				TEXT6 = #{text6,jdbcType=VARCHAR},
+			</if>
+			<if test="int1 != null">
+				INT1 = #{int1,jdbcType=DECIMAL},
+			</if>
+			<if test="int2 != null">
+				INT2 = #{int2,jdbcType=DECIMAL},
+			</if>
+			<if test="opid != null">
+				OPID = #{opid,jdbcType=VARCHAR},
+			</if>
+			<if test="optime != null">
+				OPTIME = #{optime,jdbcType=DATE},
+			</if>
+			<if test="templetid != null">
+				TEMPLETID = #{templetid,jdbcType=VARCHAR},
+			</if>
+			<if test="flowdefid != null">
+				FLOWDEFID = #{flowdefid,jdbcType=VARCHAR},
+			</if>
+			<if test="flowdescription != null">
+				FLOWDESCRIPTION = #{flowdescription,jdbcType=VARCHAR},
+			</if>
+			<if test="doccontent != null">
+				DOCCONENT = #{doccontent,jdbcType=CLOB},
+			</if>
+		</set>
+		where BASEID = #{baseid,jdbcType=VARCHAR}
+	</update>
+	<update id="updateByPrimaryKeyWithBLOBs" parameterType="com.sinog2c.model.flow.TbflowInstanceDoc">
+		update
+		TBFLOW_BASE_DOC
+		set FLOWID = #{flowid,jdbcType=VARCHAR},
+		OTHERCODEID =
+		#{othercodeid,jdbcType=VARCHAR},
+		TEXT1 = #{text1,jdbcType=VARCHAR},
+		TEXT2 = #{text2,jdbcType=VARCHAR},
+		TEXT3 = #{text3,jdbcType=VARCHAR},
+		TEXT4 = #{text4,jdbcType=VARCHAR},
+		TEXT5 = #{text5,jdbcType=VARCHAR},
+		TEXT6 = #{text6,jdbcType=VARCHAR},
+		INT1 = #{int1,jdbcType=DECIMAL},
+		INT2 = #{int2,jdbcType=DECIMAL},
+		OPID = #{opid,jdbcType=VARCHAR},
+		OPTIME = #{optime,jdbcType=DATE},
+		TEMPLETID =
+		#{templetid,jdbcType=VARCHAR},
+		FLOWDEFID =
+		#{flowdefid,jdbcType=VARCHAR},
+		FLOWDESCRIPTION =
+		#{flowdescription,jdbcType=VARCHAR},
+		DOCCONENT =
+		#{doccontent,jdbcType=CLOB}
+		where BASEID = #{baseid,jdbcType=VARCHAR}
+	</update>
+	<update id="updateByPrimaryKey" parameterType="com.sinog2c.model.flow.TbflowInstanceDoc">
+		update
+		TBFLOW_BASE_DOC
+		set FLOWID = #{flowid,jdbcType=VARCHAR},
+		OTHERCODEID =
+		#{othercodeid,jdbcType=VARCHAR},
+		TEXT1 = #{text1,jdbcType=VARCHAR},
+		TEXT2 = #{text2,jdbcType=VARCHAR},
+		TEXT3 = #{text3,jdbcType=VARCHAR},
+		TEXT4 = #{text4,jdbcType=VARCHAR},
+		TEXT5 = #{text5,jdbcType=VARCHAR},
+		TEXT6 = #{text6,jdbcType=VARCHAR},
+		INT1 = #{int1,jdbcType=DECIMAL},
+		INT2 = #{int2,jdbcType=DECIMAL},
+		OPID = #{opid,jdbcType=VARCHAR},
+		OPTIME = #{optime,jdbcType=DATE},
+		TEMPLETID =
+		#{templetid,jdbcType=VARCHAR},
+		FLOWDEFID =
+		#{flowdefid,jdbcType=VARCHAR},
+		FLOWDESCRIPTION =
+		#{flowdescription,jdbcType=VARCHAR}
+		where BASEID =
+		#{baseid,jdbcType=VARCHAR}
+	</update>
+
+	<delete id="deleteByflowid" parameterType="java.lang.String">
+		delete from
+		TBFLOW_BASE_DOC
+		where FLOWID = #{flowid,jdbcType=VARCHAR}
+	</delete>
+	<!-- end add by blue_lv 2015-07-14 -->
+</mapper>

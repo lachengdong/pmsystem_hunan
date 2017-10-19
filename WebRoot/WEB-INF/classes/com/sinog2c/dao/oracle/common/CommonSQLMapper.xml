@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.sinog2c.dao.api.common.CommonSQLMapper" >
+
+  <insert id="insert" parameterType="java.util.Map" >
+    ${sql}
+  </insert>
+  
+  <insert id="insertContent" parameterType="java.util.Map" >
+    ${sql}
+  </insert>
+
+  <delete id="delete" parameterType="java.util.Map">
+  	${sql}
+  </delete>
+  
+  <update id="update" parameterType="java.util.Map">
+    ${sql}
+  </update>
+  
+  <update id="updateContent" parameterType="java.util.Map">
+    ${sql}
+  </update>
+
+  <select id="select" parameterType="java.util.Map" resultType="Map">
+    ${sql}
+  </select>
+
+  <select id="call" parameterType="java.util.Map" statementType="CALLABLE">
+	${sql}
+  </select>
+  
+  
+  <select id="getTableColumn" parameterType="java.util.Map" resultType="Map">
+    select t.* from user_tab_columns t where t.Table_Name='${tablename}' and t.COLUMN_NAME='${col_name}'
+  </select>
+  
+  <update id="alterTableRenameColumn" parameterType="java.util.Map">
+    alter table ${tablename} rename column ${old_column} to ${col_name}
+  </update>
+  
+  <update id="alterTableAddColumn" parameterType="java.util.Map">
+  	alter table ${tablename} add ${col_name} ${datatype}
+  </update>
+  
+  <update id="alterTableModifyColumn" parameterType="java.util.Map">
+    alter table ${tablename} modify ${col_name} ${datatype}
+  </update>
+  
+  <update id="alterTableDropColumn" parameterType="java.util.Map">
+    alter table ${tablename} drop column ${col_name}
+  </update>
+  
+</mapper>

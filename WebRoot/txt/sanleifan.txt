@@ -1,0 +1,11 @@
+[
+	{id: "postcrime", text: "职务犯罪",pid : "-1"},
+	
+	{id: "xianchuji", text: "县处级及以上", pid: "postcrime"},
+	{id: "tingjuji", text: "厅局级及以上", pid: "postcrime"},
+
+	{id: "undermine", text: "破坏金融管理秩序和金融诈骗罪",pid : "-1"},
+	
+	{id: "underworld", text: "涉黑犯罪",pid : "-1"}
+	
+]

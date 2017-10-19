@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.sinog2c.dao.api.courtjoint.TbdaraPrisonerMapper" >
+  <resultMap id="BaseResultMap" type="com.sinog2c.model.courtjoint.TbdaraPrisoner" >
+    <result column="CRIMID" property="crimid" jdbcType="VARCHAR" />
+    <result column="BATCHID" property="batchid" jdbcType="VARCHAR" />
+    <result column="OPTIME" property="optime" jdbcType="VARCHAR" />
+    <result column="OPID" property="opid" jdbcType="VARCHAR" />
+  </resultMap>
+  <insert id="insert" parameterType="com.sinog2c.model.courtjoint.TbdaraPrisoner" >
+    insert into TBDATA_PRISONER (CRIMID, BATCHID, OPTIME, 
+      OPID)
+    values (#{crimid,jdbcType=VARCHAR}, #{batchid,jdbcType=VARCHAR}, #{optime,jdbcType=VARCHAR}, 
+      #{opid,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.sinog2c.model.courtjoint.TbdaraPrisoner" >
+    insert into TBDATA_PRISONER
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="crimid != null" >
+        CRIMID,
+      </if>
+      <if test="batchid != null" >
+        BATCHID,
+      </if>
+      <if test="optime != null" >
+        OPTIME,
+      </if>
+      <if test="opid != null" >
+        OPID,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="crimid != null" >
+        #{crimid,jdbcType=VARCHAR},
+      </if>
+      <if test="batchid != null" >
+        #{batchid,jdbcType=VARCHAR},
+      </if>
+      <if test="optime != null" >
+        #{optime,jdbcType=VARCHAR},
+      </if>
+      <if test="opid != null" >
+        #{opid,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  
+  <select id="countByCrimidAndBatchid" parameterType="Map" resultType="int">
+  	select count(1) from TBDATA_PRISONER where  batchid = #{batchid,jdbcType=VARCHAR}
+  </select>
+  
+  <select id="findByCrimidAndBatchid" parameterType="Map" resultType="Map">
+    select * from
+		(
+			select a.*, rownum rn from
+		(
+	  select tbc.crimid,
+        '(' || substr(tb.text6, 1, 4) || ')' || tr.shortname || tb.text7 || '第' ||
+        substr(tb.text6, 5) || '号' as CASENUMBER,
+        tb.applyname as XINGMING
+   from tbflow_base tb, TBSYS_ORGINFO tr, TBPRISONER_BASE_CRIME tbc
+  where 1 = 1
+    and tb.departid = tr.orgid
+    and tbc.crimid = tb.applyid
+    and tb.int1 in (0, 1,4)
+    and tbc.crimid in (select crimid from tbdata_prisoner where batchid = #{batchid} and opid !='1' or opid is null)
+    and tb.int6 = (select t.batch
+                     from tbxf_commuteparole_batch t
+                    where t.batchid = #{batchid} and opid !='1' )
+          <if test="crimname!=null and crimname!=''">
+			and tb.applyname like '%'||#{crimname,jdbcType=VARCHAR}||'%'
+		</if>
+           ) a
+		<if test="end!=null and end!=''">
+			where rownum &lt;= #{end}
+		</if>
+		)
+		<if test="start!=null and start!=''">
+			where rn &gt;= #{start}
+		</if>         
+
+  </select>
+  
+    <update id="change"  parameterType="Map">
+  		update TBDATA_PRISONER set opid ='1' where batchid = #{batchid} and crimid = #{crimid}
+  	</update>
+  	
+  	<delete id="deleteByBatchidAndCrimid" parameterType="Map">
+  		delete from TBDATA_PRISONER where batchid = #{batchid} and crimid = #{crimid}
+  	</delete>
+</mapper>

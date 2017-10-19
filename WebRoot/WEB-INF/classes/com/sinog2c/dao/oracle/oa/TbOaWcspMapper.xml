@@ -1,0 +1,409 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.sinog2c.dao.api.oa.TbOaWcspMapper" >
+  <resultMap id="BaseResultMap" type="com.sinog2c.model.oa.TbOaWcsp" >
+    <id column="UUID" property="uuid" jdbcType="VARCHAR" />
+    <result column="DEPARTID" property="departid" jdbcType="VARCHAR" />
+    <result column="APPLYNAME" property="applyname" jdbcType="VARCHAR" />
+    <result column="APLLYCODEID" property="apllycodeid" jdbcType="VARCHAR" />
+    <result column="APPLYREID" property="applyreid" jdbcType="VARCHAR" />
+    <result column="APPLYBOSSID" property="applybossid" jdbcType="VARCHAR" />
+    <result column="VEHICLEID" property="vehicleid" jdbcType="VARCHAR" />
+    <result column="ACHIEVEMENT" property="achievement" jdbcType="VARCHAR" />
+    <result column="ISSUCCESSID" property="issuccessid" jdbcType="VARCHAR" />
+    <result column="MANAGERSID" property="managersid" jdbcType="VARCHAR" />
+    <result column="REASON" property="reason" jdbcType="VARCHAR" />
+    <result column="MONEY" property="money" jdbcType="DECIMAL" />
+    <result column="GOCOMPANY" property="gocompany" jdbcType="VARCHAR" />
+    <result column="STORY" property="story" jdbcType="VARCHAR" />
+    <result column="LINKMAN" property="linkman" jdbcType="VARCHAR" />
+    <result column="LINKWAY" property="linkway" jdbcType="VARCHAR" />
+    <result column="SQDATE" property="sqdate" jdbcType="DATE" />
+    <result column="OUTTIME" property="outtime" jdbcType="DATE" />
+    <result column="GOBACK" property="goback" jdbcType="DATE" />
+    <result column="BOSSSIGN" property="bosssign" jdbcType="VARCHAR" />
+    <result column="WCDATE" property="wcdate" jdbcType="VARCHAR" />
+    <result column="FHDATE" property="fhdate" jdbcType="VARCHAR" />
+    <result column="TEXT1" property="text1" jdbcType="VARCHAR" />
+    <result column="TEXT2" property="text2" jdbcType="VARCHAR" />
+    <result column="TEXT3" property="text3" jdbcType="VARCHAR" />
+    <result column="TEXT4" property="text4" jdbcType="VARCHAR" />
+    <result column="TEXT5" property="text5" jdbcType="VARCHAR" />
+    <result column="TEXT6" property="text6" jdbcType="VARCHAR" />
+    <result column="INT1" property="int1" jdbcType="DECIMAL" />
+    <result column="INT2" property="int2" jdbcType="DECIMAL" />
+    <result column="OPTIME" property="optime" jdbcType="DATE" />
+    <result column="OPID" property="opid" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    UUID, DEPARTID, APPLYNAME, APLLYCODEID, APPLYREID, APPLYBOSSID, VEHICLEID, ACHIEVEMENT, 
+    ISSUCCESSID, MANAGERSID, REASON, MONEY, GOCOMPANY, STORY, LINKMAN, LINKWAY, SQDATE, 
+    OUTTIME, GOBACK, BOSSSIGN, WCDATE, FHDATE, TEXT1, TEXT2, TEXT3, TEXT4, TEXT5, TEXT6, INT1, INT2, 
+    OPTIME, OPID
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from OA_WCSP
+    where UUID = #{uuid,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from OA_WCSP
+    where UUID = #{uuid,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.sinog2c.model.oa.TbOaWcsp" >
+    insert into OA_WCSP (UUID, DEPARTID, APPLYNAME, 
+      APLLYCODEID, APPLYREID, APPLYBOSSID, 
+      VEHICLEID, ACHIEVEMENT, ISSUCCESSID, 
+      MANAGERSID, REASON, MONEY, 
+      GOCOMPANY, STORY, LINKMAN, 
+      LINKWAY, SQDATE, OUTTIME, 
+      GOBACK, BOSSSIGN, WCDATE, FHDATE, TEXT1, 
+      TEXT2, TEXT3, TEXT4, 
+      TEXT5, TEXT6, INT1, 
+      INT2, OPTIME, OPID)
+    values (#{uuid,jdbcType=VARCHAR}, #{departid,jdbcType=VARCHAR}, #{applyname,jdbcType=VARCHAR}, 
+      #{apllycodeid,jdbcType=VARCHAR}, #{applyreid,jdbcType=VARCHAR}, #{applybossid,jdbcType=VARCHAR}, 
+      #{vehicleid,jdbcType=VARCHAR}, #{achievement,jdbcType=VARCHAR}, #{issuccessid,jdbcType=VARCHAR}, 
+      #{managersid,jdbcType=VARCHAR}, #{reason,jdbcType=VARCHAR}, #{money,jdbcType=DECIMAL}, 
+      #{gocompany,jdbcType=VARCHAR}, #{story,jdbcType=VARCHAR}, #{linkman,jdbcType=VARCHAR}, 
+      #{linkway,jdbcType=VARCHAR}, #{sqdate,jdbcType=DATE}, #{outtime,jdbcType=DATE}, 
+      #{goback,jdbcType=DATE}, #{bosssign,jdbcType=VARCHAR},#{wcdate,jdbcType=VARCHAR},#{fhdate,jdbcType=VARCHAR}, #{text1,jdbcType=VARCHAR}, 
+      #{text2,jdbcType=VARCHAR}, #{text3,jdbcType=VARCHAR}, #{text4,jdbcType=VARCHAR}, 
+      #{text5,jdbcType=VARCHAR}, #{text6,jdbcType=VARCHAR}, #{int1,jdbcType=DECIMAL}, 
+      #{int2,jdbcType=DECIMAL}, #{optime,jdbcType=DATE}, #{opid,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.sinog2c.model.oa.TbOaWcsp" >
+    insert into OA_WCSP
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="uuid != null" >
+        UUID,
+      </if>
+      <if test="departid != null" >
+        DEPARTID,
+      </if>
+      <if test="applyname != null" >
+        APPLYNAME,
+      </if>
+      <if test="apllycodeid != null" >
+        APLLYCODEID,
+      </if>
+      <if test="applyreid != null" >
+        APPLYREID,
+      </if>
+      <if test="applybossid != null" >
+        APPLYBOSSID,
+      </if>
+      <if test="vehicleid != null" >
+        VEHICLEID,
+      </if>
+      <if test="achievement != null" >
+        ACHIEVEMENT,
+      </if>
+      <if test="issuccessid != null" >
+        ISSUCCESSID,
+      </if>
+      <if test="managersid != null" >
+        MANAGERSID,
+      </if>
+      <if test="reason != null" >
+        REASON,
+      </if>
+      <if test="money != null" >
+        MONEY,
+      </if>
+      <if test="gocompany != null" >
+        GOCOMPANY,
+      </if>
+      <if test="story != null" >
+        STORY,
+      </if>
+      <if test="linkman != null" >
+        LINKMAN,
+      </if>
+      <if test="linkway != null" >
+        LINKWAY,
+      </if>
+      <if test="sqdate != null" >
+        SQDATE,
+      </if>
+      <if test="outtime != null" >
+        OUTTIME,
+      </if>
+      <if test="goback != null" >
+        GOBACK,
+      </if>
+      <if test="bosssign != null" >
+        BOSSSIGN,
+      </if>
+      <if test="wcdate != null" >
+        WCDATE,
+      </if>
+      <if test="fhdate != null" >
+        FHDATE,
+      </if>
+      <if test="text1 != null" >
+        TEXT1,
+      </if>
+      <if test="text2 != null" >
+        TEXT2,
+      </if>
+      <if test="text3 != null" >
+        TEXT3,
+      </if>
+      <if test="text4 != null" >
+        TEXT4,
+      </if>
+      <if test="text5 != null" >
+        TEXT5,
+      </if>
+      <if test="text6 != null" >
+        TEXT6,
+      </if>
+      <if test="int1 != null" >
+        INT1,
+      </if>
+      <if test="int2 != null" >
+        INT2,
+      </if>
+      <if test="optime != null" >
+        OPTIME,
+      </if>
+      <if test="opid != null" >
+        OPID,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="uuid != null" >
+        #{uuid,jdbcType=VARCHAR},
+      </if>
+      <if test="departid != null" >
+        #{departid,jdbcType=VARCHAR},
+      </if>
+      <if test="applyname != null" >
+        #{applyname,jdbcType=VARCHAR},
+      </if>
+      <if test="apllycodeid != null" >
+        #{apllycodeid,jdbcType=VARCHAR},
+      </if>
+      <if test="applyreid != null" >
+        #{applyreid,jdbcType=VARCHAR},
+      </if>
+      <if test="applybossid != null" >
+        #{applybossid,jdbcType=VARCHAR},
+      </if>
+      <if test="vehicleid != null" >
+        #{vehicleid,jdbcType=VARCHAR},
+      </if>
+      <if test="achievement != null" >
+        #{achievement,jdbcType=VARCHAR},
+      </if>
+      <if test="issuccessid != null" >
+        #{issuccessid,jdbcType=VARCHAR},
+      </if>
+      <if test="managersid != null" >
+        #{managersid,jdbcType=VARCHAR},
+      </if>
+      <if test="reason != null" >
+        #{reason,jdbcType=VARCHAR},
+      </if>
+      <if test="money != null" >
+        #{money,jdbcType=DECIMAL},
+      </if>
+      <if test="gocompany != null" >
+        #{gocompany,jdbcType=VARCHAR},
+      </if>
+      <if test="story != null" >
+        #{story,jdbcType=VARCHAR},
+      </if>
+      <if test="linkman != null" >
+        #{linkman,jdbcType=VARCHAR},
+      </if>
+      <if test="linkway != null" >
+        #{linkway,jdbcType=VARCHAR},
+      </if>
+      <if test="sqdate != null" >
+        #{sqdate,jdbcType=DATE},
+      </if>
+      <if test="outtime != null" >
+        #{outtime,jdbcType=DATE},
+      </if>
+      <if test="goback != null" >
+        #{goback,jdbcType=DATE},
+      </if>
+      <if test="bosssign != null" >
+        #{bosssign,jdbcType=VARCHAR},
+      </if>
+      <if test="wcdate != null" >
+        #{wcdate,jdbcType=VARCHAR},
+      </if>
+      <if test="fhdate != null" >
+        #{fhdate,jdbcType=VARCHAR},
+      </if>
+      <if test="text1 != null" >
+        #{text1,jdbcType=VARCHAR},
+      </if>
+      <if test="text2 != null" >
+        #{text2,jdbcType=VARCHAR},
+      </if>
+      <if test="text3 != null" >
+        #{text3,jdbcType=VARCHAR},
+      </if>
+      <if test="text4 != null" >
+        #{text4,jdbcType=VARCHAR},
+      </if>
+      <if test="text5 != null" >
+        #{text5,jdbcType=VARCHAR},
+      </if>
+      <if test="text6 != null" >
+        #{text6,jdbcType=VARCHAR},
+      </if>
+      <if test="int1 != null" >
+        #{int1,jdbcType=DECIMAL},
+      </if>
+      <if test="int2 != null" >
+        #{int2,jdbcType=DECIMAL},
+      </if>
+      <if test="optime != null" >
+        #{optime,jdbcType=DATE},
+      </if>
+      <if test="opid != null" >
+        #{opid,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.sinog2c.model.oa.TbOaWcsp" >
+    update OA_WCSP
+    <set >
+      <if test="departid != null" >
+        DEPARTID = #{departid,jdbcType=VARCHAR},
+      </if>
+      <if test="applyname != null" >
+        APPLYNAME = #{applyname,jdbcType=VARCHAR},
+      </if>
+      <if test="apllycodeid != null" >
+        APLLYCODEID = #{apllycodeid,jdbcType=VARCHAR},
+      </if>
+      <if test="applyreid != null" >
+        APPLYREID = #{applyreid,jdbcType=VARCHAR},
+      </if>
+      <if test="applybossid != null" >
+        APPLYBOSSID = #{applybossid,jdbcType=VARCHAR},
+      </if>
+      <if test="vehicleid != null" >
+        VEHICLEID = #{vehicleid,jdbcType=VARCHAR},
+      </if>
+      <if test="achievement != null" >
+        ACHIEVEMENT = #{achievement,jdbcType=VARCHAR},
+      </if>
+      <if test="issuccessid != null" >
+        ISSUCCESSID = #{issuccessid,jdbcType=VARCHAR},
+      </if>
+      <if test="managersid != null" >
+        MANAGERSID = #{managersid,jdbcType=VARCHAR},
+      </if>
+      <if test="reason != null" >
+        REASON = #{reason,jdbcType=VARCHAR},
+      </if>
+      <if test="money != null" >
+        MONEY = #{money,jdbcType=DECIMAL},
+      </if>
+      <if test="gocompany != null" >
+        GOCOMPANY = #{gocompany,jdbcType=VARCHAR},
+      </if>
+      <if test="story != null" >
+        STORY = #{story,jdbcType=VARCHAR},
+      </if>
+      <if test="linkman != null" >
+        LINKMAN = #{linkman,jdbcType=VARCHAR},
+      </if>
+      <if test="linkway != null" >
+        LINKWAY = #{linkway,jdbcType=VARCHAR},
+      </if>
+      <if test="sqdate != null" >
+        SQDATE = #{sqdate,jdbcType=DATE},
+      </if>
+      <if test="outtime != null" >
+        OUTTIME = #{outtime,jdbcType=DATE},
+      </if>
+      <if test="goback != null" >
+        GOBACK = #{goback,jdbcType=DATE},
+      </if>
+      <if test="bosssign != null" >
+        BOSSSIGN = #{bosssign,jdbcType=VARCHAR},
+      </if>
+      <if test="wcdate != null" >
+        WCDATE = #{wcdate,jdbcType=VARCHAR},
+      </if>
+      <if test="fhdate != null" >
+        FHDATE = #{fhdate,jdbcType=VARCHAR},
+      </if>
+      <if test="text1 != null" >
+        TEXT1 = #{text1,jdbcType=VARCHAR},
+      </if>
+      <if test="text2 != null" >
+        TEXT2 = #{text2,jdbcType=VARCHAR},
+      </if>
+      <if test="text3 != null" >
+        TEXT3 = #{text3,jdbcType=VARCHAR},
+      </if>
+      <if test="text4 != null" >
+        TEXT4 = #{text4,jdbcType=VARCHAR},
+      </if>
+      <if test="text5 != null" >
+        TEXT5 = #{text5,jdbcType=VARCHAR},
+      </if>
+      <if test="text6 != null" >
+        TEXT6 = #{text6,jdbcType=VARCHAR},
+      </if>
+      <if test="int1 != null" >
+        INT1 = #{int1,jdbcType=DECIMAL},
+      </if>
+      <if test="int2 != null" >
+        INT2 = #{int2,jdbcType=DECIMAL},
+      </if>
+      <if test="optime != null" >
+        OPTIME = #{optime,jdbcType=DATE},
+      </if>
+      <if test="opid != null" >
+        OPID = #{opid,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where UUID = #{uuid,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.sinog2c.model.oa.TbOaWcsp" >
+    update OA_WCSP
+    set DEPARTID = #{departid,jdbcType=VARCHAR},
+      APPLYNAME = #{applyname,jdbcType=VARCHAR},
+      APLLYCODEID = #{apllycodeid,jdbcType=VARCHAR},
+      APPLYREID = #{applyreid,jdbcType=VARCHAR},
+      APPLYBOSSID = #{applybossid,jdbcType=VARCHAR},
+      VEHICLEID = #{vehicleid,jdbcType=VARCHAR},
+      ACHIEVEMENT = #{achievement,jdbcType=VARCHAR},
+      ISSUCCESSID = #{issuccessid,jdbcType=VARCHAR},
+      MANAGERSID = #{managersid,jdbcType=VARCHAR},
+      REASON = #{reason,jdbcType=VARCHAR},
+      MONEY = #{money,jdbcType=DECIMAL},
+      GOCOMPANY = #{gocompany,jdbcType=VARCHAR},
+      STORY = #{story,jdbcType=VARCHAR},
+      LINKMAN = #{linkman,jdbcType=VARCHAR},
+      LINKWAY = #{linkway,jdbcType=VARCHAR},
+      SQDATE = #{sqdate,jdbcType=DATE},
+      OUTTIME = #{outtime,jdbcType=DATE},
+      GOBACK = #{goback,jdbcType=DATE},
+      BOSSSIGN = #{bosssign,jdbcType=VARCHAR},
+      WCDATE = #{wcdate,jdbcType=VARCHAR},
+      FHDATE = #{fhdate,jdbcType=VARCHAR},
+      TEXT1 = #{text1,jdbcType=VARCHAR},
+      TEXT2 = #{text2,jdbcType=VARCHAR},
+      TEXT3 = #{text3,jdbcType=VARCHAR},
+      TEXT4 = #{text4,jdbcType=VARCHAR},
+      TEXT5 = #{text5,jdbcType=VARCHAR},
+      TEXT6 = #{text6,jdbcType=VARCHAR},
+      INT1 = #{int1,jdbcType=DECIMAL},
+      INT2 = #{int2,jdbcType=DECIMAL},
+      OPTIME = #{optime,jdbcType=DATE},
+      OPID = #{opid,jdbcType=VARCHAR}
+    where UUID = #{uuid,jdbcType=VARCHAR}
+  </update>
+</mapper>

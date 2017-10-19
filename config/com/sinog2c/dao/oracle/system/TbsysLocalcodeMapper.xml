@@ -1,0 +1,241 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.sinog2c.dao.api.system.TbsysLocalcodeMapper" >
+  <resultMap id="BaseResultMap" type="com.sinog2c.model.system.TbsysLocalcode" >
+    <id column="NOID" property="noid" jdbcType="VARCHAR" />
+    <result column="CODETYPE" property="codetype" jdbcType="VARCHAR" />
+    <result column="CODEID" property="codeid" jdbcType="VARCHAR" />
+    <result column="PCODEID" property="pcodeid" jdbcType="VARCHAR" />
+    <result column="NAME" property="name" jdbcType="VARCHAR" />
+    <result column="ONAME" property="oname" jdbcType="VARCHAR" />
+    <result column="SN" property="sn" jdbcType="DECIMAL" />
+    <result column="SCEARCH" property="scearch" jdbcType="VARCHAR" />
+    <result column="ISDEL" property="isdel" jdbcType="DECIMAL" />
+    <result column="ORGID" property="orgid" jdbcType="VARCHAR" />
+    <result column="ORGPID" property="orgpid" jdbcType="VARCHAR" />
+    <result column="ORGPPID" property="orgppid" jdbcType="VARCHAR" />
+    <result column="REMARK" property="remark" jdbcType="VARCHAR" />
+    <result column="OREMARK" property="oremark" jdbcType="VARCHAR" />
+    <result column="OPID" property="opid" jdbcType="VARCHAR" />
+    <result column="OPTIME" property="optime" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    NOID, CODETYPE, CODEID, PCODEID, NAME, ONAME, SN, SCEARCH, ISDEL, ORGID, ORGPID, 
+    ORGPPID, REMARK, OREMARK, OPID, OPTIME
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from TSYS_LOCALCODE
+    where NOID = #{noid,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from TSYS_LOCALCODE
+    where NOID = #{noid,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.sinog2c.model.system.TbsysLocalcode" >
+    insert into TSYS_LOCALCODE (NOID, CODETYPE, CODEID, 
+      PCODEID, NAME, ONAME, 
+      SN, SCEARCH, ISDEL, 
+      ORGID, ORGPID, ORGPPID, 
+      REMARK, OREMARK, OPID, 
+      OPTIME)
+    values (#{noid,jdbcType=VARCHAR}, #{codetype,jdbcType=VARCHAR}, #{codeid,jdbcType=VARCHAR}, 
+      #{pcodeid,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR}, #{oname,jdbcType=VARCHAR}, 
+      #{sn,jdbcType=DECIMAL}, #{scearch,jdbcType=VARCHAR}, #{isdel,jdbcType=DECIMAL}, 
+      #{orgid,jdbcType=VARCHAR}, #{orgpid,jdbcType=VARCHAR}, #{orgppid,jdbcType=VARCHAR}, 
+      #{remark,jdbcType=VARCHAR}, #{oremark,jdbcType=VARCHAR}, #{opid,jdbcType=VARCHAR}, 
+      #{optime,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.sinog2c.model.system.TbsysLocalcode" >
+    insert into TSYS_LOCALCODE
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="noid != null" >
+        NOID,
+      </if>
+      <if test="codetype != null" >
+        CODETYPE,
+      </if>
+      <if test="codeid != null" >
+        CODEID,
+      </if>
+      <if test="pcodeid != null" >
+        PCODEID,
+      </if>
+      <if test="name != null" >
+        NAME,
+      </if>
+      <if test="oname != null" >
+        ONAME,
+      </if>
+      <if test="sn != null" >
+        SN,
+      </if>
+      <if test="scearch != null" >
+        SCEARCH,
+      </if>
+      <if test="isdel != null" >
+        ISDEL,
+      </if>
+      <if test="orgid != null" >
+        ORGID,
+      </if>
+      <if test="orgpid != null" >
+        ORGPID,
+      </if>
+      <if test="orgppid != null" >
+        ORGPPID,
+      </if>
+      <if test="remark != null" >
+        REMARK,
+      </if>
+      <if test="oremark != null" >
+        OREMARK,
+      </if>
+      <if test="opid != null" >
+        OPID,
+      </if>
+      <if test="optime != null" >
+        OPTIME,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="noid != null" >
+        #{noid,jdbcType=VARCHAR},
+      </if>
+      <if test="codetype != null" >
+        #{codetype,jdbcType=VARCHAR},
+      </if>
+      <if test="codeid != null" >
+        #{codeid,jdbcType=VARCHAR},
+      </if>
+      <if test="pcodeid != null" >
+        #{pcodeid,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null" >
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="oname != null" >
+        #{oname,jdbcType=VARCHAR},
+      </if>
+      <if test="sn != null" >
+        #{sn,jdbcType=DECIMAL},
+      </if>
+      <if test="scearch != null" >
+        #{scearch,jdbcType=VARCHAR},
+      </if>
+      <if test="isdel != null" >
+        #{isdel,jdbcType=DECIMAL},
+      </if>
+      <if test="orgid != null" >
+        #{orgid,jdbcType=VARCHAR},
+      </if>
+      <if test="orgpid != null" >
+        #{orgpid,jdbcType=VARCHAR},
+      </if>
+      <if test="orgppid != null" >
+        #{orgppid,jdbcType=VARCHAR},
+      </if>
+      <if test="remark != null" >
+        #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="oremark != null" >
+        #{oremark,jdbcType=VARCHAR},
+      </if>
+      <if test="opid != null" >
+        #{opid,jdbcType=VARCHAR},
+      </if>
+      <if test="optime != null" >
+        #{optime,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.sinog2c.model.system.TbsysLocalcode" >
+    update TSYS_LOCALCODE
+    <set >
+      <if test="codetype != null" >
+        CODETYPE = #{codetype,jdbcType=VARCHAR},
+      </if>
+      <if test="codeid != null" >
+        CODEID = #{codeid,jdbcType=VARCHAR},
+      </if>
+      <if test="pcodeid != null" >
+        PCODEID = #{pcodeid,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null" >
+        NAME = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="oname != null" >
+        ONAME = #{oname,jdbcType=VARCHAR},
+      </if>
+      <if test="sn != null" >
+        SN = #{sn,jdbcType=DECIMAL},
+      </if>
+      <if test="scearch != null" >
+        SCEARCH = #{scearch,jdbcType=VARCHAR},
+      </if>
+      <if test="isdel != null" >
+        ISDEL = #{isdel,jdbcType=DECIMAL},
+      </if>
+      <if test="orgid != null" >
+        ORGID = #{orgid,jdbcType=VARCHAR},
+      </if>
+      <if test="orgpid != null" >
+        ORGPID = #{orgpid,jdbcType=VARCHAR},
+      </if>
+      <if test="orgppid != null" >
+        ORGPPID = #{orgppid,jdbcType=VARCHAR},
+      </if>
+      <if test="remark != null" >
+        REMARK = #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="oremark != null" >
+        OREMARK = #{oremark,jdbcType=VARCHAR},
+      </if>
+      <if test="opid != null" >
+        OPID = #{opid,jdbcType=VARCHAR},
+      </if>
+      <if test="optime != null" >
+        OPTIME = #{optime,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where NOID = #{noid,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.sinog2c.model.system.TbsysLocalcode" >
+    update TSYS_LOCALCODE
+    set CODETYPE = #{codetype,jdbcType=VARCHAR},
+      CODEID = #{codeid,jdbcType=VARCHAR},
+      PCODEID = #{pcodeid,jdbcType=VARCHAR},
+      NAME = #{name,jdbcType=VARCHAR},
+      ONAME = #{oname,jdbcType=VARCHAR},
+      SN = #{sn,jdbcType=DECIMAL},
+      SCEARCH = #{scearch,jdbcType=VARCHAR},
+      ISDEL = #{isdel,jdbcType=DECIMAL},
+      ORGID = #{orgid,jdbcType=VARCHAR},
+      ORGPID = #{orgpid,jdbcType=VARCHAR},
+      ORGPPID = #{orgppid,jdbcType=VARCHAR},
+      REMARK = #{remark,jdbcType=VARCHAR},
+      OREMARK = #{oremark,jdbcType=VARCHAR},
+      OPID = #{opid,jdbcType=VARCHAR},
+      OPTIME = #{optime,jdbcType=VARCHAR}
+    where NOID = #{noid,jdbcType=VARCHAR}
+  </update>
+  <select id="getLocalcodeList" parameterType="Map" resultType="com.sinog2c.model.system.TbsysLocalcode">
+  	select * from tsys_localcode where 1=1 
+  	  <if test="codetype != null">
+  	  	and codetype = #{codetype,jdbcType=VARCHAR}
+  	  </if>
+  	  <if test="pcodeid != null">
+  	  	and pcodeid = #{pcodeid,jdbcType=VARCHAR}
+  	  </if>
+  	  <if test="orgid != null">
+  	    and orgid = #{orgid,jdbcType=VARCHAR}
+  	  </if>
+  	  <if test="orgpid != null">
+  	    and orgpid = #{orgpid,jdbcType=VARCHAR}
+  	  </if>
+  	  <if test="orgppid != null">
+  	  	and orgppid = #{orgppid,jdbcType=VARCHAR}
+  	  </if>
+  </select>
+</mapper>

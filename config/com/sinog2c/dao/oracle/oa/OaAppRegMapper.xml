@@ -1,0 +1,528 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.sinog2c.dao.api.oa.OaAppRegMapper" >
+  <resultMap id="BaseResultMap" type="com.sinog2c.model.oa.OaAppReg" >
+    <result column="UUID" property="uuid" jdbcType="VARCHAR" />
+    <result column="YPJOBS" property="ypjobs" jdbcType="VARCHAR" />
+    <result column="TBDATE" property="tbdate" jdbcType="VARCHAR" />
+    <result column="CONTENT" property="content" jdbcType="CLOB" />
+    <result column="YPNAME" property="ypname" jdbcType="VARCHAR" />
+    <result column="SEX" property="sex" jdbcType="DECIMAL" />
+    <result column="AGE" property="age" jdbcType="DECIMAL" />
+    <result column="BIRTHDAY" property="birthday" jdbcType="VARCHAR" />
+    <result column="NATIVEPLACE" property="nativeplace" jdbcType="VARCHAR" />
+    <result column="NATIONALITY" property="nationality" jdbcType="VARCHAR" />
+    <result column="MARRY" property="marry" jdbcType="VARCHAR" />
+    <result column="EDUCATION" property="education" jdbcType="VARCHAR" />
+    <result column="HEALTH" property="health" jdbcType="VARCHAR" />
+    <result column="HEIGHT" property="height" jdbcType="VARCHAR" />
+    <result column="WEIGHT" property="weight" jdbcType="VARCHAR" />
+    <result column="BLOOD" property="blood" jdbcType="VARCHAR" />
+    <result column="CATE" property="cate" jdbcType="VARCHAR" />
+    <result column="DICARD" property="dicard" jdbcType="VARCHAR" />
+    <result column="SPECIALTY" property="specialty" jdbcType="VARCHAR" />
+    <result column="HOBBY" property="hobby" jdbcType="VARCHAR" />
+    <result column="HOUSEHOLD" property="household" jdbcType="VARCHAR" />
+    <result column="ADDRESS" property="address" jdbcType="VARCHAR" />
+    <result column="EMAIL" property="email" jdbcType="VARCHAR" />
+    <result column="CONTYPE" property="contype" jdbcType="VARCHAR" />
+    <result column="CONTACT" property="contact" jdbcType="VARCHAR" />
+    <result column="PHONE" property="phone" jdbcType="VARCHAR" />
+    <result column="EQDATE" property="eqdate" jdbcType="VARCHAR" />
+    <result column="EZDATE" property="ezdate" jdbcType="VARCHAR" />
+    <result column="SCHOOL" property="school" jdbcType="VARCHAR" />
+    <result column="PROFESSIONAL" property="professional" jdbcType="VARCHAR" />
+    <result column="FORLAN" property="forlan" jdbcType="VARCHAR" />
+    <result column="WQDATE" property="wqdate" jdbcType="VARCHAR" />
+    <result column="WZDATE" property="wzdate" jdbcType="VARCHAR" />
+    <result column="UNITS" property="units" jdbcType="VARCHAR" />
+    <result column="WORKANDPLANT" property="workandplant" jdbcType="VARCHAR" />
+    <result column="REASON" property="reason" jdbcType="VARCHAR" />
+    <result column="SALARY" property="salary" jdbcType="VARCHAR" />
+    <result column="FNAME" property="fname" jdbcType="VARCHAR" />
+    <result column="FAGE" property="fage" jdbcType="VARCHAR" />
+    <result column="RSHIP" property="rship" jdbcType="VARCHAR" />
+    <result column="WORKUNITS" property="workunits" jdbcType="VARCHAR" />
+    <result column="FPHONE" property="fphone" jdbcType="VARCHAR" />
+    <result column="WOTIME" property="wotime" jdbcType="VARCHAR" />
+    <result column="EVECTION" property="evection" jdbcType="VARCHAR" />
+    <result column="PERTRAN" property="pertran" jdbcType="VARCHAR" />
+    <result column="EXPECTSALARY" property="expectsalary" jdbcType="VARCHAR" />
+    <result column="REFEREES" property="referees" jdbcType="VARCHAR" />
+    <result column="MOBILE" property="mobile" jdbcType="VARCHAR" />
+    <result column="FF" property="ff" jdbcType="VARCHAR" />
+    <result column="FFNAME" property="ffname" jdbcType="VARCHAR" />
+    <result column="FFTITLE" property="fftitle" jdbcType="VARCHAR" />
+    <result column="TEXT1" property="text1" jdbcType="VARCHAR" />
+    <result column="TEXT2" property="text2" jdbcType="VARCHAR" />
+    <result column="TEXT3" property="text3" jdbcType="VARCHAR" />
+    <result column="TEXT4" property="text4" jdbcType="VARCHAR" />
+    <result column="TEXT5" property="text5" jdbcType="VARCHAR" />
+    <result column="TEXT6" property="text6" jdbcType="VARCHAR" />
+    <result column="INT1" property="int1" jdbcType="DECIMAL" />
+    <result column="INT2" property="int2" jdbcType="DECIMAL" />
+    <result column="OPTIME" property="optime" jdbcType="DATE" />
+    <result column="OPID" property="opid" jdbcType="VARCHAR" />
+  </resultMap>
+  <insert id="insert" parameterType="com.sinog2c.model.oa.OaAppReg" >
+    insert into OA_HR_APPREG (UUID, YPJOBS, TBDATE, 
+      CONTENT, YPNAME, SEX, 
+      AGE, BIRTHDAY, NATIVEPLACE, 
+      NATIONALITY, MARRY, EDUCATION, 
+      HEALTH, HEIGHT, WEIGHT, 
+      BLOOD, CATE, DICARD, 
+      SPECIALTY, HOBBY, HOUSEHOLD, 
+      ADDRESS, EMAIL, CONTYPE, 
+      CONTACT, PHONE, EQDATE, 
+      EZDATE, SCHOOL, PROFESSIONAL, 
+      FORLAN, WQDATE, WZDATE, 
+      UNITS, WORKANDPLANT, REASON, 
+      SALARY, FNAME, FAGE, 
+      RSHIP, WORKUNITS, FPHONE, 
+      WOTIME, EVECTION, PERTRAN, 
+      EXPECTSALARY, REFEREES, MOBILE, 
+      FF, FFNAME, FFTITLE, 
+      TEXT1, TEXT2, TEXT3, 
+      TEXT4, TEXT5, TEXT6, 
+      INT1, INT2, OPTIME, OPID
+      )
+    values (#{uuid,jdbcType=VARCHAR}, #{ypjobs,jdbcType=VARCHAR}, #{tbdate,jdbcType=VARCHAR}, 
+      #{content,jdbcType=CLOB}, #{ypname,jdbcType=VARCHAR}, #{sex,jdbcType=DECIMAL}, 
+      #{age,jdbcType=DECIMAL}, #{birthday,jdbcType=VARCHAR}, #{nativeplace,jdbcType=VARCHAR}, 
+      #{nationality,jdbcType=VARCHAR}, #{marry,jdbcType=VARCHAR}, #{education,jdbcType=VARCHAR}, 
+      #{health,jdbcType=VARCHAR}, #{height,jdbcType=VARCHAR}, #{weight,jdbcType=VARCHAR}, 
+      #{blood,jdbcType=VARCHAR}, #{cate,jdbcType=VARCHAR}, #{dicard,jdbcType=VARCHAR}, 
+      #{specialty,jdbcType=VARCHAR}, #{hobby,jdbcType=VARCHAR}, #{household,jdbcType=VARCHAR}, 
+      #{address,jdbcType=VARCHAR}, #{email,jdbcType=VARCHAR}, #{contype,jdbcType=VARCHAR}, 
+      #{contact,jdbcType=VARCHAR}, #{phone,jdbcType=VARCHAR}, #{eqdate,jdbcType=VARCHAR}, 
+      #{ezdate,jdbcType=VARCHAR}, #{school,jdbcType=VARCHAR}, #{professional,jdbcType=VARCHAR}, 
+      #{forlan,jdbcType=VARCHAR}, #{wqdate,jdbcType=VARCHAR}, #{wzdate,jdbcType=VARCHAR}, 
+      #{units,jdbcType=VARCHAR}, #{workandplant,jdbcType=VARCHAR}, #{reason,jdbcType=VARCHAR}, 
+      #{salary,jdbcType=VARCHAR}, #{fname,jdbcType=VARCHAR}, #{fage,jdbcType=VARCHAR}, 
+      #{rship,jdbcType=VARCHAR}, #{workunits,jdbcType=VARCHAR}, #{fphone,jdbcType=VARCHAR}, 
+      #{wotime,jdbcType=VARCHAR}, #{evection,jdbcType=VARCHAR}, #{pertran,jdbcType=VARCHAR}, 
+      #{expectsalary,jdbcType=VARCHAR}, #{referees,jdbcType=VARCHAR}, #{mobile,jdbcType=VARCHAR}, 
+      #{ff,jdbcType=VARCHAR}, #{ffname,jdbcType=VARCHAR}, #{fftitle,jdbcType=VARCHAR}, 
+      #{text1,jdbcType=VARCHAR}, #{text2,jdbcType=VARCHAR}, #{text3,jdbcType=VARCHAR}, 
+      #{text4,jdbcType=VARCHAR}, #{text5,jdbcType=VARCHAR}, #{text6,jdbcType=VARCHAR}, 
+      #{int1,jdbcType=DECIMAL}, #{int2,jdbcType=DECIMAL}, #{optime,jdbcType=DATE}, #{opid,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.sinog2c.model.oa.OaAppReg" >
+    insert into OA_HR_APPREG
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="uuid != null" >
+        UUID,
+      </if>
+      <if test="ypjobs != null" >
+        YPJOBS,
+      </if>
+      <if test="tbdate != null" >
+        TBDATE,
+      </if>
+      <if test="content != null" >
+        CONTENT,
+      </if>
+      <if test="ypname != null" >
+        YPNAME,
+      </if>
+      <if test="sex != null" >
+        SEX,
+      </if>
+      <if test="age != null" >
+        AGE,
+      </if>
+      <if test="birthday != null" >
+        BIRTHDAY,
+      </if>
+      <if test="nativeplace != null" >
+        NATIVEPLACE,
+      </if>
+      <if test="nationality != null" >
+        NATIONALITY,
+      </if>
+      <if test="marry != null" >
+        MARRY,
+      </if>
+      <if test="education != null" >
+        EDUCATION,
+      </if>
+      <if test="health != null" >
+        HEALTH,
+      </if>
+      <if test="height != null" >
+        HEIGHT,
+      </if>
+      <if test="weight != null" >
+        WEIGHT,
+      </if>
+      <if test="blood != null" >
+        BLOOD,
+      </if>
+      <if test="cate != null" >
+        CATE,
+      </if>
+      <if test="dicard != null" >
+        DICARD,
+      </if>
+      <if test="specialty != null" >
+        SPECIALTY,
+      </if>
+      <if test="hobby != null" >
+        HOBBY,
+      </if>
+      <if test="household != null" >
+        HOUSEHOLD,
+      </if>
+      <if test="address != null" >
+        ADDRESS,
+      </if>
+      <if test="email != null" >
+        EMAIL,
+      </if>
+      <if test="contype != null" >
+        CONTYPE,
+      </if>
+      <if test="contact != null" >
+        CONTACT,
+      </if>
+      <if test="phone != null" >
+        PHONE,
+      </if>
+      <if test="eqdate != null" >
+        EQDATE,
+      </if>
+      <if test="ezdate != null" >
+        EZDATE,
+      </if>
+      <if test="school != null" >
+        SCHOOL,
+      </if>
+      <if test="professional != null" >
+        PROFESSIONAL,
+      </if>
+      <if test="forlan != null" >
+        FORLAN,
+      </if>
+      <if test="wqdate != null" >
+        WQDATE,
+      </if>
+      <if test="wzdate != null" >
+        WZDATE,
+      </if>
+      <if test="units != null" >
+        UNITS,
+      </if>
+      <if test="workandplant != null" >
+        WORKANDPLANT,
+      </if>
+      <if test="reason != null" >
+        REASON,
+      </if>
+      <if test="salary != null" >
+        SALARY,
+      </if>
+      <if test="fname != null" >
+        FNAME,
+      </if>
+      <if test="fage != null" >
+        FAGE,
+      </if>
+      <if test="rship != null" >
+        RSHIP,
+      </if>
+      <if test="workunits != null" >
+        WORKUNITS,
+      </if>
+      <if test="fphone != null" >
+        FPHONE,
+      </if>
+      <if test="wotime != null" >
+        WOTIME,
+      </if>
+      <if test="evection != null" >
+        EVECTION,
+      </if>
+      <if test="pertran != null" >
+        PERTRAN,
+      </if>
+      <if test="expectsalary != null" >
+        EXPECTSALARY,
+      </if>
+      <if test="referees != null" >
+        REFEREES,
+      </if>
+      <if test="mobile != null" >
+        MOBILE,
+      </if>
+      <if test="ff != null" >
+        FF,
+      </if>
+      <if test="ffname != null" >
+        FFNAME,
+      </if>
+      <if test="fftitle != null" >
+        FFTITLE,
+      </if>
+      <if test="text1 != null" >
+        TEXT1,
+      </if>
+      <if test="text2 != null" >
+        TEXT2,
+      </if>
+      <if test="text3 != null" >
+        TEXT3,
+      </if>
+      <if test="text4 != null" >
+        TEXT4,
+      </if>
+      <if test="text5 != null" >
+        TEXT5,
+      </if>
+      <if test="text6 != null" >
+        TEXT6,
+      </if>
+      <if test="int1 != null" >
+        INT1,
+      </if>
+      <if test="int2 != null" >
+        INT2,
+      </if>
+      <if test="optime != null" >
+        OPTIME,
+      </if>
+      <if test="opid != null" >
+        OPID,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="uuid != null" >
+        #{uuid,jdbcType=VARCHAR},
+      </if>
+      <if test="ypjobs != null" >
+        #{ypjobs,jdbcType=VARCHAR},
+      </if>
+      <if test="tbdate != null" >
+        #{tbdate,jdbcType=VARCHAR},
+      </if>
+      <if test="content != null" >
+        #{content,jdbcType=CLOB},
+      </if>
+      <if test="ypname != null" >
+        #{ypname,jdbcType=VARCHAR},
+      </if>
+      <if test="sex != null" >
+        #{sex,jdbcType=DECIMAL},
+      </if>
+      <if test="age != null" >
+        #{age,jdbcType=DECIMAL},
+      </if>
+      <if test="birthday != null" >
+        #{birthday,jdbcType=VARCHAR},
+      </if>
+      <if test="nativeplace != null" >
+        #{nativeplace,jdbcType=VARCHAR},
+      </if>
+      <if test="nationality != null" >
+        #{nationality,jdbcType=VARCHAR},
+      </if>
+      <if test="marry != null" >
+        #{marry,jdbcType=VARCHAR},
+      </if>
+      <if test="education != null" >
+        #{education,jdbcType=VARCHAR},
+      </if>
+      <if test="health != null" >
+        #{health,jdbcType=VARCHAR},
+      </if>
+      <if test="height != null" >
+        #{height,jdbcType=VARCHAR},
+      </if>
+      <if test="weight != null" >
+        #{weight,jdbcType=VARCHAR},
+      </if>
+      <if test="blood != null" >
+        #{blood,jdbcType=VARCHAR},
+      </if>
+      <if test="cate != null" >
+        #{cate,jdbcType=VARCHAR},
+      </if>
+      <if test="dicard != null" >
+        #{dicard,jdbcType=VARCHAR},
+      </if>
+      <if test="specialty != null" >
+        #{specialty,jdbcType=VARCHAR},
+      </if>
+      <if test="hobby != null" >
+        #{hobby,jdbcType=VARCHAR},
+      </if>
+      <if test="household != null" >
+        #{household,jdbcType=VARCHAR},
+      </if>
+      <if test="address != null" >
+        #{address,jdbcType=VARCHAR},
+      </if>
+      <if test="email != null" >
+        #{email,jdbcType=VARCHAR},
+      </if>
+      <if test="contype != null" >
+        #{contype,jdbcType=VARCHAR},
+      </if>
+      <if test="contact != null" >
+        #{contact,jdbcType=VARCHAR},
+      </if>
+      <if test="phone != null" >
+        #{phone,jdbcType=VARCHAR},
+      </if>
+      <if test="eqdate != null" >
+        #{eqdate,jdbcType=VARCHAR},
+      </if>
+      <if test="ezdate != null" >
+        #{ezdate,jdbcType=VARCHAR},
+      </if>
+      <if test="school != null" >
+        #{school,jdbcType=VARCHAR},
+      </if>
+      <if test="professional != null" >
+        #{professional,jdbcType=VARCHAR},
+      </if>
+      <if test="forlan != null" >
+        #{forlan,jdbcType=VARCHAR},
+      </if>
+      <if test="wqdate != null" >
+        #{wqdate,jdbcType=VARCHAR},
+      </if>
+      <if test="wzdate != null" >
+        #{wzdate,jdbcType=VARCHAR},
+      </if>
+      <if test="units != null" >
+        #{units,jdbcType=VARCHAR},
+      </if>
+      <if test="workandplant != null" >
+        #{workandplant,jdbcType=VARCHAR},
+      </if>
+      <if test="reason != null" >
+        #{reason,jdbcType=VARCHAR},
+      </if>
+      <if test="salary != null" >
+        #{salary,jdbcType=VARCHAR},
+      </if>
+      <if test="fname != null" >
+        #{fname,jdbcType=VARCHAR},
+      </if>
+      <if test="fage != null" >
+        #{fage,jdbcType=VARCHAR},
+      </if>
+      <if test="rship != null" >
+        #{rship,jdbcType=VARCHAR},
+      </if>
+      <if test="workunits != null" >
+        #{workunits,jdbcType=VARCHAR},
+      </if>
+      <if test="fphone != null" >
+        #{fphone,jdbcType=VARCHAR},
+      </if>
+      <if test="wotime != null" >
+        #{wotime,jdbcType=VARCHAR},
+      </if>
+      <if test="evection != null" >
+        #{evection,jdbcType=VARCHAR},
+      </if>
+      <if test="pertran != null" >
+        #{pertran,jdbcType=VARCHAR},
+      </if>
+      <if test="expectsalary != null" >
+        #{expectsalary,jdbcType=VARCHAR},
+      </if>
+      <if test="referees != null" >
+        #{referees,jdbcType=VARCHAR},
+      </if>
+      <if test="mobile != null" >
+        #{mobile,jdbcType=VARCHAR},
+      </if>
+      <if test="ff != null" >
+        #{ff,jdbcType=VARCHAR},
+      </if>
+      <if test="ffname != null" >
+        #{ffname,jdbcType=VARCHAR},
+      </if>
+      <if test="fftitle != null" >
+        #{fftitle,jdbcType=VARCHAR},
+      </if>
+      <if test="text1 != null" >
+        #{text1,jdbcType=VARCHAR},
+      </if>
+      <if test="text2 != null" >
+        #{text2,jdbcType=VARCHAR},
+      </if>
+      <if test="text3 != null" >
+        #{text3,jdbcType=VARCHAR},
+      </if>
+      <if test="text4 != null" >
+        #{text4,jdbcType=VARCHAR},
+      </if>
+      <if test="text5 != null" >
+        #{text5,jdbcType=VARCHAR},
+      </if>
+      <if test="text6 != null" >
+        #{text6,jdbcType=VARCHAR},
+      </if>
+      <if test="int1 != null" >
+        #{int1,jdbcType=DECIMAL},
+      </if>
+      <if test="int2 != null" >
+        #{int2,jdbcType=DECIMAL},
+      </if>
+      <if test="optime != null" >
+        #{optime,jdbcType=DATE},
+      </if>
+      <if test="opid != null" >
+        #{opid,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="getAppRegListByCondition" resultType="java.util.HashMap">
+		select uuid,ypname,ypjobs,tbdate,opid,optime from OA_HR_APPREG 
+		where 1=1 
+		<if test="key != null and key!=''">
+			And (ypname like '%'||#{key}||'%' or ypjobs like '%'||#{key}||'%')
+		</if>
+		<if test="sortField!=null and sortField !=''">
+			order by optime
+		</if>
+   </select>
+   <select id="getAppRegCount" resultType="int">
+		select count(*)from OA_HR_APPREG 
+		where 1=1 
+		<if test="key != null and key!=''">
+			And (ypname like '%'||#{key}||'%' or ypjobs like '%'||#{key}||'%')
+		</if>
+   </select>
+    <select id="getAppRegInfoByUuid" resultType="com.sinog2c.model.oa.OaAppReg">
+		select uuid，content from OA_HR_APPREG 
+		where UUID =#{uuid} 
+   </select>
+    <delete id="deleteAppReg" parameterType="java.lang.String">
+		delete  from OA_HR_APPREG 
+		where UUID =#{uuid} 
+   </delete>
+   <update id="updateAppReg" parameterType="com.sinog2c.model.oa.OaAppReg">
+		update  OA_HR_APPREG
+		<set>
+			<if test="ypname != null">
+				YPNAME = #{ypname,jdbcType=VARCHAR},
+			</if>
+			<if test="ypjobs != null">
+				YPJOBS = #{ypjobs,jdbcType=VARCHAR},
+			</if>
+			<if test="tbdate != null">
+				TBDATE = #{tbdate,jdbcType=VARCHAR},
+			</if>
+			<if test="content != null">
+				CONTENT = #{content,jdbcType=CLOB},
+			</if>
+			OPID = #{opid,jdbcType=VARCHAR}
+		</set>
+		where UUID = #{uuid,jdbcType=VARCHAR}
+   </update>
+</mapper>

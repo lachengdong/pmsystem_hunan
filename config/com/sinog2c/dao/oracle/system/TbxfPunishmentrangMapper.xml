@@ -1,0 +1,284 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.sinog2c.dao.api.system.TbxfPunishmentrangMapper" >
+  <resultMap id="BaseResultMap" type="com.sinog2c.model.system.TbxfPunishmentrang" >
+    <id column="PUNID" property="punid" jdbcType="DECIMAL" />
+    <result column="TYPEID" property="typeid" jdbcType="DECIMAL" />
+    <result column="PHID" property="phid" jdbcType="DECIMAL" />
+    <result column="SYEAR" property="syear" jdbcType="DECIMAL" />
+    <result column="EYEAR" property="eyear" jdbcType="DECIMAL" />
+    <result column="TYPE" property="type" jdbcType="DECIMAL" />
+    <result column="GENDER" property="gender" jdbcType="DECIMAL" />
+    <result column="SENID" property="senid" jdbcType="DECIMAL" />
+    <result column="ORIGINALSTART" property="originalstart" jdbcType="DECIMAL" />
+    <result column="ORIGINALEND" property="originalend" jdbcType="DECIMAL" />
+    <result column="SENTENCESTART" property="sentencestart" jdbcType="DECIMAL" />
+    <result column="SENTENCEEND" property="sentenceend" jdbcType="DECIMAL" />
+    <result column="STARTPERIOD" property="startperiod" jdbcType="DECIMAL" />
+    <result column="INTERVALPERIOD" property="intervalperiod" jdbcType="DECIMAL" />
+    <result column="REMARK" property="remark" jdbcType="VARCHAR" />
+    <result column="DELFLAG" property="delflag" jdbcType="DECIMAL" />
+    <result column="OPID" property="opid" jdbcType="VARCHAR" />
+    <result column="OPTIME" property="optime" jdbcType="TIMESTAMP" />
+    <result column="SN" property="sn" jdbcType="DECIMAL" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    PUNID, TYPEID, PHID, SYEAR, EYEAR, TYPE, GENDER, SENID, ORIGINALSTART, ORIGINALEND, 
+    SENTENCESTART, SENTENCEEND, STARTPERIOD, INTERVALPERIOD, REMARK, DELFLAG, OPID, OPTIME, SN
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from TBXF_PUNISHMENTRANG
+    where PUNID = #{punid,jdbcType=DECIMAL}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from TBXF_PUNISHMENTRANG
+    where PUNID = #{punid,jdbcType=DECIMAL}
+  </delete>
+  <insert id="insert" parameterType="com.sinog2c.model.system.TbxfPunishmentrang" >
+    insert into TBXF_PUNISHMENTRANG (PUNID, TYPEID, PHID, 
+      SYEAR, EYEAR, TYPE, 
+      GENDER, SENID, ORIGINALSTART, 
+      ORIGINALEND, SENTENCESTART, SENTENCEEND, 
+      STARTPERIOD, INTERVALPERIOD, SENTENCETYPE, REMARK, 
+      DELFLAG, OPID, OPTIME, SN)
+    values (#{punid,jdbcType=DECIMAL}, #{typeid,jdbcType=DECIMAL}, #{phid,jdbcType=DECIMAL}, 
+      #{syear,jdbcType=DECIMAL}, #{eyear,jdbcType=DECIMAL}, #{type,jdbcType=DECIMAL}, 
+      #{gender,jdbcType=DECIMAL}, #{senid,jdbcType=DECIMAL}, #{originalstart,jdbcType=DECIMAL}, 
+      #{originalend,jdbcType=DECIMAL}, #{sentencestart,jdbcType=DECIMAL}, #{sentenceend,jdbcType=DECIMAL}, 
+      #{startperiod,jdbcType=DECIMAL}, #{intervalperiod,jdbcType=DECIMAL}, #{sentencetype,jdbcType=DECIMAL}, #{remark,jdbcType=VARCHAR}, 
+      #{delflag,jdbcType=DECIMAL}, #{opid,jdbcType=VARCHAR}, #{optime,jdbcType=TIMESTAMP}, #{sn,jdbcType=DECIMAL})
+  </insert>
+  <insert id="insertSelective" parameterType="com.sinog2c.model.system.TbxfPunishmentrang" >
+    insert into TBXF_PUNISHMENTRANG
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="punid != null" >
+        PUNID,
+      </if>
+      <if test="typeid != null" >
+        TYPEID,
+      </if>
+      <if test="phid != null" >
+        PHID,
+      </if>
+      <if test="syear != null" >
+        SYEAR,
+      </if>
+      <if test="eyear != null" >
+        EYEAR,
+      </if>
+      <if test="type != null" >
+        TYPE,
+      </if>
+      <if test="gender != null" >
+        GENDER,
+      </if>
+      <if test="senid != null" >
+        SENID,
+      </if>
+      <if test="originalstart != null" >
+        ORIGINALSTART,
+      </if>
+      <if test="originalend != null" >
+        ORIGINALEND,
+      </if>
+      <if test="sentencestart != null" >
+        SENTENCESTART,
+      </if>
+      <if test="sentenceend != null" >
+        SENTENCEEND,
+      </if>
+      <if test="startperiod != null" >
+        STARTPERIOD,
+      </if>
+      <if test="intervalperiod != null" >
+        INTERVALPERIOD,
+      </if>
+      <if test="remark != null" >
+        REMARK,
+      </if>
+      <if test="delflag != null" >
+        DELFLAG,
+      </if>
+      <if test="opid != null" >
+        OPID,
+      </if>
+      <if test="optime != null" >
+        OPTIME,
+      </if>
+      <if test="sn != null" >
+        SN,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="punid != null" >
+        #{punid,jdbcType=DECIMAL},
+      </if>
+      <if test="typeid != null" >
+        #{typeid,jdbcType=DECIMAL},
+      </if>
+      <if test="phid != null" >
+        #{phid,jdbcType=DECIMAL},
+      </if>
+      <if test="syear != null" >
+        #{syear,jdbcType=DECIMAL},
+      </if>
+      <if test="eyear != null" >
+        #{eyear,jdbcType=DECIMAL},
+      </if>
+      <if test="type != null" >
+        #{type,jdbcType=DECIMAL},
+      </if>
+      <if test="gender != null" >
+        #{gender,jdbcType=DECIMAL},
+      </if>
+      <if test="senid != null" >
+        #{senid,jdbcType=DECIMAL},
+      </if>
+      <if test="originalstart != null" >
+        #{originalstart,jdbcType=DECIMAL},
+      </if>
+      <if test="originalend != null" >
+        #{originalend,jdbcType=DECIMAL},
+      </if>
+      <if test="sentencestart != null" >
+        #{sentencestart,jdbcType=DECIMAL},
+      </if>
+      <if test="sentenceend != null" >
+        #{sentenceend,jdbcType=DECIMAL},
+      </if>
+      <if test="startperiod != null" >
+        #{startperiod,jdbcType=DECIMAL},
+      </if>
+      <if test="intervalperiod != null" >
+        #{intervalperiod,jdbcType=DECIMAL},
+      </if>
+      <if test="remark != null" >
+        #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="delflag != null" >
+        #{delflag,jdbcType=DECIMAL},
+      </if>
+      <if test="opid != null" >
+        #{opid,jdbcType=VARCHAR},
+      </if>
+      <if test="optime != null" >
+        #{optime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="sn != null" >
+        #{sn,jdbcType=DECIMAL},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.sinog2c.model.system.TbxfPunishmentrang" >
+    update TBXF_PUNISHMENTRANG
+    <set >
+      <if test="typeid != null" >
+        TYPEID = #{typeid,jdbcType=DECIMAL},
+      </if>
+      <if test="phid != null" >
+        PHID = #{phid,jdbcType=DECIMAL},
+      </if>
+      <if test="syear != null" >
+        SYEAR = #{syear,jdbcType=DECIMAL},
+      </if>
+      <if test="eyear != null" >
+        EYEAR = #{eyear,jdbcType=DECIMAL},
+      </if>
+      <if test="type != null" >
+        TYPE = #{type,jdbcType=DECIMAL},
+      </if>
+      <if test="gender != null" >
+        GENDER = #{gender,jdbcType=DECIMAL},
+      </if>
+      <if test="senid != null" >
+        SENID = #{senid,jdbcType=DECIMAL},
+      </if>
+      <if test="originalstart != null" >
+        ORIGINALSTART = #{originalstart,jdbcType=DECIMAL},
+      </if>
+      <if test="originalend != null" >
+        ORIGINALEND = #{originalend,jdbcType=DECIMAL},
+      </if>
+      <if test="sentencestart != null" >
+        SENTENCESTART = #{sentencestart,jdbcType=DECIMAL},
+      </if>
+      <if test="sentenceend != null" >
+        SENTENCEEND = #{sentenceend,jdbcType=DECIMAL},
+      </if>
+      <if test="startperiod != null" >
+        STARTPERIOD = #{startperiod,jdbcType=DECIMAL},
+      </if>
+      <if test="intervalperiod != null" >
+        INTERVALPERIOD = #{intervalperiod,jdbcType=DECIMAL},
+      </if>
+      <if test="remark != null" >
+        REMARK = #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="delflag != null" >
+        DELFLAG = #{delflag,jdbcType=DECIMAL},
+      </if>
+      <if test="opid != null" >
+        OPID = #{opid,jdbcType=VARCHAR},
+      </if>
+      <if test="optime != null" >
+        OPTIME = #{optime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="sn != null" >
+        SN = #{sn,jdbcType=DECIMAL},
+      </if>
+    </set>
+    where PUNID = #{punid,jdbcType=DECIMAL}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.sinog2c.model.system.TbxfPunishmentrang" >
+    update TBXF_PUNISHMENTRANG
+    set TYPEID = #{typeid,jdbcType=DECIMAL},
+      PHID = #{phid,jdbcType=DECIMAL},
+      SYEAR = #{syear,jdbcType=DECIMAL},
+      EYEAR = #{eyear,jdbcType=DECIMAL},
+      TYPE = #{type,jdbcType=DECIMAL},
+      GENDER = #{gender,jdbcType=DECIMAL},
+      SENID = #{senid,jdbcType=DECIMAL},
+      ORIGINALSTART = #{originalstart,jdbcType=DECIMAL},
+      ORIGINALEND = #{originalend,jdbcType=DECIMAL},
+      SENTENCESTART = #{sentencestart,jdbcType=DECIMAL},
+      SENTENCEEND = #{sentenceend,jdbcType=DECIMAL},
+      STARTPERIOD = #{startperiod,jdbcType=DECIMAL},
+      INTERVALPERIOD = #{intervalperiod,jdbcType=DECIMAL},
+      REMARK = #{remark,jdbcType=VARCHAR},
+      SENTENCETYPE = #{sentencetype,jdbcType=DECIMAL},
+      DELFLAG = #{delflag,jdbcType=DECIMAL},
+      OPID = #{opid,jdbcType=VARCHAR},
+      OPTIME = #{optime,jdbcType=TIMESTAMP},
+      SN = #{sn,jdbcType=DECIMAL}
+    where PUNID = #{punid,jdbcType=DECIMAL}
+  </update>
+  
+  <select id="countBySql" parameterType="java.lang.String" resultType="int" >
+		${sql}
+  </select>
+  
+  <select id="searchBySql" parameterType="java.lang.String" resultType="Map" >
+		${sql}
+  </select>
+
+<!-- 	
+  <select id="countBySql" statementType="CALLABLE"  parameterType="java.lang.String"   resultType="int">
+  	<![CDATA[
+ 	 call P_PLAN_QUERY(
+    	#{sql, jdbcType=VARCHAR,mode=IN},   
+    	#{queryResult, jdbcType=INTEGER,mode=OUT})
+    ]]>  
+  </select>
+  
+  <select id="searchBySql" statementType="CALLABLE"  parameterType="java.lang.String"   resultType="hashmap">
+  	<![CDATA[
+ 	 call P_PLAN_QUERY(
+    	#{sql, jdbcType=VARCHAR,mode=IN},   
+    	#{queryResult, jdbcType=CURSOR,mode=OUT})
+    ]]>  
+  </select>
+ -->
+  
+</mapper>

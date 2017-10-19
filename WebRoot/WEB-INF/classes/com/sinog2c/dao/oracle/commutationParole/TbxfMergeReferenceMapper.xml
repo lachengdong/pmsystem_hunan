@@ -1,0 +1,162 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.sinog2c.dao.api.commutationParole.TbxfMergeReferenceMapper" >
+  <resultMap id="BaseResultMap" type="com.sinog2c.model.commutationParole.TbxfMergeReference" >
+    <id column="MERGEID" property="mergeid" jdbcType="DECIMAL" />
+    <result column="REFID" property="refid" jdbcType="DECIMAL" />
+    <result column="REWARDID" property="rewardid" jdbcType="DECIMAL" />
+    <result column="SNO" property="sno" jdbcType="DECIMAL" />
+    <result column="ENO" property="eno" jdbcType="DECIMAL" />
+    <result column="OPID" property="opid" jdbcType="VARCHAR" />
+    <result column="OPTIME" property="optime" jdbcType="DATE" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    MERGEID, REFID, REWARDID, SNO, ENO, OPID, OPTIME
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from TBXF_MERGEREFERENCE
+    where MERGEID = #{mergeid,jdbcType=DECIMAL}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from TBXF_MERGEREFERENCE
+    where MERGEID = #{mergeid,jdbcType=DECIMAL}
+  </delete>
+  <insert id="insert" parameterType="com.sinog2c.model.commutationParole.TbxfMergeReference" >
+  	<selectKey keyProperty="mergeid" resultType="int" order="BEFORE">
+		select SEQ_BASE_DOC_ID.nextval as mergeid from dual
+  	</selectKey>
+    insert into TBXF_MERGEREFERENCE (MERGEID, REFID, REWARDID, 
+      SNO, ENO, OPID
+      )
+    values (#{mergeid,jdbcType=DECIMAL}, #{refid,jdbcType=DECIMAL}, #{rewardid,jdbcType=DECIMAL}, 
+      #{sno,jdbcType=DECIMAL}, #{eno,jdbcType=DECIMAL}, #{opid,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.sinog2c.model.commutationParole.TbxfMergeReference" >
+    insert into TBXF_MERGEREFERENCE
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="mergeid != null" >
+        MERGEID,
+      </if>
+      <if test="refid != null" >
+        REFID,
+      </if>
+      <if test="rewardid != null" >
+        REWARDID,
+      </if>
+      <if test="sno != null" >
+        SNO,
+      </if>
+      <if test="eno != null" >
+        ENO,
+      </if>
+      <if test="opid != null" >
+        OPID,
+      </if>
+      <if test="optime != null" >
+        OPTIME,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="mergeid != null" >
+        #{mergeid,jdbcType=DECIMAL},
+      </if>
+      <if test="refid != null" >
+        #{refid,jdbcType=DECIMAL},	
+      </if>
+      <if test="rewardid != null" >
+        #{rewardid,jdbcType=DECIMAL},
+      </if>
+      <if test="sno != null" >
+        #{sno,jdbcType=DECIMAL},
+      </if>
+      <if test="eno != null" >
+        #{eno,jdbcType=DECIMAL},
+      </if>
+      <if test="opid != null" >
+        #{opid,jdbcType=VARCHAR},
+      </if>
+      <if test="optime != null" >
+        #{optime,jdbcType=DATE},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.sinog2c.model.commutationParole.TbxfMergeReference" >
+    update TBXF_MERGEREFERENCE
+    <set >
+      <if test="refid != null" >
+        REFID = #{refid,jdbcType=DECIMAL},
+      </if>
+      <if test="rewardid != null" >
+        REWARDID = #{rewardid,jdbcType=DECIMAL},
+      </if>
+      <if test="sno != null" >
+        SNO = #{sno,jdbcType=DECIMAL},
+      </if>
+      <if test="eno != null" >
+        ENO = #{eno,jdbcType=DECIMAL},
+      </if>
+      <if test="opid != null" >
+        OPID = #{opid,jdbcType=VARCHAR},
+      </if>
+      <if test="optime != null" >
+        OPTIME = #{optime,jdbcType=DATE},
+      </if>
+    </set>
+    where MERGEID = #{mergeid,jdbcType=DECIMAL}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.sinog2c.model.commutationParole.TbxfMergeReference" >
+    update TBXF_MERGEREFERENCE
+    set REFID = #{refid,jdbcType=DECIMAL},
+      REWARDID = #{rewardid,jdbcType=DECIMAL},
+      SNO = #{sno,jdbcType=DECIMAL},
+      ENO = #{eno,jdbcType=DECIMAL},
+      OPID = #{opid,jdbcType=VARCHAR},
+      OPTIME = #{optime,jdbcType=DATE}
+    where MERGEID = #{mergeid,jdbcType=DECIMAL}
+  </update>
+  <select id="getCount" resultType="int">
+  	select count(*) from TBXF_MERGEREFERENCE t where 1=1
+  	<trim prefix="" suffix="" suffixOverrides=",">
+ 		<if test="refid!=null and refid!=''"> and t.REFID=#{refid} </if>
+ 	</trim>
+  </select>
+  
+  <select id="getCommutationReferenceList" parameterType="Object" resultType="java.util.HashMap">
+  	select * from
+    ( 
+	    select a.*, rownum rn from
+	    (
+		    select t.*,t1.NAME as REWARDNAME from TBXF_MERGEREFERENCE t,TBXF_REWARDTYPES t1 where t.REWARDID = t1.REWARDID(+)
+		    <trim prefix="" suffix="" suffixOverrides=",">
+		 		<if test="refid!=null and refid!=''"> and t.REFID=#{refid} </if>
+		 	</trim>
+		 	<trim prefix="" suffix="" suffixOverrides=",">
+				<if test="sortField!=null and sortField!=''"> order by ${sortField} ${sortOrder}</if>
+			</trim>
+	  	) a 
+	    <if test="end!=null and end!=''">
+	   		where rownum &lt;= #{end}
+	   	</if> 
+    )
+   	<if test="start!=null and start!=''">
+   		where  rn &gt;= #{start}
+   	</if>
+  </select>
+  <select id="getRewardName" parameterType="Object" resultType="java.util.HashMap">
+  		select REWARDID as id ,NAME as text from TBXF_REWARDTYPES where REWARDID = #{rewardid}
+  </select>
+  <select id="getMergeListData" resultMap="BaseResultMap" parameterType="Object" >
+    select 
+    <include refid="Base_Column_List" />
+    from tbxf_mergereference c
+		 where c.refid in
+		       (select b.refid
+		          from TBXF_COMMUTATIONREFERENCE b
+		         where b.punid in (select a.punid
+		                             from tbxf_punishmentrang a
+		                            where a.departid = #{departid}))
+  </select>
+</mapper>
