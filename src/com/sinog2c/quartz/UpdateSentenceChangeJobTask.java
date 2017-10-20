@@ -31,7 +31,6 @@ public class UpdateSentenceChangeJobTask {
 				
 //				Properties jyconfig = new GetProperty().bornProp(GkzxCommon.DATABASETYPE, null);
 //				String provincecode = jyconfig.getProperty("provincecode");
-				
 				//HB立功、重大立功的存储过程有问题，改有coding
 //				info = LogUtil.currentTime() + " -- 立功、重大立功信息 -- 更新开始";
 //				logger.info(info);

@@ -139,7 +139,7 @@ String path = request.getContextPath();
             if(jianxing){
        			url = "<%=path%>/toPublicListPage.page?1=1&flowdefid=doc_rjdjsp&tempid=XFZX_ZFRJDJ";
        		}else{
-       			url= "<%=path%>/basicRuJian.page.page?1=1&id="+id+"&menuid="+menuid+"&fathermenuid="+fathermenuid+"&tempid="+tempid+"&flowdefid="+flowdefid;
+       			url= "<%=path%>/basicRuJian.page?1=1&id="+id+"&menuid="+menuid+"&fathermenuid="+fathermenuid+"&tempid="+tempid+"&flowdefid="+flowdefid;
        		}
             if(index>0){
                 self.location.href=url;

@@ -1528,7 +1528,7 @@
 		                 or tbc.postcrime='是' or tbc.postcrime='1'
 		         THEN '2'
 		         ELSE '1'
-		         END) AS operatesymbol
+		         END) AS text12
 		 FROM TBXF_SENTENCEALTERATION sen,
 		    tbprisoner_base_crime tbc,
 		    tbflow_base tb

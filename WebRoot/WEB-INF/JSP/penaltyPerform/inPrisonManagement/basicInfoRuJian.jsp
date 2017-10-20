@@ -190,7 +190,7 @@ String path = request.getContextPath();
 				   }else {
 				   		if (confirm(allProcessing)) {
 				   			var id = ids.join(',');
-                   			var url = "<%=path%>/basicRuJian.page.page?1=1&id="+id+"&menuid="+menuid+"&tempid="+tempid+"&fathermenuid=${menuid}"+"&flowdefid=${flowdefid}";
+                   			var url = "<%=path%>/basicRuJian.page?1=1&id="+id+"&menuid="+menuid+"&tempid="+tempid+"&fathermenuid=${menuid}"+"&flowdefid=${flowdefid}";
                    			self.location.href=url;
 				   		}
 				   }
